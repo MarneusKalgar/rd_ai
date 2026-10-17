@@ -1,0 +1,12 @@
+ORDER!K1 PO number: ST-6257
+ORDER!B2 Buyer: Thornwick Merchants Ltd
+ORDER!K4 Requested delivery date: 10.08.2026
+ORDER!A13 Article code: 6537256 | D13 Description: Durum farfalle 750 g | B13 Quantity: 118 | C13 UOM: CTN | F13 Unit price: 93.48
+ORDER!A14 Article code: 0528780 | D14 Description: Buckwheat rice cakes 60 g | B14 Quantity: 16 | C14 UOM: CTN | F14 Unit price: 78.22
+ORDER!A15 Article code: 0110841 | D15 Description: White grape juice 750 ml | B15 Quantity: 104 | C15 UOM: CTN | F15 Unit price: 78.22
+ORDER!A16 Article code: 5612236 | D16 Description: Salted rice cakes 8 x 15 g | B16 Quantity: 104 | C16 UOM: CTN | F16 Unit price: 78.22
+ORDER!A17 Article code: 9716740 | D17 Description: Lemon balm tea 100 x 2 g | B17 Quantity: 118 | C17 UOM: CTN | F17 Unit price: 81.39
+ORDER!A18 Article code: 1164417 | D18 Description: Milk chocolate 40 g | B18 Quantity: 118 | C18 UOM: CTN | F18 Unit price: 81.39
+ORDER!A19 Article code: 5935669 | D19 Description: Linseed rice cakes 60 g | B19 Quantity: 6 | C19 UOM: CTN | F19 Unit price: 14.43
+ORDER!A20 Article code: 2670665 | D20 Description: Orange marmalade 150 g | B20 Quantity: 6 | C20 UOM: CTN | F20 Unit price: 14.43
+ORDER!A21 Article code: 6901558 | D21 Description: Hazelnut oat biscuits 250 g | B21 Quantity: 6 | C21 UOM: CTN | F21 Unit price: 14.43

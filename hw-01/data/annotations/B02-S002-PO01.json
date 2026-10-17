@@ -1,0 +1,130 @@
+{
+  "inputId": "B02-S002-PO01",
+  "documentation": {
+    "revision": 2,
+    "author": "agent",
+    "basis": "Approved neutral text, unchanged gold values and the v1 extraction contract. Explanatory notes added at user request after case-level approval; no new human field review is claimed."
+  },
+  "headers": [
+    {
+      "field": "purchaseOrderNumber",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No populated buyer PO number appears in the neutral input. Do not substitute a cell address, form number or generated input ID."
+    },
+    {
+      "field": "purchaseOrderDateTime",
+      "value": "2026-07-22",
+      "evidence": "ORDER!K5 Order date: 22/07/2026",
+      "decision": "normalized",
+      "note": "Normalize 22/07/2026 to 2026-07-22 using day/month/year order. This is the PO issue date, distinct from delivery or service dates."
+    },
+    {
+      "field": "buyerName",
+      "value": "Merehaven Distribution Ltd",
+      "evidence": "ORDER!E5 Buyer: Merehaven Distribution Ltd",
+      "decision": "direct",
+      "note": ""
+    },
+    {
+      "field": "shipToInfo",
+      "value": "Merehaven Distribution Ltd, 17 Alder Lane, Alderwick",
+      "evidence": "ORDER!B11 Ship to: Merehaven Distribution Ltd, 17 Alder Lane, Alderwick",
+      "decision": "direct",
+      "note": ""
+    },
+    {
+      "field": "paymentTerms",
+      "value": "Net 75 days",
+      "evidence": "ORDER!H6 Payment terms: Net 75 days",
+      "decision": "direct",
+      "note": ""
+    },
+    {
+      "field": "buyerCurrency",
+      "value": "EUR",
+      "evidence": "ORDER!L9 Currency: EUR",
+      "decision": "direct",
+      "note": ""
+    },
+    {
+      "field": "totalValue",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit net product total for this PO appears in the neutral input. Do not calculate a replacement total from quantity and unit price."
+    }
+  ],
+  "lines": [
+    {
+      "lineIndex": 1,
+      "evidence": "ORDER!B9 Article code: XB1558 | C9 Description: Acrylic binder FA-42 25 kg bag | F9 Quantity: 174 | I9 UOM: To | L9 Unit price: 36.47",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!B9 Article code: XB1558",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Acrylic binder FA-42 25 kg bag",
+          "evidence": "C9 Description: Acrylic binder FA-42 25 kg bag",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "174",
+          "evidence": "F9 Quantity: 174",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "To",
+          "evidence": "I9 UOM: To",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "OTHER",
+          "evidence": "I9 UOM: To",
+          "decision": "normalized",
+          "note": "To denotes tonnes. The v1 enum has no tonne category, so use OTHER. Keep the ordered quantity unchanged; do not convert it to kilograms."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": "36.47",
+          "evidence": "L9 Unit price: 36.47",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No requested delivery date is explicitly attached to this line."
+        }
+      ]
+    }
+  ],
+  "lineSelection": {
+    "note": "Select every row with an explicit positive ordered quantity, preserving input order. Exclude catalog rows with [blank] ordered quantity.",
+    "orderedLineCount": 1,
+    "excludedCatalogRowCount": 0,
+    "excludedRowExamples": []
+  },
+  "distractors": []
+}

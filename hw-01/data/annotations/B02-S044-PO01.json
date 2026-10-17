@@ -1,0 +1,281 @@
+{
+  "inputId": "B02-S044-PO01",
+  "documentation": {
+    "revision": 2,
+    "author": "agent",
+    "basis": "Approved neutral text, unchanged gold values and the v1 extraction contract. Explanatory notes added at user request after case-level approval; no new human field review is claimed."
+  },
+  "headers": [
+    {
+      "field": "purchaseOrderNumber",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No populated buyer PO number appears in the neutral input. Do not substitute a cell address, form number or generated input ID."
+    },
+    {
+      "field": "purchaseOrderDateTime",
+      "value": "2026-09-09",
+      "evidence": "ORDER!H4 Fecha pedido: 2026-09-09",
+      "decision": "direct",
+      "note": "The labeled date is already in YYYY-MM-DD format; retain it. This is the PO issue date, distinct from delivery or service dates."
+    },
+    {
+      "field": "buyerName",
+      "value": "Brackenmere Retail Ltd",
+      "evidence": "ORDER!C8 Nombre del cliente: Brackenmere Retail Ltd",
+      "decision": "direct",
+      "note": ""
+    },
+    {
+      "field": "shipToInfo",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit ship-to block appears in the neutral input. Do not reuse the buyer name as a delivery address."
+    },
+    {
+      "field": "paymentTerms",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No selected payment terms appear in the neutral input. Do not assume a default credit period."
+    },
+    {
+      "field": "buyerCurrency",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit selected order currency appears in the neutral input. Do not infer currency from language, geography or unit price."
+    },
+    {
+      "field": "totalValue",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit net product total for this PO appears in the neutral input. Do not calculate a replacement total from quantity and unit price."
+    }
+  ],
+  "lines": [
+    {
+      "lineIndex": 1,
+      "evidence": "ORDER!A72 Código artículo: 9728392248 | C72 Descripción: Wholegrain fusilli 200 g | D72 Cantidad: 6 | D14 Unidad: BOTELLAS",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!A72 Código artículo: 9728392248",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Wholegrain fusilli 200 g",
+          "evidence": "C72 Descripción: Wholegrain fusilli 200 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "6",
+          "evidence": "D72 Cantidad: 6",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "BOTELLAS",
+          "evidence": "D14 Unidad: BOTELLAS",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "BOTTLE",
+          "evidence": "D14 Unidad: BOTELLAS",
+          "decision": "normalized",
+          "note": "Spanish BOTELLAS denotes bottles; normalize to BOTTLE. The explicit UOM governs even when a generated product description suggests different packaging."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!H6 Service date: 2026-09-13"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 2,
+      "evidence": "ORDER!A75 Código artículo: 7475453596 | C75 Descripción: Cinnamon oat biscuits 12 x 25 g | D75 Cantidad: 140 | D14 Unidad: BOTELLAS",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!A75 Código artículo: 7475453596",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Cinnamon oat biscuits 12 x 25 g",
+          "evidence": "C75 Descripción: Cinnamon oat biscuits 12 x 25 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "140",
+          "evidence": "D75 Cantidad: 140",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "BOTELLAS",
+          "evidence": "D14 Unidad: BOTELLAS",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "BOTTLE",
+          "evidence": "D14 Unidad: BOTELLAS",
+          "decision": "normalized",
+          "note": "Spanish BOTELLAS denotes bottles; normalize to BOTTLE. The explicit UOM governs even when a generated product description suggests different packaging."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!H6 Service date: 2026-09-13"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 3,
+      "evidence": "ORDER!F74 Código artículo: 7561727513 | G74 Descripción: Durum farfalle 250 g | H74 Cantidad: 158 | H14 Unidad: BOTELLAS",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!F74 Código artículo: 7561727513",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Durum farfalle 250 g",
+          "evidence": "G74 Descripción: Durum farfalle 250 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "158",
+          "evidence": "H74 Cantidad: 158",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "BOTELLAS",
+          "evidence": "H14 Unidad: BOTELLAS",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "BOTTLE",
+          "evidence": "H14 Unidad: BOTELLAS",
+          "decision": "normalized",
+          "note": "Spanish BOTELLAS denotes bottles; normalize to BOTTLE. The explicit UOM governs even when a generated product description suggests different packaging."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!H6 Service date: 2026-09-13"
+          ]
+        }
+      ]
+    }
+  ],
+  "lineSelection": {
+    "note": "Select every row with an explicit positive ordered quantity, preserving input order. Exclude catalog rows with [blank] ordered quantity. The two product panels belong to one order: left panel top-to-bottom, then right panel top-to-bottom, as serialized in the text.",
+    "orderedLineCount": 3,
+    "excludedCatalogRowCount": 106,
+    "excludedRowExamples": [
+      {
+        "evidence": "ORDER!A15 Código artículo: 1556928089 | C15 Descripción: Strawberry preserve 300 g | D15 Cantidad: [blank] | D14 Unidad: BOTELLAS",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      },
+      {
+        "evidence": "ORDER!A16 Código artículo: 8095272719 | C16 Descripción: Milk chocolate 150 g | D16 Cantidad: [blank] | D14 Unidad: BOTELLAS",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      },
+      {
+        "evidence": "ORDER!A17 Código artículo: 3274719698 | C17 Descripción: Linseed rice cakes 8 x 15 g | D17 Cantidad: [blank] | D14 Unidad: BOTELLAS",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      }
+    ]
+  },
+  "distractors": [
+    {
+      "evidence": "ORDER!H6 Service date: 2026-09-13",
+      "note": "This order-level delivery/service date is not the PO issue date and is not explicitly tied to a line. Do not substitute it for purchaseOrderDateTime or inherit it into buyerDeliveryDate."
+    }
+  ]
+}

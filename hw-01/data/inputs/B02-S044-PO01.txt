@@ -1,0 +1,112 @@
+ORDER!H4 Fecha pedido: 2026-09-09
+ORDER!C8 Nombre del cliente: Brackenmere Retail Ltd
+ORDER!H6 Service date: 2026-09-13
+ORDER!A15 Código artículo: 1556928089 | C15 Descripción: Strawberry preserve 300 g | D15 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A16 Código artículo: 8095272719 | C16 Descripción: Milk chocolate 150 g | D16 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A17 Código artículo: 3274719698 | C17 Descripción: Linseed rice cakes 8 x 15 g | D17 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A18 Código artículo: 0994897329 | C18 Descripción: White grape juice 6 x 200 ml | D18 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A19 Código artículo: 5822837800 | C19 Descripción: Black tea 20 x 2 g | D19 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A20 Código artículo: 5019140104 | C20 Descripción: Mint chocolate 12 x 20 g | D20 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A21 Código artículo: 7861953068 | C21 Descripción: Orange marmalade 250 g | D21 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A22 Código artículo: 1617257008 | C22 Descripción: Durum spaghetti 1 kg | D22 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A23 Código artículo: 2804563856 | C23 Descripción: Wide egg noodles 400 g | D23 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A24 Código artículo: 0335949414 | C24 Descripción: Fine egg noodles 200 g | D24 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A25 Código artículo: 5187191109 | C25 Descripción: Hazelnut oat biscuits 120 g | D25 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A26 Código artículo: 7636361519 | C26 Descripción: Berry oat biscuits 300 g | D26 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A27 Código artículo: 5796461287 | C27 Descripción: Vanilla oat biscuits 120 g | D27 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A28 Código artículo: 3297353732 | C28 Descripción: Corn rice cakes 150 g | D28 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A29 Código artículo: 1741425694 | C29 Descripción: Wholegrain fusilli 500 g | D29 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A30 Código artículo: 8363244526 | C30 Descripción: Orange chocolate 180 g | D30 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A31 Código artículo: 2001558854 | C31 Descripción: Plain rice cakes 8 x 15 g | D31 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A32 Código artículo: 0887763339 | C32 Descripción: Orange chocolate 100 g | D32 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A33 Código artículo: 9146795952 | C33 Descripción: Peach nectar 250 ml | D33 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A34 Código artículo: 5502290967 | C34 Descripción: White grape juice 750 ml | D34 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A35 Código artículo: 6968936919 | C35 Descripción: Mixed beans 200 g | D35 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A36 Código artículo: 6039202157 | C36 Descripción: Caramel chocolate 80 g | D36 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A37 Código artículo: 0544955320 | C37 Descripción: Butter beans 300 g | D37 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A38 Código artículo: 2273133779 | C38 Descripción: Red kidney beans 800 g | D38 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A39 Código artículo: 8533289709 | C39 Descripción: Fine egg noodles 750 g | D39 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A40 Código artículo: 4930605613 | C40 Descripción: Wholegrain fusilli 750 g | D40 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A41 Código artículo: 5640800531 | C41 Descripción: Fine peas 4 x 200 g | D41 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A42 Código artículo: 0016670366 | C42 Descripción: Peach nectar 750 ml | D42 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A43 Código artículo: 4816260291 | C43 Descripción: Orange chocolate 150 g | D43 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A44 Código artículo: 5396850433 | C44 Descripción: Blackberry preserve 150 g | D44 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A45 Código artículo: 5894181028 | C45 Descripción: Salted rice cakes 120 g | D45 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A46 Código artículo: 8486667018 | C46 Descripción: Berry oat biscuits 6 x 40 g | D46 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A47 Código artículo: 8688288797 | C47 Descripción: Caramel chocolate 150 g | D47 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A48 Código artículo: 3445156049 | C48 Descripción: Millet rice cakes 120 g | D48 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A49 Código artículo: 4596616227 | C49 Descripción: Milk chocolate 180 g | D49 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A50 Código artículo: 6428464015 | C50 Descripción: Vanilla oat biscuits 24 x 20 g | D50 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A51 Código artículo: 9566677109 | C51 Descripción: Pear juice 12 x 250 ml | D51 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A52 Código artículo: 8330902582 | C52 Descripción: Red kidney beans 560 g | D52 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A53 Código artículo: 5012119224 | C53 Descripción: Apple juice 750 ml | D53 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A54 Código artículo: 3391495829 | C54 Descripción: Blueberry preserve 300 g | D54 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A55 Código artículo: 5049320055 | C55 Descripción: Rosehip tea 20 x 1.5 g | D55 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A57 Código artículo: 7333695018 | C57 Descripción: Green tea 25 x 2 g | D57 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A58 Código artículo: 4771164522 | C58 Descripción: Plum preserve 250 g | D58 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A60 Código artículo: 3200923880 | C60 Descripción: Blackberry preserve 340 g | D60 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A61 Código artículo: 9376870899 | C61 Descripción: Durum penne 250 g | D61 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A62 Código artículo: 9665371418 | C62 Descripción: Apricot nectar 250 ml | D62 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A63 Código artículo: 8666358612 | C63 Descripción: Hazelnut chocolate 40 g | D63 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A64 Código artículo: 0741494083 | C64 Descripción: Red kidney beans 200 g | D64 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A65 Código artículo: 7109301361 | C65 Descripción: Coconut oat biscuits 300 g | D65 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A66 Código artículo: 3935154535 | C66 Descripción: Salted rice cakes 12 x 10 g | D66 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A67 Código artículo: 3951426417 | C67 Descripción: Apricot preserve 250 g | D67 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A68 Código artículo: 3845587270 | C68 Descripción: Durum farfalle 200 g | D68 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A69 Código artículo: 9612138213 | C69 Descripción: Caramel chocolate 100 g | D69 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A70 Código artículo: 8453402502 | C70 Descripción: Sesame rice cakes 120 g | D70 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A72 Código artículo: 9728392248 | C72 Descripción: Wholegrain fusilli 200 g | D72 Cantidad: 6 | D14 Unidad: BOTELLAS
+ORDER!A73 Código artículo: 7760274404 | C73 Descripción: Cinnamon oat biscuits 100 g | D73 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A74 Código artículo: 0783363498 | C74 Descripción: Cinnamon oat biscuits 24 x 20 g | D74 Cantidad: [blank] | D14 Unidad: BOTELLAS
+ORDER!A75 Código artículo: 7475453596 | C75 Descripción: Cinnamon oat biscuits 12 x 25 g | D75 Cantidad: 140 | D14 Unidad: BOTELLAS
+ORDER!F15 Código artículo: 9495657126 | G15 Descripción: Durum farfalle 400 g | H15 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F16 Código artículo: 9035682041 | G16 Descripción: Corn rice cakes 6 x 20 g | H16 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F17 Código artículo: 7637730669 | G17 Descripción: Orange juice 200 ml | H17 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F18 Código artículo: 6595787285 | G18 Descripción: Millet rice cakes 6 x 20 g | H18 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F19 Código artículo: 0440873639 | G19 Descripción: Sweetcorn 200 g | H19 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F20 Código artículo: 2781468001 | G20 Descripción: Peach nectar 500 ml | H20 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F21 Código artículo: 3476571493 | G21 Descripción: Chamomile tea 25 x 2 g | H21 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F22 Código artículo: 5996149371 | G22 Descripción: Lemon oat biscuits 6 x 40 g | H22 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F23 Código artículo: 2427922684 | G23 Descripción: Hazelnut chocolate 6 x 25 g | H23 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F24 Código artículo: 6464397053 | G24 Descripción: Orange chocolate 40 g | H24 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F27 Código artículo: 7758147656 | G27 Descripción: Cooked chickpeas 300 g | H27 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F28 Código artículo: 9493804301 | G28 Descripción: Sunflower seed rice cakes 120 g | H28 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F31 Código artículo: 0058543659 | G31 Descripción: Wholegrain fusilli 1 kg | H31 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F32 Código artículo: 1545619589 | G32 Descripción: Orange marmalade 6 x 40 g | H32 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F33 Código artículo: 5375515633 | G33 Descripción: Orange juice 330 ml | H33 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F34 Código artículo: 3395567458 | G34 Descripción: Cocoa oat biscuits 250 g | H34 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F35 Código artículo: 2361669873 | G35 Descripción: Pear juice 6 x 200 ml | H35 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F38 Código artículo: 8868708142 | G38 Descripción: Hazelnut chocolate 180 g | H38 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F39 Código artículo: 7164417641 | G39 Descripción: Berry oat biscuits 24 x 20 g | H39 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F41 Código artículo: 8875529306 | G41 Descripción: Cinnamon oat biscuits 180 g | H41 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F42 Código artículo: 0188247267 | G42 Descripción: Rosehip tea 80 x 1.5 g | H42 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F43 Código artículo: 5592454011 | G43 Descripción: Strawberry preserve 250 g | H43 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F44 Código artículo: 0864762716 | G44 Descripción: Durum fusilli 1 kg | H44 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F45 Código artículo: 3128788598 | G45 Descripción: Buckwheat rice cakes 60 g | H45 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F47 Código artículo: 4817206228 | G47 Descripción: Green tea 80 x 1.5 g | H47 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F48 Código artículo: 5590489577 | G48 Descripción: Apricot nectar 500 ml | H48 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F49 Código artículo: 2679395748 | G49 Descripción: Wide egg noodles 200 g | H49 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F50 Código artículo: 5910561014 | G50 Descripción: Linden tea 20 x 2 g | H50 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F51 Código artículo: 9415935569 | G51 Descripción: Red kidney beans 150 g | H51 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F52 Código artículo: 2266460454 | G52 Descripción: Corn rice cakes 80 g | H52 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F53 Código artículo: 8243693182 | G53 Descripción: Honey oat biscuits 24 x 20 g | H53 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F54 Código artículo: 8022349794 | G54 Descripción: Dark chocolate 80 g | H54 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F55 Código artículo: 5929994607 | G55 Descripción: Peach nectar 12 x 250 ml | H55 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F56 Código artículo: 7896118956 | G56 Descripción: Berry oat biscuits 100 g | H56 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F57 Código artículo: 7926682489 | G57 Descripción: Peach nectar 1 l | H57 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F58 Código artículo: 0346956240 | G58 Descripción: Pear juice 750 ml | H58 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F59 Código artículo: 7096733322 | G59 Descripción: Durum penne 400 g | H59 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F60 Código artículo: 6416313085 | G60 Descripción: Cherry juice drink 750 ml | H60 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F61 Código artículo: 6714450213 | G61 Descripción: Linseed rice cakes 150 g | H61 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F62 Código artículo: 0122435399 | G62 Descripción: Wide egg noodles 6 x 500 g | H62 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F65 Código artículo: 3920344646 | G65 Descripción: Lemon balm tea 100 x 2 g | H65 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F66 Código artículo: 0379137744 | G66 Descripción: Apricot nectar 200 ml | H66 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F67 Código artículo: 9707782801 | G67 Descripción: Wholegrain penne 1 kg | H67 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F68 Código artículo: 5091491256 | G68 Descripción: Black tea 80 x 1.5 g | H68 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F69 Código artículo: 6491356255 | G69 Descripción: Durum penne 750 g | H69 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F70 Código artículo: 8740596454 | G70 Descripción: Cocoa oat biscuits 24 x 20 g | H70 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F71 Código artículo: 9176192724 | G71 Descripción: Sweetcorn 400 g | H71 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F72 Código artículo: 5477618709 | G72 Descripción: Corn rice cakes 12 x 10 g | H72 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F73 Código artículo: 8193519752 | G73 Descripción: Cocoa oat biscuits 180 g | H73 Cantidad: [blank] | H14 Unidad: BOTELLAS
+ORDER!F74 Código artículo: 7561727513 | G74 Descripción: Durum farfalle 250 g | H74 Cantidad: 158 | H14 Unidad: BOTELLAS
+ORDER!F75 Código artículo: 9719743828 | G75 Descripción: Cooked chickpeas 4 x 200 g | H75 Cantidad: [blank] | H14 Unidad: BOTELLAS

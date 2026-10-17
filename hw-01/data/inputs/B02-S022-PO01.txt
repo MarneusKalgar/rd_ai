@@ -1,0 +1,5 @@
+ORDER!C5 合同号: CM-OU694312351
+ORDER!C6 开单日期: 2026-07-19
+ORDER!C7 付款方式: Net 60 days
+ORDER!G13 币种: CNY
+ORDER!B14 产品代码: 84538135 | C14 产品名称: Resin compound RC-36 20 kg bag | F14 订购数量: 47 | F13 单位: KG | G14 单价: 54.55 | A14 序号: 1 | I14 交货日期: 2026-07-23

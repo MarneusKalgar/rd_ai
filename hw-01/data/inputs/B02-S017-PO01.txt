@@ -1,0 +1,7 @@
+ORDER!B6 Numero ordine: QA3
+ORDER!B16 Data ordine: 2026-08-04
+ORDER!B8 Cliente: Alderwick Stores Ltd
+ORDER!B11 Indirizzo di consegna: Alderwick Stores Ltd
+ORDER!B13 Indirizzo di consegna: Alderwick
+ORDER!B14 Indirizzo di consegna: 43000
+ORDER!A27 Codice prodotto: 00058535 | B27 Descrizione: Sealing compound PA-22 25 kg bag | C27 Quantità: 41 | D27 Unità: MT | G27 Data di consegna: 02/09/2026

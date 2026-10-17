@@ -1,0 +1,12 @@
+ORDER!E5 PO number: 044918782
+ORDER!E1 Buyer: Larkfen Trading Ltd
+ORDER!B8 Article code: 08633JO | C8 Description: Resin compound FA-42 500 kg bulk bag | E8 Quantity: 91 | F8 UOM: kg | D8 Delivery date: 2026-09-07
+ORDER!B9 Article code: 08633JO | C9 Description: Resin compound FA-42 500 kg bulk bag | E9 Quantity: 91 | F9 UOM: kg | D9 Delivery date: 2026-09-08
+ORDER!B10 Article code: 08633JO | C10 Description: Resin compound FA-42 500 kg bulk bag | E10 Quantity: 91 | F10 UOM: kg | D10 Delivery date: 2026-09-14
+ORDER!B11 Article code: 08633JO | C11 Description: Resin compound FA-42 500 kg bulk bag | E11 Quantity: 91 | F11 UOM: kg | D11 Delivery date: 2026-09-14
+ORDER!B12 Article code: 08633JO | C12 Description: Resin compound FA-42 500 kg bulk bag | E12 Quantity: 91 | F12 UOM: kg | D12 Delivery date: 2026-09-15
+ORDER!B13 Article code: 04619EQ | C13 Description: Acrylic binder SD-45 200 kg drum | E13 Quantity: 91 | F13 UOM: kg | D13 Delivery date: 2026-09-14
+ORDER!B14 Article code: 04619EQ | C14 Description: Acrylic binder SD-45 200 kg drum | E14 Quantity: 91 | F14 UOM: kg | D14 Delivery date: 2026-09-15
+ORDER!B15 Article code: 21891KN | C15 Description: Processing aid PR-14 1000 kg container | E15 Quantity: 91 | F15 UOM: kg | D15 Delivery date: 2026-09-08
+ORDER!B16 Article code: 21891KN | C16 Description: Processing aid PR-14 1000 kg container | E16 Quantity: 91 | F16 UOM: kg | D16 Delivery date: 2026-09-15
+ORDER!B17 Article code: 08736XRCH | C17 Description: Resin compound PC-90 500 kg bulk bag | E17 Quantity: 164 | F17 UOM: kg | D17 Delivery date: 2026-09-09

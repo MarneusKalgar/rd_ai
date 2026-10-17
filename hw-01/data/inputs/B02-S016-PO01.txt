@@ -1,0 +1,76 @@
+ORDER!B14 Megrendelés dátuma: 2026-07-20
+ORDER!B4 Ügyfél neve: Brackenmere Retail Ltd
+ORDER!B7 Szállítási cím: Brackenmere Retail Ltd
+ORDER!B10 Szállítási cím: Alderwick
+ORDER!B11 Szállítási cím: 43000
+ORDER!B12 Szállítási cím: 17 Alder Lane
+ORDER!B9 Fizetési feltétel: Net 75 days
+ORDER!G18 A rendelés összértéke: 2335.32
+ORDER!B15 Delivery date: 2026-07-21
+ORDER!A21 Termék kódja: 9898419 | B21 Megnevezés: Sealing compound RC-54 500 kg bulk bag | C21 Rendelt mennyiség: [blank] | D21 Mértékegység: L
+ORDER!A22 Termék kódja: 1349268 | B22 Megnevezés: Processing aid FA-63 200 kg drum | C22 Rendelt mennyiség: [blank] | D22 Mértékegység: L
+ORDER!A24 Termék kódja: 5528648 | B24 Megnevezés: Sealing compound FA-42 20 kg bag | C24 Rendelt mennyiség: [blank] | D24 Mértékegység: L | G24 Ár: 69.43
+ORDER!A25 Termék kódja: 9593770 | B25 Megnevezés: Resin compound PA-22 500 kg bulk bag | C25 Rendelt mennyiség: [blank] | D25 Mértékegység: L | G25 Ár: 70.59
+ORDER!A26 Termék kódja: 1688186 | B26 Megnevezés: Sealing compound AX-48 20 kg bag | C26 Rendelt mennyiség: [blank] | D26 Mértékegység: L | G26 Ár: 29.83
+ORDER!A27 Termék kódja: 7494309 | B27 Megnevezés: Protective coating PR-42 25 kg bag | C27 Rendelt mennyiség: [blank] | D27 Mértékegység: L | G27 Ár: 88.46
+ORDER!A28 Termék kódja: 7914273 | B28 Megnevezés: Surface coating RC-18 160 kg drum | C28 Rendelt mennyiség: [blank] | D28 Mértékegység: KG | G28 Ár: 98.03
+ORDER!A29 Termék kódja: 3794784 | B29 Megnevezés: Acrylic binder FA-63 5 kg pail | C29 Rendelt mennyiség: [blank] | D29 Mértékegység: L | G29 Ár: 68.41
+ORDER!A30 Termék kódja: 2017595 | B30 Megnevezés: Resin compound FA-21 500 kg bulk bag | C30 Rendelt mennyiség: [blank] | D30 Mértékegység: L | G30 Ár: 47.97
+ORDER!A31 Termék kódja: 8727558 | B31 Megnevezés: Surface coating PC-50 500 kg bulk bag | C31 Rendelt mennyiség: [blank] | D31 Mértékegység: L | G31 Ár: 40.55
+ORDER!A32 Termék kódja: 4872128 | B32 Megnevezés: Finishing additive RC-36 5 kg pail | C32 Rendelt mennyiség: [blank] | D32 Mértékegység: L | G32 Ár: 6.48
+ORDER!A33 Termék kódja: 9785181 | B33 Megnevezés: Surface coating PA-88 25 kg bag | C33 Rendelt mennyiség: [blank] | D33 Mértékegység: KG | G33 Ár: 66.48
+ORDER!A34 Termék kódja: 2156060 | B34 Megnevezés: Acrylic binder AX-12 5 kg pail | C34 Rendelt mennyiség: [blank] | D34 Mértékegység: L | G34 Ár: 4.91
+ORDER!A35 Termék kódja: 7474061 | B35 Megnevezés: Polymer dispersion PC-50 20 kg bag | C35 Rendelt mennyiség: [blank] | D35 Mértékegység: PAK | G35 Ár: 46.71
+ORDER!A36 Termék kódja: 3638614 | B36 Megnevezés: Surface coating SD-15 200 kg drum | C36 Rendelt mennyiség: [blank] | D36 Mértékegység: L | G36 Ár: 98.09
+ORDER!A37 Termék kódja: 7101436 | B37 Megnevezés: Acrylic binder AX-12 1000 kg container | C37 Rendelt mennyiség: [blank] | D37 Mértékegység: PAK | G37 Ár: 91.83
+ORDER!A38 Termék kódja: 5914335 | B38 Megnevezés: Finishing additive SC-64 125 kg drum | C38 Rendelt mennyiség: [blank] | D38 Mértékegység: L | G38 Ár: 2.51
+ORDER!A39 Termék kódja: 9725603 | B39 Megnevezés: Processing aid SC-48 160 kg drum | C39 Rendelt mennyiség: [blank] | D39 Mértékegység: PAK | G39 Ár: 18.66
+ORDER!A40 Termék kódja: 4034042 | B40 Megnevezés: Processing aid FA-42 1000 kg container | C40 Rendelt mennyiség: [blank] | D40 Mértékegység: KG | G40 Ár: 77.99
+ORDER!A41 Termék kódja: 0424456 | B41 Megnevezés: Processing aid FA-63 20 kg bag | C41 Rendelt mennyiség: [blank] | D41 Mértékegység: L | G41 Ár: 100.77
+ORDER!A42 Termék kódja: 7835364 | B42 Megnevezés: Surface coating AX-12 25 kg bag | C42 Rendelt mennyiség: [blank] | D42 Mértékegység: L | G42 Ár: 96.78
+ORDER!A43 Termék kódja: 2084191 | B43 Megnevezés: Polymer dispersion PC-25 1000 kg container | C43 Rendelt mennyiség: [blank] | D43 Mértékegység: L
+ORDER!A44 Termék kódja: 7354334 | B44 Megnevezés: Sealing compound RC-36 500 kg bulk bag | C44 Rendelt mennyiség: [blank] | D44 Mértékegység: KG | G44 Ár: 32.67
+ORDER!A45 Termék kódja: 8007623 | B45 Megnevezés: Surface coating PC-75 200 kg drum | C45 Rendelt mennyiség: [blank] | D45 Mértékegység: L | G45 Ár: 64.33
+ORDER!A46 Termék kódja: 4636244 | B46 Megnevezés: Polymer dispersion PA-44 125 kg drum | C46 Rendelt mennyiség: [blank] | D46 Mértékegység: L | G46 Ár: 61.79
+ORDER!A47 Termék kódja: 2790686 | B47 Megnevezés: Resin compound PR-56 500 kg bulk bag | C47 Rendelt mennyiség: [blank] | D47 Mértékegység: L | G47 Ár: 55.34
+ORDER!A48 Termék kódja: 4030036 | B48 Megnevezés: Acrylic binder SD-45 500 kg bulk bag | C48 Rendelt mennyiség: [blank] | D48 Mértékegység: L | G48 Ár: 77.31
+ORDER!A49 Termék kódja: 4575620 | B49 Megnevezés: Polymer dispersion FA-63 160 kg drum | C49 Rendelt mennyiség: [blank] | D49 Mértékegység: L | G49 Ár: 5.47
+ORDER!A50 Termék kódja: 0557665 | B50 Megnevezés: Polymer dispersion PA-22 5 kg pail | C50 Rendelt mennyiség: [blank] | D50 Mértékegység: KG | G50 Ár: 86.44
+ORDER!A51 Termék kódja: 2156060 | B51 Megnevezés: Acrylic binder AX-12 5 kg pail | C51 Rendelt mennyiség: [blank] | D51 Mértékegység: L | G51 Ár: 4.91
+ORDER!A52 Termék kódja: 0557665 | B52 Megnevezés: Polymer dispersion PA-22 5 kg pail | C52 Rendelt mennyiség: [blank] | D52 Mértékegység: KG | G52 Ár: 86.44
+ORDER!A53 Termék kódja: 2446995 | B53 Megnevezés: Finishing additive SC-32 5 kg pail | C53 Rendelt mennyiség: [blank] | D53 Mértékegység: L | G53 Ár: 4.91
+ORDER!A54 Termék kódja: 3108972 | B54 Megnevezés: Surface coating PC-75 160 kg drum | C54 Rendelt mennyiség: [blank] | D54 Mértékegység: KG | G54 Ár: 86.44
+ORDER!A55 Termék kódja: 2156060 | B55 Megnevezés: Acrylic binder AX-12 5 kg pail | C55 Rendelt mennyiség: [blank] | D55 Mértékegység: L | G55 Ár: 4.91
+ORDER!A56 Termék kódja: 3108972 | B56 Megnevezés: Surface coating PC-75 160 kg drum | C56 Rendelt mennyiség: [blank] | D56 Mértékegység: KG | G56 Ár: 86.44
+ORDER!A57 Termék kódja: 2446995 | B57 Megnevezés: Finishing additive SC-32 5 kg pail | C57 Rendelt mennyiség: [blank] | D57 Mértékegység: L | G57 Ár: 4.91
+ORDER!A58 Termék kódja: 4247258 | B58 Megnevezés: Finishing additive PC-25 25 kg bag | C58 Rendelt mennyiség: [blank] | D58 Mértékegység: PAK | G58 Ár: 39.82
+ORDER!A59 Termék kódja: 2446995 | B59 Megnevezés: Finishing additive SC-32 5 kg pail | C59 Rendelt mennyiség: [blank] | D59 Mértékegység: L | G59 Ár: 70.68
+ORDER!A60 Termék kódja: 8487110 | B60 Megnevezés: Processing aid SC-32 200 kg drum | C60 Rendelt mennyiség: [blank] | D60 Mértékegység: L | G60 Ár: 6.89
+ORDER!A61 Termék kódja: 2288367 | B61 Megnevezés: Sealing compound PA-88 25 kg bag | C61 Rendelt mennyiség: [blank] | D61 Mértékegység: L | G61 Ár: 6.89
+ORDER!A63 Termék kódja: 8487110 | B63 Megnevezés: Processing aid SC-32 200 kg drum | C63 Rendelt mennyiség: [blank] | D63 Mértékegység: L
+ORDER!A64 Termék kódja: 7354334 | B64 Megnevezés: Sealing compound RC-36 500 kg bulk bag | C64 Rendelt mennyiség: [blank] | D64 Mértékegység: KG
+ORDER!A65 Termék kódja: 0031274 | B65 Megnevezés: Resin compound SC-16 5 kg pail | C65 Rendelt mennyiség: [blank] | D65 Mértékegység: L | G65 Ár: 88.73
+ORDER!A66 Termék kódja: 4155666 | B66 Megnevezés: Polymer dispersion SD-60 25 kg bag | C66 Rendelt mennyiség: [blank] | D66 Mértékegység: PAK | G66 Ár: 63.16
+ORDER!A67 Termék kódja: 4780643 | B67 Megnevezés: Processing aid FA-21 160 kg drum | C67 Rendelt mennyiség: [blank] | D67 Mértékegység: KG | G67 Ár: 95.23
+ORDER!A68 Termék kódja: 9383759 | B68 Megnevezés: Protective coating PC-90 20 kg bag | C68 Rendelt mennyiség: [blank] | D68 Mértékegység: KG | G68 Ár: 2.93
+ORDER!A69 Termék kódja: 0991539 | B69 Megnevezés: Resin compound RC-54 500 kg bulk bag | C69 Rendelt mennyiség: [blank] | D69 Mértékegység: PAK | G69 Ár: 44.55
+ORDER!A70 Termék kódja: 8058008 | B70 Megnevezés: Surface coating SD-60 20 kg bag | C70 Rendelt mennyiség: [blank] | D70 Mértékegység: L
+ORDER!A71 Termék kódja: 9660749 | B71 Megnevezés: Acrylic binder PA-44 160 kg drum | C71 Rendelt mennyiség: [blank] | D71 Mértékegység: L | G71 Ár: 56.19
+ORDER!A72 Termék kódja: 2276072 | B72 Megnevezés: Surface coating PC-25 20 kg bag | C72 Rendelt mennyiség: [blank] | D72 Mértékegység: L | G72 Ár: 98.56
+ORDER!A73 Termék kódja: 1305053 | B73 Megnevezés: Acrylic binder PA-66 200 kg drum | C73 Rendelt mennyiség: [blank] | D73 Mértékegység: L | G73 Ár: 39.27
+ORDER!A74 Termék kódja: 1185105 | B74 Megnevezés: Surface coating PA-22 25 kg bag | C74 Rendelt mennyiség: 52 | D74 Mértékegység: L | G74 Ár: 44.91
+ORDER!A75 Termék kódja: 7255042 | B75 Megnevezés: Acrylic binder AX-48 160 kg drum | C75 Rendelt mennyiség: [blank] | D75 Mértékegység: KG | G75 Ár: 3.71
+ORDER!A76 Termék kódja: 0545847 | B76 Megnevezés: Resin compound AX-24 25 kg bag | C76 Rendelt mennyiség: [blank] | D76 Mértékegység: L | G76 Ár: 4.91
+ORDER!A77 Termék kódja: 0103401 | B77 Megnevezés: Sealing compound AX-36 500 kg bulk bag | C77 Rendelt mennyiség: [blank] | D77 Mértékegység: L | G77 Ár: 83.57
+ORDER!A78 Termék kódja: 0801072 | B78 Megnevezés: Protective coating SD-60 25 kg bag | C78 Rendelt mennyiség: [blank] | D78 Mértékegység: L | G78 Ár: 89.71
+ORDER!A79 Termék kódja: 3029512 | B79 Megnevezés: Finishing additive FA-42 20 kg bag | C79 Rendelt mennyiség: [blank] | D79 Mértékegység: PAK | G79 Ár: 12.89
+ORDER!A80 Termék kódja: 9956840 | B80 Megnevezés: Protective coating SC-48 1000 kg container | C80 Rendelt mennyiség: [blank] | D80 Mértékegység: L | G80 Ár: 38.96
+ORDER!A81 Termék kódja: 8006961 | B81 Megnevezés: Acrylic binder PA-44 5 kg pail | C81 Rendelt mennyiség: [blank] | D81 Mértékegység: L | G81 Ár: 71.27
+ORDER!A82 Termék kódja: 0545847 | B82 Megnevezés: Resin compound AX-24 25 kg bag | C82 Rendelt mennyiség: [blank] | D82 Mértékegység: L | G82 Ár: 41.66
+ORDER!A83 Termék kódja: 2156060 | B83 Megnevezés: Acrylic binder AX-12 5 kg pail | C83 Rendelt mennyiség: [blank] | D83 Mértékegység: L | G83 Ár: 41.66
+ORDER!A84 Termék kódja: 0995248 | B84 Megnevezés: Finishing additive FA-63 20 kg bag | C84 Rendelt mennyiség: [blank] | D84 Mértékegység: L
+ORDER!A85 Termék kódja: 8524232 | B85 Megnevezés: Polymer dispersion FA-21 5 kg pail | C85 Rendelt mennyiség: [blank] | D85 Mértékegység: L | G85 Ár: 43.47
+ORDER!A87 Termék kódja: 9956840 | B87 Megnevezés: Protective coating SC-48 1000 kg container | C87 Rendelt mennyiség: [blank] | D87 Mértékegység: L
+ORDER!A88 Termék kódja: 2156060 | B88 Megnevezés: Acrylic binder AX-12 5 kg pail | C88 Rendelt mennyiség: [blank] | D88 Mértékegység: L
+ORDER!A89 Termék kódja: 8487110 | B89 Megnevezés: Processing aid SC-32 200 kg drum | C89 Rendelt mennyiség: [blank] | D89 Mértékegység: L
+ORDER!A90 Termék kódja: 7354334 | B90 Megnevezés: Sealing compound RC-36 500 kg bulk bag | C90 Rendelt mennyiség: [blank] | D90 Mértékegység: KG

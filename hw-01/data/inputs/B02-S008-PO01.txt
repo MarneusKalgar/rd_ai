@@ -1,0 +1,442 @@
+ORDER!F2 PO number: QTA67048
+ORDER!F3 Delivery date: 21.07.2026
+ORDER!C10 Article code: 37475 | D10 Description: Cocoa oat biscuits 250 g | F10 Quantity: 31 | E5 UOM: CASE
+ORDER!C11 Article code: 96062 | D11 Description: White beans 300 g | F11 Quantity: [blank] | E5 UOM: CASE
+ORDER!C12 Article code: 33563 | D12 Description: Plum preserve 340 g | F12 Quantity: 59 | E5 UOM: CASE
+ORDER!C13 Article code: 19346 | D13 Description: Apricot preserve 150 g | F13 Quantity: [blank] | E5 UOM: CASE
+ORDER!C14 Article code: 97155 | D14 Description: Cinnamon oat biscuits 24 x 20 g | F14 Quantity: [blank] | E5 UOM: CASE
+ORDER!C15 Article code: 65749 | D15 Description: Wholegrain fusilli 500 g | F15 Quantity: [blank] | E5 UOM: CASE
+ORDER!C17 Article code: 61246 | D17 Description: Berry oat biscuits 120 g | F17 Quantity: [blank] | E5 UOM: CASE
+ORDER!C18 Article code: 02856 | D18 Description: Apple juice 6 x 200 ml | F18 Quantity: [blank] | E5 UOM: CASE
+ORDER!C19 Article code: 57798 | D19 Description: Linseed rice cakes 12 x 10 g | F19 Quantity: [blank] | E5 UOM: CASE
+ORDER!C20 Article code: 99360 | D20 Description: Milk chocolate 40 g | F20 Quantity: [blank] | E5 UOM: CASE
+ORDER!C22 Article code: 03118 | D22 Description: Caramel chocolate 150 g | F22 Quantity: [blank] | E5 UOM: CASE
+ORDER!C23 Article code: 89039 | D23 Description: Sunflower seed rice cakes 80 g | F23 Quantity: [blank] | E5 UOM: CASE
+ORDER!C25 Article code: 35589 | D25 Description: Cocoa oat biscuits 120 g | F25 Quantity: [blank] | E5 UOM: CASE
+ORDER!C26 Article code: 72063 | D26 Description: Red kidney beans 150 g | F26 Quantity: [blank] | E5 UOM: CASE
+ORDER!C28 Article code: 18684 | D28 Description: Cinnamon oat biscuits 100 g | F28 Quantity: [blank] | E5 UOM: CASE
+ORDER!C29 Article code: 74608 | D29 Description: Cocoa oat biscuits 100 g | F29 Quantity: [blank] | E5 UOM: CASE
+ORDER!C31 Article code: 00059 | D31 Description: Milk chocolate 12 x 20 g | F31 Quantity: [blank] | E5 UOM: CASE
+ORDER!C33 Article code: 61974 | D33 Description: Lemon oat biscuits 24 x 20 g | F33 Quantity: [blank] | E5 UOM: CASE
+ORDER!C34 Article code: 91008 | D34 Description: Apricot nectar 330 ml | F34 Quantity: [blank] | E5 UOM: CASE
+ORDER!C35 Article code: 71692 | D35 Description: Almond chocolate 100 g | F35 Quantity: [blank] | E5 UOM: CASE
+ORDER!C36 Article code: 63758 | D36 Description: Apple juice 12 x 250 ml | F36 Quantity: [blank] | E5 UOM: CASE
+ORDER!C37 Article code: 58920 | D37 Description: Forest fruit tea 20 x 2 g | F37 Quantity: [blank] | E5 UOM: CASE
+ORDER!C38 Article code: 54526 | D38 Description: Millet rice cakes 12 x 10 g | F38 Quantity: [blank] | E5 UOM: CASE
+ORDER!C39 Article code: 34089 | D39 Description: Fine peas 250 g | F39 Quantity: [blank] | E5 UOM: CASE
+ORDER!C40 Article code: 79960 | D40 Description: Wide egg noodles 4 x 250 g | F40 Quantity: [blank] | E5 UOM: CASE
+ORDER!C41 Article code: 91524 | D41 Description: Cherry preserve 340 g | F41 Quantity: [blank] | E5 UOM: CASE
+ORDER!C42 Article code: 63320 | D42 Description: Durum spaghetti 750 g | F42 Quantity: [blank] | E5 UOM: CASE
+ORDER!C44 Article code: 62987 | D44 Description: Mixed fruit juice 12 x 250 ml | F44 Quantity: [blank] | E5 UOM: CASE
+ORDER!C45 Article code: 67277 | D45 Description: Mint chocolate 12 x 20 g | F45 Quantity: [blank] | E5 UOM: CASE
+ORDER!C46 Article code: 89751 | D46 Description: Berry oat biscuits 300 g | F46 Quantity: [blank] | E5 UOM: CASE
+ORDER!C47 Article code: 31848 | D47 Description: Linseed rice cakes 60 g | F47 Quantity: [blank] | E5 UOM: CASE
+ORDER!C48 Article code: 65046 | D48 Description: Durum farfalle 4 x 250 g | F48 Quantity: [blank] | E5 UOM: CASE
+ORDER!C49 Article code: 52182 | D49 Description: Strawberry preserve 450 g | F49 Quantity: [blank] | E5 UOM: CASE
+ORDER!C50 Article code: 98686 | D50 Description: Salted rice cakes 6 x 20 g | F50 Quantity: [blank] | E5 UOM: CASE
+ORDER!C51 Article code: 32341 | D51 Description: Peach nectar 750 ml | F51 Quantity: [blank] | E5 UOM: CASE
+ORDER!C52 Article code: 10515 | D52 Description: Lemon oat biscuits 12 x 25 g | F52 Quantity: [blank] | E5 UOM: CASE
+ORDER!C53 Article code: 76522 | D53 Description: Chamomile tea 20 x 1.5 g | F53 Quantity: [blank] | E5 UOM: CASE
+ORDER!C55 Article code: 76882 | D55 Description: Cooked chickpeas 400 g | F55 Quantity: [blank] | E5 UOM: CASE
+ORDER!C56 Article code: 73368 | D56 Description: Pear juice 6 x 200 ml | F56 Quantity: [blank] | E5 UOM: CASE
+ORDER!C58 Article code: 03691 | D58 Description: White beans 150 g | F58 Quantity: [blank] | E5 UOM: CASE
+ORDER!C59 Article code: 34143 | D59 Description: Wide egg noodles 400 g | F59 Quantity: [blank] | E5 UOM: CASE
+ORDER!C60 Article code: 73359 | D60 Description: Chamomile tea 25 x 2 g | F60 Quantity: [blank] | E5 UOM: CASE
+ORDER!C61 Article code: 84941 | D61 Description: Durum spaghetti 6 x 500 g | F61 Quantity: [blank] | E5 UOM: CASE
+ORDER!C62 Article code: 16267 | D62 Description: Orange juice 6 x 200 ml | F62 Quantity: 22 | E5 UOM: CASE
+ORDER!C63 Article code: 88202 | D63 Description: Rosehip tea 40 x 1.5 g | F63 Quantity: [blank] | E5 UOM: CASE
+ORDER!C64 Article code: 14334 | D64 Description: Buckwheat rice cakes 80 g | F64 Quantity: [blank] | E5 UOM: CASE
+ORDER!C65 Article code: 71578 | D65 Description: Hazelnut oat biscuits 24 x 20 g | F65 Quantity: 125 | E5 UOM: CASE
+ORDER!C66 Article code: 61549 | D66 Description: Berry oat biscuits 12 x 25 g | F66 Quantity: 145 | E5 UOM: CASE
+ORDER!C67 Article code: 66457 | D67 Description: Chamomile tea 80 x 1.5 g | F67 Quantity: 142 | E5 UOM: CASE
+ORDER!C69 Article code: 92182 | D69 Description: White chocolate 80 g | F69 Quantity: [blank] | E5 UOM: CASE
+ORDER!C70 Article code: 54817 | D70 Description: Cherry preserve 150 g | F70 Quantity: [blank] | E5 UOM: CASE
+ORDER!C71 Article code: 74622 | D71 Description: Sesame rice cakes 150 g | F71 Quantity: [blank] | E5 UOM: CASE
+ORDER!C72 Article code: 80810 | D72 Description: Raspberry preserve 340 g | F72 Quantity: [blank] | E5 UOM: CASE
+ORDER!C74 Article code: 16841 | D74 Description: Butter beans 150 g | F74 Quantity: [blank] | E5 UOM: CASE
+ORDER!C75 Article code: 99334 | D75 Description: Mixed beans 150 g | F75 Quantity: [blank] | E5 UOM: CASE
+ORDER!C76 Article code: 58191 | D76 Description: White beans 560 g | F76 Quantity: [blank] | E5 UOM: CASE
+ORDER!C77 Article code: 28768 | D77 Description: Wide egg noodles 750 g | F77 Quantity: [blank] | E5 UOM: CASE
+ORDER!C78 Article code: 91777 | D78 Description: Durum fusilli 750 g | F78 Quantity: [blank] | E5 UOM: CASE
+ORDER!C80 Article code: 81401 | D80 Description: Sweetcorn 300 g | F80 Quantity: 166 | E5 UOM: CASE
+ORDER!C82 Article code: 56239 | D82 Description: Blackberry preserve 340 g | F82 Quantity: [blank] | E5 UOM: CASE
+ORDER!C83 Article code: 10161 | D83 Description: Cinnamon oat biscuits 300 g | F83 Quantity: [blank] | E5 UOM: CASE
+ORDER!C84 Article code: 51479 | D84 Description: Blueberry preserve 340 g | F84 Quantity: [blank] | E5 UOM: CASE
+ORDER!C85 Article code: 63315 | D85 Description: Rosehip tea 25 x 1.5 g | F85 Quantity: [blank] | E5 UOM: CASE
+ORDER!C86 Article code: 32266 | D86 Description: Durum spaghetti 400 g | F86 Quantity: [blank] | E5 UOM: CASE
+ORDER!C87 Article code: 12020 | D87 Description: Butter beans 300 g | F87 Quantity: [blank] | E5 UOM: CASE
+ORDER!C88 Article code: 17008 | D88 Description: Hazelnut oat biscuits 180 g | F88 Quantity: [blank] | E5 UOM: CASE
+ORDER!C89 Article code: 08593 | D89 Description: Strawberry preserve 250 g | F89 Quantity: [blank] | E5 UOM: CASE
+ORDER!C90 Article code: 77209 | D90 Description: Black tea 50 x 2 g | F90 Quantity: [blank] | E5 UOM: CASE
+ORDER!C92 Article code: 88169 | D92 Description: Durum fusilli 200 g | F92 Quantity: [blank] | E5 UOM: CASE
+ORDER!C93 Article code: 33267 | D93 Description: Plain rice cakes 8 x 15 g | F93 Quantity: [blank] | E5 UOM: CASE
+ORDER!C95 Article code: 16406 | D95 Description: Buckwheat rice cakes 120 g | F95 Quantity: [blank] | E5 UOM: CASE
+ORDER!C96 Article code: 66106 | D96 Description: Butter beans 250 g | F96 Quantity: [blank] | E5 UOM: CASE
+ORDER!C98 Article code: 10149 | D98 Description: Apricot preserve 200 g | F98 Quantity: [blank] | E5 UOM: CASE
+ORDER!C99 Article code: 52227 | D99 Description: Peach nectar 330 ml | F99 Quantity: [blank] | E5 UOM: CASE
+ORDER!C101 Article code: 61808 | D101 Description: Durum farfalle 250 g | F101 Quantity: [blank] | E5 UOM: CASE
+ORDER!C103 Article code: 00953 | D103 Description: Peppermint tea 20 x 1.5 g | F103 Quantity: [blank] | E5 UOM: CASE
+ORDER!C104 Article code: 93853 | D104 Description: Plum preserve 250 g | F104 Quantity: [blank] | E5 UOM: CASE
+ORDER!C105 Article code: 30615 | D105 Description: Mixed fruit juice 500 ml | F105 Quantity: [blank] | E5 UOM: CASE
+ORDER!C106 Article code: 02135 | D106 Description: Mixed beans 300 g | F106 Quantity: [blank] | E5 UOM: CASE
+ORDER!C107 Article code: 09871 | D107 Description: Apricot preserve 450 g | F107 Quantity: [blank] | E5 UOM: CASE
+ORDER!C108 Article code: 05796 | D108 Description: Hazelnut chocolate 180 g | F108 Quantity: [blank] | E5 UOM: CASE
+ORDER!C109 Article code: 88130 | D109 Description: Butter beans 800 g | F109 Quantity: 42 | E5 UOM: CASE
+ORDER!C110 Article code: 18832 | D110 Description: Cinnamon oat biscuits 180 g | F110 Quantity: [blank] | E5 UOM: CASE
+ORDER!C111 Article code: 81481 | D111 Description: Strawberry preserve 400 g | F111 Quantity: [blank] | E5 UOM: CASE
+ORDER!C113 Article code: 06788 | D113 Description: Peach nectar 1 l | F113 Quantity: 31 | E5 UOM: CASE
+ORDER!C114 Article code: 39334 | D114 Description: Raspberry preserve 200 g | F114 Quantity: 17 | E5 UOM: CASE
+ORDER!C115 Article code: 50583 | D115 Description: Pear juice 750 ml | F115 Quantity: [blank] | E5 UOM: CASE
+ORDER!C116 Article code: 69928 | D116 Description: Caramel chocolate 6 x 25 g | F116 Quantity: [blank] | E5 UOM: CASE
+ORDER!C117 Article code: 24607 | D117 Description: Orange chocolate 40 g | F117 Quantity: 96 | E5 UOM: CASE
+ORDER!C118 Article code: 20843 | D118 Description: Cooked chickpeas 560 g | F118 Quantity: [blank] | E5 UOM: CASE
+ORDER!C119 Article code: 67965 | D119 Description: Apricot nectar 12 x 250 ml | F119 Quantity: [blank] | E5 UOM: CASE
+ORDER!C121 Article code: 97068 | D121 Description: Milk chocolate 6 x 25 g | F121 Quantity: [blank] | E5 UOM: CASE
+ORDER!C122 Article code: 39471 | D122 Description: Almond chocolate 150 g | F122 Quantity: [blank] | E5 UOM: CASE
+ORDER!C124 Article code: 37889 | D124 Description: Blackberry preserve 450 g | F124 Quantity: [blank] | E5 UOM: CASE
+ORDER!C125 Article code: 81944 | D125 Description: Blackberry preserve 200 g | F125 Quantity: [blank] | E5 UOM: CASE
+ORDER!C126 Article code: 60467 | D126 Description: Fine egg noodles 6 x 500 g | F126 Quantity: [blank] | E5 UOM: CASE
+ORDER!C127 Article code: 99458 | D127 Description: Rosehip tea 25 x 2 g | F127 Quantity: [blank] | E5 UOM: CASE
+ORDER!C128 Article code: 96705 | D128 Description: Blackberry preserve 250 g | F128 Quantity: [blank] | E5 UOM: CASE
+ORDER!C129 Article code: 55572 | D129 Description: Blueberry preserve 200 g | F129 Quantity: [blank] | E5 UOM: CASE
+ORDER!C130 Article code: 68998 | D130 Description: Forest fruit tea 80 x 1.5 g | F130 Quantity: [blank] | E5 UOM: CASE
+ORDER!C131 Article code: 69211 | D131 Description: Wholegrain penne 6 x 500 g | F131 Quantity: [blank] | E5 UOM: CASE
+ORDER!C132 Article code: 68841 | D132 Description: White grape juice 1 l | F132 Quantity: [blank] | E5 UOM: CASE
+ORDER!C133 Article code: 11158 | D133 Description: Fine egg noodles 4 x 250 g | F133 Quantity: [blank] | E5 UOM: CASE
+ORDER!C134 Article code: 19806 | D134 Description: Orange juice 330 ml | F134 Quantity: [blank] | E5 UOM: CASE
+ORDER!C135 Article code: 68502 | D135 Description: Almond chocolate 50 g | F135 Quantity: [blank] | E5 UOM: CASE
+ORDER!C137 Article code: 90200 | D137 Description: Milk chocolate 150 g | F137 Quantity: [blank] | E5 UOM: CASE
+ORDER!C138 Article code: 83039 | D138 Description: Lemon balm tea 20 x 2 g | F138 Quantity: [blank] | E5 UOM: CASE
+ORDER!C139 Article code: 75846 | D139 Description: Red kidney beans 250 g | F139 Quantity: [blank] | E5 UOM: CASE
+ORDER!C141 Article code: 02729 | D141 Description: Cherry preserve 200 g | F141 Quantity: [blank] | E5 UOM: CASE
+ORDER!C142 Article code: 95764 | D142 Description: White chocolate 12 x 20 g | F142 Quantity: [blank] | E5 UOM: CASE
+ORDER!C143 Article code: 14974 | D143 Description: Lemon balm tea 50 x 2 g | F143 Quantity: [blank] | E5 UOM: CASE
+ORDER!C144 Article code: 74207 | D144 Description: Forest fruit tea 20 x 1.5 g | F144 Quantity: [blank] | E5 UOM: CASE
+ORDER!C145 Article code: 71641 | D145 Description: Peach nectar 500 ml | F145 Quantity: [blank] | E5 UOM: CASE
+ORDER!C147 Article code: 78787 | D147 Description: Vanilla oat biscuits 300 g | F147 Quantity: [blank] | E5 UOM: CASE
+ORDER!C148 Article code: 60495 | D148 Description: Lemon oat biscuits 120 g | F148 Quantity: [blank] | E5 UOM: CASE
+ORDER!C149 Article code: 92053 | D149 Description: Red kidney beans 800 g | F149 Quantity: [blank] | E5 UOM: CASE
+ORDER!C150 Article code: 57512 | D150 Description: Raspberry preserve 250 g | F150 Quantity: [blank] | E5 UOM: CASE
+ORDER!C151 Article code: 60759 | D151 Description: Sesame rice cakes 80 g | F151 Quantity: [blank] | E5 UOM: CASE
+ORDER!C152 Article code: 31950 | D152 Description: Apricot preserve 250 g | F152 Quantity: [blank] | E5 UOM: CASE
+ORDER!C154 Article code: 5467 | D154 Description: Vanilla oat biscuits 180 g | F154 Quantity: [blank] | E5 UOM: CASE
+ORDER!C155 Article code: 24937 | D155 Description: Orange marmalade 400 g | F155 Quantity: [blank] | E5 UOM: CASE
+ORDER!C156 Article code: 3418 | D156 Description: Linseed rice cakes 6 x 20 g | F156 Quantity: [blank] | E5 UOM: CASE
+ORDER!C157 Article code: 48650 | D157 Description: Peppermint tea 20 x 2 g | F157 Quantity: [blank] | E5 UOM: CASE
+ORDER!C158 Article code: 76578 | D158 Description: Linseed rice cakes 120 g | F158 Quantity: [blank] | E5 UOM: CASE
+ORDER!C159 Article code: 17361 | D159 Description: Durum penne 500 g | F159 Quantity: [blank] | E5 UOM: CASE
+ORDER!C161 Article code: 24422 | D161 Description: Salted rice cakes 80 g | F161 Quantity: [blank] | E5 UOM: CASE
+ORDER!C162 Article code: 29238 | D162 Description: Linden tea 20 x 1.5 g | F162 Quantity: [blank] | E5 UOM: CASE
+ORDER!C164 Article code: 09128 | D164 Description: Durum fusilli 400 g | F164 Quantity: [blank] | E5 UOM: CASE
+ORDER!C165 Article code: 91976 | D165 Description: Milk chocolate 50 g | F165 Quantity: [blank] | E5 UOM: CASE
+ORDER!C166 Article code: 06081 | D166 Description: Forest fruit tea 25 x 2 g | F166 Quantity: [blank] | E5 UOM: CASE
+ORDER!C168 Article code: 87753 | D168 Description: Cherry juice drink 500 ml | F168 Quantity: [blank] | E5 UOM: CASE
+ORDER!C169 Article code: 90468 | D169 Description: Green tea 25 x 2 g | F169 Quantity: [blank] | E5 UOM: CASE
+ORDER!C171 Article code: 32941 | D171 Description: Pear juice 12 x 250 ml | F171 Quantity: [blank] | E5 UOM: CASE
+ORDER!C172 Article code: 60558 | D172 Description: White chocolate 6 x 25 g | F172 Quantity: [blank] | E5 UOM: CASE
+ORDER!C174 Article code: 60321 | D174 Description: Berry oat biscuits 6 x 40 g | F174 Quantity: [blank] | E5 UOM: CASE
+ORDER!C176 Article code: 08897 | D176 Description: White chocolate 50 g | F176 Quantity: [blank] | E5 UOM: CASE
+ORDER!C178 Article code: 72357 | D178 Description: Hazelnut chocolate 40 g | F178 Quantity: [blank] | E5 UOM: CASE
+ORDER!C179 Article code: 43780 | D179 Description: Durum farfalle 500 g | F179 Quantity: [blank] | E5 UOM: CASE
+ORDER!C180 Article code: 58548 | D180 Description: Durum penne 250 g | F180 Quantity: [blank] | E5 UOM: CASE
+ORDER!C181 Article code: 21369 | D181 Description: Orange chocolate 6 x 25 g | F181 Quantity: [blank] | E5 UOM: CASE
+ORDER!C183 Article code: 96167 | D183 Description: Red kidney beans 4 x 200 g | F183 Quantity: [blank] | E5 UOM: CASE
+ORDER!C184 Article code: 35469 | D184 Description: Cooked lentils 560 g | F184 Quantity: [blank] | E5 UOM: CASE
+ORDER!C185 Article code: 66509 | D185 Description: Corn rice cakes 80 g | F185 Quantity: [blank] | E5 UOM: CASE
+ORDER!C186 Article code: 35697 | D186 Description: Plain rice cakes 80 g | F186 Quantity: [blank] | E5 UOM: CASE
+ORDER!C187 Article code: 38279 | D187 Description: Wholegrain penne 750 g | F187 Quantity: [blank] | E5 UOM: CASE
+ORDER!C188 Article code: 76329 | D188 Description: Plum preserve 150 g | F188 Quantity: [blank] | E5 UOM: CASE
+ORDER!C189 Article code: 31143 | D189 Description: Raspberry preserve 300 g | F189 Quantity: [blank] | E5 UOM: CASE
+ORDER!C191 Article code: 99561 | D191 Description: Buckwheat rice cakes 6 x 20 g | F191 Quantity: [blank] | E5 UOM: CASE
+ORDER!C192 Article code: 83298 | D192 Description: Coconut oat biscuits 300 g | F192 Quantity: [blank] | E5 UOM: CASE
+ORDER!C194 Article code: 05325 | D194 Description: Chamomile tea 100 x 2 g | F194 Quantity: [blank] | E5 UOM: CASE
+ORDER!C195 Article code: 79185 | D195 Description: Lemon balm tea 20 x 1.5 g | F195 Quantity: [blank] | E5 UOM: CASE
+ORDER!C197 Article code: 13106 | D197 Description: Green tea 20 x 1.5 g | F197 Quantity: [blank] | E5 UOM: CASE
+ORDER!C198 Article code: 38192 | D198 Description: Green tea 20 x 2 g | F198 Quantity: 96 | E5 UOM: CASE
+ORDER!C200 Article code: 22390 | D200 Description: Orange chocolate 80 g | F200 Quantity: [blank] | E5 UOM: CASE
+ORDER!C201 Article code: 85890 | D201 Description: Cherry juice drink 750 ml | F201 Quantity: [blank] | E5 UOM: CASE
+ORDER!C203 Article code: 60777 | D203 Description: White beans 800 g | F203 Quantity: [blank] | E5 UOM: CASE
+ORDER!C204 Article code: 87293 | D204 Description: Black tea 25 x 2 g | F204 Quantity: [blank] | E5 UOM: CASE
+ORDER!C206 Article code: 08303 | D206 Description: Butter beans 560 g | F206 Quantity: [blank] | E5 UOM: CASE
+ORDER!C207 Article code: 35637 | D207 Description: Forest fruit tea 40 x 1.5 g | F207 Quantity: [blank] | E5 UOM: CASE
+ORDER!C208 Article code: 08409 | D208 Description: Durum penne 400 g | F208 Quantity: [blank] | E5 UOM: CASE
+ORDER!C209 Article code: 37406 | D209 Description: Orange chocolate 12 x 20 g | F209 Quantity: [blank] | E5 UOM: CASE
+ORDER!C210 Article code: 09571 | D210 Description: Apple juice 200 ml | F210 Quantity: [blank] | E5 UOM: CASE
+ORDER!C211 Article code: 43756 | D211 Description: Caramel chocolate 50 g | F211 Quantity: [blank] | E5 UOM: CASE
+ORDER!C212 Article code: 11145 | D212 Description: Plum preserve 6 x 40 g | F212 Quantity: [blank] | E5 UOM: CASE
+ORDER!C213 Article code: 35848 | D213 Description: Mixed fruit juice 750 ml | F213 Quantity: [blank] | E5 UOM: CASE
+ORDER!C214 Article code: 27235 | D214 Description: Blueberry preserve 450 g | F214 Quantity: [blank] | E5 UOM: CASE
+ORDER!C215 Article code: 84375 | D215 Description: Wholegrain penne 500 g | F215 Quantity: [blank] | E5 UOM: CASE
+ORDER!C216 Article code: 58661 | D216 Description: Wholegrain fusilli 1 kg | F216 Quantity: [blank] | E5 UOM: CASE
+ORDER!C218 Article code: 54879 | D218 Description: Fine peas 4 x 200 g | F218 Quantity: [blank] | E5 UOM: CASE
+ORDER!C219 Article code: 28760 | D219 Description: Cocoa oat biscuits 300 g | F219 Quantity: [blank] | E5 UOM: CASE
+ORDER!C220 Article code: 54475 | D220 Description: Green tea 25 x 1.5 g | F220 Quantity: [blank] | E5 UOM: CASE
+ORDER!C222 Article code: 53278 | D222 Description: Raspberry preserve 400 g | F222 Quantity: 42 | E5 UOM: CASE
+ORDER!C223 Article code: 31220 | D223 Description: Forest fruit tea 25 x 1.5 g | F223 Quantity: [blank] | E5 UOM: CASE
+ORDER!C224 Article code: 58501 | D224 Description: Blackberry preserve 150 g | F224 Quantity: [blank] | E5 UOM: CASE
+ORDER!C225 Article code: 59248 | D225 Description: Sesame rice cakes 12 x 10 g | F225 Quantity: [blank] | E5 UOM: CASE
+ORDER!C227 Article code: 20447 | D227 Description: Wholegrain penne 200 g | F227 Quantity: [blank] | E5 UOM: CASE
+ORDER!C228 Article code: 16631 | D228 Description: Strawberry preserve 300 g | F228 Quantity: [blank] | E5 UOM: CASE
+ORDER!C230 Article code: 66177 | D230 Description: Dark chocolate 12 x 20 g | F230 Quantity: [blank] | E5 UOM: CASE
+ORDER!C231 Article code: 82776 | D231 Description: Blueberry preserve 250 g | F231 Quantity: [blank] | E5 UOM: CASE
+ORDER!C232 Article code: 71027 | D232 Description: Plum preserve 400 g | F232 Quantity: [blank] | E5 UOM: CASE
+ORDER!C233 Article code: 80604 | D233 Description: Berry oat biscuits 100 g | F233 Quantity: [blank] | E5 UOM: CASE
+ORDER!C234 Article code: 06634 | D234 Description: Hazelnut oat biscuits 300 g | F234 Quantity: [blank] | E5 UOM: CASE
+ORDER!C235 Article code: 91219 | D235 Description: Mint chocolate 50 g | F235 Quantity: [blank] | E5 UOM: CASE
+ORDER!C236 Article code: 80856 | D236 Description: Sweetcorn 800 g | F236 Quantity: [blank] | E5 UOM: CASE
+ORDER!C237 Article code: 03225 | D237 Description: Linden tea 25 x 1.5 g | F237 Quantity: [blank] | E5 UOM: CASE
+ORDER!C239 Article code: 00387 | D239 Description: Durum fusilli 6 x 500 g | F239 Quantity: [blank] | E5 UOM: CASE
+ORDER!C241 Article code: 93514 | D241 Description: Butter beans 200 g | F241 Quantity: [blank] | E5 UOM: CASE
+ORDER!C242 Article code: 39874 | D242 Description: Durum fusilli 250 g | F242 Quantity: [blank] | E5 UOM: CASE
+ORDER!C243 Article code: 9618 | D243 Description: Wholegrain fusilli 400 g | F243 Quantity: [blank] | E5 UOM: CASE
+ORDER!C245 Article code: 41027 | D245 Description: Millet rice cakes 60 g | F245 Quantity: [blank] | E5 UOM: CASE
+ORDER!C246 Article code: 84154 | D246 Description: Lemon balm tea 25 x 2 g | F246 Quantity: [blank] | E5 UOM: CASE
+ORDER!C247 Article code: 87293 | D247 Description: Black tea 25 x 2 g | F247 Quantity: [blank] | E5 UOM: CASE
+ORDER!C248 Article code: 60777 | D248 Description: White beans 800 g | F248 Quantity: [blank] | E5 UOM: CASE
+ORDER!C250 Article code: 50114 | D250 Description: Durum fusilli 500 g | F250 Quantity: [blank] | E5 UOM: CASE
+ORDER!C251 Article code: 06505 | D251 Description: Salted rice cakes 60 g | F251 Quantity: [blank] | E5 UOM: CASE
+ORDER!C252 Article code: 19381 | D252 Description: Lemon oat biscuits 250 g | F252 Quantity: [blank] | E5 UOM: CASE
+ORDER!C253 Article code: 29738 | D253 Description: Corn rice cakes 60 g | F253 Quantity: [blank] | E5 UOM: CASE
+ORDER!C254 Article code: 01698 | D254 Description: Strawberry preserve 200 g | F254 Quantity: [blank] | E5 UOM: CASE
+ORDER!C255 Article code: 00543 | D255 Description: Honey oat biscuits 250 g | F255 Quantity: [blank] | E5 UOM: CASE
+ORDER!C256 Article code: 09197 | D256 Description: Cocoa oat biscuits 180 g | F256 Quantity: [blank] | E5 UOM: CASE
+ORDER!C257 Article code: 99241 | D257 Description: Sunflower seed rice cakes 6 x 20 g | F257 Quantity: [blank] | E5 UOM: CASE
+ORDER!C258 Article code: 74942 | D258 Description: Cooked chickpeas 4 x 200 g | F258 Quantity: [blank] | E5 UOM: CASE
+ORDER!C260 Article code: 89509 | D260 Description: Millet rice cakes 150 g | F260 Quantity: [blank] | E5 UOM: CASE
+ORDER!C261 Article code: 03990 | D261 Description: Apricot nectar 6 x 200 ml | F261 Quantity: [blank] | E5 UOM: CASE
+ORDER!C262 Article code: 15122 | D262 Description: Durum farfalle 400 g | F262 Quantity: [blank] | E5 UOM: CASE
+ORDER!C263 Article code: 70243 | D263 Description: Durum penne 4 x 250 g | F263 Quantity: [blank] | E5 UOM: CASE
+ORDER!C264 Article code: 18840 | D264 Description: Green tea 80 x 1.5 g | F264 Quantity: [blank] | E5 UOM: CASE
+ORDER!C265 Article code: 63688 | D265 Description: Cooked lentils 800 g | F265 Quantity: [blank] | E5 UOM: CASE
+ORDER!C266 Article code: 60781 | D266 Description: Red kidney beans 200 g | F266 Quantity: [blank] | E5 UOM: CASE
+ORDER!C267 Article code: 67178 | D267 Description: Orange juice 250 ml | F267 Quantity: [blank] | E5 UOM: CASE
+ORDER!C268 Article code: 67512 | D268 Description: Cooked chickpeas 300 g | F268 Quantity: [blank] | E5 UOM: CASE
+ORDER!C269 Article code: 85033 | D269 Description: Millet rice cakes 80 g | F269 Quantity: [blank] | E5 UOM: CASE
+ORDER!C270 Article code: 06505 | D270 Description: Salted rice cakes 60 g | F270 Quantity: [blank] | E5 UOM: CASE
+ORDER!C271 Article code: 26185 | D271 Description: Salted rice cakes 12 x 10 g | F271 Quantity: [blank] | E5 UOM: CASE
+ORDER!C272 Article code: 22671 | D272 Description: Coconut oat biscuits 180 g | F272 Quantity: [blank] | E5 UOM: CASE
+ORDER!C274 Article code: 71579 | D274 Description: Wholegrain fusilli 200 g | F274 Quantity: [blank] | E5 UOM: CASE
+ORDER!C275 Article code: 63071 | D275 Description: Durum farfalle 1 kg | F275 Quantity: [blank] | E5 UOM: CASE
+ORDER!C276 Article code: 5630 | D276 Description: Butter beans 4 x 200 g | F276 Quantity: [blank] | E5 UOM: CASE
+ORDER!C277 Article code: 31760 | D277 Description: Orange juice 750 ml | F277 Quantity: [blank] | E5 UOM: CASE
+ORDER!C278 Article code: 92759 | D278 Description: Plain rice cakes 60 g | F278 Quantity: [blank] | E5 UOM: CASE
+ORDER!C279 Article code: 6021 | D279 Description: Apricot preserve 340 g | F279 Quantity: [blank] | E5 UOM: CASE
+ORDER!C280 Article code: 75374 | D280 Description: Fine peas 200 g | F280 Quantity: [blank] | E5 UOM: CASE
+ORDER!C281 Article code: 25446 | D281 Description: Coconut oat biscuits 100 g | F281 Quantity: [blank] | E5 UOM: CASE
+ORDER!C283 Article code: 16781 | D283 Description: Linseed rice cakes 100 g | F283 Quantity: [blank] | E5 UOM: CASE
+ORDER!C284 Article code: 4983 | D284 Description: Vanilla oat biscuits 100 g | F284 Quantity: [blank] | E5 UOM: CASE
+ORDER!C285 Article code: 9938 | D285 Description: Mixed fruit juice 200 ml | F285 Quantity: [blank] | E5 UOM: CASE
+ORDER!C287 Article code: 22327 | D287 Description: Buckwheat rice cakes 150 g | F287 Quantity: [blank] | E5 UOM: CASE
+ORDER!C289 Article code: 90832 | D289 Description: Cherry juice drink 330 ml | F289 Quantity: [blank] | E5 UOM: CASE
+ORDER!C290 Article code: 56929 | D290 Description: Fine peas 560 g | F290 Quantity: [blank] | E5 UOM: CASE
+ORDER!C291 Article code: 88170 | D291 Description: Plum preserve 300 g | F291 Quantity: [blank] | E5 UOM: CASE
+ORDER!C292 Article code: 57968 | D292 Description: Durum farfalle 6 x 500 g | F292 Quantity: [blank] | E5 UOM: CASE
+ORDER!C293 Article code: 20225 | D293 Description: Sunflower seed rice cakes 60 g | F293 Quantity: [blank] | E5 UOM: CASE
+ORDER!C294 Article code: 31196 | D294 Description: Rosehip tea 100 x 2 g | F294 Quantity: [blank] | E5 UOM: CASE
+ORDER!C295 Article code: 61468 | D295 Description: Plain rice cakes 100 g | F295 Quantity: [blank] | E5 UOM: CASE
+ORDER!C296 Article code: 77771 | D296 Description: Wholegrain fusilli 750 g | F296 Quantity: [blank] | E5 UOM: CASE
+ORDER!C298 Article code: 82750 | D298 Description: Dark chocolate 6 x 25 g | F298 Quantity: [blank] | E5 UOM: CASE
+ORDER!C299 Article code: 03025 | D299 Description: Sweetcorn 560 g | F299 Quantity: [blank] | E5 UOM: CASE
+ORDER!C300 Article code: 85044 | D300 Description: Sweetcorn 250 g | F300 Quantity: [blank] | E5 UOM: CASE
+ORDER!C301 Article code: 43909 | D301 Description: Orange marmalade 200 g | F301 Quantity: [blank] | E5 UOM: CASE
+ORDER!C302 Article code: 75709 | D302 Description: Honey oat biscuits 120 g | F302 Quantity: [blank] | E5 UOM: CASE
+ORDER!C303 Article code: 93298 | D303 Description: Apricot nectar 500 ml | F303 Quantity: [blank] | E5 UOM: CASE
+ORDER!C304 Article code: 66131 | D304 Description: Vanilla oat biscuits 250 g | F304 Quantity: [blank] | E5 UOM: CASE
+ORDER!C305 Article code: 39464 | D305 Description: Honey oat biscuits 24 x 20 g | F305 Quantity: [blank] | E5 UOM: CASE
+ORDER!C306 Article code: 86064 | D306 Description: Caramel chocolate 100 g | F306 Quantity: [blank] | E5 UOM: CASE
+ORDER!C307 Article code: 55889 | D307 Description: White chocolate 180 g | F307 Quantity: [blank] | E5 UOM: CASE
+ORDER!C308 Article code: 43948 | D308 Description: Black tea 25 x 1.5 g | F308 Quantity: [blank] | E5 UOM: CASE
+ORDER!C310 Article code: 70369 | D310 Description: Plain rice cakes 12 x 10 g | F310 Quantity: [blank] | E5 UOM: CASE
+ORDER!C312 Article code: 15118 | D312 Description: Cooked lentils 250 g | F312 Quantity: [blank] | E5 UOM: CASE
+ORDER!C313 Article code: 1503 | D313 Description: Corn rice cakes 100 g | F313 Quantity: [blank] | E5 UOM: CASE
+ORDER!C314 Article code: 61104 | D314 Description: Plain rice cakes 120 g | F314 Quantity: [blank] | E5 UOM: CASE
+ORDER!C315 Article code: 8066 | D315 Description: Peppermint tea 25 x 1.5 g | F315 Quantity: [blank] | E5 UOM: CASE
+ORDER!C316 Article code: 47577 | D316 Description: Fine egg noodles 400 g | F316 Quantity: [blank] | E5 UOM: CASE
+ORDER!C317 Article code: 93889 | D317 Description: Coconut oat biscuits 24 x 20 g | F317 Quantity: [blank] | E5 UOM: CASE
+ORDER!C318 Article code: 83030 | D318 Description: Butter beans 400 g | F318 Quantity: [blank] | E5 UOM: CASE
+ORDER!C320 Article code: 38432 | D320 Description: Lemon oat biscuits 300 g | F320 Quantity: [blank] | E5 UOM: CASE
+ORDER!C322 Article code: 0891 | D322 Description: Sweetcorn 400 g | F322 Quantity: [blank] | E5 UOM: CASE
+ORDER!C324 Article code: 80528 | D324 Description: Sunflower seed rice cakes 100 g | F324 Quantity: [blank] | E5 UOM: CASE
+ORDER!C325 Article code: 56945 | D325 Description: Mixed fruit juice 330 ml | F325 Quantity: [blank] | E5 UOM: CASE
+ORDER!C326 Article code: 60588 | D326 Description: Sesame rice cakes 6 x 20 g | F326 Quantity: [blank] | E5 UOM: CASE
+ORDER!C327 Article code: 43186 | D327 Description: Hazelnut chocolate 150 g | F327 Quantity: [blank] | E5 UOM: CASE
+ORDER!C329 Article code: 57396 | D329 Description: Millet rice cakes 120 g | F329 Quantity: [blank] | E5 UOM: CASE
+ORDER!C331 Article code: 58002 | D331 Description: Raspberry preserve 6 x 40 g | F331 Quantity: [blank] | E5 UOM: CASE
+ORDER!C332 Article code: 91678 | D332 Description: Mixed beans 250 g | F332 Quantity: [blank] | E5 UOM: CASE
+ORDER!C333 Article code: 59346 | D333 Description: Sweetcorn 200 g | F333 Quantity: [blank] | E5 UOM: CASE
+ORDER!C335 Article code: 70105 | D335 Description: Apricot nectar 1 l | F335 Quantity: [blank] | E5 UOM: CASE
+ORDER!C336 Article code: 64671 | D336 Description: Coconut oat biscuits 12 x 25 g | F336 Quantity: [blank] | E5 UOM: CASE
+ORDER!C338 Article code: 77590 | D338 Description: Hazelnut oat biscuits 12 x 25 g | F338 Quantity: [blank] | E5 UOM: CASE
+ORDER!C339 Article code: 80255 | D339 Description: Buckwheat rice cakes 12 x 10 g | F339 Quantity: [blank] | E5 UOM: CASE
+ORDER!C341 Article code: 01453 | D341 Description: Cherry juice drink 200 ml | F341 Quantity: [blank] | E5 UOM: CASE
+ORDER!C342 Article code: 42766 | D342 Description: Cooked chickpeas 800 g | F342 Quantity: [blank] | E5 UOM: CASE
+ORDER!C343 Article code: 95032 | D343 Description: Buckwheat rice cakes 100 g | F343 Quantity: [blank] | E5 UOM: CASE
+ORDER!C344 Article code: 05811 | D344 Description: Rosehip tea 20 x 1.5 g | F344 Quantity: [blank] | E5 UOM: CASE
+ORDER!C346 Article code: 78468 | D346 Description: Cinnamon oat biscuits 120 g | F346 Quantity: [blank] | E5 UOM: CASE
+ORDER!C347 Article code: 25697 | D347 Description: Pear juice 330 ml | F347 Quantity: [blank] | E5 UOM: CASE
+ORDER!C348 Article code: 08155 | D348 Description: Durum fusilli 1 kg | F348 Quantity: [blank] | E5 UOM: CASE
+ORDER!C349 Article code: 33263 | D349 Description: Raspberry preserve 150 g | F349 Quantity: [blank] | E5 UOM: CASE
+ORDER!C350 Article code: 70119 | D350 Description: Cocoa oat biscuits 12 x 25 g | F350 Quantity: [blank] | E5 UOM: CASE
+ORDER!C351 Article code: 52575 | D351 Description: Black tea 20 x 1.5 g | F351 Quantity: [blank] | E5 UOM: CASE
+ORDER!C352 Article code: 68451 | D352 Description: Honey oat biscuits 180 g | F352 Quantity: [blank] | E5 UOM: CASE
+ORDER!C353 Article code: 10856 | D353 Description: Blueberry preserve 300 g | F353 Quantity: [blank] | E5 UOM: CASE
+ORDER!C354 Article code: 52649 | D354 Description: Dark chocolate 150 g | F354 Quantity: [blank] | E5 UOM: CASE
+ORDER!C355 Article code: 30149 | D355 Description: Sesame rice cakes 100 g | F355 Quantity: [blank] | E5 UOM: CASE
+ORDER!C356 Article code: 88175 | D356 Description: Linden tea 80 x 1.5 g | F356 Quantity: [blank] | E5 UOM: CASE
+ORDER!C357 Article code: 52573 | D357 Description: Corn rice cakes 12 x 10 g | F357 Quantity: [blank] | E5 UOM: CASE
+ORDER!C359 Article code: 66870 | D359 Description: Orange marmalade 340 g | F359 Quantity: [blank] | E5 UOM: CASE
+ORDER!C360 Article code: 87589 | D360 Description: Berry oat biscuits 180 g | F360 Quantity: [blank] | E5 UOM: CASE
+ORDER!C361 Article code: 58550 | D361 Description: Fine egg noodles 750 g | F361 Quantity: [blank] | E5 UOM: CASE
+ORDER!C362 Article code: 60025 | D362 Description: Dark chocolate 80 g | F362 Quantity: [blank] | E5 UOM: CASE
+ORDER!C363 Article code: 27675 | D363 Description: Hazelnut chocolate 100 g | F363 Quantity: [blank] | E5 UOM: CASE
+ORDER!C364 Article code: 09559 | D364 Description: Rosehip tea 50 x 2 g | F364 Quantity: [blank] | E5 UOM: CASE
+ORDER!C365 Article code: 84217 | D365 Description: Cherry preserve 450 g | F365 Quantity: [blank] | E5 UOM: CASE
+ORDER!C366 Article code: 88853 | D366 Description: Cinnamon oat biscuits 250 g | F366 Quantity: [blank] | E5 UOM: CASE
+ORDER!C367 Article code: 71371 | D367 Description: Apple juice 750 ml | F367 Quantity: [blank] | E5 UOM: CASE
+ORDER!C368 Article code: 17095 | D368 Description: Wholegrain penne 250 g | F368 Quantity: [blank] | E5 UOM: CASE
+ORDER!C369 Article code: 90549 | D369 Description: Vanilla oat biscuits 12 x 25 g | F369 Quantity: [blank] | E5 UOM: CASE
+ORDER!C370 Article code: 38498 | D370 Description: Wholegrain fusilli 4 x 250 g | F370 Quantity: [blank] | E5 UOM: CASE
+ORDER!C371 Article code: 13661 | D371 Description: Wide egg noodles 250 g | F371 Quantity: [blank] | E5 UOM: CASE
+ORDER!C372 Article code: 64949 | D372 Description: White chocolate 100 g | F372 Quantity: [blank] | E5 UOM: CASE
+ORDER!C373 Article code: 19712 | D373 Description: Blackberry preserve 300 g | F373 Quantity: [blank] | E5 UOM: CASE
+ORDER!C374 Article code: 29966 | D374 Description: Peach nectar 6 x 200 ml | F374 Quantity: [blank] | E5 UOM: CASE
+ORDER!C376 Article code: 35439 | D376 Description: Apricot nectar 250 ml | F376 Quantity: [blank] | E5 UOM: CASE
+ORDER!C377 Article code: 25208 | D377 Description: Pear juice 500 ml | F377 Quantity: [blank] | E5 UOM: CASE
+ORDER!C378 Article code: 84592 | D378 Description: Plain rice cakes 6 x 20 g | F378 Quantity: [blank] | E5 UOM: CASE
+ORDER!C379 Article code: 29919 | D379 Description: White beans 200 g | F379 Quantity: [blank] | E5 UOM: CASE
+ORDER!C380 Article code: 05022 | D380 Description: Cocoa oat biscuits 24 x 20 g | F380 Quantity: [blank] | E5 UOM: CASE
+ORDER!C381 Article code: 17615 | D381 Description: Apricot preserve 300 g | F381 Quantity: [blank] | E5 UOM: CASE
+ORDER!C382 Article code: 56514 | D382 Description: Mint chocolate 40 g | F382 Quantity: [blank] | E5 UOM: CASE
+ORDER!C383 Article code: 28602 | D383 Description: Orange chocolate 180 g | F383 Quantity: [blank] | E5 UOM: CASE
+ORDER!C384 Article code: 88242 | D384 Description: Buckwheat rice cakes 8 x 15 g | F384 Quantity: [blank] | E5 UOM: CASE
+ORDER!C385 Article code: 80697 | D385 Description: Wide egg noodles 1 kg | F385 Quantity: [blank] | E5 UOM: CASE
+ORDER!C386 Article code: 10645 | D386 Description: Cherry preserve 6 x 40 g | F386 Quantity: [blank] | E5 UOM: CASE
+ORDER!C387 Article code: 91241 | D387 Description: Red kidney beans 400 g | F387 Quantity: [blank] | E5 UOM: CASE
+ORDER!C388 Article code: 10961 | D388 Description: Honey oat biscuits 6 x 40 g | F388 Quantity: [blank] | E5 UOM: CASE
+ORDER!C389 Article code: 87188 | D389 Description: Milk chocolate 80 g | F389 Quantity: [blank] | E5 UOM: CASE
+ORDER!C390 Article code: 57515 | D390 Description: Wide egg noodles 200 g | F390 Quantity: [blank] | E5 UOM: CASE
+ORDER!C391 Article code: 70421 | D391 Description: Apple juice 330 ml | F391 Quantity: [blank] | E5 UOM: CASE
+ORDER!C392 Article code: 62697 | D392 Description: Orange marmalade 300 g | F392 Quantity: [blank] | E5 UOM: CASE
+ORDER!C393 Article code: 38222 | D393 Description: Wide egg noodles 6 x 500 g | F393 Quantity: [blank] | E5 UOM: CASE
+ORDER!C394 Article code: 74310 | D394 Description: Corn rice cakes 150 g | F394 Quantity: [blank] | E5 UOM: CASE
+ORDER!C395 Article code: 88024 | D395 Description: Milk chocolate 100 g | F395 Quantity: [blank] | E5 UOM: CASE
+ORDER!C396 Article code: 11984 | D396 Description: Orange juice 500 ml | F396 Quantity: [blank] | E5 UOM: CASE
+ORDER!C398 Article code: 25870 | D398 Description: White grape juice 200 ml | F398 Quantity: [blank] | E5 UOM: CASE
+ORDER!C399 Article code: 67173 | D399 Description: Fine peas 800 g | F399 Quantity: [blank] | E5 UOM: CASE
+ORDER!C400 Article code: 74310 | D400 Description: Corn rice cakes 150 g | F400 Quantity: [blank] | E5 UOM: CASE
+ORDER!C402 Article code: 86880 | D402 Description: Red kidney beans 560 g | F402 Quantity: [blank] | E5 UOM: CASE
+ORDER!C403 Article code: 74009 | D403 Description: Orange marmalade 150 g | F403 Quantity: [blank] | E5 UOM: CASE
+ORDER!C404 Article code: 29280 | D404 Description: Cherry juice drink 250 ml | F404 Quantity: [blank] | E5 UOM: CASE
+ORDER!C405 Article code: 50176 | D405 Description: Durum spaghetti 1 kg | F405 Quantity: [blank] | E5 UOM: CASE
+ORDER!C406 Article code: 80397 | D406 Description: Pear juice 250 ml | F406 Quantity: [blank] | E5 UOM: CASE
+ORDER!C407 Article code: 27288 | D407 Description: Chamomile tea 25 x 1.5 g | F407 Quantity: [blank] | E5 UOM: CASE
+ORDER!C408 Article code: 60725 | D408 Description: Durum penne 6 x 500 g | F408 Quantity: [blank] | E5 UOM: CASE
+ORDER!C409 Article code: 87066 | D409 Description: Linseed rice cakes 8 x 15 g | F409 Quantity: [blank] | E5 UOM: CASE
+ORDER!C410 Article code: 86266 | D410 Description: Hazelnut oat biscuits 250 g | F410 Quantity: [blank] | E5 UOM: CASE
+ORDER!C411 Article code: 87066 | D411 Description: Linseed rice cakes 8 x 15 g | F411 Quantity: [blank] | E5 UOM: CASE
+ORDER!C412 Article code: 89881 | D412 Description: Corn rice cakes 8 x 15 g | F412 Quantity: [blank] | E5 UOM: CASE
+ORDER!C414 Article code: 61476 | D414 Description: Almond chocolate 12 x 20 g | F414 Quantity: [blank] | E5 UOM: CASE
+ORDER!C415 Article code: 23955 | D415 Description: Mixed beans 200 g | F415 Quantity: [blank] | E5 UOM: CASE
+ORDER!C416 Article code: 88858 | D416 Description: Vanilla oat biscuits 24 x 20 g | F416 Quantity: [blank] | E5 UOM: CASE
+ORDER!C418 Article code: 42282 | D418 Description: Mint chocolate 150 g | F418 Quantity: [blank] | E5 UOM: CASE
+ORDER!C419 Article code: 29670 | D419 Description: Orange juice 12 x 250 ml | F419 Quantity: [blank] | E5 UOM: CASE
+ORDER!C420 Article code: 23986 | D420 Description: Raspberry preserve 450 g | F420 Quantity: [blank] | E5 UOM: CASE
+ORDER!C421 Article code: 85690 | D421 Description: Cooked chickpeas 250 g | F421 Quantity: [blank] | E5 UOM: CASE
+ORDER!C422 Article code: 50241 | D422 Description: Cocoa oat biscuits 6 x 40 g | F422 Quantity: [blank] | E5 UOM: CASE
+ORDER!C423 Article code: 88571 | D423 Description: Durum penne 750 g | F423 Quantity: [blank] | E5 UOM: CASE
+ORDER!C424 Article code: 63061 | D424 Description: Sunflower seed rice cakes 150 g | F424 Quantity: [blank] | E5 UOM: CASE
+ORDER!C426 Article code: 4865 | D426 Description: Apple juice 500 ml | F426 Quantity: [blank] | E5 UOM: CASE
+ORDER!C427 Article code: 8000 | D427 Description: Peppermint tea 80 x 1.5 g | F427 Quantity: [blank] | E5 UOM: CASE
+ORDER!C428 Article code: 59077 | D428 Description: Plain rice cakes 150 g | F428 Quantity: [blank] | E5 UOM: CASE
+ORDER!C429 Article code: 3411 | D429 Description: Wholegrain penne 1 kg | F429 Quantity: [blank] | E5 UOM: CASE
+ORDER!C430 Article code: 83857 | D430 Description: Cooked chickpeas 150 g | F430 Quantity: [blank] | E5 UOM: CASE
+ORDER!C432 Article code: 62326 | D432 Description: Orange chocolate 50 g | F432 Quantity: [blank] | E5 UOM: CASE
+ORDER!C433 Article code: 25248 | D433 Description: Forest fruit tea 50 x 2 g | F433 Quantity: [blank] | E5 UOM: CASE
+ORDER!C435 Article code: 28338 | D435 Description: Sweetcorn 4 x 200 g | F435 Quantity: [blank] | E5 UOM: CASE
+ORDER!C437 Article code: 02880 | D437 Description: Strawberry preserve 6 x 40 g | F437 Quantity: [blank] | E5 UOM: CASE
+ORDER!C439 Article code: 07599 | D439 Description: Forest fruit tea 100 x 2 g | F439 Quantity: [blank] | E5 UOM: CASE
+ORDER!C440 Article code: 41678 | D440 Description: Caramel chocolate 40 g | F440 Quantity: [blank] | E5 UOM: CASE
+ORDER!C441 Article code: 56191 | D441 Description: Rosehip tea 20 x 2 g | F441 Quantity: [blank] | E5 UOM: CASE
+ORDER!C442 Article code: 13744 | D442 Description: Linden tea 25 x 2 g | F442 Quantity: [blank] | E5 UOM: CASE
+ORDER!C443 Article code: 99840 | D443 Description: Peach nectar 250 ml | F443 Quantity: [blank] | E5 UOM: CASE
+ORDER!C445 Article code: 74196 | D445 Description: Mixed fruit juice 6 x 200 ml | F445 Quantity: [blank] | E5 UOM: CASE
+ORDER!C446 Article code: 94873 | D446 Description: Orange juice 1 l | F446 Quantity: [blank] | E5 UOM: CASE
+ORDER!C447 Article code: 31464 | D447 Description: Mint chocolate 80 g | F447 Quantity: [blank] | E5 UOM: CASE
+ORDER!C448 Article code: 53416 | D448 Description: Durum spaghetti 250 g | F448 Quantity: [blank] | E5 UOM: CASE
+ORDER!C449 Article code: 04495 | D449 Description: Dark chocolate 40 g | F449 Quantity: [blank] | E5 UOM: CASE
+ORDER!C450 Article code: 13293 | D450 Description: Coconut oat biscuits 250 g | F450 Quantity: [blank] | E5 UOM: CASE
+ORDER!C451 Article code: 54042 | D451 Description: Dark chocolate 100 g | F451 Quantity: [blank] | E5 UOM: CASE
+ORDER!C452 Article code: 60933 | D452 Description: Vanilla oat biscuits 120 g | F452 Quantity: [blank] | E5 UOM: CASE
+ORDER!C453 Article code: 11528 | D453 Description: Millet rice cakes 100 g | F453 Quantity: [blank] | E5 UOM: CASE
+ORDER!C454 Article code: 93388 | D454 Description: Cherry juice drink 6 x 200 ml | F454 Quantity: [blank] | E5 UOM: CASE
+ORDER!C455 Article code: 74384 | D455 Description: Mixed beans 800 g | F455 Quantity: [blank] | E5 UOM: CASE
+ORDER!C456 Article code: 62713 | D456 Description: Plum preserve 200 g | F456 Quantity: [blank] | E5 UOM: CASE
+ORDER!C457 Article code: 97641 | D457 Description: Sweetcorn 150 g | F457 Quantity: [blank] | E5 UOM: CASE
+ORDER!C458 Article code: 03228 | D458 Description: Black tea 20 x 2 g | F458 Quantity: [blank] | E5 UOM: CASE
+ORDER!C459 Article code: 66472 | D459 Description: Fine egg noodles 200 g | F459 Quantity: [blank] | E5 UOM: CASE
+ORDER!C460 Article code: 73426 | D460 Description: Mixed beans 400 g | F460 Quantity: [blank] | E5 UOM: CASE
+ORDER!C461 Article code: 11087 | D461 Description: Cherry preserve 250 g | F461 Quantity: [blank] | E5 UOM: CASE
+ORDER!C463 Article code: 73503 | D463 Description: Cinnamon oat biscuits 6 x 40 g | F463 Quantity: [blank] | E5 UOM: CASE
+ORDER!C464 Article code: 84594 | D464 Description: Almond chocolate 80 g | F464 Quantity: [blank] | E5 UOM: CASE
+ORDER!C465 Article code: 11421 | D465 Description: Honey oat biscuits 12 x 25 g | F465 Quantity: [blank] | E5 UOM: CASE
+ORDER!C466 Article code: 41705 | D466 Description: White chocolate 150 g | F466 Quantity: [blank] | E5 UOM: CASE
+ORDER!C468 Article code: 28223 | D468 Description: Chamomile tea 40 x 1.5 g | F468 Quantity: [blank] | E5 UOM: CASE
+ORDER!C469 Article code: 39722 | D469 Description: Lemon balm tea 100 x 2 g | F469 Quantity: [blank] | E5 UOM: CASE
+ORDER!C470 Article code: 32796 | D470 Description: Durum penne 1 kg | F470 Quantity: [blank] | E5 UOM: CASE
+ORDER!C472 Article code: 72879 | D472 Description: Buckwheat rice cakes 60 g | F472 Quantity: [blank] | E5 UOM: CASE
+ORDER!C473 Article code: 02255 | D473 Description: Strawberry preserve 150 g | F473 Quantity: [blank] | E5 UOM: CASE
+ORDER!C474 Article code: 97654 | D474 Description: Cherry juice drink 12 x 250 ml | F474 Quantity: [blank] | E5 UOM: CASE
+ORDER!C475 Article code: 29670 | D475 Description: Orange juice 12 x 250 ml | F475 Quantity: [blank] | E5 UOM: CASE
+ORDER!C476 Article code: 58928 | D476 Description: Apricot nectar 750 ml | F476 Quantity: [blank] | E5 UOM: CASE
+ORDER!C477 Article code: 30781 | D477 Description: Hazelnut chocolate 80 g | F477 Quantity: [blank] | E5 UOM: CASE
+ORDER!C479 Article code: 81517 | D479 Description: Durum spaghetti 500 g | F479 Quantity: [blank] | E5 UOM: CASE
+ORDER!C480 Article code: 44839 | D480 Description: Almond chocolate 40 g | F480 Quantity: [blank] | E5 UOM: CASE
+ORDER!C482 Article code: 26230 | D482 Description: White beans 400 g | F482 Quantity: [blank] | E5 UOM: CASE
+ORDER!C483 Article code: 05582 | D483 Description: Pear juice 200 ml | F483 Quantity: [blank] | E5 UOM: CASE
+ORDER!C485 Article code: 39308 | D485 Description: Berry oat biscuits 24 x 20 g | F485 Quantity: [blank] | E5 UOM: CASE
+ORDER!C486 Article code: 42918 | D486 Description: Sunflower seed rice cakes 8 x 15 g | F486 Quantity: [blank] | E5 UOM: CASE
+ORDER!C489 Article code: 78307 | D489 Description: Black tea 40 x 1.5 g | F489 Quantity: [blank] | E5 UOM: CASE
+ORDER!C490 Article code: 56572 | D490 Description: Apricot nectar 200 ml | F490 Quantity: [blank] | E5 UOM: CASE
+ORDER!C492 Article code: 03443 | D492 Description: Berry oat biscuits 250 g | F492 Quantity: [blank] | E5 UOM: CASE
+ORDER!C493 Article code: 71492 | D493 Description: Green tea 40 x 1.5 g | F493 Quantity: [blank] | E5 UOM: CASE
+ORDER!C495 Article code: 19805 | D495 Description: Linden tea 40 x 1.5 g | F495 Quantity: [blank] | E5 UOM: CASE
+ORDER!C497 Article code: 99334 | D497 Description: Mixed beans 150 g | F497 Quantity: [blank] | E5 UOM: CASE
+ORDER!C498 Article code: 20128 | D498 Description: White chocolate 40 g | F498 Quantity: [blank] | E5 UOM: CASE
+ORDER!C499 Article code: 02431 | D499 Description: Mint chocolate 6 x 25 g | F499 Quantity: [blank] | E5 UOM: CASE
+ORDER!C500 Article code: 38081 | D500 Description: Cooked lentils 200 g | F500 Quantity: [blank] | E5 UOM: CASE
+ORDER!C502 Article code: 74691 | D502 Description: Almond chocolate 180 g | F502 Quantity: [blank] | E5 UOM: CASE
+ORDER!C503 Article code: 06189 | D503 Description: Mixed beans 560 g | F503 Quantity: [blank] | E5 UOM: CASE
+ORDER!C504 Article code: 22825 | D504 Description: Salted rice cakes 120 g | F504 Quantity: [blank] | E5 UOM: CASE
+ORDER!C506 Article code: 95949 | D506 Description: Lemon balm tea 40 x 1.5 g | F506 Quantity: [blank] | E5 UOM: CASE
+ORDER!C507 Article code: 17544 | D507 Description: White grape juice 6 x 200 ml | F507 Quantity: [blank] | E5 UOM: CASE
+ORDER!C509 Article code: 00099 | D509 Description: Plum preserve 450 g | F509 Quantity: [blank] | E5 UOM: CASE
+ORDER!C511 Article code: 57285 | D511 Description: Apricot preserve 6 x 40 g | F511 Quantity: [blank] | E5 UOM: CASE
+ORDER!C512 Article code: 98212 | D512 Description: Coconut oat biscuits 6 x 40 g | F512 Quantity: [blank] | E5 UOM: CASE
+ORDER!C513 Article code: 63406 | D513 Description: Lemon oat biscuits 180 g | F513 Quantity: [blank] | E5 UOM: CASE
+ORDER!C514 Article code: 44336 | D514 Description: Dark chocolate 50 g | F514 Quantity: [blank] | E5 UOM: CASE
+ORDER!C515 Article code: 18965 | D515 Description: Cooked lentils 4 x 200 g | F515 Quantity: [blank] | E5 UOM: CASE
+ORDER!C516 Article code: 23556 | D516 Description: Fine egg noodles 250 g | F516 Quantity: [blank] | E5 UOM: CASE
+ORDER!C517 Article code: 59897 | D517 Description: Hazelnut oat biscuits 6 x 40 g | F517 Quantity: [blank] | E5 UOM: CASE
+ORDER!C518 Article code: 61240 | D518 Description: Corn rice cakes 120 g | F518 Quantity: [blank] | E5 UOM: CASE
+ORDER!C519 Article code: 61617 | D519 Description: Honey oat biscuits 100 g | F519 Quantity: [blank] | E5 UOM: CASE
+ORDER!C520 Article code: 00099 | D520 Description: Plum preserve 450 g | F520 Quantity: [blank] | E5 UOM: CASE
+ORDER!C521 Article code: 72280 | D521 Description: Wholegrain penne 400 g | F521 Quantity: [blank] | E5 UOM: CASE
+ORDER!C522 Article code: 68737 | D522 Description: White beans 4 x 200 g | F522 Quantity: [blank] | E5 UOM: CASE
+ORDER!C523 Article code: 11558 | D523 Description: Durum farfalle 750 g | F523 Quantity: [blank] | E5 UOM: CASE
+ORDER!C524 Article code: 61593 | D524 Description: Wide egg noodles 500 g | F524 Quantity: [blank] | E5 UOM: CASE
+ORDER!C525 Article code: 66816 | D525 Description: Green tea 50 x 2 g | F525 Quantity: [blank] | E5 UOM: CASE
+ORDER!C527 Article code: 00411 | D527 Description: Durum fusilli 4 x 250 g | F527 Quantity: [blank] | E5 UOM: CASE
+ORDER!C528 Article code: 02511 | D528 Description: Millet rice cakes 6 x 20 g | F528 Quantity: [blank] | E5 UOM: CASE
+ORDER!C529 Article code: 97590 | D529 Description: Rosehip tea 80 x 1.5 g | F529 Quantity: [blank] | E5 UOM: CASE
+ORDER!C530 Article code: 47742 | D530 Description: Mint chocolate 180 g | F530 Quantity: [blank] | E5 UOM: CASE
+ORDER!C532 Article code: 98043 | D532 Description: Vanilla oat biscuits 6 x 40 g | F532 Quantity: [blank] | E5 UOM: CASE
+ORDER!C533 Article code: 24269 | D533 Description: Linseed rice cakes 150 g | F533 Quantity: [blank] | E5 UOM: CASE
+ORDER!C534 Article code: 03491 | D534 Description: Fine peas 300 g | F534 Quantity: [blank] | E5 UOM: CASE
+ORDER!C535 Article code: 14916 | D535 Description: Peppermint tea 50 x 2 g | F535 Quantity: [blank] | E5 UOM: CASE
+ORDER!C536 Article code: 13946 | D536 Description: Durum spaghetti 4 x 250 g | F536 Quantity: [blank] | E5 UOM: CASE
+ORDER!C538 Article code: 03443 | D538 Description: Berry oat biscuits 250 g | F538 Quantity: [blank] | E5 UOM: CASE
+ORDER!C539 Article code: 71492 | D539 Description: Green tea 40 x 1.5 g | F539 Quantity: [blank] | E5 UOM: CASE
+ORDER!C541 Article code: 64465 | D541 Description: Blackberry preserve 400 g | F541 Quantity: [blank] | E5 UOM: CASE
+ORDER!C542 Article code: 03352 | D542 Description: Orange marmalade 250 g | F542 Quantity: [blank] | E5 UOM: CASE
+ORDER!C544 Article code: 39636 | D544 Description: Chamomile tea 20 x 2 g | F544 Quantity: [blank] | E5 UOM: CASE
+ORDER!C546 Article code: 26369 | D546 Description: Caramel chocolate 12 x 20 g | F546 Quantity: [blank] | E5 UOM: CASE

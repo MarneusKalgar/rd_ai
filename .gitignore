@@ -1,0 +1,15 @@
+# Local assignment inputs, working specifications and discussion history.
+.agents/inputs
+.agents/specs
+.agents/raw
+
+# Original customer workbooks and private preparation/review outputs.
+.agents/samples
+data/private/
+
+# One-off local preparation tooling; excluded from the HW submission.
+/tools/po-data-prep/
+
+# Python bytecode and interpreter caches.
+__pycache__/
+*.py[cod]

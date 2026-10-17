@@ -1,0 +1,21 @@
+{
+  "purchaseOrderNumber": "3411",
+  "purchaseOrderDateTime": "2026-08-08",
+  "buyerName": "Merehaven Distribution Ltd",
+  "shipToInfo": "17 Alder Lane; Alderwick",
+  "paymentTerms": null,
+  "buyerCurrency": "EUR",
+  "totalValue": null,
+  "lineItems": [
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Durum farfalle 750 g",
+      "buyerProductQuantity": "65",
+      "buyerProductUOM": "CRT",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    }
+  ]
+}

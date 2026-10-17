@@ -1,0 +1,26 @@
+ORDER!D13 PO number: RHB 588
+ORDER!D15 Order date: 2026-07-26
+ORDER!K27 Currency: EUR
+ORDER!D11 Requested delivery date: 2026-08-23
+ORDER!C25 Article code: 815550 | F25 Description: Cherry juice drink 12 x 250 ml | G25 Quantity: [blank] | H25 UOM: CSE | B25 Line no.: 1
+ORDER!C26 Article code: 158928 | F26 Description: Durum farfalle 200 g | G26 Quantity: [blank] | H26 UOM: CSE | B26 Line no.: 2
+ORDER!C27 Article code: 7345369 | F27 Description: Chamomile tea 25 x 1.5 g | G27 Quantity: 73 | H27 UOM: CSE | B27 Line no.: 3
+ORDER!C28 Article code: 2187494 | F28 Description: Orange juice 12 x 250 ml | G28 Quantity: [blank] | H28 UOM: CSE | B28 Line no.: 4
+ORDER!C29 Article code: 2799414 | F29 Description: Orange juice 500 ml | G29 Quantity: [blank] | H29 UOM: CSE | B29 Line no.: 5
+ORDER!C30 Article code: 3376460 | F30 Description: Mint chocolate 180 g | G30 Quantity: [blank] | H30 UOM: CSE | B30 Line no.: 6
+ORDER!C31 Article code: 485657 | F31 Description: Durum fusilli 400 g | G31 Quantity: 164 | H31 UOM: CSE | B31 Line no.: 7
+ORDER!C32 Article code: 90213 | F32 Description: Cocoa oat biscuits 12 x 25 g | G32 Quantity: 107 | H32 UOM: CSE | B32 Line no.: 8
+ORDER!C33 Article code: 0354453 | F33 Description: Blackberry preserve 400 g | G33 Quantity: [blank] | H33 UOM: CSE | B33 Line no.: 9
+ORDER!C34 Article code: 610449 | F34 Description: Wholegrain fusilli 750 g | G34 Quantity: [blank] | H34 UOM: CSE | B34 Line no.: 10
+ORDER!C35 Article code: 5933146 | F35 Description: White beans 250 g | G35 Quantity: [blank] | H35 UOM: CSE | B35 Line no.: 11
+ORDER!C36 Article code: 9923341 | F36 Description: Durum penne 200 g | G36 Quantity: [blank] | H36 UOM: CSE | B36 Line no.: 12
+ORDER!C37 Article code: 1549331 | F37 Description: Plain rice cakes 60 g | G37 Quantity: [blank] | H37 UOM: CSE | B37 Line no.: 13
+ORDER!C38 Article code: 0403097 | F38 Description: Vanilla oat biscuits 120 g | G38 Quantity: [blank] | H38 UOM: CSE | B38 Line no.: 14
+ORDER!C39 Article code: 2941282 | F39 Description: White chocolate 80 g | G39 Quantity: [blank] | H39 UOM: CSE | B39 Line no.: 15
+ORDER!C40 Article code: 6483342 | F40 Description: Cherry preserve 400 g | G40 Quantity: [blank] | H40 UOM: CSE | B40 Line no.: 16
+ORDER!C41 Article code: 7751051 | F41 Description: Cherry juice drink 200 ml | G41 Quantity: [blank] | H41 UOM: CSE | B41 Line no.: 17
+ORDER!C42 Article code: 3996534 | F42 Description: Apricot preserve 400 g | G42 Quantity: [blank] | H42 UOM: CSE | B42 Line no.: 18
+ORDER!C43 Article code: 2801831 | F43 Description: Wholegrain fusilli 6 x 500 g | G43 Quantity: [blank] | H43 UOM: CSE | B43 Line no.: 19
+ORDER!C44 Article code: 5261661 | F44 Description: Salted rice cakes 120 g | G44 Quantity: [blank] | H44 UOM: CSE | B44 Line no.: 20
+ORDER!C45 Article code: 2182257 | F45 Description: Linden tea 25 x 2 g | G45 Quantity: 47 | H45 UOM: CSE | B45 Line no.: 21
+ORDER!C46 Article code: 5931514 | F46 Description: White chocolate 6 x 25 g | G46 Quantity: [blank] | H46 UOM: CSE | B46 Line no.: 22

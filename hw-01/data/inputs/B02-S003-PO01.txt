@@ -1,0 +1,9 @@
+ORDER!H4 발주번호: FO-73903579
+ORDER!H3 발주일자: 2026-08-20
+ORDER!C8 발주처: Larkfen Trading Ltd
+ORDER!F8 배송처: Alderwick Stores Ltd
+ORDER!F17 배송처: 17 Alder Lane
+ORDER!D22 제품 코드: 82455035 | C22 제품명: Finishing additive SC-16 20 kg bag | E22 주문수량: [blank] | F22 단위: KG | B22 행 번호: 001
+ORDER!D23 제품 코드: 95917801 | C23 제품명: Sealing compound PR-14 160 kg drum | E23 주문수량: 159 | F23 단위: KG | B23 행 번호: 002 | G23 납기요청일: 2026-08-21
+ORDER!D24 제품 코드: 25410191 | C24 제품명: Finishing additive SD-30 125 kg drum | E24 주문수량: [blank] | F24 단위: KG | B24 행 번호: 003
+ORDER!D25 제품 코드: 08548344 | C25 제품명: Surface coating SC-48 200 kg drum | E25 주문수량: [blank] | F25 단위: KG | B25 행 번호: 004

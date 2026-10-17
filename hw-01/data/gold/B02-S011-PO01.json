@@ -1,0 +1,21 @@
+{
+  "purchaseOrderNumber": "TMW 164",
+  "purchaseOrderDateTime": "2026-08-29",
+  "buyerName": null,
+  "shipToInfo": null,
+  "paymentTerms": null,
+  "buyerCurrency": "EUR",
+  "totalValue": null,
+  "lineItems": [
+    {
+      "purchaseOrderLineNumber": "1",
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Mixed fruit juice 1 l",
+      "buyerProductQuantity": "79",
+      "buyerProductUOM": "CSE",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    }
+  ]
+}

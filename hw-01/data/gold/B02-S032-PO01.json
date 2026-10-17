@@ -1,0 +1,141 @@
+{
+  "purchaseOrderNumber": "6252-14-94W93:37:74",
+  "purchaseOrderDateTime": "2026-08-31",
+  "buyerName": null,
+  "shipToInfo": "17 Alder Lane; 43000; Alderwick",
+  "paymentTerms": null,
+  "buyerCurrency": null,
+  "totalValue": null,
+  "lineItems": [
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Strawberry preserve 400 g",
+      "buyerProductQuantity": "80",
+      "buyerProductUOM": "Dozen",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "White chocolate 180 g",
+      "buyerProductQuantity": "170",
+      "buyerProductUOM": "Dozen",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Red kidney beans 300 g",
+      "buyerProductQuantity": "80",
+      "buyerProductUOM": "Dozen",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Corn rice cakes 80 g",
+      "buyerProductQuantity": "170",
+      "buyerProductUOM": "Dozen",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Lemon oat biscuits 300 g",
+      "buyerProductQuantity": "170",
+      "buyerProductUOM": "Dozen",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Orange marmalade 6 x 40 g",
+      "buyerProductQuantity": "131",
+      "buyerProductUOM": "Dozen",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Fine peas 300 g",
+      "buyerProductQuantity": "30",
+      "buyerProductUOM": "Dozen",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Wholegrain fusilli 1 kg",
+      "buyerProductQuantity": "170",
+      "buyerProductUOM": "Dozen",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Apricot preserve 300 g",
+      "buyerProductQuantity": "39",
+      "buyerProductUOM": "Dozen",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Linseed rice cakes 60 g",
+      "buyerProductQuantity": "170",
+      "buyerProductUOM": "Dozen",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Dark chocolate 6 x 25 g",
+      "buyerProductQuantity": "170",
+      "buyerProductUOM": "Dozen",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Pear juice 6 x 200 ml",
+      "buyerProductQuantity": "77",
+      "buyerProductUOM": "Dozen",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Wholegrain penne 400 g",
+      "buyerProductQuantity": "131",
+      "buyerProductUOM": "Dozen",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    }
+  ]
+}

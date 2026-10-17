@@ -1,0 +1,21 @@
+{
+  "purchaseOrderNumber": "0745488165",
+  "purchaseOrderDateTime": "2026-08-02",
+  "buyerName": "Thornwick Merchants Ltd",
+  "shipToInfo": null,
+  "paymentTerms": null,
+  "buyerCurrency": null,
+  "totalValue": null,
+  "lineItems": [
+    {
+      "purchaseOrderLineNumber": "1",
+      "buyerProductIdentifier": "024-86718",
+      "buyerProductName": "Finishing additive PC-75 200 kg drum",
+      "buyerProductQuantity": "79",
+      "buyerProductUOM": "GAL",
+      "quantityUnit": "OTHER",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": "2026-08-16"
+    }
+  ]
+}

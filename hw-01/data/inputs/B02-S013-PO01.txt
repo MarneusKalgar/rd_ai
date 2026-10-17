@@ -1,0 +1,9 @@
+ORDER!C5 PO number: EO62838
+ORDER!F5 Order date: 2026-07-22
+ORDER!C7 Buyer: Thornwick Merchants Ltd
+ORDER!F8 Ship to: Alderwick
+ORDER!F7 Delivery date: 2026-07-24
+ORDER!C21 Article code: 16878309 | D21 Description: Lemon balm tea 20 x 2 g | G21 Quantity: 114 | H21 UOM: CASE
+ORDER!C23 Article code: 91746411 | D23 Description: Fine peas 150 g | G23 Quantity: [blank] | H23 UOM: CASE
+ORDER!C24 Article code: 98363911 | D24 Description: White grape juice 500 ml | G24 Quantity: 114 | H24 UOM: CASE
+ORDER!C26 Article code: 36841664 | D26 Description: Coconut oat biscuits 300 g | G26 Quantity: [blank] | H26 UOM: CASE

@@ -1,0 +1,5 @@
+ORDER!D13 PO number: TMW 164
+ORDER!D15 Order date: 2026-08-29
+ORDER!K25 Currency: EUR
+ORDER!D11 Requested delivery date: 2026-09-27
+ORDER!C25 Article code: 5785102 | F25 Description: Mixed fruit juice 1 l | G25 Quantity: 79 | H25 UOM: CSE | B25 Line no.: 1

@@ -1,0 +1,6 @@
+ORDER!C5 合同号: OSG5734189274/MNOOFJ8510864
+ORDER!C6 开单日期: 2026-07-17
+ORDER!A1 采购方: Larkfen Trading Ltd
+ORDER!C7 付款方式: Payment in advance
+ORDER!G12 币种: CNY
+ORDER!B13 产品代码: 68017197 | C13 产品名称: Protective coating SC-64 1000 kg container | F13 订购数量: 27 | F12 单位: KG | G13 单价: 55.02 | A13 序号: 1 | I13 交货日期: 2026-07-21

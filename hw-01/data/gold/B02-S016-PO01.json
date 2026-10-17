@@ -1,0 +1,21 @@
+{
+  "purchaseOrderNumber": null,
+  "purchaseOrderDateTime": "2026-07-20",
+  "buyerName": "Brackenmere Retail Ltd",
+  "shipToInfo": "Brackenmere Retail Ltd; Alderwick; 43000; 17 Alder Lane",
+  "paymentTerms": "Net 75 days",
+  "buyerCurrency": null,
+  "totalValue": "2335.32",
+  "lineItems": [
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Surface coating PA-22 25 kg bag",
+      "buyerProductQuantity": "52",
+      "buyerProductUOM": "L",
+      "quantityUnit": "OTHER",
+      "buyerUnitPrice": "44.91",
+      "buyerDeliveryDate": null
+    }
+  ]
+}

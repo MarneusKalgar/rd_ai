@@ -1,0 +1,151 @@
+{
+  "inputId": "B02-S012-PO01",
+  "documentation": {
+    "revision": 2,
+    "author": "agent",
+    "basis": "Approved neutral text, unchanged gold values and the v1 extraction contract. Explanatory notes added at user request after case-level approval; no new human field review is claimed."
+  },
+  "headers": [
+    {
+      "field": "purchaseOrderNumber",
+      "value": "3411",
+      "evidence": "ORDER!D32 Numero ordine: 3411",
+      "decision": "direct",
+      "note": "Retain the value labeled as the PO identifier as text, including punctuation and leading zeros; do not reinterpret it as a date."
+    },
+    {
+      "field": "purchaseOrderDateTime",
+      "value": "2026-08-08",
+      "evidence": "ORDER!I18 Data ordine: 2026-08-08",
+      "decision": "direct",
+      "note": "The labeled date is already in YYYY-MM-DD format; retain it. This is the PO issue date, distinct from delivery or service dates."
+    },
+    {
+      "field": "buyerName",
+      "value": "Merehaven Distribution Ltd",
+      "evidence": "ORDER!F24 Cliente: Merehaven Distribution Ltd",
+      "decision": "direct",
+      "note": ""
+    },
+    {
+      "field": "shipToInfo",
+      "value": "17 Alder Lane; Alderwick",
+      "evidence": "ORDER!F26 Indirizzo di consegna: 17 Alder Lane\nORDER!C28 Indirizzo di consegna: Alderwick",
+      "decision": "normalized",
+      "note": "Join the explicitly labeled ship-to components with '; ' in their input order. Do not infer extra address components or replace the buyer party."
+    },
+    {
+      "field": "paymentTerms",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No selected payment terms appear in the neutral input. Do not assume a default credit period."
+    },
+    {
+      "field": "buyerCurrency",
+      "value": "EUR",
+      "evidence": "ORDER!M37 Valuta: EUR",
+      "decision": "direct",
+      "note": ""
+    },
+    {
+      "field": "totalValue",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit net product total for this PO appears in the neutral input. Do not calculate a replacement total from quantity and unit price."
+    }
+  ],
+  "lines": [
+    {
+      "lineIndex": 1,
+      "evidence": "ORDER!B44 Codice prodotto: 5536820 | C44 Descrizione: Durum farfalle 750 g | I44 Quantità: 65 | K44 Unità: CRT",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!B44 Codice prodotto: 5536820",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Durum farfalle 750 g",
+          "evidence": "C44 Descrizione: Durum farfalle 750 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "65",
+          "evidence": "I44 Quantità: 65",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "CRT",
+          "evidence": "K44 Unità: CRT",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "K44 Unità: CRT",
+          "decision": "normalized",
+          "note": "CRT denotes cartons in this order; normalize to CASE without converting cartons to individual pieces."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!E30 Delivery date: 2026-08-02"
+          ]
+        }
+      ]
+    }
+  ],
+  "lineSelection": {
+    "note": "Select every row with an explicit positive ordered quantity, preserving input order. Exclude catalog rows with [blank] ordered quantity.",
+    "orderedLineCount": 1,
+    "excludedCatalogRowCount": 3,
+    "excludedRowExamples": [
+      {
+        "evidence": "ORDER!B42 Codice prodotto: 85017 | C42 Descrizione: White chocolate 150 g | I42 Quantità: [blank] | K42 Unità: CRT",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      },
+      {
+        "evidence": "ORDER!B43 Codice prodotto: 83137 | C43 Descrizione: Coconut oat biscuits 120 g | I43 Quantità: [blank] | K43 Unità: CRT",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      },
+      {
+        "evidence": "ORDER!B45 Codice prodotto: 08165 | C45 Descrizione: Forest fruit tea 50 x 2 g | I45 Quantità: [blank] | K45 Unità: CRT",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      }
+    ]
+  },
+  "distractors": [
+    {
+      "evidence": "ORDER!E30 Delivery date: 2026-08-02",
+      "note": "This order-level delivery/service date is not the PO issue date and is not explicitly tied to a line. Do not substitute it for purchaseOrderDateTime or inherit it into buyerDeliveryDate."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "purchaseOrderNumber": null,
+  "purchaseOrderDateTime": "2026-07-22",
+  "buyerName": "Merehaven Distribution Ltd",
+  "shipToInfo": "Merehaven Distribution Ltd, 17 Alder Lane, Alderwick",
+  "paymentTerms": "Net 75 days",
+  "buyerCurrency": "EUR",
+  "totalValue": null,
+  "lineItems": [
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Acrylic binder FA-42 25 kg bag",
+      "buyerProductQuantity": "174",
+      "buyerProductUOM": "To",
+      "quantityUnit": "OTHER",
+      "buyerUnitPrice": "36.47",
+      "buyerDeliveryDate": null
+    }
+  ]
+}

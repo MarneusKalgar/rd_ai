@@ -1,0 +1,41 @@
+{
+  "purchaseOrderNumber": null,
+  "purchaseOrderDateTime": "2026-09-09",
+  "buyerName": "Brackenmere Retail Ltd",
+  "shipToInfo": null,
+  "paymentTerms": null,
+  "buyerCurrency": null,
+  "totalValue": null,
+  "lineItems": [
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Wholegrain fusilli 200 g",
+      "buyerProductQuantity": "6",
+      "buyerProductUOM": "BOTELLAS",
+      "quantityUnit": "BOTTLE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Cinnamon oat biscuits 12 x 25 g",
+      "buyerProductQuantity": "140",
+      "buyerProductUOM": "BOTELLAS",
+      "quantityUnit": "BOTTLE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Durum farfalle 250 g",
+      "buyerProductQuantity": "158",
+      "buyerProductUOM": "BOTELLAS",
+      "quantityUnit": "BOTTLE",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": null
+    }
+  ]
+}

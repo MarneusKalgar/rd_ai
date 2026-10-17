@@ -1,0 +1,19 @@
+ORDER!K1 PO number: QS-9611
+ORDER!B2 Buyer: Merehaven Distribution Ltd
+ORDER!K4 Requested delivery date: 19.08.2026
+ORDER!A13 Article code: 0073419 | D13 Description: Raspberry preserve 300 g | B13 Quantity: 146 | C13 UOM: CTN | F13 Unit price: 90.29
+ORDER!A14 Article code: 6645151 | D14 Description: Blueberry preserve 300 g | B14 Quantity: 36 | C14 UOM: CTN | F14 Unit price: 32.56
+ORDER!A15 Article code: 6231361 | D15 Description: Orange juice 500 ml | B15 Quantity: 36 | C15 UOM: CTN | F15 Unit price: 10.44
+ORDER!A16 Article code: 3924530 | D16 Description: Durum fusilli 250 g | B16 Quantity: 110 | C16 UOM: CTN | F16 Unit price: 51.34
+ORDER!A17 Article code: 3403932 | D17 Description: Buckwheat rice cakes 6 x 20 g | B17 Quantity: 101 | C17 UOM: CTN | F17 Unit price: 51.34
+ORDER!A18 Article code: 0841492 | D18 Description: Linseed rice cakes 60 g | B18 Quantity: 44 | C18 UOM: CTN | F18 Unit price: 51.34
+ORDER!A19 Article code: 3553873 | D19 Description: Cooked chickpeas 4 x 200 g | B19 Quantity: 146 | C19 UOM: CTN | F19 Unit price: 83.23
+ORDER!A20 Article code: 9132331 | D20 Description: Peppermint tea 100 x 2 g | B20 Quantity: 113 | C20 UOM: CTN | F20 Unit price: 83.23
+ORDER!A21 Article code: 5652117 | D21 Description: Lemon balm tea 20 x 1.5 g | B21 Quantity: 113 | C21 UOM: CTN | F21 Unit price: 83.23
+ORDER!A22 Article code: 8990069 | D22 Description: Millet rice cakes 60 g | B22 Quantity: 179 | C22 UOM: CTN | F22 Unit price: 83.23
+ORDER!A23 Article code: 6644070 | D23 Description: Cinnamon oat biscuits 24 x 20 g | B23 Quantity: 101 | C23 UOM: CTN | F23 Unit price: 83.23
+ORDER!A24 Article code: 9383938 | D24 Description: Cherry preserve 200 g | B24 Quantity: 101 | C24 UOM: CTN | F24 Unit price: 89.51
+ORDER!A25 Article code: 3816632 | D25 Description: Plain rice cakes 150 g | B25 Quantity: 101 | C25 UOM: CTN | F25 Unit price: 16.70
+ORDER!A26 Article code: 0148130 | D26 Description: Lemon balm tea 20 x 2 g | B26 Quantity: 101 | C26 UOM: CTN | F26 Unit price: 16.70
+ORDER!A27 Article code: 5991836 | D27 Description: Green tea 20 x 1.5 g | B27 Quantity: 36 | C27 UOM: CTN | F27 Unit price: 39.38
+ORDER!A28 Article code: 3776412 | D28 Description: Milk chocolate 80 g | B28 Quantity: 36 | C28 UOM: CTN | F28 Unit price: 39.38

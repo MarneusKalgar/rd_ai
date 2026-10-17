@@ -1,0 +1,6 @@
+ORDER!B7 PO number: 0745488165
+ORDER!B5 Order date: 2026-08-02
+ORDER!B1 Buyer: Thornwick Merchants Ltd
+ORDER!C10 Article code: 54629115 | D10 Description: Finishing additive PC-75 200 kg drum | E10 Quantity: 79 | F10 UOM: GAL | A10 Line no.: 1 | B10 Buyer product code: 024-86718 | G10 Delivery date: 2026-08-16
+ORDER!C11 Article code: 06918446 | D11 Description: Processing aid PC-25 160 kg drum | E11 Quantity: [blank] | F11 UOM: GAL | A11 Line no.: 2 | B11 Buyer product code: 973-83023
+ORDER!C12 Article code: 71564820 | D12 Description: Processing aid SD-15 200 kg drum | E12 Quantity: [blank] | F12 UOM: GAL | A12 Line no.: 3 | B12 Buyer product code: 946-26453

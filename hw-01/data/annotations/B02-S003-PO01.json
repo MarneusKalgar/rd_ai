@@ -1,0 +1,143 @@
+{
+  "inputId": "B02-S003-PO01",
+  "documentation": {
+    "revision": 2,
+    "author": "agent",
+    "basis": "Approved neutral text, unchanged gold values and the v1 extraction contract. Explanatory notes added at user request after case-level approval; no new human field review is claimed."
+  },
+  "headers": [
+    {
+      "field": "purchaseOrderNumber",
+      "value": "FO-73903579",
+      "evidence": "ORDER!H4 발주번호: FO-73903579",
+      "decision": "direct",
+      "note": "Retain the value labeled as the PO identifier as text, including punctuation and leading zeros; do not reinterpret it as a date."
+    },
+    {
+      "field": "purchaseOrderDateTime",
+      "value": "2026-08-20",
+      "evidence": "ORDER!H3 발주일자: 2026-08-20",
+      "decision": "direct",
+      "note": "The labeled date is already in YYYY-MM-DD format; retain it. This is the PO issue date, distinct from delivery or service dates."
+    },
+    {
+      "field": "buyerName",
+      "value": "Larkfen Trading Ltd",
+      "evidence": "ORDER!C8 발주처: Larkfen Trading Ltd",
+      "decision": "direct",
+      "note": ""
+    },
+    {
+      "field": "shipToInfo",
+      "value": "Alderwick Stores Ltd; 17 Alder Lane",
+      "evidence": "ORDER!F8 배송처: Alderwick Stores Ltd\nORDER!F17 배송처: 17 Alder Lane",
+      "decision": "normalized",
+      "note": "Join the explicitly labeled ship-to components with '; ' in their input order. Do not infer extra address components or replace the buyer party."
+    },
+    {
+      "field": "paymentTerms",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No selected payment terms appear in the neutral input. Do not assume a default credit period."
+    },
+    {
+      "field": "buyerCurrency",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit selected order currency appears in the neutral input. Do not infer currency from language, geography or unit price."
+    },
+    {
+      "field": "totalValue",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit net product total for this PO appears in the neutral input. Do not calculate a replacement total from quantity and unit price."
+    }
+  ],
+  "lines": [
+    {
+      "lineIndex": 1,
+      "evidence": "ORDER!D23 제품 코드: 95917801 | C23 제품명: Sealing compound PR-14 160 kg drum | E23 주문수량: 159 | F23 단위: KG | B23 행 번호: 002 | G23 납기요청일: 2026-08-21",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": "002",
+          "evidence": "B23 행 번호: 002",
+          "decision": "direct",
+          "note": "Retain the explicitly printed line number as text, including leading zeros. Do not renumber the selected lines."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!D23 제품 코드: 95917801",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Sealing compound PR-14 160 kg drum",
+          "evidence": "C23 제품명: Sealing compound PR-14 160 kg drum",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "159",
+          "evidence": "E23 주문수량: 159",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "KG",
+          "evidence": "F23 단위: KG",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "KILOGRAM",
+          "evidence": "F23 단위: KG",
+          "decision": "normalized",
+          "note": "KG denotes kilograms; normalize the enum to KILOGRAM and retain KG as the source UOM."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": "2026-08-21",
+          "evidence": "G23 납기요청일: 2026-08-21",
+          "decision": "direct",
+          "note": "The labeled date is already in YYYY-MM-DD format; retain it. The date is explicitly attached to this ordered row."
+        }
+      ]
+    }
+  ],
+  "lineSelection": {
+    "note": "Select every row with an explicit positive ordered quantity, preserving input order. Exclude catalog rows with [blank] ordered quantity.",
+    "orderedLineCount": 1,
+    "excludedCatalogRowCount": 3,
+    "excludedRowExamples": [
+      {
+        "evidence": "ORDER!D22 제품 코드: 82455035 | C22 제품명: Finishing additive SC-16 20 kg bag | E22 주문수량: [blank] | F22 단위: KG | B22 행 번호: 001",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      },
+      {
+        "evidence": "ORDER!D24 제품 코드: 25410191 | C24 제품명: Finishing additive SD-30 125 kg drum | E24 주문수량: [blank] | F24 단위: KG | B24 행 번호: 003",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      },
+      {
+        "evidence": "ORDER!D25 제품 코드: 08548344 | C25 제품명: Surface coating SC-48 200 kg drum | E25 주문수량: [blank] | F25 단위: KG | B25 행 번호: 004",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      }
+    ]
+  },
+  "distractors": []
+}

@@ -1,0 +1,936 @@
+{
+  "inputId": "B02-S032-PO01",
+  "documentation": {
+    "revision": 2,
+    "author": "agent",
+    "basis": "Approved neutral text, unchanged gold values and the v1 extraction contract. Explanatory notes added at user request after case-level approval; no new human field review is claimed."
+  },
+  "headers": [
+    {
+      "field": "purchaseOrderNumber",
+      "value": "6252-14-94W93:37:74",
+      "evidence": "ORDER!C8 PO nummer: 6252-14-94W93:37:74",
+      "decision": "direct",
+      "note": "Retain the value labeled as the PO identifier as text, including punctuation and leading zeros; do not reinterpret it as a date."
+    },
+    {
+      "field": "purchaseOrderDateTime",
+      "value": "2026-08-31",
+      "evidence": "ORDER!C6 Order datum: 2026-08-31",
+      "decision": "direct",
+      "note": "The labeled date is already in YYYY-MM-DD format; retain it. This is the PO issue date, distinct from delivery or service dates."
+    },
+    {
+      "field": "buyerName",
+      "value": null,
+      "evidence": null,
+      "decision": "role_not_established",
+      "note": "A ship-to address is present, but no explicit buyer party is named. A destination address does not establish buyerName.",
+      "relatedEvidence": [
+        "ORDER!C3 Leveradres: 17 Alder Lane",
+        "ORDER!C4 Leveradres: 43000",
+        "ORDER!C5 Leveradres: Alderwick"
+      ]
+    },
+    {
+      "field": "shipToInfo",
+      "value": "17 Alder Lane; 43000; Alderwick",
+      "evidence": "ORDER!C3 Leveradres: 17 Alder Lane\nORDER!C4 Leveradres: 43000\nORDER!C5 Leveradres: Alderwick",
+      "decision": "normalized",
+      "note": "Join the explicitly labeled ship-to components with '; ' in their input order. Do not infer extra address components or replace the buyer party."
+    },
+    {
+      "field": "paymentTerms",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No selected payment terms appear in the neutral input. Do not assume a default credit period."
+    },
+    {
+      "field": "buyerCurrency",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit selected order currency appears in the neutral input. Do not infer currency from language, geography or unit price."
+    },
+    {
+      "field": "totalValue",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit net product total for this PO appears in the neutral input. Do not calculate a replacement total from quantity and unit price."
+    }
+  ],
+  "lines": [
+    {
+      "lineIndex": 1,
+      "evidence": "ORDER!E69 Artikelcode: 4442848858 | C69 Omschrijving: Strawberry preserve 400 g | F69 Aantal: 80 | F12 Eenheid: Dozen",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!E69 Artikelcode: 4442848858",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Strawberry preserve 400 g",
+          "evidence": "C69 Omschrijving: Strawberry preserve 400 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "80",
+          "evidence": "F69 Aantal: 80",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "Dozen",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "normalized",
+          "note": "Dutch Dozen denotes boxes/cases here. Normalize to CASE; do not interpret it as the English quantity twelve."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C7 Delivery date: 2026-09-05"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 2,
+      "evidence": "ORDER!E82 Artikelcode: 3424506402 | C82 Omschrijving: White chocolate 180 g | F82 Aantal: 170 | F12 Eenheid: Dozen",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!E82 Artikelcode: 3424506402",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "White chocolate 180 g",
+          "evidence": "C82 Omschrijving: White chocolate 180 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "170",
+          "evidence": "F82 Aantal: 170",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "Dozen",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "normalized",
+          "note": "Dutch Dozen denotes boxes/cases here. Normalize to CASE; do not interpret it as the English quantity twelve."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C7 Delivery date: 2026-09-05"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 3,
+      "evidence": "ORDER!E84 Artikelcode: 6175653578 | C84 Omschrijving: Red kidney beans 300 g | F84 Aantal: 80 | F12 Eenheid: Dozen",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!E84 Artikelcode: 6175653578",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Red kidney beans 300 g",
+          "evidence": "C84 Omschrijving: Red kidney beans 300 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "80",
+          "evidence": "F84 Aantal: 80",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "Dozen",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "normalized",
+          "note": "Dutch Dozen denotes boxes/cases here. Normalize to CASE; do not interpret it as the English quantity twelve."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C7 Delivery date: 2026-09-05"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 4,
+      "evidence": "ORDER!E86 Artikelcode: 6986731093 | C86 Omschrijving: Corn rice cakes 80 g | F86 Aantal: 170 | F12 Eenheid: Dozen",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!E86 Artikelcode: 6986731093",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Corn rice cakes 80 g",
+          "evidence": "C86 Omschrijving: Corn rice cakes 80 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "170",
+          "evidence": "F86 Aantal: 170",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "Dozen",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "normalized",
+          "note": "Dutch Dozen denotes boxes/cases here. Normalize to CASE; do not interpret it as the English quantity twelve."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C7 Delivery date: 2026-09-05"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 5,
+      "evidence": "ORDER!E101 Artikelcode: 5508834219 | C101 Omschrijving: Lemon oat biscuits 300 g | F101 Aantal: 170 | F12 Eenheid: Dozen",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!E101 Artikelcode: 5508834219",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Lemon oat biscuits 300 g",
+          "evidence": "C101 Omschrijving: Lemon oat biscuits 300 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "170",
+          "evidence": "F101 Aantal: 170",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "Dozen",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "normalized",
+          "note": "Dutch Dozen denotes boxes/cases here. Normalize to CASE; do not interpret it as the English quantity twelve."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C7 Delivery date: 2026-09-05"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 6,
+      "evidence": "ORDER!E110 Artikelcode: 9763725300 | C110 Omschrijving: Orange marmalade 6 x 40 g | F110 Aantal: 131 | F12 Eenheid: Dozen",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!E110 Artikelcode: 9763725300",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Orange marmalade 6 x 40 g",
+          "evidence": "C110 Omschrijving: Orange marmalade 6 x 40 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "131",
+          "evidence": "F110 Aantal: 131",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "Dozen",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "normalized",
+          "note": "Dutch Dozen denotes boxes/cases here. Normalize to CASE; do not interpret it as the English quantity twelve."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C7 Delivery date: 2026-09-05"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 7,
+      "evidence": "ORDER!E111 Artikelcode: 9956440080 | C111 Omschrijving: Fine peas 300 g | F111 Aantal: 30 | F12 Eenheid: Dozen",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!E111 Artikelcode: 9956440080",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Fine peas 300 g",
+          "evidence": "C111 Omschrijving: Fine peas 300 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "30",
+          "evidence": "F111 Aantal: 30",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "Dozen",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "normalized",
+          "note": "Dutch Dozen denotes boxes/cases here. Normalize to CASE; do not interpret it as the English quantity twelve."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C7 Delivery date: 2026-09-05"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 8,
+      "evidence": "ORDER!E146 Artikelcode: 0259193977 | C146 Omschrijving: Wholegrain fusilli 1 kg | F146 Aantal: 170 | F12 Eenheid: Dozen",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!E146 Artikelcode: 0259193977",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Wholegrain fusilli 1 kg",
+          "evidence": "C146 Omschrijving: Wholegrain fusilli 1 kg",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "170",
+          "evidence": "F146 Aantal: 170",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "Dozen",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "normalized",
+          "note": "Dutch Dozen denotes boxes/cases here. Normalize to CASE; do not interpret it as the English quantity twelve."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C7 Delivery date: 2026-09-05"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 9,
+      "evidence": "ORDER!E163 Artikelcode: 9734261156 | C163 Omschrijving: Apricot preserve 300 g | F163 Aantal: 39 | F12 Eenheid: Dozen",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!E163 Artikelcode: 9734261156",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Apricot preserve 300 g",
+          "evidence": "C163 Omschrijving: Apricot preserve 300 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "39",
+          "evidence": "F163 Aantal: 39",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "Dozen",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "normalized",
+          "note": "Dutch Dozen denotes boxes/cases here. Normalize to CASE; do not interpret it as the English quantity twelve."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C7 Delivery date: 2026-09-05"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 10,
+      "evidence": "ORDER!E182 Artikelcode: 5668658867 | C182 Omschrijving: Linseed rice cakes 60 g | F182 Aantal: 170 | F12 Eenheid: Dozen",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!E182 Artikelcode: 5668658867",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Linseed rice cakes 60 g",
+          "evidence": "C182 Omschrijving: Linseed rice cakes 60 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "170",
+          "evidence": "F182 Aantal: 170",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "Dozen",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "normalized",
+          "note": "Dutch Dozen denotes boxes/cases here. Normalize to CASE; do not interpret it as the English quantity twelve."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C7 Delivery date: 2026-09-05"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 11,
+      "evidence": "ORDER!E220 Artikelcode: 1933554680 | C220 Omschrijving: Dark chocolate 6 x 25 g | F220 Aantal: 170 | F12 Eenheid: Dozen",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!E220 Artikelcode: 1933554680",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Dark chocolate 6 x 25 g",
+          "evidence": "C220 Omschrijving: Dark chocolate 6 x 25 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "170",
+          "evidence": "F220 Aantal: 170",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "Dozen",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "normalized",
+          "note": "Dutch Dozen denotes boxes/cases here. Normalize to CASE; do not interpret it as the English quantity twelve."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C7 Delivery date: 2026-09-05"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 12,
+      "evidence": "ORDER!E239 Artikelcode: 4222916373 | C239 Omschrijving: Pear juice 6 x 200 ml | F239 Aantal: 77 | F12 Eenheid: Dozen",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!E239 Artikelcode: 4222916373",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Pear juice 6 x 200 ml",
+          "evidence": "C239 Omschrijving: Pear juice 6 x 200 ml",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "77",
+          "evidence": "F239 Aantal: 77",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "Dozen",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "normalized",
+          "note": "Dutch Dozen denotes boxes/cases here. Normalize to CASE; do not interpret it as the English quantity twelve."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C7 Delivery date: 2026-09-05"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 13,
+      "evidence": "ORDER!E244 Artikelcode: 6574875095 | C244 Omschrijving: Wholegrain penne 400 g | F244 Aantal: 131 | F12 Eenheid: Dozen",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!E244 Artikelcode: 6574875095",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Wholegrain penne 400 g",
+          "evidence": "C244 Omschrijving: Wholegrain penne 400 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "131",
+          "evidence": "F244 Aantal: 131",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "Dozen",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "F12 Eenheid: Dozen",
+          "decision": "normalized",
+          "note": "Dutch Dozen denotes boxes/cases here. Normalize to CASE; do not interpret it as the English quantity twelve."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C7 Delivery date: 2026-09-05"
+          ]
+        }
+      ]
+    }
+  ],
+  "lineSelection": {
+    "note": "Select every row with an explicit positive ordered quantity, preserving input order. Exclude catalog rows with [blank] ordered quantity.",
+    "orderedLineCount": 13,
+    "excludedCatalogRowCount": 231,
+    "excludedRowExamples": [
+      {
+        "evidence": "ORDER!E13 Artikelcode: 0191692143 | C13 Omschrijving: Durum spaghetti 1 kg | F13 Aantal: [blank] | F12 Eenheid: Dozen",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      },
+      {
+        "evidence": "ORDER!E14 Artikelcode: 3014416460 | C14 Omschrijving: Durum farfalle 750 g | F14 Aantal: [blank] | F12 Eenheid: Dozen",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      },
+      {
+        "evidence": "ORDER!E15 Artikelcode: 9362788623 | C15 Omschrijving: Peach nectar 1 l | F15 Aantal: [blank] | F12 Eenheid: Dozen",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      }
+    ]
+  },
+  "distractors": [
+    {
+      "evidence": "ORDER!C7 Delivery date: 2026-09-05",
+      "note": "This order-level delivery/service date is not the PO issue date and is not explicitly tied to a line. Do not substitute it for purchaseOrderDateTime or inherit it into buyerDeliveryDate."
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+ORDER!B9 PO number: XS Rruei CYV 445189
+ORDER!B4 Buyer: Thornwick Merchants Ltd
+ORDER!B10 Date required: 2026-09-06
+ORDER!A16 Article code: 500818 | B16 Description: Surface coating PC-25 500 kg bulk bag | C16 Quantity: 1 | C15 UOM: IBC

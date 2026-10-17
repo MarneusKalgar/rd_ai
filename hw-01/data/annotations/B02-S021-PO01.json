@@ -1,0 +1,140 @@
+{
+  "inputId": "B02-S021-PO01",
+  "documentation": {
+    "revision": 2,
+    "author": "agent",
+    "basis": "Approved neutral text, unchanged gold values and the v1 extraction contract. Explanatory notes added at user request after case-level approval; no new human field review is claimed."
+  },
+  "headers": [
+    {
+      "field": "purchaseOrderNumber",
+      "value": "0745488165",
+      "evidence": "ORDER!B7 PO number: 0745488165",
+      "decision": "direct",
+      "note": "Retain the value labeled as the PO identifier as text, including punctuation and leading zeros; do not reinterpret it as a date."
+    },
+    {
+      "field": "purchaseOrderDateTime",
+      "value": "2026-08-02",
+      "evidence": "ORDER!B5 Order date: 2026-08-02",
+      "decision": "direct",
+      "note": "The labeled date is already in YYYY-MM-DD format; retain it. This is the PO issue date, distinct from delivery or service dates."
+    },
+    {
+      "field": "buyerName",
+      "value": "Thornwick Merchants Ltd",
+      "evidence": "ORDER!B1 Buyer: Thornwick Merchants Ltd",
+      "decision": "direct",
+      "note": ""
+    },
+    {
+      "field": "shipToInfo",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit ship-to block appears in the neutral input. Do not reuse the buyer name as a delivery address."
+    },
+    {
+      "field": "paymentTerms",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No selected payment terms appear in the neutral input. Do not assume a default credit period."
+    },
+    {
+      "field": "buyerCurrency",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit selected order currency appears in the neutral input. Do not infer currency from language, geography or unit price."
+    },
+    {
+      "field": "totalValue",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit net product total for this PO appears in the neutral input. Do not calculate a replacement total from quantity and unit price."
+    }
+  ],
+  "lines": [
+    {
+      "lineIndex": 1,
+      "evidence": "ORDER!C10 Article code: 54629115 | D10 Description: Finishing additive PC-75 200 kg drum | E10 Quantity: 79 | F10 UOM: GAL | A10 Line no.: 1 | B10 Buyer product code: 024-86718 | G10 Delivery date: 2026-08-16",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": "1",
+          "evidence": "A10 Line no.: 1",
+          "decision": "direct",
+          "note": "Retain the explicitly printed line number as text, including leading zeros. Do not renumber the selected lines."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": "024-86718",
+          "evidence": "B10 Buyer product code: 024-86718",
+          "decision": "direct",
+          "note": "Use the explicitly labeled buyer product code, preserving punctuation and leading zeros. The separate article/supplier code is not the buyer code.",
+          "rejectedEvidence": "ORDER!C10 Article code: 54629115"
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Finishing additive PC-75 200 kg drum",
+          "evidence": "D10 Description: Finishing additive PC-75 200 kg drum",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "79",
+          "evidence": "E10 Quantity: 79",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "GAL",
+          "evidence": "F10 UOM: GAL",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "OTHER",
+          "evidence": "F10 UOM: GAL",
+          "decision": "normalized",
+          "note": "GAL denotes gallons. The v1 enum has no gallon category, so use OTHER. No US/imperial conversion is established."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No unit price for the ordered quantity's UOM appears in the prepared row. Do not derive a price from package size, a catalog price or a different pricing unit."
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": "2026-08-16",
+          "evidence": "G10 Delivery date: 2026-08-16",
+          "decision": "direct",
+          "note": "The labeled date is already in YYYY-MM-DD format; retain it. The date is explicitly attached to this ordered row."
+        }
+      ]
+    }
+  ],
+  "lineSelection": {
+    "note": "Select every row with an explicit positive ordered quantity, preserving input order. Exclude catalog rows with [blank] ordered quantity.",
+    "orderedLineCount": 1,
+    "excludedCatalogRowCount": 2,
+    "excludedRowExamples": [
+      {
+        "evidence": "ORDER!C11 Article code: 06918446 | D11 Description: Processing aid PC-25 160 kg drum | E11 Quantity: [blank] | F11 UOM: GAL | A11 Line no.: 2 | B11 Buyer product code: 973-83023",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      },
+      {
+        "evidence": "ORDER!C12 Article code: 71564820 | D12 Description: Processing aid SD-15 200 kg drum | E12 Quantity: [blank] | F12 UOM: GAL | A12 Line no.: 3 | B12 Buyer product code: 946-26453",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      }
+    ]
+  },
+  "distractors": []
+}

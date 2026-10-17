@@ -1,0 +1,11 @@
+ORDER!D32 Numero ordine: 3411
+ORDER!I18 Data ordine: 2026-08-08
+ORDER!F24 Cliente: Merehaven Distribution Ltd
+ORDER!F26 Indirizzo di consegna: 17 Alder Lane
+ORDER!C28 Indirizzo di consegna: Alderwick
+ORDER!M37 Valuta: EUR
+ORDER!E30 Delivery date: 2026-08-02
+ORDER!B42 Codice prodotto: 85017 | C42 Descrizione: White chocolate 150 g | I42 Quantità: [blank] | K42 Unità: CRT
+ORDER!B43 Codice prodotto: 83137 | C43 Descrizione: Coconut oat biscuits 120 g | I43 Quantità: [blank] | K43 Unità: CRT
+ORDER!B44 Codice prodotto: 5536820 | C44 Descrizione: Durum farfalle 750 g | I44 Quantità: 65 | K44 Unità: CRT
+ORDER!B45 Codice prodotto: 08165 | C45 Descrizione: Forest fruit tea 50 x 2 g | I45 Quantità: [blank] | K45 Unità: CRT

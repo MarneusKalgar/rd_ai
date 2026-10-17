@@ -1,0 +1,16 @@
+ORDER!D14 PO number: 0079833537
+ORDER!B4 Buyer: Alderwick Stores Ltd
+ORDER!A14 Article code: 834437 | B14 Description: Durum penne 1 kg | C14 Quantity: 200 | C13 UOM: MT/WTO | E14 Delivery date: 11.09.26
+ORDER!A15 Article code: 834437 | B15 Description: Durum penne 1 kg | C15 Quantity: 121 | C13 UOM: MT/WTO | E15 Delivery date: 11.09.26
+ORDER!A16 Article code: 834437 | B16 Description: Durum penne 1 kg | C16 Quantity: 200 | C13 UOM: MT/WTO | E16 Delivery date: 11.09.26
+ORDER!A17 Article code: 834437 | B17 Description: Durum penne 1 kg | C17 Quantity: 121 | C13 UOM: MT/WTO | E17 Delivery date: 11.09.26
+ORDER!A18 Article code: 834437 | B18 Description: Durum penne 1 kg | C18 Quantity: 200 | C13 UOM: MT/WTO | E18 Delivery date: 11.09.26
+ORDER!A19 Article code: 834437 | B19 Description: Durum penne 1 kg | C19 Quantity: 121 | C13 UOM: MT/WTO | E19 Delivery date: 11.09.26
+ORDER!A20 Article code: 834437 | B20 Description: Durum penne 1 kg | C20 Quantity: 121 | C13 UOM: MT/WTO | E20 Delivery date: 11.09.26
+ORDER!A21 Article code: 834437 | B21 Description: Durum penne 1 kg | C21 Quantity: 121 | C13 UOM: MT/WTO | E21 Delivery date: 12.09.26
+ORDER!A22 Article code: 834437 | B22 Description: Durum penne 1 kg | C22 Quantity: 121 | C13 UOM: MT/WTO | E22 Delivery date: 12.09.26
+ORDER!A23 Article code: 834437 | B23 Description: Durum penne 1 kg | C23 Quantity: 121 | C13 UOM: MT/WTO | E23 Delivery date: 12.09.26
+ORDER!A24 Article code: 834437 | B24 Description: Durum penne 1 kg | C24 Quantity: 121 | C13 UOM: MT/WTO | E24 Delivery date: 12.09.26
+ORDER!A25 Article code: 834437 | B25 Description: Durum penne 1 kg | C25 Quantity: 121 | C13 UOM: MT/WTO | E25 Delivery date: 13.09.26
+ORDER!A26 Article code: 834437 | B26 Description: Durum penne 1 kg | C26 Quantity: 121 | C13 UOM: MT/WTO | E26 Delivery date: 13.09.26
+ORDER!A27 Article code: 834437 | B27 Description: Durum penne 1 kg | C27 Quantity: 121 | C13 UOM: MT/WTO | E27 Delivery date: 13.09.26

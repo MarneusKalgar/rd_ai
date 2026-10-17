@@ -1,0 +1,21 @@
+{
+  "purchaseOrderNumber": "FO-73903579",
+  "purchaseOrderDateTime": "2026-08-20",
+  "buyerName": "Larkfen Trading Ltd",
+  "shipToInfo": "Alderwick Stores Ltd; 17 Alder Lane",
+  "paymentTerms": null,
+  "buyerCurrency": null,
+  "totalValue": null,
+  "lineItems": [
+    {
+      "purchaseOrderLineNumber": "002",
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Sealing compound PR-14 160 kg drum",
+      "buyerProductQuantity": "159",
+      "buyerProductUOM": "KG",
+      "quantityUnit": "KILOGRAM",
+      "buyerUnitPrice": null,
+      "buyerDeliveryDate": "2026-08-21"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "purchaseOrderNumber": "OSG5734189274/MNOOFJ8510864",
+  "purchaseOrderDateTime": "2026-07-17",
+  "buyerName": "Larkfen Trading Ltd",
+  "shipToInfo": null,
+  "paymentTerms": "Payment in advance",
+  "buyerCurrency": "CNY",
+  "totalValue": null,
+  "lineItems": [
+    {
+      "purchaseOrderLineNumber": "1",
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Protective coating SC-64 1000 kg container",
+      "buyerProductQuantity": "27",
+      "buyerProductUOM": "KG",
+      "quantityUnit": "KILOGRAM",
+      "buyerUnitPrice": "55.02",
+      "buyerDeliveryDate": "2026-07-21"
+    }
+  ]
+}

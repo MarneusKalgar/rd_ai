@@ -1,0 +1,12 @@
+ORDER!A2 PO number: 7640677666
+ORDER!O2 Currency: EUR
+ORDER!F2 Article code: EKG266512 | H2 Description: Forest fruit tea 40 x 1.5 g | L2 Quantity: 151 | N2 Unit price: 99.44 | B2 Line no.: 10 | E2 Buyer product code: 6098935 | J2 Delivery date: 2026-08-21
+ORDER!F3 Article code: BHN291150 | H3 Description: White grape juice 500 ml | L3 Quantity: 31 | N3 Unit price: 85.83 | B3 Line no.: 20 | E3 Buyer product code: 4274627 | J3 Delivery date: 2026-08-21
+ORDER!F4 Article code: AGK272871 | H4 Description: Cooked chickpeas 250 g | L4 Quantity: 119 | N4 Unit price: 59.81 | B4 Line no.: 30 | E4 Buyer product code: 3392270 | J4 Delivery date: 2026-08-21
+ORDER!F5 Article code: EJI469100 | H5 Description: Mixed beans 250 g | L5 Quantity: 57 | N5 Unit price: 6.13 | B5 Line no.: 40 | E5 Buyer product code: 9354230 | J5 Delivery date: 2026-08-21
+ORDER!F6 Article code: YIJ246625 | H6 Description: Dark chocolate 100 g | L6 Quantity: 160 | N6 Unit price: 25.84 | B6 Line no.: 50 | E6 Buyer product code: 7372509 | J6 Delivery date: 2026-08-21
+ORDER!F7 Article code: ZHJ224929 | H7 Description: Cherry preserve 300 g | L7 Quantity: 46 | N7 Unit price: 46.96 | B7 Line no.: 60 | E7 Buyer product code: 7797029 | J7 Delivery date: 2026-08-21
+ORDER!F8 Article code: FEJ799685 | H8 Description: Hazelnut oat biscuits 300 g | L8 Quantity: 99 | N8 Unit price: 86.45 | B8 Line no.: 70 | E8 Buyer product code: 5008359 | J8 Delivery date: 2026-08-21
+ORDER!F9 Article code: ZDN052485 | H9 Description: Almond chocolate 40 g | L9 Quantity: 144 | N9 Unit price: 77.42 | B9 Line no.: 80 | E9 Buyer product code: 1474945 | J9 Delivery date: 2026-08-21
+ORDER!F10 Article code: YGI769454 | H10 Description: Cooked lentils 200 g | L10 Quantity: 34 | N10 Unit price: 52.47 | B10 Line no.: 90 | E10 Buyer product code: 4456803 | J10 Delivery date: 2026-08-21
+ORDER!F11 Article code: DCN624287 | H11 Description: Pear juice 6 x 200 ml | L11 Quantity: 123 | N11 Unit price: 87.02 | B11 Line no.: 100 | E11 Buyer product code: 4194801 | J11 Delivery date: 2026-08-21

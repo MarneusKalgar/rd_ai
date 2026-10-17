@@ -1,0 +1,130 @@
+{
+  "inputId": "B02-S023-PO01",
+  "documentation": {
+    "revision": 2,
+    "author": "agent",
+    "basis": "Approved neutral text, unchanged gold values and the v1 extraction contract. Explanatory notes added at user request after case-level approval; no new human field review is claimed."
+  },
+  "headers": [
+    {
+      "field": "purchaseOrderNumber",
+      "value": "OSG5734189274/MNOOFJ8510864",
+      "evidence": "ORDER!C5 合同号: OSG5734189274/MNOOFJ8510864",
+      "decision": "direct",
+      "note": "Retain the value labeled as the PO identifier as text, including punctuation and leading zeros; do not reinterpret it as a date."
+    },
+    {
+      "field": "purchaseOrderDateTime",
+      "value": "2026-07-17",
+      "evidence": "ORDER!C6 开单日期: 2026-07-17",
+      "decision": "direct",
+      "note": "The labeled date is already in YYYY-MM-DD format; retain it. This is the PO issue date, distinct from delivery or service dates."
+    },
+    {
+      "field": "buyerName",
+      "value": "Larkfen Trading Ltd",
+      "evidence": "ORDER!A1 采购方: Larkfen Trading Ltd",
+      "decision": "direct",
+      "note": ""
+    },
+    {
+      "field": "shipToInfo",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit ship-to block appears in the neutral input. Do not reuse the buyer name as a delivery address."
+    },
+    {
+      "field": "paymentTerms",
+      "value": "Payment in advance",
+      "evidence": "ORDER!C7 付款方式: Payment in advance",
+      "decision": "direct",
+      "note": ""
+    },
+    {
+      "field": "buyerCurrency",
+      "value": "CNY",
+      "evidence": "ORDER!G12 币种: CNY",
+      "decision": "direct",
+      "note": ""
+    },
+    {
+      "field": "totalValue",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit net product total for this PO appears in the neutral input. Do not calculate a replacement total from quantity and unit price."
+    }
+  ],
+  "lines": [
+    {
+      "lineIndex": 1,
+      "evidence": "ORDER!B13 产品代码: 68017197 | C13 产品名称: Protective coating SC-64 1000 kg container | F13 订购数量: 27 | F12 单位: KG | G13 单价: 55.02 | A13 序号: 1 | I13 交货日期: 2026-07-21",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": "1",
+          "evidence": "A13 序号: 1",
+          "decision": "direct",
+          "note": "Retain the explicitly printed line number as text, including leading zeros. Do not renumber the selected lines."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!B13 产品代码: 68017197",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Protective coating SC-64 1000 kg container",
+          "evidence": "C13 产品名称: Protective coating SC-64 1000 kg container",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "27",
+          "evidence": "F13 订购数量: 27",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "KG",
+          "evidence": "F12 单位: KG",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "KILOGRAM",
+          "evidence": "F12 单位: KG",
+          "decision": "normalized",
+          "note": "KG denotes kilograms; normalize the enum to KILOGRAM and retain KG as the source UOM."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": "55.02",
+          "evidence": "G13 单价: 55.02",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": "2026-07-21",
+          "evidence": "I13 交货日期: 2026-07-21",
+          "decision": "direct",
+          "note": "The labeled date is already in YYYY-MM-DD format; retain it. The date is explicitly attached to this ordered row."
+        }
+      ]
+    }
+  ],
+  "lineSelection": {
+    "note": "Select every row with an explicit positive ordered quantity, preserving input order. Exclude catalog rows with [blank] ordered quantity.",
+    "orderedLineCount": 1,
+    "excludedCatalogRowCount": 0,
+    "excludedRowExamples": []
+  },
+  "distractors": []
+}

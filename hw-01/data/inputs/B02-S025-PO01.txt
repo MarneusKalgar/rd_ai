@@ -1,0 +1,10 @@
+ORDER!G12 PO number: 816835FK-SOW
+ORDER!E12 Order date: 18.07.26
+ORDER!E5 Buyer: Alderwick Stores Ltd
+ORDER!H5 Ship to: Alderwick Stores Ltd, 17 Alder Lane, Alderwick
+ORDER!G42 Net order total: 40811.54
+ORDER!N15 Article code: Fhypsriuv Afwmtzb-Bhxc.Dqhqd-F3087-3-YXD | F15 Description: Orange chocolate 40 g | J15 Quantity: 159 | F40 UOM: cases | H15 Unit price: 86.82
+ORDER!N16 Article code: Fdxqnuntw Yhtkabf-Tqktcc-J6867-5-VYI | F16 Description: Sweetcorn 250 g | J16 Quantity: 136 | F40 UOM: cases | H16 Unit price: 86.82
+ORDER!N17 Article code: Djtpnmlvv Tiziweh-Cfvysjtjopx-I5841-8-ZXH | F17 Description: White beans 200 g | J17 Quantity: 165 | F40 UOM: cases | H17 Unit price: 86.82
+ORDER!N18 Article code: Jgzrmpjwt Tftlsad-Xcaz.Dnesd-E1753-03-XYF | F18 Description: Cocoa oat biscuits 100 g | J18 Quantity: 12 | F40 UOM: cases | H18 Unit price: 10.42
+ORDER!N19 Article code: Uarykvus Xtrbezm Yivltbn-Sjmfjl-C9686-7-BBC | F19 Description: Berry oat biscuits 180 g | J19 Quantity: 127 | F40 UOM: cases | H19 Unit price: 5.90

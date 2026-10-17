@@ -1,0 +1,6 @@
+ORDER!K5 Order date: 22/07/2026
+ORDER!E5 Buyer: Merehaven Distribution Ltd
+ORDER!B11 Ship to: Merehaven Distribution Ltd, 17 Alder Lane, Alderwick
+ORDER!H6 Payment terms: Net 75 days
+ORDER!L9 Currency: EUR
+ORDER!B9 Article code: XB1558 | C9 Description: Acrylic binder FA-42 25 kg bag | F9 Quantity: 174 | I9 UOM: To | L9 Unit price: 36.47

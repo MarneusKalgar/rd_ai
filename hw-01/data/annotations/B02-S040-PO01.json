@@ -1,0 +1,801 @@
+{
+  "inputId": "B02-S040-PO01",
+  "documentation": {
+    "revision": 2,
+    "author": "agent",
+    "basis": "Approved neutral text, unchanged gold values and the v1 extraction contract. Explanatory notes added at user request after case-level approval; no new human field review is claimed."
+  },
+  "headers": [
+    {
+      "field": "purchaseOrderNumber",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No populated buyer PO number appears in the neutral input. Do not substitute a cell address, form number or generated input ID."
+    },
+    {
+      "field": "purchaseOrderDateTime",
+      "value": "2026-07-31",
+      "evidence": "ORDER!C3 Data emiterii comenzii: 2026-07-31",
+      "decision": "direct",
+      "note": "The labeled date is already in YYYY-MM-DD format; retain it. This is the PO issue date, distinct from delivery or service dates."
+    },
+    {
+      "field": "buyerName",
+      "value": "Brackenmere Retail Ltd",
+      "evidence": "ORDER!C1 Firma: Brackenmere Retail Ltd",
+      "decision": "direct",
+      "note": ""
+    },
+    {
+      "field": "shipToInfo",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No explicit ship-to block appears in the neutral input. Do not reuse the buyer name as a delivery address."
+    },
+    {
+      "field": "paymentTerms",
+      "value": null,
+      "evidence": null,
+      "decision": "absent",
+      "note": "No selected payment terms appear in the neutral input. Do not assume a default credit period."
+    },
+    {
+      "field": "buyerCurrency",
+      "value": "RON",
+      "evidence": "ORDER!K9 Moneda: RON",
+      "decision": "direct",
+      "note": ""
+    },
+    {
+      "field": "totalValue",
+      "value": "59280.15",
+      "evidence": "ORDER!K4 Valoare comandă fără TVA: 59280.15",
+      "decision": "direct",
+      "note": "Use the explicitly labeled net product total for this PO. Matching line arithmetic is a consistency check, not permission to synthesize a missing total."
+    }
+  ],
+  "lines": [
+    {
+      "lineIndex": 1,
+      "evidence": "ORDER!B44 Cod produs: 6349728 | C44 Nume produs: Black tea 25 x 1.5 g | D44 Comanda: 50 | D9 Unitate: BX | K44 Preț unitar: 21.29",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!B44 Cod produs: 6349728",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Black tea 25 x 1.5 g",
+          "evidence": "C44 Nume produs: Black tea 25 x 1.5 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "50",
+          "evidence": "D44 Comanda: 50",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "BX",
+          "evidence": "D9 Unitate: BX",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "D9 Unitate: BX",
+          "decision": "normalized",
+          "note": "BX denotes boxes; the v1 unit mapping groups boxes under CASE. Do not multiply by a product's package size."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": "21.29",
+          "evidence": "K44 Preț unitar: 21.29",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C2 Requested delivery date: 2026-08-04"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 2,
+      "evidence": "ORDER!B142 Cod produs: 1470488 | C142 Nume produs: Mixed beans 150 g | D142 Comanda: 147 | D9 Unitate: BX | K142 Preț unitar: 4.78",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!B142 Cod produs: 1470488",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Mixed beans 150 g",
+          "evidence": "C142 Nume produs: Mixed beans 150 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "147",
+          "evidence": "D142 Comanda: 147",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "BX",
+          "evidence": "D9 Unitate: BX",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "D9 Unitate: BX",
+          "decision": "normalized",
+          "note": "BX denotes boxes; the v1 unit mapping groups boxes under CASE. Do not multiply by a product's package size."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": "4.78",
+          "evidence": "K142 Preț unitar: 4.78",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C2 Requested delivery date: 2026-08-04"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 3,
+      "evidence": "ORDER!B143 Cod produs: 3760045 | C143 Nume produs: Durum farfalle 200 g | D143 Comanda: 74 | D9 Unitate: BX | K143 Preț unitar: 11.71",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!B143 Cod produs: 3760045",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Durum farfalle 200 g",
+          "evidence": "C143 Nume produs: Durum farfalle 200 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "74",
+          "evidence": "D143 Comanda: 74",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "BX",
+          "evidence": "D9 Unitate: BX",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "D9 Unitate: BX",
+          "decision": "normalized",
+          "note": "BX denotes boxes; the v1 unit mapping groups boxes under CASE. Do not multiply by a product's package size."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": "11.71",
+          "evidence": "K143 Preț unitar: 11.71",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C2 Requested delivery date: 2026-08-04"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 4,
+      "evidence": "ORDER!B144 Cod produs: 2525823 | C144 Nume produs: Lemon balm tea 50 x 2 g | D144 Comanda: 104 | D9 Unitate: BX | K144 Preț unitar: 46.45",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!B144 Cod produs: 2525823",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Lemon balm tea 50 x 2 g",
+          "evidence": "C144 Nume produs: Lemon balm tea 50 x 2 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "104",
+          "evidence": "D144 Comanda: 104",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "BX",
+          "evidence": "D9 Unitate: BX",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "D9 Unitate: BX",
+          "decision": "normalized",
+          "note": "BX denotes boxes; the v1 unit mapping groups boxes under CASE. Do not multiply by a product's package size."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": "46.45",
+          "evidence": "K144 Preț unitar: 46.45",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C2 Requested delivery date: 2026-08-04"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 5,
+      "evidence": "ORDER!B145 Cod produs: 6325865 | C145 Nume produs: Chamomile tea 20 x 2 g | D145 Comanda: 5 | D9 Unitate: BX | K145 Preț unitar: 94.28",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!B145 Cod produs: 6325865",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Chamomile tea 20 x 2 g",
+          "evidence": "C145 Nume produs: Chamomile tea 20 x 2 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "5",
+          "evidence": "D145 Comanda: 5",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "BX",
+          "evidence": "D9 Unitate: BX",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "D9 Unitate: BX",
+          "decision": "normalized",
+          "note": "BX denotes boxes; the v1 unit mapping groups boxes under CASE. Do not multiply by a product's package size."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": "94.28",
+          "evidence": "K145 Preț unitar: 94.28",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C2 Requested delivery date: 2026-08-04"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 6,
+      "evidence": "ORDER!B151 Cod produs: 0482304 | C151 Nume produs: Caramel chocolate 12 x 20 g | D151 Comanda: 155 | D9 Unitate: BX | K151 Preț unitar: 89.45",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!B151 Cod produs: 0482304",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Caramel chocolate 12 x 20 g",
+          "evidence": "C151 Nume produs: Caramel chocolate 12 x 20 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "155",
+          "evidence": "D151 Comanda: 155",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "BX",
+          "evidence": "D9 Unitate: BX",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "D9 Unitate: BX",
+          "decision": "normalized",
+          "note": "BX denotes boxes; the v1 unit mapping groups boxes under CASE. Do not multiply by a product's package size."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": "89.45",
+          "evidence": "K151 Preț unitar: 89.45",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C2 Requested delivery date: 2026-08-04"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 7,
+      "evidence": "ORDER!B154 Cod produs: 6344484 | C154 Nume produs: Apricot preserve 300 g | D154 Comanda: 50 | D9 Unitate: BX | K154 Preț unitar: 88.15",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!B154 Cod produs: 6344484",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Apricot preserve 300 g",
+          "evidence": "C154 Nume produs: Apricot preserve 300 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "50",
+          "evidence": "D154 Comanda: 50",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "BX",
+          "evidence": "D9 Unitate: BX",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "D9 Unitate: BX",
+          "decision": "normalized",
+          "note": "BX denotes boxes; the v1 unit mapping groups boxes under CASE. Do not multiply by a product's package size."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": "88.15",
+          "evidence": "K154 Preț unitar: 88.15",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C2 Requested delivery date: 2026-08-04"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 8,
+      "evidence": "ORDER!B160 Cod produs: 321630 | C160 Nume produs: Plum preserve 6 x 40 g | D160 Comanda: 147 | D9 Unitate: BX | K160 Preț unitar: 59.60",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!B160 Cod produs: 321630",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Plum preserve 6 x 40 g",
+          "evidence": "C160 Nume produs: Plum preserve 6 x 40 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "147",
+          "evidence": "D160 Comanda: 147",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "BX",
+          "evidence": "D9 Unitate: BX",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "D9 Unitate: BX",
+          "decision": "normalized",
+          "note": "BX denotes boxes; the v1 unit mapping groups boxes under CASE. Do not multiply by a product's package size."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": "59.60",
+          "evidence": "K160 Preț unitar: 59.60",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C2 Requested delivery date: 2026-08-04"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 9,
+      "evidence": "ORDER!B161 Cod produs: 143974 | C161 Nume produs: Blueberry preserve 400 g | D161 Comanda: 147 | D9 Unitate: BX | K161 Preț unitar: 59.60",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!B161 Cod produs: 143974",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Blueberry preserve 400 g",
+          "evidence": "C161 Nume produs: Blueberry preserve 400 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "147",
+          "evidence": "D161 Comanda: 147",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "BX",
+          "evidence": "D9 Unitate: BX",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "D9 Unitate: BX",
+          "decision": "normalized",
+          "note": "BX denotes boxes; the v1 unit mapping groups boxes under CASE. Do not multiply by a product's package size."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": "59.60",
+          "evidence": "K161 Preț unitar: 59.60",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C2 Requested delivery date: 2026-08-04"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 10,
+      "evidence": "ORDER!B163 Cod produs: 6575412 | C163 Nume produs: Cinnamon oat biscuits 6 x 40 g | D163 Comanda: 52 | D9 Unitate: BX | K163 Preț unitar: 94.24",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!B163 Cod produs: 6575412",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Cinnamon oat biscuits 6 x 40 g",
+          "evidence": "C163 Nume produs: Cinnamon oat biscuits 6 x 40 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "52",
+          "evidence": "D163 Comanda: 52",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "BX",
+          "evidence": "D9 Unitate: BX",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "D9 Unitate: BX",
+          "decision": "normalized",
+          "note": "BX denotes boxes; the v1 unit mapping groups boxes under CASE. Do not multiply by a product's package size."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": "94.24",
+          "evidence": "K163 Preț unitar: 94.24",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C2 Requested delivery date: 2026-08-04"
+          ]
+        }
+      ]
+    },
+    {
+      "lineIndex": 11,
+      "evidence": "ORDER!B164 Cod produs: 0500414 | C164 Nume produs: Hazelnut oat biscuits 180 g | D164 Comanda: 113 | D9 Unitate: BX | K164 Preț unitar: 94.24",
+      "fields": [
+        {
+          "field": "purchaseOrderLineNumber",
+          "value": null,
+          "evidence": null,
+          "decision": "absent",
+          "note": "No printed PO line number appears for this ordered row. Its spreadsheet row address and its position in lineItems are not PO line numbers."
+        },
+        {
+          "field": "buyerProductIdentifier",
+          "value": null,
+          "evidence": "ORDER!B164 Cod produs: 0500414",
+          "decision": "role_not_established",
+          "note": "An article/product code is present, but the text does not identify it as the buyer's product code. Keep buyerProductIdentifier null."
+        },
+        {
+          "field": "buyerProductName",
+          "value": "Hazelnut oat biscuits 180 g",
+          "evidence": "C164 Nume produs: Hazelnut oat biscuits 180 g",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerProductQuantity",
+          "value": "113",
+          "evidence": "D164 Comanda: 113",
+          "decision": "direct",
+          "note": "Use the positive ordered quantity, not a number or package size embedded in the generated product description."
+        },
+        {
+          "field": "buyerProductUOM",
+          "value": "BX",
+          "evidence": "D9 Unitate: BX",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "quantityUnit",
+          "value": "CASE",
+          "evidence": "D9 Unitate: BX",
+          "decision": "normalized",
+          "note": "BX denotes boxes; the v1 unit mapping groups boxes under CASE. Do not multiply by a product's package size."
+        },
+        {
+          "field": "buyerUnitPrice",
+          "value": "94.24",
+          "evidence": "K164 Preț unitar: 94.24",
+          "decision": "direct",
+          "note": ""
+        },
+        {
+          "field": "buyerDeliveryDate",
+          "value": null,
+          "evidence": null,
+          "decision": "role_not_established",
+          "note": "No requested delivery date is explicitly attached to this line. Order-level delivery/service dates are context only under v1; do not inherit them into the line.",
+          "relatedEvidence": [
+            "ORDER!C2 Requested delivery date: 2026-08-04"
+          ]
+        }
+      ]
+    }
+  ],
+  "lineSelection": {
+    "note": "Select every row with an explicit positive ordered quantity, preserving input order. Exclude catalog rows with [blank] ordered quantity.",
+    "orderedLineCount": 11,
+    "excludedCatalogRowCount": 146,
+    "excludedRowExamples": [
+      {
+        "evidence": "ORDER!B11 Cod produs: 019379 | C11 Nume produs: Milk chocolate 180 g | D11 Comanda: [blank] | D9 Unitate: BX | K11 Preț unitar: 57.30",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      },
+      {
+        "evidence": "ORDER!B12 Cod produs: 0980030 | C12 Nume produs: Salted rice cakes 12 x 10 g | D12 Comanda: [blank] | D9 Unitate: BX | K12 Preț unitar: 57.30",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      },
+      {
+        "evidence": "ORDER!B14 Cod produs: 0161275 | C14 Nume produs: Apricot nectar 750 ml | D14 Comanda: [blank] | D9 Unitate: BX | K14 Preț unitar: 12.32",
+        "note": "The ordered quantity is [blank]; this catalog row contributes no lineItems entry even when product details or price are present."
+      }
+    ]
+  },
+  "distractors": [
+    {
+      "evidence": "ORDER!C2 Requested delivery date: 2026-08-04",
+      "note": "This order-level delivery/service date is not the PO issue date and is not explicitly tied to a line. Do not substitute it for purchaseOrderDateTime or inherit it into buyerDeliveryDate."
+    }
+  ]
+}

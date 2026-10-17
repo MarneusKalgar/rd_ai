@@ -1,0 +1,121 @@
+{
+  "purchaseOrderNumber": null,
+  "purchaseOrderDateTime": "2026-07-31",
+  "buyerName": "Brackenmere Retail Ltd",
+  "shipToInfo": null,
+  "paymentTerms": null,
+  "buyerCurrency": "RON",
+  "totalValue": "59280.15",
+  "lineItems": [
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Black tea 25 x 1.5 g",
+      "buyerProductQuantity": "50",
+      "buyerProductUOM": "BX",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": "21.29",
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Mixed beans 150 g",
+      "buyerProductQuantity": "147",
+      "buyerProductUOM": "BX",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": "4.78",
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Durum farfalle 200 g",
+      "buyerProductQuantity": "74",
+      "buyerProductUOM": "BX",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": "11.71",
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Lemon balm tea 50 x 2 g",
+      "buyerProductQuantity": "104",
+      "buyerProductUOM": "BX",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": "46.45",
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Chamomile tea 20 x 2 g",
+      "buyerProductQuantity": "5",
+      "buyerProductUOM": "BX",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": "94.28",
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Caramel chocolate 12 x 20 g",
+      "buyerProductQuantity": "155",
+      "buyerProductUOM": "BX",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": "89.45",
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Apricot preserve 300 g",
+      "buyerProductQuantity": "50",
+      "buyerProductUOM": "BX",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": "88.15",
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Plum preserve 6 x 40 g",
+      "buyerProductQuantity": "147",
+      "buyerProductUOM": "BX",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": "59.60",
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Blueberry preserve 400 g",
+      "buyerProductQuantity": "147",
+      "buyerProductUOM": "BX",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": "59.60",
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Cinnamon oat biscuits 6 x 40 g",
+      "buyerProductQuantity": "52",
+      "buyerProductUOM": "BX",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": "94.24",
+      "buyerDeliveryDate": null
+    },
+    {
+      "purchaseOrderLineNumber": null,
+      "buyerProductIdentifier": null,
+      "buyerProductName": "Hazelnut oat biscuits 180 g",
+      "buyerProductQuantity": "113",
+      "buyerProductUOM": "BX",
+      "quantityUnit": "CASE",
+      "buyerUnitPrice": "94.24",
+      "buyerDeliveryDate": null
+    }
+  ]
+}
