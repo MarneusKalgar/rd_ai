@@ -8,6 +8,9 @@ model with a local model against the same extraction contract. Its v1
 configuration/settings, prompts, retries, results and the comparison report
 remain to be implemented.
 
+Reviews follow the repository's [shared process](../docs/review-process.md) and
+the [HW-01 checklist](docs/review-checklist.md) for relevant domain concerns.
+
 ## Check the contract in Docker
 
 Prerequisites: Docker Desktop with Compose, and Make. No host Python, uv,

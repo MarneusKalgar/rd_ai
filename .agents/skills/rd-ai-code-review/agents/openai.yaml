@@ -1,0 +1,3 @@
+interface:
+  display_name: "rd_ai Code Review"
+  short_description: "Review homework requirements and correctness"

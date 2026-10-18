@@ -18,6 +18,13 @@ typing, docstrings, constants, module organization and test layout.
 `CLAUDE.md` is a relative symlink to this file. Edit `AGENTS.md` to update shared
 agent guidance; preserve the symlink rather than maintaining another copy.
 
+## Reviews
+
+Use the repository's `rd-ai-code-review` skill for review requests. Follow
+[the review process](docs/review-process.md) for scope, evidence, Docker
+verification and reporting. Keep repository files unchanged during review;
+put any focused mutation or reproduction in a disposable copy.
+
 ## Contracts and approved data
 
 - The authoritative PO extraction contract is
@@ -58,6 +65,7 @@ agent guidance; preserve the symlink rather than maintaining another copy.
   artifacts belong in the submission dataset.
 - `.agents/` contains local inputs and planning/history material; `data/private/`
   contains private preparation outputs. These are not reviewer prerequisites.
+- `.agents/skills/` contains versioned repository workflows.
 - `tools/po-data-prep/` is an ignored, one-off local utility. Do not add it to
   Git or import it into the homework service.
 - Never commit API keys or credentials. Keep actual secrets in ignored local

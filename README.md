@@ -9,9 +9,15 @@ entrypoint is reserved for the reviewer-facing HW run once that service exists.
 | [`hw-01/`](hw-01/README.md) | HW-01 contract, runtime validation and Docker checks; model execution and evaluation follow. |
 | [`hw-01/data/`](hw-01/data/README.md) | Frozen neutral input texts, reviewed gold objects, and dataset provenance. |
 | [`docs/coding-conventions.md`](docs/coding-conventions.md) | Shared coding conventions for contributors and agents. |
+| [`docs/review-process.md`](docs/review-process.md) | Review scope, evidence, verification and reporting rules. |
 
 Agent workflow guidance lives in [`AGENTS.md`](AGENTS.md); `CLAUDE.md` links to
 the same file.
+
+For code review, use the repository's
+[`rd-ai-code-review`](.agents/skills/rd-ai-code-review/SKILL.md) skill. It checks
+requirements, correctness and conventions, with Docker verification and
+disposable reproductions where useful.
 
 ## Current status
 
