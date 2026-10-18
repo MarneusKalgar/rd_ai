@@ -1,13 +1,14 @@
 import json
+import shutil
 from pathlib import Path
-from typing import cast
+from typing import Final, cast
 
 import pytest
 
 from hw01.extraction import ExtractionContract
 from hw01.extraction.validation import JsonObject
 
-PROJECT_DIR = Path(__file__).resolve().parents[1]
+PROJECT_DIR: Final[Path] = Path(__file__).resolve().parents[1]
 
 
 @pytest.fixture(scope="session")
@@ -36,3 +37,18 @@ def first_line(value: JsonObject) -> JsonObject:
     assert isinstance(lines[0], dict)
 
     return lines[0]
+
+
+@pytest.fixture
+def project_copy(tmp_path: Path) -> Path:
+    """Copy approved schema and gold artifacts for isolated tampering tests."""
+
+    project = tmp_path / "project"
+    data_dir = project / "data"
+    data_dir.mkdir(parents=True)
+
+    shutil.copytree(PROJECT_DIR / "schemas", project / "schemas")
+    shutil.copytree(PROJECT_DIR / "data/gold", data_dir / "gold")
+    shutil.copyfile(PROJECT_DIR / "data/manifest.json", data_dir / "manifest.json")
+
+    return project

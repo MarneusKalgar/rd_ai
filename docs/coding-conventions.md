@@ -125,6 +125,16 @@ SCHEMA_DIALECT: Final[str] = (
 - Name the result before asserting on it; avoid nested calls in assertions.
 - Test behavior and meaningful regression risks rather than implementation
   details, spacing, comments or copies of static configuration.
+- Start rejection cases from known-valid data and introduce a specific defect.
+  Check the failure's stage, keyword and affected path where relevant, rather
+  than accepting any failure as evidence for the intended rule.
+- Pair important rejection paths with successful cases. Check both exit status
+  and output for CLI commands, including the real process entrypoint.
+- Keep expected results independent of the implementation under test. Exercise
+  artifact checks with changed bytes and validation with invalid contents.
+- When auditing test sensitivity, try a bounded set of deliberate defects in
+  disposable copies. Report which defects the tests detect; a passing suite or
+  a mutation probe does not establish complete correctness.
 - Run the homework's documented checks in Docker. For HW-01, use
   `make hw01-check` from the repository root.
 - HW-01's enforceable lint, formatting and type rules are configured in

@@ -2,7 +2,7 @@ import hashlib
 import json
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any
+from typing import Any, Final, Never
 
 import pytest
 from conftest import PROJECT_DIR, first_line
@@ -10,9 +10,9 @@ from conftest import PROJECT_DIR, first_line
 from hw01.extraction import ContractLoadError, ExtractionContract
 from hw01.extraction.validation import JsonObject, JsonValue
 
-MANIFEST = json.loads((PROJECT_DIR / "data/manifest.json").read_text())
-GOLD_CASES = MANIFEST["cases"]
-GOLD_CASE_IDS = [case["inputId"] for case in GOLD_CASES]
+MANIFEST: Final[dict[str, Any]] = json.loads((PROJECT_DIR / "data/manifest.json").read_text())
+GOLD_CASES: Final[list[dict[str, Any]]] = MANIFEST["cases"]
+GOLD_CASE_IDS: Final[list[str]] = [case["inputId"] for case in GOLD_CASES]
 
 
 @pytest.mark.parametrize(
@@ -75,7 +75,10 @@ def test_attempt_metadata_is_rejected_inside_extraction_objects(
     result = contract.validate_json(json.dumps(gold))
 
     assert not result.is_valid
+    assert len(result.issues) == 1
+    assert result.issues[0].stage == "schema"
     assert result.issues[0].keyword == "additionalProperties"
+    assert result.issues[0].instance_path == ("" if scope == "header" else "/lineItems/0")
 
 
 @pytest.mark.parametrize("value", [None, "TONNE", "kg", 1])
@@ -89,6 +92,14 @@ def test_unit_enum_rejects_null_unknown_categories_and_wrong_types(
     result = contract.validate_json(json.dumps(gold))
 
     assert not result.is_valid
+    expected_keywords = {"type", "enum"} if value is None or value == 1 else {"enum"}
+    actual_keywords = {issue.keyword for issue in result.issues}
+
+    assert actual_keywords == expected_keywords
+
+    for issue in result.issues:
+        assert issue.stage == "schema"
+        assert issue.instance_path == "/lineItems/0/quantityUnit"
 
 
 @pytest.mark.parametrize(
@@ -107,8 +118,18 @@ def test_date_format_checks_real_calendar_dates_on_headers_and_lines(
     result = contract.validate_json(json.dumps(gold))
 
     assert not result.is_valid
+    assert len(result.issues) == 1
+    assert result.issues[0].stage == "schema"
     assert result.issues[0].keyword == "format"
-    assert result.issues[0].schema_path is not None
+    expected_path = f"/{field}" if field == "purchaseOrderDateTime" else f"/lineItems/0/{field}"
+    expected_schema_path = (
+        f"/properties/{field}/format"
+        if field == "purchaseOrderDateTime"
+        else f"/properties/lineItems/items/properties/{field}/format"
+    )
+
+    assert result.issues[0].instance_path == expected_path
+    assert result.issues[0].schema_path == expected_schema_path
 
 
 def test_valid_leap_day_and_explicit_missing_scalars_are_accepted(
@@ -143,19 +164,40 @@ def test_amounts_and_quantities_must_be_decimal_strings_without_coercion(
     assert not result.is_valid
     assert result.value is None
     assert target[field] == value
+    assert len(result.issues) == 1
+    expected_keyword = "pattern" if isinstance(value, str) else "type"
+    expected_path = f"/{field}" if field == "totalValue" else f"/lineItems/0/{field}"
+
+    assert result.issues[0].stage == "schema"
+    assert result.issues[0].keyword == expected_keyword
+    assert result.issues[0].instance_path == expected_path
 
 
-@pytest.mark.parametrize("value", [[], None, {}, [None]])
+@pytest.mark.parametrize(
+    "value,expected_keyword,expected_path",
+    [
+        ([], "minItems", "/lineItems"),
+        (None, "type", "/lineItems"),
+        ({}, "type", "/lineItems"),
+        ([None], "type", "/lineItems/0"),
+    ],
+)
 def test_lines_must_be_a_nonempty_array_of_complete_objects(
     contract: ExtractionContract,
     gold: JsonObject,
     value: JsonValue,
+    expected_keyword: str,
+    expected_path: str,
 ) -> None:
     gold["lineItems"] = value
 
     result = contract.validate_json(json.dumps(gold))
 
     assert not result.is_valid
+    assert len(result.issues) == 1
+    assert result.issues[0].stage == "schema"
+    assert result.issues[0].keyword == expected_keyword
+    assert result.issues[0].instance_path == expected_path
 
 
 @pytest.mark.parametrize("raw", ["[]", "null", '"a purchase order"', "123"])
@@ -201,6 +243,31 @@ def test_syntax_errors_keep_line_and_column_for_correction(contract: ExtractionC
 
     assert result.issues[0].line == 3
     assert result.issues[0].column == 1
+
+
+def test_json_decoder_nesting_failure_returns_evidence_instead_of_escaping(
+    contract: ExtractionContract,
+    gold: JsonObject,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    raw_response = json.dumps(gold)
+
+    def fail_decoding(response: str) -> Never:
+        raise RecursionError("decoder nesting limit reached")
+
+    # Decoder nesting thresholds vary across Python runtimes. Exercise its
+    # failure boundary without depending on a particular stack-depth limit.
+    monkeypatch.setattr("hw01.extraction.contract.parse_json", fail_decoding)
+
+    result = contract.validate_json(raw_response)
+
+    assert not result.is_valid
+    assert result.value is None
+    assert result.raw_response == raw_response
+    assert len(result.issues) == 1
+    assert result.issues[0].stage == "json"
+    assert result.issues[0].keyword == "nesting"
+    assert result.issues[0].message == "JSON nesting exceeds the decoder limit"
 
 
 def test_decoder_number_limits_are_model_failures_not_uncaught_exceptions(
@@ -268,13 +335,19 @@ def test_adapter_schema_copies_cannot_weaken_the_shared_validator(
     provider_schema["additionalProperties"] = True
     provider_schema["properties"]["lineItems"]["items"]["required"].clear()
     gold["model"] = "metadata"
+    del first_line(gold)["buyerProductIdentifier"]
 
     result = contract.validate_json(json.dumps(gold))
     unchanged_schema = contract.schema_for_provider()
 
     assert not result.is_valid
-    assert unchanged_schema["additionalProperties"] is False
-    assert unchanged_schema["properties"]["lineItems"]["items"]["required"]
+    violations = {(issue.keyword, issue.instance_path) for issue in result.issues}
+    original_schema = json.loads(
+        (PROJECT_DIR / "schemas/purchase-order-extraction.v1.schema.json").read_text()
+    )
+
+    assert violations == {("additionalProperties", ""), ("required", "/lineItems/0")}
+    assert unchanged_schema == original_schema
 
 
 def test_contract_is_loaded_once_and_reloading_changed_bytes_fails(
@@ -305,4 +378,23 @@ def test_invalid_schema_with_matching_hash_is_a_setup_error(tmp_path: Path) -> N
     expected_sha256 = hashlib.sha256(data).hexdigest()
 
     with pytest.raises(ContractLoadError, match="Invalid extraction schema"):
+        ExtractionContract.load(path, expected_sha256=expected_sha256)
+
+
+@pytest.mark.parametrize("dialect", [None, "http://json-schema.org/draft-07/schema#"])
+def test_missing_or_wrong_dialect_is_rejected_even_with_a_matching_hash(
+    tmp_path: Path,
+    dialect: str | None,
+) -> None:
+    schema: dict[str, Any] = {"type": "object"}
+
+    if dialect is not None:
+        schema["$schema"] = dialect
+
+    path = tmp_path / "purchase-order-extraction.v1.schema.json"
+    schema_bytes = json.dumps(schema).encode("utf-8")
+    path.write_bytes(schema_bytes)
+    expected_sha256 = hashlib.sha256(schema_bytes).hexdigest()
+
+    with pytest.raises(ContractLoadError, match="must declare JSON Schema Draft 2020-12"):
         ExtractionContract.load(path, expected_sha256=expected_sha256)

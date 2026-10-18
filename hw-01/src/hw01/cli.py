@@ -11,9 +11,20 @@ from hw01.extraction import ContractLoadError, ExtractionContract
 from hw01.extraction.constants import SCHEMA_FILENAME
 
 GOLD_MANIFEST_FILENAME: Final[str] = "manifest.json"
+EXIT_SUCCESS: Final[int] = 0
+EXIT_VALIDATION_FAILURE: Final[int] = 1
+EXIT_SETUP_FAILURE: Final[int] = 2
 
 
 def read_checked(path: Path, expected_sha256: str) -> str:
+    """Read an approved UTF-8 artifact only if its bytes match the expected hash.
+
+    Raises:
+        ContractLoadError: Artifact bytes differ from the approved hash.
+        OSError: The file cannot be read.
+        UnicodeError: The verified bytes are not UTF-8 text.
+    """
+
     data = path.read_bytes()
     actual_sha256 = hashlib.sha256(data).hexdigest()
 
@@ -24,6 +35,17 @@ def read_checked(path: Path, expected_sha256: str) -> str:
 
 
 def validate_gold(project_dir: Path, contract: ExtractionContract, manifest: dict[str, Any]) -> int:
+    """Verify and validate each gold artifact, then print aggregate JSON evidence.
+
+    Returns:
+        Success when every case passes, otherwise a validation-failure status.
+
+    Raises:
+        ContractLoadError: A gold artifact differs from its manifest hash.
+        OSError: A gold artifact cannot be read.
+        UnicodeError: An artifact is not UTF-8 text.
+    """
+
     failures: list[dict[str, Any]] = []
 
     for case in manifest["cases"]:
@@ -57,12 +79,22 @@ def validate_gold(project_dir: Path, contract: ExtractionContract, manifest: dic
     print(formatted_summary)
 
     if failures:
-        return 1
+        return EXIT_VALIDATION_FAILURE
 
-    return 0
+    return EXIT_SUCCESS
 
 
 def main(argv: list[str] | None = None) -> int:
+    """Run offline validation and print a JSON outcome or setup error.
+
+    Args:
+        argv: Command arguments, or None to use the process arguments.
+
+    Returns:
+        Zero for success, one for invalid output, or two for setup/file errors.
+        Argument parsing uses argparse's standard SystemExit behavior.
+    """
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project-dir", type=Path, default=Path.cwd())
 
@@ -103,13 +135,13 @@ def main(argv: list[str] | None = None) -> int:
         print(formatted_outcome)
 
         if outcome.is_valid:
-            return 0
+            return EXIT_SUCCESS
 
-        return 1
+        return EXIT_VALIDATION_FAILURE
     except (OSError, ValueError, KeyError, TypeError) as error:
         error_report = {"setup_error": str(error)}
         formatted_error = json.dumps(error_report, ensure_ascii=False)
 
         print(formatted_error)
 
-        return 2
+        return EXIT_SETUP_FAILURE
