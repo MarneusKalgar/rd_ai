@@ -2,9 +2,37 @@
 
 HW-01 consumes reviewed customer-neutral text inputs and compares a provider
 model with a local model against the same extraction contract. Its v1
-[`schema`](schemas/purchase-order-extraction.v1.schema.json) and
-[`field rules`](docs/extraction-contract.md) are defined; model runners,
-prompts, results, and the comparison report remain to be implemented.
+[`schema`](schemas/purchase-order-extraction.v1.schema.json),
+[`field rules`](docs/extraction-contract.md) and
+[`runtime validator`](docs/runtime-validation.md) are implemented. Model adapters,
+configuration/settings, prompts, retries, results and the comparison report
+remain to be implemented.
+
+## Check the contract in Docker
+
+Prerequisites: Docker Desktop with Compose, and Make. No host Python, uv,
+model installation or API key is required for these offline checks. The first
+build downloads the pinned images and locked Python dependencies.
+
+From the repository root:
+
+```sh
+make hw01-check
+```
+
+This builds the HW image, runs Ruff lint/format checks, strict mypy checks and
+pytest, then validates all 10 frozen gold objects. From this directory,
+`make check` runs the same workflow. To validate only gold objects, use
+`make hw01-validate-gold` from the root or `make validate-gold` here.
+
+The image uses Python 3.14.8 and uv 0.12.11 pinned by image digest, with
+dependencies resolved in `uv.lock`. Checks run without a network, as a
+non-root user, with a read-only image filesystem and writable temporary
+storage. The build context contains only this HW's approved artifacts and
+source; it excludes private preparation data and tooling.
+
+These commands check the extraction boundary; they do not yet run the
+provider/local comparison required for final submission.
 
 ## Dataset status
 

@@ -13,3 +13,9 @@ data/private/
 # Python bytecode and interpreter caches.
 __pycache__/
 *.py[cod]
+
+# Local Python environments and check caches; the default workflow runs in Docker.
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

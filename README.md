@@ -6,14 +6,23 @@ entrypoint is reserved for the reviewer-facing HW run once that service exists.
 
 | Area | Responsibility |
 | --- | --- |
-| [`hw-01/`](hw-01/README.md) | HW-01 extraction contract and, later, model runners, prompts, measurements, and report. |
+| [`hw-01/`](hw-01/README.md) | HW-01 contract, runtime validation and Docker checks; model execution and evaluation follow. |
 | [`hw-01/data/`](hw-01/data/README.md) | Frozen neutral input texts, reviewed gold objects, and dataset provenance. |
+| [`docs/coding-conventions.md`](docs/coding-conventions.md) | Shared coding conventions for contributors and agents. |
+
+Agent workflow guidance lives in [`AGENTS.md`](AGENTS.md); `CLAUDE.md` links to
+the same file.
 
 ## Current status
 
 HW-01 has **30 approved neutral inputs and 10 human-approved gold
 objects** frozen under [`hw-01/data/`](hw-01/data/README.md). The minimum
 dataset counts are met. Model execution and comparison remain to be implemented.
+
+With Docker Desktop/Compose and Make installed, run `make hw01-check` for
+contract tests, lint, type checks and gold validation entirely inside Docker.
+No host Python or API key is required. This is a contract check, not yet the
+final model-comparison command.
 
 The dataset README describes its preparation, approval and evaluation limits.
 Original workbooks, private review material and the one-off preparation tool

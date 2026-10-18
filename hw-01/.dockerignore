@@ -1,0 +1,12 @@
+# Only the service source, check dependencies and approved dataset enter the image.
+*
+!pyproject.toml
+!uv.lock
+!src/
+!src/**
+!tests/
+!tests/**
+!schemas/
+!schemas/**
+!data/
+!data/**
