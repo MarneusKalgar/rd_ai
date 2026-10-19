@@ -1,3 +1,4 @@
+import hashlib
 import json
 import socket
 import subprocess
@@ -30,7 +31,24 @@ def test_offline_preflight_needs_no_key_and_makes_no_connections(
     assert result.mode == "offline"
     assert result.model_capabilities_verified is False
     assert result.experiment.selection.model_id == "local"
-    assert len(result.prompts[0].sha256) == 64
+    expected_prompt_hash = hashlib.sha256(
+        (project_copy / "prompts/v1.txt").read_bytes()
+    ).hexdigest()
+
+    assert result.prompts[0].sha256 == expected_prompt_hash
+
+
+def test_preflight_prompt_identity_changes_with_its_bytes(project_copy: Path) -> None:
+    baseline = preflight(project_copy)
+    prompt_path = project_copy / "prompts/v1.txt"
+    changed_prompt = b"Extract the order.\r\nKeep missing values null.\r\n"
+    prompt_path.write_bytes(changed_prompt)
+    expected_hash = hashlib.sha256(changed_prompt).hexdigest()
+
+    result = preflight(project_copy)
+
+    assert result.prompts[0].sha256 == expected_hash
+    assert result.prompts[0].sha256 != baseline.prompts[0].sha256
 
 
 @pytest.mark.parametrize("case", ["missing_prompt", "empty_prompt", "missing_config", "bad_config"])

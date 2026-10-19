@@ -1,4 +1,5 @@
 import json
+from dataclasses import replace
 from typing import Any
 
 import pytest
@@ -273,4 +274,119 @@ def test_sampling_id_cannot_disagree_with_recorded_parameters(
     run_data["sampling_id"] = "other-config"
 
     with pytest.raises(ValidationError, match="Sampling identity differs"):
+        RunRecord.model_validate(run_data, context={"contract": contract})
+
+
+@pytest.mark.parametrize(
+    "status,expected_error",
+    [
+        ("failed", "Failed runs require a failed final attempt"),
+        ("not_attempted", "Not-attempted runs require a reason and no attempts"),
+    ],
+)
+def test_unsuccessful_status_cannot_hide_a_valid_request(
+    run_data: dict[str, Any],
+    contract: ExtractionContract,
+    status: str,
+    expected_error: str,
+) -> None:
+    baseline = RunRecord.model_validate(run_data, context={"contract": contract})
+
+    assert baseline.status == "succeeded"
+
+    run_data.update(status=status, extraction=None, reason="Contradictory status")
+
+    with pytest.raises(ValidationError, match=expected_error):
+        RunRecord.model_validate(run_data, context={"contract": contract})
+
+
+@pytest.mark.parametrize("outcome", ["valid", "invalid"])
+def test_attempt_validation_issues_must_match_its_outcome(
+    run_data: dict[str, Any], contract: ExtractionContract, outcome: str
+) -> None:
+    attempt = run_data["attempts"][0]
+    invalid = contract.validate_json("{}")
+
+    if outcome == "valid":
+        attempt["issues"] = list(invalid.issues)
+    else:
+        attempt.update(outcome="invalid", raw_response="{}", issues=[])
+
+    with pytest.raises(ValidationError, match="Validation issues must agree"):
+        AttemptResult.model_validate(attempt)
+
+
+@pytest.mark.parametrize("field", ["message", "keyword", "instance_path"])
+def test_invalid_attempt_cannot_store_fabricated_validation_evidence(
+    run_data: dict[str, Any], contract: ExtractionContract, field: str
+) -> None:
+    invalid = contract.validate_json("{}")
+    run_data["attempts"][0].update(
+        outcome="invalid",
+        raw_response="{}",
+        issues=list(invalid.issues),
+    )
+    run_data.update(status="failed", extraction=None, reason="Invalid output")
+
+    baseline = RunRecord.model_validate(run_data, context={"contract": contract})
+
+    assert baseline.attempts[0].issues == list(invalid.issues)
+
+    original_issue = invalid.issues[0]
+
+    if field == "message":
+        fabricated_issue = replace(original_issue, message="Fabricated evidence")
+    elif field == "keyword":
+        fabricated_issue = replace(original_issue, keyword="fabricated_keyword")
+    else:
+        fabricated_issue = replace(original_issue, instance_path="/fabricated/path")
+
+    run_data["attempts"][0]["issues"][0] = fabricated_issue
+
+    with pytest.raises(ValidationError, match="Attempt issues disagree"):
+        RunRecord.model_validate(run_data, context={"contract": contract})
+
+
+@pytest.mark.parametrize(
+    "total_field,incomplete_total",
+    [
+        ("total_input_tokens", 10),
+        ("total_output_tokens", 20),
+        ("total_cost_usd", 0.5),
+    ],
+)
+def test_known_accounting_includes_failed_requests(
+    run_data: dict[str, Any],
+    contract: ExtractionContract,
+    total_field: str,
+    incomplete_total: int | float,
+) -> None:
+    run_data.update(model_id="provider", model_name="candidate-provider", runtime="openrouter")
+    final_attempt = run_data["attempts"][0]
+    final_attempt.update(
+        model_id="provider", model_name="candidate-provider", runtime="openrouter", cost_usd=0.5
+    )
+    failed_attempt = final_attempt.copy()
+    failed_attempt.update(
+        outcome="transport_error",
+        raw_response=None,
+        error="Timeout with known usage",
+        duration_ms=1.0,
+        input_tokens=1,
+        output_tokens=2,
+        cost_usd=0.25,
+    )
+    final_attempt["number"] = 2
+    run_data["attempts"].insert(0, failed_attempt)
+    run_data.update(total_input_tokens=11, total_output_tokens=22, total_cost_usd=0.75)
+
+    baseline = RunRecord.model_validate(run_data, context={"contract": contract})
+
+    assert baseline.total_input_tokens == 11
+    assert baseline.total_output_tokens == 22
+    assert baseline.total_cost_usd == 0.75
+
+    run_data[total_field] = incomplete_total
+
+    with pytest.raises(ValidationError, match="Run totals must include all physical requests"):
         RunRecord.model_validate(run_data, context={"contract": contract})

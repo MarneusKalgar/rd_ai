@@ -62,6 +62,9 @@ def _check_approvals(corpus: CorpusManifest, gold: GoldManifest) -> None:
     if corpus.grouping_rule != gold.grouping_rule:
         raise CorpusError("Corpus and gold grouping rules differ")
 
+    if gold.approval.method != GOLD_PAIR_APPROVAL:
+        raise CorpusError("Gold approval must approve candidate pairs")
+
     if gold.approval.schema_sha256 != gold.schema_sha256:
         raise CorpusError("Gold approval does not name the current schema hash")
 

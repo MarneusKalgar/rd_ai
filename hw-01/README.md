@@ -12,6 +12,8 @@ variants, saved experiment results and the comparison report remain pending.
 
 Reviews follow the repository's [shared process](../docs/review-process.md) and
 the [HW-01 checklist](docs/review-checklist.md) for relevant domain concerns.
+The [testing strategy](docs/testing-strategy.md) defines test levels, execution
+boundaries and their implementation-plan points.
 
 ## Project layout
 

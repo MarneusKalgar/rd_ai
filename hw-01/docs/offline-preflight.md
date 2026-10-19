@@ -64,6 +64,14 @@ cryptographic signature or substitute for human approval. Tests change copies
 and rehash them when testing semantic errors, so an unrelated hash failure
 cannot conceal a missing validation rule.
 
+Gold-manifest approval must explicitly approve candidate input/JSON pairs;
+approval of neutral text alone does not approve gold labels. Regression tests
+exercise approval methods and schema links, frozen counts, annotation identity,
+gold line counts and directory isolation after hash checks pass. Per-input
+layout groups and prompt hashes are compared with their actual manifest values
+and file bytes. Record tests reject contradictory statuses and fabricated
+validation evidence, and include known failed-request usage/cost in totals.
+
 `load_corpus()` returns model-facing `CorpusInput` objects containing text and
 provenance. Approved gold dictionaries are held separately in `LoadedCorpus.gold`.
 Annotations are checked but not included in model input objects. The remaining

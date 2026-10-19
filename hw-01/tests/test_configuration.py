@@ -177,3 +177,27 @@ def test_settings_errors_reject_bad_values_without_disclosing_input(
         ApplicationSettings.load(tmp_path)
 
     assert "private-marker" not in str(captured.value)
+
+
+@pytest.mark.parametrize("field", ["openrouter_base_url", "ollama_base_url"])
+@pytest.mark.parametrize("suffix", ["?token=private-url-marker", "#private-url-marker"])
+def test_service_urls_reject_queries_and_fragments(tmp_path: Path, field: str, suffix: str) -> None:
+    environment_name = f"HW01_{field.upper()}"
+    environment_file = tmp_path / ".env"
+    base_url = "http://localhost:11434/"
+    environment_file.write_text(f"{environment_name}={base_url}")
+
+    baseline = ApplicationSettings.load(tmp_path)
+
+    assert str(getattr(baseline, field)) == base_url
+
+    environment_file.write_text(f"{environment_name}={base_url}{suffix}")
+
+    with pytest.raises(ValidationError, match="queries or fragments") as captured:
+        ApplicationSettings.load(tmp_path)
+
+    errors = captured.value.errors(include_input=False)
+
+    assert errors[0]["loc"] == (field,)
+    assert errors[0]["type"] == "value_error"
+    assert "private-url-marker" not in str(captured.value)

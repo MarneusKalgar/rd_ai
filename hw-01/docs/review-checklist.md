@@ -23,4 +23,6 @@ a deliberately partial slice.
 Use the commands under [Check the contract in Docker](../README.md#check-the-contract-in-docker).
 That baseline verifies the current contract implementation and approved gold
 compatibility. It does not run model adapters or establish extraction accuracy.
+Use the [testing strategy](testing-strategy.md) to distinguish component,
+integration, CLI/system and live-model evidence for the affected plan points.
 Follow the shared review process for any focused reproduction or mutation.
