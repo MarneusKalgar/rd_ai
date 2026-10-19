@@ -1,0 +1,183 @@
+# Model adapters — plan section 6.3
+
+The `inference/` package provides one typed interface for OpenRouter and Ollama.
+Both receive the same neutral source, rendered instructions, authoritative PO
+schema and explicit sampling/output limits. Neither adapter decides whether the
+returned text is a valid purchase order.
+
+## Ownership and request flow
+
+```mermaid
+flowchart TD
+    setup["Explicit metadata probes: no inference or model pull"] --> identity["Verified endpoint or installed runtime identity"]
+    contract["ExtractionContract: independent schema copy"] --> request["GenerationRequest: instructions, source, schema, sampling, timeout"]
+    identity --> adapter["OpenRouterAdapter or OllamaAdapter"]
+    request --> adapter
+    adapter --> http["One non-streaming HTTP request; retries and redirects disabled"]
+    http --> response["ModelResponse: text, finish state, identity, available usage"]
+    http --> failure["ModelTransportError: typed failure and available raw body"]
+    response --> coordinator["Section 6.4: validation, retries, correction and budget"]
+    failure --> coordinator
+```
+
+`GenerationRequest.from_contract()` obtains a deep copy using
+`schema_for_provider()`. Request serialization makes no schema modifications.
+Both APIs receive the full schema in their structured-output field and in the
+system message. The source is a separate user message. Expected answers,
+annotations and original workbooks are not adapter inputs.
+
+`ModelAdapter` describes `identity`, `generate(request)` and `close()`. Close an
+adapter in `finally` when its owner finishes. Metadata probes are separate calls
+and never occur implicitly inside `generate()`.
+
+| Common setting | OpenRouter | Ollama |
+| --- | --- | --- |
+| Schema | `response_format.json_schema`, `strict: true` | `format` |
+| Temperature | `temperature` | `options.temperature` |
+| Nucleus sampling | `top_p` | `options.top_p` |
+| Output limit | `max_tokens` | `options.num_predict` |
+| Streaming | `stream: false` | `stream: false` |
+
+OpenRouter restricts `provider.only` to the checked slug, disables fallback
+routing, and requires support for supplied parameters. No response-healing
+plugin is enabled. Requests above the catalog's output limit fail before HTTP.
+The shared HTTP client ignores host proxy settings and uses HTTPX with transport
+retries set to zero. Retry policy belongs to section 6.4.
+
+## Returned evidence
+
+`ModelResponse` keeps model text and the full HTTP envelope, requested identity,
+reported model/provider, finish reasons, available request ID, elapsed HTTP time,
+tokens and cost. Ollama also supplies available load/total timings in nanoseconds.
+HTTP elapsed time and server inference/load timings have different meanings.
+
+Internal categories are `ResponseKind` and `FailureKind` string enums. Python
+construction under strict validation requires members such as
+`ResponseKind.COMPLETED` or `FailureKind.TIMEOUT`. `model_dump()` retains enum
+members; JSON serialization (`model_dump_json()` or `model_dump(mode="json")`)
+keeps the existing string values. Reload serialized JSON with
+`model_validate_json()` to restore the typed members.
+
+Provider finish reasons remain nullable strings so unknown future values are
+retained. Recognized values have `Final` constants in `finish_reasons.py`.
+Classification uses explicit ordered guards: errors/refusals take precedence
+over truncation and completion. An unknown finish reason cannot establish completion.
+
+- `completed` means an ordinary completed generation, including empty or invalid
+  JSON text. The coordinator still has to call `ExtractionContract.validate_json()`.
+- Refusal, output truncation, missing content, incomplete generation and explicit
+  choice-level errors remain separate states. Parseable truncated text is still
+  truncated. Ollama's thinking field is retained in the envelope, not substituted
+  for the answer. Natural-language refusals are not guessed by the adapter.
+- Missing usage or OpenRouter cost is `None`; actual zero is retained. Local
+  Ollama API cost is recorded as zero, excluding hardware/electricity costs.
+- Malformed envelopes, HTTP errors and connection/timeouts raise
+  `ModelTransportError` with typed `FailureEvidence`. Available raw bodies and
+  `Retry-After` are retained. An OpenRouter error inside HTTP 200 is also a failure.
+  Status-based retryability is evidence for the future coordinator, not a retry.
+- The key never appears in request logs or normal representations. If a server
+  reflects the known credential in its body/error, that occurrence is replaced
+  with `[REDACTED]` and `credentials_redacted` is set. This explicit exception
+  takes precedence over exact text preservation. Other content is not trimmed,
+  repaired or coerced.
+
+Requested identity and reported identity are separate: an OpenRouter response
+can report a dated upstream model name. A missing reported provider stays unknown.
+The local adapter requires the response model to match its verified installed tag.
+
+## Model verification recorded on 2026-10-19
+
+These are public metadata observations, not inference measurements. Recheck
+metadata/prices before measured execution. The endpoint snapshot is not a runtime
+cache and offline preflight still reports model capabilities as unverified.
+
+### Provider selection
+
+The user approved **`google/gemini-3.8-flash`** through **`google-ai-studio`**.
+The [OpenRouter endpoint catalog](https://openrouter.ai/api/v1/models/google/gemini-3.8-flash/endpoints)
+advertised `temperature`, `top_p`, `max_tokens`, `response_format` and
+`structured_outputs`, with a 65,536-token output limit. Its standard endpoint
+listed $0.75 input and $3.75 output per million tokens. Thinking tokens can affect
+billed output. These rates were already discounted in the listed prices.
+
+The earlier `openai/gpt-6-luna` candidate was rejected for this experiment:
+its [endpoint catalog](https://openrouter.ai/api/v1/models/openai/gpt-6-luna/endpoints)
+did not advertise `temperature` or `top_p`. The adapter does not silently omit
+those required experiment settings. The approved configuration now pins Gemini's
+serving provider. No paid generation was performed during this implementation.
+
+`verify_openrouter()` fetches public metadata without credentials and checks the
+configured model, exact provider slug and required parameter set. Constructing
+the generation adapter additionally requires `OPENROUTER_API_KEY` from settings.
+Catalog structured-output support does not prove acceptance of every frozen
+schema keyword. That requires the live smoke run in section 6.6.
+
+### Local selection
+
+The public [Gemma tag](https://ollama.com/library/gemma4:e4b-it-qat) exists.
+Reading its [registry manifest](https://registry.ollama.ai/v2/library/gemma4/manifests/e4b-it-qat)
+without downloading layers produced this SHA-256 over the returned manifest bytes:
+
+```text
+ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f
+```
+
+Its listed layers totaled **6,146,501,256 bytes** (~6.15 GB), including the model
+and projector. This is a registry observation; it is not a claim that a model is
+installed or that this amount equals runtime memory use.
+
+`verify_ollama()` calls `/api/version`, `/api/tags` and `/api/show`, requires the
+configured tag and text-completion capability, and records the installed digest
+and server version. It never pulls a missing model. Native mode must be explicit
+and receives the distinct `ollama-native` identity; otherwise `ollama-docker` is
+recorded. Native mode also requires the explicitly configured host endpoint;
+the flag does not install a runtime or change a URL. Container image identity
+and comparison with the registry digest belong
+to service initialization in section 6.5.
+
+Actual Ollama initialization and live structured-output verification remain
+pending sections 6.5–6.6. No host runtime or model weights were installed here.
+
+## Verification and next steps
+
+`make hw01-check` runs the offline suite. Adapter tests exercise both real adapter
+classes through HTTPX's controlled transport and exercise the production HTTP
+transport against a loopback server. They cover request/schema/sampling fidelity,
+finish/error states, exact text, unknown versus zero usage, malformed envelopes,
+metadata identity, reflected-secret redaction and one request per generation.
+No test uses the user's key, paid inference, a live local model or private sources.
+
+The initial section 6.3 verification on 2026-10-19 passed all 301 tests, Ruff,
+strict mypy, 10 gold
+validations and the 30-input offline preflight. Eight deliberate defects in
+disposable copies were all detected: provider fallback, dropped provider
+`top_p`, weakened schema mode, dropped local output limit, trimmed model text,
+accepted truncation, invented zero cost and followed redirects. These focused
+probes establish sensitivity to those defects, not complete correctness.
+
+After the enum refactor, the full Docker gate passed 322 tests, Ruff, strict
+mypy, gold validation and offline preflight. A subsequent focused audit passed
+all 109 adapter tests but exposed regression-test gaps: only five of 15 selected
+mutations were detected by the committed suite. Temporary focused tests detected
+the other ten; they also passed against the unchanged implementation.
+
+Follow-up coverage should exercise connection-level retries, alternate valid
+model/output settings, partially populated usage, each required endpoint
+parameter, discovery after unrelated Ollama tags, the inclusive output-limit
+boundary, and an error finish reason without a choice-level error object.
+These are test-sensitivity gaps, not demonstrated runtime defects. Neither audit
+used paid inference or a live model.
+
+Section 6.4 must add the shared coordinator, bounded retries/correction, deadlines,
+dependency stopping and cumulative budget reservations. Sections 6.5–6.6 add
+Docker model services, persistence, CLI execution and the three-document live
+smoke. There is no inference CLI or full comparison command in this slice.
+
+Protocol references:
+
+- [OpenRouter structured outputs](https://openrouter.ai/docs/guides/features/structured-outputs),
+  [provider routing](https://openrouter.ai/docs/guides/routing/provider-selection)
+  and [API response format](https://openrouter.ai/docs/api_reference/overview).
+- [Ollama structured outputs](https://docs.ollama.com/capabilities/structured-outputs),
+  [chat](https://docs.ollama.com/api/chat) and [installed models](https://docs.ollama.com/api/tags).
+- [HTTPX transport configuration](https://www.python-httpx.org/advanced/transports/).

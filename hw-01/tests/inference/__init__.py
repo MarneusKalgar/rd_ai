@@ -1,0 +1,1 @@
+"""Offline model-adapter tests."""

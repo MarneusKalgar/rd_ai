@@ -2,7 +2,8 @@ version: experiment-v1
 models:
   - id: provider
     backend: openrouter
-    model: openai/gpt-6-luna
+    model: google/gemini-3.8-flash
+    serving_provider: google-ai-studio
   - id: local
     backend: ollama
     model: gemma4:e4b-it-qat

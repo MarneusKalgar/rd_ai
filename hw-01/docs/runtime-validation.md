@@ -28,14 +28,14 @@ flowchart TD
     name -->|No| error
     schema -->|No| error
     ready --> copy["schema_for_provider: independent deep copy"]
-    copy -.-> adapter["Future provider/local adapters: point 6"]
+    copy -.-> adapter["OpenRouter/Ollama requests: section 6.3"]
 ```
 
-Both future adapters receive this same contract instance. Use
-`schema_for_provider()` to obtain a fresh schema dictionary for request
-construction. Adapter-specific shaping operates on that copy; changing it
-cannot weaken the validator's rules. Provider adapters are part of point 6
-and are not implemented by this slice.
+Both [model adapters](model-adapters.md) receive schema copies from the run's
+contract through `GenerationRequest.from_contract()`. Its call to
+`schema_for_provider()` obtains a fresh dictionary for request construction;
+changing that copy cannot weaken the validator's rules. The shared coordinator
+that supplies requests and validates returned text remains section 6.4 scope.
 
 ```python
 import json
@@ -90,7 +90,7 @@ flowchart TD
 ```
 
 The diagram starts with an existing response string. Point 5 makes no model
-calls; future adapters will supply that string. Setup failures raise
+calls; section 6.3 adapters supply that string. Setup failures raise
 `ContractLoadError`, while response validation failures return an outcome.
 
 The `ValidationOutcome` contains:
@@ -107,7 +107,7 @@ Each issue records a `json` or `schema` stage, keyword, message, instance
 JSON Pointer and optional schema JSON Pointer. The empty pointer identifies
 the document root. Syntax errors also identify line and column. These are
 ordinary dataclasses that can be serialized with `dataclasses.asdict` for
-future attempt records; they do not redefine or add fields to the PO object.
+attempt records; they do not redefine or add fields to the PO object.
 The caller owns retries and the one permitted correction attempt.
 
 Schema validation checks structure and representation. It cannot establish

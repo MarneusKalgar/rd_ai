@@ -28,7 +28,7 @@ status is maintained in the [HW README](../README.md).
 
 ## Current coverage
 
-The implemented contract and sections 6.1–6.2 already exercise several levels:
+The implemented contract and sections 6.1–6.3 already exercise several levels:
 
 - [Contract tests](../tests/test_contract.py) and
   [record tests](../tests/test_records.py) cover validation rules, evidence and
@@ -40,11 +40,15 @@ The implemented contract and sections 6.1–6.2 already exercise several levels:
   disposable copies to verify cross-module behavior.
 - [CLI tests](../tests/test_cli.py) and the preflight subprocess test invoke
   `python -m extraction_service`, checking process output and exit status.
+- [Adapter tests](../tests/inference/) exercise both production adapters through
+  controlled HTTP responses, and the production HTTP client against a loopback
+  server. [Adapter documentation](model-adapters.md) records tested boundaries,
+  public metadata observations and remaining live verification.
 
 A test file can contain more than one level. Executing pytest in Docker defines
 its runtime environment; the components and boundaries exercised determine its
 level. Complete extraction workflows, live model tests and scoring tests remain
-pending with sections 6.3–8.
+pending with sections 6.4–8.
 
 ## 1. Unit and component tests
 

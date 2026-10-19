@@ -5,9 +5,10 @@ model with a local model against the same extraction contract. Its v1
 [`schema`](schemas/purchase-order-extraction.v1.schema.json),
 [`field rules`](docs/extraction-contract.md) and
 [`runtime validator`](docs/runtime-validation.md), strict configuration/settings,
-attempt/run records and [offline preflight](docs/offline-preflight.md) are
-implemented. The initial v1 prompt/configuration exists for preflight. Model
-adapters, execution/retries, runtime budget enforcement, measured prompt
+attempt/run records, [offline preflight](docs/offline-preflight.md) and
+[OpenRouter/Ollama adapters](docs/model-adapters.md) are implemented. The initial
+v1 prompt/configuration exists for preflight. Execution/retries, runtime budget
+enforcement, Docker model services, live adapter smoke checks, measured prompt
 variants, saved experiment results and the comparison report remain pending.
 
 Reviews follow the repository's [shared process](../docs/review-process.md) and
@@ -19,7 +20,7 @@ boundaries and their implementation-plan points.
 
 `hw-01/` is the independent homework project. Its importable Python package
 lives in `src/extraction_service/`, with modules grouped by responsibility:
-`configuration/`, `corpus/` and `extraction/`.
+`configuration/`, `corpus/`, `extraction/` and `inference/`.
 
 Inside the Docker image, `python -m extraction_service` invokes the CLI.
 The root `make hw01-*` targets identify the homework and route to this project.

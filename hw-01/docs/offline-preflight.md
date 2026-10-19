@@ -89,8 +89,9 @@ checks; the coordinator in section 6.4 will enforce runtime limits and spending.
 Requested temperature/top_p ranges do not establish support by a model route.
 
 The baseline v1 prompt and single sampling variant support reference validation.
-They have not been measured. Additional variants, adapters and prompt refinement
-remain later scope.
+They have not been measured. [Adapters](model-adapters.md) are implemented in
+section 6.3; additional variants, measured execution and prompt refinement remain
+later scope.
 
 `ApplicationSettings.load(project_dir)` reads the HW's optional `.env` and
 recognized process variables; process variables take precedence. The fields are
@@ -101,7 +102,7 @@ secret objects; experiment and record models remain strict.
 
 Service URLs accept HTTP/HTTPS and reject embedded credentials, queries and
 fragments. A supplied empty credential is invalid. A missing key is allowed
-offline and locally; `require_provider_credentials()` checks it before future
+offline and locally; `require_provider_credentials()` checks it before
 provider execution. Secret fields are excluded from repr and serialization,
 and validation errors hide input values. Actual `.env` overrides are ignored;
 only the harmless `.env.example` is tracked. The check image excludes `.env`
