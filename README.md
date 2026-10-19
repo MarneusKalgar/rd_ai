@@ -27,6 +27,8 @@ dataset counts are met. Model execution and comparison remain to be implemented.
 
 With Docker Desktop/Compose and Make installed, run `make hw01-check` for
 contract tests, lint, type checks and gold validation entirely inside Docker.
+Use `make hw01-preflight` to verify configuration, prompts and the complete
+approved corpus offline.
 No host Python or API key is required. This is a contract check, not yet the
 final model-comparison command.
 

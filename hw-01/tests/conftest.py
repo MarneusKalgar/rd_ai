@@ -41,14 +41,10 @@ def first_line(value: JsonObject) -> JsonObject:
 
 @pytest.fixture
 def project_copy(tmp_path: Path) -> Path:
-    """Copy approved schema and gold artifacts for isolated tampering tests."""
+    """Copy public HW artifacts for isolated configuration and tampering tests."""
 
     project = tmp_path / "project"
-    data_dir = project / "data"
-    data_dir.mkdir(parents=True)
-
-    shutil.copytree(PROJECT_DIR / "schemas", project / "schemas")
-    shutil.copytree(PROJECT_DIR / "data/gold", data_dir / "gold")
-    shutil.copyfile(PROJECT_DIR / "data/manifest.json", data_dir / "manifest.json")
+    for directory in ("schemas", "data", "config", "prompts"):
+        shutil.copytree(PROJECT_DIR / directory, project / directory)
 
     return project

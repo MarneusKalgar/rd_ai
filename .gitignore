@@ -19,3 +19,8 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+
+# Local credentials and environment overrides; only harmless examples are tracked.
+.env
+.env.*
+!.env.example

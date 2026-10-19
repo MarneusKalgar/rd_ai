@@ -16,6 +16,8 @@ COPY src ./src
 COPY tests ./tests
 COPY schemas ./schemas
 COPY data ./data
+COPY config ./config
+COPY prompts ./prompts
 
 USER 10001:10001
 CMD ["python", "-m", "hw01", "validate-gold"]

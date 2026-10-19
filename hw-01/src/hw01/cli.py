@@ -1,57 +1,43 @@
 """Offline contract checks; this command does not run models or spend API credits."""
 
 import argparse
-import hashlib
 import json
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Final
 
-from hw01.extraction import ContractLoadError, ExtractionContract
+from hw01.artifacts import read_checked
+from hw01.corpus.constants import GOLD_MANIFEST_FILENAME
+from hw01.extraction import ExtractionContract
 from hw01.extraction.constants import SCHEMA_FILENAME
+from hw01.preflight import DEFAULT_EXPERIMENT_FILE, preflight
 
-GOLD_MANIFEST_FILENAME: Final[str] = "manifest.json"
 EXIT_SUCCESS: Final[int] = 0
 EXIT_VALIDATION_FAILURE: Final[int] = 1
 EXIT_SETUP_FAILURE: Final[int] = 2
+JSON_INDENT: Final[int] = 2
+
+VALIDATE_GOLD_COMMAND: Final[str] = "validate-gold"
+VALIDATE_RESPONSE_COMMAND: Final[str] = "validate-response"
+PREFLIGHT_COMMAND: Final[str] = "preflight"
 
 
-def read_checked(path: Path, expected_sha256: str) -> str:
-    """Read an approved UTF-8 artifact only if its bytes match the expected hash.
+def _print_json(value: object, *, indent: int | None = JSON_INDENT) -> None:
+    formatted = json.dumps(value, ensure_ascii=False, indent=indent)
 
-    Raises:
-        ContractLoadError: Artifact bytes differ from the approved hash.
-        OSError: The file cannot be read.
-        UnicodeError: The verified bytes are not UTF-8 text.
-    """
-
-    data = path.read_bytes()
-    actual_sha256 = hashlib.sha256(data).hexdigest()
-
-    if actual_sha256 != expected_sha256:
-        raise ContractLoadError(f"Approved artifact hash mismatch: {path}")
-
-    return data.decode("utf-8")
+    print(formatted)
 
 
-def validate_gold(project_dir: Path, contract: ExtractionContract, manifest: dict[str, Any]) -> int:
-    """Verify and validate each gold artifact, then print aggregate JSON evidence.
-
-    Returns:
-        Success when every case passes, otherwise a validation-failure status.
-
-    Raises:
-        ContractLoadError: A gold artifact differs from its manifest hash.
-        OSError: A gold artifact cannot be read.
-        UnicodeError: An artifact is not UTF-8 text.
-    """
-
+def _gold_failures(
+    project_dir: Path,
+    contract: ExtractionContract,
+    cases: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
     failures: list[dict[str, Any]] = []
 
-    for case in manifest["cases"]:
+    for case in cases:
         path = project_dir / "data" / case["goldFile"]
         raw_response = read_checked(path, case["goldSha256"])
-
         outcome = contract.validate_json(raw_response)
 
         if not outcome.is_valid:
@@ -60,23 +46,31 @@ def validate_gold(project_dir: Path, contract: ExtractionContract, manifest: dic
                 "inputId": case["inputId"],
                 "issues": outcome_record["issues"],
             }
-
             failures.append(failure)
 
+    return failures
+
+
+def validate_gold(project_dir: Path, contract: ExtractionContract, manifest: dict[str, Any]) -> int:
+    """Check all approved gold artifacts and print aggregate JSON evidence.
+
+    Returns:
+        Success when every case passes, otherwise a validation-failure status.
+
+    Raises:
+        ArtifactError: A gold artifact differs from its hash or cannot be read.
+    """
+
+    cases = manifest["cases"]
+    failures = _gold_failures(project_dir, contract, cases)
     summary = {
         "schema": asdict(contract.identity),
-        "gold_count": len(manifest["cases"]),
-        "valid_count": len(manifest["cases"]) - len(failures),
+        "gold_count": len(cases),
+        "valid_count": len(cases) - len(failures),
         "failures": failures,
     }
 
-    formatted_summary = json.dumps(
-        summary,
-        ensure_ascii=False,
-        indent=2,
-    )
-
-    print(formatted_summary)
+    _print_json(summary)
 
     if failures:
         return EXIT_VALIDATION_FAILURE
@@ -84,64 +78,82 @@ def validate_gold(project_dir: Path, contract: ExtractionContract, manifest: dic
     return EXIT_SUCCESS
 
 
+def _build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--project-dir", type=Path, default=Path.cwd())
+    commands = parser.add_subparsers(dest="command", required=True)
+    commands.add_parser(VALIDATE_GOLD_COMMAND, help="Check every approved gold object and its hash")
+
+    preflight_parser = commands.add_parser(PREFLIGHT_COMMAND, help="Verify complete offline setup")
+    preflight_parser.add_argument("--config", default=DEFAULT_EXPERIMENT_FILE)
+
+    response_parser = commands.add_parser(
+        VALIDATE_RESPONSE_COMMAND,
+        help="Validate one raw JSON response file",
+    )
+    response_parser.add_argument("response_file", type=Path)
+
+    return parser
+
+
+def _load_contract(project_dir: Path) -> tuple[ExtractionContract, dict[str, Any]]:
+    manifest_path = project_dir / "data" / GOLD_MANIFEST_FILENAME
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    schema_path = project_dir / "schemas" / SCHEMA_FILENAME
+    contract = ExtractionContract.load(
+        schema_path,
+        expected_sha256=manifest["schemaSha256"],
+    )
+
+    return contract, manifest
+
+
+def _validate_response(path: Path, contract: ExtractionContract) -> int:
+    raw_response = path.read_text(encoding="utf-8")
+    outcome = contract.validate_json(raw_response)
+    outcome_record = asdict(outcome)
+
+    _print_json(outcome_record)
+
+    if outcome.is_valid:
+        return EXIT_SUCCESS
+
+    return EXIT_VALIDATION_FAILURE
+
+
+def _dispatch(args: argparse.Namespace) -> int:
+    if args.command == PREFLIGHT_COMMAND:
+        report = preflight(args.project_dir, args.config)
+        print(report.model_dump_json(indent=JSON_INDENT))
+
+        return EXIT_SUCCESS
+
+    contract, manifest = _load_contract(args.project_dir)
+
+    if args.command == VALIDATE_GOLD_COMMAND:
+        return validate_gold(args.project_dir, contract, manifest)
+
+    return _validate_response(args.response_file, contract)
+
+
 def main(argv: list[str] | None = None) -> int:
-    """Run offline validation and print a JSON outcome or setup error.
+    """Parse offline command arguments and report execution/setup outcomes.
 
     Args:
-        argv: Command arguments, or None to use the process arguments.
+        argv: Command arguments, or None to use process arguments.
 
     Returns:
         Zero for success, one for invalid output, or two for setup/file errors.
         Argument parsing uses argparse's standard SystemExit behavior.
     """
 
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--project-dir", type=Path, default=Path.cwd())
-
-    commands = parser.add_subparsers(dest="command", required=True)
-    commands.add_parser("validate-gold", help="Check every approved gold object and its hash")
-
-    response_parser = commands.add_parser(
-        "validate-response",
-        help="Validate one raw JSON response file",
-    )
-    response_parser.add_argument("response_file", type=Path)
-
+    parser = _build_parser()
     args = parser.parse_args(argv)
 
     try:
-        manifest_path = args.project_dir / "data" / GOLD_MANIFEST_FILENAME
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-
-        schema_path = args.project_dir / "schemas" / SCHEMA_FILENAME
-        contract = ExtractionContract.load(
-            schema_path,
-            expected_sha256=manifest["schemaSha256"],
-        )
-
-        if args.command == "validate-gold":
-            return validate_gold(args.project_dir, contract, manifest)
-
-        raw_response = args.response_file.read_text(encoding="utf-8")
-        outcome = contract.validate_json(raw_response)
-
-        outcome_record = asdict(outcome)
-        formatted_outcome = json.dumps(
-            outcome_record,
-            ensure_ascii=False,
-            indent=2,
-        )
-
-        print(formatted_outcome)
-
-        if outcome.is_valid:
-            return EXIT_SUCCESS
-
-        return EXIT_VALIDATION_FAILURE
+        return _dispatch(args)
     except (OSError, ValueError, KeyError, TypeError) as error:
         error_report = {"setup_error": str(error)}
-        formatted_error = json.dumps(error_report, ensure_ascii=False)
-
-        print(formatted_error)
+        _print_json(error_report, indent=None)
 
         return EXIT_SETUP_FAILURE

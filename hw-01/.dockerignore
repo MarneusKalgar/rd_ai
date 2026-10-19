@@ -10,3 +10,12 @@
 !schemas/**
 !data/
 !data/**
+!config/
+!config/**
+!prompts/
+!prompts/**
+
+# Keep private data and environment overrides out even inside allowed folders.
+**/private/
+**/.env
+**/.env.*

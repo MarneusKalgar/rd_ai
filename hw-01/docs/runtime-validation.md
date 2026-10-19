@@ -118,9 +118,11 @@ semantic errors. JSON Schema `description` text guides extraction but is not
 an executable semantic validator.
 
 Model, prompt, sampling, latency, token usage, cost and retry metadata belong
-in the future attempt/run envelope. Adding such fields to a PO object is
+in the [attempt/run envelope](offline-preflight.md#attempt-and-run-records).
+Adding such fields to a PO object is
 rejected by `additionalProperties: false`. Pydantic configuration and run
-models are reserved for point 6.
+models and full corpus preflight are implemented in sections 6.1–6.2; model
+execution and orchestration remain later scope.
 
 ## Commands and exit status
 

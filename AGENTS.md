@@ -30,8 +30,8 @@ put any focused mutation or reproduction in a disposable copy.
 - The authoritative PO extraction contract is
   `hw-01/schemas/purchase-order-extraction.v1.schema.json`; field semantics are
   documented in `hw-01/docs/extraction-contract.md`.
-- Do not introduce a second handwritten Pydantic PO model. Pydantic is planned
-  for configuration, settings, attempt records and run records.
+- Do not introduce a second handwritten Pydantic PO model. Pydantic validates
+  configuration, settings, attempt records and run records.
 - Keep operational metadata outside PO output objects. Preserve raw responses
   and explicit validation failures; do not silently repair or coerce outputs.
 - The approved inputs, gold answers and schema are frozen. Do not change them

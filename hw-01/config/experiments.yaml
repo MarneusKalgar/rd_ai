@@ -1,0 +1,25 @@
+version: experiment-v1
+models:
+  - id: provider
+    backend: openrouter
+    model: openai/gpt-6-luna
+  - id: local
+    backend: ollama
+    model: gemma4:e4b-it-qat
+prompts:
+  - id: v1
+    file: prompts/v1.txt
+sampling:
+  - id: baseline
+    temperature: 0.0
+    top_p: 1.0
+    max_output_tokens: 4096
+execution:
+  request_timeout_seconds: 120.0
+  input_timeout_seconds: 300.0
+  transport_retries: 1
+  api_budget_usd: 4.5
+selection:
+  model_id: local
+  prompt_id: v1
+  sampling_id: baseline
