@@ -20,4 +20,4 @@ COPY config ./config
 COPY prompts ./prompts
 
 USER 10001:10001
-CMD ["python", "-m", "hw01", "validate-gold"]
+CMD ["python", "-m", "extraction_service", "validate-gold"]

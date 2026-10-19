@@ -6,11 +6,11 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Final
 
-from hw01.artifacts import read_checked
-from hw01.corpus.constants import GOLD_MANIFEST_FILENAME
-from hw01.extraction import ExtractionContract
-from hw01.extraction.constants import SCHEMA_FILENAME
-from hw01.preflight import DEFAULT_EXPERIMENT_FILE, preflight
+from extraction_service.artifacts import read_checked
+from extraction_service.corpus.constants import GOLD_MANIFEST_FILENAME
+from extraction_service.extraction import ExtractionContract
+from extraction_service.extraction.constants import SCHEMA_FILENAME
+from extraction_service.preflight import DEFAULT_EXPERIMENT_FILE, preflight
 
 EXIT_SUCCESS: Final[int] = 0
 EXIT_VALIDATION_FAILURE: Final[int] = 1

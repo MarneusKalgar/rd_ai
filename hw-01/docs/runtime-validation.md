@@ -41,7 +41,7 @@ and are not implemented by this slice.
 import json
 from pathlib import Path
 
-from hw01.extraction import ExtractionContract
+from extraction_service.extraction import ExtractionContract
 
 project = Path(".")  # Run from hw-01/ inside the service image.
 manifest = json.loads((project / "data/manifest.json").read_text())
@@ -67,7 +67,7 @@ The implementation separates these responsibilities:
 | `constants.py` | Shared extraction protocol identifiers and filenames. |
 
 Public consumers continue importing `ExtractionContract` and
-`ContractLoadError` from `hw01.extraction`.
+`ContractLoadError` from `extraction_service.extraction`.
 
 `validate_json()` parses the complete response and applies the frozen schema
 with explicit calendar-date format checking. It does not fill defaults,
@@ -134,7 +134,7 @@ identity, gold/valid counts and per-case issues.
 To inspect a response file already inside the image, run from `hw-01/`:
 
 ```sh
-docker compose run --build --rm checks python -m hw01 validate-response data/gold/B02-S002-PO01.json
+docker compose run --build --rm checks python -m extraction_service validate-response data/gold/B02-S002-PO01.json
 ```
 
 The CLI returns `0` for valid output, `1` for JSON/schema validation failure,

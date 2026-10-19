@@ -13,6 +13,15 @@ variants, saved experiment results and the comparison report remain pending.
 Reviews follow the repository's [shared process](../docs/review-process.md) and
 the [HW-01 checklist](docs/review-checklist.md) for relevant domain concerns.
 
+## Project layout
+
+`hw-01/` is the independent homework project. Its importable Python package
+lives in `src/extraction_service/`, with modules grouped by responsibility:
+`configuration/`, `corpus/` and `extraction/`.
+
+Inside the Docker image, `python -m extraction_service` invokes the CLI.
+The root `make hw01-*` targets identify the homework and route to this project.
+
 ## Check the contract in Docker
 
 Prerequisites: Docker Desktop with Compose, and Make. No host Python, uv,

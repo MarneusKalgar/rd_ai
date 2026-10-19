@@ -3,7 +3,7 @@
 import json
 from typing import Any, Never
 
-from hw01.extraction.constants import JSON_DUPLICATE_KEY, JSON_NON_FINITE_NUMBER
+from extraction_service.extraction.constants import JSON_DUPLICATE_KEY, JSON_NON_FINITE_NUMBER
 
 
 class AmbiguousJsonError(ValueError):

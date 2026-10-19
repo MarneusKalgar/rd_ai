@@ -5,15 +5,15 @@ from collections.abc import Iterable
 
 from jsonschema import Draft202012Validator
 
-from hw01.extraction.constants import (
+from extraction_service.extraction.constants import (
     JSON_DECODER_LIMIT,
     JSON_NESTING_LIMIT,
     JSON_STAGE,
     JSON_SYNTAX,
     SCHEMA_STAGE,
 )
-from hw01.extraction.json_parsing import AmbiguousJsonError
-from hw01.extraction.validation import ValidationIssue
+from extraction_service.extraction.json_parsing import AmbiguousJsonError
+from extraction_service.extraction.validation import ValidationIssue
 
 
 def json_pointer(parts: Iterable[str | int]) -> str:

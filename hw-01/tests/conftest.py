@@ -5,8 +5,8 @@ from typing import Final, cast
 
 import pytest
 
-from hw01.extraction import ExtractionContract
-from hw01.extraction.validation import JsonObject
+from extraction_service.extraction import ExtractionContract
+from extraction_service.extraction.validation import JsonObject
 
 PROJECT_DIR: Final[Path] = Path(__file__).resolve().parents[1]
 

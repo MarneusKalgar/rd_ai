@@ -4,13 +4,13 @@ import hashlib
 from pathlib import Path
 from typing import Final, Literal
 
-from hw01.artifacts import artifact_path, read_text
-from hw01.configuration.loading import load_experiment
-from hw01.configuration.models import ExperimentConfig
-from hw01.configuration.settings import ApplicationSettings
-from hw01.corpus.loading import load_corpus
-from hw01.extraction.validation import SchemaIdentity
-from hw01.runtime_types import StrictModel
+from extraction_service.artifacts import artifact_path, read_text
+from extraction_service.configuration.loading import load_experiment
+from extraction_service.configuration.models import ExperimentConfig
+from extraction_service.configuration.settings import ApplicationSettings
+from extraction_service.corpus.loading import load_corpus
+from extraction_service.extraction.validation import SchemaIdentity
+from extraction_service.runtime_types import StrictModel
 
 DEFAULT_EXPERIMENT_FILE: Final[str] = "config/experiments.yaml"
 

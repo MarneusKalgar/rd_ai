@@ -8,8 +8,8 @@ from typing import Never
 import pytest
 from conftest import PROJECT_DIR
 
-from hw01.cli import main
-from hw01.preflight import preflight
+from extraction_service.cli import main
+from extraction_service.preflight import preflight
 
 
 def test_offline_preflight_needs_no_key_and_makes_no_connections(
@@ -83,7 +83,14 @@ def test_preflight_does_not_expose_supplied_key_in_success_or_errors(
 
 
 def test_preflight_works_through_real_module_entrypoint() -> None:
-    command = [sys.executable, "-m", "hw01", "--project-dir", str(PROJECT_DIR), "preflight"]
+    command = [
+        sys.executable,
+        "-m",
+        "extraction_service",
+        "--project-dir",
+        str(PROJECT_DIR),
+        "preflight",
+    ]
 
     result = subprocess.run(command, capture_output=True, text=True, timeout=10)
 

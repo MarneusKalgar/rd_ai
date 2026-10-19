@@ -7,11 +7,14 @@ from typing import Any, cast
 
 from jsonschema import Draft202012Validator
 
-from hw01.extraction.json_parsing import parse_json
-from hw01.extraction.schema_loading import ContractLoadError as ContractLoadError
-from hw01.extraction.schema_loading import load_schema
-from hw01.extraction.validation import JsonObject, SchemaIdentity, ValidationOutcome
-from hw01.extraction.validation_errors import collect_schema_issues, issue_from_json_error
+from extraction_service.extraction.json_parsing import parse_json
+from extraction_service.extraction.schema_loading import ContractLoadError as ContractLoadError
+from extraction_service.extraction.schema_loading import load_schema
+from extraction_service.extraction.validation import JsonObject, SchemaIdentity, ValidationOutcome
+from extraction_service.extraction.validation_errors import (
+    collect_schema_issues,
+    issue_from_json_error,
+)
 
 
 @dataclass(frozen=True)

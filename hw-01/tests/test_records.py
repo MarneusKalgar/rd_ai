@@ -4,9 +4,9 @@ from typing import Any
 import pytest
 from pydantic import ValidationError
 
-from hw01.extraction import ExtractionContract
-from hw01.extraction.validation import JsonObject
-from hw01.records import AttemptResult, RunRecord
+from extraction_service.extraction import ExtractionContract
+from extraction_service.extraction.validation import JsonObject
+from extraction_service.records import AttemptResult, RunRecord
 
 
 @pytest.fixture

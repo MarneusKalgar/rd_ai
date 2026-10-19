@@ -6,7 +6,7 @@ from typing import Any
 import pytest
 from conftest import PROJECT_DIR
 
-from hw01.corpus.loading import CorpusError, load_corpus
+from extraction_service.corpus.loading import CorpusError, load_corpus
 
 
 def write_manifests(project: Path, corpus: dict[str, Any], gold: dict[str, Any]) -> None:

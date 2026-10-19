@@ -3,8 +3,8 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from hw01.artifacts import artifact_path, read_checked, read_text
-from hw01.corpus.constants import (
+from extraction_service.artifacts import artifact_path, read_checked, read_text
+from extraction_service.corpus.constants import (
     CASE_IDENTITY_FIELDS,
     CORPUS_MANIFEST_FILENAME,
     CORPUS_V1_INPUT_COUNT,
@@ -13,9 +13,9 @@ from hw01.corpus.constants import (
     HUMAN_APPROVED,
     REQUIRED_APPROVAL_METHODS,
 )
-from hw01.corpus.errors import CorpusError
-from hw01.corpus.models import CorpusCase, CorpusManifest, GoldCase, GoldManifest
-from hw01.extraction.json_parsing import parse_json
+from extraction_service.corpus.errors import CorpusError
+from extraction_service.corpus.models import CorpusCase, CorpusManifest, GoldCase, GoldManifest
+from extraction_service.extraction.json_parsing import parse_json
 
 
 @dataclass(frozen=True)

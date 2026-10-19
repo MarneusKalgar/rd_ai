@@ -6,7 +6,7 @@ from typing import Self
 from pydantic import AnyHttpUrl, Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from hw01.configuration.constants import (
+from extraction_service.configuration.constants import (
     DEFAULT_OLLAMA_BASE_URL,
     DEFAULT_OPENROUTER_BASE_URL,
     ENVIRONMENT_ENCODING,

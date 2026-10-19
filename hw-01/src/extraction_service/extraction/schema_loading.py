@@ -8,9 +8,9 @@ from typing import Any, Final
 
 from jsonschema import Draft202012Validator, FormatChecker, SchemaError
 
-from hw01.extraction.constants import DRAFT_2020_12
-from hw01.extraction.json_parsing import parse_json
-from hw01.extraction.validation import SchemaIdentity
+from extraction_service.extraction.constants import DRAFT_2020_12
+from extraction_service.extraction.json_parsing import parse_json
+from extraction_service.extraction.validation import SchemaIdentity
 
 SCHEMA_FILENAME_PATTERN: Final[re.Pattern[str]] = re.compile(r"(.+)\.(v[0-9]+)\.schema\.json")
 UNSUPPORTED_SCHEMA_MESSAGE: Final[str] = "Extraction schema must declare JSON Schema Draft 2020-12"

@@ -4,10 +4,10 @@ from typing import Self
 
 from pydantic import Field, ValidationInfo, model_validator
 
-from hw01.configuration.models import SamplingConfig
-from hw01.extraction.validation import JsonObject, ValidationIssue
-from hw01.record_types import AttemptKind, AttemptOutcome, ModelRuntime, RunStatus
-from hw01.record_validation import (
+from extraction_service.configuration.models import SamplingConfig
+from extraction_service.extraction.validation import JsonObject, ValidationIssue
+from extraction_service.record_types import AttemptKind, AttemptOutcome, ModelRuntime, RunStatus
+from extraction_service.record_validation import (
     check_attempt_history,
     check_attempt_outcome,
     check_final_extraction,
@@ -15,7 +15,7 @@ from hw01.record_validation import (
     check_run_status,
     contract_from_context,
 )
-from hw01.runtime_types import (
+from extraction_service.runtime_types import (
     Identifier,
     NonEmptyText,
     NonNegativeFloat,

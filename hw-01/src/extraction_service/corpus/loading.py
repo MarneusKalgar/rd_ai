@@ -6,15 +6,15 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from hw01.artifacts import ArtifactError
-from hw01.corpus.errors import CorpusError as CorpusError
-from hw01.corpus.files import read_case_gold, read_input
-from hw01.corpus.manifests import load_manifests
-from hw01.corpus.models import CorpusCase, GoldCase
-from hw01.extraction import ExtractionContract
-from hw01.extraction.constants import SCHEMA_FILENAME
-from hw01.extraction.json_parsing import AmbiguousJsonError
-from hw01.extraction.validation import JsonObject
+from extraction_service.artifacts import ArtifactError
+from extraction_service.corpus.errors import CorpusError as CorpusError
+from extraction_service.corpus.files import read_case_gold, read_input
+from extraction_service.corpus.manifests import load_manifests
+from extraction_service.corpus.models import CorpusCase, GoldCase
+from extraction_service.extraction import ExtractionContract
+from extraction_service.extraction.constants import SCHEMA_FILENAME
+from extraction_service.extraction.json_parsing import AmbiguousJsonError
+from extraction_service.extraction.validation import JsonObject
 
 
 @dataclass(frozen=True)

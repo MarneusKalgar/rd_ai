@@ -7,8 +7,8 @@ from pathlib import Path
 import pytest
 from conftest import PROJECT_DIR
 
-from hw01.cli import main
-from hw01.extraction.validation import JsonObject
+from extraction_service.cli import main
+from extraction_service.extraction.validation import JsonObject
 
 
 def test_gold_check_reports_the_pinned_schema_and_all_approved_cases(
@@ -75,7 +75,7 @@ def test_module_entrypoint_returns_process_status_and_response_evidence(
     command = [
         sys.executable,
         "-m",
-        "hw01",
+        "extraction_service",
         "--project-dir",
         str(PROJECT_DIR),
         "validate-response",

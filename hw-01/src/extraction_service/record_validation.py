@@ -9,8 +9,8 @@ from typing import TYPE_CHECKING, Final
 
 from pydantic import ValidationInfo
 
-from hw01.extraction import ExtractionContract
-from hw01.record_types import (
+from extraction_service.extraction import ExtractionContract
+from extraction_service.record_types import (
     CONTRACT_CONTEXT_KEY,
     EXTRACTION_ATTEMPT,
     FIRST_ATTEMPT_NUMBER,
@@ -24,7 +24,7 @@ from hw01.record_types import (
 )
 
 if TYPE_CHECKING:
-    from hw01.records import AttemptResult, RunRecord
+    from extraction_service.records import AttemptResult, RunRecord
 
 ACCOUNTING_RELATIVE_TOLERANCE: Final[float] = 1e-9
 ACCOUNTING_ABSOLUTE_TOLERANCE: Final[float] = 1e-12

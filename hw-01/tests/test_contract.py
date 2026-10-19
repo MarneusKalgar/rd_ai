@@ -7,8 +7,8 @@ from typing import Any, Final, Never
 import pytest
 from conftest import PROJECT_DIR, first_line
 
-from hw01.extraction import ContractLoadError, ExtractionContract
-from hw01.extraction.validation import JsonObject, JsonValue
+from extraction_service.extraction import ContractLoadError, ExtractionContract
+from extraction_service.extraction.validation import JsonObject, JsonValue
 
 MANIFEST: Final[dict[str, Any]] = json.loads((PROJECT_DIR / "data/manifest.json").read_text())
 GOLD_CASES: Final[list[dict[str, Any]]] = MANIFEST["cases"]
@@ -257,7 +257,7 @@ def test_json_decoder_nesting_failure_returns_evidence_instead_of_escaping(
 
     # Decoder nesting thresholds vary across Python runtimes. Exercise its
     # failure boundary without depending on a particular stack-depth limit.
-    monkeypatch.setattr("hw01.extraction.contract.parse_json", fail_decoding)
+    monkeypatch.setattr("extraction_service.extraction.contract.parse_json", fail_decoding)
 
     result = contract.validate_json(raw_response)
 

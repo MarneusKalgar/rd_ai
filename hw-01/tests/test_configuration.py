@@ -8,9 +8,9 @@ import yaml
 from conftest import PROJECT_DIR
 from pydantic import ValidationError
 
-from hw01.configuration.loading import ConfigurationError, load_experiment
-from hw01.configuration.models import ExperimentConfig
-from hw01.configuration.settings import ApplicationSettings
+from extraction_service.configuration.loading import ConfigurationError, load_experiment
+from extraction_service.configuration.models import ExperimentConfig
+from extraction_service.configuration.settings import ApplicationSettings
 
 
 @pytest.fixture(autouse=True)

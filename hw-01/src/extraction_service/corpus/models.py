@@ -5,7 +5,13 @@ from typing import Literal, Self
 from pydantic import ConfigDict, model_validator
 from pydantic.alias_generators import to_camel
 
-from hw01.runtime_types import Identifier, NonEmptyText, PositiveInt, Sha256, StrictModel
+from extraction_service.runtime_types import (
+    Identifier,
+    NonEmptyText,
+    PositiveInt,
+    Sha256,
+    StrictModel,
+)
 
 
 class ManifestModel(StrictModel):

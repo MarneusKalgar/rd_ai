@@ -2,20 +2,20 @@
 
 from pathlib import Path
 
-from hw01.artifacts import artifact_path, read_checked
-from hw01.corpus.constants import (
+from extraction_service.artifacts import artifact_path, read_checked
+from extraction_service.corpus.constants import (
     ANNOTATION_INPUT_ID_FIELD,
     ANNOTATIONS_DIRECTORY,
     GOLD_DIRECTORY,
     INPUTS_DIRECTORY,
     ORDER_LINES_FIELD,
 )
-from hw01.corpus.errors import CorpusError
-from hw01.corpus.manifests import check_case_link
-from hw01.corpus.models import CorpusCase, GoldCase
-from hw01.extraction import ExtractionContract
-from hw01.extraction.json_parsing import parse_json
-from hw01.extraction.validation import JsonObject
+from extraction_service.corpus.errors import CorpusError
+from extraction_service.corpus.manifests import check_case_link
+from extraction_service.corpus.models import CorpusCase, GoldCase
+from extraction_service.extraction import ExtractionContract
+from extraction_service.extraction.json_parsing import parse_json
+from extraction_service.extraction.validation import JsonObject
 
 
 def _data_path(data_dir: Path, relative_path: str, area: str) -> Path:

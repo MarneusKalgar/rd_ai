@@ -6,8 +6,8 @@ from typing import Any
 import yaml
 from yaml.nodes import MappingNode
 
-from hw01.artifacts import read_text
-from hw01.configuration.models import ExperimentConfig
+from extraction_service.artifacts import read_text
+from extraction_service.configuration.models import ExperimentConfig
 
 
 class ConfigurationError(ValueError):

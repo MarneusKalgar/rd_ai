@@ -4,7 +4,13 @@ from typing import Annotated, Final, Literal, Self
 
 from pydantic import Field, model_validator
 
-from hw01.runtime_types import Identifier, NonEmptyText, PositiveFloat, PositiveInt, StrictModel
+from extraction_service.runtime_types import (
+    Identifier,
+    NonEmptyText,
+    PositiveFloat,
+    PositiveInt,
+    StrictModel,
+)
 
 MAX_TRANSPORT_RETRIES: Final[int] = 5
 ASSIGNMENT_API_CAP_USD: Final[float] = 5.0

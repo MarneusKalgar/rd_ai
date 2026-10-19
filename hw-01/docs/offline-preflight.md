@@ -33,7 +33,7 @@ preflight after lint, formatting, strict mypy, pytest and gold validation.
 To select another project-relative configuration, run from `hw-01/`:
 
 ```sh
-docker compose run --build --rm checks python -m hw01 preflight --config config/experiments.yaml
+docker compose run --build --rm checks python -m extraction_service preflight --config config/experiments.yaml
 ```
 
 Preflight returns exit `0` with JSON evidence or exit `2` with `setup_error`.
