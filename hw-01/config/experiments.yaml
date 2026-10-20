@@ -20,6 +20,10 @@ execution:
   input_timeout_seconds: 300.0
   transport_retries: 1
   api_budget_usd: 4.5
+  matrix_reserve_usd: 3.5
+  dependency_failure_limit: 3
+  backoff_initial_seconds: 1.0
+  backoff_max_seconds: 30.0
 selection:
   model_id: local
   prompt_id: v1

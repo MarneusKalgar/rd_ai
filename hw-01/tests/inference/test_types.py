@@ -7,11 +7,14 @@ from pydantic import ValidationError
 
 from extraction_service.inference.errors import FailureEvidence, FailureKind, ModelTransportError
 from extraction_service.inference.types import ModelIdentity, ModelResponse, ResponseKind
+from extraction_service.record_types import ModelRuntime
 
 
 @pytest.fixture
 def response() -> ModelResponse:
-    identity = ModelIdentity(model_id="provider", model_name="test/model", runtime="openrouter")
+    identity = ModelIdentity(
+        model_id="provider", model_name="test/model", runtime=ModelRuntime.OPENROUTER
+    )
 
     return ModelResponse(
         identity=identity,

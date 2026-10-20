@@ -5,10 +5,12 @@ from typing import Any
 
 from extraction_service.configuration.models import ModelConfig
 from extraction_service.inference.capabilities import OpenRouterEndpoint
+from extraction_service.inference.errors import ModelConfigurationError
 from extraction_service.inference.http import HttpPoster
 from extraction_service.inference.messages import request_messages
 from extraction_service.inference.openrouter_payloads import parse_completion
 from extraction_service.inference.types import GenerationRequest, ModelIdentity, ModelResponse
+from extraction_service.record_types import ModelRuntime
 
 
 class OpenRouterAdapter:
@@ -26,7 +28,7 @@ class OpenRouterAdapter:
         self._identity = ModelIdentity(
             model_id=config.id,
             model_name=config.model,
-            runtime="openrouter",
+            runtime=ModelRuntime.OPENROUTER,
             serving_provider=endpoint.provider_slug,
         )
         self._http = http_client
@@ -39,7 +41,9 @@ class OpenRouterAdapter:
         maximum = self._endpoint.max_output_tokens
 
         if maximum is not None and request.sampling.max_output_tokens > maximum:
-            raise ValueError("Requested output tokens exceed the verified endpoint limit")
+            raise ModelConfigurationError(
+                "Requested output tokens exceed the verified endpoint limit"
+            )
 
         return {
             "model": self.identity.model_name,

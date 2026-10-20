@@ -8,7 +8,8 @@ from extraction_service.inference.capabilities import WireModel
 from extraction_service.inference.errors import (
     FailureEvidence,
     ModelTransportError,
-    classify_http_status,
+    classify_error_body,
+    error_usage,
 )
 from extraction_service.inference.finish_reasons import (
     CONTENT_FILTER_FINISH_REASON,
@@ -78,7 +79,8 @@ def _check_error_envelope(reply: HttpReply) -> None:
         raise protocol_error(reply.raw_body, reply.duration_ms, reply.credentials_redacted)
 
     status = error["code"]
-    kind, retryable = classify_http_status(status)
+    kind, retryable = classify_error_body(status, reply.raw_body)
+    usage = error_usage(reply.raw_body)
     evidence = FailureEvidence(
         kind=kind,
         retryable=retryable,
@@ -87,6 +89,9 @@ def _check_error_envelope(reply: HttpReply) -> None:
         raw_http_body=reply.raw_body,
         duration_ms=reply.duration_ms,
         credentials_redacted=reply.credentials_redacted,
+        input_tokens=usage.prompt_tokens,
+        output_tokens=usage.completion_tokens,
+        cost_usd=usage.cost,
     )
 
     raise ModelTransportError(evidence)

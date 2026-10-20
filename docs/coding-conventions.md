@@ -38,6 +38,9 @@ step by step, including for someone learning Python.
   that merely rename a standard type without adding useful meaning.
 - Limit `Any` to boundaries where data genuinely has an unknown shape. Narrow
   types after validation and keep dynamic input separate from validated data.
+- Compare known model fields through explicit attribute access. Reserve `getattr`
+  for genuinely dynamic attribute selection; named field constants do not give
+  reflection the static checks available to direct attributes.
 - Type annotations and casts support static checking; they do not replace
   runtime validation of external inputs.
 
@@ -94,6 +97,11 @@ Raises:
   of related machine-readable codes benefits from one named type.
 - Keep ordinary one-off messages and self-explanatory protocol keys inline when
   extraction would only add indirection. Do not move every string to constants.
+- Use `StrEnum` members consistently for internal state groups used in decisions.
+  Keep `Literal` for small value constraints that do not need named runtime
+  members, and keep unknown provider finish reasons/error prose as strings.
+  Preserve serialized values when migrating an existing group; verify strict
+  Python construction and JSON reload behavior separately.
 - Model IDs, sampling parameters, URLs, timeouts, retry limits and budgets that
   vary between runs belong in validated configuration/settings.
 - `Final` does not enforce runtime immutability or freeze an object's contents.

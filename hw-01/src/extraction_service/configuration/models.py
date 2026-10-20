@@ -7,6 +7,7 @@ from pydantic import Field, model_validator
 from extraction_service.runtime_types import (
     Identifier,
     NonEmptyText,
+    NonNegativeFloat,
     PositiveFloat,
     PositiveInt,
     StrictModel,
@@ -51,12 +52,16 @@ class SamplingConfig(StrictModel):
 
 
 class ExecutionConfig(StrictModel):
-    """Runtime bounds; their enforcement belongs to the future coordinator."""
+    """Runtime bounds enforced by the shared coordinator and homework ledger."""
 
     request_timeout_seconds: PositiveFloat
     input_timeout_seconds: PositiveFloat
     transport_retries: Annotated[int, Field(ge=0, le=MAX_TRANSPORT_RETRIES)]
     api_budget_usd: Annotated[float, Field(gt=0, lt=ASSIGNMENT_API_CAP_USD)]
+    matrix_reserve_usd: NonNegativeFloat = 0.0
+    dependency_failure_limit: PositiveInt = 3
+    backoff_initial_seconds: PositiveFloat = 1.0
+    backoff_max_seconds: PositiveFloat = 30.0
 
     @model_validator(mode="after")
     def check_deadline(self) -> Self:
@@ -64,6 +69,12 @@ class ExecutionConfig(StrictModel):
 
         if self.input_timeout_seconds < self.request_timeout_seconds:
             raise ValueError("Input timeout cannot be shorter than request timeout")
+
+        if self.matrix_reserve_usd >= self.api_budget_usd:
+            raise ValueError("Matrix reserve must be smaller than the API budget")
+
+        if self.backoff_initial_seconds > self.backoff_max_seconds:
+            raise ValueError("Initial backoff cannot exceed maximum backoff")
 
         return self
 

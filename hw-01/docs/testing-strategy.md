@@ -29,7 +29,7 @@ status is maintained in the [HW README](../README.md).
 
 ## Current coverage
 
-The implemented contract and sections 6.1–6.3.1 already exercise several levels:
+The implemented contract and sections 6.1–6.4 already exercise several levels:
 
 - [Contract tests](../tests/test_contract.py) and
   [record tests](../tests/test_records.py) cover validation rules, evidence and
@@ -52,10 +52,18 @@ The implemented contract and sections 6.1–6.3.1 already exercise several level
   share clients without changing each other's requests, and application scopes
   close clients once after success, generation failure or partial setup failure.
 
+- [Coordinator tests](../tests/execution/) cover correction/retry bounds, clock
+  and dependency decisions, cumulative spending, protected matrix funds and
+  locked reservations. [Coordinator integration](../tests/inference/test_coordinator_integration.py)
+  uses both real adapters and HTTP envelopes. A
+  [slow-response loopback check](../tests/inference/test_total_deadline.py)
+  verifies total timeout cancellation and subsequent client reuse. See the
+  [execution documentation](execution-coordinator.md) for policy and limits.
+
 A test file can contain more than one level. Executing pytest in Docker defines
 its runtime environment; the components and boundaries exercised determine its
-level. Complete extraction workflows, live model tests and scoring tests remain
-pending with sections 6.4–8.
+level. Inference CLI/persistence workflows, live model tests and scoring remain
+pending with sections 6.5–8.
 
 ## 1. Unit and component tests
 
@@ -67,7 +75,7 @@ Dependencies on external inference, time and transport can be controlled.
 
 Existing coverage includes required/nullable PO fields, enums, dates, decimal
 strings, strict configuration, status consistency and usage/cost availability.
-As the coordinator and evaluator are implemented, add focused cases for:
+Coordinator cases below are implemented; scoring cases follow in section 8:
 
 - Transient versus permanent transport failures and retry eligibility.
 - One correction after invalid returned output, with a bounded request count.

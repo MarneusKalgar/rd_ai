@@ -1,10 +1,16 @@
 """Typed transport failures with explicit retry classification and safe evidence."""
 
 from enum import StrEnum
+from typing import Final
 
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
-from extraction_service.runtime_types import NonNegativeFloat, StrictModel
+from extraction_service.extraction.json_parsing import parse_json
+from extraction_service.runtime_types import NonNegativeFloat, NonNegativeInt, StrictModel
+
+QUOTA_ERROR_CODES: Final[frozenset[str]] = frozenset(
+    ("insufficient_quota", "quota_exceeded", "billing_hard_limit_reached", "credits_exhausted")
+)
 
 
 class FailureKind(StrEnum):
@@ -32,6 +38,33 @@ class FailureEvidence(StrictModel):
     raw_http_body: str | None = Field(default=None, repr=False)
     retry_after: str | None = None
     credentials_redacted: bool = False
+    input_tokens: NonNegativeInt | None = None
+    output_tokens: NonNegativeInt | None = None
+    cost_usd: NonNegativeFloat | None = None
+
+
+class _ErrorUsage(StrictModel):
+    """Known OpenRouter usage fields, when also supplied on an error envelope."""
+
+    model_config = ConfigDict(extra="ignore")
+
+    prompt_tokens: NonNegativeInt | None = None
+    completion_tokens: NonNegativeInt | None = None
+    cost: NonNegativeFloat | None = None
+
+
+def error_usage(raw_body: str) -> _ErrorUsage:
+    """Retain checked error accounting; an unusable field never conceals the error."""
+
+    try:
+        body = parse_json(raw_body)
+
+        if isinstance(body, dict) and isinstance(body.get("usage"), dict):
+            return _ErrorUsage.model_validate(body["usage"])
+    except ValueError, RecursionError:
+        pass
+
+    return _ErrorUsage()
 
 
 class ModelTransportError(Exception):
@@ -41,6 +74,10 @@ class ModelTransportError(Exception):
         self.evidence = evidence
 
         super().__init__(f"{evidence.kind}: {evidence.message}")
+
+
+class ModelConfigurationError(ValueError):
+    """A known unsupported generation setting rejected before any physical request."""
 
 
 def classify_http_status(status: int) -> tuple[FailureKind, bool]:
@@ -65,3 +102,22 @@ def classify_http_status(status: int) -> tuple[FailureKind, bool]:
         return FailureKind.UNSUPPORTED_REQUEST, False
 
     return FailureKind.HTTP_ERROR, False
+
+
+def classify_error_body(status: int, raw_body: str) -> tuple[FailureKind, bool]:
+    """Recognize explicit account/quota evidence without guessing from arbitrary prose."""
+
+    if status == 429:
+        try:
+            body = parse_json(raw_body)
+        except ValueError, RecursionError:
+            body = None
+
+        if isinstance(body, dict) and isinstance(body.get("error"), dict):
+            error = body["error"]
+
+            for field in ("code", "type"):
+                if isinstance(error.get(field), str) and error[field] in QUOTA_ERROR_CODES:
+                    return FailureKind.QUOTA, False
+
+    return classify_http_status(status)

@@ -93,10 +93,16 @@ plugin is enabled. Requests above the catalog's output limit fail before HTTP.
 The shared HTTP client ignores host proxy settings and uses HTTPX with transport
 retries set to zero. Retry policy belongs to section 6.4.
 
+The implemented [coordinator](execution-coordinator.md) owns paid reservations,
+validation and retries. Direct `generate()` calls above illustrate adapter
+ownership only; measured homework inference must use the coordinator. The client
+now owns an HTTPX AsyncClient and a private runner behind the same synchronous
+interface, adding a total request timeout alongside HTTPX's phase timeouts.
+
 Adapters let typed transport/parser failures propagate unchanged. They also let
 unexpected programming errors propagate. Client scopes perform cleanup without
-handling these failures as model outcomes. The coordinator's retry/stop decisions
-and the final CLI error boundary remain sections 6.4 and 6.6 respectively.
+handling these failures as model outcomes. The coordinator implements retry/stop
+decisions in section 6.4; the final CLI error boundary remains section 6.6.
 
 ## Returned evidence
 
@@ -128,7 +134,7 @@ over truncation and completion. An unknown finish reason cannot establish comple
 - Malformed envelopes, HTTP errors and connection/timeouts raise
   `ModelTransportError` with typed `FailureEvidence`. Available raw bodies and
   `Retry-After` are retained. An OpenRouter error inside HTTP 200 is also a failure.
-  Status-based retryability is evidence for the future coordinator, not a retry.
+  Status-based retryability is evidence for the coordinator, not an adapter retry.
 - The key never appears in request logs or normal representations. If a server
   reflects the known credential in its body/error, that occurrence is replaced
   with `[REDACTED]` and `credentials_redacted` is set. This explicit exception
@@ -250,8 +256,9 @@ demonstrated defects in the current runtime. The temporary regression cases are
 not part of the repository suite, and the probe counts are not an overall
 correctness score.
 
-Section 6.4 must add the shared coordinator, bounded retries/correction, deadlines,
-dependency stopping and cumulative budget reservations. Sections 6.5–6.6 add
+Section 6.4 adds the [shared coordinator](execution-coordinator.md), bounded
+retries/correction, deadlines, dependency stopping and cumulative budget
+reservations. Sections 6.5–6.6 add
 Docker model services, persistence, CLI execution and the three-document live
 smoke. There is no inference CLI or full comparison command in this slice.
 

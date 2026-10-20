@@ -9,7 +9,7 @@ approved corpus. They do not connect models or execute experiments.
 | --- | --- |
 | `configuration/constants.py` | Environment names, dotenv file settings and service URL defaults. |
 | `records.py` | Typed envelopes and the order of their validation checks. |
-| `record_types.py` | Strict string protocol types and named outcome/status values. |
+| `record_types.py` | String enums for attempt kind/outcome, runtime, run status, stage and stable reason codes. |
 | `record_validation.py` | Status, request evidence, final extraction and accounting checks. |
 | `corpus/loading.py` | Coordinate complete corpus loading under one approved contract. |
 | `corpus/manifests.py` | Manifest reading, uniqueness, membership, approvals and cross-references. |
@@ -84,8 +84,10 @@ one default selection. IDs must be unique within their lists, and each selection
 must resolve. Duplicate YAML mapping keys, unknown fields, numeric strings,
 booleans used as numbers, non-finite values and invalid ranges are rejected.
 Output tokens and timeouts must be positive; retries are limited to 0–5 and the
-API budget must be greater than zero and below $5. These are configuration
-checks; the coordinator in section 6.4 will enforce runtime limits and spending.
+API budget must be greater than zero and below $5. Dependency-failure thresholds
+must be positive integers; backoff and matrix-reserve settings are also checked.
+The [coordinator](execution-coordinator.md) in section 6.4 enforces runtime bounds
+and cumulative reservations. Offline preflight itself performs no inference.
 Requested temperature/top_p ranges do not establish support by a model route.
 
 The baseline v1 prompt and single sampling variant support reference validation.
@@ -135,7 +137,12 @@ Pydantic checks the envelope; it never defines another set of PO fields. The
 record checks require contract context even when reloading serialized records.
 Frozen Pydantic models prevent field reassignment but do not deeply freeze
 nested lists/dictionaries; callers must treat validated records as snapshots.
-The later coordinator owns constructing and persisting them.
+The coordinator constructs them; application persistence remains section 6.6.
+
+Operational state fields require enum members in strict Python construction.
+JSON records keep their original string values and reload through
+`model_validate_json()`. See [execution records](execution-coordinator.md#records-and-summaries)
+for the enum and result-construction boundaries.
 
 Implementation references: [strict validation](https://docs.pydantic.dev/latest/concepts/strict_mode/),
 [validation context](https://docs.pydantic.dev/latest/concepts/validators/#validation-context)

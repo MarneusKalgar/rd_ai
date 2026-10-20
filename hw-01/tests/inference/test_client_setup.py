@@ -36,6 +36,19 @@ class TrackingTransport(httpx.MockTransport):
         super().close()
 
 
+def test_client_close_remains_idempotent_and_closed_requests_fail_cleanly() -> None:
+    transport = TrackingTransport(lambda request: httpx.Response(200, json={"ok": True}))
+    client = JsonHttpClient("https://provider.test", transport=transport)
+
+    client.close()
+    client.close()
+
+    with pytest.raises(RuntimeError, match="closed HTTP client"):
+        client.get("metadata", 1.0)
+
+    assert transport.close_calls == 1
+
+
 def client_scope(
     kind: str, settings: ApplicationSettings, transport: httpx.BaseTransport
 ) -> AbstractContextManager[JsonHttpClient]:

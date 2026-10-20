@@ -7,9 +7,11 @@ model with a local model against the same extraction contract. Its v1
 [`runtime validator`](docs/runtime-validation.md), strict configuration/settings,
 attempt/run records, [offline preflight](docs/offline-preflight.md) and
 [OpenRouter/Ollama adapters](docs/model-adapters.md), including client injection
-and application-owned client scopes, are implemented. The initial
-v1 prompt/configuration exists for preflight. Execution/retries, runtime budget
-enforcement, Docker model services, live adapter smoke checks, measured prompt
+and application-owned client scopes, are implemented. The shared
+[execution coordinator](docs/execution-coordinator.md) adds bounded retries,
+one correction, deadlines, dependency stops and a cumulative reservation ledger.
+The initial v1 prompt/configuration exists for preflight. The inference CLI,
+Docker model services, live adapter smoke checks, measured prompt
 variants, saved experiment results and the comparison report remain pending.
 
 Reviews follow the repository's [shared process](../docs/review-process.md) and

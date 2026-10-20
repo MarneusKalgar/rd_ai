@@ -5,12 +5,22 @@ from typing import Self
 from pydantic import Field, ValidationInfo, model_validator
 
 from extraction_service.configuration.models import SamplingConfig
+from extraction_service.execution.types import DependencyIdentity
 from extraction_service.extraction.validation import JsonObject, ValidationIssue
-from extraction_service.record_types import AttemptKind, AttemptOutcome, ModelRuntime, RunStatus
+from extraction_service.inference.errors import FailureEvidence
+from extraction_service.inference.types import ModelResponse
+from extraction_service.record_types import (
+    AttemptKind,
+    AttemptOutcome,
+    ExecutionStage,
+    ModelRuntime,
+    RunStatus,
+)
 from extraction_service.record_validation import (
     check_attempt_history,
     check_attempt_outcome,
     check_final_extraction,
+    check_response_evidence,
     check_run_accounting,
     check_run_status,
     contract_from_context,
@@ -20,6 +30,7 @@ from extraction_service.runtime_types import (
     NonEmptyText,
     NonNegativeFloat,
     NonNegativeInt,
+    PositiveFloat,
     PositiveInt,
     Sha256,
     StrictModel,
@@ -46,12 +57,20 @@ class AttemptResult(StrictModel):
     cost_usd: NonNegativeFloat | None = None
     request_id: NonEmptyText | None = None
     serving_provider: NonEmptyText | None = None
+    response: ModelResponse | None = Field(default=None, repr=False)
+    failure: FailureEvidence | None = None
+    request_timeout_seconds: PositiveFloat | None = None
+    retry_delay_seconds: NonNegativeFloat = 0.0
+    budget_reservation_id: Identifier | None = None
+    budget_reserved_usd: NonNegativeFloat | None = None
+    accounting_note: NonEmptyText | None = None
 
     @model_validator(mode="after")
     def check_outcome(self) -> Self:
         """Require evidence appropriate to the declared outcome."""
 
         check_attempt_outcome(self)
+        check_response_evidence(self)
 
         return self
 
@@ -83,6 +102,8 @@ class RunRecord(StrictModel):
     total_input_tokens: NonNegativeInt | None
     total_output_tokens: NonNegativeInt | None
     total_cost_usd: NonNegativeFloat | None
+    stage: ExecutionStage = ExecutionStage.MATRIX
+    dependency: DependencyIdentity | None = None
 
     @model_validator(mode="after")
     def check_run(self, info: ValidationInfo) -> Self:

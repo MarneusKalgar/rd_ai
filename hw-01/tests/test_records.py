@@ -7,6 +7,7 @@ from pydantic import ValidationError
 
 from extraction_service.extraction import ExtractionContract
 from extraction_service.extraction.validation import JsonObject
+from extraction_service.record_types import AttemptKind, AttemptOutcome, ModelRuntime, RunStatus
 from extraction_service.records import AttemptResult, RunRecord
 
 
@@ -19,7 +20,7 @@ def run_data(contract: ExtractionContract, gold: JsonObject) -> dict[str, Any]:
         "experiment_sha256": "2" * 64,
         "model_id": "local",
         "model_name": "candidate-local",
-        "runtime": "ollama-docker",
+        "runtime": ModelRuntime.OLLAMA_DOCKER,
         "prompt_id": "v1",
         "prompt_sha256": "3" * 64,
         "sampling_id": "baseline",
@@ -30,15 +31,15 @@ def run_data(contract: ExtractionContract, gold: JsonObject) -> dict[str, Any]:
             "max_output_tokens": 4096,
         },
         "schema_sha256": contract.identity.sha256,
-        "status": "succeeded",
+        "status": RunStatus.SUCCEEDED,
         "attempts": [
             {
                 "number": 1,
-                "kind": "extraction",
-                "outcome": "valid",
+                "kind": AttemptKind.EXTRACTION,
+                "outcome": AttemptOutcome.VALID,
                 "model_id": "local",
                 "model_name": "candidate-local",
-                "runtime": "ollama-docker",
+                "runtime": ModelRuntime.OLLAMA_DOCKER,
                 "raw_response": json.dumps(gold),
                 "error": None,
                 "duration_ms": 12.0,
@@ -72,7 +73,7 @@ def test_successful_record_round_trips_without_redefining_po_fields(
 @pytest.mark.parametrize(
     "field,value",
     [
-        ("status", "failed"),
+        ("status", RunStatus.FAILED),
         ("extraction", None),
         ("reason", "unexpected"),
         ("schema_sha256", "0" * 64),
@@ -122,11 +123,11 @@ def test_unknown_usage_stays_unknown_and_failed_requests_contribute_to_totals(
 ) -> None:
     retry = {
         "number": 1,
-        "kind": "extraction",
-        "outcome": "transport_error",
+        "kind": AttemptKind.EXTRACTION,
+        "outcome": AttemptOutcome.TRANSPORT_ERROR,
         "model_id": "local",
         "model_name": "candidate-local",
-        "runtime": "ollama-docker",
+        "runtime": ModelRuntime.OLLAMA_DOCKER,
         "raw_response": None,
         "error": "timeout; billing unavailable",
         "duration_ms": 2.0,
@@ -154,11 +155,11 @@ def test_invalid_then_corrected_attempt_preserves_original_issues_and_accounting
     invalid = contract.validate_json("{}")
     first = AttemptResult(
         number=1,
-        kind="extraction",
-        outcome="invalid",
+        kind=AttemptKind.EXTRACTION,
+        outcome=AttemptOutcome.INVALID,
         model_id="local",
         model_name="candidate-local",
-        runtime="ollama-docker",
+        runtime=ModelRuntime.OLLAMA_DOCKER,
         raw_response="{}",
         error=None,
         issues=list(invalid.issues),
@@ -168,7 +169,7 @@ def test_invalid_then_corrected_attempt_preserves_original_issues_and_accounting
         cost_usd=0.0,
     )
     run_data["attempts"][0]["number"] = 2
-    run_data["attempts"][0]["kind"] = "correction"
+    run_data["attempts"][0]["kind"] = AttemptKind.CORRECTION
     run_data["attempts"].insert(0, first)
     run_data["total_input_tokens"] = 11
     run_data["total_output_tokens"] = 21
@@ -186,7 +187,7 @@ def test_not_attempted_records_are_distinct_from_attempted_failures(
     run_data: dict[str, Any], contract: ExtractionContract
 ) -> None:
     run_data.update(
-        status="not_attempted",
+        status=RunStatus.NOT_ATTEMPTED,
         attempts=[],
         extraction=None,
         reason="budget exhausted",
@@ -211,10 +212,10 @@ def test_record_requires_contract_context(run_data: dict[str, Any]) -> None:
     "field,value",
     [
         ("number", 2),
-        ("kind", "correction"),
+        ("kind", AttemptKind.CORRECTION),
         ("model_id", "other-model"),
         ("model_name", "other-model"),
-        ("runtime", "openrouter"),
+        ("runtime", ModelRuntime.OPENROUTER),
         ("duration_ms", -1.0),
         ("input_tokens", True),
         ("raw_response", None),
@@ -238,18 +239,18 @@ def test_failed_extraction_record_retains_invalid_response_and_can_be_reloaded(
     invalid = contract.validate_json("{}")
     attempt = AttemptResult(
         number=1,
-        kind="extraction",
-        outcome="invalid",
+        kind=AttemptKind.EXTRACTION,
+        outcome=AttemptOutcome.INVALID,
         model_id="local",
         model_name="candidate-local",
-        runtime="ollama-docker",
+        runtime=ModelRuntime.OLLAMA_DOCKER,
         raw_response="{}",
         error=None,
         issues=list(invalid.issues),
         duration_ms=1.0,
     )
     run_data.update(
-        status="failed",
+        status=RunStatus.FAILED,
         attempts=[attempt],
         extraction=None,
         reason="invalid output",
@@ -280,14 +281,14 @@ def test_sampling_id_cannot_disagree_with_recorded_parameters(
 @pytest.mark.parametrize(
     "status,expected_error",
     [
-        ("failed", "Failed runs require a failed final attempt"),
-        ("not_attempted", "Not-attempted runs require a reason and no attempts"),
+        (RunStatus.FAILED, "Failed runs require a failed final attempt"),
+        (RunStatus.NOT_ATTEMPTED, "Not-attempted runs require a reason and no attempts"),
     ],
 )
 def test_unsuccessful_status_cannot_hide_a_valid_request(
     run_data: dict[str, Any],
     contract: ExtractionContract,
-    status: str,
+    status: RunStatus,
     expected_error: str,
 ) -> None:
     baseline = RunRecord.model_validate(run_data, context={"contract": contract})
@@ -310,7 +311,7 @@ def test_attempt_validation_issues_must_match_its_outcome(
     if outcome == "valid":
         attempt["issues"] = list(invalid.issues)
     else:
-        attempt.update(outcome="invalid", raw_response="{}", issues=[])
+        attempt.update(outcome=AttemptOutcome.INVALID, raw_response="{}", issues=[])
 
     with pytest.raises(ValidationError, match="Validation issues must agree"):
         AttemptResult.model_validate(attempt)
@@ -322,11 +323,11 @@ def test_invalid_attempt_cannot_store_fabricated_validation_evidence(
 ) -> None:
     invalid = contract.validate_json("{}")
     run_data["attempts"][0].update(
-        outcome="invalid",
+        outcome=AttemptOutcome.INVALID,
         raw_response="{}",
         issues=list(invalid.issues),
     )
-    run_data.update(status="failed", extraction=None, reason="Invalid output")
+    run_data.update(status=RunStatus.FAILED, extraction=None, reason="Invalid output")
 
     baseline = RunRecord.model_validate(run_data, context={"contract": contract})
 
@@ -361,14 +362,19 @@ def test_known_accounting_includes_failed_requests(
     total_field: str,
     incomplete_total: int | float,
 ) -> None:
-    run_data.update(model_id="provider", model_name="candidate-provider", runtime="openrouter")
+    run_data.update(
+        model_id="provider", model_name="candidate-provider", runtime=ModelRuntime.OPENROUTER
+    )
     final_attempt = run_data["attempts"][0]
     final_attempt.update(
-        model_id="provider", model_name="candidate-provider", runtime="openrouter", cost_usd=0.5
+        model_id="provider",
+        model_name="candidate-provider",
+        runtime=ModelRuntime.OPENROUTER,
+        cost_usd=0.5,
     )
     failed_attempt = final_attempt.copy()
     failed_attempt.update(
-        outcome="transport_error",
+        outcome=AttemptOutcome.TRANSPORT_ERROR,
         raw_response=None,
         error="Timeout with known usage",
         duration_ms=1.0,

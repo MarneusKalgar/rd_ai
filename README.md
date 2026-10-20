@@ -6,7 +6,7 @@ entrypoint is reserved for the reviewer-facing HW run once that service exists.
 
 | Area | Responsibility |
 | --- | --- |
-| [`hw-01/`](hw-01/README.md) | HW-01 contract, runtime validation and Docker checks; model execution and evaluation follow. |
+| [`hw-01/`](hw-01/README.md) | HW-01 contract, adapters, execution policy and Docker checks; inference CLI and measured evaluation follow. |
 | [`hw-01/data/`](hw-01/data/README.md) | Frozen neutral input texts, reviewed gold objects, and dataset provenance. |
 | [`docs/coding-conventions.md`](docs/coding-conventions.md) | Shared coding conventions for contributors and agents. |
 | [`docs/review-process.md`](docs/review-process.md) | Review scope, evidence, verification and reporting rules. |
@@ -23,7 +23,8 @@ disposable reproductions where useful.
 
 HW-01 has **30 approved neutral inputs and 10 human-approved gold
 objects** frozen under [`hw-01/data/`](hw-01/data/README.md). The minimum
-dataset counts are met. Model execution and comparison remain to be implemented.
+dataset counts are met. Adapters and the shared execution policy are implemented;
+the inference CLI, runtime services and measured comparison remain pending.
 
 With Docker Desktop/Compose and Make installed, run `make hw01-check` for
 contract tests, lint, type checks and gold validation entirely inside Docker.

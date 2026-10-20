@@ -10,18 +10,17 @@ from typing import TYPE_CHECKING, Final
 from pydantic import ValidationInfo
 
 from extraction_service.extraction import ExtractionContract
+from extraction_service.inference.types import ResponseKind
 from extraction_service.record_types import (
     CONTRACT_CONTEXT_KEY,
-    EXTRACTION_ATTEMPT,
     FIRST_ATTEMPT_NUMBER,
-    INVALID_OUTCOME,
-    NOT_ATTEMPTED_STATUS,
-    SUCCEEDED_STATUS,
-    TRANSPORT_ERROR_OUTCOME,
-    TRUNCATED_OUTCOME,
-    VALID_OUTCOME,
     VALIDATED_OUTCOMES,
+    AttemptKind,
+    AttemptOutcome,
+    ModelRuntime,
+    RunStatus,
 )
+from extraction_service.response_outcomes import RESPONSE_OUTCOMES
 
 if TYPE_CHECKING:
     from extraction_service.records import AttemptResult, RunRecord
@@ -69,7 +68,7 @@ def check_attempt_outcome(attempt: AttemptResult) -> None:
         if attempt.raw_response is None or attempt.error is not None:
             raise ValueError("Validated attempts require raw response and no transport error")
 
-        if (attempt.outcome == INVALID_OUTCOME) != bool(attempt.issues):
+        if (attempt.outcome == AttemptOutcome.INVALID) != bool(attempt.issues):
             raise ValueError("Validation issues must agree with attempt outcome")
 
         return
@@ -77,11 +76,73 @@ def check_attempt_outcome(attempt: AttemptResult) -> None:
     if attempt.error is None:
         raise ValueError("Failed transport/model outcomes require an error")
 
-    if attempt.outcome == TRANSPORT_ERROR_OUTCOME and attempt.raw_response is not None:
+    if attempt.outcome == AttemptOutcome.TRANSPORT_ERROR and attempt.raw_response is not None:
         raise ValueError("Transport failure cannot claim a model response")
 
-    if attempt.outcome != TRUNCATED_OUTCOME and attempt.issues:
+    if attempt.raw_response is None and attempt.issues:
         raise ValueError("Only a returned response can carry validation issues")
+
+
+def check_response_evidence(attempt: AttemptResult) -> None:
+    """Prevent nested transport evidence from disagreeing with request accounting."""
+
+    response = attempt.response
+
+    if response is not None:
+        identity = response.identity
+
+        identity_differs = (
+            identity.model_id != attempt.model_id
+            or identity.model_name != attempt.model_name
+            or identity.runtime != attempt.runtime
+            or identity.runtime_version != attempt.runtime_version
+            or identity.model_digest != attempt.model_digest
+            or identity.serving_provider != attempt.serving_provider
+        )
+
+        if identity_differs:
+            raise ValueError("Response identity differs from the attempt")
+
+        accounting_differs = (
+            response.raw_response != attempt.raw_response
+            or response.duration_ms != attempt.duration_ms
+            or response.input_tokens != attempt.input_tokens
+            or response.output_tokens != attempt.output_tokens
+            or response.cost_usd != attempt.cost_usd
+        )
+
+        if accounting_differs:
+            raise ValueError("Response evidence differs from attempt accounting")
+
+        if response.kind != ResponseKind.COMPLETED and attempt.outcome in VALIDATED_OUTCOMES:
+            raise ValueError("Only completed responses can claim validated outcomes")
+
+        if response.kind != ResponseKind.COMPLETED:
+            expected = RESPONSE_OUTCOMES[response.kind]
+
+            if attempt.outcome not in (expected, AttemptOutcome.DEADLINE_EXCEEDED):
+                raise ValueError("Response kind differs from the attempt outcome")
+
+    if attempt.failure is not None:
+        if response is not None or attempt.outcome != AttemptOutcome.TRANSPORT_ERROR:
+            raise ValueError("Transport failure evidence requires a transport-error outcome")
+
+        if attempt.duration_ms != attempt.failure.duration_ms:
+            raise ValueError("Transport timing differs from the attempt")
+
+        usage_differs = (
+            attempt.failure.input_tokens != attempt.input_tokens
+            or attempt.failure.output_tokens != attempt.output_tokens
+        )
+
+        if usage_differs:
+            raise ValueError("Transport usage differs from the attempt")
+
+        if (
+            attempt.runtime == ModelRuntime.OPENROUTER
+            and attempt.cost_usd != attempt.failure.cost_usd
+        ):
+            raise ValueError("Transport billed cost differs from the attempt")
 
 
 def contract_from_context(info: ValidationInfo) -> ExtractionContract:
@@ -99,7 +160,7 @@ def contract_from_context(info: ValidationInfo) -> ExtractionContract:
 def check_run_status(record: RunRecord) -> None:
     """Keep succeeded, failed and not-attempted evidence mutually consistent."""
 
-    if record.status == NOT_ATTEMPTED_STATUS:
+    if record.status == RunStatus.NOT_ATTEMPTED:
         if record.attempts or record.extraction is not None or record.reason is None:
             raise ValueError("Not-attempted runs require a reason and no attempts/extraction")
 
@@ -110,17 +171,17 @@ def check_run_status(record: RunRecord) -> None:
 
     final_attempt = record.attempts[-1]
 
-    if record.status == SUCCEEDED_STATUS:
+    if record.status == RunStatus.SUCCEEDED:
         if (
             record.extraction is None
             or record.reason is not None
-            or final_attempt.outcome != VALID_OUTCOME
+            or final_attempt.outcome != AttemptOutcome.VALID
         ):
             raise ValueError("Successful runs require a valid final attempt and extraction")
     elif (
         record.extraction is not None
         or record.reason is None
-        or final_attempt.outcome == VALID_OUTCOME
+        or final_attempt.outcome == AttemptOutcome.VALID
     ):
         raise ValueError("Failed runs require a failed final attempt, reason and no extraction")
 
@@ -134,7 +195,7 @@ def check_attempt_identity(record: RunRecord, attempt: AttemptResult, expected_n
     if attempt.model_name != record.model_name or attempt.runtime != record.runtime:
         raise ValueError("Attempt model/runtime differs from the run variant")
 
-    if expected_number == FIRST_ATTEMPT_NUMBER and attempt.kind != EXTRACTION_ATTEMPT:
+    if expected_number == FIRST_ATTEMPT_NUMBER and attempt.kind != AttemptKind.EXTRACTION:
         raise ValueError("First attempt must be an extraction")
 
 
@@ -142,6 +203,12 @@ def check_attempt_response(attempt: AttemptResult, contract: ExtractionContract)
     """Compare reported validation evidence with the authoritative validator."""
 
     if attempt.outcome not in VALIDATED_OUTCOMES:
+        if attempt.raw_response is not None and attempt.issues:
+            outcome = contract.validate_json(attempt.raw_response)
+
+            if tuple(attempt.issues) != outcome.issues:
+                raise ValueError("Attempt issues disagree with authoritative validation")
+
         return
 
     if attempt.raw_response is None:
@@ -149,7 +216,7 @@ def check_attempt_response(attempt: AttemptResult, contract: ExtractionContract)
 
     outcome = contract.validate_json(attempt.raw_response)
 
-    if outcome.is_valid != (attempt.outcome == VALID_OUTCOME):
+    if outcome.is_valid != (attempt.outcome == AttemptOutcome.VALID):
         raise ValueError("Attempt outcome disagrees with authoritative validation")
 
     if tuple(attempt.issues) != outcome.issues:

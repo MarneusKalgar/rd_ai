@@ -99,7 +99,7 @@ class ModelResponse(StrictModel):
 
 
 class ModelAdapter(Protocol):
-    """One physical inference request per call; application setup owns HTTP clients."""
+    """At most one physical request per call; known setup errors fail before I/O."""
 
     @property
     def identity(self) -> ModelIdentity: ...

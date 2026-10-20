@@ -6,6 +6,7 @@ from pydantic import ConfigDict
 
 from extraction_service.configuration.models import ModelConfig
 from extraction_service.inference.types import ModelIdentity
+from extraction_service.record_types import ModelRuntime
 from extraction_service.runtime_types import NonEmptyText, PositiveInt, Sha256, StrictModel
 
 REQUIRED_OPENROUTER_PARAMETERS: Final[frozenset[str]] = frozenset(
@@ -110,7 +111,7 @@ class OllamaRuntime(StrictModel):
         return ModelIdentity(
             model_id=config.id,
             model_name=config.model,
-            runtime="ollama-native" if native else "ollama-docker",
+            runtime=ModelRuntime.OLLAMA_NATIVE if native else ModelRuntime.OLLAMA_DOCKER,
             runtime_version=self.version,
             model_digest=self.model_digest,
         )
