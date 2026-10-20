@@ -21,15 +21,18 @@ status is maintained in the [HW README](../README.md).
 | **6.3 — Shared model interface and adapters** | Translate explicit requests and preserve response/error metadata for both backends. | Adapter integration tests with controlled HTTP responses, followed by live capability verification. |
 | **6.3.1 — Adapter construction and HTTP client ownership** | Adapters borrow injected post-only clients; application scopes own construction, sharing and cleanup. | Focused injection/exception tests plus real-client sharing, authentication, URL and cleanup checks. |
 | **6.4 — Shared coordinator, failure handling and budget** | Common validation, bounded retries/correction, deadlines, dependency-level batch stopping and cumulative spending limits. | Unit tests for decisions; integration tests for request sequences, stop behavior and accounting. |
-| **6.5 — Docker services and environment setup** | Portable app/runtime setup, model initialization, readiness and persistent storage. | Process/container checks and live startup verification through the documented entrypoint. |
+| **6.4.1 — Audit regression coverage** | Close the ten identified assertion-sensitivity gaps in the implemented coordinator. | Focused offline regressions and bounded mutations in disposable copies. |
+| **6.5 — Docker services and environment setup** | Runtime image, mode selection, bounded model initialization, readiness and persistent storage. | Controlled setup failures and container/storage checks, with separate live context/memory evidence. |
 | **6.6 — Persistence, tests and integration acceptance** | Process selected inputs, save records and summaries, and exercise both real adapters. | Application workflow tests with a controlled model endpoint; a live smoke run on three documents per adapter. |
-| **7 — Prompt and experiment design** | Version prompts and compare the model × prompt × sampling matrix. | Deterministic configuration/request checks plus separate measured model experiments. |
+| **7.1 — Provider screening** | Compare explicitly selected candidates with fixed v1/baseline settings and record selection use of gold cases. | A measured screening experiment using the already-tested evaluator from section 8. |
+| **7.2 — Required matrix** | Version prompts and compare the selected provider/local model × prompt × sampling combinations. | Deterministic selection checks plus the separate measured matrix. |
 | **8 — Evaluation and results** | Compute accuracy, validity, latency and cost from saved records. | Unit tests for scoring/arithmetic and integration tests from records to aggregates. |
 | **9 — Verification and acceptance** | Reviewer can run the submission and reproduce its evidence. | Final Docker/Make acceptance using tracked artifacts, recorded runtime identities and saved results. |
 
 ## Current coverage
 
-The implemented contract and sections 6.1–6.4 already exercise several levels:
+The implemented contract and sections 6.1–6.4, including the 6.4.1 regression
+follow-up, already exercise several levels:
 
 - [Contract tests](../tests/test_contract.py) and
   [record tests](../tests/test_records.py) cover validation rules, evidence and
@@ -65,9 +68,39 @@ its runtime environment; the components and boundaries exercised determine its
 level. Inference CLI/persistence workflows, live model tests and scoring remain
 pending with sections 6.5–8.
 
+### Coordinator audit follow-up — 6.4.1 complete
+
+The coordinator implementation is complete. Its 20 October audit identified ten
+test-sensitivity gaps: the existing suite passed the selected defective variants,
+while the unchanged implementation passed distinguishing cases in a disposable
+copy. The follow-up adds 14 repository cases and strengthens both existing
+correction-evidence cases, replacing reliance on temporary audit cases.
+
+| Audited behavior | Repository coverage |
+| --- | --- |
+| Settlement failure retains evidence and stops only paid work | [Spending policy](../tests/execution/test_spending_policy.py) |
+| Fixed request fee contributes to the reservation quote | [Pricing](../tests/execution/test_pricing.py) |
+| Zero allocation blocks optional work while allowing matrix work | [Spending policy](../tests/execution/test_spending_policy.py) |
+| Optional holdback does not stop affordable matrix work | [Spending policy](../tests/execution/test_spending_policy.py) |
+| Different models, versions and digests have independent stop state | [Dependency policy](../tests/execution/test_dependency_policy.py) |
+| Correction requests contain the exact structured issues | [Coordinator](../tests/execution/test_coordinator.py) |
+| Failure timing, tokens and cost cannot contradict attempt evidence | [Failure evidence](../tests/execution/test_failure_evidence.py) |
+| Later backoff grows, caps and restarts for correction | [Deadlines](../tests/execution/test_deadlines.py) |
+| Fully attempted invalid outputs still form a complete comparison | [Coordinator](../tests/execution/test_coordinator.py) |
+| A nonretryable availability failure sends no retry | [Coordinator](../tests/execution/test_coordinator.py) |
+
+Verified on 20 October 2026: `make hw01-check` passed 466 tests, lint, formatting,
+strict typing, all 10 gold validations and the 30-input offline preflight. In a
+disposable Docker copy, each of the ten deliberate defects failed its intended
+repository assertion or rejection check, with no setup/collection errors. The
+unmodified and restored copies each passed all 466 tests, and source/test hashes
+matched after restoration. No production code, frozen data, schema or model
+configuration changed, and no inference was performed. This closes the selected
+audit findings; it does not establish exhaustive correctness or live acceptance.
+
 ## 1. Unit and component tests
 
-**Plan points: 5, 6.1, 6.3.1, 6.4 and 8.**
+**Plan points: 5, 6.1, 6.3.1, 6.4–6.4.1 and 8.**
 
 Test one rule or cohesive component through its public API. Keep the real PO
 validator and operational models where they are the subject of the test.
@@ -75,7 +108,8 @@ Dependencies on external inference, time and transport can be controlled.
 
 Existing coverage includes required/nullable PO fields, enums, dates, decimal
 strings, strict configuration, status consistency and usage/cost availability.
-Coordinator cases below are implemented; scoring cases follow in section 8:
+Coordinator categories below have existing coverage, with the completed audit
+regressions listed above. Scoring cases follow in section 8:
 
 - Transient versus permanent transport failures and retry eligibility.
 - One correction after invalid returned output, with a bounded request count.
@@ -96,7 +130,7 @@ for real timeouts or making inference requests.
 
 ## 2. Integration tests
 
-**Plan points: 5, 6.1–6.4 (including 6.3.1), 6.6 and 8.**
+**Plan points: 5, 6.1–6.4.1 (including 6.3.1), 6.6 and 8.**
 
 Exercise cooperating application modules with real validation and real files.
 For adapters, control the external HTTP boundary while preserving production
@@ -110,6 +144,7 @@ request construction and response parsing.
 | HTTP response → adapter result | Realistic success, refusal, truncation, usage/cost and error payloads retain their available evidence. | 6.3 |
 | Application setup → borrowed HTTP clients | Correct URL/authentication, unauthenticated catalog probes, shared and distinct client behavior, and cleanup once per owned client during success or failure. | 6.3.1 |
 | Coordinator → adapter → PO validator | Retry/correction sequences, final statuses, deadlines, dependency stopping and accounting agree across components. | 5, 6.4 |
+| Coordinator → persistent budget | Each paid request reserves before sending; settlement failures retain evidence and stop paid work; optional-stage holdback leaves affordable matrix work available. | 6.4.1 |
 | Runner → saved records | Records reload under the approved contract, summaries retain failures/unattempted cases, and run identity prevents silent overwrites. | 6.6 |
 | Saved records → evaluation | Aggregates use the intended records, variant identities, matching rules and denominators. | 8 |
 
@@ -119,7 +154,32 @@ integration tests remain independent of provider credentials and model weights.
 Temporary files and stub responses belong to test fixtures; real inference
 requests use only the approved neutral inputs.
 
-## 3. CLI/system and end-to-end tests
+## 3. Runtime/container setup checks
+
+**Plan points: 6.5.1–6.5.6.** Add these checks with the runtime services:
+
+- Resolve provider and Docker-local startup paths independently. Provider-only
+  setup does not start Ollama or download weights; local setup needs no key.
+- Use controlled responses/process failures to check bounded readiness and
+  initialization, missing models and identity mismatches. Ordinary tests do not
+  download weights or invoke real models.
+- Exercise the app's actual non-root identity and persistent results directory:
+  create, lock, write and atomically replace ledger files; recreate the app
+  container and verify accounted spending and unresolved reservations survive.
+- Verify that ordinary shutdown preserves results and weights, and that a
+  startup never resets a ledger or invents zero previous spending.
+- Check offline preflight through the app runtime image and documented setup
+  commands. The existing network-isolated check service remains independent.
+
+Separately record live local setup evidence for the pinned image/model digest,
+service versus model readiness, effective context and memory fit on the 16 GB
+machine. The capacity check includes instructions, schema, source, correction
+evidence and output allowance. Record the token-capacity method and actual Docker
+resources; missing evidence is unverified setup, not a passing configuration test.
+Model loading and cold startup remain distinct from measured document latency.
+These setup diagnostics do not replace the extraction smoke in section 6.6.
+
+## 4. CLI/system and end-to-end tests
 
 **Plan points: 6.3–6.6 and 9.**
 
@@ -142,7 +202,7 @@ validation boundaries shown above. Separate two execution modes at this level.
 
 ### Routine application workflow checks
 
-**Plan points: 6.4–6.6.** Launch the real CLI in a separate process and use a
+**Plan point: 6.6, integrating sections 6.3–6.5.** Launch the real CLI in a separate process and use a
 controlled model endpoint. This covers the application's complete workflow
 while substituting for the external inference dependency.
 
@@ -154,6 +214,14 @@ Keep a small set of scenarios:
 3. Exhausted retries/deadlines remain failed results; a budget or dependency
    stop also records untouched inputs as not attempted. Request counts and
    summaries agree, and interrupted comparisons are identified as incomplete.
+4. Partial setup failure and an unexpected execution defect produce the
+   documented nonzero exit status and credential-safe diagnostics. Owned clients
+   close once, the original error is retained, completed evidence survives where
+   storage is available, and the interrupted run remains incomplete.
+5. Explicit selections send only the intended combinations. Budget initialization
+   refuses to overwrite existing state; reopening retains prior spending across
+   invocations. Missing/unsafe pricing or an unavailable ledger sends no paid
+   request. Pair rejection paths with successful setup/execution cases.
 
 For dependency-stop integration, retain state across prompt/sampling variants
 sharing the same backend/endpoint/model route, and verify that no HTTP request
@@ -174,7 +242,7 @@ the extraction runner exists.
 
 ### Live end-to-end smoke
 
-**Plan points: 6.3, 6.5, 6.6 and 9.** Exercise both real adapters on the same
+**Plan points: 6.6 and 9, using the setup verified in 6.5.** Exercise both real adapters on the same
 three representative approved documents, with the selected v1 configuration.
 Include Docker/runtime readiness and the documented application entrypoint.
 
@@ -201,6 +269,19 @@ variable responses justify keeping this layer small.
 model behavior. Engineering tests establish that the service follows its
 contract and records those outcomes faithfully.
 
+Implement section 8's deterministic scoring core and saved-record aggregation
+before section 7.1 screening. Use the same tested evaluator for screening and
+the required matrix; verify matching, failure denominators and accounting with
+independently calculated fixtures, without model calls.
+
+Section 7.1 screens the explicitly selected provider candidates on the same
+10 approved gold cases with fixed v1/baseline settings. Record candidate and
+stage identity, failed outcomes, actual available cost and the production-model
+selection rationale. Smoke, screening and matrix spending share the same ledger.
+Merely listing a candidate must not schedule it. Disclose that these gold cases
+were used for model selection and prompt tuning: their later scores are
+development-set measurements, not independent held-out generalization evidence.
+
 Run the full two-model × two-prompt × two-sampling comparison on the 30 approved
 texts as a separate measured experiment, within the configured budget. Compute
 quality against the 10 approved gold objects from saved records. Include
@@ -223,18 +304,27 @@ homework target. Keep its network-isolated check service as the default gate.
 | When | Work to add or run | Plan points |
 | --- | --- | --- |
 | Current contract/configuration/corpus changes | Existing unit, integration and validation/preflight process checks. | 5, 6.1–6.2 |
-| Adapter/coordinator implementation | Request/response integration and focused retry, correction, deadline and budget cases. | 6.3–6.4 |
-| Runtime/persistence completion | Controlled-endpoint CLI workflows and the explicit three-document live smoke for each adapter. | 6.5–6.6 |
-| Evaluation implementation | Deterministic scoring tests and saved-record aggregation checks. | 8 |
-| Prompt/model comparison and submission | Measured matrix, report reproduction and clean Docker/Make acceptance. | 7–9 |
+| Current adapter/coordinator changes | Existing request/response integration and focused policy checks. | 6.3–6.4 |
+| Completed audit follow-up / later changes to audited guards | Maintain the targeted repository regressions; use corresponding bounded mutation probes when their sensitivity needs verification. | 6.4.1 |
+| Runtime infrastructure implementation | Controlled setup failures, mode selection, non-root persistence/recreation checks and separate live context/memory evidence. | 6.5 |
+| Before the first live test | Register the live marker, enforce default exclusion and provide explicit selection before any real runtime/model-dependent test is introduced. | 6.5–6.6 |
+| Runner/persistence implementation | Controlled-endpoint CLI workflows, cleanup/error boundaries, selection and budget composition. | 6.6 |
+| Integration acceptance | Explicit three-document extraction smoke for each real adapter, retaining failures and spending evidence. | 6.6 |
+| Before provider screening | Deterministic scoring tests and saved-record aggregation checks. | 8 core, before 7.1 |
+| Provider screening | Fixed-configuration candidate comparison, selection rationale and gold selection-use disclosure. | 7.1 |
+| Required comparison | Selected provider/local two-prompt, two-sampling matrix over all 30 inputs. | 7.2 |
+| After measured runs / final submission | Reproduce aggregates/report from saved records and verify clean Docker/Make acceptance. | 8 report, 9 |
 
 Existing pytest and Docker tooling are sufficient. Introduce registered
-`unit`, `integration` and `e2e` markers when separate selection becomes useful;
-use an additional `live` marker for inference-dependent cases. Configure an
-explicit default exclusion for live tests and a dedicated selection path.
+`unit`, `integration` and `e2e` markers when separate selection becomes useful.
+Before introducing the first real runtime/model-dependent test, register a
+`live` marker, configure explicit default exclusion and provide a dedicated
+selection path. Keep model pulls and external requests out of module imports
+and collection; only explicitly selected live fixtures may perform them.
 Markers alone do not prevent tests from running. Register markers and reject
 unknown names as described in the [pytest marker documentation](https://docs.pytest.org/en/stable/how-to/mark.html).
-These marker and selection changes remain future implementation work.
+These marker and selection changes remain future work. Live isolation is a
+prerequisite for live tests; broad level tagging does not need to precede 6.4.1.
 
 Keep fixtures shared where useful, and split files/directories when that makes
 responsibilities clearer. Exercise detailed failure combinations at the lowest

@@ -1,4 +1,5 @@
 import json
+from dataclasses import asdict
 
 import pytest
 
@@ -72,16 +73,25 @@ def test_one_correction_uses_original_source_and_exact_invalid_evidence(
     record = coordinator.execute(
         ScheduledExtraction(job, ExecutionTarget(adapter, "http://ollama:11434"))
     )
+    validation = contract.validate_json(first_text)
+    correction_text = adapter.requests[1].instructions
+    evidence_text = correction_text.split("Correction evidence:\n", 1)[1]
+    correction_evidence = json.loads(evidence_text)
+    expected_issues = [asdict(issue) for issue in validation.issues]
 
     assert record.status == "succeeded"
     assert [attempt.kind for attempt in record.attempts] == ["extraction", "correction"]
     assert [attempt.outcome for attempt in record.attempts] == ["invalid", "valid"]
     assert record.attempts[0].raw_response == first_text
-    assert record.attempts[0].issues == list(contract.validate_json(first_text).issues)
+    assert record.attempts[0].issues == list(validation.issues)
     assert adapter.requests[1].source_text == job.source_text
     assert adapter.requests[1].instructions.startswith(job.instructions)
     assert json.dumps(first_text) in adapter.requests[1].instructions
-    assert "validation_issues" in adapter.requests[1].instructions
+    assert expected_issues
+    assert correction_evidence == {
+        "invalid_response": first_text,
+        "validation_issues": expected_issues,
+    }
     assert adapter.requests[0].output_schema == adapter.requests[1].output_schema
     assert record.total_input_tokens == 24
     assert record.total_output_tokens == 8
@@ -117,6 +127,60 @@ def test_each_generation_has_its_own_retry_bound_and_only_one_correction(
     assert record.total_input_tokens == (24 if retries == 0 else None)
     assert record.total_output_tokens == (8 if retries == 0 else None)
     assert record.total_cost_usd == 0.0
+
+
+def test_fully_attempted_invalid_batch_is_a_complete_comparison(
+    contract: ExtractionContract,
+    policy: ExecutionConfig,
+    job: ExtractionJob,
+    local_identity: ModelIdentity,
+    clock: FakeClock,
+) -> None:
+    adapter = ScriptedAdapter(
+        local_identity,
+        clock,
+        [response(local_identity, "{}"), response(local_identity, "{}")],
+    )
+    coordinator = ExtractionCoordinator(contract, policy, clock=clock)
+    task = ScheduledExtraction(job, ExecutionTarget(adapter, "http://ollama:11434"))
+
+    batch = coordinator.execute_many([task])
+
+    assert batch.records[0].status == "failed"
+    assert len(adapter.requests) == 2
+    assert batch.summary.succeeded == 0
+    assert batch.summary.failed == 1
+    assert batch.summary.not_attempted == 0
+    assert batch.summary.dependency_stops == []
+    assert batch.summary.budget_stops == []
+    assert batch.summary.comparison_complete
+
+
+def test_nonretryable_availability_failure_is_not_retried(
+    contract: ExtractionContract,
+    gold: JsonObject,
+    policy: ExecutionConfig,
+    job: ExtractionJob,
+    local_identity: ModelIdentity,
+    clock: FakeClock,
+) -> None:
+    adapter = ScriptedAdapter(
+        local_identity,
+        clock,
+        [failure(FailureKind.TIMEOUT, retryable=False), response(local_identity, json.dumps(gold))],
+    )
+    coordinator = ExtractionCoordinator(contract, policy, clock=clock)
+    task = ScheduledExtraction(job, ExecutionTarget(adapter, "http://ollama:11434"))
+
+    record = coordinator.execute(task)
+
+    assert record.status == "failed"
+    assert record.reason == "transport_failure:timeout"
+    assert len(adapter.requests) == 1
+    assert len(record.attempts) == 1
+    assert record.attempts[0].failure is not None
+    assert not record.attempts[0].failure.retryable
+    assert clock.sleeps == []
 
 
 @pytest.mark.parametrize(

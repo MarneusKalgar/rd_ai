@@ -13,6 +13,48 @@ from extraction_service.inference.types import ModelIdentity, ModelResponse, Res
 from .helpers import FakeClock, ScriptedAdapter, failure, response
 
 
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("model_name", "other-local-model"),
+        ("runtime_version", "other-version"),
+        ("model_digest", "b" * 64),
+    ],
+)
+def test_changed_model_or_runtime_identity_has_independent_stop_state(
+    contract: ExtractionContract,
+    gold: JsonObject,
+    policy: ExecutionConfig,
+    job: ExtractionJob,
+    local_identity: ModelIdentity,
+    clock: FakeClock,
+    field: str,
+    value: str,
+) -> None:
+    configured = policy.model_copy(update={"transport_retries": 0, "dependency_failure_limit": 1})
+    values = local_identity.model_dump()
+    values[field] = value
+    other_identity = ModelIdentity.model_validate(values)
+    failing = ScriptedAdapter(local_identity, clock, [failure()])
+    independent = ScriptedAdapter(
+        other_identity, clock, [response(other_identity, json.dumps(gold))]
+    )
+    first_target = ExecutionTarget(failing, "http://ollama:11434")
+    other_target = ExecutionTarget(independent, "http://ollama:11434")
+    coordinator = ExtractionCoordinator(contract, configured, clock=clock)
+
+    batch = coordinator.execute_many(
+        [ScheduledExtraction(job, first_target), ScheduledExtraction(job, other_target)]
+    )
+
+    assert [record.status for record in batch.records] == ["failed", "succeeded"]
+    assert len(failing.requests) == len(independent.requests) == 1
+    assert len(batch.summary.dependency_stops) == 1
+    assert batch.summary.dependency_stops[0].dependency == first_target.dependency
+    assert batch.records[1].dependency == other_target.dependency
+    assert first_target.dependency != other_target.dependency
+
+
 @pytest.mark.parametrize("threshold", [1, 3, 4])
 def test_stop_counts_failed_inputs_not_physical_retries(
     contract: ExtractionContract,

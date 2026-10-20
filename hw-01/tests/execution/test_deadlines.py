@@ -10,9 +10,36 @@ from extraction_service.execution.types import ExecutionTarget, ExtractionJob
 from extraction_service.extraction import ExtractionContract
 from extraction_service.extraction.validation import JsonObject
 from extraction_service.inference.errors import FailureKind
-from extraction_service.inference.types import ModelIdentity
+from extraction_service.inference.types import ModelIdentity, ModelResponse
 
 from .helpers import FakeClock, ScriptedAdapter, failure, response
+
+
+def test_later_backoff_grows_caps_and_restarts_for_correction(
+    contract: ExtractionContract,
+    gold: JsonObject,
+    policy: ExecutionConfig,
+    job: ExtractionJob,
+    local_identity: ModelIdentity,
+    clock: FakeClock,
+) -> None:
+    configured = policy.model_copy(update={"transport_retries": 4, "input_timeout_seconds": 120.0})
+    outcomes: list[ModelResponse | Exception] = [failure() for _ in range(4)]
+    outcomes.append(response(local_identity, "{}"))
+    outcomes.extend(failure() for _ in range(4))
+    outcomes.append(response(local_identity, json.dumps(gold)))
+    adapter = ScriptedAdapter(local_identity, clock, outcomes)
+    coordinator = ExtractionCoordinator(contract, configured, clock=clock)
+    task = ScheduledExtraction(job, ExecutionTarget(adapter, "http://ollama:11434"))
+
+    record = coordinator.execute(task)
+    recorded_delays = [attempt.retry_delay_seconds for attempt in record.attempts]
+
+    assert record.status == "succeeded"
+    assert len(adapter.requests) == 10
+    assert clock.sleeps == [1.0, 2.0, 3.0, 3.0, 1.0, 2.0, 3.0, 3.0]
+    assert recorded_delays == [1.0, 2.0, 3.0, 3.0, 0.0, 1.0, 2.0, 3.0, 3.0, 0.0]
+    assert record.duration_ms == pytest.approx(18100.0)
 
 
 @pytest.mark.parametrize("retry_after", ["3", "http-date", "nonsense", "-2", "2.5"])
