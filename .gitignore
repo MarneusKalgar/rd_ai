@@ -2,6 +2,7 @@
 .agents/inputs
 .agents/specs
 .agents/raw
+.agents/investigations
 
 # Original customer workbooks and private preparation/review outputs.
 .agents/samples
