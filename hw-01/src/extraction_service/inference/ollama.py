@@ -2,12 +2,9 @@
 
 from copy import deepcopy
 
-import httpx
-
 from extraction_service.configuration.models import ModelConfig
-from extraction_service.configuration.settings import ApplicationSettings
 from extraction_service.inference.capabilities import OllamaRuntime
-from extraction_service.inference.http import JsonHttpClient
+from extraction_service.inference.http import HttpPoster
 from extraction_service.inference.messages import request_messages
 from extraction_service.inference.ollama_payloads import parse_completion
 from extraction_service.inference.types import GenerationRequest, ModelIdentity, ModelResponse
@@ -19,21 +16,17 @@ class OllamaAdapter:
     def __init__(
         self,
         config: ModelConfig,
-        settings: ApplicationSettings,
         runtime: OllamaRuntime,
         *,
+        http_client: HttpPoster,
         native: bool = False,
-        transport: httpx.BaseTransport | None = None,
     ) -> None:
         self._identity = runtime.identity(config, native=native)
-        self._http = JsonHttpClient(str(settings.ollama_base_url), transport=transport)
+        self._http = http_client
 
     @property
     def identity(self) -> ModelIdentity:
         return self._identity
-
-    def close(self) -> None:
-        self._http.close()
 
     def generate(self, request: GenerationRequest) -> ModelResponse:
         """Send the full schema and explicit common options with streaming disabled."""

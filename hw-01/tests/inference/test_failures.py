@@ -51,11 +51,8 @@ def test_http_failures_are_preserved_without_retries_or_redirects(
 
     adapter = adapter_factory(backend, httpx.MockTransport(handle))
 
-    try:
-        with pytest.raises(ModelTransportError) as failure:
-            adapter.generate(generation)
-    finally:
-        adapter.close()
+    with pytest.raises(ModelTransportError) as failure:
+        adapter.generate(generation)
 
     evidence = failure.value.evidence
     assert isinstance(evidence.kind, FailureKind)
@@ -84,11 +81,8 @@ def test_credential_redaction_flag_covers_failure_messages_and_headers(
 
     adapter = adapter_factory("openrouter", httpx.MockTransport(handle))
 
-    try:
-        with pytest.raises(ModelTransportError) as failure:
-            adapter.generate(generation)
-    finally:
-        adapter.close()
+    with pytest.raises(ModelTransportError) as failure:
+        adapter.generate(generation)
 
     evidence = failure.value.evidence
     assert evidence.credentials_redacted is True
@@ -123,11 +117,8 @@ def test_transport_exceptions_are_single_attempts(
 
     adapter = adapter_factory(backend, httpx.MockTransport(handle))
 
-    try:
-        with pytest.raises(ModelTransportError) as failure:
-            adapter.generate(generation)
-    finally:
-        adapter.close()
+    with pytest.raises(ModelTransportError) as failure:
+        adapter.generate(generation)
 
     evidence = failure.value.evidence
     assert evidence.kind == ("timeout" if timeout else "connection")
@@ -150,11 +141,8 @@ def test_malformed_envelopes_keep_exact_body(
         backend, httpx.MockTransport(lambda request: httpx.Response(200, text=raw_body))
     )
 
-    try:
-        with pytest.raises(ModelTransportError) as failure:
-            adapter.generate(generation)
-    finally:
-        adapter.close()
+    with pytest.raises(ModelTransportError) as failure:
+        adapter.generate(generation)
 
     assert failure.value.evidence.kind == "protocol_error"
     assert failure.value.evidence.retryable is False
@@ -193,11 +181,8 @@ def test_invalid_wire_fields_fail_from_valid_envelope(
         backend, httpx.MockTransport(lambda request: httpx.Response(200, text=raw_body))
     )
 
-    try:
-        with pytest.raises(ModelTransportError) as failure:
-            adapter.generate(generation)
-    finally:
-        adapter.close()
+    with pytest.raises(ModelTransportError) as failure:
+        adapter.generate(generation)
 
     assert failure.value.evidence.kind == "protocol_error"
     assert failure.value.evidence.raw_http_body == raw_body
@@ -212,11 +197,8 @@ def test_http_200_openrouter_error_is_not_a_completion(
         "openrouter", httpx.MockTransport(lambda request: httpx.Response(200, text=raw_body))
     )
 
-    try:
-        with pytest.raises(ModelTransportError) as failure:
-            adapter.generate(generation)
-    finally:
-        adapter.close()
+    with pytest.raises(ModelTransportError) as failure:
+        adapter.generate(generation)
 
     assert failure.value.evidence.kind == "quota"
     assert failure.value.evidence.retryable is False
@@ -238,19 +220,16 @@ def test_reflected_credentials_are_redacted_from_evidence(
     )
     evidence: ModelResponse | FailureEvidence
 
-    try:
-        if status == 200:
-            evidence = adapter.generate(generation)
-            assert evidence.raw_response == "echo [REDACTED]"
-        else:
-            with pytest.raises(ModelTransportError) as failure:
-                adapter.generate(generation)
+    if status == 200:
+        evidence = adapter.generate(generation)
+        assert evidence.raw_response == "echo [REDACTED]"
+    else:
+        with pytest.raises(ModelTransportError) as failure:
+            adapter.generate(generation)
 
-            evidence = failure.value.evidence
-            assert "adapter-test-credential" not in str(failure.value)
+        evidence = failure.value.evidence
+        assert "adapter-test-credential" not in str(failure.value)
 
-        assert evidence.credentials_redacted is True
-        assert "adapter-test-credential" not in evidence.model_dump_json()
-        assert "adapter-test-credential" not in repr(evidence)
-    finally:
-        adapter.close()
+    assert evidence.credentials_redacted is True
+    assert "adapter-test-credential" not in evidence.model_dump_json()
+    assert "adapter-test-credential" not in repr(evidence)

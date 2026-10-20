@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from time import perf_counter
-from typing import Any, Literal
+from typing import Any, Literal, Protocol
 
 import httpx
 
@@ -25,11 +25,18 @@ class HttpReply:
     credentials_redacted: bool
 
 
+class HttpPoster(Protocol):
+    """Borrowed request capability; client ownership stays with application setup."""
+
+    def post(self, path: str, payload: dict[str, Any], timeout_seconds: float) -> HttpReply: ...
+
+
 class JsonHttpClient:
     """Own a client that sends one request, follows no redirects and ignores host proxies.
 
     A test transport can replace HTTP I/O. The production transport has retries=0;
-    retry policy belongs to the coordinator. Call close() when the adapter is done.
+    retry policy belongs to the coordinator. Only the owner closes this client,
+    after all adapters borrowing it have finished.
     """
 
     def __init__(

@@ -6,7 +6,8 @@ model with a local model against the same extraction contract. Its v1
 [`field rules`](docs/extraction-contract.md) and
 [`runtime validator`](docs/runtime-validation.md), strict configuration/settings,
 attempt/run records, [offline preflight](docs/offline-preflight.md) and
-[OpenRouter/Ollama adapters](docs/model-adapters.md) are implemented. The initial
+[OpenRouter/Ollama adapters](docs/model-adapters.md), including client injection
+and application-owned client scopes, are implemented. The initial
 v1 prompt/configuration exists for preflight. Execution/retries, runtime budget
 enforcement, Docker model services, live adapter smoke checks, measured prompt
 variants, saved experiment results and the comparison report remain pending.

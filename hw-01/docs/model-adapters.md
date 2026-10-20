@@ -1,4 +1,4 @@
-# Model adapters — plan section 6.3
+# Model adapters — plan sections 6.3 and 6.3.1
 
 The `inference/` package provides one typed interface for OpenRouter and Ollama.
 Both receive the same neutral source, rendered instructions, authoritative PO
@@ -12,6 +12,8 @@ flowchart TD
     setup["Explicit metadata probes: no inference or model pull"] --> identity["Verified endpoint or installed runtime identity"]
     contract["ExtractionContract: independent schema copy"] --> request["GenerationRequest: instructions, source, schema, sampling, timeout"]
     identity --> adapter["OpenRouterAdapter or OllamaAdapter"]
+    clients["Application setup: client scope factories"] -->|"inject borrowed HttpPoster"| adapter
+    clients -.->|"owns and closes"| http
     request --> adapter
     adapter --> http["One non-streaming HTTP request; retries and redirects disabled"]
     http --> response["ModelResponse: text, finish state, identity, available usage"]
@@ -26,9 +28,56 @@ Both APIs receive the full schema in their structured-output field and in the
 system message. The source is a separate user message. Expected answers,
 annotations and original workbooks are not adapter inputs.
 
-`ModelAdapter` describes `identity`, `generate(request)` and `close()`. Close an
-adapter in `finally` when its owner finishes. Metadata probes are separate calls
-and never occur implicitly inside `generate()`.
+`ModelAdapter` describes `identity` and `generate(request)`. Constructors receive
+an `HttpPoster` protocol exposing only `post()`. Adapters do not construct, close
+or reconfigure clients, and do not assume that a client belongs exclusively to
+them. Identity is still derived from configuration and checked endpoint/runtime
+metadata. Metadata probes are separate calls and never occur implicitly inside
+`generate()`.
+
+### Client construction and lifetime
+
+`client_setup.py` provides three context-managed factories:
+
+| Factory | Configuration and ownership |
+| --- | --- |
+| `openrouter_client(settings)` | Requires the provider key and owns an authenticated generation client scope. |
+| `openrouter_metadata_client(settings)` | Owns a separate unauthenticated public catalog client scope; no key is required. |
+| `ollama_client(settings)` | Owns an unauthenticated scope for the configured Ollama URL, without installing or selecting a runtime. |
+
+Application setup enters a scope once per service URL/authentication
+configuration, reuses its client across requests and can lend it to several
+compatible adapters. Model, routing and sampling choices remain request data.
+Different URLs or credentials use separate scopes. There is no process-global
+singleton, client registry or implicit caching.
+
+Given already checked configurations/endpoints and a rendered request, application
+setup can register multiple clients with `ExitStack`:
+
+```python
+from contextlib import ExitStack
+
+from extraction_service.inference.client_setup import ollama_client, openrouter_client
+from extraction_service.inference.ollama import OllamaAdapter
+from extraction_service.inference.openrouter import OpenRouterAdapter
+
+with ExitStack() as clients:
+    provider_http = clients.enter_context(openrouter_client(settings))
+    local_http = clients.enter_context(ollama_client(settings))
+
+    provider = OpenRouterAdapter(provider_config, endpoint, http_client=provider_http)
+    local = OllamaAdapter(local_config, runtime, http_client=local_http)
+
+    provider_response = provider.generate(request)
+    local_response = local.generate(request)
+```
+
+Another compatible provider adapter can receive the same `provider_http`. The
+application exits each client scope once, after all borrowers finish, including
+when adapter construction or generation raises. Each factory closes its owned
+`JsonHttpClient`, which closes its internal HTTPX client. No adapter `close()`
+method is involved. Factories do not issue metadata, inference or pull requests;
+explicit metadata probes use their own short-lived scopes.
 
 | Common setting | OpenRouter | Ollama |
 | --- | --- | --- |
@@ -43,6 +92,11 @@ routing, and requires support for supplied parameters. No response-healing
 plugin is enabled. Requests above the catalog's output limit fail before HTTP.
 The shared HTTP client ignores host proxy settings and uses HTTPX with transport
 retries set to zero. Retry policy belongs to section 6.4.
+
+Adapters let typed transport/parser failures propagate unchanged. They also let
+unexpected programming errors propagate. Client scopes perform cleanup without
+handling these failures as model outcomes. The coordinator's retry/stop decisions
+and the final CLI error boundary remain sections 6.4 and 6.6 respectively.
 
 ## Returned evidence
 
@@ -107,8 +161,8 @@ those required experiment settings. The approved configuration now pins Gemini's
 serving provider. No paid generation was performed during this implementation.
 
 `verify_openrouter()` fetches public metadata without credentials and checks the
-configured model, exact provider slug and required parameter set. Constructing
-the generation adapter additionally requires `OPENROUTER_API_KEY` from settings.
+configured model, exact provider slug and required parameter set. Entering the
+generation client scope additionally requires `OPENROUTER_API_KEY` from settings.
 Catalog structured-output support does not prove acceptance of every frozen
 schema keyword. That requires the live smoke run in section 6.6.
 
@@ -161,12 +215,40 @@ all 109 adapter tests but exposed regression-test gaps: only five of 15 selected
 mutations were detected by the committed suite. Temporary focused tests detected
 the other ten; they also passed against the unchanged implementation.
 
-Follow-up coverage should exercise connection-level retries, alternate valid
-model/output settings, partially populated usage, each required endpoint
+The section 6.3.1 sharing tests now exercise alternate valid model/output
+settings through the real HTTP wrapper. Remaining audit follow-ups include
+connection-level retries, partially populated usage, each required endpoint
 parameter, discovery after unrelated Ollama tags, the inclusive output-limit
 boundary, and an error finish reason without a choice-level error object.
 These are test-sensitivity gaps, not demonstrated runtime defects. Neither audit
 used paid inference or a live model.
+
+Section 6.3.1 adds post-only injected-client tests and real-client lifecycle tests
+for shared/distinct clients, authentication/URL setup, partial construction,
+generation failures and unchanged exception propagation. Existing HTTP-envelope
+and loopback tests retain the real wrapper; injecting a final model result does
+not replace that integration coverage.
+
+Verification on 2026-10-20 passed `make hw01-check`: 342 tests, Ruff lint/format,
+strict mypy, all 10 gold objects and the 30-input offline preflight. The adapter
+subset contains 129 passing tests. No provider inference or live local model was
+used; the extraction schema, dataset and experiment configuration are unchanged.
+
+The subsequent 6.3.1 test-sensitivity audit passed the 342-test baseline and
+restored baseline. Of 13 selected probes, five were detected, seven survived,
+and one double-close probe was excluded as behaviorally equivalent because
+HTTPX closes its transport idempotently. Nine temporary regression cases passed
+on the unchanged implementation and detected all seven surviving defects.
+
+Follow-up tests need independent configuration-based model/ID expectations,
+different generation timeouts, different supplied credentials for authentication
+and redaction, and a connection-failure probe beneath the real HTTP transport.
+The existing shared-client identity checks can remain internally consistent
+with an incorrectly derived identity. The connection-retry gap was already
+documented in the earlier audit. These findings concern test sensitivity, not
+demonstrated defects in the current runtime. The temporary regression cases are
+not part of the repository suite, and the probe counts are not an overall
+correctness score.
 
 Section 6.4 must add the shared coordinator, bounded retries/correction, deadlines,
 dependency stopping and cumulative budget reservations. Sections 6.5–6.6 add

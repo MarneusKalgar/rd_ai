@@ -19,6 +19,7 @@ status is maintained in the [HW README](../README.md).
 | **6.1 — Pydantic for configuration, settings and run records** | Strict operational data, credentials, status consistency and accounting. | Focused model tests; environment/YAML loading and record/contract round trips. |
 | **6.2 — Corpus loader and offline preflight** | Frozen input/gold/annotation hashes, approvals, links, provenance and prompt references. | Real-file integration tests and CLI preflight checks, with no model requests. |
 | **6.3 — Shared model interface and adapters** | Translate explicit requests and preserve response/error metadata for both backends. | Adapter integration tests with controlled HTTP responses, followed by live capability verification. |
+| **6.3.1 — Adapter construction and HTTP client ownership** | Adapters borrow injected post-only clients; application scopes own construction, sharing and cleanup. | Focused injection/exception tests plus real-client sharing, authentication, URL and cleanup checks. |
 | **6.4 — Shared coordinator, failure handling and budget** | Common validation, bounded retries/correction, deadlines, dependency-level batch stopping and cumulative spending limits. | Unit tests for decisions; integration tests for request sequences, stop behavior and accounting. |
 | **6.5 — Docker services and environment setup** | Portable app/runtime setup, model initialization, readiness and persistent storage. | Process/container checks and live startup verification through the documented entrypoint. |
 | **6.6 — Persistence, tests and integration acceptance** | Process selected inputs, save records and summaries, and exercise both real adapters. | Application workflow tests with a controlled model endpoint; a live smoke run on three documents per adapter. |
@@ -28,7 +29,7 @@ status is maintained in the [HW README](../README.md).
 
 ## Current coverage
 
-The implemented contract and sections 6.1–6.3 already exercise several levels:
+The implemented contract and sections 6.1–6.3.1 already exercise several levels:
 
 - [Contract tests](../tests/test_contract.py) and
   [record tests](../tests/test_records.py) cover validation rules, evidence and
@@ -44,6 +45,12 @@ The implemented contract and sections 6.1–6.3 already exercise several levels:
   controlled HTTP responses, and the production HTTP client against a loopback
   server. [Adapter documentation](model-adapters.md) records tested boundaries,
   public metadata observations and remaining live verification.
+- [Injection tests](../tests/inference/test_client_injection.py) supply only the
+  borrowed `post()` capability and verify real adapter translation and unchanged
+  typed/unexpected error propagation. [Client setup tests](../tests/inference/test_client_setup.py)
+  exercise real HTTPX clients through controlled transports: compatible adapters
+  share clients without changing each other's requests, and application scopes
+  close clients once after success, generation failure or partial setup failure.
 
 A test file can contain more than one level. Executing pytest in Docker defines
 its runtime environment; the components and boundaries exercised determine its
@@ -52,7 +59,7 @@ pending with sections 6.4–8.
 
 ## 1. Unit and component tests
 
-**Plan points: 5, 6.1, 6.4 and 8.**
+**Plan points: 5, 6.1, 6.3.1, 6.4 and 8.**
 
 Test one rule or cohesive component through its public API. Keep the real PO
 validator and operational models where they are the subject of the test.
@@ -81,7 +88,7 @@ for real timeouts or making inference requests.
 
 ## 2. Integration tests
 
-**Plan points: 5, 6.1–6.4, 6.6 and 8.**
+**Plan points: 5, 6.1–6.4 (including 6.3.1), 6.6 and 8.**
 
 Exercise cooperating application modules with real validation and real files.
 For adapters, control the external HTTP boundary while preserving production
@@ -93,6 +100,7 @@ request construction and response parsing.
 | Manifests/files → loaded corpus | Hashes, approvals, membership, annotation identity and gold line counts are checked; each input retains its provenance. | 6.2 |
 | Adapter → HTTP request | Correct schema copy, source text, model/routing identity and applied sampling limits; labels and annotations stay outside inference requests. | 5, 6.3 |
 | HTTP response → adapter result | Realistic success, refusal, truncation, usage/cost and error payloads retain their available evidence. | 6.3 |
+| Application setup → borrowed HTTP clients | Correct URL/authentication, unauthenticated catalog probes, shared and distinct client behavior, and cleanup once per owned client during success or failure. | 6.3.1 |
 | Coordinator → adapter → PO validator | Retry/correction sequences, final statuses, deadlines, dependency stopping and accounting agree across components. | 5, 6.4 |
 | Runner → saved records | Records reload under the approved contract, summaries retain failures/unattempted cases, and run identity prevents silent overwrites. | 6.6 |
 | Saved records → evaluation | Aggregates use the intended records, variant identities, matching rules and denominators. | 8 |

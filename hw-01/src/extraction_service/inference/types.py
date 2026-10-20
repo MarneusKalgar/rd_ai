@@ -99,11 +99,9 @@ class ModelResponse(StrictModel):
 
 
 class ModelAdapter(Protocol):
-    """Shared synchronous interface for one physical inference request per call."""
+    """One physical inference request per call; application setup owns HTTP clients."""
 
     @property
     def identity(self) -> ModelIdentity: ...
 
     def generate(self, request: GenerationRequest) -> ModelResponse: ...
-
-    def close(self) -> None: ...

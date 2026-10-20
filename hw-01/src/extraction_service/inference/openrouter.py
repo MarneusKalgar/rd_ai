@@ -3,12 +3,9 @@
 from copy import deepcopy
 from typing import Any
 
-import httpx
-
 from extraction_service.configuration.models import ModelConfig
-from extraction_service.configuration.settings import ApplicationSettings
 from extraction_service.inference.capabilities import OpenRouterEndpoint
-from extraction_service.inference.http import JsonHttpClient
+from extraction_service.inference.http import HttpPoster
 from extraction_service.inference.messages import request_messages
 from extraction_service.inference.openrouter_payloads import parse_completion
 from extraction_service.inference.types import GenerationRequest, ModelIdentity, ModelResponse
@@ -20,13 +17,11 @@ class OpenRouterAdapter:
     def __init__(
         self,
         config: ModelConfig,
-        settings: ApplicationSettings,
         endpoint: OpenRouterEndpoint,
         *,
-        transport: httpx.BaseTransport | None = None,
+        http_client: HttpPoster,
     ) -> None:
         endpoint.check(config)
-        key = settings.require_provider_credentials()
         self._endpoint = endpoint
         self._identity = ModelIdentity(
             model_id=config.id,
@@ -34,18 +29,11 @@ class OpenRouterAdapter:
             runtime="openrouter",
             serving_provider=endpoint.provider_slug,
         )
-        self._http = JsonHttpClient(
-            str(settings.openrouter_base_url),
-            api_key=key.get_secret_value(),
-            transport=transport,
-        )
+        self._http = http_client
 
     @property
     def identity(self) -> ModelIdentity:
         return self._identity
-
-    def close(self) -> None:
-        self._http.close()
 
     def _payload(self, request: GenerationRequest) -> dict[str, Any]:
         maximum = self._endpoint.max_output_tokens

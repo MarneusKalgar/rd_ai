@@ -36,10 +36,7 @@ def test_exact_schema_sampling_and_single_request(
 
     adapter = adapter_factory(backend, httpx.MockTransport(handle))
 
-    try:
-        result = adapter.generate(request)
-    finally:
-        adapter.close()
+    result = adapter.generate(request)
 
     assert len(captured) == 1
     incoming = captured[0]

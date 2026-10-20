@@ -12,6 +12,7 @@ from pydantic import AnyHttpUrl
 from extraction_service.configuration.models import ModelConfig
 from extraction_service.configuration.settings import ApplicationSettings
 from extraction_service.inference.capabilities import OllamaRuntime
+from extraction_service.inference.client_setup import ollama_client
 from extraction_service.inference.errors import ModelTransportError
 from extraction_service.inference.ollama import OllamaAdapter
 from extraction_service.inference.types import GenerationRequest
@@ -53,20 +54,21 @@ def test_real_http_transport_sends_one_request_and_ignores_host_proxy(
         worker.start()
         base_url = AnyHttpUrl(f"http://127.0.0.1:{server.server_port}")
         local_settings = settings.model_copy(update={"ollama_base_url": base_url})
-        adapter = OllamaAdapter(local_config, local_settings, runtime)
 
         try:
-            if status == 200:
-                result = adapter.generate(generation)
-                assert result.raw_response == "  {invalid PO}\n"
-            else:
-                with pytest.raises(ModelTransportError) as failure:
-                    adapter.generate(generation)
+            with ollama_client(local_settings) as client:
+                adapter = OllamaAdapter(local_config, runtime, http_client=client)
 
-                assert failure.value.evidence.kind == "server_error"
-                assert failure.value.evidence.raw_http_body == raw_body.decode()
+                if status == 200:
+                    result = adapter.generate(generation)
+                    assert result.raw_response == "  {invalid PO}\n"
+                else:
+                    with pytest.raises(ModelTransportError) as failure:
+                        adapter.generate(generation)
+
+                    assert failure.value.evidence.kind == "server_error"
+                    assert failure.value.evidence.raw_http_body == raw_body.decode()
         finally:
-            adapter.close()
             server.shutdown()
             worker.join(timeout=1)
 

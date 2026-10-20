@@ -10,7 +10,7 @@ from extraction_service.inference.capabilities import (
     WireModel,
     openrouter_endpoint,
 )
-from extraction_service.inference.http import JsonHttpClient
+from extraction_service.inference.client_setup import ollama_client, openrouter_metadata_client
 from extraction_service.runtime_types import NonEmptyText, Sha256
 
 
@@ -47,14 +47,10 @@ def verify_openrouter(
     if config.backend != "openrouter":
         raise ValueError("OpenRouter verification requires an OpenRouter model")
 
-    client = JsonHttpClient(str(settings.openrouter_base_url), transport=transport)
-
-    try:
+    with openrouter_metadata_client(settings, transport=transport) as client:
         reply = client.get(f"models/{config.model}/endpoints", timeout_seconds)
 
         return openrouter_endpoint(reply.body, config)
-    finally:
-        client.close()
 
 
 def verify_ollama(
@@ -73,9 +69,7 @@ def verify_ollama(
     if config.backend != "ollama":
         raise ValueError("Ollama verification requires an Ollama model")
 
-    client = JsonHttpClient(str(settings.ollama_base_url), transport=transport)
-
-    try:
+    with ollama_client(settings, transport=transport) as client:
         version_reply = client.get("api/version", timeout_seconds)
         version = _Version.model_validate(version_reply.body)
         tags_reply = client.get("api/tags", timeout_seconds)
@@ -96,5 +90,3 @@ def verify_ollama(
                 return runtime
 
         raise ValueError("Configured Ollama model is not installed; initialize it explicitly")
-    finally:
-        client.close()

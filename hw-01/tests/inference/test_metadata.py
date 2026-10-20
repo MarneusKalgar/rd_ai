@@ -10,6 +10,7 @@ import pytest
 from extraction_service.configuration.models import ModelConfig
 from extraction_service.configuration.settings import ApplicationSettings
 from extraction_service.inference.capabilities import OllamaRuntime, OpenRouterEndpoint
+from extraction_service.inference.client_setup import ollama_client, openrouter_client
 from extraction_service.inference.metadata import verify_ollama, verify_openrouter
 from extraction_service.inference.ollama import OllamaAdapter
 from extraction_service.inference.openrouter import OpenRouterAdapter
@@ -108,15 +109,11 @@ def test_output_limit_rejected_before_http(
     def unexpected(request: httpx.Request) -> httpx.Response:
         pytest.fail("An oversized request must not reach HTTP")
 
-    adapter = OpenRouterAdapter(
-        provider_config, settings, limited, transport=httpx.MockTransport(unexpected)
-    )
+    with openrouter_client(settings, transport=httpx.MockTransport(unexpected)) as client:
+        adapter = OpenRouterAdapter(provider_config, limited, http_client=client)
 
-    try:
         with pytest.raises(ValueError, match="exceed the verified endpoint limit"):
             adapter.generate(generation)
-    finally:
-        adapter.close()
 
 
 @dataclass
@@ -158,14 +155,12 @@ def test_installed_identity_and_explicit_native_mode(
     runtime = verify_ollama(
         local_config, settings, timeout_seconds=3.0, transport=httpx.MockTransport(server.handle)
     )
-    adapter = OllamaAdapter(local_config, settings, runtime, native=True)
+    with ollama_client(settings) as client:
+        adapter = OllamaAdapter(local_config, runtime, http_client=client, native=True)
 
-    try:
         assert adapter.identity.runtime == "ollama-native"
         assert adapter.identity.runtime_version == "0.40.5"
         assert adapter.identity.model_digest == "a" * 64
-    finally:
-        adapter.close()
 
     assert server.paths == ["/api/version", "/api/tags", "/api/show"]
 
@@ -200,17 +195,17 @@ def test_runtime_model_mismatch_rejected(
 ) -> None:
     wrong_runtime = runtime.model_copy(update={"model_name": "other-tag"})
 
-    with pytest.raises(ValueError, match="does not match configuration"):
-        OllamaAdapter(local_config, settings, wrong_runtime)
+    with ollama_client(settings) as client:
+        with pytest.raises(ValueError, match="does not match configuration"):
+            OllamaAdapter(local_config, wrong_runtime, http_client=client)
 
 
-def test_provider_key_required_only_for_generation_adapter(
-    provider_config: ModelConfig, endpoint: OpenRouterEndpoint
-) -> None:
+def test_provider_key_required_only_for_generation_client() -> None:
     without_key = ApplicationSettings()
 
     with pytest.raises(ValueError, match="requires OPENROUTER_API_KEY"):
-        OpenRouterAdapter(provider_config, without_key, endpoint)
+        with openrouter_client(without_key):
+            pytest.fail("A provider client must not be supplied without credentials")
 
 
 def test_provider_route_mismatch_rejected_before_generation(
@@ -220,5 +215,6 @@ def test_provider_route_mismatch_rejected_before_generation(
 ) -> None:
     wrong_route = provider_config.model_copy(update={"serving_provider": "other-provider"})
 
-    with pytest.raises(ValueError, match="verified serving-provider slug"):
-        OpenRouterAdapter(wrong_route, settings, endpoint)
+    with openrouter_client(settings) as client:
+        with pytest.raises(ValueError, match="verified serving-provider slug"):
+            OpenRouterAdapter(wrong_route, endpoint, http_client=client)

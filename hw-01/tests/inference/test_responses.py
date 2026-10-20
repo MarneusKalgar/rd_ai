@@ -22,10 +22,7 @@ def test_response_preserves_identity_usage_and_raw_envelope(
     transport = httpx.MockTransport(lambda request: httpx.Response(200, text=raw_body))
     adapter = adapter_factory(backend, transport)
 
-    try:
-        result = adapter.generate(generation)
-    finally:
-        adapter.close()
+    result = adapter.generate(generation)
 
     assert result.raw_http_body == raw_body
     assert result.kind is ResponseKind.COMPLETED
@@ -78,10 +75,7 @@ def test_missing_usage_stays_unknown_and_zero_is_retained(
         backend, httpx.MockTransport(lambda request: httpx.Response(200, json=body))
     )
 
-    try:
-        result = adapter.generate(generation)
-    finally:
-        adapter.close()
+    result = adapter.generate(generation)
 
     expected = 0 if zero_usage else None
     assert result.input_tokens == expected
@@ -121,10 +115,7 @@ def test_finish_state_is_independent_of_json_validity(
         backend, httpx.MockTransport(lambda request: httpx.Response(200, json=body))
     )
 
-    try:
-        result = adapter.generate(generation)
-    finally:
-        adapter.close()
+    result = adapter.generate(generation)
 
     assert result.kind == expected
     assert result.raw_response == content
@@ -163,10 +154,7 @@ def test_other_noncompletion_states(
         backend, httpx.MockTransport(lambda request: httpx.Response(200, json=body))
     )
 
-    try:
-        result = adapter.generate(generation)
-    finally:
-        adapter.close()
+    result = adapter.generate(generation)
 
     assert result.kind == expected
     assert result.raw_response == "  {invalid PO}\n"
@@ -198,10 +186,7 @@ def test_overlapping_states_preserve_error_and_refusal_priority(
         "openrouter", httpx.MockTransport(lambda request: httpx.Response(200, json=body))
     )
 
-    try:
-        result = adapter.generate(generation)
-    finally:
-        adapter.close()
+    result = adapter.generate(generation)
 
     expected = ResponseKind.ERROR if explicit_error else ResponseKind.REFUSED
     assert result.kind is expected

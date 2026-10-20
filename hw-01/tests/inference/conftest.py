@@ -1,6 +1,7 @@
 """Offline adapter fixtures with explicit wire examples and a harmless test credential."""
 
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
+from contextlib import ExitStack
 from typing import Any
 
 import httpx
@@ -11,6 +12,7 @@ from extraction_service.configuration.models import ModelConfig, SamplingConfig
 from extraction_service.configuration.settings import ApplicationSettings
 from extraction_service.extraction import ExtractionContract
 from extraction_service.inference.capabilities import OllamaRuntime, OpenRouterEndpoint
+from extraction_service.inference.client_setup import ollama_client, openrouter_client
 from extraction_service.inference.ollama import OllamaAdapter
 from extraction_service.inference.openrouter import OpenRouterAdapter
 from extraction_service.inference.types import GenerationRequest, ModelAdapter
@@ -78,14 +80,23 @@ def adapter_factory(
     local_config: ModelConfig,
     endpoint: OpenRouterEndpoint,
     runtime: OllamaRuntime,
-) -> Callable[[str, httpx.BaseTransport], ModelAdapter]:
-    def create(backend: str, transport: httpx.BaseTransport) -> ModelAdapter:
-        if backend == "openrouter":
-            return OpenRouterAdapter(provider_config, settings, endpoint, transport=transport)
+) -> Iterator[Callable[[str, httpx.BaseTransport], ModelAdapter]]:
+    with ExitStack() as clients:
 
-        return OllamaAdapter(local_config, settings, runtime, transport=transport)
+        def create(backend: str, transport: httpx.BaseTransport) -> ModelAdapter:
+            if backend == "openrouter":
+                client = clients.enter_context(openrouter_client(settings, transport=transport))
 
-    return create
+                return OpenRouterAdapter(provider_config, endpoint, http_client=client)
+
+            if backend == "ollama":
+                client = clients.enter_context(ollama_client(settings, transport=transport))
+
+                return OllamaAdapter(local_config, runtime, http_client=client)
+
+            raise ValueError(f"Unknown test backend: {backend}")
+
+        yield create
 
 
 @pytest.fixture
