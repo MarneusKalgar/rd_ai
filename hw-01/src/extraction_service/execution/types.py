@@ -13,7 +13,7 @@ from extraction_service.record_types import ExecutionStage, ModelRuntime
 from extraction_service.runtime_types import Identifier, NonEmptyText, Sha256, StrictModel
 
 if TYPE_CHECKING:
-    from extraction_service.execution.pricing import VerifiedPricing
+    from extraction_service.execution.budget.pricing import VerifiedPricing
     from extraction_service.inference.errors import FailureEvidence
     from extraction_service.records import AttemptResult
 

@@ -3,7 +3,8 @@
 from collections.abc import Iterable
 
 from extraction_service.configuration.models import ExecutionConfig
-from extraction_service.execution.budget import BudgetLedger, BudgetStop, Reservation
+from extraction_service.execution.budget.guard import SpendingGuard
+from extraction_service.execution.budget.ledger import BudgetLedger, BudgetStop, Reservation
 from extraction_service.execution.evidence import (
     AttemptContext,
     correction_instructions,
@@ -24,7 +25,6 @@ from extraction_service.execution.results import (
     build_batch_result,
     build_run_record,
 )
-from extraction_service.execution.spending import SpendingGuard
 from extraction_service.execution.types import DependencyIdentity, InputExecution
 from extraction_service.execution.types import ScheduledExtraction as ScheduledExtraction
 from extraction_service.extraction import ExtractionContract

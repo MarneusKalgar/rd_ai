@@ -5,6 +5,21 @@ Both receive the same neutral source, rendered instructions, authoritative PO
 schema and explicit sampling/output limits. Neither adapter decides whether the
 returned text is a valid purchase order.
 
+## Package layout
+
+| Area | Responsibility |
+| --- | --- |
+| `openrouter/adapter.py`, `openrouter/payloads.py` | OpenRouter request translation and response parsing. |
+| `openrouter/capabilities.py`, `openrouter/metadata.py` | Verified endpoint metadata and explicit public catalog probes. |
+| `ollama/adapter.py`, `ollama/payloads.py` | Ollama request translation and response parsing. |
+| `ollama/capabilities.py`, `ollama/metadata.py` | Installed model identity and explicit runtime probes. |
+| `transport/http.py`, `transport/client_setup.py` | Shared HTTP implementation and application-owned client scopes. |
+| `types.py`, `errors.py`, `messages.py`, `finish_reasons.py` | Shared request/response interfaces, classified failures and protocol values. |
+| `wire_models.py` | Common validation policy for evolving remote envelopes. |
+
+Package initializers contain only descriptions. Import adapters and setup probes
+from their owning modules; provider packages do not import each other.
+
 ## Ownership and request flow
 
 ```mermaid
@@ -37,7 +52,7 @@ metadata. Metadata probes are separate calls and never occur implicitly inside
 
 ### Client construction and lifetime
 
-`client_setup.py` provides three context-managed factories:
+`transport/client_setup.py` provides three context-managed factories:
 
 | Factory | Configuration and ownership |
 | --- | --- |
@@ -57,9 +72,9 @@ setup can register multiple clients with `ExitStack`:
 ```python
 from contextlib import ExitStack
 
-from extraction_service.inference.client_setup import ollama_client, openrouter_client
-from extraction_service.inference.ollama import OllamaAdapter
-from extraction_service.inference.openrouter import OpenRouterAdapter
+from extraction_service.inference.ollama.adapter import OllamaAdapter
+from extraction_service.inference.openrouter.adapter import OpenRouterAdapter
+from extraction_service.inference.transport.client_setup import ollama_client, openrouter_client
 
 with ExitStack() as clients:
     provider_http = clients.enter_context(openrouter_client(settings))

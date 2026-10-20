@@ -1,23 +1,14 @@
-"""Verify model metadata before constructing an adapter; these calls do no inference."""
+"""Verify the configured OpenRouter endpoint and its advertised capabilities."""
 
 from typing import Any, Final
 
-from pydantic import ConfigDict
-
 from extraction_service.configuration.models import ModelConfig
-from extraction_service.inference.types import ModelIdentity
-from extraction_service.record_types import ModelRuntime
-from extraction_service.runtime_types import NonEmptyText, PositiveInt, Sha256, StrictModel
+from extraction_service.inference.wire_models import WireModel
+from extraction_service.runtime_types import NonEmptyText, PositiveInt, StrictModel
 
 REQUIRED_OPENROUTER_PARAMETERS: Final[frozenset[str]] = frozenset(
     ("temperature", "top_p", "max_tokens", "response_format", "structured_outputs")
 )
-
-
-class WireModel(StrictModel):
-    """Strict known wire fields; evolving remote extras remain in raw HTTP evidence."""
-
-    model_config = ConfigDict(extra="allow")
 
 
 class OpenRouterEndpoint(StrictModel):
@@ -89,29 +80,3 @@ def openrouter_endpoint(body: dict[str, Any], config: ModelConfig) -> OpenRouter
         return endpoint
 
     raise ValueError("Configured OpenRouter provider endpoint was not found")
-
-
-class OllamaRuntime(StrictModel):
-    """Identity read from the installed server and resolved model, without generation."""
-
-    version: NonEmptyText
-    model_name: NonEmptyText
-    model_digest: Sha256
-    capabilities: frozenset[str]
-
-    def identity(self, config: ModelConfig, *, native: bool = False) -> ModelIdentity:
-        """Require a matching installed text-completion model and preserve its digest."""
-
-        if config.backend != "ollama" or config.model != self.model_name:
-            raise ValueError("Installed Ollama model does not match configuration")
-
-        if "completion" not in self.capabilities:
-            raise ValueError("Installed Ollama model lacks text completion capability")
-
-        return ModelIdentity(
-            model_id=config.id,
-            model_name=config.model,
-            runtime=ModelRuntime.OLLAMA_NATIVE if native else ModelRuntime.OLLAMA_DOCKER,
-            runtime_version=self.version,
-            model_digest=self.model_digest,
-        )

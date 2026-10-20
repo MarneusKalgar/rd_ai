@@ -1,16 +1,12 @@
-"""Explicit setup probes; generation calls never hide metadata or model-pull requests."""
+"""Explicit installed-runtime probes without inference or model pulls."""
 
 import httpx
 
 from extraction_service.configuration.models import ModelConfig
 from extraction_service.configuration.settings import ApplicationSettings
-from extraction_service.inference.capabilities import (
-    OllamaRuntime,
-    OpenRouterEndpoint,
-    WireModel,
-    openrouter_endpoint,
-)
-from extraction_service.inference.client_setup import ollama_client, openrouter_metadata_client
+from extraction_service.inference.ollama.capabilities import OllamaRuntime
+from extraction_service.inference.transport.client_setup import ollama_client
+from extraction_service.inference.wire_models import WireModel
 from extraction_service.runtime_types import NonEmptyText, Sha256
 
 
@@ -29,28 +25,6 @@ class _Tags(WireModel):
 
 class _ModelDetails(WireModel):
     capabilities: list[str]
-
-
-def verify_openrouter(
-    config: ModelConfig,
-    settings: ApplicationSettings,
-    *,
-    timeout_seconds: float,
-    transport: httpx.BaseTransport | None = None,
-) -> OpenRouterEndpoint:
-    """Read the public catalog and require the configured route and common parameters.
-
-    No key or generation is needed. Catalog support does not establish that a
-    provider accepts every keyword in the frozen schema; live smoke checks that.
-    """
-
-    if config.backend != "openrouter":
-        raise ValueError("OpenRouter verification requires an OpenRouter model")
-
-    with openrouter_metadata_client(settings, transport=transport) as client:
-        reply = client.get(f"models/{config.model}/endpoints", timeout_seconds)
-
-        return openrouter_endpoint(reply.body, config)
 
 
 def verify_ollama(

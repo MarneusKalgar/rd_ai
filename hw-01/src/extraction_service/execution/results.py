@@ -4,7 +4,7 @@ from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 
 from extraction_service.configuration.models import ExecutionConfig
-from extraction_service.execution.budget import BudgetStopReason
+from extraction_service.execution.budget.ledger import BudgetStopReason
 from extraction_service.execution.policy import DependencyState, DependencyStop
 from extraction_service.execution.types import DependencyIdentity, InputExecution
 from extraction_service.extraction import ExtractionContract

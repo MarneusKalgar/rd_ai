@@ -6,7 +6,7 @@ from contextlib import closing, contextmanager
 import httpx
 
 from extraction_service.configuration.settings import ApplicationSettings
-from extraction_service.inference.http import JsonHttpClient
+from extraction_service.inference.transport.http import JsonHttpClient
 
 
 @contextmanager

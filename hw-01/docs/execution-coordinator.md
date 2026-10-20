@@ -15,19 +15,24 @@ sections 6.5–6.6. Existing Make commands continue to run offline checks.
 | --- | --- |
 | `execution/types.py` | Selected jobs, scheduling/progress data and verified dependency identities. |
 | `execution/coordinator.py` | Request sequence, deadlines and retry/correction/dependency decisions. |
-| `execution/spending.py` | Paid-request admission, reconciliation and invocation-wide spending stops. |
+| `execution/budget/guard.py` | Paid-request admission, reconciliation and invocation-wide spending stops. |
 | `execution/results.py` | Validated run records, explicit accounting totals and batch summaries. |
 | `execution/evidence.py` | Translate exact responses/failures into attempt records and render correction evidence. |
 | `execution/policy.py` | Clock boundary, backoff/Retry-After handling and invocation-local dependency counters. |
-| `execution/pricing.py` | Explicit verified pricing ceilings for a particular paid route. |
-| `execution/budget.py` | Locked, durable homework-wide reservations and billed-cost reconciliation. |
-| `inference/http.py` | One physical request, total network timeout and typed HTTP/envelope failures. |
+| `execution/budget/pricing.py` | Explicit verified pricing ceilings for a particular paid route. |
+| `execution/budget/ledger.py` | Locked, durable homework-wide reservations and billed-cost reconciliation. |
+| `inference/transport/http.py` | One physical request, total network timeout and typed HTTP/envelope failures. |
 | `records.py`, `record_validation.py` | Validate status, response evidence, identities and accounting against the PO contract. |
 | `record_types.py`, `response_outcomes.py` | Named state/reason enums and a shared response-to-outcome mapping. |
 
 `ScheduledExtraction` belongs to `execution/types.py`; `BatchResult` and
 `BatchSummary` belong to `execution/results.py`. Existing imports from
 `execution/coordinator.py` remain available as explicit public re-exports.
+
+`execution/budget/` groups the ledger, pricing bounds and invocation-wide spending
+guard. Its initializer contains only a description; callers import the owning
+`ledger`, `pricing` or `guard` module directly. The coordinator continues to own
+request sequencing, and application setup continues to own borrowed clients.
 
 ## Request and correction sequence
 

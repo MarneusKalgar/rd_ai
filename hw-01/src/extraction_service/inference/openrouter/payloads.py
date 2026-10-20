@@ -4,7 +4,6 @@ from typing import Any
 
 from pydantic import ValidationError
 
-from extraction_service.inference.capabilities import WireModel
 from extraction_service.inference.errors import (
     FailureEvidence,
     ModelTransportError,
@@ -17,8 +16,9 @@ from extraction_service.inference.finish_reasons import (
     LENGTH_FINISH_REASON,
     STOP_FINISH_REASON,
 )
-from extraction_service.inference.http import HttpReply, protocol_error
+from extraction_service.inference.transport.http import HttpReply, protocol_error
 from extraction_service.inference.types import ModelIdentity, ModelResponse, ResponseKind
+from extraction_service.inference.wire_models import WireModel
 from extraction_service.runtime_types import NonNegativeFloat, NonNegativeInt
 
 

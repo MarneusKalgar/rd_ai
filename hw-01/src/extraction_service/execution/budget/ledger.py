@@ -14,7 +14,7 @@ from uuid import uuid4
 from pydantic import ValidationError, model_validator
 
 from extraction_service.configuration.models import ASSIGNMENT_API_CAP_USD, ExecutionConfig
-from extraction_service.execution.pricing import Money
+from extraction_service.execution.budget.pricing import Money
 from extraction_service.record_types import ExecutionStage
 from extraction_service.runtime_types import Identifier, NonEmptyText, StrictModel
 

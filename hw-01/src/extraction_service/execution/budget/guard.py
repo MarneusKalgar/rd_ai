@@ -3,7 +3,7 @@
 from decimal import Decimal
 
 from extraction_service.configuration.models import ExecutionConfig
-from extraction_service.execution.budget import (
+from extraction_service.execution.budget.ledger import (
     BudgetLedger,
     BudgetStop,
     BudgetStopReason,

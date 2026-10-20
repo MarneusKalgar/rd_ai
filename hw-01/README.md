@@ -23,7 +23,13 @@ boundaries and their implementation-plan points.
 
 `hw-01/` is the independent homework project. Its importable Python package
 lives in `src/extraction_service/`, with modules grouped by responsibility:
-`configuration/`, `corpus/`, `extraction/` and `inference/`.
+`configuration/`, `corpus/`, `extraction/`, `inference/` and `execution/`.
+
+Provider-specific adapters, response parsing, capabilities and metadata probes
+live in `inference/openrouter/` and `inference/ollama/`. Shared HTTP clients and
+their application-owned scopes live in `inference/transport/`. The coordinator
+uses `execution/budget/` for the persistent ledger, verified pricing and spending
+admission. Shared request/response types stay at the `inference/` level.
 
 Inside the Docker image, `python -m extraction_service` invokes the CLI.
 The root `make hw01-*` targets identify the homework and route to this project.

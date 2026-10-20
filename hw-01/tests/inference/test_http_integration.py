@@ -11,10 +11,10 @@ from pydantic import AnyHttpUrl
 
 from extraction_service.configuration.models import ModelConfig
 from extraction_service.configuration.settings import ApplicationSettings
-from extraction_service.inference.capabilities import OllamaRuntime
-from extraction_service.inference.client_setup import ollama_client
 from extraction_service.inference.errors import ModelTransportError
-from extraction_service.inference.ollama import OllamaAdapter
+from extraction_service.inference.ollama.adapter import OllamaAdapter
+from extraction_service.inference.ollama.capabilities import OllamaRuntime
+from extraction_service.inference.transport.client_setup import ollama_client
 from extraction_service.inference.types import GenerationRequest
 
 

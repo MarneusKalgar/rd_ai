@@ -9,11 +9,13 @@ import pytest
 
 from extraction_service.configuration.models import ModelConfig
 from extraction_service.configuration.settings import ApplicationSettings
-from extraction_service.inference.capabilities import OllamaRuntime, OpenRouterEndpoint
-from extraction_service.inference.client_setup import ollama_client, openrouter_client
-from extraction_service.inference.metadata import verify_ollama, verify_openrouter
-from extraction_service.inference.ollama import OllamaAdapter
-from extraction_service.inference.openrouter import OpenRouterAdapter
+from extraction_service.inference.ollama.adapter import OllamaAdapter
+from extraction_service.inference.ollama.capabilities import OllamaRuntime
+from extraction_service.inference.ollama.metadata import verify_ollama
+from extraction_service.inference.openrouter.adapter import OpenRouterAdapter
+from extraction_service.inference.openrouter.capabilities import OpenRouterEndpoint
+from extraction_service.inference.openrouter.metadata import verify_openrouter
+from extraction_service.inference.transport.client_setup import ollama_client, openrouter_client
 from extraction_service.inference.types import GenerationRequest
 
 

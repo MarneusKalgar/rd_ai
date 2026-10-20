@@ -3,7 +3,7 @@
 import json
 from dataclasses import asdict, dataclass
 
-from extraction_service.execution.budget import Reservation
+from extraction_service.execution.budget.ledger import Reservation
 from extraction_service.extraction import ExtractionContract
 from extraction_service.inference.errors import FailureEvidence
 from extraction_service.inference.types import ModelIdentity, ModelResponse, ResponseKind

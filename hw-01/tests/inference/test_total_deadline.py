@@ -7,7 +7,7 @@ from threading import Thread
 import pytest
 
 from extraction_service.inference.errors import FailureKind, ModelTransportError
-from extraction_service.inference.http import JsonHttpClient
+from extraction_service.inference.transport.http import JsonHttpClient
 
 
 def test_total_timeout_cancels_slow_body_and_client_remains_usable() -> None:

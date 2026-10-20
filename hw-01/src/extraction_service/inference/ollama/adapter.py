@@ -3,10 +3,10 @@
 from copy import deepcopy
 
 from extraction_service.configuration.models import ModelConfig
-from extraction_service.inference.capabilities import OllamaRuntime
-from extraction_service.inference.http import HttpPoster
 from extraction_service.inference.messages import request_messages
-from extraction_service.inference.ollama_payloads import parse_completion
+from extraction_service.inference.ollama.capabilities import OllamaRuntime
+from extraction_service.inference.ollama.payloads import parse_completion
+from extraction_service.inference.transport.http import HttpPoster
 from extraction_service.inference.types import GenerationRequest, ModelIdentity, ModelResponse
 
 

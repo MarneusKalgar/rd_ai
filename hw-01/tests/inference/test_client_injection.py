@@ -8,11 +8,12 @@ from typing import Any
 import pytest
 
 from extraction_service.configuration.models import ModelConfig
-from extraction_service.inference.capabilities import OllamaRuntime, OpenRouterEndpoint
 from extraction_service.inference.errors import FailureEvidence, FailureKind, ModelTransportError
-from extraction_service.inference.http import HttpPoster, HttpReply
-from extraction_service.inference.ollama import OllamaAdapter
-from extraction_service.inference.openrouter import OpenRouterAdapter
+from extraction_service.inference.ollama.adapter import OllamaAdapter
+from extraction_service.inference.ollama.capabilities import OllamaRuntime
+from extraction_service.inference.openrouter.adapter import OpenRouterAdapter
+from extraction_service.inference.openrouter.capabilities import OpenRouterEndpoint
+from extraction_service.inference.transport.http import HttpPoster, HttpReply
 from extraction_service.inference.types import GenerationRequest, ModelAdapter, ResponseKind
 
 
