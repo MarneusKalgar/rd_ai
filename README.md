@@ -6,7 +6,7 @@ entrypoint is reserved for the reviewer-facing HW run once that service exists.
 
 | Area | Responsibility |
 | --- | --- |
-| [`hw-01/`](hw-01/README.md) | HW-01 contract, adapters, execution policy and Docker checks; inference CLI and measured evaluation follow. |
+| [`hw-01/`](hw-01/README.md) | HW-01 contract, adapters, execution policy, Docker setup and checks; inference CLI and measured evaluation follow. |
 | [`hw-01/data/`](hw-01/data/README.md) | Frozen neutral input texts, reviewed gold objects, and dataset provenance. |
 | [`docs/coding-conventions.md`](docs/coding-conventions.md) | Shared coding conventions for contributors and agents. |
 | [`docs/review-process.md`](docs/review-process.md) | Review scope, evidence, verification and reporting rules. |
@@ -24,7 +24,8 @@ disposable reproductions where useful.
 HW-01 has **30 approved neutral inputs and 10 human-approved gold
 objects** frozen under [`hw-01/data/`](hw-01/data/README.md). The minimum
 dataset counts are met. Adapters and the shared execution policy are implemented;
-the inference CLI, runtime services and measured comparison remain pending.
+the [Docker runtime setup](hw-01/docs/docker-runtime.md) is implemented. The
+inference CLI and measured comparison remain pending.
 
 With Docker Desktop/Compose and Make installed, run `make hw01-check` for
 contract tests, lint, type checks and gold validation entirely inside Docker.
@@ -32,6 +33,13 @@ Use `make hw01-preflight` to verify configuration, prompts and the complete
 approved corpus offline.
 No host Python or API key is required. This is a contract check, not yet the
 final model-comparison command.
+
+Use `make hw01-setup-provider` for offline app/storage preparation, or
+`make hw01-setup-local` for explicit pinned Ollama/Gemma initialization and local
+representative readiness diagnostics (currently six requests). The optional
+`make hw01-local-capacity` checks all prepared requests. `make hw01-down`
+preserves weights and results. Provider
+inference requires explicit human approval; these setup commands do not call it.
 
 The dataset README describes its preparation, approval and evaluation limits.
 Original workbooks, private review material and the one-off preparation tool

@@ -1,10 +1,12 @@
 """Translate physical request evidence into validated operational records."""
 
 import json
+from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 
 from extraction_service.execution.budget.ledger import Reservation
 from extraction_service.extraction import ExtractionContract
+from extraction_service.extraction.validation import ValidationIssue
 from extraction_service.inference.errors import FailureEvidence
 from extraction_service.inference.types import ModelIdentity, ModelResponse, ResponseKind
 from extraction_service.record_types import (
@@ -116,9 +118,17 @@ def failure_attempt(context: AttemptContext, failure: FailureEvidence) -> Attemp
 def correction_instructions(original: str, invalid: AttemptResult) -> str:
     """Render original output and structured issues as data for exactly one correction."""
 
+    return render_correction(original, invalid.raw_response, invalid.issues)
+
+
+def render_correction(
+    original: str, raw_response: str | None, issues: Sequence[ValidationIssue]
+) -> str:
+    """Share exact correction rendering with setup capacity diagnostics."""
+
     evidence = {
-        "invalid_response": invalid.raw_response,
-        "validation_issues": [asdict(issue) for issue in invalid.issues],
+        "invalid_response": raw_response,
+        "validation_issues": [asdict(issue) for issue in issues],
     }
     serialized = json.dumps(evidence, ensure_ascii=False, allow_nan=False)
 

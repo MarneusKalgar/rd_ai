@@ -31,7 +31,7 @@ status is maintained in the [HW README](../README.md).
 
 ## Current coverage
 
-The implemented contract and sections 6.1–6.4, including the 6.4.1 regression
+The implemented contract and sections 6.1–6.5, including the 6.4.1 regression
 follow-up, already exercise several levels:
 
 - [Contract tests](../tests/test_contract.py) and
@@ -63,10 +63,17 @@ follow-up, already exercise several levels:
   verifies total timeout cancellation and subsequent client reuse. See the
   [execution documentation](execution-coordinator.md) for policy and limits.
 
+- [Runtime setup tests](../tests/runtime/) cover offline provider isolation,
+  bounded service discovery and initialization, identity mismatch rejection,
+  exact loaded context, persistent storage and full-request token admission.
+  They use controlled HTTP and temporary files. Separately selected Docker
+  setup diagnostics and their [live evidence](docker-setup-verification.md)
+  exercise actual image/model/storage/resources; no live pytest tests exist.
+
 A test file can contain more than one level. Executing pytest in Docker defines
 its runtime environment; the components and boundaries exercised determine its
 level. Inference CLI/persistence workflows, live model tests and scoring remain
-pending with sections 6.5–8.
+pending with sections 6.6–8.
 
 ### Coordinator audit follow-up — 6.4.1 complete
 
@@ -156,7 +163,8 @@ requests use only the approved neutral inputs.
 
 ## 3. Runtime/container setup checks
 
-**Plan points: 6.5.1–6.5.6.** Add these checks with the runtime services:
+**Plan points: 6.5.1–6.5.6.** Implemented by runtime tests and the explicit
+[Docker setup workflow](docker-runtime.md); retain these checks when changing it:
 
 - Resolve provider and Docker-local startup paths independently. Provider-only
   setup does not start Ollama or download weights; local setup needs no key.
@@ -178,6 +186,21 @@ evidence and output allowance. Record the token-capacity method and actual Docke
 resources; missing evidence is unverified setup, not a passing configuration test.
 Model loading and cold startup remain distinct from measured document latency.
 These setup diagnostics do not replace the extraction smoke in section 6.6.
+
+Default context diagnostics select smallest, middle and largest initial messages
+by UTF-8 bytes per prompt/sampling variant, then check their initial and `{}`
+correction fixtures (currently 6 requests). An optional exhaustive command checks
+all 60. Both use actual validator issues, full schema/source, output allowance
+and the pinned runtime's token counts with truncation/shift disabled. Controlled
+tests verify bounded/deterministic selection, both request kinds, each variant,
+small corpora, explicit CLI selection and separate reports. Report selected and
+total counts; a representative pass must not claim corpus-wide verification.
+The fixture does not bound arbitrary future correction evidence: 6.6 must check
+every actual initial and correction request before accepting it as fitting.
+A selected-request failure remains an explicit blocker in live evidence; untested
+inputs remain unverified without preventing a representative setup pass.
+Actual run admission must use a non-generating method; the one-token setup
+probes must not become hidden extra coordinator requests.
 
 ## 4. CLI/system and end-to-end tests
 

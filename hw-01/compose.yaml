@@ -1,8 +1,39 @@
 name: rd-ai-hw01
 
+x-ollama-image: &ollama-image ollama/ollama@sha256:265409e1d931028a8f7d5a32bcbafddd7bffbc6cc629d77efe9560adf692a5e7
+x-app: &app
+  build:
+    context: .
+    target: runtime
+  read_only: true
+  tmpfs:
+    - /tmp
+  cap_drop:
+    - ALL
+  security_opt:
+    - no-new-privileges:true
+  volumes:
+    - results:/app/results
+
+x-local-environment: &local-environment
+  # Only these allowlisted values reach local helpers; app credentials stay separate.
+  HW01_OLLAMA_BASE_URL: http://ollama:11434
+  HW01_SETUP_IMAGE: *ollama-image
+  HW01_SETUP_CONTEXT_LENGTH: ${HW01_CONTEXT_LENGTH:-32768}
+  HW01_SETUP_WAIT_SECONDS: ${HW01_SETUP_WAIT_SECONDS:-60}
+  HW01_SETUP_POLL_SECONDS: ${HW01_SETUP_POLL_SECONDS:-1}
+  HW01_SETUP_REQUEST_SECONDS: ${HW01_SETUP_REQUEST_SECONDS:-5}
+  HW01_SETUP_PULL_SECONDS: ${HW01_SETUP_PULL_SECONDS:-1800}
+  HW01_SETUP_LOAD_SECONDS: ${HW01_SETUP_LOAD_SECONDS:-300}
+  HW01_SETUP_KEEP_ALIVE_SECONDS: ${HW01_SETUP_KEEP_ALIVE_SECONDS:-600}
+  HW01_SETUP_CAPACITY_SECONDS: ${HW01_SETUP_CAPACITY_SECONDS:-900}
+  HW01_SETUP_MEASUREMENT_SECONDS: ${HW01_SETUP_MEASUREMENT_SECONDS:-600}
+
 services:
   checks:
-    build: .
+    build:
+      context: .
+      target: checks
     read_only: true
     network_mode: none
     tmpfs:
@@ -11,3 +42,62 @@ services:
       - ALL
     security_opt:
       - no-new-privileges:true
+
+  app:
+    <<: *app
+    # Inject app settings/credentials at runtime, never into images or local helpers.
+    env_file:
+      - path: .env
+        required: false
+
+  local-init:
+    <<: *app
+    profiles: [local]
+    environment: *local-environment
+    command: [python, -m, extraction_service.runtime, initialize]
+    depends_on:
+      ollama:
+        condition: service_healthy
+
+  local-ready:
+    <<: *app
+    profiles: [local]
+    environment: *local-environment
+    command: [python, -m, extraction_service.runtime, readiness]
+    depends_on:
+      ollama:
+        condition: service_healthy
+
+  ollama:
+    image: *ollama-image
+    profiles: [local]
+    environment:
+      OLLAMA_HOST: 0.0.0.0:11434
+      OLLAMA_CONTEXT_LENGTH: ${HW01_CONTEXT_LENGTH:-32768}
+      # Keep model work sequential for bounded memory and comparable experiments.
+      OLLAMA_MAX_LOADED_MODELS: 1
+      OLLAMA_NUM_PARALLEL: 1
+      OLLAMA_KEEP_ALIVE: 10m
+      OLLAMA_LOAD_TIMEOUT: 5m
+      OLLAMA_NO_CLOUD: "1"
+    volumes:
+      - ollama-models:/root/.ollama
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    # Per-container ceiling; Docker Desktop's VM needs additional headroom.
+    mem_limit: ${HW01_OLLAMA_MEMORY_LIMIT:-7g}
+    healthcheck:
+      test: [CMD, ollama, list]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+volumes:
+  results:
+  ollama-models:

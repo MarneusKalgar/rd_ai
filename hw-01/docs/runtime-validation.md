@@ -142,14 +142,37 @@ and `2` for setup, file or hash errors. It makes no model calls.
 
 ## Dependency maintenance
 
-All Python dependencies and checks run inside Docker. To intentionally
-refresh the lockfile after editing `pyproject.toml`, run from the repository
-root:
+Manage dependencies with **uv commands inside Docker**, like `npm install` /
+`npm uninstall`. Do not manually edit dependency lists in `pyproject.toml` or
+individual entries in `uv.lock`. uv updates both files together; metadata and
+tool configuration in `pyproject.toml` can still be edited normally.
+
+From the repository root, build the pinned tooling image, then run the desired
+dependency command through it. For example, to add or change the HTTP dependency:
 
 ```sh
 docker build --target tooling -t rd-ai-hw01-tooling:0.12.11 hw-01
-docker run --rm --mount type=bind,src="$PWD/hw-01",dst=/workspace --workdir /workspace --env UV_CACHE_DIR=/tmp/uv-cache rd-ai-hw01-tooling:0.12.11 uv lock
+docker run --rm \
+  --mount type=bind,src="$PWD/hw-01",dst=/workspace \
+  --workdir /workspace \
+  --env UV_CACHE_DIR=/tmp/uv-cache \
+  rd-ai-hw01-tooling:0.12.11 uv add --no-sync 'httpx>=0.28,<0.29'
 ```
 
-Review the lockfile diff and rerun `make hw01-check`. A normal check uses
+Replace the final uv arguments as appropriate (`PACKAGE` is a placeholder):
+
+| Operation | Arguments after the tooling image name |
+| --- | --- |
+| Add/change a runtime dependency | `uv add --no-sync PACKAGE` |
+| Add/change a development dependency | `uv add --dev --no-sync PACKAGE` |
+| Remove a runtime dependency | `uv remove --no-sync PACKAGE` |
+| Remove a development dependency | `uv remove --dev --no-sync PACKAGE` |
+
+`--no-sync` still resolves and writes the lockfile, but avoids creating or changing
+a host-mounted virtual environment. The bind mount writes the manifest/lockfile
+back into the repository. Dependency resolution can require network access.
+Use `uv lock` through the same container when explicitly refreshing resolution;
+it is not a replacement for `uv add` / `uv remove` when changing declarations.
+
+Review both file diffs and rerun `make hw01-check`. A normal check uses
 `uv sync --locked` at build time and never updates dependency resolution.

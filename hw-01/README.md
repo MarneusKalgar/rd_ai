@@ -10,8 +10,13 @@ attempt/run records, [offline preflight](docs/offline-preflight.md) and
 and application-owned client scopes, are implemented. The shared
 [execution coordinator](docs/execution-coordinator.md) adds bounded retries,
 one correction, deadlines, dependency stops and a cumulative reservation ledger.
-The initial v1 prompt/configuration exists for preflight. The inference CLI,
-Docker model services, live adapter smoke checks, measured prompt
+The initial v1 prompt/configuration exists for preflight. The
+[Docker runtime setup](docs/docker-runtime.md) provides isolated checks, an app
+image, pinned Ollama/Gemma initialization and persistent results storage.
+`make hw01-local-ready` from the root checks six representative requests;
+`make hw01-local-capacity` optionally checks all 60 prepared requests.
+Readiness coverage does not replace actual request admission in the future runner.
+The inference CLI, live adapter smoke checks, measured prompt
 variants, saved experiment results and the comparison report remain pending.
 
 Reviews follow the repository's [shared process](../docs/review-process.md) and
@@ -23,7 +28,7 @@ boundaries and their implementation-plan points.
 
 `hw-01/` is the independent homework project. Its importable Python package
 lives in `src/extraction_service/`, with modules grouped by responsibility:
-`configuration/`, `corpus/`, `extraction/`, `inference/` and `execution/`.
+`configuration/`, `corpus/`, `extraction/`, `inference/`, `execution/` and `runtime/`.
 
 Provider-specific adapters, response parsing, capabilities and metadata probes
 live in `inference/openrouter/` and `inference/ollama/`. Shared HTTP clients and
@@ -51,6 +56,12 @@ pytest, then validates all 10 frozen gold objects and runs full offline prefligh
 From this directory,
 `make check` runs the same workflow. To validate only gold objects, use
 `make hw01-validate-gold` from the root or `make validate-gold` here.
+
+Make loads Compose controls from `.env.compose` when present, otherwise from
+[`.env.compose.example`](.env.compose.example). Copy the example for machine-local
+memory/context/deadline overrides. Provider credentials and application URLs stay
+in the separate optional `.env`; neither file enters the image. See
+[runtime configuration](docs/docker-runtime.md#configuration-and-deadlines).
 
 The image uses Python 3.14.8 and uv 0.12.11 pinned by image digest, with
 dependencies resolved in `uv.lock`. Checks run without a network, as a

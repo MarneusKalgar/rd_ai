@@ -129,6 +129,12 @@ SCHEMA_DIALECT: Final[str] = (
 
 ## Tests and enforcement
 
+- Manage Python dependency declarations with `uv add` / `uv remove` inside Docker.
+  Let uv update `pyproject.toml` and `uv.lock` together; do not hand-edit dependency
+  lists or lockfile entries. Pass version constraints to the command when needed.
+  Ordinary metadata and tool configuration in `pyproject.toml` remain editable.
+  See HW-01's [dependency commands](../hw-01/docs/runtime-validation.md#dependency-maintenance).
+
 - Separate setup, the action under test and assertions with blank lines.
 - Name the result before asserting on it; avoid nested calls in assertions.
 - Test behavior and meaningful regression risks rather than implementation

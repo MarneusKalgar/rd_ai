@@ -25,3 +25,7 @@ __pycache__/
 .env
 .env.*
 !.env.example
+!.env.compose.example
+
+# Generated HW-01 runtime logs, reports and local comparison snapshots.
+/hw-01/results/
