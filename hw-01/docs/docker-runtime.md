@@ -30,8 +30,9 @@ identify the underlying blocker. A responding server or successful download alon
 is not model readiness. Inspect `docker compose logs ollama` inside `hw-01/`
 when setup fails. Resolve the failure and rerun the explicit command.
 
-`make hw01-run`, the inference CLI, pricing/ledger initialization and three-document
-extraction smoke remain section 6.6. Setup diagnostics are not experiment results.
+Section 6.6's [application workflow](running-extractions.md) now supplies
+`make hw01-run`, selected smoke commands, pricing/ledger composition and durable
+output export. Setup diagnostics remain separate from extraction results.
 
 ## Images, selection and isolation
 

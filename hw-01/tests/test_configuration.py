@@ -71,12 +71,13 @@ def test_execution_bounds_reject_malformed_configuration(
     value: object,
 ) -> None:
     baseline = ExperimentConfig.model_validate(configuration)
+    expected_timeout = configuration["execution"]["request_timeout_seconds"]
     configuration["execution"][field] = value
 
     with pytest.raises(ValidationError):
         ExperimentConfig.model_validate(configuration)
 
-    assert baseline.execution.request_timeout_seconds == 120.0
+    assert baseline.execution.request_timeout_seconds == expected_timeout
 
 
 @pytest.mark.parametrize(

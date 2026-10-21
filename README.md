@@ -2,11 +2,11 @@
 
 One repository for independent AI homework projects. Each homework owns its
 implementation and deliverables. The root
-entrypoint is reserved for the reviewer-facing HW run once that service exists.
+entrypoint routes reviewer-facing commands to each homework.
 
 | Area | Responsibility |
 | --- | --- |
-| [`hw-01/`](hw-01/README.md) | HW-01 contract, adapters, execution policy, Docker setup and checks; inference CLI and measured evaluation follow. |
+| [`hw-01/`](hw-01/README.md) | HW-01 contract, adapters, selected-run CLI, durable results, Docker setup and checks; measured evaluation follows. |
 | [`hw-01/data/`](hw-01/data/README.md) | Frozen neutral input texts, reviewed gold objects, and dataset provenance. |
 | [`docs/coding-conventions.md`](docs/coding-conventions.md) | Shared coding conventions for contributors and agents. |
 | [`docs/review-process.md`](docs/review-process.md) | Review scope, evidence, verification and reporting rules. |
@@ -25,7 +25,9 @@ HW-01 has **30 approved neutral inputs and 10 human-approved gold
 objects** frozen under [`hw-01/data/`](hw-01/data/README.md). The minimum
 dataset counts are met. Adapters and the shared execution policy are implemented;
 the [Docker runtime setup](hw-01/docs/docker-runtime.md) is implemented. The
-inference CLI and measured comparison remain pending.
+[selected-run workflow](hw-01/docs/running-extractions.md) is implemented with
+actual-request admission, incremental persistence and checked result exports.
+Live acceptance and the measured comparison are tracked separately.
 
 With Docker Desktop/Compose and Make installed, run `make hw01-check` for
 contract tests, lint, type checks and gold validation entirely inside Docker.

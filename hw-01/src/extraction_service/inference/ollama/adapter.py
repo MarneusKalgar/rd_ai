@@ -1,6 +1,7 @@
 """Ollama structured-output adapter, with installed model/runtime identity."""
 
 from copy import deepcopy
+from typing import Any
 
 from extraction_service.configuration.models import ModelConfig
 from extraction_service.inference.messages import request_messages
@@ -20,9 +21,11 @@ class OllamaAdapter:
         *,
         http_client: HttpPoster,
         native: bool = False,
+        context_length: int | None = None,
     ) -> None:
         self._identity = runtime.identity(config, native=native)
         self._http = http_client
+        self._context_length = context_length
 
     @property
     def identity(self) -> ModelIdentity:
@@ -31,7 +34,7 @@ class OllamaAdapter:
     def generate(self, request: GenerationRequest) -> ModelResponse:
         """Send the full schema and explicit common options with streaming disabled."""
 
-        payload = {
+        payload: dict[str, Any] = {
             "model": self.identity.model_name,
             "messages": request_messages(request),
             "format": deepcopy(request.output_schema),
@@ -42,6 +45,11 @@ class OllamaAdapter:
                 "num_predict": request.sampling.max_output_tokens,
             },
         }
+
+        if self._context_length is not None:
+            payload["truncate"] = False
+            payload["shift"] = False
+            payload["options"]["num_ctx"] = self._context_length
 
         reply = self._http.post("api/chat", payload, request.timeout_seconds)
 

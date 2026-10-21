@@ -65,15 +65,26 @@ follow-up, already exercise several levels:
 
 - [Runtime setup tests](../tests/runtime/) cover offline provider isolation,
   bounded service discovery and initialization, identity mismatch rejection,
-  exact loaded context, persistent storage and full-request token admission.
+  exact loaded context, persistent storage and sampled readiness probes.
   They use controlled HTTP and temporary files. Separately selected Docker
   setup diagnostics and their [live evidence](docker-setup-verification.md)
   exercise actual image/model/storage/resources; no live pytest tests exist.
 
 A test file can contain more than one level. Executing pytest in Docker defines
 its runtime environment; the components and boundaries exercised determine its
-level. Inference CLI/persistence workflows, live model tests and scoring remain
-pending with sections 6.6–8.
+level. [Application workflow tests](../tests/application/) now exercise the real
+CLI in subprocesses with a controlled loopback HTTP service: all-30 selection,
+correction, failed output, actual-request admission, accounting, client reuse,
+incremental persistence, corruption/export and interruption. The
+[admission deadline tests](../tests/execution/test_admission.py) use a controlled
+clock. See [running extractions](running-extractions.md) for commands and limits.
+Live extraction acceptance is separate and remains pending until documented;
+scoring and measured experiments remain sections 7–8.
+
+The [21 October partial smoke](extraction-smoke.md) records two completed local
+outputs and a user-interrupted third request, with a verified interrupted export.
+It does not satisfy the complete live acceptance gate. The final offline gate
+passed 566 tests, gold validation and the full corpus preflight.
 
 ### Coordinator audit follow-up — 6.4.1 complete
 
@@ -259,9 +270,10 @@ extension; the planned HW-01 policy ends the affected batch for that invocation.
 Use the real adapter, HTTP client, validator, coordinator and persistence path.
 Substituting an adapter's final return value would leave HTTP wiring untested.
 Use a temporary result directory, explicit process timeouts and inspect saved
-records as well as command output. The existing subprocess tests cover the
-currently implemented validation/preflight commands; extend the approach when
-the extraction runner exists.
+records as well as command output. The application subprocess tests now cover
+these extraction, accounting and export paths. They substitute only the HTTP
+service; the production adapter, HTTP client, validator, coordinator and storage
+remain real. Fake provider prices/count bounds are test fixtures, not live evidence.
 
 ### Live end-to-end smoke
 
@@ -318,6 +330,43 @@ or drop failures to improve reported metrics. Scoring and aggregation are
 tested deterministically without rerunning models.
 
 ## Execution and adoption
+
+### Docker, native Ollama and CI responsibilities
+
+Keep Docker Ollama as a portable compatibility option. Use the planned native
+Ollama comparison to evaluate Apple GPU execution while Python stays in Docker.
+Native performance is not measured yet; preserve the same Gemma digest,
+quantization, schema, inputs, context and sampling when comparing runtimes.
+Record Docker CPU and native GPU results separately.
+
+| Check | Runtime | Recommended cadence | Current status |
+| --- | --- | --- | --- |
+| Tests, typing, lint, gold validation and corpus preflight | Python container with controlled HTTP endpoints; no model | Every PR | Implemented by `make hw01-check`; CI workflow wiring is separate. |
+| Ollama startup, version and installed-model identity | Docker Ollama | Runtime/image changes | Existing health/setup mechanisms; a dedicated lightweight CI job is not implemented. |
+| One short, complete extraction with the full schema | Docker Ollama with cached pinned weights | Explicit manual or scheduled CI | Proposed small smoke profile; the current three-document smoke is broader. |
+| Three-document live smoke and larger local experiments | Native Ollama on the Mac, Python in Docker | Explicit integration/evaluation runs | Native application wiring and comparative verification remain planned. |
+
+A small real-model CI smoke should use an explicitly defined short single-line
+order, the full extraction schema, a bounded output allowance and a strict job
+deadline. Check the intended model/request, response handling, validation and
+saved evidence. Report extraction validity separately from transport/application
+completion; this check does not establish corpus accuracy or large-context fit.
+Keep its profile and results distinct from the measured experiment. Cache weights
+where supported and verify runner memory/disk capacity before enabling the job.
+
+The current six-probe readiness check took approximately 12 minutes; the smallest
+full extraction took approximately two minutes plus model loading. Neither is
+a seconds-scale PR gate. A Docker CPU model smoke is hardware-dependent and may
+take minutes even with cached weights. Routine PR checks should retain their
+network-isolated, model-free boundary. No CI model job or additional model run
+is introduced by this documentation.
+
+Linux Docker deployments can use supported GPUs; our Mac CPU measurements do
+not predict GPU-backed CI performance. See the official
+[Ollama Docker hardware configuration](https://docs.ollama.com/docker) and the
+[recorded partial extraction smoke](extraction-smoke.md).
+
+### Adoption sequence
 
 All Python checks run in Docker. The current
 [`make hw01-check`](../../Makefile) workflow runs lint, formatting, strict typing,

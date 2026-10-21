@@ -9,6 +9,7 @@ dependencies = [
     "pydantic>=2.12,<3",
     "pydantic-settings>=2.12,<3",
     "PyYAML>=6.0.3,<7",
+    "tokenizers>=0.22,<0.24",
 ]
 
 [dependency-groups]

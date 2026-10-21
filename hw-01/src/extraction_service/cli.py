@@ -1,4 +1,4 @@
-"""Offline contract checks; this command does not run models or spend API credits."""
+"""Contract checks and explicitly selected extraction/accounting commands."""
 
 import argparse
 import json
@@ -6,15 +6,17 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Final
 
+from extraction_service.application import cli as application_cli
 from extraction_service.artifacts import read_checked
 from extraction_service.corpus.constants import GOLD_MANIFEST_FILENAME
+from extraction_service.exit_status import ExitStatus
 from extraction_service.extraction import ExtractionContract
 from extraction_service.extraction.constants import SCHEMA_FILENAME
 from extraction_service.preflight import DEFAULT_EXPERIMENT_FILE, preflight
 
-EXIT_SUCCESS: Final[int] = 0
-EXIT_VALIDATION_FAILURE: Final[int] = 1
-EXIT_SETUP_FAILURE: Final[int] = 2
+EXIT_SUCCESS: Final[int] = ExitStatus.SUCCESS
+EXIT_VALIDATION_FAILURE: Final[int] = ExitStatus.EXTRACTION_FAILURE
+EXIT_SETUP_FAILURE: Final[int] = ExitStatus.SETUP_FAILURE
 JSON_INDENT: Final[int] = 2
 
 VALIDATE_GOLD_COMMAND: Final[str] = "validate-gold"
@@ -92,6 +94,7 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Validate one raw JSON response file",
     )
     response_parser.add_argument("response_file", type=Path)
+    application_cli.add_commands(commands)
 
     return parser
 
@@ -122,6 +125,9 @@ def _validate_response(path: Path, contract: ExtractionContract) -> int:
 
 
 def _dispatch(args: argparse.Namespace) -> int:
+    if args.command in application_cli.COMMANDS:
+        return application_cli.dispatch(args)
+
     if args.command == PREFLIGHT_COMMAND:
         report = preflight(args.project_dir, args.config)
         print(report.model_dump_json(indent=JSON_INDENT))
@@ -137,13 +143,14 @@ def _dispatch(args: argparse.Namespace) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
-    """Parse offline command arguments and report execution/setup outcomes.
+    """Parse explicit commands and report checked execution/setup outcomes.
 
     Args:
         argv: Command arguments, or None to use process arguments.
 
     Returns:
-        Zero for success, one for invalid output, or two for setup/file errors.
+        Zero for success, one for invalid output, two for setup/application
+        errors, three for incomplete work, or 130 for caught interruption.
         Argument parsing uses argparse's standard SystemExit behavior.
     """
 
@@ -152,8 +159,21 @@ def main(argv: list[str] | None = None) -> int:
 
     try:
         return _dispatch(args)
+    except KeyboardInterrupt:
+        _print_json({"interrupted": True}, indent=None)
+
+        return ExitStatus.INTERRUPTED
     except (OSError, ValueError, KeyError, TypeError) as error:
-        error_report = {"setup_error": str(error)}
+        # Operational exceptions may contain arbitrary provider or local input.
+        message = type(error).__name__ if args.command in application_cli.COMMANDS else str(error)
+        error_report = {"setup_error": message}
         _print_json(error_report, indent=None)
+
+        return EXIT_SETUP_FAILURE
+    except Exception as error:
+        if args.command not in application_cli.COMMANDS:
+            raise
+
+        _print_json({"unexpected_error": type(error).__name__}, indent=None)
 
         return EXIT_SETUP_FAILURE

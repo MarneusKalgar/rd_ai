@@ -8,7 +8,7 @@ from extraction_service.artifacts import artifact_path, read_text
 from extraction_service.configuration.loading import load_experiment
 from extraction_service.configuration.models import ExperimentConfig
 from extraction_service.configuration.settings import ApplicationSettings
-from extraction_service.corpus.loading import load_corpus
+from extraction_service.corpus.loading import LoadedCorpus, load_corpus
 from extraction_service.extraction.validation import SchemaIdentity
 from extraction_service.runtime_types import StrictModel
 
@@ -39,7 +39,12 @@ class PreflightReport(StrictModel):
     model_capabilities_verified: Literal[False] = False
 
 
-def preflight(project_dir: Path, config_file: str = DEFAULT_EXPERIMENT_FILE) -> PreflightReport:
+def preflight(
+    project_dir: Path,
+    config_file: str = DEFAULT_EXPERIMENT_FILE,
+    *,
+    corpus: LoadedCorpus | None = None,
+) -> PreflightReport:
     """Verify configuration, prompt references and the full approved corpus offline.
 
     Args:
@@ -77,7 +82,8 @@ def preflight(project_dir: Path, config_file: str = DEFAULT_EXPERIMENT_FILE) -> 
             )
         )
 
-    corpus = load_corpus(project_dir)
+    if corpus is None:
+        corpus = load_corpus(project_dir)
     source_groups = {item.source_group for item in corpus.inputs}
     layout_groups = {item.layout_group for item in corpus.inputs}
 

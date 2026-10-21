@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Self
 from pydantic import AnyHttpUrl, model_validator
 
 from extraction_service.configuration.models import SamplingConfig
+from extraction_service.execution.admission import AdmissionEvidence
 from extraction_service.inference.types import ModelAdapter, ModelIdentity
 from extraction_service.record_types import ExecutionStage, ModelRuntime
 from extraction_service.runtime_types import Identifier, NonEmptyText, Sha256, StrictModel
@@ -106,3 +107,4 @@ class InputExecution:
     reason: str | None = None
     last_failure: FailureEvidence | None = None
     budget_stopped: bool = False
+    admissions: list[AdmissionEvidence] = field(default_factory=list)
