@@ -1,0 +1,139 @@
+{
+  "version": "run-manifest-v1",
+  "run_id": "local-smoke-20261021-66",
+  "created_at": "2026-10-21T12:36:40.210433+00:00",
+  "stage": "smoke",
+  "state": "interrupted",
+  "experiment": {
+    "version": "experiment-v1",
+    "models": [
+      {
+        "id": "provider",
+        "backend": "openrouter",
+        "model": "google/gemini-3.8-flash",
+        "serving_provider": "google-ai-studio"
+      },
+      {
+        "id": "local",
+        "backend": "ollama",
+        "model": "gemma4:e4b-it-qat",
+        "serving_provider": null
+      }
+    ],
+    "prompts": [
+      {
+        "id": "v1",
+        "file": "prompts/v1.txt"
+      }
+    ],
+    "sampling": [
+      {
+        "id": "baseline",
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "max_output_tokens": 4096
+      }
+    ],
+    "execution": {
+      "request_timeout_seconds": 1800.0,
+      "input_timeout_seconds": 7205.0,
+      "transport_retries": 1,
+      "api_budget_usd": 4.5,
+      "matrix_reserve_usd": 3.5,
+      "dependency_failure_limit": 3,
+      "backoff_initial_seconds": 1.0,
+      "backoff_max_seconds": 30.0
+    },
+    "selection": {
+      "model_id": "local",
+      "prompt_id": "v1",
+      "sampling_id": "baseline"
+    }
+  },
+  "schema_sha256": "efd06205171717bf69997007c36a0c85a66f55384042e79bda75df102be9bafb",
+  "jobs": [
+    {
+      "key": "99e1ebc4ff9c59be078615c677d98fc014180069f0ca689fc1d190c08dbfad72",
+      "input_id": "B02-S030-PO01",
+      "model_id": "local",
+      "prompt_id": "v1",
+      "sampling_id": "baseline",
+      "input_sha256": "2f26b05454e5ff7c95d46f69db9d129d2969f41bef80faad167d4dc06fe9062c",
+      "prompt_sha256": "ef5cf6c25a2623e73e5e85948321b304b1ce67f09b7caf0dfbc47fa26e666785",
+      "experiment_sha256": "4c6137a92f3c70095980a479696b93f73e790ba369bdb970a887d10b02092f72"
+    },
+    {
+      "key": "778bdbdeb383859a03bb2517dbdf81dcc52293db025aef1b5e658bd0d98a7313",
+      "input_id": "B02-S026-PO01",
+      "model_id": "local",
+      "prompt_id": "v1",
+      "sampling_id": "baseline",
+      "input_sha256": "d6f288ae629d39873f46787261015611723f3dec894a94d475291cf907a71c3c",
+      "prompt_sha256": "ef5cf6c25a2623e73e5e85948321b304b1ce67f09b7caf0dfbc47fa26e666785",
+      "experiment_sha256": "4c6137a92f3c70095980a479696b93f73e790ba369bdb970a887d10b02092f72"
+    },
+    {
+      "key": "dc014d70e8983b827d983a17cc360c2e6ae23645490e697dcb6d990aeb719c10",
+      "input_id": "B02-S008-PO01",
+      "model_id": "local",
+      "prompt_id": "v1",
+      "sampling_id": "baseline",
+      "input_sha256": "bc4678f85b792f9fd022a680e8079aa8441016b22cfd1301c4623d34d049be1b",
+      "prompt_sha256": "ef5cf6c25a2623e73e5e85948321b304b1ce67f09b7caf0dfbc47fa26e666785",
+      "experiment_sha256": "4c6137a92f3c70095980a479696b93f73e790ba369bdb970a887d10b02092f72"
+    }
+  ],
+  "records": {
+    "99e1ebc4ff9c59be078615c677d98fc014180069f0ca689fc1d190c08dbfad72": "records/99e1ebc4ff9c59be078615c677d98fc014180069f0ca689fc1d190c08dbfad72.json",
+    "778bdbdeb383859a03bb2517dbdf81dcc52293db025aef1b5e658bd0d98a7313": "records/778bdbdeb383859a03bb2517dbdf81dcc52293db025aef1b5e658bd0d98a7313.json"
+  },
+  "record_sha256": {
+    "99e1ebc4ff9c59be078615c677d98fc014180069f0ca689fc1d190c08dbfad72": "e44f80aad8e091f463d8fa1601842a4acc49f317959757dab07d085e9ff57f3b",
+    "778bdbdeb383859a03bb2517dbdf81dcc52293db025aef1b5e658bd0d98a7313": "9e61fe5847af44061fb7052e816811f5d13248fcfb0d994e4696d87c066950ce"
+  },
+  "checkpoint_sha256": {
+    "99e1ebc4ff9c59be078615c677d98fc014180069f0ca689fc1d190c08dbfad72": "532fe9ea5c991673e8c7f3d02aa1e57a50046e1a651711534096d477fa064576",
+    "778bdbdeb383859a03bb2517dbdf81dcc52293db025aef1b5e658bd0d98a7313": "c4ab1e5d5751b04f91c26fe79773a972a23542b5b389b262ecd1c3280dc16f59",
+    "dc014d70e8983b827d983a17cc360c2e6ae23645490e697dcb6d990aeb719c10": "eeff7d2ada7bc49c8ba4c63e3c002d7bec7933b55bc5d9eb51702d23c5db6873"
+  },
+  "summary": null,
+  "error": "KeyboardInterrupt",
+  "setup": {
+    "local": {
+      "loaded": {
+        "name": "gemma4:e4b-it-qat",
+        "digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+        "size": 6154407115,
+        "size_vram": 0,
+        "context_length": 32768,
+        "model": "gemma4:e4b-it-qat",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma4",
+          "families": [
+            "gemma4"
+          ],
+          "parameter_size": "7.5B",
+          "quantization_level": "Q4_0"
+        },
+        "expires_at": "2026-10-21T12:46:35.294635177Z",
+        "runner": "llamacpp"
+      },
+      "load_duration_ms": 63920.65248800009,
+      "tokenizer_sha256": "42e3a238e10726346e996c7e3569fcfb2e8d47173944a3cd56826d8dc4d9a9fb",
+      "runtime": {
+        "version": "0.40.6",
+        "model_name": "gemma4:e4b-it-qat",
+        "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+        "capabilities": [
+          "audio",
+          "tools",
+          "completion",
+          "thinking",
+          "vision"
+        ]
+      }
+    }
+  }
+}

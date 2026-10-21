@@ -1,0 +1,16 @@
+{
+  "input_id": "B02-S008-PO01",
+  "model_id": "local",
+  "attempts": [],
+  "admissions": [
+    {
+      "method": "gemma4-installed-bpe-render-only-plus-two-boundary-tokens",
+      "request_sha256": "594dc09bd15f5ca8bb00b2da72b3cd97c63ce825d1d3d88e29965d64949b16ac",
+      "counter_identity": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f/42e3a238e10726346e996c7e3569fcfb2e8d47173944a3cd56826d8dc4d9a9fb",
+      "prompt_token_bound": 22278,
+      "output_allowance": 4096,
+      "context_length": 32768
+    }
+  ],
+  "reason": null
+}

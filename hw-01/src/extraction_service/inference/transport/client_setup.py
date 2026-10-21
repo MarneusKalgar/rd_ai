@@ -1,12 +1,29 @@
 """Explicit client scopes owned by application setup, independent of model adapters."""
 
 from collections.abc import Generator
-from contextlib import closing, contextmanager
+from contextlib import contextmanager
 
 import httpx
 
 from extraction_service.configuration.settings import ApplicationSettings
 from extraction_service.inference.transport.http import JsonHttpClient
+
+
+@contextmanager
+def _owned_client(client: JsonHttpClient) -> Generator[JsonHttpClient]:
+    """Close once, preserving the original setup/execution error if cleanup fails."""
+
+    try:
+        yield client
+    except BaseException:
+        try:
+            client.close()
+        except BaseException:
+            pass
+
+        raise
+    else:
+        client.close()
 
 
 @contextmanager
@@ -29,8 +46,8 @@ def openrouter_client(
         transport=transport,
     )
 
-    with closing(client):
-        yield client
+    with _owned_client(client) as owned:
+        yield owned
 
 
 @contextmanager
@@ -43,8 +60,8 @@ def openrouter_metadata_client(
 
     client = JsonHttpClient(str(settings.openrouter_base_url), transport=transport)
 
-    with closing(client):
-        yield client
+    with _owned_client(client) as owned:
+        yield owned
 
 
 @contextmanager
@@ -61,5 +78,5 @@ def ollama_client(
 
     client = JsonHttpClient(str(settings.ollama_base_url), transport=transport)
 
-    with closing(client):
-        yield client
+    with _owned_client(client) as owned:
+        yield owned

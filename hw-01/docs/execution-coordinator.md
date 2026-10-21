@@ -5,9 +5,10 @@ policy and operational accounting to OpenRouter and Ollama. It borrows adapters
 from application setup and returns validated records. It neither constructs nor
 closes HTTP clients and never reads expected gold answers.
 
-The coordinator and persistent budget ledger are implemented. Model services,
-the inference CLI, saved per-input results and live smoke acceptance remain
-sections 6.5–6.6. Existing Make commands continue to run offline checks.
+The coordinator and persistent budget ledger are implemented. Section 6.5 adds
+model services; the [6.6 application workflow](running-extractions.md) now
+composes admission, the inference CLI and incremental persistence. Live smoke
+acceptance remains a separately recorded gate. Routine checks stay offline.
 
 ## Responsibilities
 

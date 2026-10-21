@@ -11,6 +11,18 @@ help:
 	@echo "hw01-local-capacity Check all prepared local requests (optional, slow)"
 	@echo "hw01-storage-check Verify persistent non-root results storage"
 	@echo "hw01-down          Stop HW-01 containers; preserve results and model weights"
+	@echo "hw01-run           Execute selected work (MODE=local/provider, ARGS='...')"
+	@echo "hw01-smoke         Run the explicit three-document extraction smoke"
+	@echo "hw01-plan-run      Describe selections and available cost bounds offline"
+	@echo "hw01-budget-init   Declare prior spend explicitly (ARGS required)"
+	@echo "hw01-budget-show   Reopen cumulative spending without resetting it"
+	@echo "hw01-export-run    Export saved evidence to results/submission (ARGS=run-id)"
+	@echo "hw01-verify-export Recheck exported byte hashes and records (ARGS=run-id)"
+
+.PHONY: hw01-run hw01-smoke hw01-plan-run hw01-budget-init hw01-budget-show hw01-export-run hw01-verify-export
+
+hw01-run hw01-smoke hw01-plan-run hw01-budget-init hw01-budget-show hw01-export-run hw01-verify-export:
+	$(MAKE) -C hw-01 $(patsubst hw01-%,%,$@)
 
 hw01-check:
 	$(MAKE) -C hw-01 check

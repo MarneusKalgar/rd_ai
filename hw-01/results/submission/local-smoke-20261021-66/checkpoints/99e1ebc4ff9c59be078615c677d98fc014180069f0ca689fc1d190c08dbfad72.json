@@ -1,0 +1,69 @@
+{
+  "input_id": "B02-S030-PO01",
+  "model_id": "local",
+  "attempts": [
+    {
+      "number": 1,
+      "kind": "extraction",
+      "outcome": "valid",
+      "model_id": "local",
+      "model_name": "gemma4:e4b-it-qat",
+      "runtime": "ollama-docker",
+      "runtime_version": "0.40.6",
+      "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+      "raw_response": "{\"purchaseOrderNumber\": \"9415698592\", \"purchaseOrderDateTime\": null, \"buyerName\": \"Thornwick Merchants Ltd\", \"shipToInfo\": null, \"paymentTerms\": null, \"buyerCurrency\": null, \"totalValue\": null, \"lineItems\": [{\"purchaseOrderLineNumber\": null, \"buyerProductIdentifier\": \"169163\", \"buyerProductName\": \"Corn rice cakes 150 g\", \"buyerProductQuantity\": \"186\", \"buyerProductUOM\": \"MT/WTO\", \"quantityUnit\": \"OTHER\", \"buyerUnitPrice\": null, \"buyerDeliveryDate\": \"2026-09-21\"}]}",
+      "error": null,
+      "issues": [],
+      "duration_ms": 77399.51228499922,
+      "input_tokens": 1163,
+      "output_tokens": 723,
+      "cost_usd": 0.0,
+      "request_id": null,
+      "serving_provider": null,
+      "response": {
+        "identity": {
+          "model_id": "local",
+          "model_name": "gemma4:e4b-it-qat",
+          "runtime": "ollama-docker",
+          "serving_provider": null,
+          "runtime_version": "0.40.6",
+          "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f"
+        },
+        "kind": "completed",
+        "raw_response": "{\"purchaseOrderNumber\": \"9415698592\", \"purchaseOrderDateTime\": null, \"buyerName\": \"Thornwick Merchants Ltd\", \"shipToInfo\": null, \"paymentTerms\": null, \"buyerCurrency\": null, \"totalValue\": null, \"lineItems\": [{\"purchaseOrderLineNumber\": null, \"buyerProductIdentifier\": \"169163\", \"buyerProductName\": \"Corn rice cakes 150 g\", \"buyerProductQuantity\": \"186\", \"buyerProductUOM\": \"MT/WTO\", \"quantityUnit\": \"OTHER\", \"buyerUnitPrice\": null, \"buyerDeliveryDate\": \"2026-09-21\"}]}",
+        "raw_http_body": "{\"model\":\"gemma4:e4b-it-qat\",\"created_at\":\"2026-10-21T12:38:38.161751428Z\",\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"purchaseOrderNumber\\\": \\\"9415698592\\\", \\\"purchaseOrderDateTime\\\": null, \\\"buyerName\\\": \\\"Thornwick Merchants Ltd\\\", \\\"shipToInfo\\\": null, \\\"paymentTerms\\\": null, \\\"buyerCurrency\\\": null, \\\"totalValue\\\": null, \\\"lineItems\\\": [{\\\"purchaseOrderLineNumber\\\": null, \\\"buyerProductIdentifier\\\": \\\"169163\\\", \\\"buyerProductName\\\": \\\"Corn rice cakes 150 g\\\", \\\"buyerProductQuantity\\\": \\\"186\\\", \\\"buyerProductUOM\\\": \\\"MT/WTO\\\", \\\"quantityUnit\\\": \\\"OTHER\\\", \\\"buyerUnitPrice\\\": null, \\\"buyerDeliveryDate\\\": \\\"2026-09-21\\\"}]}\",\"thinking\":\"The user wants me to extract a purchase order from the provided text based on a specific JSON schema.\\n\\nSource text analysis:\\n1. `ORDER!D14 PO number: 9415698592` -\\u003e `purchaseOrderNumber`: \\\"9415698592\\\"\\n2. `ORDER!B4 Buyer: Thornwick Merchants Ltd` -\\u003e `buyerName`: \\\"Thornwick Merchants Ltd\\\"\\n3. `ORDER!A14 Article code: 169163` -\\u003e `buyerProductIdentifier`: \\\"169163\\\"\\n4. `ORDER!B14 Description: Corn rice cakes 150 g` -\\u003e `buyerProductName`: \\\"Corn rice cakes 150 g\\\"\\n5. `ORDER!C14 Quantity: 186` -\\u003e `buyerProductQuantity`: \\\"186\\\"\\n6. `ORDER!C13 UOM: MT/WTO` -\\u003e `buyerProductUOM`: \\\"MT/WTO\\\"\\n7. `ORDER!E14 Delivery date: 2026-09-21` -\\u003e `buyerDeliveryDate`: \\\"2026-09-21\\\"\\n\\nRequired fields for the PO object:\\n- `purchaseOrderNumber`: \\\"9415698592\\\"\\n- `purchaseOrderDateTime`: Not found. -\\u003e null\\n- `buyerName`: \\\"Thornwick Merchants Ltd\\\"\\n- `shipToInfo`: Not found. -\\u003e null\\n- `paymentTerms`: Not found. -\\u003e null\\n- `buyerCurrency`: Not found. -\\u003e null\\n- `totalValue`: Not found. -\\u003e null\\n- `lineItems`: Array containing the extracted line item.\\n\\nLine Item details:\\n- `purchaseOrderLineNumber`: Not explicitly given, but it's the first line item. I will check if there's any implicit numbering. Since there is no explicit line number, I will set it to null.\\n- `buyerProductIdentifier`: \\\"169163\\\"\\n- `buyerProductName`: \\\"Corn rice cakes 150 g\\\"\\n- `buyerProductQuantity`: \\\"186\\\"\\n- `buyerProductUOM`: \\\"MT/WTO\\\"\\n- `quantityUnit`: \\\"MT/WTO\\\" is not in the enum [\\\"EACH\\\", \\\"CASE\\\", \\\"KILOGRAM\\\", \\\"BOTTLE\\\", \\\"OTHER\\\", \\\"UNKNOWN\\\"]. Since it's an explicit unit, I should use \\\"OTHER\\\".\\n- `buyerUnitPrice`: Not found. -\\u003e null\\n- `buyerDeliveryDate`: \\\"2026-09-21\\\"\\n\\nConstructing the JSON.\"},\"done\":true,\"done_reason\":\"stop\",\"total_duration\":77386035702,\"load_duration\":9835625,\"prompt_eval_count\":1163,\"prompt_eval_cached_count\":0,\"prompt_eval_duration\":12101286000,\"eval_count\":723,\"eval_duration\":64901938000}",
+        "reported_model": "gemma4:e4b-it-qat",
+        "serving_provider": null,
+        "request_id": null,
+        "finish_reason": "stop",
+        "native_finish_reason": null,
+        "refusal": null,
+        "error": null,
+        "duration_ms": 77399.51228499922,
+        "input_tokens": 1163,
+        "output_tokens": 723,
+        "cost_usd": 0.0,
+        "total_duration_ns": 77386035702,
+        "load_duration_ns": 9835625,
+        "credentials_redacted": false
+      },
+      "failure": null,
+      "request_timeout_seconds": 1800.0,
+      "retry_delay_seconds": 0.0,
+      "budget_reservation_id": null,
+      "budget_reserved_usd": null,
+      "accounting_note": null
+    }
+  ],
+  "admissions": [
+    {
+      "method": "gemma4-installed-bpe-render-only-plus-two-boundary-tokens",
+      "request_sha256": "a06fd704e910a32dddae9fa390745e09cebf5447ce1bd560176f504d7259025d",
+      "counter_identity": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f/42e3a238e10726346e996c7e3569fcfb2e8d47173944a3cd56826d8dc4d9a9fb",
+      "prompt_token_bound": 1165,
+      "output_allowance": 4096,
+      "context_length": 32768
+    }
+  ],
+  "reason": null
+}

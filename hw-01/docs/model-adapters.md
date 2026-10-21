@@ -210,8 +210,9 @@ the flag does not install a runtime or change a URL. Container image identity
 and comparison with the registry digest belong
 to service initialization in section 6.5.
 
-Actual Ollama initialization and live structured-output verification remain
-pending sections 6.5–6.6. No host runtime or model weights were installed here.
+Ollama Docker initialization/readiness is documented in
+[runtime setup](docker-runtime.md). Full extraction acceptance is separate in
+the [6.6 runner](running-extractions.md). No host model runtime is required.
 
 ## Verification and next steps
 
@@ -275,7 +276,8 @@ Section 6.4 adds the [shared coordinator](execution-coordinator.md), bounded
 retries/correction, deadlines, dependency stopping and cumulative budget
 reservations. Sections 6.5–6.6 add
 Docker model services, persistence, CLI execution and the three-document live
-smoke. There is no inference CLI or full comparison command in this slice.
+smoke. The [selected-run CLI](running-extractions.md) is now implemented;
+the full measured comparison remains sections 7–8.
 
 Protocol references:
 

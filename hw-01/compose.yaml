@@ -30,6 +30,10 @@ x-local-environment: &local-environment
   HW01_SETUP_MEASUREMENT_SECONDS: ${HW01_SETUP_MEASUREMENT_SECONDS:-600}
 
 services:
+  offline:
+    <<: *app
+    network_mode: none
+
   checks:
     build:
       context: .
@@ -45,10 +49,20 @@ services:
 
   app:
     <<: *app
+    environment: *local-environment
     # Inject app settings/credentials at runtime, never into images or local helpers.
     env_file:
       - path: .env
         required: false
+
+  # Local inference deliberately has no provider credentials.
+  local-run:
+    <<: *app
+    profiles: [local]
+    environment: *local-environment
+    depends_on:
+      ollama:
+        condition: service_healthy
 
   local-init:
     <<: *app

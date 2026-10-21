@@ -15,9 +15,11 @@ The initial v1 prompt/configuration exists for preflight. The
 image, pinned Ollama/Gemma initialization and persistent results storage.
 `make hw01-local-ready` from the root checks six representative requests;
 `make hw01-local-capacity` optionally checks all 60 prepared requests.
-Readiness coverage does not replace actual request admission in the future runner.
-The inference CLI, live adapter smoke checks, measured prompt
-variants, saved experiment results and the comparison report remain pending.
+The [selected extraction runner](docs/running-extractions.md) adds actual-request
+admission, incremental records/checkpoints, budget administration, CLI/Make
+commands and checked exports. Live acceptance is tracked separately; provider
+inference requires verified coverage and explicit human approval. Measured prompt
+variants, the complete matrix, scoring and the comparison report remain pending.
 
 Reviews follow the repository's [shared process](../docs/review-process.md) and
 the [HW-01 checklist](docs/review-checklist.md) for relevant domain concerns.
@@ -28,7 +30,8 @@ boundaries and their implementation-plan points.
 
 `hw-01/` is the independent homework project. Its importable Python package
 lives in `src/extraction_service/`, with modules grouped by responsibility:
-`configuration/`, `corpus/`, `extraction/`, `inference/`, `execution/` and `runtime/`.
+`configuration/`, `corpus/`, `extraction/`, `inference/`, `execution/`, `runtime/`
+and application composition/persistence in `application/`.
 
 Provider-specific adapters, response parsing, capabilities and metadata probes
 live in `inference/openrouter/` and `inference/ollama/`. Shared HTTP clients and

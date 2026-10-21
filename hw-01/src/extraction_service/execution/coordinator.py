@@ -1,8 +1,9 @@
 """Coordinate extraction, correction, retries and invocation-local dependency policy."""
 
-from collections.abc import Iterable
+from collections.abc import Callable, Iterable
 
 from extraction_service.configuration.models import ExecutionConfig
+from extraction_service.execution.admission import AdmissionRejected, RequestAdmission
 from extraction_service.execution.budget.guard import SpendingGuard
 from extraction_service.execution.budget.ledger import BudgetLedger, BudgetStop, Reservation
 from extraction_service.execution.evidence import (
@@ -59,12 +60,16 @@ class ExtractionCoordinator:
         *,
         ledger: BudgetLedger | None = None,
         clock: Clock | None = None,
+        admission: RequestAdmission | None = None,
+        checkpoint: Callable[[InputExecution], None] | None = None,
     ) -> None:
         self._contract = contract
         self._execution = execution
         self._spending = SpendingGuard(execution, ledger)
         self._clock = SystemClock() if clock is None else clock
         self._dependencies: dict[DependencyIdentity, DependencyState] = {}
+        self._admission = admission
+        self._checkpoint = checkpoint
 
     def execute_many(self, scheduled: Iterable[ScheduledExtraction]) -> BatchResult:
         """Process selected work, retaining empty histories for untouched combinations."""
@@ -91,6 +96,7 @@ class ExtractionCoordinator:
             deadline=started + self._execution.input_timeout_seconds,
         )
         dependency = scheduled.target.dependency
+        self._save_progress(progress)
         state = self._dependencies.setdefault(dependency, DependencyState())
         paid_stop = self._spending.paid_stop
 
@@ -196,6 +202,31 @@ class ExtractionCoordinator:
             timeout_seconds=min(self._execution.request_timeout_seconds, remaining),
         )
 
+        if self._admission is not None:
+            try:
+                evidence = self._admission.check(
+                    request, progress.scheduled.target.adapter.identity
+                )
+            except BudgetStop as error:
+                self._stop_budget(progress, error)
+                self._save_progress(progress)
+
+                return None
+            except AdmissionRejected as error:
+                progress.reason = str(error)
+                progress.last_failure = None
+                self._save_progress(progress)
+
+                return None
+
+            progress.admissions.append(evidence)
+            self._save_progress(progress)
+
+        if self._clock.monotonic() >= progress.deadline:
+            progress.reason = ExecutionReason.INPUT_DEADLINE_EXCEEDED.value
+
+            return None
+
         try:
             reservation = self._spending.reserve(
                 progress.scheduled, request, attempt_number=len(progress.attempts) + 1
@@ -270,6 +301,7 @@ class ExtractionCoordinator:
                 attempt = AttemptResult.model_validate(values)
 
         progress.attempts.append(attempt)
+        self._save_progress(progress)
 
         try:
             self._spending.reconcile(reservation, attempt.cost_usd)
@@ -301,6 +333,7 @@ class ExtractionCoordinator:
         values = attempt.model_dump()
         values["retry_delay_seconds"] = actual_delay
         progress.attempts[-1] = AttemptResult.model_validate(values)
+        self._save_progress(progress)
         self._clock.sleep(actual_delay)
 
         if self._clock.monotonic() >= progress.deadline:
@@ -309,3 +342,17 @@ class ExtractionCoordinator:
             return False
 
         return True
+
+    def _save_progress(self, progress: InputExecution) -> None:
+        if self._checkpoint is not None:
+            self._checkpoint(progress)
+
+    def summarize(self, records: Iterable[RunRecord]) -> BatchResult:
+        """Summarize incrementally saved work without resetting dependency state."""
+
+        return build_batch_result(
+            tuple(records),
+            self._execution,
+            dependencies=self._dependencies,
+            budget_stops=self._spending.stops,
+        )
