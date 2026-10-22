@@ -161,8 +161,11 @@ On 22 October the user approved an explicit **provider-enforced context policy
 for smoke**, then separately extended it to screening. Coverage defaults to
 `server_context_stages: ["smoke"]`; screening coverage explicitly names
 `["screening"]`. Coverage with `context_enforcement: "provider"` requires
-`--allow-server-context` and an allowed stage. Matrix/repetition remain rejected;
-this policy does not require a Google key.
+`--allow-server-context` and an allowed stage. The user subsequently accepted
+the matrix-stage extension for 7.2; new matrix coverage must explicitly name
+`["matrix"]`. Historical coverage remains limited to its recorded stages, and
+repetition remains rejected. See [matrix preparation](matrix-experiment.md).
+This policy does not require a Google key or approve paid inference.
 The application checks the advertised route context against the coverage and
 reserves its full input ceiling plus the configured output allowance before
 each physical request. Input pricing coverage below that context is rejected.

@@ -7,6 +7,7 @@ models:
   - id: local
     backend: ollama
     model: gemma4:e4b-it-qat
+    thinking: false
 prompts:
   - id: v1
     file: prompts/v1.txt

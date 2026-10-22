@@ -24,13 +24,17 @@ class ModelConfig(StrictModel):
     backend: Literal["openrouter", "ollama"]
     model: Identifier
     serving_provider: NonEmptyText | None = None
+    thinking: bool | None = None
 
     @model_validator(mode="after")
-    def check_provider(self) -> Self:
-        """Keep serving-provider routing specific to provider requests."""
+    def check_backend_controls(self) -> Self:
+        """Keep serving routes and local thinking controls on their matching backend."""
 
         if self.backend == "ollama" and self.serving_provider is not None:
             raise ValueError("Ollama models cannot specify a serving provider")
+
+        if self.backend != "ollama" and self.thinking is not None:
+            raise ValueError("The thinking control is supported only for Ollama models")
 
         return self
 

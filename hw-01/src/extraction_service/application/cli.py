@@ -66,7 +66,7 @@ def add_commands(commands: argparse._SubParsersAction[argparse.ArgumentParser]) 
         parser.add_argument(
             "--allow-server-context",
             action="store_true",
-            help="Approved smoke/screening coverage: accept provider-enforced context limits",
+            help="Approved stage coverage: accept provider-enforced context limits",
         )
 
     for name in ("budget-init", "budget-show"):

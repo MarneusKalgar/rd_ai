@@ -35,6 +35,9 @@ def _variant(record: RunRecord, execution: dict[str, Any], setup: dict[str, Any]
         "pricing_stop": setup.get("pricing_stop"),
     }
 
+    if "thinking" in setup:
+        context["thinking"] = setup["thinking"]
+
     return {
         "stage": record.stage.value,
         "model_id": record.model_id,

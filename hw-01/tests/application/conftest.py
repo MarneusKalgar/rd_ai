@@ -98,7 +98,11 @@ class ControlledService:
         metadata: dict[str, dict[str, Any]] = {
             "/api/version": {"version": pin.server_version},
             "/api/tags": {"models": [model]},
-            "/api/show": {"capabilities": ["completion"], "model_info": tokenizer_info()},
+            "/api/show": {
+                "capabilities": ["completion"],
+                "model_info": tokenizer_info(),
+                "thinking": {"values": [False, True], "default": True},
+            },
             "/api/generate": {"model": pin.model, "done": True},
             "/api/ps": {"models": [model]},
         }

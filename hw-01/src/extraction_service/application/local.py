@@ -25,6 +25,27 @@ from extraction_service.runtime.ollama import (
 from extraction_service.runtime.workflows import Installation
 
 
+def _thinking_control(metadata: dict[str, Any], requested: bool | None) -> dict[str, Any]:
+    """Verify an explicit boolean control against installed, non-generating metadata."""
+
+    advertised = metadata.get("thinking")
+    values = advertised.get("values") if isinstance(advertised, dict) else None
+
+    if requested is not None and (
+        not isinstance(values, list)
+        or not any(type(value) is bool and value == requested for value in values)
+    ):
+        raise ValueError("Installed model does not advertise the requested thinking control")
+
+    default = advertised.get("default") if isinstance(advertised, dict) else None
+
+    return {
+        "requested": requested,
+        "effective": default if requested is None else requested,
+        "advertised": advertised,
+    }
+
+
 def prepare_local(
     project_dir: Path, model: ModelConfig, settings: ApplicationSettings, client: JsonHttpClient
 ) -> tuple[ExecutionTarget, LocalAdmission, dict[str, Any]]:
@@ -54,21 +75,27 @@ def prepare_local(
         raise ValueError("Pinned local weights are missing; run explicit setup for this mode")
 
     runtime = model_runtime(client, pin, version, local_settings)
-    started = perf_counter()
-    loaded = load_model(client, pin, local_settings)
-    load_ms = (perf_counter() - started) * 1000
     details = client.post("api/show", {"model": model.model, "verbose": True}, 60.0)
+    thinking = _thinking_control(details.body, model.thinking)
     info = details.body.get("model_info")
 
     if not isinstance(info, dict):
         raise ValueError("Installed tokenizer metadata unavailable")
 
     tokenizer = GemmaTokenizer(info)
+    started = perf_counter()
+    loaded = load_model(client, pin, local_settings)
+    load_ms = (perf_counter() - started) * 1000
     adapter = OllamaAdapter(
         model, runtime, http_client=client, native=native, context_length=loaded.context_length
     )
     admission = LocalAdmission(
-        client, pin, tokenizer, loaded.context_length, runtime_version=version
+        client,
+        pin,
+        tokenizer,
+        loaded.context_length,
+        runtime_version=version,
+        thinking=model.thinking,
     )
     target = ExecutionTarget(adapter=adapter, endpoint=str(settings.ollama_base_url))
     evidence = {
@@ -79,6 +106,7 @@ def prepare_local(
         "load_duration_ms": load_ms,
         "tokenizer_sha256": tokenizer.sha256,
         "runtime": runtime.model_dump(mode="json"),
+        "thinking": thinking,
     }
 
     return target, admission, evidence

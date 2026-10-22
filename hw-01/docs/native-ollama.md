@@ -118,3 +118,35 @@ replace full adapter acceptance or the required two-prompt/two-sampling matrix.
 
 See [recorded native extraction evidence](native-runtime-verification.md) for the
 completed short and three-document runs, the retained truncation and comparison limits.
+
+## Explicit thinking profile — 7.2
+
+The initial full-corpus native baseline used the model default: thinking was
+true in installed metadata and all 30 saved response envelopes. Six requests
+exhausted 4,096 tokens in thinking before returning any final answer. After
+reviewing both baselines, the user accepted disabling thinking and rerunning
+all 30 native v1/baseline inputs. Keep the original run as a separate diagnostic;
+reuse the unchanged completed provider baseline.
+
+The local model entry in `config/experiments.yaml` sets **`thinking: false`**.
+This maps to top-level **`think: false`** on both render-only admission and every
+Ollama generation/correction. It does not change the installed desktop app,
+weights, input, schema, prompt, sampling or output allowance. Omitted/null
+thinking retains runtime defaults for historical configurations. The option is
+Ollama-specific and is rejected on provider model entries; it is not a shared
+provider reasoning setting.
+
+Before loading, composition verifies an explicit value against installed
+`/api/show` thinking metadata. Unsupported or absent metadata stops before
+loading/generation. Setup records requested/effective/default controls;
+admission includes the control and binds it into the request fingerprint.
+Aggregation keeps different thinking profiles separate. Historical exports
+remain byte-identical and still reload with the optional field absent.
+
+See [Ollama thinking controls](https://docs.ollama.com/capabilities/thinking)
+and the pinned [0.40.6 request/show definitions](https://github.com/ollama/ollama/blob/v0.40.6/api/types.go).
+Both the portable runtime's request schema and the installed native model's
+metadata support the boolean control. No Docker Ollama service was started to
+perform this check; actual thinking-disabled behavior is verified by the new
+native run's raw envelopes. Controlled tests establish request/evidence plumbing,
+not real model compliance or an extraction-quality improvement.

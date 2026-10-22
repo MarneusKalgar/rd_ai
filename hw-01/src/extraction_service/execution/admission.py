@@ -38,6 +38,7 @@ class AdmissionEvidence(StrictModel):
     prompt_token_bound: PositiveInt | None
     output_allowance: PositiveInt
     context_length: PositiveInt
+    thinking: bool | None = None
 
     @model_validator(mode="after")
     def check_counter_evidence(self) -> AdmissionEvidence:
@@ -48,6 +49,9 @@ class AdmissionEvidence(StrictModel):
                 raise ValueError("Counted admission requires counter identity and token bound")
         elif self.counter_identity is not None or self.prompt_token_bound is not None:
             raise ValueError("Provider context enforcement has no verified counter or token bound")
+
+        if self.context_enforcement == ContextEnforcement.PROVIDER and self.thinking is not None:
+            raise ValueError("Provider context evidence cannot contain an Ollama thinking control")
 
         return self
 

@@ -359,9 +359,21 @@ variable responses justify keeping this layer small.
 
 ## Model quality evaluation
 
+The [7.2 matrix preparation](matrix-experiment.md) initially passed **659 offline tests**.
+The explicit thinking-control extension subsequently passed **672 tests**,
+including phase reuse and 12 thinking-control regressions: initial/correction
+render/generation agreement, strict backend-specific controls, metadata rejection
+before loading, request fingerprint binding and profile-separated aggregation.
+Both original live baseline exports reload unchanged under the new fields.
+Six added [matrix regressions](../tests/application/test_matrix.py) exercise all
+30 selected inputs through controlled HTTP, accuracy over only the 10 labeled
+cases, preserved prior spending and matrix-reserve settlement. Matrix-only
+coverage plus explicit opt-in is required; smoke/screening-only coverage and
+repetition are rejected before HTTP. Fixture accuracy is not live model quality.
+
 The shared [offline evaluator](evaluation.md) and
 [screening preparation](provider-screening.md) are implemented for 7.1.
-The current gate passes 653 tests, including 27 new scoring, aggregation,
+The 7.1 gate passed 653 tests, including 27 new scoring, aggregation,
 screening selection/stage and accounting regressions. Controlled CLI tests
 exercise all three candidates over the 10 gold inputs and independent count/
 cost oracles. The [paid screening](provider-screening-results.md) subsequently

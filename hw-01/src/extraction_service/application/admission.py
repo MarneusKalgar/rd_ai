@@ -3,6 +3,7 @@
 import hashlib
 import json
 from decimal import Decimal, InvalidOperation
+from typing import Any
 
 from pydantic import Field, model_validator
 
@@ -24,10 +25,15 @@ from extraction_service.runtime.configuration import ModelPin
 from extraction_service.runtime_types import NonEmptyText, PositiveInt, StrictModel
 
 
-def request_fingerprint(request: GenerationRequest) -> str:
-    """Identify exact instructions/schema/source and output/sampling controls."""
+def request_fingerprint(request: GenerationRequest, *, thinking: bool | None = None) -> str:
+    """Hash request content/sampling and any explicit Ollama thinking control."""
 
-    serialized = json.dumps(request.model_dump(exclude={"timeout_seconds"}), sort_keys=True)
+    payload = request.model_dump(exclude={"timeout_seconds"})
+
+    if thinking is not None:
+        payload["ollama_thinking"] = thinking
+
+    serialized = json.dumps(payload, sort_keys=True)
 
     return hashlib.sha256(serialized.encode()).hexdigest()
 
@@ -41,12 +47,14 @@ class LocalAdmission:
         context_length: int,
         *,
         runtime_version: str,
+        thinking: bool | None = None,
     ) -> None:
         self._client = client
         self._pin = pin
         self._tokenizer = tokenizer
         self._context_length = context_length
         self._runtime_version = runtime_version
+        self._thinking = thinking
 
     def check(self, request: GenerationRequest, identity: ModelIdentity) -> AdmissionEvidence:
         if (
@@ -57,18 +65,23 @@ class LocalAdmission:
 
         # This pinned server returns before its completion path. There is no
         # num_predict=1 probe and no prompt-evaluation/generation timing sample.
+        payload: dict[str, Any] = {
+            "model": self._pin.model,
+            "messages": request_messages(request),
+            "format": request.output_schema,
+            "stream": False,
+            "truncate": False,
+            "shift": False,
+            "_debug_render_only": True,
+            "options": {"num_ctx": self._context_length},
+        }
+
+        if self._thinking is not None:
+            payload["think"] = self._thinking
+
         reply = self._client.post(
             "api/chat",
-            {
-                "model": self._pin.model,
-                "messages": request_messages(request),
-                "format": request.output_schema,
-                "stream": False,
-                "truncate": False,
-                "shift": False,
-                "_debug_render_only": True,
-                "options": {"num_ctx": self._context_length},
-            },
+            payload,
             request.timeout_seconds,
         )
         debug = reply.body.get("_debug_info")
@@ -90,11 +103,12 @@ class LocalAdmission:
 
         return AdmissionEvidence(
             method="gemma4-installed-bpe-render-only-plus-two-boundary-tokens",
-            request_sha256=request_fingerprint(request),
+            request_sha256=request_fingerprint(request, thinking=self._thinking),
             counter_identity=f"{self._pin.digest}/{self._tokenizer.sha256}",
             prompt_token_bound=count,
             output_allowance=allowance,
             context_length=self._context_length,
+            thinking=self._thinking,
         )
 
 
@@ -118,8 +132,9 @@ class ProviderCoverage(StrictModel):
         if not self.server_context_stages or not self.server_context_stages <= {
             ExecutionStage.SMOKE,
             ExecutionStage.SCREENING,
+            ExecutionStage.MATRIX,
         }:
-            raise ValueError("Provider context stages must be smoke and/or screening")
+            raise ValueError("Provider context stages must be smoke, screening and/or matrix")
 
         if self.context_enforcement == ContextEnforcement.PROVIDER:
             if self.pricing.input_token_ceiling < self.context_length:

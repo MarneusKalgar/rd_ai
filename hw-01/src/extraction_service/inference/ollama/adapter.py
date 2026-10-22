@@ -26,6 +26,7 @@ class OllamaAdapter:
         self._identity = runtime.identity(config, native=native)
         self._http = http_client
         self._context_length = context_length
+        self._thinking = config.thinking
 
     @property
     def identity(self) -> ModelIdentity:
@@ -45,6 +46,9 @@ class OllamaAdapter:
                 "num_predict": request.sampling.max_output_tokens,
             },
         }
+
+        if self._thinking is not None:
+            payload["think"] = self._thinking
 
         if self._context_length is not None:
             payload["truncate"] = False

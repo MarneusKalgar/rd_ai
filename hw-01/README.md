@@ -33,7 +33,8 @@ Gemini candidates; Mistral stopped on upstream rate limits in both the original\
 with the Gemini pair: Gemini 3.5 Flash-Lite is frozen as the main provider in
 `config/experiments.yaml`; Mistral remains unranked. Further paid execution
 needs the documented approval.
-The later main matrix uses all 30 inputs for both prompts and sampling settings.
+The [main matrix](docs/matrix-experiment.md) uses all 30 inputs for both prompts
+and sampling settings, starting with unchanged v1/baseline on both models.
 
 [Native Ollama mode](docs/native-ollama.md) uses the existing desktop app through
 `MODE=native`, with Python still in Docker and an explicit patch compatibility policy.
