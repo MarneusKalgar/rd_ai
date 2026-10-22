@@ -359,6 +359,17 @@ variable responses justify keeping this layer small.
 
 ## Model quality evaluation
 
+The shared [offline evaluator](evaluation.md) and
+[screening preparation](provider-screening.md) are implemented for 7.1.
+The current gate passes 653 tests, including 27 new scoring, aggregation,
+screening selection/stage and accounting regressions. Controlled CLI tests
+exercise all three candidates over the 10 gold inputs and independent count/
+cost oracles. The [paid screening](provider-screening-results.md) subsequently
+completed both Gemini candidates and stopped Mistral on upstream rate limits;
+the user accepted finalizing 7.1 with the Gemini pair and selecting Gemini 3.5
+Flash-Lite. Mistral is unranked; the main matrix remains pending. The controlled test's
+perfect predictions are fixture data, not model quality evidence.
+
 **Plan points: 7–8.** The golden-set experiment measures field accuracy and
 model behavior. Engineering tests establish that the service follows its
 contract and records those outcomes faithfully.

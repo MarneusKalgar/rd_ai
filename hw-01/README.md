@@ -19,12 +19,21 @@ The [selected extraction runner](docs/running-extractions.md) adds actual-reques
 admission, incremental records/checkpoints, budget administration, CLI/Make
 commands and checked exports. Live acceptance is tracked separately; provider
 inference requires verified coverage and explicit human approval. Measured prompt
-variants, the complete matrix, scoring and the comparison report remain pending.
+variants, the complete matrix and the final comparison report remain pending.
 
 The [provider smoke evidence](docs/provider-runtime-verification.md) records the
 approved Gemini 3.1 Flash-Lite run: two schema-valid outputs, one truncation,
 verified export and $0.01518250 in billed cost. Together with native local
 acceptance, this completes 6.6.6. Further paid execution needs separate approval.
+
+[Provider screening](docs/provider-screening.md) prepares section 7.1 on the
+10 approved gold cases, using the [offline evaluator](docs/evaluation.md).
+The [approved screening run](docs/provider-screening-results.md) completed both
+Gemini candidates; Mistral stopped on upstream rate limits in both the original\ninvocation and one separately approved retry. The user accepted completing 7.1
+with the Gemini pair: Gemini 3.5 Flash-Lite is frozen as the main provider in
+`config/experiments.yaml`; Mistral remains unranked. Further paid execution
+needs the documented approval.
+The later main matrix uses all 30 inputs for both prompts and sampling settings.
 
 [Native Ollama mode](docs/native-ollama.md) uses the existing desktop app through
 `MODE=native`, with Python still in Docker and an explicit patch compatibility policy.

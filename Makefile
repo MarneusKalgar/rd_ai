@@ -19,10 +19,11 @@ help:
 	@echo "hw01-budget-show   Reopen cumulative spending without resetting it"
 	@echo "hw01-export-run    Export saved evidence to results/submission (ARGS=run-id)"
 	@echo "hw01-verify-export Recheck exported byte hashes and records (ARGS=run-id)"
+	@echo "hw01-evaluate      Score saved terminal runs offline (ARGS='run-id ...')"
 
-.PHONY: hw01-run hw01-smoke hw01-plan-run hw01-budget-init hw01-budget-show hw01-export-run hw01-verify-export hw01-setup-native
+.PHONY: hw01-run hw01-smoke hw01-plan-run hw01-budget-init hw01-budget-show hw01-export-run hw01-verify-export hw01-setup-native hw01-evaluate
 
-hw01-run hw01-smoke hw01-plan-run hw01-budget-init hw01-budget-show hw01-export-run hw01-verify-export hw01-setup-native:
+hw01-run hw01-smoke hw01-plan-run hw01-budget-init hw01-budget-show hw01-export-run hw01-verify-export hw01-setup-native hw01-evaluate:
 	$(MAKE) -C hw-01 $(patsubst hw01-%,%,$@)
 
 hw01-check:

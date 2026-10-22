@@ -109,11 +109,18 @@ class ProviderCoverage(StrictModel):
     pricing: VerifiedPricing
     context_length: PositiveInt
     context_enforcement: ContextEnforcement = ContextEnforcement.COUNTED
+    server_context_stages: frozenset[ExecutionStage] = frozenset({ExecutionStage.SMOKE})
     request_token_bounds: dict[str, PositiveInt] = Field(default_factory=dict)
     evidence: NonEmptyText
 
     @model_validator(mode="after")
     def check_provider_ceiling(self) -> ProviderCoverage:
+        if not self.server_context_stages or not self.server_context_stages <= {
+            ExecutionStage.SMOKE,
+            ExecutionStage.SCREENING,
+        }:
+            raise ValueError("Provider context stages must be smoke and/or screening")
+
         if self.context_enforcement == ContextEnforcement.PROVIDER:
             if self.pricing.input_token_ceiling < self.context_length:
                 raise ValueError(
@@ -126,12 +133,13 @@ class ProviderCoverage(StrictModel):
         return self
 
     def check_policy(self, *, allow_server_context: bool, stage: ExecutionStage) -> None:
-        """Keep the approved exception explicit and limited to smoke execution."""
+        """Keep provider enforcement explicit, with coverage-specific allowed stages."""
 
         if self.context_enforcement == ContextEnforcement.PROVIDER:
-            if not allow_server_context or stage != ExecutionStage.SMOKE:
+            if not allow_server_context or stage not in self.server_context_stages:
                 raise ValueError(
-                    "Provider context enforcement requires smoke and --allow-server-context"
+                    "Provider context enforcement requires an approved stage "
+                    "and --allow-server-context"
                 )
 
     def check_catalog(self, endpoint: OpenRouterEndpoint) -> None:
@@ -141,11 +149,14 @@ class ProviderCoverage(StrictModel):
             if endpoint.context_length != self.context_length:
                 raise ValueError("Provider context coverage differs from current catalog context")
 
-        rates = (
+        rates = [
             ("prompt", self.pricing.input_usd_per_token),
             ("completion", self.pricing.output_usd_per_token),
             ("request", self.pricing.request_usd),
-        )
+        ]
+
+        if "internal_reasoning" in endpoint.pricing:
+            rates.append(("internal_reasoning", self.pricing.output_usd_per_token))
 
         for name, ceiling in rates:
             raw = endpoint.pricing.get(name, "0" if name == "request" else None)

@@ -16,6 +16,7 @@ from extraction_service.application.runner import run
 from extraction_service.application.selection import RunOptions
 from extraction_service.artifacts import artifact_path
 from extraction_service.configuration.loading import load_experiment
+from extraction_service.evaluation.reporting import evaluate_runs
 from extraction_service.execution.budget.ledger import BudgetLedger
 from extraction_service.exit_status import ExitStatus
 from extraction_service.preflight import DEFAULT_EXPERIMENT_FILE
@@ -31,6 +32,7 @@ COMMANDS: Final[frozenset[str]] = frozenset(
         "budget-show",
         "export-run",
         "verify-export",
+        "evaluate",
     }
 )
 SMOKE_INPUTS: Final[tuple[str, ...]] = ("B02-S030-PO01", "B02-S026-PO01", "B02-S008-PO01")
@@ -64,7 +66,7 @@ def add_commands(commands: argparse._SubParsersAction[argparse.ArgumentParser]) 
         parser.add_argument(
             "--allow-server-context",
             action="store_true",
-            help="Smoke only: accept provider context rejection without a verified local count",
+            help="Approved smoke/screening coverage: accept provider-enforced context limits",
         )
 
     for name in ("budget-init", "budget-show"):
@@ -78,6 +80,9 @@ def add_commands(commands: argparse._SubParsersAction[argparse.ArgumentParser]) 
     for name in ("export-run", "verify-export"):
         parser = commands.add_parser(name, help="Copy/check saved evidence without inference")
         parser.add_argument("run_id")
+
+    evaluation = commands.add_parser("evaluate", help="Score saved terminal runs offline")
+    evaluation.add_argument("run_ids", nargs="+")
 
 
 def _options(args: argparse.Namespace) -> RunOptions:
@@ -117,6 +122,12 @@ def dispatch(args: argparse.Namespace) -> int:
     """Execute one explicit command; outer CLI owns safe error reporting."""
 
     project_dir = args.project_dir
+
+    if args.command == "evaluate":
+        report = evaluate_runs(project_dir, args.run_ids)
+        print(json.dumps(report, indent=2))
+
+        return ExitStatus.SUCCESS
 
     if args.command in ("run", "smoke", "plan-run"):
         options = _options(args)

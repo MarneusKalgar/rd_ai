@@ -18,6 +18,7 @@ $(error MODE must be local, provider or native)
 endif
 
 .PHONY: run smoke plan-run budget-init budget-show export-run verify-export
+.PHONY: evaluate
 .PHONY: setup-native
 
 # Make runs from hw-01/ (including calls routed from the root Makefile).
@@ -100,3 +101,7 @@ export-run:
 
 verify-export:
 	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service verify-export $(ARGS)
+
+# Saved-run scoring has no network, key, model loading or generation.
+evaluate:
+	$(COMPOSE) run --build --rm --no-deps offline python -m extraction_service evaluate $(ARGS)

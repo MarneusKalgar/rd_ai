@@ -14,7 +14,7 @@ from extraction_service.execution.admission import AdmissionEvidence
 from .conftest import ControlledService
 
 INPUT: str = "B02-S003-PO01"
-CATALOG: str = "/api/v1/models/google/gemini-3.1-flash-lite/endpoints"
+CATALOG: str = "/api/v1/models/google/gemini-3.5-flash-lite/endpoints"
 ARGUMENTS: tuple[str, ...] = (
     "--model",
     "provider",
@@ -197,6 +197,19 @@ def test_provider_context_offline_plan(service: ControlledService) -> None:
     assert report["provider_context_enforcement"] == {"provider": "provider"}
     assert Decimal(report["maximum_api_usd_by_model"]["provider"]) == Decimal("1.073152")
     assert service.requests == []
+
+
+def test_increased_reasoning_rate_stops_before_paid_http(service: ControlledService) -> None:
+    prepare_coverage(service)
+    endpoint = service.replacements[CATALOG]["data"]["endpoints"][0]
+    endpoint["pricing"]["internal_reasoning"] = "0.000002"
+
+    result = service.invoke("smoke", *ARGUMENTS, "--input", INPUT, "--run-id", "reasoning-rate")
+
+    assert result.returncode == 3, result.stdout + result.stderr
+    _, records = reload_records(service.project / "results/runs/reasoning-rate")
+    assert records[0].reason == "unsafe_pricing" and records[0].attempts == []
+    assert [path for path, _, _ in service.requests] == [CATALOG]
 
 
 def test_provider_context_rejection_retains_physical_failure(service: ControlledService) -> None:

@@ -8,6 +8,7 @@ from typing import Any
 from pydantic import TypeAdapter
 
 from extraction_service.application.admission import ProviderCoverage, request_fingerprint
+from extraction_service.application.screening import screening_options
 from extraction_service.application.selection import RunOptions, select_models, selected_jobs
 from extraction_service.artifacts import artifact_path
 from extraction_service.configuration.loading import load_experiment
@@ -56,6 +57,7 @@ def describe_run(project_dir: Path, options: RunOptions, config_file: str) -> di
     config_path = artifact_path(project_dir, config_file)
     experiment = load_experiment(config_path)
     corpus = load_corpus(project_dir)
+    options = screening_options(experiment, corpus, options)
     digest = hashlib.sha256(config_path.read_bytes()).hexdigest()
     jobs = selected_jobs(project_dir, corpus, experiment, options, digest)
     models = select_models(experiment, options)

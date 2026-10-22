@@ -10,6 +10,7 @@ from extraction_service.application.composition import (
     compose_targets,
 )
 from extraction_service.application.persistence import RunStore
+from extraction_service.application.screening import screening_options
 from extraction_service.application.selection import RunOptions, select_models, selected_jobs
 from extraction_service.artifacts import artifact_path
 from extraction_service.configuration.models import ExperimentConfig
@@ -92,6 +93,7 @@ def run(
     corpus = load_corpus(project_dir)
     report = preflight(project_dir, config_file, corpus=corpus)
     experiment = report.experiment
+    options = screening_options(experiment, corpus, options)
     models = select_models(experiment, options)
     digest = hashlib.sha256(artifact_path(project_dir, config_file).read_bytes()).hexdigest()
     jobs = selected_jobs(project_dir, corpus, experiment, options, digest)

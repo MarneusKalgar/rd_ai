@@ -67,14 +67,20 @@ class ControlledService:
         }
 
         if path.endswith("/endpoints"):
+            name = path.removeprefix("/api/v1/models/").removesuffix("/endpoints")
+            configured = load_experiment(self.project / "config/screening.yaml")
+            selected = next(model for model in configured.models if model.model == name)
+
             return 200, {
                 "data": {
-                    "id": "google/gemini-3.1-flash-lite",
+                    "id": name,
                     "endpoints": [
                         {
-                            "model_id": "google/gemini-3.1-flash-lite",
-                            "tag": "google-ai-studio",
-                            "provider_name": "Google AI Studio",
+                            "model_id": name,
+                            "tag": selected.serving_provider,
+                            "provider_name": "Mistral"
+                            if name.startswith("mistralai/")
+                            else "Google AI Studio",
                             "supported_parameters": [
                                 "temperature",
                                 "top_p",
@@ -124,8 +130,10 @@ class ControlledService:
 
         if path == "/api/v1/chat/completions":
             return 200, {
-                "model": "google/gemini-3.1-flash-lite",
-                "provider": "Google AI Studio",
+                "model": payload.get("model", "google/gemini-3.5-flash-lite"),
+                "provider": "Mistral"
+                if str(payload.get("model", "")).startswith("mistralai/")
+                else "Google AI Studio",
                 "choices": [
                     {"finish_reason": "stop", "message": {"role": "assistant", "content": content}}
                 ],
@@ -195,7 +203,7 @@ class ControlledService:
                 dependency=DependencyIdentity(
                     runtime=ModelRuntime.OPENROUTER,
                     endpoint=AnyHttpUrl(self.base_url + "/api/v1/"),
-                    model_name="google/gemini-3.1-flash-lite",
+                    model_name="google/gemini-3.5-flash-lite",
                     serving_provider="google-ai-studio",
                 ),
                 input_token_ceiling=32768,

@@ -98,7 +98,7 @@ def test_exact_request_admission(service: ControlledService, defect: str) -> Non
     )
     identity = ModelIdentity(
         model_id="provider",
-        model_name="google/gemini-3.1-flash-lite",
+        model_name="google/gemini-3.5-flash-lite",
         runtime=ModelRuntime.OPENROUTER,
         serving_provider="google-ai-studio",
     )

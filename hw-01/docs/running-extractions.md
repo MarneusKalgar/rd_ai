@@ -51,6 +51,12 @@ It is a service selection, not a model override: supply `--model provider` too.
 Planning, budget administration and export use the network-disabled `offline`
 service. Project-level targets omit the root `hw01-` prefix.
 
+Section [7.1 screening](provider-screening.md) uses `run --stage screening`:
+it selects exactly the approved gold inputs with v1/baseline and requires
+explicit provider candidate IDs. It does not use the smoke stage or run the
+full corpus. `make hw01-evaluate ARGS='run-id ...'` uses the same offline
+service to [score saved terminal records](evaluation.md), without model calls.
+
 ## Flow and ownership
 
 ```mermaid
@@ -142,14 +148,21 @@ did not list Gemini 3.8 Flash. Google's documented
 but requires Google API configuration and verification that its counted request
 covers OpenRouter's upstream schema/message transformation. No extra credentials
 were assumed, no Gemini tokenizer was substituted, and no provider count or
-generation was sent while implementing this gate. The current cheaper smoke
-candidate is Gemini 3.1 Flash-Lite; its public tokenizer diagnostic is described
+generation was sent while implementing this gate. The historical cheaper smoke
+candidate was Gemini 3.1 Flash-Lite; its public tokenizer diagnostic is described
 in [provider smoke preparation](provider-smoke-preparation.md). Local string
-counts do not certify OpenRouter's complete upstream request.
+counts do not certify OpenRouter's complete upstream request. Section 7.1
+subsequently selected Gemini 3.5 Flash-Lite as the main `provider` in
+`config/experiments.yaml`; historical 3.1 coverage does not match that identity.
+Prepare refreshed model/route/pricing coverage for the selected provider before
+any new paid phase. See [the accepted selection](provider-screening-results.md).
 
 On 22 October the user approved an explicit **provider-enforced context policy
-for smoke only**. Coverage with `context_enforcement: "provider"` requires
-`--allow-server-context` and the smoke stage; it does not require a Google key.
+for smoke**, then separately extended it to screening. Coverage defaults to
+`server_context_stages: ["smoke"]`; screening coverage explicitly names
+`["screening"]`. Coverage with `context_enforcement: "provider"` requires
+`--allow-server-context` and an allowed stage. Matrix/repetition remain rejected;
+this policy does not require a Google key.
 The application checks the advertised route context against the coverage and
 reserves its full input ceiling plus the configured output allowance before
 each physical request. Input pricing coverage below that context is rejected.

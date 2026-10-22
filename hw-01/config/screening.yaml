@@ -1,0 +1,38 @@
+version: experiment-v1
+models:
+  - id: provider
+    backend: openrouter
+    model: google/gemini-3.1-flash-lite
+    serving_provider: google-ai-studio
+  - id: provider-35
+    backend: openrouter
+    model: google/gemini-3.5-flash-lite
+    serving_provider: google-ai-studio
+  - id: provider-mistral
+    backend: openrouter
+    model: mistralai/mistral-small-2603
+    serving_provider: mistral/zdr
+  - id: local
+    backend: ollama
+    model: gemma4:e4b-it-qat
+prompts:
+  - id: v1
+    file: prompts/v1.txt
+sampling:
+  - id: baseline
+    temperature: 0.0
+    top_p: 1.0
+    max_output_tokens: 4096
+execution:
+  request_timeout_seconds: 1800.0
+  input_timeout_seconds: 7205.0
+  transport_retries: 1
+  api_budget_usd: 4.5
+  matrix_reserve_usd: 3.5
+  dependency_failure_limit: 3
+  backoff_initial_seconds: 1.0
+  backoff_max_seconds: 30.0
+selection:
+  model_id: local
+  prompt_id: v1
+  sampling_id: baseline
