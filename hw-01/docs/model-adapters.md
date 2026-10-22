@@ -166,7 +166,7 @@ These are public metadata observations, not inference measurements. Recheck
 metadata/prices before measured execution. The endpoint snapshot is not a runtime
 cache and offline preflight still reports model capabilities as unverified.
 
-### Provider selection
+### Historical provider selection — 19 October
 
 The user approved **`google/gemini-3.8-flash`** through **`google-ai-studio`**.
 The [OpenRouter endpoint catalog](https://openrouter.ai/api/v1/models/google/gemini-3.8-flash/endpoints)
@@ -178,8 +178,30 @@ billed output. These rates were already discounted in the listed prices.
 The earlier `openai/gpt-6-luna` candidate was rejected for this experiment:
 its [endpoint catalog](https://openrouter.ai/api/v1/models/openai/gpt-6-luna/endpoints)
 did not advertise `temperature` or `top_p`. The adapter does not silently omit
-those required experiment settings. The approved configuration now pins Gemini's
-serving provider. No paid generation was performed during this implementation.
+those required experiment settings. That configuration pinned Gemini's serving
+provider. No paid generation was performed during this implementation.
+
+### Current provider smoke selection — 22 October
+
+The active `config/experiments.yaml` selects **`google/gemini-3.1-flash-lite`**
+through **`google-ai-studio`** for the completed 6.6.6 smoke. The user approved
+this cheaper candidate; [live evidence](provider-runtime-verification.md) records
+two valid outputs, one truncation and $0.01518250 in billed cost. Further paid
+execution requires a new approved invocation. The v1 prompt, baseline sampling and 4,096-token
+output limit are unchanged. Historical native exports and the separate
+8,192-token diagnostic configuration retain their original identities.
+
+The [current endpoint catalog](https://openrouter.ai/api/v1/models/google/gemini-3.1-flash-lite/endpoints)
+advertises the required parameters, 1,048,576 context, a 65,536-token output
+limit, and standard text rates of $0.25 input / $1.50 output per million tokens.
+Those are catalog observations, not live schema acceptance or quality results.
+Provider selection for the section 7 matrix still needs measured screening.
+
+Google's [official local-tokenizer mapping](https://github.com/googleapis/python-genai/blob/main/google/genai/_local_tokenizer_loader.py)
+maps this model to `google/gemma-4-E4B-it`. The public tokenizer was downloaded
+without another API key, pinned by revision/hash and inspected without generation.
+Local message/schema counts alone do not establish the full request count after
+OpenRouter's upstream formatting. See [provider smoke preparation](provider-smoke-preparation.md).
 
 `verify_openrouter()` fetches public metadata without credentials and checks the
 configured model, exact provider slug and required parameter set. Entering the

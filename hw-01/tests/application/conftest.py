@@ -69,10 +69,10 @@ class ControlledService:
         if path.endswith("/endpoints"):
             return 200, {
                 "data": {
-                    "id": "google/gemini-3.8-flash",
+                    "id": "google/gemini-3.1-flash-lite",
                     "endpoints": [
                         {
-                            "model_id": "google/gemini-3.8-flash",
+                            "model_id": "google/gemini-3.1-flash-lite",
                             "tag": "google-ai-studio",
                             "provider_name": "Google AI Studio",
                             "supported_parameters": [
@@ -124,7 +124,7 @@ class ControlledService:
 
         if path == "/api/v1/chat/completions":
             return 200, {
-                "model": "google/gemini-3.8-flash",
+                "model": "google/gemini-3.1-flash-lite",
                 "provider": "Google AI Studio",
                 "choices": [
                     {"finish_reason": "stop", "message": {"role": "assistant", "content": content}}
@@ -195,7 +195,7 @@ class ControlledService:
                 dependency=DependencyIdentity(
                     runtime=ModelRuntime.OPENROUTER,
                     endpoint=AnyHttpUrl(self.base_url + "/api/v1/"),
-                    model_name="google/gemini-3.8-flash",
+                    model_name="google/gemini-3.1-flash-lite",
                     serving_provider="google-ai-studio",
                 ),
                 input_token_ceiling=32768,

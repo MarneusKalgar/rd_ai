@@ -21,6 +21,11 @@ commands and checked exports. Live acceptance is tracked separately; provider
 inference requires verified coverage and explicit human approval. Measured prompt
 variants, the complete matrix, scoring and the comparison report remain pending.
 
+The [provider smoke evidence](docs/provider-runtime-verification.md) records the
+approved Gemini 3.1 Flash-Lite run: two schema-valid outputs, one truncation,
+verified export and $0.01518250 in billed cost. Together with native local
+acceptance, this completes 6.6.6. Further paid execution needs separate approval.
+
 [Native Ollama mode](docs/native-ollama.md) uses the existing desktop app through
 `MODE=native`, with Python still in Docker and an explicit patch compatibility policy.
 It preserves Docker execution and uses the same admission/runner/record path.

@@ -22,6 +22,7 @@ class OpenRouterAdapter:
         endpoint: OpenRouterEndpoint,
         *,
         http_client: HttpPoster,
+        server_context: bool = False,
     ) -> None:
         endpoint.check(config)
         self._endpoint = endpoint
@@ -32,6 +33,7 @@ class OpenRouterAdapter:
             serving_provider=endpoint.provider_slug,
         )
         self._http = http_client
+        self._server_context = server_context
 
     @property
     def identity(self) -> ModelIdentity:
@@ -45,7 +47,7 @@ class OpenRouterAdapter:
                 "Requested output tokens exceed the verified endpoint limit"
             )
 
-        return {
+        payload: dict[str, Any] = {
             "model": self.identity.model_name,
             "messages": request_messages(request),
             "stream": False,
@@ -67,6 +69,14 @@ class OpenRouterAdapter:
             },
             "plugins": [],
         }
+
+        if self._server_context:
+            # Explicit disabling overrides compression defaults; the full input
+            # must be rejected when oversized, never shortened to fit.
+            payload["plugins"] = [{"id": "context-compression", "enabled": False}]
+            payload["service_tier"] = "default"
+
+        return payload
 
     def generate(self, request: GenerationRequest) -> ModelResponse:
         """Send exactly one inference request and preserve the returned evidence."""

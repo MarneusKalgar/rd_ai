@@ -4,11 +4,14 @@ import hashlib
 import json
 from decimal import Decimal, InvalidOperation
 
+from pydantic import Field, model_validator
+
 from extraction_service.application.tokenization import GemmaTokenizer
 from extraction_service.execution.admission import (
     AdmissionEvidence,
     AdmissionReason,
     AdmissionRejected,
+    ContextEnforcement,
 )
 from extraction_service.execution.budget.ledger import BudgetStop, BudgetStopReason
 from extraction_service.execution.budget.pricing import VerifiedPricing
@@ -16,7 +19,7 @@ from extraction_service.inference.messages import request_messages
 from extraction_service.inference.openrouter.capabilities import OpenRouterEndpoint
 from extraction_service.inference.transport.http import JsonHttpClient
 from extraction_service.inference.types import GenerationRequest, ModelIdentity
-from extraction_service.record_types import ModelRuntime
+from extraction_service.record_types import ExecutionStage, ModelRuntime
 from extraction_service.runtime.configuration import ModelPin
 from extraction_service.runtime_types import NonEmptyText, PositiveInt, StrictModel
 
@@ -98,18 +101,45 @@ class LocalAdmission:
 class ProviderCoverage(StrictModel):
     """Operator-verified coverage; never infer a token bound from character counts.
 
-    Each admitted request requires a certificate for its exact fingerprint.
-    Certificates come from a verified non-generating provider token-count method.
-    Missing correction certificates fail closed rather than generating a probe.
+    Counted mode requires exact non-generating request certificates. Explicit
+    provider enforcement instead reserves the entire verified context ceiling;
+    it makes no claim that a request has been counted or will fit.
     """
 
     pricing: VerifiedPricing
     context_length: PositiveInt
-    request_token_bounds: dict[str, PositiveInt]
+    context_enforcement: ContextEnforcement = ContextEnforcement.COUNTED
+    request_token_bounds: dict[str, PositiveInt] = Field(default_factory=dict)
     evidence: NonEmptyText
+
+    @model_validator(mode="after")
+    def check_provider_ceiling(self) -> ProviderCoverage:
+        if self.context_enforcement == ContextEnforcement.PROVIDER:
+            if self.pricing.input_token_ceiling < self.context_length:
+                raise ValueError(
+                    "Provider enforcement requires full-context input pricing coverage"
+                )
+
+            if self.request_token_bounds:
+                raise ValueError("Provider enforcement must not claim request token certificates")
+
+        return self
+
+    def check_policy(self, *, allow_server_context: bool, stage: ExecutionStage) -> None:
+        """Keep the approved exception explicit and limited to smoke execution."""
+
+        if self.context_enforcement == ContextEnforcement.PROVIDER:
+            if not allow_server_context or stage != ExecutionStage.SMOKE:
+                raise ValueError(
+                    "Provider context enforcement requires smoke and --allow-server-context"
+                )
 
     def check_catalog(self, endpoint: OpenRouterEndpoint) -> None:
         """Reject stale lower rates; catalog floors do not prove complete tier coverage."""
+
+        if self.context_enforcement == ContextEnforcement.PROVIDER:
+            if endpoint.context_length != self.context_length:
+                raise ValueError("Provider context coverage differs from current catalog context")
 
         rates = (
             ("prompt", self.pricing.input_usd_per_token),
@@ -147,12 +177,29 @@ class ProviderAdmission:
             raise AdmissionRejected(AdmissionReason.PROVIDER_IDENTITY_MISMATCH)
 
         fingerprint = request_fingerprint(request)
+        output = request.sampling.max_output_tokens
+
+        if self.coverage.context_enforcement == ContextEnforcement.PROVIDER:
+            if (
+                output > self.coverage.pricing.output_token_ceiling
+                or output > self.coverage.context_length
+            ):
+                raise AdmissionRejected(AdmissionReason.CONTEXT_CAPACITY_EXCEEDED)
+
+            return AdmissionEvidence(
+                method="provider-enforced-context-full-ceiling-reservation",
+                request_sha256=fingerprint,
+                context_enforcement=ContextEnforcement.PROVIDER,
+                counter_identity=None,
+                prompt_token_bound=None,
+                output_allowance=output,
+                context_length=self.coverage.context_length,
+            )
+
         bound = self.coverage.request_token_bounds.get(fingerprint)
 
         if bound is None:
             raise AdmissionRejected(AdmissionReason.PROVIDER_BOUND_UNAVAILABLE)
-
-        output = request.sampling.max_output_tokens
 
         if (
             bound > self.coverage.pricing.input_token_ceiling

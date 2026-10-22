@@ -82,6 +82,7 @@ def describe_run(project_dir: Path, options: RunOptions, config_file: str) -> di
 
     physical_limit = 2 * (experiment.execution.transport_retries + 1)
     estimates: dict[str, str | None] = {}
+    context_policies: dict[str, str] = {}
     coverages: dict[str, ProviderCoverage] = {}
 
     if options.coverage_file is not None:
@@ -96,6 +97,13 @@ def describe_run(project_dir: Path, options: RunOptions, config_file: str) -> di
             continue
 
         coverage = coverages.get(model.id)
+
+        if coverage is not None:
+            coverage.check_policy(
+                allow_server_context=options.allow_server_context, stage=options.stage
+            )
+            context_policies[model.id] = coverage.context_enforcement.value
+
         estimates[model.id] = _provider_estimate(model, coverage, requests, physical_limit)
 
     accounted: str | None = None
@@ -117,6 +125,7 @@ def describe_run(project_dir: Path, options: RunOptions, config_file: str) -> di
         "primary_requests": len(models) * len(jobs),
         "maximum_physical_requests": len(models) * len(jobs) * physical_limit,
         "maximum_api_usd_by_model": estimates,
+        "provider_context_enforcement": context_policies,
         "accounted_prior_usd": accounted,
         "provider_approval_required": any(model.backend == "openrouter" for model in models),
         "note": (

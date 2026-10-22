@@ -18,7 +18,11 @@ from extraction_service.application.selection import RunOptions
 from extraction_service.artifacts import artifact_path
 from extraction_service.configuration.models import ModelConfig
 from extraction_service.configuration.settings import ApplicationSettings
-from extraction_service.execution.admission import AdmissionEvidence, RequestAdmission
+from extraction_service.execution.admission import (
+    AdmissionEvidence,
+    ContextEnforcement,
+    RequestAdmission,
+)
 from extraction_service.execution.budget.pricing import VerifiedPricing
 from extraction_service.execution.types import ExecutionTarget
 from extraction_service.inference.openrouter.adapter import OpenRouterAdapter
@@ -53,7 +57,14 @@ def _provider_coverage(
     path = artifact_path(project_dir, options.coverage_file)
     coverages = TypeAdapter(dict[str, ProviderCoverage]).validate_json(path.read_bytes())
 
-    return coverages.get(model_id)
+    coverage = coverages.get(model_id)
+
+    if coverage is not None:
+        coverage.check_policy(
+            allow_server_context=options.allow_server_context, stage=options.stage
+        )
+
+    return coverage
 
 
 def _prepare_provider(
@@ -72,7 +83,13 @@ def _prepare_provider(
         except ValueError:
             coverage = None
 
-    adapter = OpenRouterAdapter(model, endpoint, http_client=client)
+    adapter = OpenRouterAdapter(
+        model,
+        endpoint,
+        http_client=client,
+        server_context=coverage is not None
+        and coverage.context_enforcement == ContextEnforcement.PROVIDER,
+    )
     target = ExecutionTarget(adapter=adapter, endpoint=str(settings.openrouter_base_url))
 
     if coverage is not None and target.dependency != coverage.pricing.dependency:

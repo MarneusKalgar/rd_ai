@@ -61,6 +61,11 @@ def add_commands(commands: argparse._SubParsersAction[argparse.ArgumentParser]) 
             action="store_true",
             help="Use only after human approval of this invocation",
         )
+        parser.add_argument(
+            "--allow-server-context",
+            action="store_true",
+            help="Smoke only: accept provider context rejection without a verified local count",
+        )
 
     for name in ("budget-init", "budget-show"):
         parser = commands.add_parser(name, help="Explicit cumulative budget administration")
@@ -83,6 +88,7 @@ def _options(args: argparse.Namespace) -> RunOptions:
         "sampling_ids": args.sampling,
         "stage": ExecutionStage.SMOKE if args.command == "smoke" else ExecutionStage(args.stage),
         "allow_provider": args.allow_provider,
+        "allow_server_context": args.allow_server_context,
         "coverage_file": args.coverage,
     }
 

@@ -19,6 +19,7 @@ class OpenRouterEndpoint(StrictModel):
     provider_name: NonEmptyText
     supported_parameters: frozenset[str]
     max_output_tokens: PositiveInt | None
+    context_length: PositiveInt | None = None
     pricing: dict[str, Any]
 
     def check(self, config: ModelConfig) -> None:
@@ -43,6 +44,7 @@ class _Endpoint(WireModel):
     provider_name: str
     supported_parameters: list[str]
     max_completion_tokens: PositiveInt | None = None
+    context_length: PositiveInt | None = None
     pricing: dict[str, Any]
 
 
@@ -73,6 +75,7 @@ def openrouter_endpoint(body: dict[str, Any], config: ModelConfig) -> OpenRouter
             provider_name=candidate.provider_name,
             supported_parameters=frozenset(candidate.supported_parameters),
             max_output_tokens=candidate.max_completion_tokens,
+            context_length=candidate.context_length,
             pricing=candidate.pricing,
         )
         endpoint.check(config)
