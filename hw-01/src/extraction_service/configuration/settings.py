@@ -1,5 +1,6 @@
 """Environment settings with explicit credential requirements and safe output."""
 
+from enum import StrEnum
 from pathlib import Path
 from typing import Self
 
@@ -14,6 +15,13 @@ from extraction_service.configuration.constants import (
     ENVIRONMENT_PREFIX,
     PROVIDER_API_KEY_VARIABLE,
 )
+
+
+class OllamaMode(StrEnum):
+    """Explicit local deployment selection; never infer it from connectivity."""
+
+    DOCKER = "docker"
+    NATIVE = "native"
 
 
 class ApplicationSettings(BaseSettings):
@@ -38,6 +46,7 @@ class ApplicationSettings(BaseSettings):
     )
     openrouter_base_url: AnyHttpUrl = AnyHttpUrl(DEFAULT_OPENROUTER_BASE_URL)
     ollama_base_url: AnyHttpUrl = AnyHttpUrl(DEFAULT_OLLAMA_BASE_URL)
+    ollama_mode: OllamaMode = OllamaMode.DOCKER
 
     @field_validator("openrouter_base_url", "ollama_base_url")
     @classmethod

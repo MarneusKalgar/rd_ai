@@ -116,3 +116,31 @@ def test_checkpoint_failure_stops_before_retry(
     assert len(adapter.requests) == len(seen) == 1
     assert seen[0]["number"] == 1
     assert clock.sleeps == []
+
+
+def test_retry_delay_is_checkpointed_before_interrupted_sleep(
+    contract: ExtractionContract,
+    policy: ExecutionConfig,
+    job: ExtractionJob,
+    local_identity: ModelIdentity,
+    clock: FakeClock,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    snapshots = []
+
+    def checkpoint(progress: InputExecution) -> None:
+        snapshots.append([attempt.model_dump() for attempt in progress.attempts])
+
+    def interrupted_sleep(seconds: float) -> None:
+        raise KeyboardInterrupt
+
+    monkeypatch.setattr(clock, "sleep", interrupted_sleep)
+    adapter = ScriptedAdapter(local_identity, clock, [failure(), failure()])
+    coordinator = ExtractionCoordinator(contract, policy, clock=clock, checkpoint=checkpoint)
+
+    with pytest.raises(KeyboardInterrupt):
+        coordinator.execute(ScheduledExtraction(job, ExecutionTarget(adapter, "http://local")))
+
+    assert len(adapter.requests) == 1
+    assert len(snapshots[-1]) == 1
+    assert snapshots[-1][0]["retry_delay_seconds"] == 1.0

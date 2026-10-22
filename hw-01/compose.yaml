@@ -15,10 +15,8 @@ x-app: &app
   volumes:
     - results:/app/results
 
-x-local-environment: &local-environment
+x-setup-environment: &setup-environment
   # Only these allowlisted values reach local helpers; app credentials stay separate.
-  HW01_OLLAMA_BASE_URL: http://ollama:11434
-  HW01_SETUP_IMAGE: *ollama-image
   HW01_SETUP_CONTEXT_LENGTH: ${HW01_CONTEXT_LENGTH:-32768}
   HW01_SETUP_WAIT_SECONDS: ${HW01_SETUP_WAIT_SECONDS:-60}
   HW01_SETUP_POLL_SECONDS: ${HW01_SETUP_POLL_SECONDS:-1}
@@ -28,6 +26,17 @@ x-local-environment: &local-environment
   HW01_SETUP_KEEP_ALIVE_SECONDS: ${HW01_SETUP_KEEP_ALIVE_SECONDS:-600}
   HW01_SETUP_CAPACITY_SECONDS: ${HW01_SETUP_CAPACITY_SECONDS:-900}
   HW01_SETUP_MEASUREMENT_SECONDS: ${HW01_SETUP_MEASUREMENT_SECONDS:-600}
+
+x-local-environment: &local-environment
+  <<: *setup-environment
+  HW01_OLLAMA_BASE_URL: http://ollama:11434
+  HW01_OLLAMA_MODE: docker
+  HW01_SETUP_IMAGE: *ollama-image
+
+x-native-environment: &native-environment
+  <<: *setup-environment
+  HW01_OLLAMA_BASE_URL: ${HW01_NATIVE_OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+  HW01_OLLAMA_MODE: native
 
 services:
   offline:
@@ -63,6 +72,13 @@ services:
     depends_on:
       ollama:
         condition: service_healthy
+
+  # The desktop app is independently owned; this service has no Ollama dependency.
+  # It receives no provider dotenv file and never falls back to the Docker server.
+  native-run:
+    <<: *app
+    profiles: [native]
+    environment: *native-environment
 
   local-init:
     <<: *app

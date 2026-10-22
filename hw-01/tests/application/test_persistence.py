@@ -13,6 +13,7 @@ from extraction_service.application.persistence import (
 )
 from extraction_service.application.runner import run
 from extraction_service.application.selection import RunOptions
+from extraction_service.execution.budget.ledger import BudgetLedger
 from extraction_service.inference.transport.http import JsonHttpClient
 from extraction_service.records import RunRecord
 
@@ -157,3 +158,42 @@ def test_failed_public_export_removes_partial_bundle(
     manifest, records = reload_records(service.project / "results/runs/unsafe-export")
     assert manifest.state == RunState.COMPLETE
     assert records[0].extraction == gold
+
+
+def test_completed_response_is_durable_before_settlement(
+    service: ControlledService, gold: dict[str, Any], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    identifier = "B02-S003-PO01"
+    service.coverage([identifier])
+    initialized = service.invoke("budget-init", "--opening-spend", "0", "--evidence", "Test only")
+    assert initialized.returncode == 0
+    service.responses = [json.dumps(gold)]
+
+    for key, value in service.environment().items():
+        monkeypatch.setenv(key, value)
+
+    def broken_settlement(*args: Any, **kwargs: Any) -> None:
+        raise RuntimeError("controlled settlement failure")
+
+    monkeypatch.setattr(BudgetLedger, "settle", broken_settlement)
+    options = RunOptions(
+        run_id="settlement-failure",
+        model_ids=["provider"],
+        input_ids=[identifier],
+        allow_provider=True,
+        coverage_file="config/coverage.json",
+    )
+
+    with pytest.raises(RuntimeError, match="controlled settlement failure"):
+        run(service.project, options)
+
+    directory = service.project / "results/runs/settlement-failure"
+    manifest, records = reload_records(directory)
+    assert manifest.state == RunState.INTERRUPTED
+    assert records == []
+    checkpoint = json.loads(next((directory / "checkpoints").glob("*.json")).read_bytes())
+    assert len(checkpoint["attempts"]) == 1
+    assert checkpoint["attempts"][0]["raw_response"] == json.dumps(gold)
+    ledger = json.loads((service.project / "results/budget-ledger.json").read_bytes())
+    assert len(ledger["reservations"]) == 1
+    assert ledger["reservations"][0]["resolved"] is False

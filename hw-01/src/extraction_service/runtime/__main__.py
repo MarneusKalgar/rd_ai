@@ -6,11 +6,12 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from extraction_service.configuration.settings import ApplicationSettings
+from extraction_service.configuration.settings import ApplicationSettings, OllamaMode
 from extraction_service.inference.errors import ModelTransportError
 from extraction_service.inference.transport.client_setup import ollama_client
 from extraction_service.runtime.configuration import CapacityScope, SetupSettings
 from extraction_service.runtime.errors import SetupError
+from extraction_service.runtime.native import initialize_native
 from extraction_service.runtime.storage import verify_storage
 from extraction_service.runtime.workflows import ReadinessStatus, local_setup, provider_setup
 
@@ -24,7 +25,9 @@ def main(arguments: list[str] | None = None) -> int:
     parser.add_argument(
         "--exhaustive", action="store_true", help="Check all prepared requests (readiness only)"
     )
-    parser.add_argument("command", choices=["provider", "initialize", "readiness", "storage"])
+    parser.add_argument(
+        "command", choices=["provider", "initialize", "initialize-native", "readiness", "storage"]
+    )
     args = parser.parse_args(arguments)
 
     if args.exhaustive and args.command != "readiness":
@@ -35,9 +38,20 @@ def main(arguments: list[str] | None = None) -> int:
             report = provider_setup(args.project_dir, args.model_id or "provider")
         elif args.command == "storage":
             report = verify_storage(args.project_dir / "results")
+        elif args.command == "initialize-native":
+            application_settings = ApplicationSettings.load(args.project_dir)
+
+            if application_settings.ollama_mode != OllamaMode.NATIVE:
+                raise SetupError("Native initialization requires explicit native mode")
+
+            with ollama_client(application_settings) as client:
+                report = initialize_native(args.project_dir, args.model_id or "local", client)
         else:
             settings = SetupSettings()
             application_settings = ApplicationSettings.load(args.project_dir)
+
+            if application_settings.ollama_mode != OllamaMode.DOCKER:
+                raise SetupError("Docker diagnostics require explicit Docker mode")
 
             with ollama_client(application_settings) as client:
                 report = local_setup(

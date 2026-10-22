@@ -11,9 +11,43 @@ from extraction_service.application.admission import ProviderCoverage, request_f
 from extraction_service.application.selection import RunOptions, select_models, selected_jobs
 from extraction_service.artifacts import artifact_path
 from extraction_service.configuration.loading import load_experiment
+from extraction_service.configuration.models import ModelConfig
 from extraction_service.corpus.loading import load_corpus
 from extraction_service.execution.budget.ledger import BudgetLedger, BudgetStop
 from extraction_service.inference.types import GenerationRequest
+from extraction_service.record_types import ModelRuntime
+
+
+def _provider_estimate(
+    model: ModelConfig,
+    coverage: ProviderCoverage | None,
+    requests: list[GenerationRequest],
+    physical_limit: int,
+) -> str | None:
+    """Use compatible operator evidence without claiming a live price refresh."""
+
+    if coverage is None:
+        return None
+
+    pricing = coverage.pricing
+    dependency = pricing.dependency
+
+    if (
+        dependency.runtime != ModelRuntime.OPENROUTER
+        or dependency.model_name != model.model
+        or dependency.serving_provider != model.serving_provider
+    ):
+        return None
+
+    maximum = Decimal("0")
+
+    try:
+        for request in requests:
+            maximum += physical_limit * pricing.reserve_for(request, dependency)
+    except ValueError:
+        return None
+
+    return str(maximum)
 
 
 def describe_run(project_dir: Path, options: RunOptions, config_file: str) -> dict[str, Any]:
@@ -26,6 +60,7 @@ def describe_run(project_dir: Path, options: RunOptions, config_file: str) -> di
     jobs = selected_jobs(project_dir, corpus, experiment, options, digest)
     models = select_models(experiment, options)
     fingerprints = []
+    requests = []
 
     for job in jobs:
         request = GenerationRequest.from_contract(
@@ -35,6 +70,7 @@ def describe_run(project_dir: Path, options: RunOptions, config_file: str) -> di
             sampling=job.sampling,
             timeout_seconds=experiment.execution.request_timeout_seconds,
         )
+        requests.append(request)
         fingerprints.append(
             {
                 "input_id": job.input_id,
@@ -60,20 +96,7 @@ def describe_run(project_dir: Path, options: RunOptions, config_file: str) -> di
             continue
 
         coverage = coverages.get(model.id)
-        estimates[model.id] = None
-
-        if coverage is not None:
-            pricing = coverage.pricing
-            maximum = Decimal("0")
-
-            for job in jobs:
-                maximum += physical_limit * (
-                    pricing.input_token_ceiling * pricing.input_usd_per_token
-                    + job.sampling.max_output_tokens * pricing.output_usd_per_token
-                    + pricing.request_usd
-                )
-
-            estimates[model.id] = str(maximum)
+        estimates[model.id] = _provider_estimate(model, coverage, requests, physical_limit)
 
     accounted: str | None = None
     ledger = BudgetLedger(project_dir, experiment.execution)

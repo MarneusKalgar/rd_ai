@@ -84,7 +84,50 @@ scoring and measured experiments remain sections 7–8.
 The [21 October partial smoke](extraction-smoke.md) records two completed local
 outputs and a user-interrupted third request, with a verified interrupted export.
 It does not satisfy the complete live acceptance gate. The final offline gate
-passed 566 tests, gold validation and the full corpus preflight.
+passed 566 tests, gold validation and the full corpus preflight at that baseline.
+
+### Application audit follow-up — 6.6.7
+
+The follow-up fixes offline planning coverage identity/output validation and
+adds independent nonzero estimates, read-only prior-accounting checks, shared
+application stop-state tests, nondefault variants, completed-attempt/backoff
+durability, isolated export integrity, single-defect tokenizer cases and CLI
+unexpected-error redaction. These regressions are retained in
+[application tests](../tests/application/) and
+[execution admission tests](../tests/execution/test_admission.py).
+
+The 21 October Docker gate passed 589 tests, Ruff, strict mypy, 10 gold validations
+and the 30-input preflight with the native wiring included. Twelve bounded mutations
+were detected in disposable copies: the ten earlier survivors plus planner
+identity and native record identity. The initial 16-case targeted baseline and
+the second 12-case baseline passed; the latter passed again after restoration.
+One audit-script assertion recognizer was corrected after it misclassified a
+real assertion failure; the remaining cases were rerun. This is selected
+regression sensitivity, not exhaustive mutation coverage or live model evidence.
+
+### Native test audit — 6.7 follow-up pending
+
+The native patch-version policy brought the 22 October offline gate to 614 tests,
+with lint, formatting, typing, gold validation and corpus preflight passing.
+A subsequent read-only sensitivity audit used a 36-case focused baseline and
+15 mutations in disposable Docker copies: nine were detected and six survived.
+All six survivors together also passed the full 614-test suite. Each individual
+probe and the combined run were restored and their focused baselines passed.
+
+Four coverage gaps remain open:
+
+- Assert native generation's full schema and context against admission;
+  a missing schema format and 4K generation context after 32K admission survived.
+- Test unsupported versions through `initialize-native`, not only through
+  extraction or the policy method; removing its version guard survived.
+- Seed existing accounting and Docker installation evidence, then assert their
+  bytes survive native initialization; deletion/overwrite mutations survived.
+- Exercise Make/Compose native routing and isolation; routing native execution
+  to `local-run` survived fixtures that supply the native settings directly.
+
+The reviewed implementation retained these guards; the mutations were confined
+to disposable copies. These findings are pending test work, and passing counts
+do not establish complete regression coverage or future server compatibility.
 
 ### Coordinator audit follow-up — 6.4.1 complete
 
@@ -236,6 +279,14 @@ validation boundaries shown above. Separate two execution modes at this level.
 
 ### Routine application workflow checks
 
+Native desktop auto-updates use a reviewed patch-series policy, while Docker
+keeps an exact runtime pin. Controlled native tests cover accepted later patches
+in initialization and extraction/correction, actual-version persistence, older
+or different release-series rejection before loading, and unchanged rejection
+of missing render evidence or mismatched model/context. Admission remains bound
+to the exact version composed for the run. These tests do not establish live
+compatibility or performance for a future release.
+
 **Plan point: 6.6, integrating sections 6.3–6.5.** Launch the real CLI in a separate process and use a
 controlled model endpoint. This covers the application's complete workflow
 while substituting for the external inference dependency.
@@ -333,18 +384,18 @@ tested deterministically without rerunning models.
 
 ### Docker, native Ollama and CI responsibilities
 
-Keep Docker Ollama as a portable compatibility option. Use the planned native
-Ollama comparison to evaluate Apple GPU execution while Python stays in Docker.
-Native performance is not measured yet; preserve the same Gemma digest,
-quantization, schema, inputs, context and sampling when comparing runtimes.
-Record Docker CPU and native GPU results separately.
+Keep Docker Ollama as a portable compatibility option. The
+[native composition](native-ollama.md) uses the existing desktop app while
+Python stays in Docker. Preserve the same Gemma digest, quantization, schema,
+inputs, context and sampling when comparing runtimes. Record actual processor
+placement and Docker/native version differences; keep their timings separate.
 
 | Check | Runtime | Recommended cadence | Current status |
 | --- | --- | --- | --- |
 | Tests, typing, lint, gold validation and corpus preflight | Python container with controlled HTTP endpoints; no model | Every PR | Implemented by `make hw01-check`; CI workflow wiring is separate. |
 | Ollama startup, version and installed-model identity | Docker Ollama | Runtime/image changes | Existing health/setup mechanisms; a dedicated lightweight CI job is not implemented. |
-| One short, complete extraction with the full schema | Docker Ollama with cached pinned weights | Explicit manual or scheduled CI | Proposed small smoke profile; the current three-document smoke is broader. |
-| Three-document live smoke and larger local experiments | Native Ollama on the Mac, Python in Docker | Explicit integration/evaluation runs | Native application wiring and comparative verification remain planned. |
+| One short, complete extraction with the full schema | Docker Ollama with cached pinned weights | Explicit manual or scheduled CI | Section 6.7.3 deferred at user request; the current three-document smoke is broader. |
+| Three-document live smoke and larger local experiments | Native Ollama on the Mac, Python in Docker | Explicit integration/evaluation runs | Native wiring and local smoke are verified: two valid outputs and one retained truncation; see [evidence](native-runtime-verification.md). Larger experiments remain pending. |
 
 A small real-model CI smoke should use an explicitly defined short single-line
 order, the full extraction schema, a bounded output allowance and a strict job

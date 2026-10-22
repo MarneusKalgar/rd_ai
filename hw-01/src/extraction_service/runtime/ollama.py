@@ -7,7 +7,7 @@ from extraction_service.inference.errors import FailureKind, ModelTransportError
 from extraction_service.inference.ollama.capabilities import OllamaRuntime
 from extraction_service.inference.transport.http import JsonHttpClient
 from extraction_service.inference.wire_models import WireModel
-from extraction_service.runtime.configuration import ModelPin, SetupSettings
+from extraction_service.runtime.configuration import ModelPin, OllamaSetupSettings
 from extraction_service.runtime.errors import SetupError
 from extraction_service.runtime_types import NonEmptyText, NonNegativeInt, PositiveInt, Sha256
 
@@ -50,7 +50,7 @@ class LoadResult(WireModel):
 
 def wait_for_server(
     client: JsonHttpClient,
-    settings: SetupSettings,
+    settings: OllamaSetupSettings,
     *,
     clock: Callable[[], float] = monotonic,
     pause: Callable[[float], None] = sleep,
@@ -76,7 +76,7 @@ def wait_for_server(
 
 
 def installed_model(
-    client: JsonHttpClient, pin: ModelPin, settings: SetupSettings
+    client: JsonHttpClient, pin: ModelPin, settings: OllamaSetupSettings
 ) -> InstalledModel | None:
     """Reject a tag that now resolves to different bytes; never repair it by pulling."""
 
@@ -94,7 +94,7 @@ def installed_model(
 
 
 def initialize_model(
-    client: JsonHttpClient, pin: ModelPin, settings: SetupSettings
+    client: JsonHttpClient, pin: ModelPin, settings: OllamaSetupSettings
 ) -> tuple[InstalledModel, bool]:
     """Pull only an absent, explicitly selected model and verify its resolved digest."""
 
@@ -118,7 +118,7 @@ def initialize_model(
 
 
 def model_runtime(
-    client: JsonHttpClient, pin: ModelPin, version: str, settings: SetupSettings
+    client: JsonHttpClient, pin: ModelPin, version: str, settings: OllamaSetupSettings
 ) -> OllamaRuntime:
     """Verify completion capability separately from installation and memory fit."""
 
@@ -136,7 +136,7 @@ def model_runtime(
     )
 
 
-def load_model(client: JsonHttpClient, pin: ModelPin, settings: SetupSettings) -> LoadedModel:
+def load_model(client: JsonHttpClient, pin: ModelPin, settings: OllamaSetupSettings) -> LoadedModel:
     """Load without a prompt, then verify the applied context and memory placement."""
 
     reply = client.post(
@@ -171,7 +171,7 @@ def load_model(client: JsonHttpClient, pin: ModelPin, settings: SetupSettings) -
     raise SetupError("Ollama responded but the configured model is not loaded")
 
 
-def unload_model(client: JsonHttpClient, pin: ModelPin, settings: SetupSettings) -> None:
+def unload_model(client: JsonHttpClient, pin: ModelPin, settings: OllamaSetupSettings) -> None:
     """Release a blocked setup's model without removing its persistent weights."""
 
     reply = client.post(
