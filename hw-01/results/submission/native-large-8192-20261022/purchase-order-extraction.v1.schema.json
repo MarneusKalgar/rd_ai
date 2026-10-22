@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HW-01 Purchase Order Extraction v1",
+  "description": "One logical purchase order extracted from one customer-neutral text input. Missing source values are null; line items stay in source order.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "purchaseOrderNumber",
+    "purchaseOrderDateTime",
+    "buyerName",
+    "shipToInfo",
+    "paymentTerms",
+    "buyerCurrency",
+    "totalValue",
+    "lineItems"
+  ],
+  "properties": {
+    "purchaseOrderNumber": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "description": "The buyer's PO identifier, kept as text so leading zeros survive."
+    },
+    "purchaseOrderDateTime": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "PO issue date normalized to YYYY-MM-DD; not a requested delivery, entry, or cancellation date."
+    },
+    "buyerName": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "description": "Buyer party named by the source; never inferred from ship-to or bill-to alone."
+    },
+    "shipToInfo": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "description": "Source-supported ship-to name/address as one neutral text value."
+    },
+    "paymentTerms": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "description": "Payment terms stated on the order."
+    },
+    "buyerCurrency": {
+      "type": ["string", "null"],
+      "pattern": "^[A-Z]{3}$",
+      "description": "Explicit order currency as a three-letter code. A list of choices is not a selected currency."
+    },
+    "totalValue": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]+(?:\\.[0-9]+)?$",
+      "description": "Explicit net product total for this PO, normalized as a decimal string; not a workbook batch total."
+    },
+    "lineItems": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Ordered lines belonging to this PO only; exclude catalog and lookup-only rows.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "purchaseOrderLineNumber",
+          "buyerProductIdentifier",
+          "buyerProductName",
+          "buyerProductQuantity",
+          "buyerProductUOM",
+          "quantityUnit",
+          "buyerUnitPrice",
+          "buyerDeliveryDate"
+        ],
+        "properties": {
+          "purchaseOrderLineNumber": {
+            "type": ["string", "null"],
+            "minLength": 1,
+            "description": "Printed line number, if present, as text to retain leading zeros."
+          },
+          "buyerProductIdentifier": {
+            "type": ["string", "null"],
+            "minLength": 1,
+            "description": "Product identifier supplied by the buyer, not a barcode or seller code unless identified as the buyer code."
+          },
+          "buyerProductName": {
+            "type": ["string", "null"],
+            "minLength": 1,
+            "description": "Product name or description attached to the ordered line."
+          },
+          "buyerProductQuantity": {
+            "type": ["string", "null"],
+            "pattern": "^[0-9]+(?:\\.[0-9]+)?$",
+            "description": "Ordered quantity normalized as a decimal string."
+          },
+          "buyerProductUOM": {
+            "type": ["string", "null"],
+            "minLength": 1,
+            "description": "Source wording or code for the ordered quantity's unit when its meaning is supported."
+          },
+          "quantityUnit": {
+            "type": "string",
+            "enum": ["EACH", "CASE", "KILOGRAM", "BOTTLE", "OTHER", "UNKNOWN"],
+            "description": "Small normalized unit category. OTHER means an explicit different unit; UNKNOWN means the unit is absent or its code cannot be interpreted."
+          },
+          "buyerUnitPrice": {
+            "type": ["string", "null"],
+            "pattern": "^[0-9]+(?:\\.[0-9]+)?$",
+            "description": "Explicit per-unit price, normalized as a decimal string."
+          },
+          "buyerDeliveryDate": {
+            "type": ["string", "null"],
+            "format": "date",
+            "description": "Requested delivery date for this line, if the source ties it to the line."
+          }
+        }
+      }
+    }
+  }
+}

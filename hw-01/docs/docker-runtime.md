@@ -46,8 +46,9 @@ private preparation, original workbooks, weights and generated results.
 The provider setup uses only `app --no-deps`. Ollama and its helpers have the
 `local` profile. No Ollama port is published to the host. This prevents collisions
 with a later native installation. Cloud features are disabled in the container.
-Native Ollama is an optional, separate exercise: no host installation is automatic,
-and its endpoint/runtime identity must remain `ollama-native` in measured runs.
+The [native mode](native-ollama.md) uses the existing desktop app through the
+`native-run` service, without a Docker Ollama dependency or provider credentials.
+No host installation is automatic; records retain `ollama-native` identity.
 
 The Compose image is pinned to an immutable multi-platform digest. ARM64 support
 was verified. `config/ollama-model.json` pins the tag, full registry manifest digest

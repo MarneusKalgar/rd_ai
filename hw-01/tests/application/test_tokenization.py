@@ -36,3 +36,14 @@ def test_unsupported_tokenizers_fail_closed(field: str, value: Any) -> None:
 
     with pytest.raises(ValueError):
         GemmaTokenizer(info)
+
+
+@pytest.mark.parametrize("missing", ["<0xC3>", "<unk>"])
+def test_incomplete_fallback_vocabulary_has_no_other_metadata_defect(missing: str) -> None:
+    info = copy.deepcopy(tokenizer_info())
+    index = info["tokenizer.ggml.tokens"].index(missing)
+    info["tokenizer.ggml.tokens"].pop(index)
+    info["tokenizer.ggml.token_type"].pop(index)
+
+    with pytest.raises(ValueError, match="Incomplete byte fallback vocabulary"):
+        GemmaTokenizer(info)

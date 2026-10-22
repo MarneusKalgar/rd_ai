@@ -50,14 +50,19 @@ class ControlledService:
     release_generation: Event = field(default_factory=Event)
     block_generation: bool = False
     rendered_override: str | None = None
+    native: bool = False
+    replacements: dict[str, dict[str, Any]] = field(default_factory=dict)
 
     def reply(self, path: str, payload: dict[str, Any] | None) -> tuple[int, dict[str, Any]]:
-        pin = load_model_pin(self.project)
+        if path in self.replacements:
+            return 200, self.replacements[path]
+
+        pin = load_model_pin(self.project, native=self.native)
         model = {
             "name": pin.model,
             "digest": pin.digest,
             "size": 100,
-            "size_vram": 0,
+            "size_vram": 80 if self.native else 0,
             "context_length": 32768,
         }
 
@@ -145,6 +150,7 @@ class ControlledService:
             **os.environ,
             "PYTHONPATH": str(Path(__file__).resolve().parents[2] / "src"),
             "HW01_OLLAMA_BASE_URL": self.base_url,
+            "HW01_OLLAMA_MODE": "native" if self.native else "docker",
             "HW01_OPENROUTER_BASE_URL": self.base_url + "/api/v1",
             "OPENROUTER_API_KEY": "controlled-test-key",
             "HW01_SETUP_IMAGE": "ollama/ollama@sha256:" + "a" * 64,

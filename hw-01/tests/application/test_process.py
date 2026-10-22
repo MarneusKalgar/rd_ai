@@ -7,6 +7,7 @@ import sys
 from typing import Any
 
 import pytest
+import yaml
 
 from extraction_service.application.persistence import RunState, reload_records
 from extraction_service.record_types import RunStatus
@@ -265,3 +266,47 @@ def test_offline_plan_never_contacts_services(service: ControlledService) -> Non
     assert report["accounted_prior_usd"] is None
     assert service.requests == []
     assert not (service.project / "results/budget-ledger.json").exists()
+
+
+def test_dependency_stop_survives_application_input_boundaries(service: ControlledService) -> None:
+    service.generation_status = 503
+    path = service.project / "config/experiments.yaml"
+    config = yaml.safe_load(path.read_text())
+    config["models"].append({**config["models"][1], "id": "local-alias"})
+    config["prompts"].append({"id": "v2", "file": "prompts/v2.txt"})
+    path.write_text(yaml.safe_dump(config))
+    (service.project / "prompts/v2.txt").write_text("Distinct controlled variant.")
+    arguments = [
+        "run",
+        "--run-id",
+        "shared-stop",
+        "--model",
+        "local",
+        "--model",
+        "local-alias",
+        "--input",
+        INPUT,
+        "--input",
+        "B02-S006-PO01",
+        "--prompt",
+        "v1",
+        "--prompt",
+        "v2",
+    ]
+
+    result = service.invoke(*arguments)
+
+    assert result.returncode == 3, result.stdout + result.stderr
+    manifest, records = reload_records(service.project / "results/runs/shared-stop")
+    assert [record.status.value for record in records] == ["failed"] * 3 + ["not_attempted"] * 5
+    assert len(manifest.jobs) == len(records) == 8
+    assert {record.prompt_id for record in records} == {"v1", "v2"}
+    assert {record.model_id for record in records} == {"local", "local-alias"}
+    assert all(record.attempts == [] for record in records[3:])
+    assert manifest.summary is not None and not manifest.summary.comparison_complete
+    generations = [
+        payload
+        for path, payload, _ in service.requests
+        if path == "/api/chat" and payload is not None and not payload.get("_debug_render_only")
+    ]
+    assert len(generations) == 6

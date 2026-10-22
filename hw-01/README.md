@@ -21,6 +21,11 @@ commands and checked exports. Live acceptance is tracked separately; provider
 inference requires verified coverage and explicit human approval. Measured prompt
 variants, the complete matrix, scoring and the comparison report remain pending.
 
+[Native Ollama mode](docs/native-ollama.md) uses the existing desktop app through
+`MODE=native`, with Python still in Docker and an explicit patch compatibility policy.
+It preserves Docker execution and uses the same admission/runner/record path.
+Use `make hw01-setup-native` for explicit native weight initialization.
+
 Reviews follow the repository's [shared process](../docs/review-process.md) and
 the [HW-01 checklist](docs/review-checklist.md) for relevant domain concerns.
 The [testing strategy](docs/testing-strategy.md) defines test levels, execution

@@ -5,39 +5,28 @@ from collections.abc import Generator
 from contextlib import ExitStack, contextmanager
 from dataclasses import dataclass
 from pathlib import Path
-from time import perf_counter
 from typing import Any
 
 from pydantic import TypeAdapter
 
 from extraction_service.application.admission import (
-    LocalAdmission,
     ProviderAdmission,
     ProviderCoverage,
 )
+from extraction_service.application.local import prepare_local
 from extraction_service.application.selection import RunOptions
-from extraction_service.application.tokenization import GemmaTokenizer
 from extraction_service.artifacts import artifact_path
 from extraction_service.configuration.models import ModelConfig
 from extraction_service.configuration.settings import ApplicationSettings
 from extraction_service.execution.admission import AdmissionEvidence, RequestAdmission
 from extraction_service.execution.budget.pricing import VerifiedPricing
 from extraction_service.execution.types import ExecutionTarget
-from extraction_service.inference.ollama.adapter import OllamaAdapter
 from extraction_service.inference.openrouter.adapter import OpenRouterAdapter
 from extraction_service.inference.openrouter.metadata import verify_openrouter
 from extraction_service.inference.transport.client_setup import ollama_client, openrouter_client
 from extraction_service.inference.transport.http import JsonHttpClient
 from extraction_service.inference.types import GenerationRequest, ModelIdentity
-from extraction_service.runtime.configuration import SetupSettings, load_model_pin
-from extraction_service.runtime.ollama import (
-    installed_model,
-    load_model,
-    model_runtime,
-    wait_for_server,
-)
 from extraction_service.runtime.storage import setup_lock
-from extraction_service.runtime.workflows import Installation
 
 
 @dataclass(frozen=True)
@@ -53,60 +42,6 @@ class SelectedAdmission:
 
     def check(self, request: GenerationRequest, identity: ModelIdentity) -> AdmissionEvidence:
         return self._targets[identity.model_id].admission.check(request, identity)
-
-
-def _prepare_local(
-    project_dir: Path,
-    model: ModelConfig,
-    settings: ApplicationSettings,
-    client: JsonHttpClient,
-) -> tuple[PreparedTarget, dict[str, Any]]:
-    """Verify initialized identity and context; keep empty-load time outside input latency."""
-
-    local_settings = SetupSettings()
-    pin = load_model_pin(project_dir)
-    pin.check(model)
-    version = wait_for_server(client, local_settings)
-    installation = Installation.model_validate_json(
-        (project_dir / "results/setup/installation.json").read_bytes()
-    )
-
-    if (
-        version != pin.server_version
-        or installation.image != local_settings.image
-        or installation.runtime.version != version
-        or installation.runtime.model_name != pin.model
-        or installation.runtime.model_digest != pin.digest
-    ):
-        raise ValueError("Local runtime differs from initialization evidence")
-
-    if installed_model(client, pin, local_settings) is None:
-        raise ValueError("Initialized weights are missing")
-
-    runtime = model_runtime(client, pin, version, local_settings)
-    started = perf_counter()
-    loaded = load_model(client, pin, local_settings)
-    load_ms = (perf_counter() - started) * 1000
-    details = client.post("api/show", {"model": model.model, "verbose": True}, 60.0)
-    info = details.body.get("model_info")
-
-    if not isinstance(info, dict):
-        raise ValueError("Installed tokenizer metadata unavailable")
-
-    tokenizer = GemmaTokenizer(info)
-    adapter = OllamaAdapter(
-        model, runtime, http_client=client, context_length=loaded.context_length
-    )
-    admission = LocalAdmission(client, pin, tokenizer, loaded.context_length)
-    target = ExecutionTarget(adapter=adapter, endpoint=str(settings.ollama_base_url))
-    evidence = {
-        "loaded": loaded.model_dump(mode="json"),
-        "load_duration_ms": load_ms,
-        "tokenizer_sha256": tokenizer.sha256,
-        "runtime": runtime.model_dump(mode="json"),
-    }
-
-    return PreparedTarget(target=target, admission=admission), evidence
 
 
 def _provider_coverage(
@@ -182,7 +117,10 @@ def compose_targets(
                     stack.enter_context(setup_lock(project_dir / "results"))
                     local_client = stack.enter_context(ollama_client(settings))
 
-                prepared, observed = _prepare_local(project_dir, model, settings, local_client)
+                target, admission, observed = prepare_local(
+                    project_dir, model, settings, local_client
+                )
+                prepared = PreparedTarget(target=target, admission=admission)
             else:
                 coverage = _provider_coverage(project_dir, model.id, options)
 

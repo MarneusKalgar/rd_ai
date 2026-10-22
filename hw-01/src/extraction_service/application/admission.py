@@ -31,17 +31,24 @@ def request_fingerprint(request: GenerationRequest) -> str:
 
 class LocalAdmission:
     def __init__(
-        self, client: JsonHttpClient, pin: ModelPin, tokenizer: GemmaTokenizer, context_length: int
+        self,
+        client: JsonHttpClient,
+        pin: ModelPin,
+        tokenizer: GemmaTokenizer,
+        context_length: int,
+        *,
+        runtime_version: str,
     ) -> None:
         self._client = client
         self._pin = pin
         self._tokenizer = tokenizer
         self._context_length = context_length
+        self._runtime_version = runtime_version
 
     def check(self, request: GenerationRequest, identity: ModelIdentity) -> AdmissionEvidence:
         if (
             identity.model_digest != self._pin.digest
-            or identity.runtime_version != self._pin.server_version
+            or identity.runtime_version != self._runtime_version
         ):
             raise AdmissionRejected(AdmissionReason.CONTEXT_IDENTITY_MISMATCH)
 

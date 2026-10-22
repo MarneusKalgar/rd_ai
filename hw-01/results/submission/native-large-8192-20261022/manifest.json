@@ -1,0 +1,135 @@
+{
+  "version": "run-manifest-v1",
+  "run_id": "native-large-8192-20261022",
+  "created_at": "2026-10-22T08:17:17.979379+00:00",
+  "stage": "smoke",
+  "state": "complete",
+  "experiment": {
+    "version": "experiment-v1",
+    "models": [
+      {
+        "id": "provider",
+        "backend": "openrouter",
+        "model": "google/gemini-3.8-flash",
+        "serving_provider": "google-ai-studio"
+      },
+      {
+        "id": "local",
+        "backend": "ollama",
+        "model": "gemma4:e4b-it-qat",
+        "serving_provider": null
+      }
+    ],
+    "prompts": [
+      {
+        "id": "v1",
+        "file": "prompts/v1.txt"
+      }
+    ],
+    "sampling": [
+      {
+        "id": "output-8192",
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "max_output_tokens": 8192
+      }
+    ],
+    "execution": {
+      "request_timeout_seconds": 1800.0,
+      "input_timeout_seconds": 7205.0,
+      "transport_retries": 1,
+      "api_budget_usd": 4.5,
+      "matrix_reserve_usd": 3.5,
+      "dependency_failure_limit": 3,
+      "backoff_initial_seconds": 1.0,
+      "backoff_max_seconds": 30.0
+    },
+    "selection": {
+      "model_id": "local",
+      "prompt_id": "v1",
+      "sampling_id": "output-8192"
+    }
+  },
+  "schema_sha256": "efd06205171717bf69997007c36a0c85a66f55384042e79bda75df102be9bafb",
+  "jobs": [
+    {
+      "key": "7ab73ec3822f9284e2e91dea4e59b18481c696369fc6e0b819bfb72cc7c5fec1",
+      "input_id": "B02-S008-PO01",
+      "model_id": "local",
+      "prompt_id": "v1",
+      "sampling_id": "output-8192",
+      "input_sha256": "bc4678f85b792f9fd022a680e8079aa8441016b22cfd1301c4623d34d049be1b",
+      "prompt_sha256": "ef5cf6c25a2623e73e5e85948321b304b1ce67f09b7caf0dfbc47fa26e666785",
+      "experiment_sha256": "3ff38ec6c46895a511db5c63179f57407d77024754e7458fdd2edd125a3d9e07"
+    }
+  ],
+  "records": {
+    "7ab73ec3822f9284e2e91dea4e59b18481c696369fc6e0b819bfb72cc7c5fec1": "records/7ab73ec3822f9284e2e91dea4e59b18481c696369fc6e0b819bfb72cc7c5fec1.json"
+  },
+  "record_sha256": {
+    "7ab73ec3822f9284e2e91dea4e59b18481c696369fc6e0b819bfb72cc7c5fec1": "22319b481b1d82e2e47102477a8dd8807b9afc649aa54f7bf924455b3991e119"
+  },
+  "checkpoint_sha256": {
+    "7ab73ec3822f9284e2e91dea4e59b18481c696369fc6e0b819bfb72cc7c5fec1": "c0bdebe1d853b19da5fe567ace71eb9801ab3be57b9bcf657615a356624b0ad3"
+  },
+  "summary": {
+    "execution": {
+      "request_timeout_seconds": 1800.0,
+      "input_timeout_seconds": 7205.0,
+      "transport_retries": 1,
+      "api_budget_usd": 4.5,
+      "matrix_reserve_usd": 3.5,
+      "dependency_failure_limit": 3,
+      "backoff_initial_seconds": 1.0,
+      "backoff_max_seconds": 30.0
+    },
+    "succeeded": 0,
+    "failed": 1,
+    "not_attempted": 0,
+    "comparison_complete": true,
+    "dependency_stops": [],
+    "budget_stops": []
+  },
+  "error": null,
+  "setup": {
+    "local": {
+      "mode": "native",
+      "endpoint": "http://host.docker.internal:11434/",
+      "loaded": {
+        "name": "gemma4:e4b-it-qat",
+        "digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+        "size": 3234773072,
+        "size_vram": 3234773072,
+        "context_length": 32768,
+        "model": "gemma4:e4b-it-qat",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma4",
+          "families": [
+            "gemma4"
+          ],
+          "parameter_size": "7.5B",
+          "quantization_level": "Q4_0"
+        },
+        "expires_at": "2026-10-22T11:27:16.970584+03:00",
+        "runner": "llamacpp"
+      },
+      "processor": "gpu_or_mixed",
+      "load_duration_ms": 6197.886710999996,
+      "tokenizer_sha256": "42e3a238e10726346e996c7e3569fcfb2e8d47173944a3cd56826d8dc4d9a9fb",
+      "runtime": {
+        "version": "0.40.7",
+        "model_name": "gemma4:e4b-it-qat",
+        "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+        "capabilities": [
+          "tools",
+          "completion",
+          "vision",
+          "audio",
+          "thinking"
+        ]
+      }
+    }
+  }
+}

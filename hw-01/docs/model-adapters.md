@@ -213,6 +213,9 @@ to service initialization in section 6.5.
 Ollama Docker initialization/readiness is documented in
 [runtime setup](docker-runtime.md). Full extraction acceptance is separate in
 the [6.6 runner](running-extractions.md). No host model runtime is required.
+The explicit [6.7 native mode](native-ollama.md) reuses this adapter with the
+existing desktop app, a separately pinned version and the same Gemma digest.
+It requires native admission/identity checks and preserves distinct runtime records.
 
 ## Verification and next steps
 

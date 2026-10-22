@@ -10,6 +10,11 @@ Run from the repository root. Docker and Make are the only host prerequisites.
 Local weights must already be initialized with `make hw01-setup-local`.
 Commands reuse the persistent results volume and never reset its ledger.
 
+For the existing desktop app, use [native mode](native-ollama.md): explicitly
+initialize its pinned weights with `make hw01-setup-native`, then pass
+`MODE=native` to run/smoke. Python and results remain in Docker. Native and
+Docker versions have separate pins; neither mode silently substitutes the other.
+
 ```sh
 # Inspect selected work without network access or inference.
 make hw01-plan-run ARGS='--model local --input B02-S030-PO01'
@@ -181,8 +186,11 @@ make hw01-plan-run ARGS='--stage smoke --model provider --input B02-S030-PO01 --
 make hw01-smoke MODE=provider ARGS='--model provider --coverage results/provider-coverage.json --allow-provider --run-id provider-smoke'
 ```
 
-Planning makes no HTTP calls. With coverage it reports a conservative maximum
-for all configured retries and one correction, using verified pricing ceilings.
+Planning makes no HTTP calls. Compatible coverage must match the selected
+provider model/runtime/serving route and cover the requested output allowance;
+otherwise the estimate remains null. With compatible operator evidence it reports
+a conservative maximum for all configured retries and one correction, including
+fixed request fees. Offline planning does not refresh live prices or route state.
 This is an allowance, not expected billed cost. Null cost/accounted-spend means
 unverified/unavailable, **not zero**. Runtime checks exact verified route identity;
 the spending guard rechecks pricing/output coverage and cumulative budget before

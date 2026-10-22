@@ -5,16 +5,65 @@ from typing import Any
 
 import pytest
 
-from extraction_service.application.admission import ProviderAdmission, ProviderCoverage
+from extraction_service.application.admission import (
+    LocalAdmission,
+    ProviderAdmission,
+    ProviderCoverage,
+)
 from extraction_service.application.persistence import reload_records
 from extraction_service.application.selection import RunOptions, selected_jobs
+from extraction_service.application.tokenization import GemmaTokenizer
 from extraction_service.configuration.loading import load_experiment
 from extraction_service.corpus.loading import load_corpus
 from extraction_service.execution.admission import AdmissionRejected
+from extraction_service.extraction import ExtractionContract
+from extraction_service.inference.transport.http import JsonHttpClient
 from extraction_service.inference.types import GenerationRequest, ModelIdentity
 from extraction_service.record_types import ModelRuntime
+from extraction_service.runtime.configuration import load_model_pin
 
-from .conftest import ControlledService
+from .conftest import ControlledService, tokenizer_info
+
+
+@pytest.mark.parametrize("version", ["0.40.7", "0.40.12"])
+def test_local_admission_binds_observed_version(
+    service: ControlledService, contract: ExtractionContract, version: str
+) -> None:
+    service.native = True
+    pin = load_model_pin(service.project, native=True)
+    sampling = load_experiment(service.project / "config/experiments.yaml").sampling[0]
+    request = GenerationRequest.from_contract(
+        instructions="Extract the purchase order.",
+        source_text="Order PO-1",
+        contract=contract,
+        sampling=sampling,
+        timeout_seconds=1.0,
+    )
+    identity = ModelIdentity(
+        model_id="local",
+        model_name=pin.model,
+        runtime=ModelRuntime.OLLAMA_NATIVE,
+        runtime_version=version,
+        model_digest=pin.digest,
+    )
+    client = JsonHttpClient(service.base_url)
+
+    try:
+        admission = LocalAdmission(
+            client, pin, GemmaTokenizer(tokenizer_info()), 32768, runtime_version="0.40.12"
+        )
+
+        if version == "0.40.12":
+            evidence = admission.check(request, identity)
+            assert evidence.context_length == 32768
+            assert [path for path, _, _ in service.requests] == ["/api/chat"]
+        else:
+            with pytest.raises(AdmissionRejected, match="context_identity_mismatch"):
+                admission.check(request, identity)
+
+            assert service.requests == []
+    finally:
+        client.close()
 
 
 @pytest.mark.parametrize(

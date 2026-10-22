@@ -1,0 +1,239 @@
+{
+  "run_id": "native-smoke-20261021-67",
+  "input_id": "B02-S026-PO01",
+  "input_sha256": "d6f288ae629d39873f46787261015611723f3dec894a94d475291cf907a71c3c",
+  "experiment_sha256": "4c6137a92f3c70095980a479696b93f73e790ba369bdb970a887d10b02092f72",
+  "model_id": "local",
+  "model_name": "gemma4:e4b-it-qat",
+  "runtime": "ollama-native",
+  "prompt_id": "v1",
+  "prompt_sha256": "ef5cf6c25a2623e73e5e85948321b304b1ce67f09b7caf0dfbc47fa26e666785",
+  "sampling_id": "baseline",
+  "sampling": {
+    "id": "baseline",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_output_tokens": 4096
+  },
+  "schema_sha256": "efd06205171717bf69997007c36a0c85a66f55384042e79bda75df102be9bafb",
+  "status": "succeeded",
+  "attempts": [
+    {
+      "number": 1,
+      "kind": "extraction",
+      "outcome": "valid",
+      "model_id": "local",
+      "model_name": "gemma4:e4b-it-qat",
+      "runtime": "ollama-native",
+      "runtime_version": "0.40.3",
+      "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+      "raw_response": "{\"purchaseOrderNumber\":\"0079833537\",\"purchaseOrderDateTime\":null,\"buyerName\":\"Alderwick Stores Ltd\",\"shipToInfo\":null,\"paymentTerms\":null,\"buyerCurrency\":null,\"totalValue\":null,\"lineItems\":[{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"200\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-11\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-11\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"200\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-11\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-11\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"200\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-11\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-11\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-11\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-12\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-12\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-12\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-12\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-13\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-13\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-13\"}]}",
+      "error": null,
+      "issues": [],
+      "duration_ms": 70050.13707400007,
+      "input_tokens": 2005,
+      "output_tokens": 2972,
+      "cost_usd": 0.0,
+      "request_id": null,
+      "serving_provider": null,
+      "response": {
+        "identity": {
+          "model_id": "local",
+          "model_name": "gemma4:e4b-it-qat",
+          "runtime": "ollama-native",
+          "serving_provider": null,
+          "runtime_version": "0.40.3",
+          "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f"
+        },
+        "kind": "completed",
+        "raw_response": "{\"purchaseOrderNumber\":\"0079833537\",\"purchaseOrderDateTime\":null,\"buyerName\":\"Alderwick Stores Ltd\",\"shipToInfo\":null,\"paymentTerms\":null,\"buyerCurrency\":null,\"totalValue\":null,\"lineItems\":[{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"200\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-11\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-11\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"200\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-11\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-11\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"200\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-11\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-11\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-11\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-12\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-12\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-12\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-12\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-13\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-13\"},{\"purchaseOrderLineNumber\":null,\"buyerProductIdentifier\":\"834437\",\"buyerProductName\":\"Durum penne 1 kg\",\"buyerProductQuantity\":\"121\",\"buyerProductUOM\":\"MT/WTO\",\"quantityUnit\":\"OTHER\",\"buyerUnitPrice\":null,\"buyerDeliveryDate\":\"2026-09-13\"}]}",
+        "raw_http_body": "{\"model\":\"gemma4:e4b-it-qat\",\"created_at\":\"2026-10-21T15:52:36.149379Z\",\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"purchaseOrderNumber\\\":\\\"0079833537\\\",\\\"purchaseOrderDateTime\\\":null,\\\"buyerName\\\":\\\"Alderwick Stores Ltd\\\",\\\"shipToInfo\\\":null,\\\"paymentTerms\\\":null,\\\"buyerCurrency\\\":null,\\\"totalValue\\\":null,\\\"lineItems\\\":[{\\\"purchaseOrderLineNumber\\\":null,\\\"buyerProductIdentifier\\\":\\\"834437\\\",\\\"buyerProductName\\\":\\\"Durum penne 1 kg\\\",\\\"buyerProductQuantity\\\":\\\"200\\\",\\\"buyerProductUOM\\\":\\\"MT/WTO\\\",\\\"quantityUnit\\\":\\\"OTHER\\\",\\\"buyerUnitPrice\\\":null,\\\"buyerDeliveryDate\\\":\\\"2026-09-11\\\"},{\\\"purchaseOrderLineNumber\\\":null,\\\"buyerProductIdentifier\\\":\\\"834437\\\",\\\"buyerProductName\\\":\\\"Durum penne 1 kg\\\",\\\"buyerProductQuantity\\\":\\\"121\\\",\\\"buyerProductUOM\\\":\\\"MT/WTO\\\",\\\"quantityUnit\\\":\\\"OTHER\\\",\\\"buyerUnitPrice\\\":null,\\\"buyerDeliveryDate\\\":\\\"2026-09-11\\\"},{\\\"purchaseOrderLineNumber\\\":null,\\\"buyerProductIdentifier\\\":\\\"834437\\\",\\\"buyerProductName\\\":\\\"Durum penne 1 kg\\\",\\\"buyerProductQuantity\\\":\\\"200\\\",\\\"buyerProductUOM\\\":\\\"MT/WTO\\\",\\\"quantityUnit\\\":\\\"OTHER\\\",\\\"buyerUnitPrice\\\":null,\\\"buyerDeliveryDate\\\":\\\"2026-09-11\\\"},{\\\"purchaseOrderLineNumber\\\":null,\\\"buyerProductIdentifier\\\":\\\"834437\\\",\\\"buyerProductName\\\":\\\"Durum penne 1 kg\\\",\\\"buyerProductQuantity\\\":\\\"121\\\",\\\"buyerProductUOM\\\":\\\"MT/WTO\\\",\\\"quantityUnit\\\":\\\"OTHER\\\",\\\"buyerUnitPrice\\\":null,\\\"buyerDeliveryDate\\\":\\\"2026-09-11\\\"},{\\\"purchaseOrderLineNumber\\\":null,\\\"buyerProductIdentifier\\\":\\\"834437\\\",\\\"buyerProductName\\\":\\\"Durum penne 1 kg\\\",\\\"buyerProductQuantity\\\":\\\"200\\\",\\\"buyerProductUOM\\\":\\\"MT/WTO\\\",\\\"quantityUnit\\\":\\\"OTHER\\\",\\\"buyerUnitPrice\\\":null,\\\"buyerDeliveryDate\\\":\\\"2026-09-11\\\"},{\\\"purchaseOrderLineNumber\\\":null,\\\"buyerProductIdentifier\\\":\\\"834437\\\",\\\"buyerProductName\\\":\\\"Durum penne 1 kg\\\",\\\"buyerProductQuantity\\\":\\\"121\\\",\\\"buyerProductUOM\\\":\\\"MT/WTO\\\",\\\"quantityUnit\\\":\\\"OTHER\\\",\\\"buyerUnitPrice\\\":null,\\\"buyerDeliveryDate\\\":\\\"2026-09-11\\\"},{\\\"purchaseOrderLineNumber\\\":null,\\\"buyerProductIdentifier\\\":\\\"834437\\\",\\\"buyerProductName\\\":\\\"Durum penne 1 kg\\\",\\\"buyerProductQuantity\\\":\\\"121\\\",\\\"buyerProductUOM\\\":\\\"MT/WTO\\\",\\\"quantityUnit\\\":\\\"OTHER\\\",\\\"buyerUnitPrice\\\":null,\\\"buyerDeliveryDate\\\":\\\"2026-09-11\\\"},{\\\"purchaseOrderLineNumber\\\":null,\\\"buyerProductIdentifier\\\":\\\"834437\\\",\\\"buyerProductName\\\":\\\"Durum penne 1 kg\\\",\\\"buyerProductQuantity\\\":\\\"121\\\",\\\"buyerProductUOM\\\":\\\"MT/WTO\\\",\\\"quantityUnit\\\":\\\"OTHER\\\",\\\"buyerUnitPrice\\\":null,\\\"buyerDeliveryDate\\\":\\\"2026-09-12\\\"},{\\\"purchaseOrderLineNumber\\\":null,\\\"buyerProductIdentifier\\\":\\\"834437\\\",\\\"buyerProductName\\\":\\\"Durum penne 1 kg\\\",\\\"buyerProductQuantity\\\":\\\"121\\\",\\\"buyerProductUOM\\\":\\\"MT/WTO\\\",\\\"quantityUnit\\\":\\\"OTHER\\\",\\\"buyerUnitPrice\\\":null,\\\"buyerDeliveryDate\\\":\\\"2026-09-12\\\"},{\\\"purchaseOrderLineNumber\\\":null,\\\"buyerProductIdentifier\\\":\\\"834437\\\",\\\"buyerProductName\\\":\\\"Durum penne 1 kg\\\",\\\"buyerProductQuantity\\\":\\\"121\\\",\\\"buyerProductUOM\\\":\\\"MT/WTO\\\",\\\"quantityUnit\\\":\\\"OTHER\\\",\\\"buyerUnitPrice\\\":null,\\\"buyerDeliveryDate\\\":\\\"2026-09-12\\\"},{\\\"purchaseOrderLineNumber\\\":null,\\\"buyerProductIdentifier\\\":\\\"834437\\\",\\\"buyerProductName\\\":\\\"Durum penne 1 kg\\\",\\\"buyerProductQuantity\\\":\\\"121\\\",\\\"buyerProductUOM\\\":\\\"MT/WTO\\\",\\\"quantityUnit\\\":\\\"OTHER\\\",\\\"buyerUnitPrice\\\":null,\\\"buyerDeliveryDate\\\":\\\"2026-09-12\\\"},{\\\"purchaseOrderLineNumber\\\":null,\\\"buyerProductIdentifier\\\":\\\"834437\\\",\\\"buyerProductName\\\":\\\"Durum penne 1 kg\\\",\\\"buyerProductQuantity\\\":\\\"121\\\",\\\"buyerProductUOM\\\":\\\"MT/WTO\\\",\\\"quantityUnit\\\":\\\"OTHER\\\",\\\"buyerUnitPrice\\\":null,\\\"buyerDeliveryDate\\\":\\\"2026-09-13\\\"},{\\\"purchaseOrderLineNumber\\\":null,\\\"buyerProductIdentifier\\\":\\\"834437\\\",\\\"buyerProductName\\\":\\\"Durum penne 1 kg\\\",\\\"buyerProductQuantity\\\":\\\"121\\\",\\\"buyerProductUOM\\\":\\\"MT/WTO\\\",\\\"quantityUnit\\\":\\\"OTHER\\\",\\\"buyerUnitPrice\\\":null,\\\"buyerDeliveryDate\\\":\\\"2026-09-13\\\"},{\\\"purchaseOrderLineNumber\\\":null,\\\"buyerProductIdentifier\\\":\\\"834437\\\",\\\"buyerProductName\\\":\\\"Durum penne 1 kg\\\",\\\"buyerProductQuantity\\\":\\\"121\\\",\\\"buyerProductUOM\\\":\\\"MT/WTO\\\",\\\"quantityUnit\\\":\\\"OTHER\\\",\\\"buyerUnitPrice\\\":null,\\\"buyerDeliveryDate\\\":\\\"2026-09-13\\\"}]}\",\"thinking\":\"The user wants me to extract a single purchase order from the provided text based on a specific JSON schema.\\n\\n**Source Analysis:**\\nThe source text is structured like a spreadsheet or a list of order details.\\n\\n*   `ORDER!D14 PO number: 0079833537` -\\u003e `purchaseOrderNumber`\\n*   `ORDER!B4 Buyer: Alderwick Stores Ltd` -\\u003e `buyerName`\\n*   `ORDER!A14 Article code: 834437 | B14 Description: Durum penne 1 kg | C14 Quantity: 200 | C13 UOM: MT/WTO | E14 Delivery date: 11.09.26` -\\u003e Line Item 1\\n*   ... (Subsequent lines are more line items)\\n\\n**Schema Requirements Check:**\\n1.  `purchaseOrderNumber`: \\\"0079833537\\\" (String)\\n2.  `purchaseOrderDateTime`: Not found. (Null)\\n3.  `buyerName`: \\\"Alderwick Stores Ltd\\\" (String)\\n4.  `shipToInfo`: Not found. (Null)\\n5.  `paymentTerms`: Not found. (Null)\\n6.  `buyerCurrency`: Not found. (Null)\\n7.  `totalValue`: Not found. (Null)\\n8.  `lineItems`: Array of objects.\\n\\n**Line Item Extraction (Example: Line 1 - ORDER!A14):**\\n*   `purchaseOrderLineNumber`: Not explicitly given, but the source uses A14, B14, C14, etc. I will use the row identifier if possible, or null if not clearly a line number. Since the schema asks for \\\"Printed line number, if present\\\", and the source uses A14, I'll treat the row number as the line number if it's the only identifier. Let's look for a dedicated line number column. None is explicitly labeled \\\"Line #\\\". I will use null for `purchaseOrderLineNumber`.\\n*   `buyerProductIdentifier`: \\\"834437\\\" (Article code)\\n*   `buyerProductName`: \\\"Durum penne 1 kg\\\" (Description)\\n*   `buyerProductQuantity`: \\\"200\\\" (Quantity)\\n*   `buyerProductUOM`: \\\"MT/WTO\\\" (UOM)\\n*   `quantityUnit`: Needs normalization. \\\"MT/WTO\\\" is not in the enum [EACH, CASE, KILOGRAM, BOTTLE, OTHER, UNKNOWN]. It's an explicit unit. I'll use \\\"OTHER\\\".\\n*   `buyerUnitPrice`: Not found. (Null)\\n*   `buyerDeliveryDate`: \\\"11.09.26\\\" -\\u003e Normalized to YYYY-MM-DD: \\\"2026-09-11\\\"\\n\\n**Processing all lines:**\\n\\n**Line 1 (A14):**\\n*   PO Line Number: null\\n*   ID: 834437\\n*   Name: Durum penne 1 kg\\n*   Qty: 200\\n*   UOM: MT/WTO\\n*   Unit: OTHER\\n*   Price: null\\n*   Delivery Date: 2026-09-11\\n\\n**Line 2 (A15):**\\n*   PO Line Number: null\\n*   ID: 834437\\n*   Name: Durum penne 1 kg\\n*   Qty: 121\\n*   UOM: MT/WTO\\n*   Unit: OTHER\\n*   Price: null\\n*   Delivery Date: 2026-09-11\\n\\n**Line 3 (A16):**\\n*   PO Line Number: null\\n*   ID: 834437\\n*   Name: Durum penne 1 kg\\n*   Qty: 200\\n*   UOM: MT/WTO\\n*   Unit: OTHER\\n*   Price: null\\n*   Delivery Date: 2026-09-11\\n\\n**Line 4 (A17):**\\n*   PO Line Number: null\\n*   ID: 834437\\n*   Name: Durum penne 1 kg\\n*   Qty: 121\\n*   UOM: MT/WTO\\n*   Unit: OTHER\\n*   Price: null\\n*   Delivery Date: 2026-09-11\\n\\n**Line 5 (A18):**\\n*   PO Line Number: null\\n*   ID: 834437\\n*   Name: Durum penne 1 kg\\n*   Qty: 200\\n*   UOM: MT/WTO\\n*   Unit: OTHER\\n*   Price: null\\n*   Delivery Date: 2026-09-11\\n\\n**Line 6 (A19):**\\n*   PO Line Number: null\\n*   ID: 834437\\n*   Name: Durum penne 1 kg\\n*   Qty: 121\\n*   UOM: MT/WTO\\n*   Unit: OTHER\\n*   Price: null\\n*   Delivery Date: 2026-09-11\\n\\n**Line 7 (A20):**\\n*   PO Line Number: null\\n*   ID: 834437\\n*   Name: Durum penne 1 kg\\n*   Qty: 121\\n*   UOM: MT/WTO\\n*   Unit: OTHER\\n*   Price: null\\n*   Delivery Date: 2026-09-11\\n\\n**Line 8 (A21):**\\n*   PO Line Number: null\\n*   ID: 834437\\n*   Name: Durum penne 1 kg\\n*   Qty: 121\\n*   UOM: MT/WTO\\n*   Unit: OTHER\\n*   Price: null\\n*   Delivery Date: 2026-09-12\\n\\n**Line 9 (A22):**\\n*   PO Line Number: null\\n*   ID: 834437\\n*   Name: Durum penne 1 kg\\n*   Qty: 121\\n*   UOM: MT/WTO\\n*   Unit: OTHER\\n*   Price: null\\n*   Delivery Date: 2026-09-12\\n\\n**Line 10 (A23):**\\n*   PO Line Number: null\\n*   ID: 834437\\n*   Name: Durum penne 1 kg\\n*   Qty: 121\\n*   UOM: MT/WTO\\n*   Unit: OTHER\\n*   Price: null\\n*   Delivery Date: 2026-09-12\\n\\n**Line 11 (A24):**\\n*   PO Line Number: null\\n*   ID: 834437\\n*   Name: Durum penne 1 kg\\n*   Qty: 121\\n*   UOM: MT/WTO\\n*   Unit: OTHER\\n*   Price: null\\n*   Delivery Date: 2026-09-12\\n\\n**Line 12 (A25):**\\n*   PO Line Number: null\\n*   ID: 834437\\n*   Name: Durum penne 1 kg\\n*   Qty: 121\\n*   UOM: MT/WTO\\n*   Unit: OTHER\\n*   Price: null\\n*   Delivery Date: 2026-09-13\\n\\n**Line 13 (A26):**\\n*   PO Line Number: null\\n*   ID: 834437\\n*   Name: Durum penne 1 kg\\n*   Qty: 121\\n*   UOM: MT/WTO\\n*   Unit: OTHER\\n*   Price: null\\n*   Delivery Date: 2026-09-13\\n\\n**Line 14 (A27):**\\n*   PO Line Number: null\\n*   ID: 834437\\n*   Name: Durum penne 1 kg\\n*   Qty: 121\\n*   UOM: MT/WTO\\n*   Unit: OTHER\\n*   Price: null\\n*   Delivery Date: 2026-09-13\\n\\n**Final JSON Construction.** (Ensuring all required fields are present, even if null).\"},\"done\":true,\"done_reason\":\"stop\",\"total_duration\":70015258542,\"load_duration\":3734875,\"prompt_eval_count\":2005,\"prompt_eval_cached_count\":650,\"prompt_eval_duration\":2466636000,\"eval_count\":2972,\"eval_duration\":67524880999}",
+        "reported_model": "gemma4:e4b-it-qat",
+        "serving_provider": null,
+        "request_id": null,
+        "finish_reason": "stop",
+        "native_finish_reason": null,
+        "refusal": null,
+        "error": null,
+        "duration_ms": 70050.13707400007,
+        "input_tokens": 2005,
+        "output_tokens": 2972,
+        "cost_usd": 0.0,
+        "total_duration_ns": 70015258542,
+        "load_duration_ns": 3734875,
+        "credentials_redacted": false
+      },
+      "failure": null,
+      "request_timeout_seconds": 1800.0,
+      "retry_delay_seconds": 0.0,
+      "budget_reservation_id": null,
+      "budget_reserved_usd": null,
+      "accounting_note": null
+    }
+  ],
+  "extraction": {
+    "purchaseOrderNumber": "0079833537",
+    "purchaseOrderDateTime": null,
+    "buyerName": "Alderwick Stores Ltd",
+    "shipToInfo": null,
+    "paymentTerms": null,
+    "buyerCurrency": null,
+    "totalValue": null,
+    "lineItems": [
+      {
+        "purchaseOrderLineNumber": null,
+        "buyerProductIdentifier": "834437",
+        "buyerProductName": "Durum penne 1 kg",
+        "buyerProductQuantity": "200",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "OTHER",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-11"
+      },
+      {
+        "purchaseOrderLineNumber": null,
+        "buyerProductIdentifier": "834437",
+        "buyerProductName": "Durum penne 1 kg",
+        "buyerProductQuantity": "121",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "OTHER",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-11"
+      },
+      {
+        "purchaseOrderLineNumber": null,
+        "buyerProductIdentifier": "834437",
+        "buyerProductName": "Durum penne 1 kg",
+        "buyerProductQuantity": "200",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "OTHER",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-11"
+      },
+      {
+        "purchaseOrderLineNumber": null,
+        "buyerProductIdentifier": "834437",
+        "buyerProductName": "Durum penne 1 kg",
+        "buyerProductQuantity": "121",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "OTHER",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-11"
+      },
+      {
+        "purchaseOrderLineNumber": null,
+        "buyerProductIdentifier": "834437",
+        "buyerProductName": "Durum penne 1 kg",
+        "buyerProductQuantity": "200",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "OTHER",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-11"
+      },
+      {
+        "purchaseOrderLineNumber": null,
+        "buyerProductIdentifier": "834437",
+        "buyerProductName": "Durum penne 1 kg",
+        "buyerProductQuantity": "121",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "OTHER",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-11"
+      },
+      {
+        "purchaseOrderLineNumber": null,
+        "buyerProductIdentifier": "834437",
+        "buyerProductName": "Durum penne 1 kg",
+        "buyerProductQuantity": "121",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "OTHER",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-11"
+      },
+      {
+        "purchaseOrderLineNumber": null,
+        "buyerProductIdentifier": "834437",
+        "buyerProductName": "Durum penne 1 kg",
+        "buyerProductQuantity": "121",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "OTHER",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-12"
+      },
+      {
+        "purchaseOrderLineNumber": null,
+        "buyerProductIdentifier": "834437",
+        "buyerProductName": "Durum penne 1 kg",
+        "buyerProductQuantity": "121",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "OTHER",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-12"
+      },
+      {
+        "purchaseOrderLineNumber": null,
+        "buyerProductIdentifier": "834437",
+        "buyerProductName": "Durum penne 1 kg",
+        "buyerProductQuantity": "121",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "OTHER",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-12"
+      },
+      {
+        "purchaseOrderLineNumber": null,
+        "buyerProductIdentifier": "834437",
+        "buyerProductName": "Durum penne 1 kg",
+        "buyerProductQuantity": "121",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "OTHER",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-12"
+      },
+      {
+        "purchaseOrderLineNumber": null,
+        "buyerProductIdentifier": "834437",
+        "buyerProductName": "Durum penne 1 kg",
+        "buyerProductQuantity": "121",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "OTHER",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-13"
+      },
+      {
+        "purchaseOrderLineNumber": null,
+        "buyerProductIdentifier": "834437",
+        "buyerProductName": "Durum penne 1 kg",
+        "buyerProductQuantity": "121",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "OTHER",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-13"
+      },
+      {
+        "purchaseOrderLineNumber": null,
+        "buyerProductIdentifier": "834437",
+        "buyerProductName": "Durum penne 1 kg",
+        "buyerProductQuantity": "121",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "OTHER",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-13"
+      }
+    ]
+  },
+  "reason": null,
+  "duration_ms": 70116.18911600021,
+  "total_input_tokens": 2005,
+  "total_output_tokens": 2972,
+  "total_cost_usd": 0.0,
+  "stage": "smoke",
+  "dependency": {
+    "runtime": "ollama-native",
+    "endpoint": "http://host.docker.internal:11434/",
+    "model_name": "gemma4:e4b-it-qat",
+    "serving_provider": null,
+    "runtime_version": "0.40.3",
+    "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f"
+  }
+}

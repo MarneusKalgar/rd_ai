@@ -4,6 +4,7 @@ from typing import Any
 import pytest
 import yaml
 
+from extraction_service import cli
 from extraction_service.application.admission import LocalAdmission
 from extraction_service.application.runner import run
 from extraction_service.application.selection import RunOptions
@@ -118,3 +119,19 @@ def test_cleanup_failure_preserves_original_execution_error(
     )
     assert manifest["state"] == "interrupted"
     assert manifest["error"] == "RuntimeError"
+
+
+def test_cli_redacts_unexpected_exception(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    def broken_dispatch(arguments: Any) -> int:
+        raise RuntimeError("controlled-sensitive-marker")
+
+    monkeypatch.setattr(cli, "_dispatch", broken_dispatch)
+
+    status = cli.main(["run"])
+
+    output = capsys.readouterr().out
+    assert status == 2
+    assert "controlled-sensitive-marker" not in output
+    assert json.loads(output) == {"unexpected_error": "RuntimeError"}

@@ -3,14 +3,22 @@
 
 # ARGS carries explicit model/input/run selections; local is the safe default.
 # MODE=provider selects the credentialed app and never starts Ollama.
+# MODE=native uses the existing desktop server; Python remains in Docker.
 ARGS ?=
 MODE ?= local
 RUN_SERVICE := local-run
 ifeq ($(MODE),provider)
 RUN_SERVICE := app
 endif
+ifeq ($(MODE),native)
+RUN_SERVICE := native-run
+endif
+ifeq ($(filter $(MODE),local provider native),)
+$(error MODE must be local, provider or native)
+endif
 
 .PHONY: run smoke plan-run budget-init budget-show export-run verify-export
+.PHONY: setup-native
 
 # Make runs from hw-01/ (including calls routed from the root Makefile).
 # Prefer local resource overrides; the tracked example keeps a fresh checkout usable.
@@ -43,6 +51,11 @@ setup-provider:
 setup-local:
 	$(COMPOSE) --profile local up -d --wait --wait-timeout 120 ollama
 	$(COMPOSE) run --build --rm local-init
+
+# Explicitly initialize missing pinned weights through the already running desktop app.
+# No host installation, Docker Ollama startup or model generation is performed here.
+setup-native:
+	$(COMPOSE) run --build --rm --no-deps native-run python -m extraction_service.runtime initialize-native
 
 # Six representative one-token probes in the current configuration; no model pull.
 local-ready:

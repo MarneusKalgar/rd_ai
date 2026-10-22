@@ -1,0 +1,135 @@
+{
+  "version": "run-manifest-v1",
+  "run_id": "native-short-20261021-67",
+  "created_at": "2026-10-21T15:48:57.168651+00:00",
+  "stage": "smoke",
+  "state": "complete",
+  "experiment": {
+    "version": "experiment-v1",
+    "models": [
+      {
+        "id": "provider",
+        "backend": "openrouter",
+        "model": "google/gemini-3.8-flash",
+        "serving_provider": "google-ai-studio"
+      },
+      {
+        "id": "local",
+        "backend": "ollama",
+        "model": "gemma4:e4b-it-qat",
+        "serving_provider": null
+      }
+    ],
+    "prompts": [
+      {
+        "id": "v1",
+        "file": "prompts/v1.txt"
+      }
+    ],
+    "sampling": [
+      {
+        "id": "baseline",
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "max_output_tokens": 4096
+      }
+    ],
+    "execution": {
+      "request_timeout_seconds": 1800.0,
+      "input_timeout_seconds": 7205.0,
+      "transport_retries": 1,
+      "api_budget_usd": 4.5,
+      "matrix_reserve_usd": 3.5,
+      "dependency_failure_limit": 3,
+      "backoff_initial_seconds": 1.0,
+      "backoff_max_seconds": 30.0
+    },
+    "selection": {
+      "model_id": "local",
+      "prompt_id": "v1",
+      "sampling_id": "baseline"
+    }
+  },
+  "schema_sha256": "efd06205171717bf69997007c36a0c85a66f55384042e79bda75df102be9bafb",
+  "jobs": [
+    {
+      "key": "99e1ebc4ff9c59be078615c677d98fc014180069f0ca689fc1d190c08dbfad72",
+      "input_id": "B02-S030-PO01",
+      "model_id": "local",
+      "prompt_id": "v1",
+      "sampling_id": "baseline",
+      "input_sha256": "2f26b05454e5ff7c95d46f69db9d129d2969f41bef80faad167d4dc06fe9062c",
+      "prompt_sha256": "ef5cf6c25a2623e73e5e85948321b304b1ce67f09b7caf0dfbc47fa26e666785",
+      "experiment_sha256": "4c6137a92f3c70095980a479696b93f73e790ba369bdb970a887d10b02092f72"
+    }
+  ],
+  "records": {
+    "99e1ebc4ff9c59be078615c677d98fc014180069f0ca689fc1d190c08dbfad72": "records/99e1ebc4ff9c59be078615c677d98fc014180069f0ca689fc1d190c08dbfad72.json"
+  },
+  "record_sha256": {
+    "99e1ebc4ff9c59be078615c677d98fc014180069f0ca689fc1d190c08dbfad72": "8e4bc5c5a278eea349d31137754fb3b468fd7c69336d87b7ce251eaf3944a4ab"
+  },
+  "checkpoint_sha256": {
+    "99e1ebc4ff9c59be078615c677d98fc014180069f0ca689fc1d190c08dbfad72": "d128f5467f3e7815fa717e63d034bd1e55c025669e67da16ac63d4229d781f21"
+  },
+  "summary": {
+    "execution": {
+      "request_timeout_seconds": 1800.0,
+      "input_timeout_seconds": 7205.0,
+      "transport_retries": 1,
+      "api_budget_usd": 4.5,
+      "matrix_reserve_usd": 3.5,
+      "dependency_failure_limit": 3,
+      "backoff_initial_seconds": 1.0,
+      "backoff_max_seconds": 30.0
+    },
+    "succeeded": 1,
+    "failed": 0,
+    "not_attempted": 0,
+    "comparison_complete": true,
+    "dependency_stops": [],
+    "budget_stops": []
+  },
+  "error": null,
+  "setup": {
+    "local": {
+      "mode": "native",
+      "endpoint": "http://host.docker.internal:11434/",
+      "loaded": {
+        "name": "gemma4:e4b-it-qat",
+        "digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+        "size": 3223228250,
+        "size_vram": 3223228250,
+        "context_length": 32768,
+        "model": "gemma4:e4b-it-qat",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma4",
+          "families": [
+            "gemma4"
+          ],
+          "parameter_size": "7.5B",
+          "quantization_level": "Q4_0"
+        },
+        "expires_at": "2026-10-21T18:58:55.384662+03:00",
+        "runner": "llamacpp"
+      },
+      "processor": "gpu_or_mixed",
+      "load_duration_ms": 8427.665961999992,
+      "tokenizer_sha256": "42e3a238e10726346e996c7e3569fcfb2e8d47173944a3cd56826d8dc4d9a9fb",
+      "runtime": {
+        "version": "0.40.3",
+        "model_name": "gemma4:e4b-it-qat",
+        "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+        "capabilities": [
+          "audio",
+          "thinking",
+          "vision",
+          "tools",
+          "completion"
+        ]
+      }
+    }
+  }
+}
