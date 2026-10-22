@@ -1,0 +1,109 @@
+{
+  "run_id": "provider-smoke-31-20261022",
+  "input_id": "B02-S030-PO01",
+  "input_sha256": "2f26b05454e5ff7c95d46f69db9d129d2969f41bef80faad167d4dc06fe9062c",
+  "experiment_sha256": "59ae70356e4a856a2aaa57f71bc710ef943fb6f6ce890feb100a2c715bd2a5c6",
+  "model_id": "provider",
+  "model_name": "google/gemini-3.1-flash-lite",
+  "runtime": "openrouter",
+  "prompt_id": "v1",
+  "prompt_sha256": "ef5cf6c25a2623e73e5e85948321b304b1ce67f09b7caf0dfbc47fa26e666785",
+  "sampling_id": "baseline",
+  "sampling": {
+    "id": "baseline",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_output_tokens": 4096
+  },
+  "schema_sha256": "efd06205171717bf69997007c36a0c85a66f55384042e79bda75df102be9bafb",
+  "status": "succeeded",
+  "attempts": [
+    {
+      "number": 1,
+      "kind": "extraction",
+      "outcome": "valid",
+      "model_id": "provider",
+      "model_name": "google/gemini-3.1-flash-lite",
+      "runtime": "openrouter",
+      "runtime_version": null,
+      "model_digest": null,
+      "raw_response": "{\n  \"purchaseOrderNumber\": \"9415698592\",\n  \"purchaseOrderDateTime\": null,\n  \"buyerName\": \"Thornwick Merchants Ltd\",\n  \"shipToInfo\": null,\n  \"paymentTerms\": null,\n  \"buyerCurrency\": null,\n  \"totalValue\": null,\n  \"lineItems\": [\n    {\n      \"purchaseOrderLineNumber\": \"1\",\n      \"buyerProductIdentifier\": \"169163\",\n      \"buyerProductName\": \"Corn rice cakes 150 g\",\n      \"buyerProductQuantity\": \"186\",\n      \"buyerProductUOM\": \"MT/WTO\",\n      \"quantityUnit\": \"UNKNOWN\",\n      \"buyerUnitPrice\": null,\n      \"buyerDeliveryDate\": \"2026-09-21\"\n    }\n  ]\n}",
+      "error": null,
+      "issues": [],
+      "duration_ms": 2175.241375999974,
+      "input_tokens": 1149,
+      "output_tokens": 196,
+      "cost_usd": 0.00058125,
+      "request_id": "gen-1792665922-oAyTp638Yqm6zOJtXjej",
+      "serving_provider": "google-ai-studio",
+      "response": {
+        "identity": {
+          "model_id": "provider",
+          "model_name": "google/gemini-3.1-flash-lite",
+          "runtime": "openrouter",
+          "serving_provider": "google-ai-studio",
+          "runtime_version": null,
+          "model_digest": null
+        },
+        "kind": "completed",
+        "raw_response": "{\n  \"purchaseOrderNumber\": \"9415698592\",\n  \"purchaseOrderDateTime\": null,\n  \"buyerName\": \"Thornwick Merchants Ltd\",\n  \"shipToInfo\": null,\n  \"paymentTerms\": null,\n  \"buyerCurrency\": null,\n  \"totalValue\": null,\n  \"lineItems\": [\n    {\n      \"purchaseOrderLineNumber\": \"1\",\n      \"buyerProductIdentifier\": \"169163\",\n      \"buyerProductName\": \"Corn rice cakes 150 g\",\n      \"buyerProductQuantity\": \"186\",\n      \"buyerProductUOM\": \"MT/WTO\",\n      \"quantityUnit\": \"UNKNOWN\",\n      \"buyerUnitPrice\": null,\n      \"buyerDeliveryDate\": \"2026-09-21\"\n    }\n  ]\n}",
+        "raw_http_body": "\n         \n{\"id\":\"gen-1792665922-oAyTp638Yqm6zOJtXjej\",\"object\":\"chat.completion\",\"created\":1792665922,\"model\":\"google/gemini-3.1-flash-lite\",\"provider\":\"Google AI Studio\",\"system_fingerprint\":null,\"service_tier\":\"default\",\"choices\":[{\"index\":0,\"logprobs\":null,\"finish_reason\":\"stop\",\"native_finish_reason\":\"STOP\",\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"purchaseOrderNumber\\\": \\\"9415698592\\\",\\n  \\\"purchaseOrderDateTime\\\": null,\\n  \\\"buyerName\\\": \\\"Thornwick Merchants Ltd\\\",\\n  \\\"shipToInfo\\\": null,\\n  \\\"paymentTerms\\\": null,\\n  \\\"buyerCurrency\\\": null,\\n  \\\"totalValue\\\": null,\\n  \\\"lineItems\\\": [\\n    {\\n      \\\"purchaseOrderLineNumber\\\": \\\"1\\\",\\n      \\\"buyerProductIdentifier\\\": \\\"169163\\\",\\n      \\\"buyerProductName\\\": \\\"Corn rice cakes 150 g\\\",\\n      \\\"buyerProductQuantity\\\": \\\"186\\\",\\n      \\\"buyerProductUOM\\\": \\\"MT/WTO\\\",\\n      \\\"quantityUnit\\\": \\\"UNKNOWN\\\",\\n      \\\"buyerUnitPrice\\\": null,\\n      \\\"buyerDeliveryDate\\\": \\\"2026-09-21\\\"\\n    }\\n  ]\\n}\",\"refusal\":null,\"reasoning\":null,\"reasoning_details\":[{\"type\":\"reasoning.encrypted\",\"data\":\"EnMKcQFpFH0TYtCiY6P8mQaFzGNtUJprvBgYhoxEWNHbkHPUUoAb1t1L0ps9xRZwDUcmiJqL/TF4AHTLkqLixhKNqsoKhMz191ZZ1c0OshXTgkFDZNBD20IuaODcxeYBTGGa37xdBxz0LOMJ5cj78fzbDpSe\",\"format\":\"google-gemini-v1\",\"index\":0}]}}],\"usage\":{\"prompt_tokens\":1149,\"completion_tokens\":196,\"total_tokens\":1345,\"cost\":0.00058125,\"is_byok\":false,\"prompt_tokens_details\":{\"cached_tokens\":0,\"cache_write_tokens\":0,\"audio_tokens\":0,\"video_tokens\":0},\"cost_details\":{\"upstream_inference_cost\":0.00058125,\"upstream_inference_prompt_cost\":0.00028725,\"upstream_inference_completions_cost\":0.000294},\"completion_tokens_details\":{\"reasoning_tokens\":0,\"image_tokens\":0,\"audio_tokens\":0}}}",
+        "reported_model": "google/gemini-3.1-flash-lite",
+        "serving_provider": "Google AI Studio",
+        "request_id": "gen-1792665922-oAyTp638Yqm6zOJtXjej",
+        "finish_reason": "stop",
+        "native_finish_reason": "STOP",
+        "refusal": null,
+        "error": null,
+        "duration_ms": 2175.241375999974,
+        "input_tokens": 1149,
+        "output_tokens": 196,
+        "cost_usd": 0.00058125,
+        "total_duration_ns": null,
+        "load_duration_ns": null,
+        "credentials_redacted": false
+      },
+      "failure": null,
+      "request_timeout_seconds": 1800.0,
+      "retry_delay_seconds": 0.0,
+      "budget_reservation_id": "144e7252841b4218864c5480a746662a",
+      "budget_reserved_usd": 0.268288,
+      "accounting_note": null
+    }
+  ],
+  "extraction": {
+    "purchaseOrderNumber": "9415698592",
+    "purchaseOrderDateTime": null,
+    "buyerName": "Thornwick Merchants Ltd",
+    "shipToInfo": null,
+    "paymentTerms": null,
+    "buyerCurrency": null,
+    "totalValue": null,
+    "lineItems": [
+      {
+        "purchaseOrderLineNumber": "1",
+        "buyerProductIdentifier": "169163",
+        "buyerProductName": "Corn rice cakes 150 g",
+        "buyerProductQuantity": "186",
+        "buyerProductUOM": "MT/WTO",
+        "quantityUnit": "UNKNOWN",
+        "buyerUnitPrice": null,
+        "buyerDeliveryDate": "2026-09-21"
+      }
+    ]
+  },
+  "reason": null,
+  "duration_ms": 2194.794793000028,
+  "total_input_tokens": 1149,
+  "total_output_tokens": 196,
+  "total_cost_usd": 0.00058125,
+  "stage": "smoke",
+  "dependency": {
+    "runtime": "openrouter",
+    "endpoint": "https://openrouter.ai/api/v1/",
+    "model_name": "google/gemini-3.1-flash-lite",
+    "serving_provider": "google-ai-studio",
+    "runtime_version": null,
+    "model_digest": null
+  }
+}

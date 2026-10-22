@@ -3,6 +3,8 @@
 from enum import StrEnum
 from typing import Protocol
 
+from pydantic import model_validator
+
 from extraction_service.inference.types import GenerationRequest, ModelIdentity
 from extraction_service.runtime_types import NonEmptyText, PositiveInt, Sha256, StrictModel
 
@@ -23,13 +25,31 @@ class AdmissionRejected(ValueError):
         super().__init__(reason.value)
 
 
+class ContextEnforcement(StrEnum):
+    COUNTED = "counted"
+    PROVIDER = "provider"
+
+
 class AdmissionEvidence(StrictModel):
     method: NonEmptyText
     request_sha256: Sha256
-    counter_identity: NonEmptyText
-    prompt_token_bound: PositiveInt
+    context_enforcement: ContextEnforcement = ContextEnforcement.COUNTED
+    counter_identity: NonEmptyText | None
+    prompt_token_bound: PositiveInt | None
     output_allowance: PositiveInt
     context_length: PositiveInt
+
+    @model_validator(mode="after")
+    def check_counter_evidence(self) -> AdmissionEvidence:
+        """Never serialize provider enforcement as a verified local token count."""
+
+        if self.context_enforcement == ContextEnforcement.COUNTED:
+            if self.counter_identity is None or self.prompt_token_bound is None:
+                raise ValueError("Counted admission requires counter identity and token bound")
+        elif self.counter_identity is not None or self.prompt_token_bound is not None:
+            raise ValueError("Provider context enforcement has no verified counter or token bound")
+
+        return self
 
 
 class RequestAdmission(Protocol):

@@ -328,6 +328,14 @@ remain real. Fake provider prices/count bounds are test fixtures, not live evide
 
 ### Live end-to-end smoke
 
+**6.6.6 verified on 22 October:** [native local](native-runtime-verification.md)
+and [Gemini 3.1 Flash-Lite](provider-runtime-verification.md) completed the same
+three-input v1/baseline smoke. Each retains two schema-valid outputs and one
+truncation; exports reload independently. Provider cost was $0.01518250, with
+the matrix reserve intact. The current offline gate passes 626 tests, including
+12 controlled regressions for the explicit smoke-only provider context policy.
+This verifies integration and failure handling; quality evaluation remains 7–8.
+
 **Plan points: 6.6 and 9, using the setup verified in 6.5.** Exercise both real adapters on the same
 three representative approved documents, with the selected v1 configuration.
 Include Docker/runtime readiness and the documented application entrypoint.

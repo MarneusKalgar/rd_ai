@@ -6,7 +6,9 @@ For the separately approved 8,192-token follow-up on the large input, see the
 **Native local smoke completed:** two schema-valid outputs and one explicitly
 truncated output, all persisted and exported. Native mode/admission/application
 handling are verified for the recorded configuration. Field accuracy and the
-full experiment matrix are unmeasured. Provider live acceptance remains pending.
+full experiment matrix are unmeasured. The later
+[22 October provider smoke](provider-runtime-verification.md) completes provider
+acceptance separately, preserving this native run's original evidence.
 
 The current native configuration allows stable 0.40 patches starting at 0.40.7
 following the desktop update on 22 October. These retained runs used 0.40.3;
@@ -124,5 +126,6 @@ verified offline rather than rerunning these model requests.
 Sections 6.7.1–6.7.2's native wiring and local comparison are exercised.
 Section 6.7.3 (small Docker model smoke profile/CI jobs) is deferred at the
 user's request. The complete 30-input
-matrix, additional prompts/sampling, scoring/reporting and provider live smoke
-are separate pending work; no further model invocation is scheduled.
+matrix, additional prompts/sampling and scoring/reporting remain pending.
+Provider live smoke subsequently completed on 22 October; no further model
+invocation is scheduled.

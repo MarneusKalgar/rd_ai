@@ -1,0 +1,70 @@
+{
+  "input_id": "B02-S030-PO01",
+  "model_id": "provider",
+  "attempts": [
+    {
+      "number": 1,
+      "kind": "extraction",
+      "outcome": "valid",
+      "model_id": "provider",
+      "model_name": "google/gemini-3.1-flash-lite",
+      "runtime": "openrouter",
+      "runtime_version": null,
+      "model_digest": null,
+      "raw_response": "{\n  \"purchaseOrderNumber\": \"9415698592\",\n  \"purchaseOrderDateTime\": null,\n  \"buyerName\": \"Thornwick Merchants Ltd\",\n  \"shipToInfo\": null,\n  \"paymentTerms\": null,\n  \"buyerCurrency\": null,\n  \"totalValue\": null,\n  \"lineItems\": [\n    {\n      \"purchaseOrderLineNumber\": \"1\",\n      \"buyerProductIdentifier\": \"169163\",\n      \"buyerProductName\": \"Corn rice cakes 150 g\",\n      \"buyerProductQuantity\": \"186\",\n      \"buyerProductUOM\": \"MT/WTO\",\n      \"quantityUnit\": \"UNKNOWN\",\n      \"buyerUnitPrice\": null,\n      \"buyerDeliveryDate\": \"2026-09-21\"\n    }\n  ]\n}",
+      "error": null,
+      "issues": [],
+      "duration_ms": 2175.241375999974,
+      "input_tokens": 1149,
+      "output_tokens": 196,
+      "cost_usd": 0.00058125,
+      "request_id": "gen-1792665922-oAyTp638Yqm6zOJtXjej",
+      "serving_provider": "google-ai-studio",
+      "response": {
+        "identity": {
+          "model_id": "provider",
+          "model_name": "google/gemini-3.1-flash-lite",
+          "runtime": "openrouter",
+          "serving_provider": "google-ai-studio",
+          "runtime_version": null,
+          "model_digest": null
+        },
+        "kind": "completed",
+        "raw_response": "{\n  \"purchaseOrderNumber\": \"9415698592\",\n  \"purchaseOrderDateTime\": null,\n  \"buyerName\": \"Thornwick Merchants Ltd\",\n  \"shipToInfo\": null,\n  \"paymentTerms\": null,\n  \"buyerCurrency\": null,\n  \"totalValue\": null,\n  \"lineItems\": [\n    {\n      \"purchaseOrderLineNumber\": \"1\",\n      \"buyerProductIdentifier\": \"169163\",\n      \"buyerProductName\": \"Corn rice cakes 150 g\",\n      \"buyerProductQuantity\": \"186\",\n      \"buyerProductUOM\": \"MT/WTO\",\n      \"quantityUnit\": \"UNKNOWN\",\n      \"buyerUnitPrice\": null,\n      \"buyerDeliveryDate\": \"2026-09-21\"\n    }\n  ]\n}",
+        "raw_http_body": "\n         \n{\"id\":\"gen-1792665922-oAyTp638Yqm6zOJtXjej\",\"object\":\"chat.completion\",\"created\":1792665922,\"model\":\"google/gemini-3.1-flash-lite\",\"provider\":\"Google AI Studio\",\"system_fingerprint\":null,\"service_tier\":\"default\",\"choices\":[{\"index\":0,\"logprobs\":null,\"finish_reason\":\"stop\",\"native_finish_reason\":\"STOP\",\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"purchaseOrderNumber\\\": \\\"9415698592\\\",\\n  \\\"purchaseOrderDateTime\\\": null,\\n  \\\"buyerName\\\": \\\"Thornwick Merchants Ltd\\\",\\n  \\\"shipToInfo\\\": null,\\n  \\\"paymentTerms\\\": null,\\n  \\\"buyerCurrency\\\": null,\\n  \\\"totalValue\\\": null,\\n  \\\"lineItems\\\": [\\n    {\\n      \\\"purchaseOrderLineNumber\\\": \\\"1\\\",\\n      \\\"buyerProductIdentifier\\\": \\\"169163\\\",\\n      \\\"buyerProductName\\\": \\\"Corn rice cakes 150 g\\\",\\n      \\\"buyerProductQuantity\\\": \\\"186\\\",\\n      \\\"buyerProductUOM\\\": \\\"MT/WTO\\\",\\n      \\\"quantityUnit\\\": \\\"UNKNOWN\\\",\\n      \\\"buyerUnitPrice\\\": null,\\n      \\\"buyerDeliveryDate\\\": \\\"2026-09-21\\\"\\n    }\\n  ]\\n}\",\"refusal\":null,\"reasoning\":null,\"reasoning_details\":[{\"type\":\"reasoning.encrypted\",\"data\":\"EnMKcQFpFH0TYtCiY6P8mQaFzGNtUJprvBgYhoxEWNHbkHPUUoAb1t1L0ps9xRZwDUcmiJqL/TF4AHTLkqLixhKNqsoKhMz191ZZ1c0OshXTgkFDZNBD20IuaODcxeYBTGGa37xdBxz0LOMJ5cj78fzbDpSe\",\"format\":\"google-gemini-v1\",\"index\":0}]}}],\"usage\":{\"prompt_tokens\":1149,\"completion_tokens\":196,\"total_tokens\":1345,\"cost\":0.00058125,\"is_byok\":false,\"prompt_tokens_details\":{\"cached_tokens\":0,\"cache_write_tokens\":0,\"audio_tokens\":0,\"video_tokens\":0},\"cost_details\":{\"upstream_inference_cost\":0.00058125,\"upstream_inference_prompt_cost\":0.00028725,\"upstream_inference_completions_cost\":0.000294},\"completion_tokens_details\":{\"reasoning_tokens\":0,\"image_tokens\":0,\"audio_tokens\":0}}}",
+        "reported_model": "google/gemini-3.1-flash-lite",
+        "serving_provider": "Google AI Studio",
+        "request_id": "gen-1792665922-oAyTp638Yqm6zOJtXjej",
+        "finish_reason": "stop",
+        "native_finish_reason": "STOP",
+        "refusal": null,
+        "error": null,
+        "duration_ms": 2175.241375999974,
+        "input_tokens": 1149,
+        "output_tokens": 196,
+        "cost_usd": 0.00058125,
+        "total_duration_ns": null,
+        "load_duration_ns": null,
+        "credentials_redacted": false
+      },
+      "failure": null,
+      "request_timeout_seconds": 1800.0,
+      "retry_delay_seconds": 0.0,
+      "budget_reservation_id": "144e7252841b4218864c5480a746662a",
+      "budget_reserved_usd": 0.268288,
+      "accounting_note": null
+    }
+  ],
+  "admissions": [
+    {
+      "method": "provider-enforced-context-full-ceiling-reservation",
+      "request_sha256": "a06fd704e910a32dddae9fa390745e09cebf5447ce1bd560176f504d7259025d",
+      "context_enforcement": "provider",
+      "counter_identity": null,
+      "prompt_token_bound": null,
+      "output_allowance": 4096,
+      "context_length": 1048576
+    }
+  ],
+  "reason": null
+}

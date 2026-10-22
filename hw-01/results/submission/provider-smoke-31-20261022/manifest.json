@@ -1,0 +1,144 @@
+{
+  "version": "run-manifest-v1",
+  "run_id": "provider-smoke-31-20261022",
+  "created_at": "2026-10-22T10:45:22.317367+00:00",
+  "stage": "smoke",
+  "state": "complete",
+  "experiment": {
+    "version": "experiment-v1",
+    "models": [
+      {
+        "id": "provider",
+        "backend": "openrouter",
+        "model": "google/gemini-3.1-flash-lite",
+        "serving_provider": "google-ai-studio"
+      },
+      {
+        "id": "local",
+        "backend": "ollama",
+        "model": "gemma4:e4b-it-qat",
+        "serving_provider": null
+      }
+    ],
+    "prompts": [
+      {
+        "id": "v1",
+        "file": "prompts/v1.txt"
+      }
+    ],
+    "sampling": [
+      {
+        "id": "baseline",
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "max_output_tokens": 4096
+      }
+    ],
+    "execution": {
+      "request_timeout_seconds": 1800.0,
+      "input_timeout_seconds": 7205.0,
+      "transport_retries": 1,
+      "api_budget_usd": 4.5,
+      "matrix_reserve_usd": 3.5,
+      "dependency_failure_limit": 3,
+      "backoff_initial_seconds": 1.0,
+      "backoff_max_seconds": 30.0
+    },
+    "selection": {
+      "model_id": "local",
+      "prompt_id": "v1",
+      "sampling_id": "baseline"
+    }
+  },
+  "schema_sha256": "efd06205171717bf69997007c36a0c85a66f55384042e79bda75df102be9bafb",
+  "jobs": [
+    {
+      "key": "05e84570ec18bd3a76c68fadc4ff2b199e2ebe0f2c4294c1f1ebade106b338fc",
+      "input_id": "B02-S030-PO01",
+      "model_id": "provider",
+      "prompt_id": "v1",
+      "sampling_id": "baseline",
+      "input_sha256": "2f26b05454e5ff7c95d46f69db9d129d2969f41bef80faad167d4dc06fe9062c",
+      "prompt_sha256": "ef5cf6c25a2623e73e5e85948321b304b1ce67f09b7caf0dfbc47fa26e666785",
+      "experiment_sha256": "59ae70356e4a856a2aaa57f71bc710ef943fb6f6ce890feb100a2c715bd2a5c6"
+    },
+    {
+      "key": "f50c06c232721eca9f09ec6536aee20bf6b8bdf896d40bc409126b103295a39f",
+      "input_id": "B02-S026-PO01",
+      "model_id": "provider",
+      "prompt_id": "v1",
+      "sampling_id": "baseline",
+      "input_sha256": "d6f288ae629d39873f46787261015611723f3dec894a94d475291cf907a71c3c",
+      "prompt_sha256": "ef5cf6c25a2623e73e5e85948321b304b1ce67f09b7caf0dfbc47fa26e666785",
+      "experiment_sha256": "59ae70356e4a856a2aaa57f71bc710ef943fb6f6ce890feb100a2c715bd2a5c6"
+    },
+    {
+      "key": "9a330c6bf5b4f95aa7479536123e36a0d94fd96a78233647884aa0f281326e2c",
+      "input_id": "B02-S008-PO01",
+      "model_id": "provider",
+      "prompt_id": "v1",
+      "sampling_id": "baseline",
+      "input_sha256": "bc4678f85b792f9fd022a680e8079aa8441016b22cfd1301c4623d34d049be1b",
+      "prompt_sha256": "ef5cf6c25a2623e73e5e85948321b304b1ce67f09b7caf0dfbc47fa26e666785",
+      "experiment_sha256": "59ae70356e4a856a2aaa57f71bc710ef943fb6f6ce890feb100a2c715bd2a5c6"
+    }
+  ],
+  "records": {
+    "05e84570ec18bd3a76c68fadc4ff2b199e2ebe0f2c4294c1f1ebade106b338fc": "records/05e84570ec18bd3a76c68fadc4ff2b199e2ebe0f2c4294c1f1ebade106b338fc.json",
+    "f50c06c232721eca9f09ec6536aee20bf6b8bdf896d40bc409126b103295a39f": "records/f50c06c232721eca9f09ec6536aee20bf6b8bdf896d40bc409126b103295a39f.json",
+    "9a330c6bf5b4f95aa7479536123e36a0d94fd96a78233647884aa0f281326e2c": "records/9a330c6bf5b4f95aa7479536123e36a0d94fd96a78233647884aa0f281326e2c.json"
+  },
+  "record_sha256": {
+    "05e84570ec18bd3a76c68fadc4ff2b199e2ebe0f2c4294c1f1ebade106b338fc": "2d8a6266fa9f94be60869757fdb69ea00fbd1e0fa8e8f5cf6e2047f6ca76c139",
+    "f50c06c232721eca9f09ec6536aee20bf6b8bdf896d40bc409126b103295a39f": "d4a8c7f7adaf77aec3e0e8296646a2a55fa1a8fbd733718255bdaf035e4bbb67",
+    "9a330c6bf5b4f95aa7479536123e36a0d94fd96a78233647884aa0f281326e2c": "9cf9ae73f4e77c0fdfe523f2722df3733cf7efa217c77225b93410b857ee02fc"
+  },
+  "checkpoint_sha256": {
+    "05e84570ec18bd3a76c68fadc4ff2b199e2ebe0f2c4294c1f1ebade106b338fc": "514fec1c05bd7f2ecc56f1b233e14b43c7d819a558280d1a34f7bbd1d383e882",
+    "f50c06c232721eca9f09ec6536aee20bf6b8bdf896d40bc409126b103295a39f": "926c992e296c6cd61c77b1602fbb4eb40c195b282680b88aa51f80e5bdb00262",
+    "9a330c6bf5b4f95aa7479536123e36a0d94fd96a78233647884aa0f281326e2c": "932d5a9f7ee7e895c2d4886ce85ac1756739ad9103abfdd24d2f362f30079c4b"
+  },
+  "summary": {
+    "execution": {
+      "request_timeout_seconds": 1800.0,
+      "input_timeout_seconds": 7205.0,
+      "transport_retries": 1,
+      "api_budget_usd": 4.5,
+      "matrix_reserve_usd": 3.5,
+      "dependency_failure_limit": 3,
+      "backoff_initial_seconds": 1.0,
+      "backoff_max_seconds": 30.0
+    },
+    "succeeded": 2,
+    "failed": 1,
+    "not_attempted": 0,
+    "comparison_complete": true,
+    "dependency_stops": [],
+    "budget_stops": []
+  },
+  "error": null,
+  "setup": {
+    "provider": {
+      "pricing": {
+        "dependency": {
+          "runtime": "openrouter",
+          "endpoint": "https://openrouter.ai/api/v1/",
+          "model_name": "google/gemini-3.1-flash-lite",
+          "serving_provider": "google-ai-studio",
+          "runtime_version": null,
+          "model_digest": null
+        },
+        "input_token_ceiling": 1048576,
+        "output_token_ceiling": 4096,
+        "input_usd_per_token": "2.5E-7",
+        "output_usd_per_token": "0.0000015",
+        "request_usd": "0",
+        "evidence": "Public route catalog verified 2026-10-22T10:40:00.662184+00:00; Gemini 3.1 Flash-Lite Google AI Studio standard/default text tier: input $0.25/M, output including thinking $1.50/M, request $0; context 1048576, max_tokens 4096 includes thinking+output; no tools or paid plugins. https://openrouter.ai/api/v1/models/google/gemini-3.1-flash-lite/endpoints; https://ai.google.dev/gemini-api/docs/generate-content/thinking; https://openrouter.ai/docs/guides/features/service-tiers"
+      },
+      "context_length": 1048576,
+      "context_enforcement": "provider",
+      "request_token_bounds": {},
+      "evidence": "User approved provider-enforced context policy for 6.6.6 smoke on 2026-10-22. No complete-request local token bound claimed. Full source/schema preserved; explicit context-compression disabled; exact route, no fallback, default tier. Oversize context must be rejected by provider. https://openrouter.ai/docs/guides/features/message-transforms"
+    }
+  }
+}

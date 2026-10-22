@@ -25,6 +25,7 @@ class RunOptions(StrictModel):
     input_ids: list[str] = Field(default_factory=list)
     stage: ExecutionStage = ExecutionStage.MATRIX
     allow_provider: bool = False
+    allow_server_context: bool = False
     coverage_file: str | None = None
 
 

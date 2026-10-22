@@ -122,7 +122,7 @@ exhaust it before every possible retry. These are bounded starting limits,
 not a promise of completion or a measured throughput estimate. Runs save the
 resolved configuration/hash; do not silently extend limits after a failure.
 
-### Provider admission is fail-closed
+### Provider admission policies
 
 OpenRouter catalog metadata establishes route/parameter support, **not an exact
 Gemini tokenizer or complete request-token count**. The application accepts an
@@ -131,11 +131,9 @@ certificate must come from a verified, non-generating provider count/bound,
 covering the entire actual schema/messages/template. A byte/character heuristic
 or a paid probe is not a certificate. An uncertified correction is rejected.
 
-No live coverage file is supplied or claimed verified. `plan-run` prints initial
-request fingerprints; timeout changes do not change the fingerprint. A future
-automated provider counter can implement the existing `RequestAdmission`
-protocol without changing adapters or the coordinator. Until verified provider
-counting is available, provider live acceptance remains pending.
+This counted policy remains the default. `plan-run` prints initial request
+fingerprints; timeout changes do not change the fingerprint. An uncertified
+request is never automatically switched to another policy.
 
 The 21 October check of Google's official
 [local-tokenizer model mapping](https://github.com/googleapis/python-genai/blob/main/google/genai/_local_tokenizer_loader.py)
@@ -144,7 +142,27 @@ did not list Gemini 3.8 Flash. Google's documented
 but requires Google API configuration and verification that its counted request
 covers OpenRouter's upstream schema/message transformation. No extra credentials
 were assumed, no Gemini tokenizer was substituted, and no provider count or
-generation was sent while implementing this gate.
+generation was sent while implementing this gate. The current cheaper smoke
+candidate is Gemini 3.1 Flash-Lite; its public tokenizer diagnostic is described
+in [provider smoke preparation](provider-smoke-preparation.md). Local string
+counts do not certify OpenRouter's complete upstream request.
+
+On 22 October the user approved an explicit **provider-enforced context policy
+for smoke only**. Coverage with `context_enforcement: "provider"` requires
+`--allow-server-context` and the smoke stage; it does not require a Google key.
+The application checks the advertised route context against the coverage and
+reserves its full input ceiling plus the configured output allowance before
+each physical request. Input pricing coverage below that context is rejected.
+
+The adapter preserves complete messages/schema, disables the
+[context-compression plugin](https://openrouter.ai/docs/guides/features/message-transforms)
+explicitly, pins the [default service tier](https://openrouter.ai/docs/guides/features/service-tiers)
+and disables route fallback. Oversized requests rely on provider rejection;
+**there is no verified local fit claim**. Checkpoints record policy `provider`
+with null `prompt_token_bound` and `counter_identity`. Actual corrections pass
+the same reservation/admission path. Context errors and unknown charges remain
+visible in attempts and accounting. Provider live acceptance still requires
+human approval of the final paid invocation.
 
 ## Explicit paid execution
 
@@ -171,9 +189,12 @@ Provider coverage JSON is a mapping from configured model ID to:
   serving dependency, verified input/output ceilings, decimal string rates,
   fixed request fee, and dated billing evidence covering applicable tiers.
 - `context_length`: verified route context limit.
+- `context_enforcement`: `counted` (default) or the explicitly approved
+  smoke-only `provider` policy.
 - `request_token_bounds`: mapping of exact request SHA-256 to verified positive
-  prompt bounds, including any actual corrections that will be admitted.
-- `evidence`: the non-generating counting source, date and assumptions.
+  prompt bounds in counted mode, including actual corrections. Empty in
+  provider mode, which must not claim such certificates.
+- `evidence`: dated counting evidence or provider context policy/limit evidence.
 
 Keep operator coverage under the persistent `results/` volume (for example
 `results/provider-coverage.json`), outside image build contexts and Git. Never
@@ -185,6 +206,9 @@ make hw01-plan-run ARGS='--stage smoke --model provider --input B02-S030-PO01 --
 # Only AFTER counting/pricing evidence, explicit accounting and human approval:
 make hw01-smoke MODE=provider ARGS='--model provider --coverage results/provider-coverage.json --allow-provider --run-id provider-smoke'
 ```
+
+For approved provider-enforced smoke coverage, add `--allow-server-context` to
+both planning and execution. This flag does not authorize paid execution.
 
 Planning makes no HTTP calls. Compatible coverage must match the selected
 provider model/runtime/serving route and cover the requested output allowance;
@@ -247,11 +271,17 @@ interruption with an unresolved paid reservation, accounting and client cleanup.
 
 The real three-document extraction smoke is selected through Make, not a live
 pytest fixture. No live marker/fixture is introduced. Local readiness alone
-does not complete this acceptance. Provider inference remains pending until its
-verified counting/pricing, accounting declaration and human approval exist.
-The full 6.6 acceptance is not passed merely because offline tests pass.
+does not complete this acceptance. The [22 October provider smoke](provider-runtime-verification.md)
+now completes 6.6.6 alongside native local acceptance: both used the same three
+inputs/v1/baseline, saved two valid outputs plus one truncation and passed export
+verification. Provider spend was $0.01518250. Further paid execution needs a new
+approved invocation. Offline tests alone do not establish live acceptance.
 
 The [21 October smoke record](extraction-smoke.md) documents the user-stopped
 local run: two saved valid outputs and one unfinished request. The final offline
 Docker gate passed 566 tests. Neither the three-document local acceptance nor
-provider live acceptance is complete; no automatic resume is scheduled.
+provider live acceptance is complete in that historical run; no automatic
+resume is scheduled. The later [native smoke](native-runtime-verification.md)
+supplies local acceptance with two valid results and one retained truncation.
+The [provider preparation](provider-smoke-preparation.md) records the policy,
+pricing and approval leading to the separately retained provider smoke.
