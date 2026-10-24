@@ -359,6 +359,12 @@ variable responses justify keeping this layer small.
 
 ## Model quality evaluation
 
+The revised matrix budget/profile implementation passed **684 offline tests**.
+See [audited revisions](budget-revisions.md) for coverage of cap administration,
+backups, retained holds, failure recovery, concurrency, compatible historical
+aggregation and high-context native initial/correction controls. No provider
+inference is used by these regressions.
+
 The [7.2 matrix preparation](matrix-experiment.md) initially passed **659 offline tests**.
 The explicit thinking-control extension subsequently passed **672 tests**,
 including phase reuse and 12 thinking-control regressions: initial/correction

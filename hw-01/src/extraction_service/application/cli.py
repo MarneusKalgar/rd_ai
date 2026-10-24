@@ -30,6 +30,7 @@ COMMANDS: Final[frozenset[str]] = frozenset(
         "plan-run",
         "budget-init",
         "budget-show",
+        "budget-raise",
         "export-run",
         "verify-export",
         "evaluate",
@@ -69,12 +70,16 @@ def add_commands(commands: argparse._SubParsersAction[argparse.ArgumentParser]) 
             help="Approved stage coverage: accept provider-enforced context limits",
         )
 
-    for name in ("budget-init", "budget-show"):
+    for name in ("budget-init", "budget-show", "budget-raise"):
         parser = commands.add_parser(name, help="Explicit cumulative budget administration")
         parser.add_argument("--config", default=DEFAULT_EXPERIMENT_FILE)
 
         if name == "budget-init":
             parser.add_argument("--opening-spend", required=True, type=Decimal)
+            parser.add_argument("--evidence", required=True)
+
+        if name == "budget-raise":
+            parser.add_argument("--expected-budget", required=True, type=Decimal)
             parser.add_argument("--evidence", required=True)
 
     for name in ("export-run", "verify-export"):
@@ -83,6 +88,7 @@ def add_commands(commands: argparse._SubParsersAction[argparse.ArgumentParser]) 
 
     evaluation = commands.add_parser("evaluate", help="Score saved terminal runs offline")
     evaluation.add_argument("run_ids", nargs="+")
+    evaluation.add_argument("--allow-budget-revision", action="store_true")
 
 
 def _options(args: argparse.Namespace) -> RunOptions:
@@ -124,7 +130,9 @@ def dispatch(args: argparse.Namespace) -> int:
     project_dir = args.project_dir
 
     if args.command == "evaluate":
-        report = evaluate_runs(project_dir, args.run_ids)
+        report = evaluate_runs(
+            project_dir, args.run_ids, allow_budget_revision=args.allow_budget_revision
+        )
         print(json.dumps(report, indent=2))
 
         return ExitStatus.SUCCESS
@@ -145,12 +153,15 @@ def dispatch(args: argparse.Namespace) -> int:
 
         return status
 
-    if args.command in ("budget-init", "budget-show"):
+    if args.command in ("budget-init", "budget-show", "budget-raise"):
         config = load_experiment(artifact_path(project_dir, args.config))
         ledger = BudgetLedger(project_dir, config.execution)
 
         if args.command == "budget-init":
             ledger.initialize(opening_spend_usd=args.opening_spend, evidence=args.evidence)
+
+        if args.command == "budget-raise":
+            ledger.raise_cap(expected_budget_usd=args.expected_budget, evidence=args.evidence)
 
         snapshot = ledger.snapshot()
         print(
@@ -160,6 +171,9 @@ def dispatch(args: argparse.Namespace) -> int:
                     "budget_usd": str(snapshot.budget_usd),
                     "protected_matrix_usd": str(snapshot.protected_matrix_usd),
                     "reservations": len(snapshot.reservations),
+                    "policy_revisions": [
+                        revision.model_dump(mode="json") for revision in snapshot.policy_revisions
+                    ],
                 }
             )
         )

@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
@@ -10,6 +11,7 @@ from extraction_service.application.selection import RunOptions
 from extraction_service.corpus.loading import load_corpus
 from extraction_service.evaluation.metrics import operational_metrics
 from extraction_service.evaluation.scoring import FieldScore, combine_scores, score_extraction
+from extraction_service.execution.budget.ledger import BudgetSnapshot
 from extraction_service.records import RunRecord
 
 
@@ -53,7 +55,36 @@ def _variant(record: RunRecord, execution: dict[str, Any], setup: dict[str, Any]
     }
 
 
-def evaluate_runs(project_dir: Path, run_ids: list[str]) -> dict[str, Any]:
+def _budget_revision(project_dir: Path) -> BudgetSnapshot:
+    """Require durable cap-raise evidence before normalizing historical budget caps."""
+
+    directory = project_dir / "results"
+    snapshot = BudgetSnapshot.model_validate_json((directory / "budget-ledger.json").read_bytes())
+
+    if not snapshot.policy_revisions:
+        raise ValueError("Budget revision aggregation requires an audited cap raise")
+
+    for revision in snapshot.policy_revisions:
+        path = directory / "budget-policy" / f"{revision.previous_sha256}.json"
+        original = path.read_bytes()
+
+        if hashlib.sha256(original).hexdigest() != revision.previous_sha256:
+            raise ValueError("Budget revision backup hash differs")
+
+        previous = BudgetSnapshot.model_validate_json(original)
+
+        if (
+            previous.budget_usd != revision.previous_budget_usd
+            or previous.matrix_reserve_usd != snapshot.matrix_reserve_usd
+        ):
+            raise ValueError("Budget revision backup policy differs")
+
+    return snapshot
+
+
+def evaluate_runs(
+    project_dir: Path, run_ids: list[str], *, allow_budget_revision: bool = False
+) -> dict[str, Any]:
     """Evaluate saved terminal runs without inference or rewriting original evidence.
 
     Reject overlapping observations, current-corpus mismatches and unfinished
@@ -69,6 +100,12 @@ def evaluate_runs(project_dir: Path, run_ids: list[str]) -> dict[str, Any]:
     grouped: dict[str, list[RunRecord]] = {}
     identities: dict[str, dict[str, Any]] = {}
     runs = []
+    budget = _budget_revision(project_dir) if allow_budget_revision else None
+    authorized_caps: set[Decimal] = set()
+
+    if budget is not None:
+        authorized_caps.add(budget.budget_usd)
+        authorized_caps.update(revision.previous_budget_usd for revision in budget.policy_revisions)
 
     for run_id in run_ids:
         RunOptions(run_id=run_id)
@@ -78,16 +115,29 @@ def evaluate_runs(project_dir: Path, run_ids: list[str]) -> dict[str, Any]:
         if manifest.state not in (RunState.COMPLETE, RunState.INCOMPLETE):
             raise ValueError("Evaluation requires terminal records for every selected job")
 
-        runs.append(
-            {
-                "run_id": run_id,
-                "state": manifest.state.value,
-                "manifest_sha256": hashlib.sha256(
-                    (directory / "manifest.json").read_bytes()
-                ).hexdigest(),
-                "experiment_sha256": sorted({record.experiment_sha256 for record in records}),
-            }
-        )
+        run_evidence: dict[str, Any] = {
+            "run_id": run_id,
+            "state": manifest.state.value,
+            "manifest_sha256": hashlib.sha256(
+                (directory / "manifest.json").read_bytes()
+            ).hexdigest(),
+            "experiment_sha256": sorted({record.experiment_sha256 for record in records}),
+        }
+        execution: dict[str, Any] = manifest.experiment.execution.model_dump()
+
+        if budget is not None:
+            if (
+                Decimal(str(execution["api_budget_usd"])) not in authorized_caps
+                or Decimal(str(execution["matrix_reserve_usd"])) != budget.matrix_reserve_usd
+            ):
+                raise ValueError("Run budget policy is outside the audited revision")
+
+            run_evidence["original_execution_policy"] = dict(execution)
+            # Only the administrative cap is normalized. All generation,
+            # deadline, retry, reserve and context controls remain in the key.
+            execution.pop("api_budget_usd")
+
+        runs.append(run_evidence)
 
         for record in records:
             source = sources.get(record.input_id)
@@ -100,7 +150,7 @@ def evaluate_runs(project_dir: Path, run_ids: list[str]) -> dict[str, Any]:
 
             descriptor = _variant(
                 record,
-                manifest.experiment.execution.model_dump(),
+                execution,
                 manifest.setup.get(record.model_id, {}),
             )
             key = hashlib.sha256(json.dumps(descriptor, sort_keys=True).encode()).hexdigest()
@@ -178,7 +228,7 @@ def evaluate_runs(project_dir: Path, run_ids: list[str]) -> dict[str, Any]:
             }
         )
 
-    return {
+    report: dict[str, Any] = {
         "version": "evaluation-v1",
         "corpus": corpus.version,
         "runs": runs,
@@ -188,3 +238,10 @@ def evaluate_runs(project_dir: Path, run_ids: list[str]) -> dict[str, Any]:
             "Gold cases used for screening/tuning are development data, not a held-out test."
         ),
     }
+
+    if budget is not None:
+        report["budget_policy_revisions"] = [
+            revision.model_dump(mode="json") for revision in budget.policy_revisions
+        ]
+
+    return report

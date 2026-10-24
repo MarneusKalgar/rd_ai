@@ -14,7 +14,7 @@ from extraction_service.runtime_types import (
 )
 
 MAX_TRANSPORT_RETRIES: Final[int] = 5
-ASSIGNMENT_API_CAP_USD: Final[float] = 5.0
+MAX_EXPERIMENT_BUDGET_USD: Final[float] = 10.0
 
 
 class ModelConfig(StrictModel):
@@ -61,7 +61,7 @@ class ExecutionConfig(StrictModel):
     request_timeout_seconds: PositiveFloat
     input_timeout_seconds: PositiveFloat
     transport_retries: Annotated[int, Field(ge=0, le=MAX_TRANSPORT_RETRIES)]
-    api_budget_usd: Annotated[float, Field(gt=0, lt=ASSIGNMENT_API_CAP_USD)]
+    api_budget_usd: Annotated[float, Field(gt=0, le=MAX_EXPERIMENT_BUDGET_USD)]
     matrix_reserve_usd: NonNegativeFloat = 0.0
     dependency_failure_limit: PositiveInt = 3
     backoff_initial_seconds: PositiveFloat = 1.0

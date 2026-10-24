@@ -1,9 +1,11 @@
 """Locked, durable homework-wide reservations across models and invocations."""
 
 import fcntl
+import hashlib
 import os
 from collections.abc import Generator
 from contextlib import ExitStack, contextmanager
+from datetime import UTC, datetime
 from decimal import Decimal
 from enum import StrEnum
 from pathlib import Path
@@ -11,12 +13,12 @@ from tempfile import NamedTemporaryFile
 from typing import Literal, Self
 from uuid import uuid4
 
-from pydantic import ValidationError, model_validator
+from pydantic import Field, ValidationError, model_validator
 
-from extraction_service.configuration.models import ASSIGNMENT_API_CAP_USD, ExecutionConfig
+from extraction_service.configuration.models import MAX_EXPERIMENT_BUDGET_USD, ExecutionConfig
 from extraction_service.execution.budget.pricing import Money
 from extraction_service.record_types import ExecutionStage
-from extraction_service.runtime_types import Identifier, NonEmptyText, StrictModel
+from extraction_service.runtime_types import Identifier, NonEmptyText, Sha256, StrictModel
 
 
 class BudgetStopReason(StrEnum):
@@ -60,6 +62,16 @@ class Reservation(StrictModel):
         return self
 
 
+class BudgetRevision(StrictModel):
+    """User-authorized cap raise backed by the exact previous ledger bytes."""
+
+    previous_budget_usd: Money
+    budget_usd: Money
+    previous_sha256: Sha256
+    evidence: NonEmptyText
+    observed_at: str
+
+
 class BudgetSnapshot(StrictModel):
     """Persisted policy and reservations; totals are derived from original entries."""
 
@@ -69,11 +81,12 @@ class BudgetSnapshot(StrictModel):
     opening_spend_usd: Money
     opening_evidence: NonEmptyText
     reservations: list[Reservation]
+    policy_revisions: list[BudgetRevision] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def check_policy(self) -> Self:
-        if not Decimal("0") < self.budget_usd < Decimal(str(ASSIGNMENT_API_CAP_USD)):
-            raise ValueError("Ledger budget must stay below the assignment cap")
+        if not Decimal("0") < self.budget_usd <= Decimal(str(MAX_EXPERIMENT_BUDGET_USD)):
+            raise ValueError("Ledger budget exceeds the experiment ceiling")
 
         if self.matrix_reserve_usd >= self.budget_usd:
             raise ValueError("Ledger matrix reserve must stay below its budget")
@@ -82,6 +95,20 @@ class BudgetSnapshot(StrictModel):
 
         if len(identifiers) != len(set(identifiers)):
             raise ValueError("Duplicate reservation identity")
+
+        previous = None
+
+        for revision in self.policy_revisions:
+            if not Decimal("0") < revision.previous_budget_usd < revision.budget_usd:
+                raise ValueError("Budget revision must increase a positive cap")
+
+            if previous is not None and revision.previous_budget_usd != previous:
+                raise ValueError("Budget revision chain is discontinuous")
+
+            previous = revision.budget_usd
+
+        if previous is not None and previous != self.budget_usd:
+            raise ValueError("Budget revisions do not match the current cap")
 
         return self
 
@@ -160,6 +187,70 @@ class BudgetLedger:
             raise BudgetStop(BudgetStopReason.UNAVAILABLE)
 
         return snapshot
+
+    def raise_cap(self, *, expected_budget_usd: Decimal, evidence: str) -> BudgetSnapshot:
+        """Raise to the configured cap explicitly, retaining charges and an audited backup.
+
+        A missing/corrupt ledger is never initialized. A completed raise cannot
+        be replayed; a failed atomic replacement can retry against its same backup.
+        """
+
+        with self._locked():
+            try:
+                original = self.path.read_bytes()
+                snapshot = BudgetSnapshot.model_validate_json(original)
+            except OSError, ValidationError:
+                raise BudgetStop(BudgetStopReason.UNAVAILABLE) from None
+
+            new_budget = Decimal(str(self.policy.api_budget_usd))
+
+            if snapshot.budget_usd != expected_budget_usd:
+                raise ValueError("Ledger cap differs from the expected previous cap")
+
+            if new_budget <= snapshot.budget_usd:
+                raise ValueError("New budget must strictly increase the current cap")
+
+            if snapshot.matrix_reserve_usd != Decimal(str(self.policy.matrix_reserve_usd)):
+                raise ValueError("A cap raise cannot change the matrix reserve")
+
+            digest = hashlib.sha256(original).hexdigest()
+            revision = BudgetRevision(
+                previous_budget_usd=snapshot.budget_usd,
+                budget_usd=new_budget,
+                previous_sha256=digest,
+                evidence=evidence,
+                observed_at=datetime.now(UTC).isoformat(),
+            )
+            updated = BudgetSnapshot.model_validate(
+                {
+                    **snapshot.model_dump(),
+                    "budget_usd": new_budget,
+                    "policy_revisions": [*snapshot.policy_revisions, revision],
+                }
+            )
+            directory = self.path.parent / "budget-policy"
+            directory.mkdir(exist_ok=True)
+            backup = directory / f"{digest}.json"
+
+            if backup.exists():
+                if backup.read_bytes() != original:
+                    raise ValueError("Budget policy backup differs from its expected hash")
+            else:
+                with backup.open("xb") as output:
+                    output.write(original)
+                    output.flush()
+                    os.fsync(output.fileno())
+
+            descriptor = os.open(directory, os.O_RDONLY)
+
+            try:
+                os.fsync(descriptor)
+            finally:
+                os.close(descriptor)
+
+            self._write(updated)
+
+            return updated
 
     def _write(self, snapshot: BudgetSnapshot) -> None:
         temporary_path: Path | None = None

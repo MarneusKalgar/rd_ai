@@ -1,80 +1,261 @@
-# Required provider/local matrix — plan 7.2
+# Revised required provider/local matrix (7.2)
 
-## Latest status after the stronger-model diagnostic
+## Execution update — 23 October 2026
 
-**Latest follow-up:** the separately approved stronger Flash gold10 run at
-16,384 is complete: 10/10 valid, no truncations, 278/342 (81.29%) field accuracy,
-one exact document and no extra/missing rows. The entire gain over its 8,192
-run is S040 completion. S040 used only 6,260 tokens this time, so reasoning
-variability prevents claiming a necessary token threshold. No further allowance
-increase is needed for this diagnostic. See the
-[full comparison](stronger-model-experiment.md).
-After its $0.32986350 cost, cumulative accounted spend is $1.77332305,
-including unchanged $0.50135040 earlier holds. Current remaining allowance is
-$2.72667695, including $2.32384295 protected matrix funds. Required matrix
-profiles remain unchanged; no v2 inference or additional paid run is approved.
+**Review gate:** finish and verify the revised v1 baselines, then stop for the
+user to review the results. Do not create, freeze or run v2, or run exploratory
+sampling, before that review and further user direction.
 
-**Follow-up update:** the separately approved 8,192-token comparison on the
-same gold10 is complete: Flash-Lite 18.20%, Flash 59.94%, nine valid outputs
-each; both truncated S040. The diagnostic cost $0.39944890. Current cumulative
-accounted spend is $1.44345955, including the unchanged $0.50135040 prior holds;
-$3.05654045 remains, including $2.65370645 protected matrix funds. The result
-and its extra-row/output-budget interpretation are retained in the
-[diagnostic report](stronger-model-experiment.md). The selected required matrix
-profiles remain unchanged pending a scope decision; no v2 inference has run.
+**Provider v1 baseline complete and verified:** the approved continuation
+`matrix-provider-v1-baseline-remaining-20261023-72` saved 20/20 valid outputs,
+one call each, no retry/correction or dependency/budget stop. Combined with
+`flash-v1-gold-16384-20261022`, it forms exactly 30 unique baseline inputs,
+30/30 valid, gold **278/342 (81.29%)**, one exact document and no extra/missing
+gold rows. The unchanged gold score is reused evidence, not a second gold run.
 
-Both required v1/baseline runs are complete, including the native thinking=false
-rebaseline (21/30 valid, nine truncations, 17.24% gold field accuracy). The
-thinking-enabled native run remains diagnostic. V2 and exploratory sampling
-have been drafted after baseline review; neither has been run. The updated
-offline gate passed 672 tests, lint/format, types, gold validation and preflight.
+Across all30, p50/p95 input latency is **11.983 / 33.568 seconds** and known
+API cost **$1.20499515** (saved gold10 $0.32986350 plus new20 $0.87513165).
+All new charges settled; no new unknown holds. Cumulative accounted spend is
+now **$2.64845470**, including unchanged prior holds of **$0.50135040**.
+Remaining allowance is **$7.35154530**, including **$1.44871130** protected
+matrix funds. These supersede the preparation balances below.
 
-At the user's request, remaining variants were deferred for a separately
-approved [Flash gold-set diagnostic](stronger-model-experiment.md), now complete
-and excluded from required matrix membership. Flash scored 33.52% against
-Lite's 40.15% under v1/4,096 tokens, with reasoning-heavy truncations. Flash-Lite
-remains the selected provider; no further paid invocation is approved.
+The continuation's separate evaluation bundle aggregates both source runs
+with explicit audited-budget revision handling; all source hashes/policies
+remain visible. It is saved under
+`results/submission/matrix-provider-v1-baseline-remaining-20261023-72-evaluation/`.
+The raw continuation is saved separately beside it; the original gold10 bundle
+is unchanged. Native continuation is also complete and verified: 28/29 new
+outputs valid; combined with saved S008, **29/30 valid**, gold **164/3,494
+(4.69%)**, 394 extra gold line items and zero exact gold documents. S033
+truncated at 16,384 output tokens. The model was unloaded and residency checked.
+See [both revised v1 baselines](revised-v1-baseline-results.md) for the scoring
+denominator, latency, source memberships and exports. Stop for user review;
+no v2 or exploratory work and no additional paid invocation are approved.
 
-After the diagnostic's $0.29324205 settled cost, cumulative accounted spend is
-$1.04401065 (including $0.50135040 of earlier unknown-charge holds). Remaining
-total allowance is $3.45598935; protected matrix funds are $3.05315535. Historical
-phase-opening balances below are retained as history, not current availability.
-The remaining required matrix still contains 180 primary requests.
+The [audited budget revision](budget-revisions.md) and explicit budget-policy
+aggregation compatibility are implemented. The full offline gate passed
+**684 tests**, lint/format/types, gold validation and preflight. The real cap
+raise to $10 preserved all 105 prior reservations, opening evidence, matrix
+reserve and unknown holds; accounted spend remained $1.77332305.
 
-## Scope and phase boundaries
+The active revised entrypoint is **`config/matrix.yaml`**, retaining the original
+configurations and uncommitted v2 work. It registers v1 only with both 16,384
+sampling settings; no v2 is selected until baseline review. Native invocations
+use `HW01_CONTEXT_LENGTH=49152` explicitly. Budget commands must use this
+configuration to match the migrated ledger.
 
-The matrix uses all 30 frozen neutral inputs for each of eight variants:
-selected provider/local × v1/v2 × two sampling settings. That is **240 primary
-requests**, plus bounded corrections/retries. Factual accuracy is scored on the
-10 approved gold cases; all 30 contribute operational metrics. Gold cases used
-for screening and prompt development are development data.
+Fresh route/native metadata verifies the 11 reusable observations. An explicit
+240-entry membership inventory and exact remaining-input schedules are retained
+in `results/submission/matrix-revised-preparation-20261023/`. All 29 remaining
+native initial requests passed render-only admission without generation probes.
+Actual corrections still require separate admission.
 
-The selected provider is Gemini 3.5 Flash-Lite through `google-ai-studio`.
-The selected local deployment is the existing native Ollama desktop server with
-`gemma4:e4b-it-qat`, the pinned digest and a 32,768-token effective context.
-Python and evidence handling remain in Docker. Docker CPU results remain a
-separate compatibility/runtime comparison.
+Both terminal continuations retain unique run/configuration identities and
+verified exports. The checked 240-entry inventory now records 60 covered v1
+baseline observations and 180 unexecuted observations behind the user review
+gate. No exploratory or v2 inference has started. The full 7.2 matrix is not
+complete; only its revised v1 baseline phase is complete.
 
-1. **Full-corpus baseline:** run unchanged v1/baseline on both models, 30 inputs
-   each, with temperature 0, top_p 1 and 4,096 output tokens. Preserve the resolved
-   configuration, prompt/schema/input hashes, runtime identities and admissions.
-2. **Review:** evaluate both saved baseline runs and inspect failures and
-   representative outputs. A schema failure/truncation is a measured outcome;
-   a stopped run with untouched inputs is an incomplete phase. Do not create v2
-   until both baseline runs have completed and their evidence has been reviewed.
-3. **Remaining variants:** freeze v2 and a second explicit sampling setting,
-   then run v1/second-sampling and v2/both-sampling on both models over all 30
-   inputs: 180 additional primary requests. Keep matched execution/output limits.
-4. **Aggregate:** retain the baseline's 60 observations once, with their original
-   run/configuration hashes. Use the shared evaluator; do not pool overlapping
-   observations, screening or smoke records into a matrix variant.
+The design specification below records the rationale and implementation gates;
+its earlier pending-migration descriptions are superseded by this update.
 
-No v2 or second sampling setting is introduced before the baseline review.
-No output limit, frozen data/schema/gold or scoring rule is changed to improve
-this baseline's score. See [the accepted provider selection](provider-screening-results.md)
-and [evaluation rules](evaluation.md).
+**Revised plan — 22 October 2026; in progress, authorized budget migration pending.** The user requested this revision after the v1 model/output/context diagnostics, then increased the experiment budget to **$10**, showing the OpenRouter lifetime limit. The target comparison remains all 30 approved inputs × two models × v1/v2 × two sampling settings: **240 primary observations**, including failures. The new target uses stronger Gemini 3.5 Flash and native Gemma with sufficient output capacity. This supersedes the original Flash-Lite/4,096 required-matrix profile prospectively; preserve the original complete baselines and every diagnostic unchanged. Updating the plan does not execute inference, change the live configuration/ledger, or approve a paid invocation.
 
-## Provider context and spending
+## Evidence and target execution profiles
+
+- Original full-corpus v1/baseline: Flash-Lite at 4,096 produced 25/30 valid and 40.15% gold field accuracy; native Gemma with thinking=false produced 21/30 valid and 17.24%. The earlier thinking-enabled Gemma run remains a separate diagnostic. These are budget-constrained historical baselines, not members of the revised matrix.
+- Stronger Flash gold10 at 4,096 / 8,192 / 16,384 scored 33.52% / 59.94% / 81.29%; validity 8/10 / 9/10 / 10/10. At 16,384 there were no extra/missing lines and one exact document. S040 completed at only 6,260 actual tokens, so single-run reasoning variability prevents claiming a necessary 16,384-token threshold. Flash-Lite at 8,192 still overselected catalog rows; more output capacity alone is not a quality fix.
+- Native S008 at 49,152 context / 16,384 output / thinking=false completed schema-valid JSON in 519.550 seconds, using 15,592 output tokens. It returned 207 rows, 194 with null quantities. S008 is unlabeled; no factual accuracy is claimed. The model was unloaded after verification. See [native large-context diagnostic](native-large-context.md).
+- The committed v1 runtime/evidence is `e1ed2a3`; its isolated v1-only snapshot passed **672 tests**, lint/format, strict types, gold validation and preflight. The v2 prompt, registration, exploratory sampling and their fixture changes remain uncommitted. No v2 or exploratory inference has run. See [baseline review](matrix-baseline-review.md), [Flash diagnostics](stronger-model-experiment.md).
+
+| Control | Revised provider target | Revised local target |
+| --- | --- | --- |
+| Model / evidence ID | `google/gemini-3.5-flash` / `provider-flash` | Pinned `gemma4:e4b-it-qat` / `local` |
+| Deployment | OpenRouter, only `google-ai-studio`, no fallback/compression | Existing native desktop Ollama, no Docker Ollama |
+| Output allowance | 16,384 including any provider reasoning | 16,384, explicit thinking=false |
+| Context | Refresh provider route's advertised limit; accepted matrix admission policy | 49,152 effective loaded context, checked per actual request |
+| Baseline sampling | `baseline-16384`: temperature 0, top_p 1 | Same ID and values |
+| Second sampling | `exploratory-16384`: temperature 0.2, top_p 0.9 | Same ID and values |
+
+Preserve v1 bytes, authoritative schema, approved corpus/gold, shared parsing/scoring and retry/correction/deadline policy. Apply the separately authorized $10 cumulative experiment ceiling only through the audited migration below; the runtime still enforces $4.50 until that work completes. Freeze the effective local runtime/digest/tokenizer/context/thinking profile across matched variants and record provider-reported identities/reasoning usage. Recheck the installed runtime before continuing; do not silently pool runtime updates. Explicit thinking controls differ between deployments and must be disclosed. A common allowance is not identical final-answer capacity or tokenization across models.
+
+The main experiment configuration still contains the historical provider/output settings. Implement and verify the revised profile in a subsequent execution task; keep the existing standalone diagnostic configurations as original evidence. Retain a safe local default and exact sampling IDs needed for reuse. Preflight full inputs, schema, proposed v2 and prepared corrections against local context; admit each actual correction separately. Do not truncate inputs, silently enlarge context, or substitute a different model when admission fails. Native Gemma advertises 131,072 maximum context, but this plan selects 49,152, not the maximum.
+
+## Reuse and remaining work
+
+Declare an explicit membership manifest without rewriting any source run/configuration/hash. Reuse requires identical source/schema/v1 hashes, model/evidence ID, provider route or actual native runtime/digest/tokenizer, sampling controls, thinking/context and request execution controls. The explicit exception is the authorized budget-only revision from $4.50 to $10: source observations completed without budget stops, and the original caps must remain visible. Implement/test compatible aggregation for that revision before reuse; the current evaluator groups by the entire execution policy and would otherwise split the old/new caps into separate variants. Do not normalize changed deadlines, retries, context or thinking as a budget revision. Refreshing metadata must not silently merge incompatible observations. If a compatibility check fails, exclude the affected source observation from membership and rebaseline explicitly; do not select outputs by score.
+
+| Revised matrix component | Reusable source | Remaining primary requests |
+| --- | --- | ---: |
+| Provider v1 / baseline-16384, all 30 | `flash-v1-gold-16384-20261022`, exactly gold10 | 20 non-gold inputs |
+| Native v1 / baseline-16384, all 30 | `native-s008-49152-16384-20261022`, exactly S008 | 29 other inputs |
+| Provider v1 / exploratory-16384 | None | 30 |
+| Native v1 / exploratory-16384 | None | 30 |
+| Provider v2 / both sampling settings | None | 60 |
+| Native v2 / both sampling settings | None | 60 |
+| **Total** | **11 existing observations, counted once** | **229: 110 provider + 119 local** |
+
+The 11 reused observations were originally diagnostics and were excluded from the original matrix. This revision explicitly promotes only the compatible **16,384** provider gold10 and native S008 observations into the revised baseline. Retain their original diagnostic intent and gold-only/one-case populations in the history; do not relabel the raw manifests. All 4,096/8,192 outputs, Flash-Lite screening and native thinking-enabled observations remain outside revised membership.
+
+## Authorized $10 budget migration and feasibility gate
+
+The user increased the experiment budget to **$10** on 22 October, with an OpenRouter screenshot showing a $10 lifetime/key limit and rounded $1.27 spend. This authorizes the planned cumulative ceiling increase, not a paid inference invocation. The assignment originally allows up to $5 in API costs; report the user-authorized experiment extension explicitly rather than claiming the original assignment allowance itself changed. Record original and extended experiment spending in the final report.
+
+The application configuration and persisted ledger still enforce **$4.50**. Both strict validators currently reject a $10 policy, and ledger reads reject a configuration/persisted-policy mismatch. Changing an OpenRouter dashboard limit alone does not alter either guard. Before further paid work, implement an explicit audited cap-raise operation and matching configuration validation; do not delete/reinitialize the ledger or simply change YAML and bypass the mismatch.
+
+The cap-raise must acquire the ledger lock, validate the old cap/state, preserve every original reservation ID/key/stage/price/charge/resolution and opening-spend evidence, retain matrix_reserve_usd=3.5, record the user authorization and old/new caps, back up the prior bytes/hash, and persist atomically. Reject cap reductions, invalid/unapproved caps and missing/corrupt ledgers. Preserve read-only evaluation of historical $4.50 manifests and old exports. Test successful migration, unchanged accounted totals/holds, mismatched policy rejection and failure recovery without automatic reinitialization. The model/evidence migration and audited budget administration are implementation work, not part of this plan edit.
+
+Current cumulative accounted spend is **$1.77332305**: known reported charges **$1.27197265** plus **$0.50135040** unresolved earlier Mistral holds. The screenshot's rounded $1.27 is consistent with known charges but is not itemized billing evidence sufficient to release holds. Reconcile unknowns only with exact billing evidence; do not assume zero or treat them as known charges.
+
+| Budget quantity | Current enforced policy | Authorized policy after migration |
+| --- | ---: | ---: |
+| Cumulative cap | $4.50 | $10.00 |
+| Accounted spend, including holds | $1.77332305 | Unchanged |
+| Remaining conservative allowance | $2.72667695 | **$8.22667695** |
+| Unspent protected matrix funds | $2.32384295 | Unchanged |
+
+The latest verified Flash full-context reservation at 16,384 is **$1.720320 per physical call**; refresh route/context/prices before a new phase. After migration, headroom before another call's reservation stops fitting becomes **$6.50635695** of additional accounted spend, assuming that bound is unchanged. Unknown charges retain reservations and may still stop the run. Serial reservation sums are not expected bills.
+
+The completed Flash gold10 cost $0.32986350. Linear scaling to the **110 remaining provider primaries** gives **$3.62849850**, excluding retries/corrections. Under the $10 cap this fits the remaining allowance at that observed average and leaves roughly $4.59817845 after those primaries, above one current reservation. This is a feasibility signal, not a guarantee or forecast: larger inputs, reasoning and v2/sampling may change cost. Prepare phase-specific usage estimates and preserve guards; consider trustworthy complete-request certificates only if verified and useful, not as an invented estimate to bypass reservations.
+
+The budget increase changes the current evaluator's execution descriptor. Add an explicit compatible budget-revision path for the 11 reusable completed observations, retain every source cap and run hash, and regression-test aggregation into the intended variants without weakening duplicate detection or combining altered generation controls. A budget-stopped historical run must retain its stop and untouched outcomes rather than being presented as completed after a cap increase.
+
+After audited policy/configuration/profile updates, aggregation compatibility, offline checks and refreshed pricing/context evidence, request separate approval of each exact paid invocation and allowance. No previous diagnostic approval permits another provider call. If actual feasibility deteriorates, report it and request an explicit scope decision; the 240-observation target is not silently reduced. Native work requires no API spend but is a separate execution task, not part of this plan edit.
+
+## Baseline completion, prompt review and remaining variants
+
+After the gate and revised-profile checks, complete the remaining **20 provider + 29 local** v1/baseline inputs, preserving every failed/untouched outcome. Combine them with the 11 declared source observations only after fresh offline verification. Review all 30 inputs for each deployment: factual accuracy only on gold10, operations over all30. Truncation/invalid output is a measured failure; insufficient budget, unavailable dependencies or untouched inputs leave the phase incomplete.
+
+After user review and further direction, review and freeze v2. A v2 draft already exists from the original baseline review; do not recreate it or claim it was written after the revised baselines. Its current hash is `c2c6c61dcdd3fe9c93fcaf9b40d6f811a30fb9351e6918fcaa899459021e5ba0`. Reconcile its general ordered-row, buyer-identifier, line-date, address and unit rules against the revised baseline evidence. Record any subsequent edits, new hash, rationale and examples in the prompt changelog. No case-specific answer leakage or frozen schema/input/gold/scorer edits. All gold10 were used in model/profile selection and prompt development; report development-set scores, not held-out generalization.
+
+Keep the initial v1/v2 comparison on the existing pipeline: strict JSON/schema
+validation, the same correction policy and unchanged gold scoring. Semantic
+checks may be designed and assessed against saved v1 outputs before v2, but must
+not reject, filter, repair or trigger correction only for v2. Follow the separate
+semantic-validation sequence in 7.3.2 below. Existing full-corpus v1 results do
+not need rerunning merely to inspect or flag their source-evidence errors.
+
+After both revised full-corpus baselines are complete and reviewed, run the remaining **180 primaries** over all30: v1/exploratory and v2/both samplings on both models. Keep 16,384 output, the selected runtime/thinking/context, deadlines, retries and scoring matched across prompts. Freeze any profile change as a new explicit variant rather than changing only v2 or failed cases. Every paid invocation still needs approval and budget admission.
+
+Finish section 8 from an explicit **240-observation membership inventory**, eight complete 30-input variants, duplicate rejection, checked exports and preserved source hashes. Report gold10 quality, all30 operations, reasoning/output usage, null/present correctness, row errors and known/unknown costs. Historical constrained-budget and Docker/runtime diagnostics receive separate tables. Docker Ollama's stopped container, image and weights volume were removed at the user's request; native weights/results remain. Docker runs Python/offline checks; native is the selected model runtime. Optional Docker compatibility code remains in source and must not download/start Ollama implicitly.
+
+## Optional extraction skill experiment (7.3.1)
+
+**Proposed after the v1 user review; documentation only.** The user requested
+planning a reusable extraction skill that Gemma can actually consume. This does
+not authorize skill implementation, v2 changes, inference, model downloads or
+an autonomous agent loop. Keep this optional exercise separate from the required
+240-observation prompt/sampling matrix.
+
+The current Ollama adapter sends instructions, schema and source text through
+`request_messages`; it has no skill discovery, resource loader or tool loop.
+Placing a `SKILL.md` file in the repository alone would not affect inference.
+A skill packages instructions/resources; it does not train or enlarge the model.
+
+### First approach: application-controlled loading
+
+- Package concise extraction instructions in `SKILL.md`, with references to
+  the authoritative contract, small worked examples and optional validation
+  scripts. Focus on ordered versus catalog rows, explicit order evidence,
+  quantities versus package sizes, buyer versus supplier identifiers, line-date
+  linkage, null semantics and unit normalization. Derive rules from source
+  evidence; do not impose a universal non-null-quantity filter that could remove
+  legitimate order lines.
+- Have the application explicitly load the selected instructions and relevant
+  examples into the request. Gemma need not discover a skill or read files.
+  Include the fully rendered request in context admission; preserve complete
+  approved source/schema and retain the existing failure policy when it does
+  not fit. Record package/resource hashes and loaded content in run evidence.
+- First measure instruction/example loading alone as a separate prompt variant.
+  With the same rendered instructions, skill packaging itself offers no new
+  model capability; it provides reusable organization and versioning.
+- If instruction-only results remain insufficient, separately test a fixed
+  application workflow: **select ordered rows with source references → extract
+  fields from selected rows → validate source support**. The application owns
+  transitions and executes any scripts. Keep intermediate selections, references,
+  raw replies and validation failures outside the authoritative PO object;
+  version the intermediate contract. Do not silently delete unsupported rows
+  or repair the final extraction to improve its score.
+
+### Comparison and acceptance
+
+Keep the same model digest, runtime, thinking, sampling and context/output
+controls where feasible, and the frozen inputs, schema and evaluator. Identify
+all changed controls. Assign distinct prompt/package/workflow identities rather
+than overwriting v1 or silently treating a multi-call workflow as prompt-only v2.
+Record any input transformation explicitly and report it as a separate variant.
+
+Evaluate gold10 field accuracy, extra/missing rows, null/present correctness and
+exact documents; report validity and total latency over all30 when running a
+complete comparison. Count every selection/extraction/validation/correction
+call, generated tokens and failure. Local API charges remain zero, but additional
+passes consume machine time; do not claim zero total operating cost. Disclose
+all examples used for development; gold10 is not held out, and examples must not
+contain case-specific benchmark answers. Improvement requires measured quality
+gains with an explicit latency/call-count trade-off, not just valid JSON or the
+presence of a skill file.
+
+When implementation is separately requested, verify actual loaded instructions,
+resource hashes/context admission and controlled multi-step behavior with
+offline fixtures before model calls. Reuse the existing parsing/scoring and
+evidence infrastructure. Do not run inference merely to add this plan item.
+
+Model-selected skill discovery, dynamic resource loading and tool calling remain
+deferred. They require explicit application integration, verified model support
+and separate evaluation of tool selection. Consider them only if the fixed
+workflow demonstrates a concrete need for autonomy. See the
+[Agent Skills integration guide](https://github.com/agentskills/agentskills/blob/main/docs/client-implementation/adding-skills-support.mdx).
+
+## Semantic validation sequence (7.3.2)
+
+**Planned sequence, 24 October 2026; no implementation or inference authorized.**
+Semantic validation checks whether source evidence supports the extracted facts,
+including whether an output row represents an order. It supplements JSON/schema
+validation; schema descriptions alone do not perform these source comparisons.
+
+1. **Before v2: review and assess candidate checks offline.** Use saved v1
+   responses, approved source texts and the contract to identify evidence rules
+   and counterexamples. A detection-only diagnostic needs no model calls or full
+   v1 rerun. Store flags separately with check/version identity, source/output
+   hashes and supporting evidence; preserve original statuses, extractions and
+   scores. Assess both false positives and missed errors on reviewed cases.
+   Gold10 remains development evidence; do not claim the other20 are labeled.
+   Treat blank quantity as case-dependent evidence, not a universal instruction
+   to reject every row with a null quantity. Do not feed new diagnostic flags
+   into the required matrix's requests or correction policy.
+2. **Initial v1/v2 comparison: change the prompt only.** After user review and
+   further direction, freeze v2 and run the required matched variants using the
+   current pipeline. Preserve the completed v1 baselines. Keep row selection,
+   source preprocessing, runtime validation and correction behavior unchanged
+   across prompts so the prompt effect can be interpreted.
+3. **After that comparison: test behavioral semantic validation separately.**
+   When explicitly requested, give semantic rejection, evidence-based correction
+   or the skill's multi-step workflow its own versioned experiment identity,
+   outside the 240-observation prompt-only matrix. Compare the same frozen prompt
+   with and without that behavior, preserving other controls. Reuse compatible
+   saved no-check baseline observations with explicit membership rather than
+   automatically rerunning all v1. New corrected outputs require actual measured
+   calls; they cannot be inferred from detection flags. Bound all additional
+   attempts, retain raw failures/intermediate evidence, and report total calls,
+   tokens, latency and known/unknown costs alongside gold quality and check
+   precision/recall on cases with reviewed check labels. No silent row deletion,
+   output repair or rescoring of historical results. Each paid invocation still
+   requires concrete approval and budget admission.
+
+This sequence adds semantic-check design to the baseline review without making
+new runtime validation a prerequisite for the prompt experiment. The extraction
+skill proposal in 7.3.1 can reuse the assessed checks later; packaging them as a
+skill does not change their experimental identity or prove their reliability.
+
+
+## Historical original 4,096-token phase
+
+The following preparation notes, commands, prices and balances describe the
+original profile. They are retained as history; the revised target and current
+budget gate above supersede their forward-looking instructions.
+
+### Provider context and spending
 
 On 22 October 2026 the user accepted extending provider-enforced context to the
 **matrix stage**. Each coverage document must explicitly include
@@ -98,7 +279,7 @@ remaining amount. The runner enforces the existing $4.50 cumulative budget,
 below the assignment's $5 cap. Each paid phase requires separate approval of
 its exact command and allowance; no automatic continuation is authorized.
 
-## Readiness and evidence
+### Readiness and evidence
 
 Preparation checks public provider metadata and native `/api/version`,
 `/api/tags` and `/api/ps` without generation. Actual local composition checks
@@ -122,7 +303,7 @@ The user separately approved the concrete provider command and initial
 $3.90283400 remaining cumulative allowance on 22 October. The user accepted explicit local thinking=false and a new 30-input native
 baseline; no v2 or later phase has started.
 
-### Metadata preparation — 22 October 2026
+#### Metadata preparation — 22 October 2026
 
 At 14:43 UTC, metadata-only preparation confirmed native Ollama **0.40.7** and
 model digest `ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f`.
@@ -151,7 +332,7 @@ unknown charges retain their reservation and can cause an early stop. The
 10-case screening cost $0.04512240 for this model, but scaling it to the full
 corpus is only a rough indication because document sizes and failures differ.
 
-### Phase-one schedule and commands
+#### Phase-one schedule and commands
 
 The offline plan selects exactly 60 primaries / at most 240 physical calls across
 the two models. Each separate model invocation selects 30 / at most 120.
@@ -177,7 +358,7 @@ baseline configuration. Run IDs are unique evidence identities, not replay
 commands. After execution, record approval/status/outcomes below before any
 continuation.
 
-### Provider v1/baseline — completed
+#### Provider v1/baseline — completed
 
 The separately approved provider run started at **14:51:56 UTC** on 22 October.
 All 30 inputs were attempted once: **25 schema-valid outputs, five truncations,
@@ -220,7 +401,7 @@ a claim that every operation is GPU-only. Initial loading took 17.467 seconds,
 recorded separately from per-input durations. The tokenizer SHA-256 is
 `42e3a238e10726346e996c7e3569fcfb2e8d47173944a3cd56826d8dc4d9a9fb`.
 
-### Native v1/baseline — completed diagnostic, thinking enabled
+#### Native v1/baseline — completed diagnostic, thinking enabled
 
 `matrix-native-v1-baseline-20261022-72` completed all 30 inputs: **19 valid,
 11 truncated, zero untouched**, 30 physical requests, no correction/retry and no
@@ -238,7 +419,7 @@ baseline stays reusable. V2 and the remaining 180 required requests have not
 started. The model residency expired during the review pause and was reloaded
 for the newly authorized run. Preserve this completed thinking-enabled diagnostic.
 
-### Thinking-disabled native rebaseline — authorized and started
+#### Thinking-disabled native rebaseline — authorized and started
 
 The user accepted explicit thinking=false and a fresh 30-input native
 v1/baseline, then renewed the instruction to continue after pausing before

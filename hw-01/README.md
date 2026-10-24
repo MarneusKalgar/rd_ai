@@ -13,8 +13,12 @@ one correction, deadlines, dependency stops and a cumulative reservation ledger.
 The initial v1 prompt/configuration exists for preflight. The
 [Docker runtime setup](docs/docker-runtime.md) provides isolated checks, an app
 image, pinned Ollama/Gemma initialization and persistent results storage.
-`make hw01-local-ready` from the root checks six representative requests;
-`make hw01-local-capacity` optionally checks all 60 prepared requests.
+Explicit Docker compatibility diagnostics are available through
+`make hw01-local-ready` (representative requests) and
+`make hw01-local-capacity` (all prepared requests in the selected configuration).
+Their request counts depend on the configured prompt/sampling variants.
+Ordinary Make execution now defaults to native Ollama; Docker Ollama requires
+explicit selection and initialization. Its local image/weights were removed.
 The [selected extraction runner](docs/running-extractions.md) adds actual-request
 admission, incremental records/checkpoints, budget administration, CLI/Make
 commands and checked exports. Live acceptance is tracked separately; provider
@@ -35,6 +39,9 @@ with the Gemini pair: Gemini 3.5 Flash-Lite is frozen as the main provider in
 needs the documented approval.
 The [main matrix](docs/matrix-experiment.md) uses all 30 inputs for both prompts
 and sampling settings, starting with unchanged v1/baseline on both models.
+The revised profile uses `config/matrix.yaml`, stronger Flash/native Gemma and
+16,384 output tokens. Its [audited budget update](docs/budget-revisions.md)
+preserves prior spending under the user-authorized $10 experiment ceiling.
 
 [Native Ollama mode](docs/native-ollama.md) uses the existing desktop app through
 `MODE=native`, with Python still in Docker and an explicit patch compatibility policy.

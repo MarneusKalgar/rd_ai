@@ -49,7 +49,7 @@ def test_real_configuration_preserves_explicit_parameters() -> None:
         ("transport_retries", 6),
         ("transport_retries", 1.5),
         ("api_budget_usd", 0.0),
-        ("api_budget_usd", 5.0),
+        ("api_budget_usd", 10.01),
         ("api_budget_usd", float("nan")),
         ("dependency_failure_limit", 0),
         ("dependency_failure_limit", -1),

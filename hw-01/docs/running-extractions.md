@@ -45,9 +45,16 @@ small/middle/large representatives used in the recorded readiness check. Both
 adapters must use these same IDs, v1 and baseline for live acceptance. An input
 override is a scoped run; it does not establish the default smoke's acceptance.
 
-`MODE=local` uses `local-run`, starts its healthy Ollama dependency, and supplies
+Native mode is now the Make execution default; it uses the existing desktop
+server and does not download/start Docker Ollama. Revised matrix work explicitly
+uses `--config config/matrix.yaml`, with `HW01_CONTEXT_LENGTH=49152` for native
+requests. See [matrix execution](matrix-experiment.md) and
+[budget policy updates](budget-revisions.md).
+
+Explicit `MODE=local` uses `local-run`, starts its healthy Ollama dependency, and supplies
 no provider credentials. `MODE=provider` uses `app` without an Ollama dependency.
-It is a service selection, not a model override: supply `--model provider` too.
+It is a service selection, not a model override: also select the configured
+provider ID (`provider-flash` in `config/matrix.yaml`).
 Planning, budget administration and export use the network-disabled `offline`
 service. Project-level targets omit the root `hw01-` prefix.
 

@@ -1,11 +1,11 @@
 .PHONY: check validate-gold preflight setup-provider setup-local local-ready local-capacity storage-check down
 .DEFAULT_GOAL := check
 
-# ARGS carries explicit model/input/run selections; local is the safe default.
+# ARGS carries explicit model/input/run selections; native avoids implicit downloads.
 # MODE=provider selects the credentialed app and never starts Ollama.
 # MODE=native uses the existing desktop server; Python remains in Docker.
 ARGS ?=
-MODE ?= local
+MODE ?= native
 RUN_SERVICE := local-run
 ifeq ($(MODE),provider)
 RUN_SERVICE := app
@@ -17,7 +17,7 @@ ifeq ($(filter $(MODE),local provider native),)
 $(error MODE must be local, provider or native)
 endif
 
-.PHONY: run smoke plan-run budget-init budget-show export-run verify-export
+.PHONY: run smoke plan-run budget-init budget-show budget-raise export-run verify-export
 .PHONY: evaluate
 .PHONY: setup-native
 
@@ -58,7 +58,7 @@ setup-local:
 setup-native:
 	$(COMPOSE) run --build --rm --no-deps native-run python -m extraction_service.runtime initialize-native
 
-# Six representative one-token probes in the current configuration; no model pull.
+# Explicit Docker diagnostic: representative one-token probes across configured variants.
 local-ready:
 	$(COMPOSE) run --build --rm local-ready
 
@@ -92,6 +92,10 @@ budget-init:
 
 budget-show:
 	$(COMPOSE) run --build --rm --no-deps offline python -m extraction_service budget-show $(ARGS)
+
+# Administrative action only: preserve reservations and audit the expected old cap.
+budget-raise:
+	$(COMPOSE) run --build --rm --no-deps offline python -m extraction_service budget-raise $(ARGS)
 
 # Overlay only the submission subtree to copy reviewed output to the host.
 # Raw logs, setup snapshots and the cumulative ledger stay in the named volume.
