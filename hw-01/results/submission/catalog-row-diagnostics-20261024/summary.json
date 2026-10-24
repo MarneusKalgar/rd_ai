@@ -1,0 +1,127 @@
+{
+  "check_id": "catalog-order-evidence-v1",
+  "check_sha256": "62232dc02aec9ca083ac53a1c836e349b67a00d0cca517b5fdba530b6ceb1d9e",
+  "diagnostic_only": true,
+  "inference_performed": false,
+  "gold_answers_read": false,
+  "records": 60,
+  "row_counts": {
+    "supported": 45,
+    "contradicted": 336,
+    "unknown": 1048
+  },
+  "original_payload_hashes_verified": 128,
+  "offline_tests_passed": 722,
+  "scope": "Output-row selection evidence only; not field accuracy or completeness",
+  "runs": [
+    {
+      "run_id": "matrix-native-v1-baseline-remaining-20261023-72",
+      "records": 29,
+      "record_statuses": {
+        "unknown": 26,
+        "contradicted": 3
+      },
+      "recognized": [
+        {
+          "input_id": "B02-S016-PO01",
+          "model_id": "local",
+          "row_counts": {
+            "supported": 1,
+            "contradicted": 66,
+            "unknown": 0
+          },
+          "profile": "hu-entered-order-quantity-v1"
+        },
+        {
+          "input_id": "B02-S032-PO01",
+          "model_id": "local",
+          "row_counts": {
+            "supported": 8,
+            "contradicted": 124,
+            "unknown": 0
+          },
+          "profile": "nl-entered-order-quantity-v1"
+        },
+        {
+          "input_id": "B02-S040-PO01",
+          "model_id": "local",
+          "row_counts": {
+            "supported": 11,
+            "contradicted": 146,
+            "unknown": 0
+          },
+          "profile": "ro-entered-order-quantity-v1"
+        }
+      ]
+    },
+    {
+      "run_id": "native-s008-49152-16384-20261022",
+      "records": 1,
+      "record_statuses": {
+        "unknown": 1
+      },
+      "recognized": [
+
+      ]
+    },
+    {
+      "run_id": "flash-v1-gold-16384-20261022",
+      "records": 10,
+      "record_statuses": {
+        "unknown": 7,
+        "supported": 3
+      },
+      "recognized": [
+        {
+          "input_id": "B02-S016-PO01",
+          "model_id": "provider-flash",
+          "row_counts": {
+            "supported": 1,
+            "contradicted": 0,
+            "unknown": 0
+          },
+          "profile": "hu-entered-order-quantity-v1"
+        },
+        {
+          "input_id": "B02-S032-PO01",
+          "model_id": "provider-flash",
+          "row_counts": {
+            "supported": 13,
+            "contradicted": 0,
+            "unknown": 0
+          },
+          "profile": "nl-entered-order-quantity-v1"
+        },
+        {
+          "input_id": "B02-S040-PO01",
+          "model_id": "provider-flash",
+          "row_counts": {
+            "supported": 11,
+            "contradicted": 0,
+            "unknown": 0
+          },
+          "profile": "ro-entered-order-quantity-v1"
+        }
+      ]
+    },
+    {
+      "run_id": "matrix-provider-v1-baseline-remaining-20261023-72",
+      "records": 20,
+      "record_statuses": {
+        "unknown": 20
+      },
+      "recognized": [
+
+      ]
+    }
+  ],
+  "generated_report": {
+    "path": "results/diagnostics/catalog-row-diagnostics-20261024/diagnostic.json",
+    "sha256": "d7a8c27e4fbf319b9d63508fa5c4b6ac9ef5867eb35d2f999ba37d7aab478ac3",
+    "bytes": 1084250,
+    "tracked": false,
+    "source": "submission",
+    "make_target": "hw01-diagnose-rows",
+    "args": "matrix-native-v1-baseline-remaining-20261023-72 native-s008-49152-16384-20261022 flash-v1-gold-16384-20261022 matrix-provider-v1-baseline-remaining-20261023-72"
+  }
+}

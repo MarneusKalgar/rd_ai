@@ -19,6 +19,7 @@ endif
 
 .PHONY: run smoke plan-run budget-init budget-show budget-raise export-run verify-export
 .PHONY: evaluate
+.PHONY: diagnose-rows
 .PHONY: setup-native
 
 # Make runs from hw-01/ (including calls routed from the root Makefile).
@@ -102,6 +103,11 @@ budget-raise:
 export-run:
 	mkdir -p results/submission
 	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission" offline python -m extraction_service export-run $(ARGS)
+
+# Read-only source/output evidence; diagnostic flags never trigger inference.
+diagnose-rows:
+	$(COMPOSE) build offline 1>&2
+	$(COMPOSE) run --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service diagnose-rows $(ARGS)
 
 verify-export:
 	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service verify-export $(ARGS)

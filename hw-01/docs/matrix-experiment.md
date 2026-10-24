@@ -209,7 +209,18 @@ workflow demonstrates a concrete need for autonomy. See the
 
 ## Semantic validation sequence (7.3.2)
 
-**Planned sequence, 24 October 2026; no implementation or inference authorized.**
+**Detection-only implementation authorized on 24 October 2026.** The first
+catalog-row candidate and saved-run CLI are implemented; see
+[deterministic row diagnostics](row-diagnostics.md) for supported structures,
+unknown outcomes and evidence. The 722-test offline gate passed; 60 saved v1
+observations were inspected without inference, retaining source/output hashes
+and historical scores. Keep the compact diagnostic summary and reproduction
+command versioned; the verbose regenerable report belongs under ignored
+`results/diagnostics/`, with its hash retained as generated-artifact metadata.
+The other proposed deterministic candidates remain future
+work. Behavioral rejection/correction and inference
+remain unexecuted and require a separate task. This does not lift the v2 review
+gate or authorize the optional extraction skill implementation.
 Semantic validation checks whether source evidence supports the extracted facts,
 including whether an output row represents an order. It supplements JSON/schema
 validation; schema descriptions alone do not perform these source comparisons.

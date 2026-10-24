@@ -43,6 +43,11 @@ The revised profile uses `config/matrix.yaml`, stronger Flash/native Gemma and
 16,384 output tokens. Its [audited budget update](docs/budget-revisions.md)
 preserves prior spending under the user-authorized $10 experiment ceiling.
 
+The [deterministic row diagnostic](docs/row-diagnostics.md) checks saved outputs
+against explicit source order-quantity evidence. `make hw01-diagnose-rows`
+performs no inference or output correction and leaves the prompt comparison
+pipeline and gold scores unchanged.
+
 [Native Ollama mode](docs/native-ollama.md) uses the existing desktop app through
 `MODE=native`, with Python still in Docker and an explicit patch compatibility policy.
 It preserves Docker execution and uses the same admission/runner/record path.

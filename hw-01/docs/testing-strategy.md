@@ -493,3 +493,36 @@ Follow the repository's [test conventions](../../docs/coding-conventions.md#test
 and [mutation/reproduction process](../../docs/review-process.md#verification-and-experiments)
 to verify assertion sensitivity. Layer coverage and passing tests provide
 bounded evidence rather than a proof that no defects remain.
+
+## Detection-only row diagnostics — 24 October 2026
+
+The initial implementation gate passed **722 tests**. Its 38 diagnostic tests cover
+three recognized order-form structures, positive/blank/unclear quantities,
+same-sheet/row evidence, repeated names/references, unsupported layouts and
+unusable output. Real CLI fixtures verify deterministic reports after removing
+gold-answer/annotation files, unchanged saved artifacts, no additional HTTP
+requests and rejection of changed source/record bytes. Live providers and
+Ollama are not involved.
+
+The saved-output exercise inspects all 60 revised v1 observations and rechecks
+128 original export payload hashes. It demonstrates source-evidence findings,
+not universally valid semantic rules or measured precision/recall. Reviewed
+positive and negative check labels remain necessary before behavioral rejection
+or correction. See [diagnostic scope and observations](row-diagnostics.md).
+
+### Regression hardening after the test audit
+
+The diagnostic suite now contains **48 tests**. It additionally asserts failed
+record retention through both saved-run sources, exact finding counts/paths for
+duplicates, wrong quantity columns for all three profiles (blank and positive
+values), contradiction priority alongside unknown rows in either order, and
+implementation/aggregate hashes computed independently from source files.
+
+The full offline gate passed **732 tests**, lint/format, strict types, gold
+validation and preflight after this hardening.
+
+All five audited mutation probes are detected in disposable Docker copies.
+Each failure was an assertion on the intended behavior, and the relevant tests
+passed after restoration; the restored 48-test suite also passed. These are
+bounded sensitivity checks, not a claim of exhaustive mutation coverage.
+Production diagnostic logic, historical reports and their checksums are unchanged.
