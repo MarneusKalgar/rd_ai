@@ -1,0 +1,33 @@
+{
+  "version": "sampling-archive-selection-v1",
+  "bundles": [
+    {
+      "path": "results/submission/matrix-native-v2-gold-20261024-72",
+      "source_inventory_sha256": "275087025bf6569f341794f659a9ed403b11dfec07bb29e677d8953bb62c42c9"
+    },
+    {
+      "path": "results/submission/native-v2-gold-t02-p100-20261025",
+      "source_inventory_sha256": "7076eb23294dacddc5357ff41818fb989e707f6f53436f1cdfa63e462dfc9c92"
+    },
+    {
+      "path": "results/submission/native-v2-gold-t05-p100-20261025",
+      "source_inventory_sha256": "9e62d1007f5247acedb2012db92e9ab0f89332822f1acea16a75fd2c59be9f65"
+    },
+    {
+      "path": "results/submission/native-v2-gold-t02-p095-20261025",
+      "source_inventory_sha256": "ceedfc13b8935348ad19fd5a03d137b304b2002d9b55d2808c3c595328f806c6"
+    },
+    {
+      "path": "results/submission/native-v2-gold-t02-p090-20261025",
+      "source_inventory_sha256": "1071173982a6006291f26c2521095e789fbf03811d43bf046d0825de3b80492c"
+    },
+    {
+      "path": "results/submission/native-sampling-20261025-preparation",
+      "source_inventory_sha256": "cb86468662b1c245ce57e1e597f78107cdee6452f9feec359d1675128c54f0e3"
+    },
+    {
+      "path": "results/submission/native-sampling-20261025-evaluation",
+      "source_inventory_sha256": "ef5654796b08a1619943909848c00e33262f10373a8171f1c4e679da3c5b17e1"
+    }
+  ]
+}

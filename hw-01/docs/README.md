@@ -56,6 +56,7 @@ permission for model inference or spending.
 | Original v1 review and thinking decision | [Matrix baseline review](reports/matrix-baseline-review.md) |
 | Revised v1 all30 baseline comparison | [Revised v1 baseline results](reports/revised-v1-baseline-results.md) |
 | Native v2 gold10 | [Native v2 gold results](reports/native-v2-gold.md) |
+| Native v2 temperature/top_p gold10 diagnostic | [Native sampling experiment](reports/native-sampling-experiment.md) |
 | Completed v2 all30 baselines | [V2 continuation results](reports/v2-continuation-results.md) |
 | Cumulative budget migration audit | [Budget revisions](reports/budget-revisions.md) |
 

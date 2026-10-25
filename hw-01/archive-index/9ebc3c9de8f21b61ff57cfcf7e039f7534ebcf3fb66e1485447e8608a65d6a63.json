@@ -1,0 +1,48 @@
+{
+  "archive_sha256": "9ebc3c9de8f21b61ff57cfcf7e039f7534ebcf3fb66e1485447e8608a65d6a63",
+  "archive_size": 278625,
+  "bundles": [
+    {
+      "inventory_sha256": "5ecb6072021ef553341b48b164ff456c29902aaf08348566454feb4ca7658a57",
+      "kind": "evidence",
+      "name": "native-interaction-20261025-evaluation",
+      "payload_files": 8
+    },
+    {
+      "inventory_sha256": "a397980bbdfcb54661c508cc39d9024e558e027d3b7074f39af13711e9bec09f",
+      "kind": "evidence",
+      "name": "native-interaction-20261025-preparation",
+      "payload_files": 7
+    },
+    {
+      "inventory_sha256": "1071173982a6006291f26c2521095e789fbf03811d43bf046d0825de3b80492c",
+      "kind": "run",
+      "name": "native-v2-gold-t02-p090-20261025",
+      "payload_files": 23
+    },
+    {
+      "inventory_sha256": "7076eb23294dacddc5357ff41818fb989e707f6f53436f1cdfa63e462dfc9c92",
+      "kind": "run",
+      "name": "native-v2-gold-t02-p100-20261025",
+      "payload_files": 23
+    },
+    {
+      "inventory_sha256": "9a9f9aad4280068810c40fae79625c0b1c0e67b4e772b409ff678cf7275fdd0d",
+      "kind": "run",
+      "name": "native-v2-gold-t05-p090-20261025",
+      "payload_files": 23
+    },
+    {
+      "inventory_sha256": "9e62d1007f5247acedb2012db92e9ab0f89332822f1acea16a75fd2c59be9f65",
+      "kind": "run",
+      "name": "native-v2-gold-t05-p100-20261025",
+      "payload_files": 23
+    }
+  ],
+  "covered_observations": 40,
+  "manifest_sha256": "a638251aec909ff0f1728d5a4bd92a72eba667c9045e01c7cb2d6fc0e1f3ad29",
+  "membership_sha256": "298e4f87a40e8f71613f5b003b9abf2360cd549673640c2ea0fd44f6fef87412",
+  "object_key": "hw01/archives/sha256/9ebc3c9de8f21b61ff57cfcf7e039f7534ebcf3fb66e1485447e8608a65d6a63.tar.gz",
+  "selection": "native-sampling-interaction",
+  "version": "hw01-archive-index-v1"
+}

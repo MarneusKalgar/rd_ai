@@ -1,0 +1,18 @@
+{
+  "version": "native-interaction-archive-verification-v1",
+  "archive_sha256": "9ebc3c9de8f21b61ff57cfcf7e039f7534ebcf3fb66e1485447e8608a65d6a63",
+  "archive_bytes": 278625,
+  "bundles": 6,
+  "payload_files": 107,
+  "expanded_payload_bytes": 4000056,
+  "diagnostic_observations": 40,
+  "new_observations": 10,
+  "reused_reference_observations": 30,
+  "source_and_restored_payloads_equal": true,
+  "restored_evaluations_equal_original_reports": 4,
+  "garage_full_get_verified": true,
+  "provider_ledger_unchanged": true,
+  "native_unloaded": true,
+  "provider_inference_performed": false,
+  "required_matrix_membership_changed": false
+}

@@ -6,6 +6,12 @@
 
 ## Current status — 24 October 2026
 
+**25 October addendum:** the user authorized the separate native sampling
+diagnostic in 7.3.4: four gold10 settings, temperature first then top_p, with
+the compatible saved v2 reference reused. It is complete outside required
+matrix membership; the other inference/download approval boundaries below
+remain in effect. See the [sampling report](../reports/native-sampling-experiment.md).
+
 **Frozen v2 baseline phases complete and verified on 24 October 2026.** Native
 Gemma attempted all30 with **29/30 schema-valid**, gold **7.16%**, 303 extra
 gold rows and one exact gold document. Stronger Gemini Flash saved **30/30
@@ -444,6 +450,28 @@ Stop for user review after gold10. Do not automatically run Qwen remaining20,
 switch the selected local model, revise v2 or implement the harness. Any later
 model substitution needs an explicit plan/membership update and matched matrix
 coverage; this diagnostic does not silently satisfy Gemma's outstanding phases.
+
+## Optional native sampling diagnostic (7.3.4)
+
+**Authorized and completed on 25 October 2026.** The same frozen v2/gold10 ran
+through native Gemma, varying temperature first and top_p second. Reuse the
+compatible saved temperature-0/top_p-1 reference. New temperature profiles are
+0.2/1 and 0.5/1; nucleus profiles are 0.2/0.95 and 0.2/0.9, with 0.2/1 reused
+as their reference. This is 40 new observations outside required matrix coverage.
+See the [sampling diagnostic](../reports/native-sampling-experiment.md) and
+`config/native-sampling-sweep.yaml` for fixed controls and limitations.
+
+Keep v2, gold, schema, input representation, runtime/digest/tokenizer,
+49,152 context, 16,384 output and thinking=false unchanged. Preserve failures,
+attempts, checked exports, post-hoc diagnostics and processing time. No provider
+inference or paid reservations are authorized. No automatic extension to other
+settings, repeated trials or the remaining20 is included.
+
+**Explicit follow-up authorization — 25 October:** after reviewing that sweep,
+the user requested one further gold10 pass at temperature 0.5/top_p 0.90.
+`config/native-sampling-interaction.yaml` adds exactly ten native observations;
+the existing 0.2/1, 0.5/1 and 0.2/0.9 runs are reused for the 2×2 comparison.
+Keep the original sweep and archive unchanged. The follow-up is complete: 132/2366 (5.58%) on development gold10, with 253 extra rows. It adds no required matrix membership or provider spending; see the checked report.
 
 ## Historical original 4,096-token phase
 
