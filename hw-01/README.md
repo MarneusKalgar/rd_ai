@@ -3,6 +3,10 @@
 See the [documentation index](docs/README.md) for guides, technical reference,
 experiment plans, measured reports and quality practices.
 
+The [archive workflow](docs/guides/archiving-results.md) packages public evidence
+in Docker, verifies isolated restoration, and optionally uploads to local Garage
+or another S3-compatible store. It keeps original evidence and Git tracking intact.
+
 HW-01 consumes reviewed customer-neutral text inputs and compares a provider
 model with a local model against the same extraction contract. Its v1
 [`schema`](schemas/purchase-order-extraction.v1.schema.json),

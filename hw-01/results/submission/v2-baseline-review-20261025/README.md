@@ -1,5 +1,11 @@
 # V2 baseline review checkpoint
 
+The [archival workflow](../../../docs/guides/archiving-results.md) was implemented
+after this checkpoint; its [verification report](../../../docs/reports/archive-workflow-verification.md)
+records the subsequent local Garage copy and restored evaluation. Availability
+fields below and in the original JSON are checkpoint-time observations, not a
+live catalog of later archive receipts.
+
 This directory contains the compact reviewed results of the completed v1/v2
 baseline comparison. It is not a complete run export or an external archive.
 
@@ -11,9 +17,10 @@ baseline comparison. It is not a complete run export or an external archive.
   in this checkout. Previously committed v1 evidence is unchanged.
 
 The new raw responses, checkpoints, preparation reports, detailed evaluations
-and membership snapshots remain untracked pending an archival workflow. No
-Garage upload, portable archive or restore command is supplied by this commit.
-The working copies have been retained without deletion or Git-history changes.
+and membership snapshots remain locally retained, ignored and untracked. Their
+subsequent verified archive is recorded in the report linked above; the raw
+payloads are not embedded in this compact checkpoint. Working copies have been
+retained without deletion, Git untracking or history changes.
 
 A fresh checkout can run the offline implementation tests and inspect this
 summary, but cannot independently recompute the new v2 scores without the

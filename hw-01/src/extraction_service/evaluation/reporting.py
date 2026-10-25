@@ -8,6 +8,7 @@ from typing import Any
 
 from extraction_service.application.persistence import RunState, reload_records
 from extraction_service.application.selection import RunOptions
+from extraction_service.artifacts import artifact_path
 from extraction_service.corpus.loading import load_corpus
 from extraction_service.evaluation.metrics import operational_metrics
 from extraction_service.evaluation.scoring import FieldScore, combine_scores, score_extraction
@@ -83,10 +84,15 @@ def _budget_revision(project_dir: Path) -> BudgetSnapshot:
 
 
 def evaluate_runs(
-    project_dir: Path, run_ids: list[str], *, allow_budget_revision: bool = False
+    project_dir: Path,
+    run_ids: list[str],
+    *,
+    allow_budget_revision: bool = False,
+    source_dir: str = "results/runs",
 ) -> dict[str, Any]:
     """Evaluate saved terminal runs without inference or rewriting original evidence.
 
+    `source_dir` can identify an isolated restored submission inside the project.
     Reject overlapping observations, current-corpus mismatches and unfinished
     checkpoint-only runs. Complete and stopped runs with terminal records are
     both supported; untouched labeled inputs receive zero field matches.
@@ -96,6 +102,7 @@ def evaluate_runs(
         raise ValueError("Evaluation requires unique run IDs")
 
     corpus = load_corpus(project_dir)
+    source_root = artifact_path(project_dir, source_dir)
     sources = {source.input_id: source for source in corpus.inputs}
     grouped: dict[str, list[RunRecord]] = {}
     identities: dict[str, dict[str, Any]] = {}
@@ -109,7 +116,7 @@ def evaluate_runs(
 
     for run_id in run_ids:
         RunOptions(run_id=run_id)
-        directory = project_dir / "results/runs" / run_id
+        directory = artifact_path(source_root, run_id)
         manifest, records = reload_records(directory)
 
         if manifest.state not in (RunState.COMPLETE, RunState.INCOMPLETE):

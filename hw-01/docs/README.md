@@ -13,6 +13,7 @@ instruction to rerun a completed experiment.
 
 ## Guides
 
+- [Archive, upload and restore experiment evidence](guides/archiving-results.md).
 - [Run and save extractions](guides/running-extractions.md).
 - [Use native Ollama with Python in Docker](guides/native-ollama.md).
 - [Configure Docker and persistent storage](guides/docker-runtime.md).
@@ -40,6 +41,7 @@ permission for model inference or spending.
 
 | Evidence | Document |
 | --- | --- |
+| Checked archive, Garage upload and restored evaluation | [Archive workflow verification](reports/archive-workflow-verification.md) |
 | Docker setup acceptance | [Docker setup verification](reports/docker-setup-verification.md) |
 | Interrupted Docker extraction smoke | [Extraction smoke](reports/extraction-smoke.md) |
 | Native smoke acceptance | [Native runtime verification](reports/native-runtime-verification.md) |

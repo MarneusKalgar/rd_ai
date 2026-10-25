@@ -91,6 +91,7 @@ def add_commands(commands: argparse._SubParsersAction[argparse.ArgumentParser]) 
     evaluation = commands.add_parser("evaluate", help="Score saved terminal runs offline")
     evaluation.add_argument("run_ids", nargs="+")
     evaluation.add_argument("--allow-budget-revision", action="store_true")
+    evaluation.add_argument("--source-dir", default="results/runs")
 
     diagnostic = commands.add_parser("diagnose-rows", help="Inspect saved row selection offline")
     diagnostic.add_argument("run_ids", nargs="+")
@@ -143,7 +144,10 @@ def dispatch(args: argparse.Namespace) -> int:
 
     if args.command == "evaluate":
         report = evaluate_runs(
-            project_dir, args.run_ids, allow_budget_revision=args.allow_budget_revision
+            project_dir,
+            args.run_ids,
+            allow_budget_revision=args.allow_budget_revision,
+            source_dir=args.source_dir,
         )
         print(json.dumps(report, indent=2))
 

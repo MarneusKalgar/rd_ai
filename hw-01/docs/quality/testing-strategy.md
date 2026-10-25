@@ -1,5 +1,23 @@
 # HW-01 testing strategy
 
+## Artifact archival verification — 25 October 2026
+
+The [archive workflow](../guides/archiving-results.md) adds 35 archive/storage
+regression cases; the complete Docker gate passes 767 tests. These cover checked
+selection, deterministic packaging, safe restoration, byte identity, refusal to
+replace existing evidence, bounded and verified S3 transfers, redacted failures,
+and the existing evaluator's explicit restored-source option. Successful and
+negative cases start from real controlled run exports. The restoration test
+removes its temporary original run/export directories before evaluating, so an
+ignored source override cannot produce a false positive.
+
+The [real Garage round trip](../reports/archive-workflow-verification.md) is
+separate integration evidence: initialization, upload/GET checksum verification,
+idempotent reuse, download, isolated restore and exact reproduction of both saved
+v2 evaluation reports. Ordinary tests stay offline, use SDK stubs/loopback HTTP,
+and require neither Garage nor an installed model/account. No artifact cleanup
+or inference is part of archival verification.
+
 ## Purpose and plan references
 
 Use a broad base of focused unit/component tests, integration tests for module

@@ -52,3 +52,14 @@ COPY --from=artifacts /app/prompts ./prompts
 COPY tests ./tests
 USER 10001:10001
 CMD ["python", "-m", "extraction_service", "validate-gold"]
+
+# Initialize empty volume ownership without adding a shell to Garage's scratch image.
+FROM tooling AS garage-directories
+RUN mkdir -p /garage-state/meta /garage-state/data \
+    && chown -R 10001:10001 /garage-state
+
+# Optional local archive storage; independent of all model runtime services.
+FROM dxflrs/garage@sha256:9c96caa2612d3411acc5b0e6701fb238dbfba33e533a6d7d3d811a4b12d0d020 AS archive-store
+COPY --from=garage-directories --chown=10001:10001 /garage-state /var/lib/garage
+USER 10001:10001
+CMD ["/garage", "server", "--single-node", "--default-bucket"]

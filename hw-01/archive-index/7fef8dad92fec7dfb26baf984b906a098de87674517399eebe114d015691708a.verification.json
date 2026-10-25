@@ -1,0 +1,17 @@
+{
+  "all_original_and_restored_payload_hashes_match": true,
+  "archive_bytes": 1786839,
+  "archive_sha256": "7fef8dad92fec7dfb26baf984b906a098de87674517399eebe114d015691708a",
+  "bundles": 16,
+  "covered_observations": 120,
+  "expanded_payload_bytes": 10484232,
+  "inference_performed": false,
+  "local_garage_upload_download_verified": true,
+  "offline_tests_passed": 767,
+  "payload_files": 311,
+  "repeat_upload_reused_object": true,
+  "restored_v2_evaluations_equal_original_reports": true,
+  "run_bundles": 8,
+  "source_cleanup_performed": false,
+  "version": "hw01-archive-verification-v1"
+}

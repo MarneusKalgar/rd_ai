@@ -43,6 +43,46 @@ services:
     <<: *app
     network_mode: none
 
+  # Host evidence is read-only. Only caches, isolated restores and compact indexes are writable.
+  archive-offline:
+    <<: *app
+    network_mode: none
+    volumes: &archive-volumes
+      - ./results/submission:/app/results/submission:ro
+      - ./results/archives:/app/results/archives
+      - ./results/restored:/app/results/restored
+      - ./archive-index:/app/archive-index
+
+  archive-online:
+    <<: *app
+    volumes: *archive-volumes
+    env_file:
+      - path: .env.archive
+        required: false
+
+  garage:
+    profiles: [archive]
+    build:
+      context: .
+      target: archive-store
+    env_file:
+      - path: .env.archive
+        required: false
+    volumes:
+      - ./results/garage-config/garage.toml:/etc/garage.toml:ro
+      - garage-data:/var/lib/garage
+    ports:
+      - "127.0.0.1:${HW01_GARAGE_PORT:-3900}:3900"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 256m
+    healthcheck:
+      test: [CMD, /garage, status]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
   checks:
     build:
       context: .
@@ -131,3 +171,4 @@ services:
 volumes:
   results:
   ollama-models:
+  garage-data:

@@ -115,3 +115,36 @@ verify-export:
 # Saved-run scoring has no network, key, model loading or generation.
 evaluate:
 	$(COMPOSE) run --build --rm --no-deps offline python -m extraction_service evaluate $(ARGS)
+
+.PHONY: archive-dirs archive-results verify-archive restore-results upload-archive download-archive evaluate-restored archive-store-init archive-store-up archive-store-down
+archive-dirs:
+	mkdir -p results/submission results/archives results/restored archive-index
+
+# Network-disabled operations use read-only original evidence and isolated writable outputs.
+archive-results: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps archive-offline python -m extraction_service.archiving create $(ARGS)
+
+verify-archive: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps archive-offline python -m extraction_service.archiving verify $(ARGS)
+
+restore-results: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps archive-offline python -m extraction_service.archiving restore $(ARGS)
+
+evaluate-restored: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/restored:/app/results/restored:ro" offline python -m extraction_service evaluate $(ARGS)
+
+# Storage credentials are confined to the online helper; provider credentials are never loaded.
+upload-archive: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps archive-online python -m extraction_service.archiving upload $(ARGS)
+
+download-archive: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps archive-online python -m extraction_service.archiving download $(ARGS)
+
+archive-store-init: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR):/workspace" archive-offline python -m extraction_service.archiving --project-dir /workspace init-store
+
+archive-store-up:
+	$(COMPOSE) --profile archive up --build -d --wait --wait-timeout 120 garage
+
+archive-store-down:
+	$(COMPOSE) --profile archive stop garage

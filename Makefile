@@ -22,6 +22,19 @@ help:
 	@echo "hw01-verify-export Recheck exported byte hashes and records (ARGS=run-id)"
 	@echo "hw01-evaluate      Score saved terminal runs offline (ARGS='run-id ...')"
 	@echo "hw01-diagnose-rows Inspect saved row selection without inference or rescoring"
+	@echo "hw01-archive-results Create and verify a copy-only archive (ARGS='--selection final-baselines')"
+	@echo "hw01-verify-archive Verify a cached archive (ARGS='--index archive-index/<sha>.json')"
+	@echo "hw01-restore-results Restore an archive into an isolated results/restored directory"
+	@echo "hw01-upload-archive Upload to configured S3/Garage and verify with a download"
+	@echo "hw01-download-archive Download and verify indexed evidence from S3/Garage"
+	@echo "hw01-evaluate-restored Score restored evidence offline (ARGS includes --source-dir)"
+	@echo "hw01-archive-store-init Generate private single-node Garage settings once"
+	@echo "hw01-archive-store-up Start the optional local Garage bucket"
+	@echo "hw01-archive-store-down Stop Garage; preserve its data volume"
+
+.PHONY: hw01-archive-results hw01-verify-archive hw01-restore-results hw01-upload-archive hw01-download-archive hw01-evaluate-restored hw01-archive-store-init hw01-archive-store-up hw01-archive-store-down
+hw01-archive-results hw01-verify-archive hw01-restore-results hw01-upload-archive hw01-download-archive hw01-evaluate-restored hw01-archive-store-init hw01-archive-store-up hw01-archive-store-down:
+	$(MAKE) -C hw-01 $(patsubst hw01-%,%,$@)
 
 .PHONY: hw01-run hw01-smoke hw01-plan-run hw01-budget-init hw01-budget-show hw01-budget-raise hw01-export-run hw01-verify-export hw01-setup-native hw01-evaluate hw01-diagnose-rows
 
