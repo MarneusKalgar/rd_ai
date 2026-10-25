@@ -1,6 +1,8 @@
 # Native Gemma v2 gold10
 
-**Evidence availability — 25 October 2026:** the [compact review snapshot](../../results/submission/v2-baseline-review-20261025/summary.json) and [availability index](../../results/submission/v2-baseline-review-20261025/evidence-index.json) are included in this checkpoint. New v2 raw/preparation/detailed evaluation bundles referenced below are retained locally and intentionally unversioned pending archival. A fresh checkout cannot reproduce their saved-run evaluation yet. See the [checkpoint notes](../../results/submission/v2-baseline-review-20261025/README.md).
+**Evidence retrieval:** Bulk evidence is in the [submission-history archive](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json). Follow the [restore instructions](../guides/archiving-results.md#historical-submission-evidence) before opening restored-file links. Original run IDs and export paths retain their historical meaning.
+
+**Evidence availability — 25 October 2026:** the compact review snapshot remains in Git. Raw runs, preparation and detailed evaluation bundles are preserved in verified archives; restore them before recomputing saved-run scores. See the [retrieval guide](../guides/archiving-results.md#historical-submission-evidence).
 
 ## Scope and frozen profile
 
@@ -30,7 +32,7 @@ This bound is not measured prompt usage; each actual correction still requires
 admission. Preparation used no generation probes and left the budget ledger
 unchanged.
 
-The preparation bundle (local-only: `../../results/submission/native-v2-gold-20261024-preparation/preparation.json`)
+The preparation bundle (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/native-v2-gold-20261024-preparation/preparation.json`)
 records exact membership, command, prompt/configuration hashes, model/tokenizer
 identity, admission evidence and baseline source identity. It also retains the
 old draft and frozen prompt/configuration bytes with checksums.
@@ -72,12 +74,12 @@ altered scores or triggered model correction.
 
 Evidence:
 
-- Raw run (local-only: `../../results/submission/matrix-native-v2-gold-20261024-72/`).
-- Verified summary (local-only: `../../results/submission/matrix-native-v2-gold-20261024-72-evaluation/verified-summary.json`).
-- Matched comparison (local-only: `../../results/submission/matrix-native-v2-gold-20261024-72-evaluation/comparison.json`).
-- Evaluation (local-only: `../../results/submission/matrix-native-v2-gold-20261024-72-evaluation/evaluation.json`).
-- Required matrix membership (local-only: `../../results/submission/matrix-native-v2-gold-20261024-72-evaluation/membership.json`): 70/240 covered, 170 unexecuted.
-- Compact row diagnostic (local-only: `../../results/submission/matrix-native-v2-gold-20261024-72-evaluation/diagnostic-summary.json`); the full report stays ignored under `results/diagnostics/native-v2-gold-20261024/`.
+- Raw run (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v2-gold-20261024-72/`).
+- Verified summary (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v2-gold-20261024-72-evaluation/verified-summary.json`).
+- Matched comparison (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v2-gold-20261024-72-evaluation/comparison.json`).
+- Evaluation (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v2-gold-20261024-72-evaluation/evaluation.json`).
+- Required matrix membership (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v2-gold-20261024-72-evaluation/membership.json`): 70/240 covered, 170 unexecuted.
+- Compact row diagnostic (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v2-gold-20261024-72-evaluation/diagnostic-summary.json`); the full report stays ignored under `results/diagnostics/native-v2-gold-20261024/`.
 
 ## Review gate
 

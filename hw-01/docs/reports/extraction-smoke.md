@@ -1,5 +1,7 @@
 # Extraction smoke evidence — 21 October 2026
 
+**Evidence retrieval:** Bulk evidence is in the [submission-history archive](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json). Follow the [restore instructions](../guides/archiving-results.md#historical-submission-evidence) before opening restored-file links. Original run IDs and export paths retain their historical meaning.
+
 **Status: interrupted at the user's request.** This is a partial local smoke,
 not a completed three-document acceptance or the full 30-document experiment.
 Provider inference was not run. Section 6.6 remains partially accepted.
@@ -33,7 +35,7 @@ S008's checkpoint retains its admission evidence and no fabricated response.
 There is no completed batch summary. The model server's compute returned to idle
 (observed approximately 0.02% CPU) after cancellation; weights were preserved.
 
-The [exported bundle](../../results/submission/local-smoke-20261021-66/) was reloaded
+The [exported bundle](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/local-smoke-20261021-66/) was reloaded
 and byte-checked from a fresh network-disabled app container:
 
 ```sh

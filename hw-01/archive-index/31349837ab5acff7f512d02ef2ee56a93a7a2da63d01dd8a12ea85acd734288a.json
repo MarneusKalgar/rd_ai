@@ -1,0 +1,264 @@
+{
+  "archive_sha256": "31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a",
+  "archive_size": 2904768,
+  "bundles": [
+    {
+      "inventory_sha256": "b3dc43a98b738fb6bef93d12d994a477d53977814c2e5e7e6bad4093926a7e1a",
+      "kind": "run",
+      "name": "flash-pair-v1-gold-8192-20261022",
+      "payload_files": 43
+    },
+    {
+      "inventory_sha256": "98feac28e19e5ac375aadba2f34039f90ac54da8891a6abe47087530d16500f9",
+      "kind": "evidence",
+      "name": "flash-pair-v1-gold-8192-20261022-evaluation",
+      "payload_files": 4
+    },
+    {
+      "inventory_sha256": "f910107d95e547af1c8222dd14a82d9f32855f8d19d79a43407ae0954be02d97",
+      "kind": "run",
+      "name": "flash-v1-gold-16384-20261022",
+      "payload_files": 23
+    },
+    {
+      "inventory_sha256": "aff5759fe303b95cc620dd16a228f499da16ecf8d1ba707613903876296fd9c6",
+      "kind": "evidence",
+      "name": "flash-v1-gold-16384-20261022-evaluation",
+      "payload_files": 4
+    },
+    {
+      "inventory_sha256": "dab01e2e46138d138893a90eb69da2ed6658e4d6d671ffbd398c61bf5cfe24ab",
+      "kind": "run",
+      "name": "local-smoke-20261021-66",
+      "payload_files": 8
+    },
+    {
+      "inventory_sha256": "688664c65c194ba7afbea7d40be9e981d94501ebf8e72980ddb0136ed34a402e",
+      "kind": "run",
+      "name": "matrix-native-v1-baseline-20261022-72",
+      "payload_files": 63
+    },
+    {
+      "inventory_sha256": "d5588152f7a8bf8941583b6d63b2b48270225facdd6fb9e7256938969509db92",
+      "kind": "evidence",
+      "name": "matrix-native-v1-baseline-20261022-72-evaluation",
+      "payload_files": 3
+    },
+    {
+      "inventory_sha256": "18287b145354b8c3001db5e3ccc7bd2f9496dfa827db0ea7700d37ae82395ad8",
+      "kind": "run",
+      "name": "matrix-native-v1-baseline-nothink-20261022-72",
+      "payload_files": 63
+    },
+    {
+      "inventory_sha256": "bd46a623170f21f24c38172eca341b7a8d7c042fec20923d0a3417de1a193c90",
+      "kind": "evidence",
+      "name": "matrix-native-v1-baseline-nothink-20261022-72-evaluation",
+      "payload_files": 3
+    },
+    {
+      "inventory_sha256": "1a037d0a91d6682482759f43f14d14734f0e6728f77208b148798f5710fe907c",
+      "kind": "run",
+      "name": "matrix-native-v1-baseline-remaining-20261023-72",
+      "payload_files": 61
+    },
+    {
+      "inventory_sha256": "6d73e36739775ce3b71e43dbd13f096aba70ec26bbe6add9347bd9a30f20f81f",
+      "kind": "evidence",
+      "name": "matrix-native-v1-baseline-remaining-20261023-72-evaluation",
+      "payload_files": 4
+    },
+    {
+      "inventory_sha256": "275087025bf6569f341794f659a9ed403b11dfec07bb29e677d8953bb62c42c9",
+      "kind": "run",
+      "name": "matrix-native-v2-gold-20261024-72",
+      "payload_files": 23
+    },
+    {
+      "inventory_sha256": "33d2698a15c833e09cf127dc502e8cbfef47339e99d71dea7edbe88c1cd7d81b",
+      "kind": "evidence",
+      "name": "matrix-native-v2-gold-20261024-72-evaluation",
+      "payload_files": 7
+    },
+    {
+      "inventory_sha256": "b4c6f0f118989a8c4087421246d8bb2f8adcabcb27677541f2eab7e600e856cf",
+      "kind": "run",
+      "name": "matrix-native-v2-remaining-20261024-72",
+      "payload_files": 43
+    },
+    {
+      "inventory_sha256": "01d19b8b7539dd7a763b5e4d7bccfe0919be0696d58ecd561cff80118cda22f5",
+      "kind": "evidence",
+      "name": "matrix-native-v2-remaining-20261024-72-evaluation",
+      "payload_files": 7
+    },
+    {
+      "inventory_sha256": "3b994f4a755f44a8fd34768aec3b15a51a1065e6b372ec24c8016832ca09334f",
+      "kind": "run",
+      "name": "matrix-provider-v1-baseline-20261022-72",
+      "payload_files": 63
+    },
+    {
+      "inventory_sha256": "68d0880a686a3ce207029ce3497648f184d5218468ef2fc59e12414c4f022d89",
+      "kind": "evidence",
+      "name": "matrix-provider-v1-baseline-20261022-72-evaluation",
+      "payload_files": 3
+    },
+    {
+      "inventory_sha256": "2849552fc3c28ec3c0eead84da5df55283e786b1d0030a63d12d4cdcba80d65d",
+      "kind": "run",
+      "name": "matrix-provider-v1-baseline-remaining-20261023-72",
+      "payload_files": 43
+    },
+    {
+      "inventory_sha256": "b26e8e8a6882ecaff807129b734ab911ab087a962e2249b7f8ab013b4f9beb60",
+      "kind": "evidence",
+      "name": "matrix-provider-v1-baseline-remaining-20261023-72-evaluation",
+      "payload_files": 4
+    },
+    {
+      "inventory_sha256": "ed5e1fa53098f0216121408381d3aa2056bd31aaf9c072c17a44b50b528b3bcb",
+      "kind": "run",
+      "name": "matrix-provider-v2-gold-20261024-72",
+      "payload_files": 23
+    },
+    {
+      "inventory_sha256": "8a1cdd9b34c9d6ffcb99437dab97fdd9ec5b4499f930fe8eff8923b779a9c1e8",
+      "kind": "evidence",
+      "name": "matrix-provider-v2-gold-20261024-72-evaluation",
+      "payload_files": 6
+    },
+    {
+      "inventory_sha256": "33a8b9e88c6a525ea6f01a5ce8b4b0a07316131ca711c689e5b58f6a9ee2a0b2",
+      "kind": "run",
+      "name": "matrix-provider-v2-remaining-20261024-72",
+      "payload_files": 43
+    },
+    {
+      "inventory_sha256": "d518dce9d8eb30f2d9ab9bf96cadb07dd0ff0a1161e82dda57f9bd8fca55df37",
+      "kind": "evidence",
+      "name": "matrix-provider-v2-remaining-20261024-72-evaluation",
+      "payload_files": 6
+    },
+    {
+      "inventory_sha256": "cce9d97e44a92cd15315269785fbeaf19c1705bcd980a0d4645d9e36fddbf45d",
+      "kind": "evidence",
+      "name": "matrix-revised-preparation-20261023",
+      "payload_files": 9
+    },
+    {
+      "inventory_sha256": "dd0b77e718517a61b5149c5106dadd3cdeda385f2733ce54ddf94030362bea28",
+      "kind": "run",
+      "name": "native-large-8192-20261022",
+      "payload_files": 5
+    },
+    {
+      "inventory_sha256": "dd4e4101c8e654831d440534de7d7228a8ccd60d4f832a9998096eecf35173a5",
+      "kind": "run",
+      "name": "native-s008-49152-16384-20261022",
+      "payload_files": 5
+    },
+    {
+      "inventory_sha256": "45c70959110d011af1c381642f8e87bc9c30e1f56de343e3c1829534d03f4c54",
+      "kind": "evidence",
+      "name": "native-s008-49152-16384-20261022-evaluation",
+      "payload_files": 4
+    },
+    {
+      "inventory_sha256": "73196a00fb837c28f3a0c0dbef1ca8ca0642dea05b7c78f7668ebd35e2a70637",
+      "kind": "run",
+      "name": "native-short-20261021-67",
+      "payload_files": 5
+    },
+    {
+      "inventory_sha256": "f2d35ad858e5c986a0b3adf3f70eafe47050040cc902119e0348e327828318e5",
+      "kind": "run",
+      "name": "native-smoke-20261021-67",
+      "payload_files": 9
+    },
+    {
+      "inventory_sha256": "7ef4393a40268d45f61776965eaa2e7dc88df64f9bad0a7a5c35fca86df0c599",
+      "kind": "evidence",
+      "name": "native-v2-gold-20261024-preparation",
+      "payload_files": 5
+    },
+    {
+      "inventory_sha256": "314ea6362ac386681d1c07cf708a179c87f7c84a4e5aaef844a7c380889bbac3",
+      "kind": "evidence",
+      "name": "native-v2-remaining-20261024-preparation",
+      "payload_files": 4
+    },
+    {
+      "inventory_sha256": "abed5394e46a03307dbfb55f167c5fbd1ab05968b999723d088fd971cf1156b3",
+      "kind": "run",
+      "name": "provider-screening-20261022-71",
+      "payload_files": 63
+    },
+    {
+      "inventory_sha256": "8fc24d77ab1b8c05da2f48ea9876da88ee5636973dd25a105234dafc5fa324ca",
+      "kind": "evidence",
+      "name": "provider-screening-20261022-71-evaluation",
+      "payload_files": 3
+    },
+    {
+      "inventory_sha256": "5476523fe0514fc1c49e0295be723e8c0e2d072a73dfcbe8a668c9f527e2528e",
+      "kind": "run",
+      "name": "provider-screening-mistral-20261022-71-retry1",
+      "payload_files": 23
+    },
+    {
+      "inventory_sha256": "391e9e8ea59d622aee95f8cf9607ca0dc51614c12942997bd1d4cc4c00e1dff1",
+      "kind": "evidence",
+      "name": "provider-screening-mistral-20261022-71-retry1-evaluation",
+      "payload_files": 3
+    },
+    {
+      "inventory_sha256": "6bf13e598abcf4fdf1fc2ace18b49f099a556763c2b6cefb3c1f9df443a201c2",
+      "kind": "run",
+      "name": "provider-smoke-31-20261022",
+      "payload_files": 9
+    },
+    {
+      "inventory_sha256": "2539203d7fb50863e6a0bec3644f4b626533eead1a7a700500bcb58716972e9e",
+      "kind": "evidence",
+      "name": "provider-v2-gold-20261024-preparation",
+      "payload_files": 6
+    },
+    {
+      "inventory_sha256": "cc8d1fa4d4f4f41f97a80baa70889fb1219d1dd6b944680b22e9537585ed5cf4",
+      "kind": "evidence",
+      "name": "provider-v2-remaining-20261024-preparation",
+      "payload_files": 6
+    },
+    {
+      "inventory_sha256": "69c2de50b10de85a229fc4d05b60124023e3d3dc187dbadc4cef2082c2a3391d",
+      "kind": "evidence",
+      "name": "revised-v1-baseline-review-20261023",
+      "payload_files": 4
+    },
+    {
+      "inventory_sha256": "9856dfd42add7687ebb58fd5dac4e59a897f4c27c713ef2c757f851c68c9ecbc",
+      "kind": "evidence",
+      "name": "revised-v1-native-runtime-20261023",
+      "payload_files": 2
+    },
+    {
+      "inventory_sha256": "c2c6c5333565b77f4151793cac93906249c56ce8e484348c4dbd0fbb80924c87",
+      "kind": "run",
+      "name": "stronger-flash-v1-gold-20261022",
+      "payload_files": 23
+    },
+    {
+      "inventory_sha256": "2ef9d78ca48459ac6efe6e1cb2a056738ecabf73f0b9fb531c4427bf62077df9",
+      "kind": "evidence",
+      "name": "stronger-flash-v1-gold-20261022-evaluation",
+      "payload_files": 4
+    }
+  ],
+  "covered_observations": 120,
+  "manifest_sha256": "ab3855c90dca9c9c541b7fef965aee5119bc0746cbaefcba1bfcbd67f358d281",
+  "membership_sha256": "95ba11883faa1e5e7594c30e4a132d4e6a5228f24be0badc69a1d371e2b698de",
+  "object_key": "hw01/archives/sha256/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.tar.gz",
+  "selection": "submission-history",
+  "version": "hw01-archive-index-v1"
+}

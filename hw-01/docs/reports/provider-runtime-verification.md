@@ -1,5 +1,7 @@
 # Provider extraction evidence — 22 October 2026
 
+**Evidence retrieval:** Bulk evidence is in the [submission-history archive](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json). Follow the [restore instructions](../guides/archiving-results.md#historical-submission-evidence) before opening restored-file links. Original run IDs and export paths retain their historical meaning.
+
 **Plan 6.6.6 is accepted for both adapters.** The approved provider smoke
 completed all three inputs and its export passed verification in a fresh offline
 container. Together with the [native local smoke](native-runtime-verification.md),
@@ -75,7 +77,7 @@ make hw01-export-run ARGS='provider-smoke-31-20261022'
 make hw01-verify-export ARGS='provider-smoke-31-20261022'
 ```
 
-The [exported bundle](../../results/submission/provider-smoke-31-20261022/)
+The [exported bundle](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/provider-smoke-31-20261022/)
 contains all three records/checkpoints, raw returned bodies, frozen schema,
 resolved experiment/setup metadata, manifest and byte hashes. Raw operational
 logs, offline plan and a verified accounting/outcome summary with checksums are

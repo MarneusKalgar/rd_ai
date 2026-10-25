@@ -42,6 +42,7 @@ permission for model inference or spending.
 | Evidence | Document |
 | --- | --- |
 | Checked archive, Garage upload and restored evaluation | [Archive workflow verification](reports/archive-workflow-verification.md) |
+| Bulk evidence retention and Git history cleanup | [Submission retention](reports/submission-retention.md) |
 | Docker setup acceptance | [Docker setup verification](reports/docker-setup-verification.md) |
 | Interrupted Docker extraction smoke | [Extraction smoke](reports/extraction-smoke.md) |
 | Native smoke acceptance | [Native runtime verification](reports/native-runtime-verification.md) |
@@ -60,8 +61,10 @@ permission for model inference or spending.
 
 Raw model evidence belongs under `results/`, separately from these narrative
 reports. The [compact v2 checkpoint](../results/submission/v2-baseline-review-20261025/README.md)
-explains which new evidence is locally retained and awaiting archival; a fresh
-checkout does not contain those raw v2 bundles.
+records checkpoint-time availability. The [retention report](reports/submission-retention.md)
+and [retrieval guide](guides/archiving-results.md#historical-submission-evidence)
+describe subsequent verified archival; a fresh checkout retrieves bulk evidence
+instead of storing raw payloads in Git.
 
 ## Quality
 

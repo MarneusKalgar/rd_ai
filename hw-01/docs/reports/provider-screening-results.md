@@ -1,5 +1,7 @@
 # Provider screening observations — 22 October 2026
 
+**Evidence retrieval:** Bulk evidence is in the [submission-history archive](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json). Follow the [restore instructions](../guides/archiving-results.md#historical-submission-evidence) before opening restored-file links. Original run IDs and export paths retain their historical meaning.
+
 **7.1 is complete with the Gemini pair.** On 22 October 2026, the user accepted
 finalizing selection from the two completed candidates and confirmed that
 Mistral was optional. **Gemini 3.5 Flash-Lite / `google-ai-studio` is selected.**
@@ -98,10 +100,10 @@ make hw01-export-run ARGS='provider-screening-20261022-71'
 make hw01-verify-export ARGS='provider-screening-20261022-71'
 ```
 
-The [run bundle](../../results/submission/provider-screening-20261022-71/) contains
+The [run bundle](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/provider-screening-20261022-71/) contains
 all records/checkpoints, raw returned evidence, resolved configuration, schema,
 manifest and hashes. The separate
-[evaluation bundle](../../results/submission/provider-screening-20261022-71-evaluation/)
+[evaluation bundle](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/provider-screening-20261022-71-evaluation/)
 contains evaluator JSON, a verified summary and byte hashes. Original results
 remain unchanged. Raw process/plan logs, config snapshot and evaluation/accounting
 evidence with checksums remain in the ignored persistent volume under
@@ -129,9 +131,9 @@ Neither Gemini was rerun; no fallback or credential substitution occurred.
 
 Saved records were reloaded and evaluated offline, independently checking
 selection, sampling, errors, context admissions and cumulative accounting.
-The [retry run bundle](../../results/submission/provider-screening-mistral-20261022-71-retry1/)
+The [retry run bundle](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/provider-screening-mistral-20261022-71-retry1/)
 and separate
-[retry evaluation bundle](../../results/submission/provider-screening-mistral-20261022-71-retry1-evaluation/)
+[retry evaluation bundle](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/provider-screening-mistral-20261022-71-retry1-evaluation/)
 retain all 10 terminal records and their provenance. Export verification ran in
 a fresh offline container; all 24 exported payload hashes were checked on the
 host. Process log, configuration, evaluation and accounting summary with

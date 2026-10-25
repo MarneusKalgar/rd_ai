@@ -1,5 +1,7 @@
 # Large-document output allowance experiment — 22 October 2026
 
+**Evidence retrieval:** Bulk evidence is in the [submission-history archive](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json). Follow the [restore instructions](../guides/archiving-results.md#historical-submission-evidence) before opening restored-file links. Original run IDs and export paths retain their historical meaning.
+
 The user approved a second native experiment for **B02-S008-PO01** with an
 8,192-token output allowance. It completed with one failed, truncated attempt.
 Doubling the allowance did not produce a complete extraction.
@@ -71,7 +73,7 @@ resource decision. No additional experiment is scheduled.
 
 ## Retained evidence
 
-The [verified export](../../results/submission/native-large-8192-20261022/)
+The [verified export](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/native-large-8192-20261022/)
 contains the manifest, record, checkpoint/admission evidence, raw response,
 schema and hash inventory. Export and independent offline verification both
 reported one record in a complete run. Logs and configuration copies are saved

@@ -1,5 +1,7 @@
 # Full-corpus v1 baseline review — plan 7.2
 
+**Evidence retrieval:** Bulk evidence is in the [submission-history archive](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json). Follow the [restore instructions](../guides/archiving-results.md#historical-submission-evidence) before opening restored-file links. Original run IDs and export paths retain their historical meaning.
+
 This review uses saved matrix outputs, the frozen schema/inputs/gold and their
 existing annotation explanations. It does not create new human gold review or
 alter labels. The same 10 gold cases were used in provider selection; subsequent
@@ -105,8 +107,8 @@ text is not treated as a PO extraction. See the official
 [Gemma thinking templates](https://ai.google.dev/gemma/docs/capabilities/thinking).
 No extra generation was used to diagnose this.
 
-The [native run bundle](../../results/submission/matrix-native-v1-baseline-20261022-72/)
-and [evaluation bundle](../../results/submission/matrix-native-v1-baseline-20261022-72-evaluation/)
+The [native run bundle](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v1-baseline-20261022-72/)
+and [evaluation bundle](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v1-baseline-20261022-72-evaluation/)
 retain all outcomes; a fresh offline container revalidated all 30 records.
 Native model residency subsequently expired: `/api/ps` returned no models,
 and the app/server processes were idle. The user reported about 12 GB while

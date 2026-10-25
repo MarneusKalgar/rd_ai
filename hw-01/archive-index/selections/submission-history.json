@@ -1,0 +1,193 @@
+{
+  "version": "submission-retention-v1",
+  "bundles": [
+    {
+      "path": "results/submission/flash-pair-v1-gold-8192-20261022",
+      "source_inventory_sha256": "b3dc43a98b738fb6bef93d12d994a477d53977814c2e5e7e6bad4093926a7e1a",
+      "source_manifest_sha256": "1b970d8b5a93713ada66379455bf897f32312303afa588e360de03a0d0cee84d"
+    },
+    {
+      "path": "results/submission/flash-pair-v1-gold-8192-20261022-evaluation",
+      "source_inventory_sha256": "98feac28e19e5ac375aadba2f34039f90ac54da8891a6abe47087530d16500f9"
+    },
+    {
+      "path": "results/submission/flash-v1-gold-16384-20261022",
+      "source_inventory_sha256": "f910107d95e547af1c8222dd14a82d9f32855f8d19d79a43407ae0954be02d97",
+      "source_manifest_sha256": "e63f0eadd1afdb8ae19b9c313d1acabebb40f4f8546a52f709d7990d42d9395f"
+    },
+    {
+      "path": "results/submission/flash-v1-gold-16384-20261022-evaluation",
+      "source_inventory_sha256": "aff5759fe303b95cc620dd16a228f499da16ecf8d1ba707613903876296fd9c6"
+    },
+    {
+      "path": "results/submission/local-smoke-20261021-66",
+      "source_inventory_sha256": "dab01e2e46138d138893a90eb69da2ed6658e4d6d671ffbd398c61bf5cfe24ab",
+      "source_manifest_sha256": "32e9349d1133f538cca1876577c06728f3a53455199de7e1d13f9ec9ad82e35b"
+    },
+    {
+      "path": "results/submission/matrix-native-v1-baseline-20261022-72",
+      "source_inventory_sha256": "688664c65c194ba7afbea7d40be9e981d94501ebf8e72980ddb0136ed34a402e",
+      "source_manifest_sha256": "63e261023507b635e263c35a7921fdc5c04c1e81f0cd2a82467f2ccdcc0ab91e"
+    },
+    {
+      "path": "results/submission/matrix-native-v1-baseline-20261022-72-evaluation",
+      "source_inventory_sha256": "d5588152f7a8bf8941583b6d63b2b48270225facdd6fb9e7256938969509db92"
+    },
+    {
+      "path": "results/submission/matrix-native-v1-baseline-nothink-20261022-72",
+      "source_inventory_sha256": "18287b145354b8c3001db5e3ccc7bd2f9496dfa827db0ea7700d37ae82395ad8",
+      "source_manifest_sha256": "979df78b3a294609a482973c1363951ac23b66f5ed9c5b4561bc94467b6333f6"
+    },
+    {
+      "path": "results/submission/matrix-native-v1-baseline-nothink-20261022-72-evaluation",
+      "source_inventory_sha256": "bd46a623170f21f24c38172eca341b7a8d7c042fec20923d0a3417de1a193c90"
+    },
+    {
+      "path": "results/submission/matrix-native-v1-baseline-remaining-20261023-72",
+      "source_inventory_sha256": "1a037d0a91d6682482759f43f14d14734f0e6728f77208b148798f5710fe907c",
+      "source_manifest_sha256": "a00263f8123750e572e98aecabc77b6a29c5a070361714e2fbd4ebc9c4ac2f9a"
+    },
+    {
+      "path": "results/submission/matrix-native-v1-baseline-remaining-20261023-72-evaluation",
+      "source_inventory_sha256": "6d73e36739775ce3b71e43dbd13f096aba70ec26bbe6add9347bd9a30f20f81f"
+    },
+    {
+      "path": "results/submission/matrix-native-v2-gold-20261024-72",
+      "source_inventory_sha256": "275087025bf6569f341794f659a9ed403b11dfec07bb29e677d8953bb62c42c9",
+      "source_manifest_sha256": "25ee66000d3021277b1912cf134640fbfd9e0b95b768034053b390289538ff21"
+    },
+    {
+      "path": "results/submission/matrix-native-v2-gold-20261024-72-evaluation",
+      "source_inventory_sha256": "33d2698a15c833e09cf127dc502e8cbfef47339e99d71dea7edbe88c1cd7d81b"
+    },
+    {
+      "path": "results/submission/matrix-native-v2-remaining-20261024-72",
+      "source_inventory_sha256": "b4c6f0f118989a8c4087421246d8bb2f8adcabcb27677541f2eab7e600e856cf",
+      "source_manifest_sha256": "ee9b939b2293d1fb47aab996dfba2b646b58e56cd01d3ab1f2be8ddf43237633"
+    },
+    {
+      "path": "results/submission/matrix-native-v2-remaining-20261024-72-evaluation",
+      "source_inventory_sha256": "01d19b8b7539dd7a763b5e4d7bccfe0919be0696d58ecd561cff80118cda22f5"
+    },
+    {
+      "path": "results/submission/matrix-provider-v1-baseline-20261022-72",
+      "source_inventory_sha256": "3b994f4a755f44a8fd34768aec3b15a51a1065e6b372ec24c8016832ca09334f",
+      "source_manifest_sha256": "761ceff81b95f3285cf6b46b72504f89a559911429bcee894d04a57a2641295c"
+    },
+    {
+      "path": "results/submission/matrix-provider-v1-baseline-20261022-72-evaluation",
+      "source_inventory_sha256": "68d0880a686a3ce207029ce3497648f184d5218468ef2fc59e12414c4f022d89"
+    },
+    {
+      "path": "results/submission/matrix-provider-v1-baseline-remaining-20261023-72",
+      "source_inventory_sha256": "2849552fc3c28ec3c0eead84da5df55283e786b1d0030a63d12d4cdcba80d65d",
+      "source_manifest_sha256": "b1e134883d607183eb72b776067b165fd5267b08f4a431556f4640c041f1e229"
+    },
+    {
+      "path": "results/submission/matrix-provider-v1-baseline-remaining-20261023-72-evaluation",
+      "source_inventory_sha256": "b26e8e8a6882ecaff807129b734ab911ab087a962e2249b7f8ab013b4f9beb60"
+    },
+    {
+      "path": "results/submission/matrix-provider-v2-gold-20261024-72",
+      "source_inventory_sha256": "ed5e1fa53098f0216121408381d3aa2056bd31aaf9c072c17a44b50b528b3bcb",
+      "source_manifest_sha256": "57182e5332cb576cc2bed379cb14781ebb014872803fa8f32a49bf13340ce210"
+    },
+    {
+      "path": "results/submission/matrix-provider-v2-gold-20261024-72-evaluation",
+      "source_inventory_sha256": "8a1cdd9b34c9d6ffcb99437dab97fdd9ec5b4499f930fe8eff8923b779a9c1e8"
+    },
+    {
+      "path": "results/submission/matrix-provider-v2-remaining-20261024-72",
+      "source_inventory_sha256": "33a8b9e88c6a525ea6f01a5ce8b4b0a07316131ca711c689e5b58f6a9ee2a0b2",
+      "source_manifest_sha256": "f69490556d991cd7e88a8963b60cab76dd69e424ffcf8067784373220287c302"
+    },
+    {
+      "path": "results/submission/matrix-provider-v2-remaining-20261024-72-evaluation",
+      "source_inventory_sha256": "d518dce9d8eb30f2d9ab9bf96cadb07dd0ff0a1161e82dda57f9bd8fca55df37"
+    },
+    {
+      "path": "results/submission/matrix-revised-preparation-20261023",
+      "source_inventory_sha256": "cce9d97e44a92cd15315269785fbeaf19c1705bcd980a0d4645d9e36fddbf45d"
+    },
+    {
+      "path": "results/submission/native-large-8192-20261022",
+      "source_inventory_sha256": "dd0b77e718517a61b5149c5106dadd3cdeda385f2733ce54ddf94030362bea28",
+      "source_manifest_sha256": "045338d93277cab1e17c3a3ba0ad78690c02c6ecc4f141cd016b27b04cbaf70a"
+    },
+    {
+      "path": "results/submission/native-s008-49152-16384-20261022",
+      "source_inventory_sha256": "dd4e4101c8e654831d440534de7d7228a8ccd60d4f832a9998096eecf35173a5",
+      "source_manifest_sha256": "214e49b2a0121c8161909d330e3d726846b665af961c2fa39dd280e698dcf276"
+    },
+    {
+      "path": "results/submission/native-s008-49152-16384-20261022-evaluation",
+      "source_inventory_sha256": "45c70959110d011af1c381642f8e87bc9c30e1f56de343e3c1829534d03f4c54"
+    },
+    {
+      "path": "results/submission/native-short-20261021-67",
+      "source_inventory_sha256": "73196a00fb837c28f3a0c0dbef1ca8ca0642dea05b7c78f7668ebd35e2a70637",
+      "source_manifest_sha256": "69b923f02e8ce166b950195e85f805e4df9a63e9a4521df721822ccd197690a0"
+    },
+    {
+      "path": "results/submission/native-smoke-20261021-67",
+      "source_inventory_sha256": "f2d35ad858e5c986a0b3adf3f70eafe47050040cc902119e0348e327828318e5",
+      "source_manifest_sha256": "973827aa0e0cf0d459b7041d3b57f6237c57402bc3b35fabffb7b7ebc04b71d2"
+    },
+    {
+      "path": "results/submission/native-v2-gold-20261024-preparation",
+      "source_inventory_sha256": "7ef4393a40268d45f61776965eaa2e7dc88df64f9bad0a7a5c35fca86df0c599"
+    },
+    {
+      "path": "results/submission/native-v2-remaining-20261024-preparation",
+      "source_inventory_sha256": "314ea6362ac386681d1c07cf708a179c87f7c84a4e5aaef844a7c380889bbac3"
+    },
+    {
+      "path": "results/submission/provider-screening-20261022-71",
+      "source_inventory_sha256": "abed5394e46a03307dbfb55f167c5fbd1ab05968b999723d088fd971cf1156b3",
+      "source_manifest_sha256": "74906e3666bce9a5356e52e91a7df0656827c7b0e4057121a512ed40e5c53d20"
+    },
+    {
+      "path": "results/submission/provider-screening-20261022-71-evaluation",
+      "source_inventory_sha256": "8fc24d77ab1b8c05da2f48ea9876da88ee5636973dd25a105234dafc5fa324ca"
+    },
+    {
+      "path": "results/submission/provider-screening-mistral-20261022-71-retry1",
+      "source_inventory_sha256": "5476523fe0514fc1c49e0295be723e8c0e2d072a73dfcbe8a668c9f527e2528e",
+      "source_manifest_sha256": "f1481369988bf707a748bbdaf72cfabd0a63de6b38688abb414f95f1fe8f3948"
+    },
+    {
+      "path": "results/submission/provider-screening-mistral-20261022-71-retry1-evaluation",
+      "source_inventory_sha256": "391e9e8ea59d622aee95f8cf9607ca0dc51614c12942997bd1d4cc4c00e1dff1"
+    },
+    {
+      "path": "results/submission/provider-smoke-31-20261022",
+      "source_inventory_sha256": "6bf13e598abcf4fdf1fc2ace18b49f099a556763c2b6cefb3c1f9df443a201c2",
+      "source_manifest_sha256": "9fc5099ec4a5876cc0cd31ea8b6d0b9737a8ac0977a0b75be0eb9b0288e7fe67"
+    },
+    {
+      "path": "results/submission/provider-v2-gold-20261024-preparation",
+      "source_inventory_sha256": "2539203d7fb50863e6a0bec3644f4b626533eead1a7a700500bcb58716972e9e"
+    },
+    {
+      "path": "results/submission/provider-v2-remaining-20261024-preparation",
+      "source_inventory_sha256": "cc8d1fa4d4f4f41f97a80baa70889fb1219d1dd6b944680b22e9537585ed5cf4"
+    },
+    {
+      "path": "results/submission/revised-v1-baseline-review-20261023",
+      "source_inventory_sha256": "69c2de50b10de85a229fc4d05b60124023e3d3dc187dbadc4cef2082c2a3391d"
+    },
+    {
+      "path": "results/submission/revised-v1-native-runtime-20261023",
+      "source_inventory_sha256": "9856dfd42add7687ebb58fd5dac4e59a897f4c27c713ef2c757f851c68c9ecbc"
+    },
+    {
+      "path": "results/submission/stronger-flash-v1-gold-20261022",
+      "source_inventory_sha256": "c2c6c5333565b77f4151793cac93906249c56ce8e484348c4dbd0fbb80924c87",
+      "source_manifest_sha256": "c01941e840b61834d48dfbb5a90528a86319f1cb7a107ecdba96dda3f3e59f0a"
+    },
+    {
+      "path": "results/submission/stronger-flash-v1-gold-20261022-evaluation",
+      "source_inventory_sha256": "2ef9d78ca48459ac6efe6e1cb2a056738ecabf73f0b9fb531c4427bf62077df9"
+    }
+  ]
+}

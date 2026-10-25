@@ -1,6 +1,8 @@
 # Revised required provider/local matrix (7.2)
 
-**Evidence availability — 25 October 2026:** the [compact review snapshot](../../results/submission/v2-baseline-review-20261025/summary.json) and [availability index](../../results/submission/v2-baseline-review-20261025/evidence-index.json) are included in this checkpoint. New v2 raw/preparation/detailed evaluation bundles referenced below are retained locally and intentionally unversioned pending archival. A fresh checkout cannot reproduce their saved-run evaluation yet. See the [checkpoint notes](../../results/submission/v2-baseline-review-20261025/README.md).
+**Evidence retrieval:** Bulk evidence is in the [submission-history archive](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json). Follow the [restore instructions](../guides/archiving-results.md#historical-submission-evidence) before opening restored-file links. Original run IDs and export paths retain their historical meaning.
+
+**Evidence availability — 25 October 2026:** the compact review snapshot remains in Git. Raw runs, preparation and detailed evaluation bundles are preserved in verified archives; restore them before recomputing saved-run scores. See the [retrieval guide](../guides/archiving-results.md#historical-submission-evidence).
 
 ## Current status — 24 October 2026
 
@@ -579,10 +581,10 @@ Remaining total allowance is **$3.74923140**; the unspent protected matrix
 amount is **$3.34639740**. These are ledger amounts, not a claim that the
 unknown historical charges were billed.
 
-The [provider run bundle](../../results/submission/matrix-provider-v1-baseline-20261022-72/)
+The [provider run bundle](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-provider-v1-baseline-20261022-72/)
 contains all 30 records/checkpoints and hashes; its records revalidated in a
 fresh offline container. The separate
-[evaluation bundle](../../results/submission/matrix-provider-v1-baseline-20261022-72-evaluation/)
+[evaluation bundle](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-provider-v1-baseline-20261022-72-evaluation/)
 contains the unchanged shared evaluator output and verified accounting summary.
 Process/plan logs, configuration snapshot, evaluation and summary with checksums
 are retained in `results/matrix-runs/matrix-provider-v1-baseline-20261022-72/`.

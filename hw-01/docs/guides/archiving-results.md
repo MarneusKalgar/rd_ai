@@ -75,6 +75,50 @@ the original ledger/policy backups. The archive deliberately does not export
 private accounting files. Without those backups, individual v1 runs can still
 be evaluated, but do not claim the same combined budget-normalized variant.
 
+## Historical submission evidence
+
+The `submission-history` selection preserves all 42 public bulk bundles that
+existed at the 25 October 2026 retention migration: 20 run exports and 22
+preparation/evaluation/runtime bundles. Its explicit inventory references live
+in `archive-index/selections/submission-history.json`. The five curated files
+under `catalog-row-diagnostics-20261024/` and `v2-baseline-review-20261025/`
+remain in Git; bulk payloads are retrieved separately.
+
+The comprehensive archive is
+`31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a`.
+Its [compact index](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json),
+[Garage receipt](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.remote.json)
+and [coverage verification](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.verification.json)
+identify the exact retained bytes. With access to the original Garage volume
+and its ignored credentials, run from the repository root:
+
+```sh
+make hw01-archive-store-up
+make hw01-download-archive ARGS='--index archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json'
+make hw01-restore-results ARGS='--index archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json'
+```
+
+If the exact isolated restore already exists, verify the archive rather than
+trying to overwrite that directory. The result is
+`hw-01/results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/`.
+Report links to bulk payloads target this tree. Evaluation uses the existing
+`hw01-evaluate-restored` command with that submission path as `--source-dir`.
+
+The diagnostic command can inspect this restore without copying over originals:
+
+```sh
+cd hw-01
+docker compose --env-file .env.compose run --rm --no-deps --volume "$PWD/results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission:/app/results/submission:ro" offline python -m extraction_service diagnose-rows matrix-native-v1-baseline-remaining-20261023-72
+```
+
+Original `results/submission/...` paths in historical prose identify the export
+locations at execution time. On the original workstation those ignored working
+copies are retained; a fresh checkout needs restoration. Creating the selection
+again requires the original bundle paths and membership file to be present.
+Downloading/restoring an existing index does not require those source exports.
+See the [retention report](../reports/submission-retention.md) for Git scope and
+recovery boundaries.
+
 ## Optional local Garage bucket
 
 Generate first-use settings and start the pinned single-node service:
@@ -145,6 +189,8 @@ portable archive or an accessible retrieval location when handing off evidence.
 
 The local cache, original exports and Garage volume can all live on the same
 laptop. Back up archives or Garage data separately before deleting originals.
-This workflow performs no deletion or untracking; any later cleanup is a
-separately authorized action. Existing tracked evidence and new untracked raw
-bundles stay in place throughout implementation and verification.
+Archive commands perform no deletion or untracking. The separately authorized
+[retention migration](../reports/submission-retention.md) removes verified bulk
+payloads from Git while preserving original local exports, restored copies and
+Garage objects. Keep the local Git recovery bundle until the rewritten history
+and evidence access have been checked.

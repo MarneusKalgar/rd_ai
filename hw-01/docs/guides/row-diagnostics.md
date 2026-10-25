@@ -51,6 +51,10 @@ date/party roles and total reconciliation are not implemented by this check.
 
 From the repository root, inspect exported evidence on the host:
 
+This example uses the retained original exports. After a fresh checkout, follow
+the [archive restore instructions](archiving-results.md#historical-submission-evidence),
+which include a read-only diagnostic command for the isolated restore.
+
 ```sh
 make -s hw01-diagnose-rows ARGS='matrix-native-v1-baseline-remaining-20261023-72'
 ```

@@ -1,5 +1,7 @@
 # Audited experiment budget revisions
 
+**Evidence retrieval:** Bulk evidence is in the [submission-history archive](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json). Follow the [restore instructions](../guides/archiving-results.md#historical-submission-evidence) before opening restored-file links. Original run IDs and export paths retain their historical meaning.
+
 The user authorized increasing the cumulative experiment ceiling from $4.50
 to **$10**. OpenRouter's key limit and this application's ledger policy are
 separate controls. The original assignment's up-to-$5 allowance is retained

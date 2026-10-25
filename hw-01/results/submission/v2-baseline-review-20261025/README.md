@@ -14,13 +14,12 @@ baseline comparison. It is not a complete run export or an external archive.
 - `evidence-index.json` identifies the twelve new v2 source bundles retained
   locally, with hashes of their original inventories/manifests. Those hashes
   identify omitted evidence; they do not claim that its payloads are included
-  in this checkout. Previously committed v1 evidence is unchanged.
+  in this checkout. The subsequent retention migration archived previously committed v1 evidence as well; see the [retention report](../../../docs/reports/submission-retention.md).
 
 The new raw responses, checkpoints, preparation reports, detailed evaluations
 and membership snapshots remain locally retained, ignored and untracked. Their
 subsequent verified archive is recorded in the report linked above; the raw
-payloads are not embedded in this compact checkpoint. Working copies have been
-retained without deletion, Git untracking or history changes.
+payloads are not embedded in this compact checkpoint. Working copies remain locally retained. The later [retention report](../../../docs/reports/submission-retention.md) documents removal of bulk evidence from Git tracking and history.
 
 A fresh checkout can run the offline implementation tests and inspect this
 summary, but cannot independently recompute the new v2 scores without the

@@ -1,6 +1,8 @@
 # Frozen v2 continuation — 24 October 2026
 
-**Evidence availability — 25 October 2026:** the [compact review snapshot](../../results/submission/v2-baseline-review-20261025/summary.json) and [availability index](../../results/submission/v2-baseline-review-20261025/evidence-index.json) are included in this checkpoint. New v2 raw/preparation/detailed evaluation bundles referenced below are retained locally and intentionally unversioned pending archival. A fresh checkout cannot reproduce their saved-run evaluation yet. See the [checkpoint notes](../../results/submission/v2-baseline-review-20261025/README.md).
+**Evidence retrieval:** Bulk evidence is in the [submission-history archive](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json). Follow the [restore instructions](../guides/archiving-results.md#historical-submission-evidence) before opening restored-file links. Original run IDs and export paths retain their historical meaning.
+
+**Evidence availability — 25 October 2026:** the compact review snapshot remains in Git. Raw runs, preparation and detailed evaluation bundles are preserved in verified archives; restore them before recomputing saved-run scores. See the [retrieval guide](../guides/archiving-results.md#historical-submission-evidence).
 
 ## Requested scope and preparation
 
@@ -19,7 +21,7 @@ and scorer. No skill/examples, Qwen or exploratory invocation is included.
   0.40.7, matching saved model/tokenizer identity, context 49,152, thinking=false.
   All 20 initial requests passed render-only admission; maximum prompt bound
   22,863 plus 16,384 output allowance. Actual correction requests need their
-  own admission. Preparation (local-only: `../../results/submission/native-v2-remaining-20261024-preparation/preparation.json`).
+  own admission. Preparation (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/native-v2-remaining-20261024-preparation/preparation.json`).
 - Provider run: `matrix-provider-v2-gold-20261024-72`; Gemini 3.5 Flash through
   `google-ai-studio`, default reasoning retained, 16,384 output allowance.
   Provider-enforced context policy already approved for matrix execution; full
@@ -27,7 +29,7 @@ and scorer. No skill/examples, Qwen or exploratory invocation is included.
   advertises 1,048,576 context and 65,536 maximum completion tokens. Reserve
   $1.720320 per physical call; settle reported costs, retain unknown charges.
   Ten primaries, at most 40 physical calls including bounded retries/correction.
-  Preparation (local-only: `../../results/submission/provider-v2-gold-20261024-preparation/preparation.json`).
+  Preparation (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/provider-v2-gold-20261024-preparation/preparation.json`).
 
 Preparation performed no inference and did not change the ledger: $2.64845470
 accounted, including $0.50135040 prior unknown holds; $7.35154530 remaining under
@@ -43,7 +45,7 @@ calls for 20 primaries. Its opening accounted balance is $2.86977220 and
 remaining allowance $7.13022780 under the unchanged $10 cap. Each call reserves
 $1.720320; earlier unknown holds remain preserved. This continuation subsequently
 completed and supplies no approval for any later invocation.
-Preparation (local-only: `../../results/submission/provider-v2-remaining-20261024-preparation/preparation.json`).
+Preparation (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/provider-v2-remaining-20261024-preparation/preparation.json`).
 
 ## Execution status
 
@@ -71,10 +73,10 @@ nine unknown output rows. Unknown means the check has no conclusive evidence;
 it is not an extraction error label. These categories are distinct from field
 accuracy and did not change output, correction behavior or scoring.
 
-- Raw provider run (local-only: `../../results/submission/matrix-provider-v2-gold-20261024-72/`).
-- Provider summary (local-only: `../../results/submission/matrix-provider-v2-gold-20261024-72-evaluation/verified-summary.json`).
-- Matched v1/v2 comparison (local-only: `../../results/submission/matrix-provider-v2-gold-20261024-72-evaluation/comparison.json`).
-- Compact source-row diagnostic (local-only: `../../results/submission/matrix-provider-v2-gold-20261024-72-evaluation/diagnostic-summary.json`).
+- Raw provider run (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-provider-v2-gold-20261024-72/`).
+- Provider summary (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-provider-v2-gold-20261024-72-evaluation/verified-summary.json`).
+- Matched v1/v2 comparison (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-provider-v2-gold-20261024-72-evaluation/comparison.json`).
+- Compact source-row diagnostic (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-provider-v2-gold-20261024-72-evaluation/diagnostic-summary.json`).
 
 The later provider remaining20 continuation is complete, as recorded below.
 Native remaining20 subsequently completed, as recorded below.
@@ -102,10 +104,10 @@ The full source-row diagnostic reports 25 supported, zero contradicted and
 255 unknown output rows. Most forms are outside its conclusive evidence
 coverage; this is not proof that all unlabeled outputs are correct.
 
-- Raw continuation (local-only: `../../results/submission/matrix-provider-v2-remaining-20261024-72/`).
-- All30 summary (local-only: `../../results/submission/matrix-provider-v2-remaining-20261024-72-evaluation/verified-summary.json`).
-- All30 v1/v2 comparison (local-only: `../../results/submission/matrix-provider-v2-remaining-20261024-72-evaluation/comparison.json`).
-- Compact all30 diagnostic (local-only: `../../results/submission/matrix-provider-v2-remaining-20261024-72-evaluation/diagnostic-summary.json`).
+- Raw continuation (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-provider-v2-remaining-20261024-72/`).
+- All30 summary (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-provider-v2-remaining-20261024-72-evaluation/verified-summary.json`).
+- All30 v1/v2 comparison (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-provider-v2-remaining-20261024-72-evaluation/comparison.json`).
+- Compact all30 diagnostic (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-provider-v2-remaining-20261024-72-evaluation/diagnostic-summary.json`).
 
 Provider completion brought required coverage to 100/240; the final native
 continuation increases this to 120/240 below. No further paid invocation is approved.
@@ -143,12 +145,12 @@ conditions visible when comparing timings.
 Native API spend is zero. Gemma was unloaded after completion; native residency
 was verified empty. No further model invocation is authorized.
 
-- Raw native continuation (local-only: `../../results/submission/matrix-native-v2-remaining-20261024-72/`).
-- Combined native summary (local-only: `../../results/submission/matrix-native-v2-remaining-20261024-72-evaluation/verified-summary.json`).
-- All30 native v1/v2 comparison (local-only: `../../results/submission/matrix-native-v2-remaining-20261024-72-evaluation/comparison.json`).
-- Compact native diagnostic (local-only: `../../results/submission/matrix-native-v2-remaining-20261024-72-evaluation/diagnostic-summary.json`).
-- Native unload evidence (local-only: `../../results/submission/matrix-native-v2-remaining-20261024-72-evaluation/native-runtime.json`).
-- Final required membership (local-only: `../../results/submission/matrix-native-v2-remaining-20261024-72-evaluation/membership.json`).
+- Raw native continuation (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v2-remaining-20261024-72/`).
+- Combined native summary (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v2-remaining-20261024-72-evaluation/verified-summary.json`).
+- All30 native v1/v2 comparison (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v2-remaining-20261024-72-evaluation/comparison.json`).
+- Compact native diagnostic (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v2-remaining-20261024-72-evaluation/diagnostic-summary.json`).
+- Native unload evidence (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v2-remaining-20261024-72-evaluation/native-runtime.json`).
+- Final required membership (restore first: `../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v2-remaining-20261024-72-evaluation/membership.json`).
 
 ## Final scope and budget
 

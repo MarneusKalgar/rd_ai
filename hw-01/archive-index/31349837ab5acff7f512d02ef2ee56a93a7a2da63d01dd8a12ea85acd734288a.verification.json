@@ -1,0 +1,15 @@
+{
+  "version": "hw01-retention-verification-v1",
+  "archive_sha256": "31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a",
+  "archive_bytes": 2904768,
+  "bundles": 42,
+  "run_bundles": 20,
+  "payload_files": 742,
+  "expanded_payload_bytes": 19201213,
+  "previously_tracked_bulk_files": 563,
+  "curated_files_retained_in_git": 5,
+  "every_source_and_restored_payload_equal": true,
+  "every_previously_tracked_bulk_file_archived": true,
+  "inference_performed": false,
+  "garage_full_get_verified": true
+}

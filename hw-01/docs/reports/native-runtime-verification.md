@@ -1,5 +1,7 @@
 # Native extraction evidence — 21 October 2026
 
+**Evidence retrieval:** Bulk evidence is in the [submission-history archive](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json). Follow the [restore instructions](../guides/archiving-results.md#historical-submission-evidence) before opening restored-file links. Original run IDs and export paths retain their historical meaning.
+
 For the separately approved 8,192-token follow-up on the large input, see the
 [22 October output-allowance experiment](output-allowance-experiment.md).
 
@@ -110,8 +112,8 @@ make hw01-export-run ARGS='native-smoke-20261021-67'
 make hw01-verify-export ARGS='native-smoke-20261021-67'
 ```
 
-The [short export](../../results/submission/native-short-20261021-67/) contains one
-record; the [three-document export](../../results/submission/native-smoke-20261021-67/)
+The [short export](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/native-short-20261021-67/) contains one
+record; the [three-document export](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/native-smoke-20261021-67/)
 contains all three, including the truncated result. Each includes its manifest,
 schema, checkpoints, raw responses and file hashes. The interrupted Docker export
 was preserved unchanged. Raw logs/configuration and sensitivity-check evidence

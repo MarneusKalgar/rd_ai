@@ -2,3 +2,6 @@ selections:
   final-baselines:
     membership: results/submission/matrix-native-v2-remaining-20261024-72-evaluation/membership.json
     evidence_index: results/submission/v2-baseline-review-20261025/evidence-index.json
+  submission-history:
+    membership: results/submission/matrix-native-v2-remaining-20261024-72-evaluation/membership.json
+    evidence_index: archive-index/selections/submission-history.json

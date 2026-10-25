@@ -1,5 +1,7 @@
 # Revised v1 baseline results
 
+**Evidence retrieval:** Bulk evidence is in the [submission-history archive](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json). Follow the [restore instructions](../guides/archiving-results.md#historical-submission-evidence) before opening restored-file links. Original run IDs and export paths retain their historical meaning.
+
 Verified 23 October 2026. Both models attempted all 30 frozen inputs using
 unchanged v1, temperature 0, top_p 1 and a 16,384-token output allowance.
 Native Gemma used 49,152 context and thinking=false. Flash retained its default
@@ -72,12 +74,12 @@ unique inputs per model. Explicit audited-budget compatibility preserves the
 original $4.50 source policies alongside the new $10 policies. Original records
 and hashes remain unchanged. Historical 4,096/8,192 diagnostics remain separate.
 
-- [Combined comparison and membership](../../results/submission/revised-v1-baseline-review-20261023/verified-summary.json)
-- [Full evaluation](../../results/submission/revised-v1-baseline-review-20261023/evaluation.json)
-- [240-entry membership inventory](../../results/submission/revised-v1-baseline-review-20261023/membership.json): 60 baseline observations covered; 180 unexecuted behind the review gate.
-- [Native continuation evaluation](../../results/submission/matrix-native-v1-baseline-remaining-20261023-72-evaluation/verified-summary.json)
-- [Provider continuation evaluation](../../results/submission/matrix-provider-v1-baseline-remaining-20261023-72-evaluation/verified-summary.json)
-- [Native final runtime and unload evidence](../../results/submission/revised-v1-native-runtime-20261023/runtime.json)
+- [Combined comparison and membership](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/revised-v1-baseline-review-20261023/verified-summary.json)
+- [Full evaluation](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/revised-v1-baseline-review-20261023/evaluation.json)
+- [240-entry membership inventory](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/revised-v1-baseline-review-20261023/membership.json): 60 baseline observations covered; 180 unexecuted behind the review gate.
+- [Native continuation evaluation](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-native-v1-baseline-remaining-20261023-72-evaluation/verified-summary.json)
+- [Provider continuation evaluation](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/matrix-provider-v1-baseline-remaining-20261023-72-evaluation/verified-summary.json)
+- [Native final runtime and unload evidence](../../results/restored/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a/submission/revised-v1-native-runtime-20261023/runtime.json)
 
 The new provider20 cost **$0.87513165**, with every charge settled. Current
 cumulative accounted spend is **$2.64845470**, including **$0.50135040** in
