@@ -5,6 +5,8 @@
 - This repository contains independent AI homework projects. Each homework owns
   its dependencies, implementation, data, checks and deliverables.
 - HW-01 lives in `hw-01/`. Read its README and relevant documents before editing.
+- Start at `hw-01/docs/README.md` for guides, reference, plans, reports and quality
+  documentation. Keep new documents in the group matching their primary purpose.
 - Root Make targets route to homework commands. Keep private data preparation
   out of the reviewer-facing workflow.
 - Work here does not automatically change AspectLoop or its AI-track scope.
@@ -29,7 +31,7 @@ put any focused mutation or reproduction in a disposable copy.
 
 - The authoritative PO extraction contract is
   `hw-01/schemas/purchase-order-extraction.v1.schema.json`; field semantics are
-  documented in `hw-01/docs/extraction-contract.md`.
+  documented in `hw-01/docs/reference/extraction-contract.md`.
 - Do not introduce a second handwritten Pydantic PO model. Pydantic validates
   configuration, settings, attempt records and run records.
 - Keep operational metadata outside PO output objects. Preserve raw responses
@@ -62,7 +64,7 @@ put any focused mutation or reproduction in a disposable copy.
 - Use `make hw01-validate-gold` when only gold validation is needed.
 - Dependencies are declared in `hw-01/pyproject.toml` and locked in
   `hw-01/uv.lock`. Update both together when changing dependencies; see
-  `hw-01/docs/runtime-validation.md` for the Docker lock-update command.
+  `hw-01/docs/reference/runtime-validation.md` for the Docker lock-update command.
 - Keep base images pinned by digest. Verify model tags, provider capabilities
   and prices before selecting them for measured runs.
 - Test meaningful behavior and regression risks. Do not add tests for spacing,

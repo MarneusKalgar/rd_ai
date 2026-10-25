@@ -126,7 +126,7 @@ subsequent explicit model initialization reported `pulled: false`.
 
 ## Reproduction and evidence locations
 
-See [Docker runtime setup](docker-runtime.md) for matching root/project commands,
+See [Docker runtime setup](../guides/docker-runtime.md) for matching root/project commands,
 volumes, pins, deadlines and exit codes. Runtime identity/readiness reports live
 in the persistent results volume under `results/setup/`. The first download
 report is preserved there as `initial-download.json`; `readiness.json` contains

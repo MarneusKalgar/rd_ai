@@ -92,7 +92,7 @@ this candidate to reject output or trigger correction. Gold10 has already been
 used during development; diagnostic flags on the other20 inputs are not new
 human labels. Do not report precision/recall without reviewed check labels.
 Future behavioral validation belongs to the separate workflow experiment in
-[the semantic-validation sequence](matrix-experiment.md#semantic-validation-sequence-732).
+[the semantic-validation sequence](../plans/matrix-experiment.md#semantic-validation-sequence-732).
 
 ## Saved v1 observations — 24 October 2026
 
@@ -117,7 +117,7 @@ S032's 124 source-evidence contradictions are not the gold scorer's 119 extra
 rows: membership evidence and the difference between output/gold row counts
 measure different things. Original gold scores and run statuses are unchanged.
 
-The versioned [summary](../results/submission/catalog-row-diagnostics-20261024/summary.json)
+The versioned [summary](../../results/submission/catalog-row-diagnostics-20261024/summary.json)
 retains the check identity, source run IDs, counts and generated-report metadata.
 Its `files.sha256.json` lists only the included summary. The full per-row report
 is local at `results/diagnostics/catalog-row-diagnostics-20261024/diagnostic.json`,
@@ -152,4 +152,4 @@ incorrect aggregate implementation hash. The unmodified and restored suites
 pass; the full offline gate passes **732 tests** plus lint/format, strict types,
 gold validation and preflight. This test-only hardening does not change the
 original saved report, check implementation identity or extraction scores. See the
-[test strategy](testing-strategy.md#regression-hardening-after-the-test-audit).
+[test strategy](../quality/testing-strategy.md#regression-hardening-after-the-test-audit).

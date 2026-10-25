@@ -3,7 +3,7 @@
 ## Scope and current status
 
 **7.1 is complete under the user-accepted Gemini-pair scope.** The
-[recorded results](provider-screening-results.md) select Gemini 3.5 Flash-Lite
+[recorded results](../reports/provider-screening-results.md) select Gemini 3.5 Flash-Lite
 through `google-ai-studio` from the two completed candidates. Optional Mistral
 remains unavailable/unranked after the original invocation and one approved
 retry. Historical manifests, failed requests and accounting holds are preserved.
@@ -98,7 +98,7 @@ The preparation snapshot above is historical. Original and retry exports
 passed independent verification. See the results document for both outcomes
 and the accepted Gemini-pair selection; no further paid invocation is authorized.
 
-Use the [shared evaluator](evaluation.md); no screening-specific scoring rules
+Use the [shared evaluator](../reference/evaluation.md); no screening-specific scoring rules
 or model calls are introduced by evaluation. Choose the main provider only
 from candidates with comparable completed evidence on the same 10 cases. The
 user accepted the completed Gemini pair; unavailable optional Mistral is unranked.

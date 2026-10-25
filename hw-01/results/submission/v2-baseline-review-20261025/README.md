@@ -23,4 +23,4 @@ produce a different experiment and is not a substitute for restoration.
 
 Gold10 informed prompt/model development. Its scores are not held-out accuracy;
 the other20 have no factual accuracy labels. Native v2 retains S004's truncation.
-See [results and limitations](../../../docs/v2-continuation-results.md).
+See [results and limitations](../../../docs/reports/v2-continuation-results.md).

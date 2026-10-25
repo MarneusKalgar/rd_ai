@@ -48,8 +48,8 @@ override is a scoped run; it does not establish the default smoke's acceptance.
 Native mode is now the Make execution default; it uses the existing desktop
 server and does not download/start Docker Ollama. Revised matrix work explicitly
 uses `--config config/matrix.yaml`, with `HW01_CONTEXT_LENGTH=49152` for native
-requests. See [matrix execution](matrix-experiment.md) and
-[budget policy updates](budget-revisions.md).
+requests. See [matrix execution](../plans/matrix-experiment.md) and
+[budget policy updates](../reports/budget-revisions.md).
 
 Explicit `MODE=local` uses `local-run`, starts its healthy Ollama dependency, and supplies
 no provider credentials. `MODE=provider` uses `app` without an Ollama dependency.
@@ -58,11 +58,11 @@ provider ID (`provider-flash` in `config/matrix.yaml`).
 Planning, budget administration and export use the network-disabled `offline`
 service. Project-level targets omit the root `hw01-` prefix.
 
-Section [7.1 screening](provider-screening.md) uses `run --stage screening`:
+Section [7.1 screening](../plans/provider-screening.md) uses `run --stage screening`:
 it selects exactly the approved gold inputs with v1/baseline and requires
 explicit provider candidate IDs. It does not use the smoke stage or run the
 full corpus. `make hw01-evaluate ARGS='run-id ...'` uses the same offline
-service to [score saved terminal records](evaluation.md), without model calls.
+service to [score saved terminal records](../reference/evaluation.md), without model calls.
 
 ## Flow and ownership
 
@@ -157,12 +157,12 @@ covers OpenRouter's upstream schema/message transformation. No extra credentials
 were assumed, no Gemini tokenizer was substituted, and no provider count or
 generation was sent while implementing this gate. The historical cheaper smoke
 candidate was Gemini 3.1 Flash-Lite; its public tokenizer diagnostic is described
-in [provider smoke preparation](provider-smoke-preparation.md). Local string
+in [provider smoke preparation](../reports/provider-smoke-preparation.md). Local string
 counts do not certify OpenRouter's complete upstream request. Section 7.1
 subsequently selected Gemini 3.5 Flash-Lite as the main `provider` in
 `config/experiments.yaml`; historical 3.1 coverage does not match that identity.
 Prepare refreshed model/route/pricing coverage for the selected provider before
-any new paid phase. See [the accepted selection](provider-screening-results.md).
+any new paid phase. See [the accepted selection](../reports/provider-screening-results.md).
 
 On 22 October the user approved an explicit **provider-enforced context policy
 for smoke**, then separately extended it to screening. Coverage defaults to
@@ -171,7 +171,7 @@ for smoke**, then separately extended it to screening. Coverage defaults to
 `--allow-server-context` and an allowed stage. The user subsequently accepted
 the matrix-stage extension for 7.2; new matrix coverage must explicitly name
 `["matrix"]`. Historical coverage remains limited to its recorded stages, and
-repetition remains rejected. See [matrix preparation](matrix-experiment.md).
+repetition remains rejected. See [matrix preparation](../plans/matrix-experiment.md).
 This policy does not require a Google key or approve paid inference.
 The application checks the advertised route context against the coverage and
 reserves its full input ceiling plus the configured output allowance before
@@ -294,17 +294,17 @@ interruption with an unresolved paid reservation, accounting and client cleanup.
 
 The real three-document extraction smoke is selected through Make, not a live
 pytest fixture. No live marker/fixture is introduced. Local readiness alone
-does not complete this acceptance. The [22 October provider smoke](provider-runtime-verification.md)
+does not complete this acceptance. The [22 October provider smoke](../reports/provider-runtime-verification.md)
 now completes 6.6.6 alongside native local acceptance: both used the same three
 inputs/v1/baseline, saved two valid outputs plus one truncation and passed export
 verification. Provider spend was $0.01518250. Further paid execution needs a new
 approved invocation. Offline tests alone do not establish live acceptance.
 
-The [21 October smoke record](extraction-smoke.md) documents the user-stopped
+The [21 October smoke record](../reports/extraction-smoke.md) documents the user-stopped
 local run: two saved valid outputs and one unfinished request. The final offline
 Docker gate passed 566 tests. Neither the three-document local acceptance nor
 provider live acceptance is complete in that historical run; no automatic
-resume is scheduled. The later [native smoke](native-runtime-verification.md)
+resume is scheduled. The later [native smoke](../reports/native-runtime-verification.md)
 supplies local acceptance with two valid results and one retained truncation.
-The [provider preparation](provider-smoke-preparation.md) records the policy,
+The [provider preparation](../reports/provider-smoke-preparation.md) records the policy,
 pricing and approval leading to the separately retained provider smoke.

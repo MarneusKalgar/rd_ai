@@ -33,7 +33,7 @@ S008's checkpoint retains its admission evidence and no fabricated response.
 There is no completed batch summary. The model server's compute returned to idle
 (observed approximately 0.02% CPU) after cancellation; weights were preserved.
 
-The [exported bundle](../results/submission/local-smoke-20261021-66/) was reloaded
+The [exported bundle](../../results/submission/local-smoke-20261021-66/) was reloaded
 and byte-checked from a fresh network-disabled app container:
 
 ```sh
@@ -87,4 +87,4 @@ scheduled. Provider smoke additionally needs verified actual-request counting
 and route/pricing evidence, declared cumulative prior spend, and human approval
 of the concrete invocation/cost estimate. The offline provider plan correctly
 reports unavailable cost/ledger values as null, not zero. See
-[running extractions](running-extractions.md) for those gates and commands.
+[running extractions](../guides/running-extractions.md) for those gates and commands.

@@ -9,7 +9,7 @@ ordered lines. It does not copy the integration schema, XML paths, master-data
 requirements, or customer-specific rules. Any field change after labeling
 requires a new schema version and a review of affected gold labels.
 
-The output schema is [`purchase-order-extraction.v1.schema.json`](../schemas/purchase-order-extraction.v1.schema.json).
+The output schema is [`purchase-order-extraction.v1.schema.json`](../../schemas/purchase-order-extraction.v1.schema.json).
 One schema instance represents **one logical PO**, not necessarily one file,
 sheet, or row. The deterministic input-preparation step may produce zero, one,
 or several neutral text inputs from a workbook. Each input has one stable,
@@ -93,7 +93,7 @@ to avoid near-duplicate leakage.
 
 ## Golden-set and scoring rules
 
-The frozen [`dataset`](../data/README.md) contains 30 approved neutral PO texts
+The frozen [`dataset`](../../data/README.md) contains 30 approved neutral PO texts
 and 10 manually reviewed v1 gold objects, satisfying the assignment's minimum
 counts. These are separate from the six pilot POs. Gold cases span distinct
 source layouts, languages, missing fields and line counts; copied rows or

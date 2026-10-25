@@ -12,7 +12,7 @@ All records, evaluations and unknown-charge holds are retained.
 
 Run `provider-screening-20261022-71` started at `2026-10-22T12:36:06Z`
 (15:36:06 Europe/Kiev). The user approved the concrete command in
-[screening preparation](provider-screening.md), limited to the remaining
+[screening preparation](../plans/provider-screening.md), limited to the remaining
 $0.98481750 non-matrix allowance with $3.50 protected. All candidates used the
 same 10 approved gold inputs, unchanged v1/baseline, full schema/source,
 temperature 0, top_p 1 and a 4,096-token output allowance. The current main
@@ -25,7 +25,7 @@ candidate and six Mistral requests. No correction attempt was made.
 
 ## Completed Gemini comparison
 
-The [shared evaluator](evaluation.md) scored both completed candidates over all
+The [shared evaluator](../reference/evaluation.md) scored both completed candidates over all
 10 gold cases, with identical strict positional/representation rules. These
 cases were used for selection and are development data.
 
@@ -98,10 +98,10 @@ make hw01-export-run ARGS='provider-screening-20261022-71'
 make hw01-verify-export ARGS='provider-screening-20261022-71'
 ```
 
-The [run bundle](../results/submission/provider-screening-20261022-71/) contains
+The [run bundle](../../results/submission/provider-screening-20261022-71/) contains
 all records/checkpoints, raw returned evidence, resolved configuration, schema,
 manifest and hashes. The separate
-[evaluation bundle](../results/submission/provider-screening-20261022-71-evaluation/)
+[evaluation bundle](../../results/submission/provider-screening-20261022-71-evaluation/)
 contains evaluator JSON, a verified summary and byte hashes. Original results
 remain unchanged. Raw process/plan logs, config snapshot and evaluation/accounting
 evidence with checksums remain in the ignored persistent volume under
@@ -129,9 +129,9 @@ Neither Gemini was rerun; no fallback or credential substitution occurred.
 
 Saved records were reloaded and evaluated offline, independently checking
 selection, sampling, errors, context admissions and cumulative accounting.
-The [retry run bundle](../results/submission/provider-screening-mistral-20261022-71-retry1/)
+The [retry run bundle](../../results/submission/provider-screening-mistral-20261022-71-retry1/)
 and separate
-[retry evaluation bundle](../results/submission/provider-screening-mistral-20261022-71-retry1-evaluation/)
+[retry evaluation bundle](../../results/submission/provider-screening-mistral-20261022-71-retry1-evaluation/)
 retain all 10 terminal records and their provenance. Export verification ran in
 a fresh offline container; all 24 exported payload hashes were checked on the
 host. Process log, configuration, evaluation and accounting summary with
@@ -158,7 +158,7 @@ independent held-out evaluation. The reasons for the low absolute scores include
 truncation, extra catalog rows, conservative field semantics and strict string/
 positional comparison. No prompt, output limit or scoring rule was tuned here.
 
-[`config/experiments.yaml`](../config/experiments.yaml) now freezes the main
+[`config/experiments.yaml`](../../config/experiments.yaml) now freezes the main
 provider as `google/gemini-3.5-flash-lite` through `google-ai-studio`, under the
 main model ID `provider`. The selection evidence uses screening ID `provider-35`;
 the model and route are identical. Screening configuration and historical

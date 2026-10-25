@@ -1,7 +1,7 @@
 # Runtime extraction validation
 
 The authoritative contract is
-[`purchase-order-extraction.v1.schema.json`](../schemas/purchase-order-extraction.v1.schema.json).
+[`purchase-order-extraction.v1.schema.json`](../../schemas/purchase-order-extraction.v1.schema.json).
 It remains byte-identical to the schema approved with the gold dataset.
 There is no second Pydantic definition of PO fields.
 

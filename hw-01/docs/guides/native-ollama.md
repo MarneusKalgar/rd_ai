@@ -107,7 +107,7 @@ provide two matched observations, not a full-corpus benchmark or an isolated
 measurement of Docker overhead. The interrupted Docker third input remains
 interrupted even if native execution later completes it.
 
-The [testing strategy](testing-strategy.md#docker-native-ollama-and-ci-responsibilities)
+The [testing strategy](../quality/testing-strategy.md#docker-native-ollama-and-ci-responsibilities)
 keeps ordinary Docker checks model-free. Native controlled tests cover identity,
 correction, initialization separation, absent weights, unsupported rendering and
 context/version/digest mismatch rejection. Native live evidence and performance
@@ -116,7 +116,7 @@ Section 6.7.3's optional small Docker model CI profile/job is deferred at the
 user's request. It does not
 replace full adapter acceptance or the required two-prompt/two-sampling matrix.
 
-See [recorded native extraction evidence](native-runtime-verification.md) for the
+See [recorded native extraction evidence](../reports/native-runtime-verification.md) for the
 completed short and three-document runs, the retained truncation and comparison limits.
 
 ## Explicit thinking profile — 7.2

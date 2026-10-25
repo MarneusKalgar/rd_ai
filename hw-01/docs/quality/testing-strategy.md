@@ -11,7 +11,7 @@ and critical workflows in [Google's testing guidance](https://testing.googleblog
 Plan references below identify sections of `HW-01-implementation-plan.md`,
 kept locally in `.agents/specs/`. The table summarizes the relevant requirements
 so this document is usable without that ignored planning file. Implementation
-status is maintained in the [HW README](../README.md).
+status is maintained in the [HW README](../../README.md).
 
 | Plan point | Responsibility | Testing contribution |
 | --- | --- | --- |
@@ -34,54 +34,54 @@ status is maintained in the [HW README](../README.md).
 The implemented contract and sections 6.1–6.5, including the 6.4.1 regression
 follow-up, already exercise several levels:
 
-- [Contract tests](../tests/test_contract.py) and
-  [record tests](../tests/test_records.py) cover validation rules, evidence and
+- [Contract tests](../../tests/test_contract.py) and
+  [record tests](../../tests/test_records.py) cover validation rules, evidence and
   accounting, including integration with the actual PO contract.
-- [Configuration tests](../tests/test_configuration.py) combine focused model
+- [Configuration tests](../../tests/test_configuration.py) combine focused model
   validation with real YAML, environment and dotenv loading.
-- [Corpus tests](../tests/test_corpus.py) and
-  [preflight tests](../tests/test_preflight.py) use real public artifacts and
+- [Corpus tests](../../tests/test_corpus.py) and
+  [preflight tests](../../tests/test_preflight.py) use real public artifacts and
   disposable copies to verify cross-module behavior.
-- [CLI tests](../tests/test_cli.py) and the preflight subprocess test invoke
+- [CLI tests](../../tests/test_cli.py) and the preflight subprocess test invoke
   `python -m extraction_service`, checking process output and exit status.
-- [Adapter tests](../tests/inference/) exercise both production adapters through
+- [Adapter tests](../../tests/inference/) exercise both production adapters through
   controlled HTTP responses, and the production HTTP client against a loopback
-  server. [Adapter documentation](model-adapters.md) records tested boundaries,
+  server. [Adapter documentation](../reference/model-adapters.md) records tested boundaries,
   public metadata observations and remaining live verification.
-- [Injection tests](../tests/inference/test_client_injection.py) supply only the
+- [Injection tests](../../tests/inference/test_client_injection.py) supply only the
   borrowed `post()` capability and verify real adapter translation and unchanged
-  typed/unexpected error propagation. [Client setup tests](../tests/inference/test_client_setup.py)
+  typed/unexpected error propagation. [Client setup tests](../../tests/inference/test_client_setup.py)
   exercise real HTTPX clients through controlled transports: compatible adapters
   share clients without changing each other's requests, and application scopes
   close clients once after success, generation failure or partial setup failure.
 
-- [Coordinator tests](../tests/execution/) cover correction/retry bounds, clock
+- [Coordinator tests](../../tests/execution/) cover correction/retry bounds, clock
   and dependency decisions, cumulative spending, protected matrix funds and
-  locked reservations. [Coordinator integration](../tests/inference/test_coordinator_integration.py)
+  locked reservations. [Coordinator integration](../../tests/inference/test_coordinator_integration.py)
   uses both real adapters and HTTP envelopes. A
-  [slow-response loopback check](../tests/inference/test_total_deadline.py)
+  [slow-response loopback check](../../tests/inference/test_total_deadline.py)
   verifies total timeout cancellation and subsequent client reuse. See the
-  [execution documentation](execution-coordinator.md) for policy and limits.
+  [execution documentation](../reference/execution-coordinator.md) for policy and limits.
 
-- [Runtime setup tests](../tests/runtime/) cover offline provider isolation,
+- [Runtime setup tests](../../tests/runtime/) cover offline provider isolation,
   bounded service discovery and initialization, identity mismatch rejection,
   exact loaded context, persistent storage and sampled readiness probes.
   They use controlled HTTP and temporary files. Separately selected Docker
-  setup diagnostics and their [live evidence](docker-setup-verification.md)
+  setup diagnostics and their [live evidence](../reports/docker-setup-verification.md)
   exercise actual image/model/storage/resources; no live pytest tests exist.
 
 A test file can contain more than one level. Executing pytest in Docker defines
 its runtime environment; the components and boundaries exercised determine its
-level. [Application workflow tests](../tests/application/) now exercise the real
+level. [Application workflow tests](../../tests/application/) now exercise the real
 CLI in subprocesses with a controlled loopback HTTP service: all-30 selection,
 correction, failed output, actual-request admission, accounting, client reuse,
 incremental persistence, corruption/export and interruption. The
-[admission deadline tests](../tests/execution/test_admission.py) use a controlled
-clock. See [running extractions](running-extractions.md) for commands and limits.
+[admission deadline tests](../../tests/execution/test_admission.py) use a controlled
+clock. See [running extractions](../guides/running-extractions.md) for commands and limits.
 Live extraction acceptance is separate and remains pending until documented;
 scoring and measured experiments remain sections 7–8.
 
-The [21 October partial smoke](extraction-smoke.md) records two completed local
+The [21 October partial smoke](../reports/extraction-smoke.md) records two completed local
 outputs and a user-interrupted third request, with a verified interrupted export.
 It does not satisfy the complete live acceptance gate. The final offline gate
 passed 566 tests, gold validation and the full corpus preflight at that baseline.
@@ -93,8 +93,8 @@ adds independent nonzero estimates, read-only prior-accounting checks, shared
 application stop-state tests, nondefault variants, completed-attempt/backoff
 durability, isolated export integrity, single-defect tokenizer cases and CLI
 unexpected-error redaction. These regressions are retained in
-[application tests](../tests/application/) and
-[execution admission tests](../tests/execution/test_admission.py).
+[application tests](../../tests/application/) and
+[execution admission tests](../../tests/execution/test_admission.py).
 
 The 21 October Docker gate passed 589 tests, Ruff, strict mypy, 10 gold validations
 and the 30-input preflight with the native wiring included. Twelve bounded mutations
@@ -139,16 +139,16 @@ correction-evidence cases, replacing reliance on temporary audit cases.
 
 | Audited behavior | Repository coverage |
 | --- | --- |
-| Settlement failure retains evidence and stops only paid work | [Spending policy](../tests/execution/test_spending_policy.py) |
-| Fixed request fee contributes to the reservation quote | [Pricing](../tests/execution/test_pricing.py) |
-| Zero allocation blocks optional work while allowing matrix work | [Spending policy](../tests/execution/test_spending_policy.py) |
-| Optional holdback does not stop affordable matrix work | [Spending policy](../tests/execution/test_spending_policy.py) |
-| Different models, versions and digests have independent stop state | [Dependency policy](../tests/execution/test_dependency_policy.py) |
-| Correction requests contain the exact structured issues | [Coordinator](../tests/execution/test_coordinator.py) |
-| Failure timing, tokens and cost cannot contradict attempt evidence | [Failure evidence](../tests/execution/test_failure_evidence.py) |
-| Later backoff grows, caps and restarts for correction | [Deadlines](../tests/execution/test_deadlines.py) |
-| Fully attempted invalid outputs still form a complete comparison | [Coordinator](../tests/execution/test_coordinator.py) |
-| A nonretryable availability failure sends no retry | [Coordinator](../tests/execution/test_coordinator.py) |
+| Settlement failure retains evidence and stops only paid work | [Spending policy](../../tests/execution/test_spending_policy.py) |
+| Fixed request fee contributes to the reservation quote | [Pricing](../../tests/execution/test_pricing.py) |
+| Zero allocation blocks optional work while allowing matrix work | [Spending policy](../../tests/execution/test_spending_policy.py) |
+| Optional holdback does not stop affordable matrix work | [Spending policy](../../tests/execution/test_spending_policy.py) |
+| Different models, versions and digests have independent stop state | [Dependency policy](../../tests/execution/test_dependency_policy.py) |
+| Correction requests contain the exact structured issues | [Coordinator](../../tests/execution/test_coordinator.py) |
+| Failure timing, tokens and cost cannot contradict attempt evidence | [Failure evidence](../../tests/execution/test_failure_evidence.py) |
+| Later backoff grows, caps and restarts for correction | [Deadlines](../../tests/execution/test_deadlines.py) |
+| Fully attempted invalid outputs still form a complete comparison | [Coordinator](../../tests/execution/test_coordinator.py) |
+| A nonretryable availability failure sends no retry | [Coordinator](../../tests/execution/test_coordinator.py) |
 
 Verified on 20 October 2026: `make hw01-check` passed 466 tests, lint, formatting,
 strict typing, all 10 gold validations and the 30-input offline preflight. In a
@@ -218,7 +218,7 @@ requests use only the approved neutral inputs.
 ## 3. Runtime/container setup checks
 
 **Plan points: 6.5.1–6.5.6.** Implemented by runtime tests and the explicit
-[Docker setup workflow](docker-runtime.md); retain these checks when changing it:
+[Docker setup workflow](../guides/docker-runtime.md); retain these checks when changing it:
 
 - Resolve provider and Docker-local startup paths independently. Provider-only
   setup does not start Ollama or download weights; local setup needs no key.
@@ -328,8 +328,8 @@ remain real. Fake provider prices/count bounds are test fixtures, not live evide
 
 ### Live end-to-end smoke
 
-**6.6.6 verified on 22 October:** [native local](native-runtime-verification.md)
-and [Gemini 3.1 Flash-Lite](provider-runtime-verification.md) completed the same
+**6.6.6 verified on 22 October:** [native local](../reports/native-runtime-verification.md)
+and [Gemini 3.1 Flash-Lite](../reports/provider-runtime-verification.md) completed the same
 three-input v1/baseline smoke. Each retains two schema-valid outputs and one
 truncation; exports reload independently. Provider cost was $0.01518250, with
 the matrix reserve intact. The current offline gate passes 626 tests, including
@@ -360,29 +360,29 @@ variable responses justify keeping this layer small.
 ## Model quality evaluation
 
 The revised matrix budget/profile implementation passed **684 offline tests**.
-See [audited revisions](budget-revisions.md) for coverage of cap administration,
+See [audited revisions](../reports/budget-revisions.md) for coverage of cap administration,
 backups, retained holds, failure recovery, concurrency, compatible historical
 aggregation and high-context native initial/correction controls. No provider
 inference is used by these regressions.
 
-The [7.2 matrix preparation](matrix-experiment.md) initially passed **659 offline tests**.
+The [7.2 matrix preparation](../plans/matrix-experiment.md) initially passed **659 offline tests**.
 The explicit thinking-control extension subsequently passed **672 tests**,
 including phase reuse and 12 thinking-control regressions: initial/correction
 render/generation agreement, strict backend-specific controls, metadata rejection
 before loading, request fingerprint binding and profile-separated aggregation.
 Both original live baseline exports reload unchanged under the new fields.
-Six added [matrix regressions](../tests/application/test_matrix.py) exercise all
+Six added [matrix regressions](../../tests/application/test_matrix.py) exercise all
 30 selected inputs through controlled HTTP, accuracy over only the 10 labeled
 cases, preserved prior spending and matrix-reserve settlement. Matrix-only
 coverage plus explicit opt-in is required; smoke/screening-only coverage and
 repetition are rejected before HTTP. Fixture accuracy is not live model quality.
 
-The shared [offline evaluator](evaluation.md) and
-[screening preparation](provider-screening.md) are implemented for 7.1.
+The shared [offline evaluator](../reference/evaluation.md) and
+[screening preparation](../plans/provider-screening.md) are implemented for 7.1.
 The 7.1 gate passed 653 tests, including 27 new scoring, aggregation,
 screening selection/stage and accounting regressions. Controlled CLI tests
 exercise all three candidates over the 10 gold inputs and independent count/
-cost oracles. The [paid screening](provider-screening-results.md) subsequently
+cost oracles. The [paid screening](../reports/provider-screening-results.md) subsequently
 completed both Gemini candidates and stopped Mistral on upstream rate limits;
 the user accepted finalizing 7.1 with the Gemini pair and selecting Gemini 3.5
 Flash-Lite. Mistral is unranked; the main matrix remains pending. The controlled test's
@@ -422,7 +422,7 @@ tested deterministically without rerunning models.
 ### Docker, native Ollama and CI responsibilities
 
 Keep Docker Ollama as a portable compatibility option. The
-[native composition](native-ollama.md) uses the existing desktop app while
+[native composition](../guides/native-ollama.md) uses the existing desktop app while
 Python stays in Docker. Preserve the same Gemma digest, quantization, schema,
 inputs, context and sampling when comparing runtimes. Record actual processor
 placement and Docker/native version differences; keep their timings separate.
@@ -432,7 +432,7 @@ placement and Docker/native version differences; keep their timings separate.
 | Tests, typing, lint, gold validation and corpus preflight | Python container with controlled HTTP endpoints; no model | Every PR | Implemented by `make hw01-check`; CI workflow wiring is separate. |
 | Ollama startup, version and installed-model identity | Docker Ollama | Runtime/image changes | Existing health/setup mechanisms; a dedicated lightweight CI job is not implemented. |
 | One short, complete extraction with the full schema | Docker Ollama with cached pinned weights | Explicit manual or scheduled CI | Section 6.7.3 deferred at user request; the current three-document smoke is broader. |
-| Three-document live smoke and larger local experiments | Native Ollama on the Mac, Python in Docker | Explicit integration/evaluation runs | Native wiring and local smoke are verified: two valid outputs and one retained truncation; see [evidence](native-runtime-verification.md). Larger experiments remain pending. |
+| Three-document live smoke and larger local experiments | Native Ollama on the Mac, Python in Docker | Explicit integration/evaluation runs | Native wiring and local smoke are verified: two valid outputs and one retained truncation; see [evidence](../reports/native-runtime-verification.md). Larger experiments remain pending. |
 
 A small real-model CI smoke should use an explicitly defined short single-line
 order, the full extraction schema, a bounded output allowance and a strict job
@@ -452,12 +452,12 @@ is introduced by this documentation.
 Linux Docker deployments can use supported GPUs; our Mac CPU measurements do
 not predict GPU-backed CI performance. See the official
 [Ollama Docker hardware configuration](https://docs.ollama.com/docker) and the
-[recorded partial extraction smoke](extraction-smoke.md).
+[recorded partial extraction smoke](../reports/extraction-smoke.md).
 
 ### Adoption sequence
 
 All Python checks run in Docker. The current
-[`make hw01-check`](../../Makefile) workflow runs lint, formatting, strict typing,
+[`make hw01-check`](../../../Makefile) workflow runs lint, formatting, strict typing,
 pytest, frozen gold validation and offline preflight. Root Make routes to the
 homework target. Keep its network-isolated check service as the default gate.
 
@@ -489,8 +489,8 @@ prerequisite for live tests; broad level tagging does not need to precede 6.4.1.
 Keep fixtures shared where useful, and split files/directories when that makes
 responsibilities clearer. Exercise detailed failure combinations at the lowest
 useful level; use broader checks to protect wiring and critical workflows.
-Follow the repository's [test conventions](../../docs/coding-conventions.md#tests-and-enforcement)
-and [mutation/reproduction process](../../docs/review-process.md#verification-and-experiments)
+Follow the repository's [test conventions](../../../docs/coding-conventions.md#tests-and-enforcement)
+and [mutation/reproduction process](../../../docs/review-process.md#verification-and-experiments)
 to verify assertion sensitivity. Layer coverage and passing tests provide
 bounded evidence rather than a proof that no defects remain.
 
@@ -508,7 +508,7 @@ The saved-output exercise inspects all 60 revised v1 observations and rechecks
 128 original export payload hashes. It demonstrates source-evidence findings,
 not universally valid semantic rules or measured precision/recall. Reviewed
 positive and negative check labels remain necessary before behavioral rejection
-or correction. See [diagnostic scope and observations](row-diagnostics.md).
+or correction. See [diagnostic scope and observations](../guides/row-diagnostics.md).
 
 ### Regression hardening after the test audit
 

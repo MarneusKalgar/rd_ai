@@ -7,6 +7,7 @@ entrypoint routes reviewer-facing commands to each homework.
 | Area | Responsibility |
 | --- | --- |
 | [`hw-01/`](hw-01/README.md) | HW-01 contract, adapters, selected-run CLI, durable results, Docker setup and checks; measured evaluation follows. |
+| [HW-01 documentation](hw-01/docs/README.md) | Operating guides, reference, experiment plans, reports and quality practices. |
 | [`hw-01/data/`](hw-01/data/README.md) | Frozen neutral input texts, reviewed gold objects, and dataset provenance. |
 | [`docs/coding-conventions.md`](docs/coding-conventions.md) | Shared coding conventions for contributors and agents. |
 | [`docs/review-process.md`](docs/review-process.md) | Review scope, evidence, verification and reporting rules. |
@@ -24,8 +25,8 @@ disposable reproductions where useful.
 HW-01 has **30 approved neutral inputs and 10 human-approved gold
 objects** frozen under [`hw-01/data/`](hw-01/data/README.md). The minimum
 dataset counts are met. Adapters and the shared execution policy are implemented;
-the [Docker runtime setup](hw-01/docs/docker-runtime.md) is implemented. The
-[selected-run workflow](hw-01/docs/running-extractions.md) is implemented with
+the [Docker runtime setup](hw-01/docs/guides/docker-runtime.md) is implemented. The
+[selected-run workflow](hw-01/docs/guides/running-extractions.md) is implemented with
 actual-request admission, incremental persistence and checked result exports.
 Live acceptance and the measured comparison are tracked separately.
 

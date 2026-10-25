@@ -75,7 +75,7 @@ make hw01-export-run ARGS='provider-smoke-31-20261022'
 make hw01-verify-export ARGS='provider-smoke-31-20261022'
 ```
 
-The [exported bundle](../results/submission/provider-smoke-31-20261022/)
+The [exported bundle](../../results/submission/provider-smoke-31-20261022/)
 contains all three records/checkpoints, raw returned bodies, frozen schema,
 resolved experiment/setup metadata, manifest and byte hashes. Raw operational
 logs, offline plan and a verified accounting/outcome summary with checksums are

@@ -214,9 +214,9 @@ define truncation/shift controls. See the
 ## Live verification
 
 The dated setup evidence and any remaining blocker are recorded separately in
-[Docker setup verification](docker-setup-verification.md).
+[Docker setup verification](../reports/docker-setup-verification.md).
 The passing representative baseline and evidence-retention/comparison rules are
-recorded in [local runtime comparison](local-runtime-comparison.md).
+recorded in [local runtime comparison](../reports/local-runtime-comparison.md).
 Ordinary pytest uses
 controlled transports, temporary storage and fake clocks; it does not download
 weights or contact a live runtime. Live setup is an explicitly selected Make

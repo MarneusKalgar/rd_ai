@@ -6,7 +6,7 @@ Doubling the allowance did not produce a complete extraction.
 
 ## Configuration and execution
 
-The separate [configuration](../config/experiments-output-8192.yaml) preserves
+The separate [configuration](../../config/experiments-output-8192.yaml) preserves
 the baseline prompt, temperature 0, top_p 1, timeouts and execution policy.
 It changes the output allowance to 8,192 and names the sampling variant
 `output-8192`. The original configuration and recorded 4,096-token run remain
@@ -71,7 +71,7 @@ resource decision. No additional experiment is scheduled.
 
 ## Retained evidence
 
-The [verified export](../results/submission/native-large-8192-20261022/)
+The [verified export](../../results/submission/native-large-8192-20261022/)
 contains the manifest, record, checkpoint/admission evidence, raw response,
 schema and hash inventory. Export and independent offline verification both
 reported one record in a complete run. Logs and configuration copies are saved

@@ -6,7 +6,7 @@ from application setup and returns validated records. It neither constructs nor
 closes HTTP clients and never reads expected gold answers.
 
 The coordinator and persistent budget ledger are implemented. Section 6.5 adds
-model services; the [6.6 application workflow](running-extractions.md) now
+model services; the [6.6 application workflow](../guides/running-extractions.md) now
 composes admission, the inference CLI and incremental persistence. Live smoke
 acceptance remains a separately recorded gate. Routine checks stay offline.
 

@@ -13,7 +13,7 @@ acceptance separately, preserving this native run's original evidence.
 The current native configuration allows stable 0.40 patches starting at 0.40.7
 following the desktop update on 22 October. These retained runs used 0.40.3;
 their recorded identities and timing measurements are unchanged. See
-[native runtime compatibility](native-ollama.md#runtime-identity-and-admission).
+[native runtime compatibility](../guides/native-ollama.md#runtime-identity-and-admission).
 
 ## Runtime and invocation
 
@@ -110,8 +110,8 @@ make hw01-export-run ARGS='native-smoke-20261021-67'
 make hw01-verify-export ARGS='native-smoke-20261021-67'
 ```
 
-The [short export](../results/submission/native-short-20261021-67/) contains one
-record; the [three-document export](../results/submission/native-smoke-20261021-67/)
+The [short export](../../results/submission/native-short-20261021-67/) contains one
+record; the [three-document export](../../results/submission/native-smoke-20261021-67/)
 contains all three, including the truncated result. Each includes its manifest,
 schema, checkpoints, raw responses and file hashes. The interrupted Docker export
 was preserved unchanged. Raw logs/configuration and sensitivity-check evidence

@@ -10,7 +10,7 @@ used the installed default thinking=true; the user accepted rebaselining with ex
 thinking disabled before creating v2. That rebaseline has completed, and v2 has
 subsequently been drafted; no v2 inference has run. The separate
 [stronger-model diagnostic](stronger-model-experiment.md) is complete.
-See [execution and evidence](matrix-experiment.md).
+See [execution and evidence](../plans/matrix-experiment.md).
 
 ## Provider observations
 
@@ -105,8 +105,8 @@ text is not treated as a PO extraction. See the official
 [Gemma thinking templates](https://ai.google.dev/gemma/docs/capabilities/thinking).
 No extra generation was used to diagnose this.
 
-The [native run bundle](../results/submission/matrix-native-v1-baseline-20261022-72/)
-and [evaluation bundle](../results/submission/matrix-native-v1-baseline-20261022-72-evaluation/)
+The [native run bundle](../../results/submission/matrix-native-v1-baseline-20261022-72/)
+and [evaluation bundle](../../results/submission/matrix-native-v1-baseline-20261022-72-evaluation/)
 retain all outcomes; a fresh offline container revalidated all 30 records.
 Native model residency subsequently expired: `/api/ps` returned no models,
 and the app/server processes were idle. The user reported about 12 GB while

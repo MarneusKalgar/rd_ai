@@ -68,6 +68,6 @@ Frozen prompt SHA-256 for this gold10 invocation:
 
 The subsequently approved native remaining20 and both stronger Flash v2 phases
 used these same frozen bytes. Both all30 baseline variants are verified; see
-[v2 continuation results](../docs/v2-continuation-results.md) and the
+[v2 continuation results](../docs/reports/v2-continuation-results.md) and the
 [compact review checkpoint](../results/submission/v2-baseline-review-20261025/README.md).
 New raw evidence remains locally retained and unversioned pending archival.

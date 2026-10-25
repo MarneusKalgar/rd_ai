@@ -1,6 +1,6 @@
 # Revised required provider/local matrix (7.2)
 
-**Evidence availability — 25 October 2026:** the [compact review snapshot](../results/submission/v2-baseline-review-20261025/summary.json) and [availability index](../results/submission/v2-baseline-review-20261025/evidence-index.json) are included in this checkpoint. New v2 raw/preparation/detailed evaluation bundles referenced below are retained locally and intentionally unversioned pending archival. A fresh checkout cannot reproduce their saved-run evaluation yet. See the [checkpoint notes](../results/submission/v2-baseline-review-20261025/README.md).
+**Evidence availability — 25 October 2026:** the [compact review snapshot](../../results/submission/v2-baseline-review-20261025/summary.json) and [availability index](../../results/submission/v2-baseline-review-20261025/evidence-index.json) are included in this checkpoint. New v2 raw/preparation/detailed evaluation bundles referenced below are retained locally and intentionally unversioned pending archival. A fresh checkout cannot reproduce their saved-run evaluation yet. See the [checkpoint notes](../../results/submission/v2-baseline-review-20261025/README.md).
 
 ## Current status — 24 October 2026
 
@@ -10,7 +10,7 @@ gold rows and one exact gold document. Stronger Gemini Flash saved **30/30
 schema-valid**, gold **100% (342/342)** and **10/10 exact gold documents**.
 Gold10 is development data; the other20 have no gold labels. Both reuse their
 saved gold10 exactly once with disjoint remaining20 continuations. See
-[v2 continuation results](v2-continuation-results.md) for failures, checked exports,
+[v2 continuation results](../reports/v2-continuation-results.md) for failures, checked exports,
 matched comparisons, timings and budget evidence.
 
 V2 remains frozen at SHA-256
@@ -53,11 +53,11 @@ is unchanged. Native continuation is also complete and verified: 28/29 new
 outputs valid; combined with saved S008, **29/30 valid**, gold **164/3,494
 (4.69%)**, 394 extra gold line items and zero exact gold documents. S033
 truncated at 16,384 output tokens. The model was unloaded and residency checked.
-See [both revised v1 baselines](revised-v1-baseline-results.md) for the scoring
+See [both revised v1 baselines](../reports/revised-v1-baseline-results.md) for the scoring
 denominator, latency, source memberships and exports. Stop for user review;
 no v2 or exploratory work and no additional paid invocation are approved.
 
-The [audited budget revision](budget-revisions.md) and explicit budget-policy
+The [audited budget revision](../reports/budget-revisions.md) and explicit budget-policy
 aggregation compatibility are implemented. The full offline gate passed
 **684 tests**, lint/format/types, gold validation and preflight. The real cap
 raise to $10 preserved all 105 prior reservations, opening evidence, matrix
@@ -90,8 +90,8 @@ its earlier pending-migration descriptions are superseded by this update.
 
 - Original full-corpus v1/baseline: Flash-Lite at 4,096 produced 25/30 valid and 40.15% gold field accuracy; native Gemma with thinking=false produced 21/30 valid and 17.24%. The earlier thinking-enabled Gemma run remains a separate diagnostic. These are budget-constrained historical baselines, not members of the revised matrix.
 - Stronger Flash gold10 at 4,096 / 8,192 / 16,384 scored 33.52% / 59.94% / 81.29%; validity 8/10 / 9/10 / 10/10. At 16,384 there were no extra/missing lines and one exact document. S040 completed at only 6,260 actual tokens, so single-run reasoning variability prevents claiming a necessary 16,384-token threshold. Flash-Lite at 8,192 still overselected catalog rows; more output capacity alone is not a quality fix.
-- Native S008 at 49,152 context / 16,384 output / thinking=false completed schema-valid JSON in 519.550 seconds, using 15,592 output tokens. It returned 207 rows, 194 with null quantities. S008 is unlabeled; no factual accuracy is claimed. The model was unloaded after verification. See [native large-context diagnostic](native-large-context.md).
-- The committed v1 runtime/evidence is `e1ed2a3`; its isolated v1-only snapshot passed **672 tests**, lint/format, strict types, gold validation and preflight. The v2 prompt, registration, exploratory sampling and their fixture changes remain uncommitted. No v2 or exploratory inference has run. See [baseline review](matrix-baseline-review.md), [Flash diagnostics](stronger-model-experiment.md).
+- Native S008 at 49,152 context / 16,384 output / thinking=false completed schema-valid JSON in 519.550 seconds, using 15,592 output tokens. It returned 207 rows, 194 with null quantities. S008 is unlabeled; no factual accuracy is claimed. The model was unloaded after verification. See [native large-context diagnostic](../reports/native-large-context.md).
+- The committed v1 runtime/evidence is `e1ed2a3`; its isolated v1-only snapshot passed **672 tests**, lint/format, strict types, gold validation and preflight. The v2 prompt, registration, exploratory sampling and their fixture changes remain uncommitted. No v2 or exploratory inference has run. See [baseline review](../reports/matrix-baseline-review.md), [Flash diagnostics](../reports/stronger-model-experiment.md).
 
 | Control | Revised provider target | Revised local target |
 | --- | --- | --- |
@@ -155,7 +155,7 @@ observations, preserving failures and source hashes. Reuse these results rather
 than rerunning v1 to begin v2. Review all30 per deployment: factual accuracy on
 gold10, operations over all30. Truncation/invalid output remains a measured
 failure; untouched inputs leave a future phase incomplete. See the
-[revised v1 results](revised-v1-baseline-results.md).
+[revised v1 results](../reports/revised-v1-baseline-results.md).
 
 After user review and further direction, review and freeze v2. A v2 draft already exists from the original baseline review; do not recreate it or claim it was written after the revised baselines. Its original unexecuted draft hash was `c2c6c61dcdd3fe9c93fcaf9b40d6f811a30fb9351e6918fcaa899459021e5ba0`; the 24 October frozen revision and results are recorded above. Reconcile its general ordered-row, buyer-identifier, line-date, address and unit rules against the revised baseline evidence. Record any subsequent edits, new hash, rationale and examples in the prompt changelog. No case-specific answer leakage or frozen schema/input/gold/scorer edits. All gold10 were used in model/profile selection and prompt development; report development-set scores, not held-out generalization.
 
@@ -175,7 +175,7 @@ Finish section 8 from an explicit **240-observation membership inventory**, eigh
 **Steps 1–5 baseline execution complete on 24 October 2026.** The user
 approved both remaining20 continuations, which are verified with their reused
 gold10. Preserve the original draft/history and the staged controls below.
-Exploratory execution remains pending; see [terminal v2 results](v2-continuation-results.md).
+Exploratory execution remains pending; see [terminal v2 results](../reports/v2-continuation-results.md).
 No further invocation is authorized.
 
 1. **Revise and freeze a shared instruction-only prompt.** Reconcile the draft
@@ -313,7 +313,7 @@ workflow demonstrates a concrete need for autonomy. See the
 
 **Detection-only implementation authorized on 24 October 2026.** The first
 catalog-row candidate and saved-run CLI are implemented; see
-[deterministic row diagnostics](row-diagnostics.md) for supported structures,
+[deterministic row diagnostics](../guides/row-diagnostics.md) for supported structures,
 unknown outcomes and evidence. Implementation and regression hardening passed
 the 732-test offline gate; 60 saved v1
 observations were inspected without inference, retaining source/output hashes
@@ -579,10 +579,10 @@ Remaining total allowance is **$3.74923140**; the unspent protected matrix
 amount is **$3.34639740**. These are ledger amounts, not a claim that the
 unknown historical charges were billed.
 
-The [provider run bundle](../results/submission/matrix-provider-v1-baseline-20261022-72/)
+The [provider run bundle](../../results/submission/matrix-provider-v1-baseline-20261022-72/)
 contains all 30 records/checkpoints and hashes; its records revalidated in a
 fresh offline container. The separate
-[evaluation bundle](../results/submission/matrix-provider-v1-baseline-20261022-72-evaluation/)
+[evaluation bundle](../../results/submission/matrix-provider-v1-baseline-20261022-72-evaluation/)
 contains the unchanged shared evaluator output and verified accounting summary.
 Process/plan logs, configuration snapshot, evaluation and summary with checksums
 are retained in `results/matrix-runs/matrix-provider-v1-baseline-20261022-72/`.
@@ -604,7 +604,7 @@ dependency/budget stop. Its gold score is **89/406 = 21.92%**, exact documents
 API cost is zero; cumulative provider accounting is unchanged at $0.75076860.
 Both baseline exports and evaluations are retained and independently verified.
 
-The [baseline review](matrix-baseline-review.md) found thinking enabled in all
+The [baseline review](../reports/matrix-baseline-review.md) found thinking enabled in all
 30 raw responses. Six inputs consumed all 4,096 tokens in thinking before
 emitting any answer; the installed `/api/show` metadata confirms default=true
 and supports false. The user accepted disabling thinking and rerunning only the

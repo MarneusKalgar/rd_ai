@@ -185,7 +185,7 @@ provider. No paid generation was performed during this implementation.
 
 The active `config/experiments.yaml` selects **`google/gemini-3.1-flash-lite`**
 through **`google-ai-studio`** for the completed 6.6.6 smoke. The user approved
-this cheaper candidate; [live evidence](provider-runtime-verification.md) records
+this cheaper candidate; [live evidence](../reports/provider-runtime-verification.md) records
 two valid outputs, one truncation and $0.01518250 in billed cost. Further paid
 execution requires a new approved invocation. The v1 prompt, baseline sampling and 4,096-token
 output limit are unchanged. Historical native exports and the separate
@@ -201,7 +201,7 @@ Google's [official local-tokenizer mapping](https://github.com/googleapis/python
 maps this model to `google/gemma-4-E4B-it`. The public tokenizer was downloaded
 without another API key, pinned by revision/hash and inspected without generation.
 Local message/schema counts alone do not establish the full request count after
-OpenRouter's upstream formatting. See [provider smoke preparation](provider-smoke-preparation.md).
+OpenRouter's upstream formatting. See [provider smoke preparation](../reports/provider-smoke-preparation.md).
 
 `verify_openrouter()` fetches public metadata without credentials and checks the
 configured model, exact provider slug and required parameter set. Entering the
@@ -233,9 +233,9 @@ and comparison with the registry digest belong
 to service initialization in section 6.5.
 
 Ollama Docker initialization/readiness is documented in
-[runtime setup](docker-runtime.md). Full extraction acceptance is separate in
-the [6.6 runner](running-extractions.md). No host model runtime is required.
-The explicit [6.7 native mode](native-ollama.md) reuses this adapter with the
+[runtime setup](../guides/docker-runtime.md). Full extraction acceptance is separate in
+the [6.6 runner](../guides/running-extractions.md). No host model runtime is required.
+The explicit [6.7 native mode](../guides/native-ollama.md) reuses this adapter with the
 existing desktop app, a separately pinned version and the same Gemma digest.
 It requires native admission/identity checks and preserves distinct runtime records.
 
@@ -301,7 +301,7 @@ Section 6.4 adds the [shared coordinator](execution-coordinator.md), bounded
 retries/correction, deadlines, dependency stopping and cumulative budget
 reservations. Sections 6.5–6.6 add
 Docker model services, persistence, CLI execution and the three-document live
-smoke. The [selected-run CLI](running-extractions.md) is now implemented;
+smoke. The [selected-run CLI](../guides/running-extractions.md) is now implemented;
 the full measured comparison remains sections 7–8.
 
 Protocol references:

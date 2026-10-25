@@ -1,17 +1,20 @@
 # HW-01: Structured Extraction Service
 
+See the [documentation index](docs/README.md) for guides, technical reference,
+experiment plans, measured reports and quality practices.
+
 HW-01 consumes reviewed customer-neutral text inputs and compares a provider
 model with a local model against the same extraction contract. Its v1
 [`schema`](schemas/purchase-order-extraction.v1.schema.json),
-[`field rules`](docs/extraction-contract.md) and
-[`runtime validator`](docs/runtime-validation.md), strict configuration/settings,
-attempt/run records, [offline preflight](docs/offline-preflight.md) and
-[OpenRouter/Ollama adapters](docs/model-adapters.md), including client injection
+[`field rules`](docs/reference/extraction-contract.md) and
+[`runtime validator`](docs/reference/runtime-validation.md), strict configuration/settings,
+attempt/run records, [offline preflight](docs/reference/offline-preflight.md) and
+[OpenRouter/Ollama adapters](docs/reference/model-adapters.md), including client injection
 and application-owned client scopes, are implemented. The shared
-[execution coordinator](docs/execution-coordinator.md) adds bounded retries,
+[execution coordinator](docs/reference/execution-coordinator.md) adds bounded retries,
 one correction, deadlines, dependency stops and a cumulative reservation ledger.
 The initial v1 prompt/configuration exists for preflight. The
-[Docker runtime setup](docs/docker-runtime.md) provides isolated checks, an app
+[Docker runtime setup](docs/guides/docker-runtime.md) provides isolated checks, an app
 image, pinned Ollama/Gemma initialization and persistent results storage.
 Explicit Docker compatibility diagnostics are available through
 `make hw01-local-ready` (representative requests) and
@@ -19,43 +22,43 @@ Explicit Docker compatibility diagnostics are available through
 Their request counts depend on the configured prompt/sampling variants.
 Ordinary Make execution now defaults to native Ollama; Docker Ollama requires
 explicit selection and initialization. Its local image/weights were removed.
-The [selected extraction runner](docs/running-extractions.md) adds actual-request
+The [selected extraction runner](docs/guides/running-extractions.md) adds actual-request
 admission, incremental records/checkpoints, budget administration, CLI/Make
 commands and checked exports. Live acceptance is tracked separately; provider
 inference requires verified coverage and explicit human approval. Measured prompt
 variants, the complete matrix and the final comparison report remain pending.
 
-The [provider smoke evidence](docs/provider-runtime-verification.md) records the
+The [provider smoke evidence](docs/reports/provider-runtime-verification.md) records the
 approved Gemini 3.1 Flash-Lite run: two schema-valid outputs, one truncation,
 verified export and $0.01518250 in billed cost. Together with native local
 acceptance, this completes 6.6.6. Further paid execution needs separate approval.
 
-[Provider screening](docs/provider-screening.md) prepares section 7.1 on the
-10 approved gold cases, using the [offline evaluator](docs/evaluation.md).
-The [approved screening run](docs/provider-screening-results.md) completed both
+[Provider screening](docs/plans/provider-screening.md) prepares section 7.1 on the
+10 approved gold cases, using the [offline evaluator](docs/reference/evaluation.md).
+The [approved screening run](docs/reports/provider-screening-results.md) completed both
 Gemini candidates; Mistral stopped on upstream rate limits in both the original\ninvocation and one separately approved retry. The user accepted completing 7.1
 with the Gemini pair: Gemini 3.5 Flash-Lite is frozen as the main provider in
 `config/experiments.yaml`; Mistral remains unranked. Further paid execution
 needs the documented approval.
-The [main matrix](docs/matrix-experiment.md) uses all 30 inputs for both prompts
+The [main matrix](docs/plans/matrix-experiment.md) uses all 30 inputs for both prompts
 and sampling settings, starting with unchanged v1/baseline on both models.
 The revised profile uses `config/matrix.yaml`, stronger Flash/native Gemma and
-16,384 output tokens. Its [audited budget update](docs/budget-revisions.md)
+16,384 output tokens. Its [audited budget update](docs/reports/budget-revisions.md)
 preserves prior spending under the user-authorized $10 experiment ceiling.
 
-The [deterministic row diagnostic](docs/row-diagnostics.md) checks saved outputs
+The [deterministic row diagnostic](docs/guides/row-diagnostics.md) checks saved outputs
 against explicit source order-quantity evidence. `make hw01-diagnose-rows`
 performs no inference or output correction and leaves the prompt comparison
 pipeline and gold scores unchanged.
 
-[Native Ollama mode](docs/native-ollama.md) uses the existing desktop app through
+[Native Ollama mode](docs/guides/native-ollama.md) uses the existing desktop app through
 `MODE=native`, with Python still in Docker and an explicit patch compatibility policy.
 It preserves Docker execution and uses the same admission/runner/record path.
 Use `make hw01-setup-native` for explicit native weight initialization.
 
 Reviews follow the repository's [shared process](../docs/review-process.md) and
-the [HW-01 checklist](docs/review-checklist.md) for relevant domain concerns.
-The [testing strategy](docs/testing-strategy.md) defines test levels, execution
+the [HW-01 checklist](docs/quality/review-checklist.md) for relevant domain concerns.
+The [testing strategy](docs/quality/testing-strategy.md) defines test levels, execution
 boundaries and their implementation-plan points.
 
 ## Project layout
@@ -96,7 +99,7 @@ Make loads Compose controls from `.env.compose` when present, otherwise from
 [`.env.compose.example`](.env.compose.example). Copy the example for machine-local
 memory/context/deadline overrides. Provider credentials and application URLs stay
 in the separate optional `.env`; neither file enters the image. See
-[runtime configuration](docs/docker-runtime.md#configuration-and-deadlines).
+[runtime configuration](docs/guides/docker-runtime.md#configuration-and-deadlines).
 
 The image uses Python 3.14.8 and uv 0.12.11 pinned by image digest, with
 dependencies resolved in `uv.lock`. Checks run without a network, as a
@@ -114,7 +117,7 @@ configuration, prompt references, all 30 input hashes, the gold-manifest link,
 10 gold objects, current annotation hashes and source/layout metadata. No
 provider key, model runtime or model download is required. The JSON report
 explicitly leaves model capabilities unverified. See
-[offline preflight](docs/offline-preflight.md) for settings, records and limits.
+[offline preflight](docs/reference/offline-preflight.md) for settings, records and limits.
 
 ## Dataset status
 

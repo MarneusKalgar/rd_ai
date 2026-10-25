@@ -103,4 +103,4 @@ label subsequent runs before starting another one if their evidence is needed.
 This baseline establishes sampled runtime/context readiness under 10 GiB.
 Memory pressure persists, and no measured 9-to-10 GiB speedup is established.
 See the [historical setup evidence](docker-setup-verification.md) for earlier
-failures and [runtime setup](docker-runtime.md) for commands and report scope.
+failures and [runtime setup](../guides/docker-runtime.md) for commands and report scope.
