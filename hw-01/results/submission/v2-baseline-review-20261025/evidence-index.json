@@ -1,0 +1,108 @@
+{
+  "version": "local-evidence-index-v1",
+  "purpose": "Provenance references, not a complete export or an inventory of files included in Git.",
+  "archival_status": "pending; no Garage upload or restorable external archive provided by this checkpoint",
+  "bundles": [
+    {
+      "path": "results/submission/matrix-native-v2-gold-20261024-72",
+      "availability": "local-only; untracked; archival pending",
+      "included_in_this_checkpoint": false,
+      "payload_file_count": 22,
+      "source_inventory_sha256": "275087025bf6569f341794f659a9ed403b11dfec07bb29e677d8953bb62c42c9",
+      "source_manifest_sha256": "25ee66000d3021277b1912cf134640fbfd9e0b95b768034053b390289538ff21"
+    },
+    {
+      "path": "results/submission/matrix-native-v2-gold-20261024-72-evaluation",
+      "availability": "local-only; untracked; archival pending",
+      "included_in_this_checkpoint": false,
+      "payload_file_count": 6,
+      "source_inventory_sha256": "33d2698a15c833e09cf127dc502e8cbfef47339e99d71dea7edbe88c1cd7d81b",
+      "source_manifest_sha256": null
+    },
+    {
+      "path": "results/submission/matrix-native-v2-remaining-20261024-72",
+      "availability": "local-only; untracked; archival pending",
+      "included_in_this_checkpoint": false,
+      "payload_file_count": 42,
+      "source_inventory_sha256": "b4c6f0f118989a8c4087421246d8bb2f8adcabcb27677541f2eab7e600e856cf",
+      "source_manifest_sha256": "ee9b939b2293d1fb47aab996dfba2b646b58e56cd01d3ab1f2be8ddf43237633"
+    },
+    {
+      "path": "results/submission/matrix-native-v2-remaining-20261024-72-evaluation",
+      "availability": "local-only; untracked; archival pending",
+      "included_in_this_checkpoint": false,
+      "payload_file_count": 6,
+      "source_inventory_sha256": "01d19b8b7539dd7a763b5e4d7bccfe0919be0696d58ecd561cff80118cda22f5",
+      "source_manifest_sha256": null
+    },
+    {
+      "path": "results/submission/matrix-provider-v2-gold-20261024-72",
+      "availability": "local-only; untracked; archival pending",
+      "included_in_this_checkpoint": false,
+      "payload_file_count": 22,
+      "source_inventory_sha256": "ed5e1fa53098f0216121408381d3aa2056bd31aaf9c072c17a44b50b528b3bcb",
+      "source_manifest_sha256": "57182e5332cb576cc2bed379cb14781ebb014872803fa8f32a49bf13340ce210"
+    },
+    {
+      "path": "results/submission/matrix-provider-v2-gold-20261024-72-evaluation",
+      "availability": "local-only; untracked; archival pending",
+      "included_in_this_checkpoint": false,
+      "payload_file_count": 5,
+      "source_inventory_sha256": "8a1cdd9b34c9d6ffcb99437dab97fdd9ec5b4499f930fe8eff8923b779a9c1e8",
+      "source_manifest_sha256": null
+    },
+    {
+      "path": "results/submission/matrix-provider-v2-remaining-20261024-72",
+      "availability": "local-only; untracked; archival pending",
+      "included_in_this_checkpoint": false,
+      "payload_file_count": 42,
+      "source_inventory_sha256": "33a8b9e88c6a525ea6f01a5ce8b4b0a07316131ca711c689e5b58f6a9ee2a0b2",
+      "source_manifest_sha256": "f69490556d991cd7e88a8963b60cab76dd69e424ffcf8067784373220287c302"
+    },
+    {
+      "path": "results/submission/matrix-provider-v2-remaining-20261024-72-evaluation",
+      "availability": "local-only; untracked; archival pending",
+      "included_in_this_checkpoint": false,
+      "payload_file_count": 5,
+      "source_inventory_sha256": "d518dce9d8eb30f2d9ab9bf96cadb07dd0ff0a1161e82dda57f9bd8fca55df37",
+      "source_manifest_sha256": null
+    },
+    {
+      "path": "results/submission/native-v2-gold-20261024-preparation",
+      "availability": "local-only; untracked; archival pending",
+      "included_in_this_checkpoint": false,
+      "payload_file_count": 4,
+      "source_inventory_sha256": "7ef4393a40268d45f61776965eaa2e7dc88df64f9bad0a7a5c35fca86df0c599",
+      "source_manifest_sha256": null
+    },
+    {
+      "path": "results/submission/native-v2-remaining-20261024-preparation",
+      "availability": "local-only; untracked; archival pending",
+      "included_in_this_checkpoint": false,
+      "payload_file_count": 3,
+      "source_inventory_sha256": "314ea6362ac386681d1c07cf708a179c87f7c84a4e5aaef844a7c380889bbac3",
+      "source_manifest_sha256": null
+    },
+    {
+      "path": "results/submission/provider-v2-gold-20261024-preparation",
+      "availability": "local-only; untracked; archival pending",
+      "included_in_this_checkpoint": false,
+      "payload_file_count": 5,
+      "source_inventory_sha256": "2539203d7fb50863e6a0bec3644f4b626533eead1a7a700500bcb58716972e9e",
+      "source_manifest_sha256": null
+    },
+    {
+      "path": "results/submission/provider-v2-remaining-20261024-preparation",
+      "availability": "local-only; untracked; archival pending",
+      "included_in_this_checkpoint": false,
+      "payload_file_count": 5,
+      "source_inventory_sha256": "cc8d1fa4d4f4f41f97a80baa70889fb1219d1dd6b944680b22e9537585ed5cf4",
+      "source_manifest_sha256": null
+    }
+  ],
+  "latest_membership_reference": {
+    "path": "results/submission/matrix-native-v2-remaining-20261024-72-evaluation/membership.json",
+    "availability": "local-only; untracked",
+    "sha256": "95ba11883faa1e5e7594c30e4a132d4e6a5228f24be0badc69a1d371e2b698de"
+  }
+}

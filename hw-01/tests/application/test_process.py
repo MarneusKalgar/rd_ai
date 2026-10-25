@@ -273,9 +273,9 @@ def test_dependency_stop_survives_application_input_boundaries(service: Controll
     path = service.project / "config/experiments.yaml"
     config = yaml.safe_load(path.read_text())
     config["models"].append({**config["models"][1], "id": "local-alias"})
-    config["prompts"].append({"id": "v2", "file": "prompts/v2.txt"})
+    config["prompts"].append({"id": "controlled", "file": "prompts/controlled.txt"})
     path.write_text(yaml.safe_dump(config))
-    (service.project / "prompts/v2.txt").write_text("Distinct controlled variant.")
+    (service.project / "prompts/controlled.txt").write_text("Distinct controlled variant.")
     arguments = [
         "run",
         "--run-id",
@@ -291,7 +291,7 @@ def test_dependency_stop_survives_application_input_boundaries(service: Controll
         "--prompt",
         "v1",
         "--prompt",
-        "v2",
+        "controlled",
     ]
 
     result = service.invoke(*arguments)
@@ -300,7 +300,7 @@ def test_dependency_stop_survives_application_input_boundaries(service: Controll
     manifest, records = reload_records(service.project / "results/runs/shared-stop")
     assert [record.status.value for record in records] == ["failed"] * 3 + ["not_attempted"] * 5
     assert len(manifest.jobs) == len(records) == 8
-    assert {record.prompt_id for record in records} == {"v1", "v2"}
+    assert {record.prompt_id for record in records} == {"v1", "controlled"}
     assert {record.model_id for record in records} == {"local", "local-alias"}
     assert all(record.attempts == [] for record in records[3:])
     assert manifest.summary is not None and not manifest.summary.comparison_complete

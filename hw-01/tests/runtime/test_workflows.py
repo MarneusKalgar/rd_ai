@@ -65,10 +65,10 @@ def test_successful_setup_then_readiness_reuses_pinned_installation_without_key(
     assert initialized["loaded_model"]["context_length"] == 16384
     assert repeated["processor"] == "cpu"
     assert repeated["capacity"]["token_capacity_verified"] is True
-    assert len(repeated["capacity"]["measurements"]) == 6
+    assert len(repeated["capacity"]["measurements"]) == 24
     assert repeated["capacity"]["scope"] == "representative"
-    assert repeated["capacity"]["prepared_request_count"] == 60
-    assert repeated["capacity"]["selected_request_count"] == 6
+    assert repeated["capacity"]["prepared_request_count"] == 240
+    assert repeated["capacity"]["selected_request_count"] == 24
     assert repeated["capacity"]["all_prepared_requests_verified"] is False
     assert repeated["capacity"]["actual_requests_require_admission"] is True
     assert installation_path.read_bytes() == initial_bytes
@@ -98,11 +98,11 @@ def test_exhaustive_readiness_checks_every_request_and_preserves_sample_report(
 
     assert report["status"] == "ready"
     assert report["capacity"]["scope"] == "exhaustive"
-    assert report["capacity"]["selected_request_count"] == 60
-    assert len(report["capacity"]["measurements"]) == 60
+    assert report["capacity"]["selected_request_count"] == 240
+    assert len(report["capacity"]["measurements"]) == 240
     assert report["capacity"]["all_prepared_requests_verified"] is True
     assert report["capacity"]["actual_requests_require_admission"] is True
-    assert [path for path, _ in server.requests].count("/api/chat") == 60
+    assert [path for path, _ in server.requests].count("/api/chat") == 240
     assert "/api/pull" not in [path for path, _ in server.requests]
     assert sample_path.read_bytes() == sample_bytes
     saved_path = project_copy / "results/setup/capacity-exhaustive.json"
@@ -227,7 +227,7 @@ def test_exhaustive_cli_routes_to_full_diagnostic(
 
     assert status == 0
     assert report["capacity"]["scope"] == "exhaustive"
-    assert [path for path, _ in server.requests].count("/api/chat") == 60
+    assert [path for path, _ in server.requests].count("/api/chat") == 240
 
 
 @pytest.mark.parametrize("command", ["provider", "initialize", "storage"])

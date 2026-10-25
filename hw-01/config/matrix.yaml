@@ -12,6 +12,8 @@ models:
 prompts:
 - id: v1
   file: prompts/v1.txt
+- id: v2
+  file: prompts/v2.txt
 sampling:
 - id: baseline-16384
   temperature: 0.0

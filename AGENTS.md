@@ -47,6 +47,16 @@ put any focused mutation or reproduction in a disposable copy.
 - Run Python, dependency resolution, lint, type checks and tests in Docker.
   Do not install Python packages or model runtimes on the host without an
   explicit user request. Make is the host entrypoint.
+- Run substantial scripting in Docker regardless of language. This includes
+  JSON processing, checksum generation/verification, artifact aggregation and
+  scripted bulk edits. Do not use host Ruby, Python, Node or another interpreter
+  to bypass this boundary, even when it is already installed.
+- Limit host work to Make/Docker/Git orchestration, direct file edits, simple
+  shell commands and basic filesystem/text utilities such as `rg`, `cat`,
+  `tail`, `cp` and `cmp`. Move shell pipelines or embedded scripts that perform
+  substantial data processing into Docker as well.
+- Native Ollama is the explicitly selected exception for local model inference;
+  its use does not authorize other application or scripting work on the host.
 - Run `make hw01-check` from the repository root for Ruff lint/format checks,
   strict mypy checks, pytest and frozen gold validation.
 - Use `make hw01-validate-gold` when only gold validation is needed.

@@ -11,10 +11,16 @@ models:
 prompts:
   - id: v1
     file: prompts/v1.txt
+  - id: v2
+    file: prompts/v2.txt
 sampling:
   - id: baseline
     temperature: 0.0
     top_p: 1.0
+    max_output_tokens: 4096
+  - id: exploratory
+    temperature: 0.2
+    top_p: 0.9
     max_output_tokens: 4096
 execution:
   request_timeout_seconds: 1800.0

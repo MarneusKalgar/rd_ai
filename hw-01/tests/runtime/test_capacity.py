@@ -1,9 +1,11 @@
 """Token admission uses complete rendered requests and the full output allowance."""
 
+from itertools import product
 from pathlib import Path
 
 import pytest
 
+from extraction_service.corpus.loading import load_corpus
 from extraction_service.inference.transport.http import JsonHttpClient
 from extraction_service.preflight import preflight
 from extraction_service.runtime.capacity import measure_capacity
@@ -21,8 +23,20 @@ def test_inventory_includes_all_sources_and_complete_correction_evidence(
 
     inventory = context_inventory(project_copy, experiment)
 
-    assert len(requests) == 60
+    assert len(requests) == 240
     assert len({request.input_id for request in requests}) == 30
+    expected = set(
+        product(
+            (source.input_id for source in load_corpus(project_copy).inputs),
+            ("v1", "v2"),
+            ("baseline", "exploratory"),
+            ("extraction", "correction"),
+        )
+    )
+    assert {
+        (request.input_id, request.prompt_id, request.request.sampling.id, request.kind.value)
+        for request in requests
+    } == expected
     assert inventory["token_capacity_verified"] is False
     assert inventory["future_corrections_require_actual_request_admission"] is True
     assert inventory["largest_by_bytes"]["message_utf8_bytes"] > 54000
@@ -46,7 +60,7 @@ def test_capacity_checks_every_prepared_request_not_only_largest_byte_count(
     report = measure_capacity(client, requests, pin, setup_settings)
 
     assert report["token_capacity_verified"] is True
-    assert len(report["measurements"]) == 60
+    assert len(report["measurements"]) == 240
     payload = server.requests[0][1]
     assert payload is not None
     assert payload["truncate"] is False

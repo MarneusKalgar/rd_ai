@@ -15,12 +15,12 @@ def test_explicit_nondefault_variants(service: ControlledService, gold: dict[str
     path = service.project / "config/experiments.yaml"
     config = yaml.safe_load(path.read_text())
     instructions = "Distinct controlled test instructions."
-    config["prompts"].append({"id": "v2", "file": "prompts/v2.txt"})
+    config["prompts"].append({"id": "controlled", "file": "prompts/controlled.txt"})
     config["sampling"].append(
         {"id": "alt", "temperature": 0.2, "top_p": 0.9, "max_output_tokens": 1000}
     )
     path.write_text(yaml.safe_dump(config))
-    (service.project / "prompts/v2.txt").write_text(instructions)
+    (service.project / "prompts/controlled.txt").write_text(instructions)
     service.responses = [json.dumps(gold)]
 
     result = service.invoke(
@@ -30,7 +30,7 @@ def test_explicit_nondefault_variants(service: ControlledService, gold: dict[str
         "--input",
         "B02-S003-PO01",
         "--prompt",
-        "v2",
+        "controlled",
         "--sampling",
         "alt",
     )
@@ -38,7 +38,7 @@ def test_explicit_nondefault_variants(service: ControlledService, gold: dict[str
     assert result.returncode == 0, result.stdout + result.stderr
     _, records = reload_records(service.project / "results/runs/variant")
     assert len(records) == 1
-    assert records[0].prompt_id == "v2"
+    assert records[0].prompt_id == "controlled"
     assert records[0].prompt_sha256 == hashlib.sha256(instructions.encode()).hexdigest()
     assert records[0].sampling_id == "alt"
     payloads = [

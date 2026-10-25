@@ -1,5 +1,29 @@
 # Revised required provider/local matrix (7.2)
 
+**Evidence availability — 25 October 2026:** the [compact review snapshot](../results/submission/v2-baseline-review-20261025/summary.json) and [availability index](../results/submission/v2-baseline-review-20261025/evidence-index.json) are included in this checkpoint. New v2 raw/preparation/detailed evaluation bundles referenced below are retained locally and intentionally unversioned pending archival. A fresh checkout cannot reproduce their saved-run evaluation yet. See the [checkpoint notes](../results/submission/v2-baseline-review-20261025/README.md).
+
+## Current status — 24 October 2026
+
+**Frozen v2 baseline phases complete and verified on 24 October 2026.** Native
+Gemma attempted all30 with **29/30 schema-valid**, gold **7.16%**, 303 extra
+gold rows and one exact gold document. Stronger Gemini Flash saved **30/30
+schema-valid**, gold **100% (342/342)** and **10/10 exact gold documents**.
+Gold10 is development data; the other20 have no gold labels. Both reuse their
+saved gold10 exactly once with disjoint remaining20 continuations. See
+[v2 continuation results](v2-continuation-results.md) for failures, checked exports,
+matched comparisons, timings and budget evidence.
+
+V2 remains frozen at SHA-256
+`6a03379937695a2e5b127d292fc6ddb2301c9048b730ca3f9982d6c6443d155b`.
+Native settings remain 49,152 context, 16,384 output and thinking=false; Flash
+retains default reasoning and 16,384 output. The 732-test gate passed. Gemma
+is unloaded. Provider v2 cost **$0.88064190**; cumulative accounted spend
+**$3.52909660**, prior unknown holds **$0.50135040**, remaining **$6.47090340**.
+Required coverage is **120/240**; four exploratory variants (**120 primaries**)
+remain. Qwen3.5 9B is a separately planned optional gold10 comparison before a
+Gemma-specific harness. **No further inference, model download or paid invocation
+is approved.** Keep examples/skills and behavioral semantic correction separate.
+
 ## Execution update — 23 October 2026
 
 **Review gate:** finish and verify the revised v1 baselines, then stop for the
@@ -125,9 +149,15 @@ After audited policy/configuration/profile updates, aggregation compatibility, o
 
 ## Baseline completion, prompt review and remaining variants
 
-After the gate and revised-profile checks, complete the remaining **20 provider + 29 local** v1/baseline inputs, preserving every failed/untouched outcome. Combine them with the 11 declared source observations only after fresh offline verification. Review all 30 inputs for each deployment: factual accuracy only on gold10, operations over all30. Truncation/invalid output is a measured failure; insufficient budget, unavailable dependencies or untouched inputs leave the phase incomplete.
+Both revised v1 baselines are complete and verified: the remaining20 provider
+and remaining29 native observations were combined with the 11 compatible saved
+observations, preserving failures and source hashes. Reuse these results rather
+than rerunning v1 to begin v2. Review all30 per deployment: factual accuracy on
+gold10, operations over all30. Truncation/invalid output remains a measured
+failure; untouched inputs leave a future phase incomplete. See the
+[revised v1 results](revised-v1-baseline-results.md).
 
-After user review and further direction, review and freeze v2. A v2 draft already exists from the original baseline review; do not recreate it or claim it was written after the revised baselines. Its current hash is `c2c6c61dcdd3fe9c93fcaf9b40d6f811a30fb9351e6918fcaa899459021e5ba0`. Reconcile its general ordered-row, buyer-identifier, line-date, address and unit rules against the revised baseline evidence. Record any subsequent edits, new hash, rationale and examples in the prompt changelog. No case-specific answer leakage or frozen schema/input/gold/scorer edits. All gold10 were used in model/profile selection and prompt development; report development-set scores, not held-out generalization.
+After user review and further direction, review and freeze v2. A v2 draft already exists from the original baseline review; do not recreate it or claim it was written after the revised baselines. Its original unexecuted draft hash was `c2c6c61dcdd3fe9c93fcaf9b40d6f811a30fb9351e6918fcaa899459021e5ba0`; the 24 October frozen revision and results are recorded above. Reconcile its general ordered-row, buyer-identifier, line-date, address and unit rules against the revised baseline evidence. Record any subsequent edits, new hash, rationale and examples in the prompt changelog. No case-specific answer leakage or frozen schema/input/gold/scorer edits. All gold10 were used in model/profile selection and prompt development; report development-set scores, not held-out generalization.
 
 Keep the initial v1/v2 comparison on the existing pipeline: strict JSON/schema
 validation, the same correction policy and unchanged gold scoring. Semantic
@@ -136,9 +166,74 @@ not reject, filter, repair or trigger correction only for v2. Follow the separat
 semantic-validation sequence in 7.3.2 below. Existing full-corpus v1 results do
 not need rerunning merely to inspect or flag their source-evidence errors.
 
-After both revised full-corpus baselines are complete and reviewed, run the remaining **180 primaries** over all30: v1/exploratory and v2/both samplings on both models. Keep 16,384 output, the selected runtime/thinking/context, deadlines, retries and scoring matched across prompts. Freeze any profile change as a new explicit variant rather than changing only v2 or failed cases. Every paid invocation still needs approval and budget admission.
+Both v2/baseline variants are complete. The remaining **120 primaries** are v1/v2 exploratory sampling on both models. The native gold10/remaining20 split changes execution order, not the all30 requirement or 240-observation target. Keep 16,384 output, the selected runtime/thinking/context, deadlines, retries and scoring matched across prompts. Freeze any profile change as a new explicit variant rather than changing only v2 or failed cases. Every paid invocation still needs approval and budget admission.
 
 Finish section 8 from an explicit **240-observation membership inventory**, eight complete 30-input variants, duplicate rejection, checked exports and preserved source hashes. Report gold10 quality, all30 operations, reasoning/output usage, null/present correctness, row errors and known/unknown costs. Historical constrained-budget and Docker/runtime diagnostics receive separate tables. Docker Ollama's stopped container, image and weights volume were removed at the user's request; native weights/results remain. Docker runs Python/offline checks; native is the selected model runtime. Optional Docker compatibility code remains in source and must not download/start Ollama implicitly.
+
+## Staged instruction-only v2 execution (7.2.5)
+
+**Steps 1–5 baseline execution complete on 24 October 2026.** The user
+approved both remaining20 continuations, which are verified with their reused
+gold10. Preserve the original draft/history and the staged controls below.
+Exploratory execution remains pending; see [terminal v2 results](v2-continuation-results.md).
+No further invocation is authorized.
+
+1. **Revise and freeze a shared instruction-only prompt.** Reconcile the draft
+   against the revised v1 results and source-evidence observations. Clarify
+   quantity-to-product linkage; scope blank-quantity exclusion to catalog/order
+   entry evidence rather than globally dropping otherwise explicitly ordered
+   items with unknown quantities. Retain conservative buyer-ID ownership,
+   line-linked dates, source-order address components, decimal precision and
+   unit rules. Include no synthetic worked examples, benchmark answer objects,
+   skill content or new multi-stage model workflow in this initial v2.
+   Both Gemma and stronger
+   Flash must receive the same frozen instruction bytes and schema. Record the
+   revision rationale/hash in the changelog; update the stale 4,096-token wording
+   and register the reviewed revision in `config/matrix.yaml`. Do not use the
+   older Flash-Lite/$4.50 configuration as the revised experiment profile.
+2. **Verify the matched profile and request admission.** Preserve the latest
+   v1 controls below. Recheck actual native runtime/model/tokenizer identities
+   before reuse and admit the complete revised instructions, schema, source and
+   output allowance. Actual corrections require their own admission. No silent
+   input truncation, context increase, thinking change or output-limit change.
+   A profile mismatch needs an explicitly separate variant or rebaseline.
+3. **Run native Gemma on exactly the approved gold10 first.** When execution is
+   separately requested after prompt review/freeze, use v2/baseline-16384 and
+   matrix-stage records with a unique run ID and explicit input membership.
+   Retain every attempted failure and untouched outcome. Report first/final
+   validity, gold field/row/null errors, exact documents, total calls/tokens and
+   latency against the saved matching v1 gold subset. Do not describe this
+   10-input phase as a completed all30 baseline or as held-out evaluation.
+4. **Stop for user review and approval before native remaining20.** No score
+   threshold automatically approves continuation. If approved with unchanged
+   prompt bytes and effective execution controls, run exactly the disjoint
+   remaining20 and aggregate checked source runs into one 30-input variant.
+   Preserve both run IDs/hashes; count each input once. These unlabeled20 add
+   operational and qualitative evidence, not new factual accuracy labels.
+   If gold10 observations motivate a prompt change, assign/freeze a new revision
+   and hash, rerun gold10 under it, and only then complete its remaining20 after
+   approval. Never pool earlier gold results with a changed prompt/profile.
+5. **Provider v2 and exploratory variants remain separate phases.** Flash can
+   use the same frozen v2; it is not a local-only prompt. Prepare current provider
+   route/context/pricing evidence and a concrete command/allowance for approval
+   before any paid invocation. Local continuation approval supplies no provider
+   authorization. Complete the two v2 baseline variants before proceeding to
+   the four all30 exploratory variants, subject to further direction and paid
+   approvals. Preserve the full 240-observation membership target, including
+   failures; extra revision trials remain separately identified diagnostics.
+
+| Control | Native Gemma v2 | Provider Flash v2 |
+| --- | --- | --- |
+| Context | **49,152**, matching revised v1 | Existing verified provider-enforced policy; refresh evidence |
+| Output allowance | **16,384** | **16,384**, including any reasoning usage |
+| Thinking/reasoning | **thinking=false** | Preserve revised v1 default reasoning |
+| Baseline sampling | **temperature 0, top_p 1** | Same |
+| Pipeline | Existing JSON/schema validation and bounded correction | Same |
+
+The recorded native model maximum is 131,072, but this comparison selects
+49,152. Raising context beyond that only for v2 would confound the prompt
+comparison. Keep deterministic semantic diagnostics detection-only; they must
+not filter rows, reject output or trigger new correction calls in this matrix.
 
 ## Optional extraction skill experiment (7.3.1)
 
@@ -152,6 +247,13 @@ The current Ollama adapter sends instructions, schema and source text through
 `request_messages`; it has no skill discovery, resource loader or tool loop.
 Placing a `SKILL.md` file in the repository alone would not affect inference.
 A skill packages instructions/resources; it does not train or enlarge the model.
+
+Reserve synthetic worked examples for this separate experiment and keep them
+out of the initial v2 run. An invented example is a prompting technique, not
+automatically answer leakage; disclose the design and any benchmark-informed
+assumptions. Gold10 remains development data. Once the application loads an
+example from the skill, it becomes model context and needs its own version/hash
+and measured comparison. A file on disk supplies no model capability by itself.
 
 ### First approach: application-controlled loading
 
@@ -212,7 +314,8 @@ workflow demonstrates a concrete need for autonomy. See the
 **Detection-only implementation authorized on 24 October 2026.** The first
 catalog-row candidate and saved-run CLI are implemented; see
 [deterministic row diagnostics](row-diagnostics.md) for supported structures,
-unknown outcomes and evidence. The 722-test offline gate passed; 60 saved v1
+unknown outcomes and evidence. Implementation and regression hardening passed
+the 732-test offline gate; 60 saved v1
 observations were inspected without inference, retaining source/output hashes
 and historical scores. Keep the compact diagnostic summary and reproduction
 command versioned; the verbose regenerable report belongs under ignored
@@ -237,7 +340,9 @@ validation; schema descriptions alone do not perform these source comparisons.
    into the required matrix's requests or correction policy.
 2. **Initial v1/v2 comparison: change the prompt only.** After user review and
    further direction, freeze v2 and run the required matched variants using the
-   current pipeline. Preserve the completed v1 baselines. Keep row selection,
+   current pipeline and the gold10-first staging in 7.2.5. Native remaining20
+   require user review and approval. Load no skill or worked examples into this
+   initial v2. Preserve the completed v1 baselines. Keep row selection,
    source preprocessing, runtime validation and correction behavior unchanged
    across prompts so the prompt effect can be interpreted.
 3. **After that comparison: test behavioral semantic validation separately.**
@@ -259,6 +364,84 @@ new runtime validation a prerequisite for the prompt experiment. The extraction
 skill proposal in 7.3.1 can reuse the assessed checks later; packaging them as a
 skill does not change their experimental identity or prove their reliability.
 
+
+## Optional Qwen3.5 9B comparison (7.3.3)
+
+**Planned diagnostic; not executed.** Before investing in a Gemma-specific
+skill or behavioral validation harness, compare a second local model family:
+**`qwen3.5:9b-q4_K_M`**, through the existing native Ollama desktop runtime.
+This plan edit authorizes no download, implementation or inference invocation.
+Native Gemma remaining20, provider v2 and exploratory runs keep their existing
+review/approval gates.
+
+### Question and comparison boundary
+
+Test whether changing the local model materially improves ordered-row selection
+with the existing extraction pipeline. Reuse the verified Gemma v2 gold10 as
+the comparator; do not rerun Gemma automatically. Qwen is a separate optional
+model diagnostic, not a replacement for the selected Gemma baseline or a new
+member of the required 240-observation matrix. Qwen observations do not increase required matrix coverage; see the latest
+status and checked membership above for completed required phases.
+
+The [exact Qwen artifact](https://ollama.com/library/qwen3.5:9b-q4_K_M)
+is listed at approximately 6.6GB, versus approximately 6.1GB for the
+[Gemma QAT artifact](https://ollama.com/library/gemma4:e4b-it-qat).
+These are download sizes, not runtime memory requirements or equivalent compute
+budgets. Gemma's E4B designation means effective parameters; Qwen 9B is not a
+parameter-matched model. Describe this as a comparison within a similar weight
+storage budget, and measure memory and speed rather than assuming equivalence.
+
+### Preparation and matched controls
+
+1. When execution is separately requested, verify the exact tag, digest,
+   quantization, native runtime compatibility, tokenizer/template identity,
+   structured-output support and whether thinking can actually be disabled.
+   Keep Gemma's saved identities unchanged. Add an explicit diagnostic
+   configuration/model identity; preserve ordinary defaults and Gemma records.
+2. Use the same ten frozen gold inputs, v2 instruction bytes (SHA-256
+   `6a03379937695a2e5b127d292fc6ddb2301c9048b730ca3f9982d6c6443d155b`),
+   authoritative schema, input representation and gold scorer. Keep context
+   **49,152**, output allowance **16,384**, temperature **0**, top_p **1**,
+   and **thinking=false**, subject to verified support. Preserve deadlines,
+   bounded retry/correction policy and sequential execution. No examples,
+   skill resources, source filtering or behavioral semantic correction.
+3. Audit and record the complete effective generation options, including
+   artifact defaults such as presence/repetition penalties and top_k. Explicitly
+   align supported controls where possible; disclose unavoidable model-specific
+   behavior. Do not call the comparison perfectly controlled merely because
+   temperature and top_p match. A thinking/profile mismatch requires a separately
+   identified variant and review before inference, not a silent fallback.
+4. Verify complete-request admission using Qwen's own tokenizer/template; do
+   not reuse Gemma token counts or certificates. Check memory headroom on the
+   16GiB M2 Pro with only one model resident. Keep the full input and schema;
+   a failed admission or memory gate stops preparation rather than silently
+   shrinking context/input/output. If the current admission path cannot verify
+   Qwen, implement and test that support before generation; do not bypass it.
+   Run Python/offline verification in Docker; model inference remains native.
+
+### Execution, evidence and review gate
+
+After a separate execution request and successful preparation, run exactly the
+same gold10 once under a unique Qwen diagnostic run ID. Retain every outcome,
+raw response, correction/retry and request/profile hash. No paid inference is
+part of this diagnostic. Unload the model after completion and verify residency.
+
+Report overall/header/line-field accuracy, exact documents, extra/missing rows,
+first/final validity, truncations, calls, actual token usage, processing and
+load times, model residency/GPU placement and observed memory. Inspect S016,
+S032 and S040 explicitly, but keep all ten cases in the evaluation. Run the
+existing source-row diagnostic only post hoc; it must not alter model outputs,
+corrections or gold scores. Preserve checked raw exports and compact comparison
+summaries; keep verbose regenerable row diagnostics ignored with a recorded hash.
+
+A substantial reduction in unsupported catalog rows would support model choice
+as a useful intervention; similar failures would strengthen the case for testing
+input representation or staged row selection. One development-set comparison
+cannot prove reliability, a universal small-model limit or harness effectiveness.
+Stop for user review after gold10. Do not automatically run Qwen remaining20,
+switch the selected local model, revise v2 or implement the harness. Any later
+model substitution needs an explicit plan/membership update and matched matrix
+coverage; this diagnostic does not silently satisfy Gemma's outstanding phases.
 
 ## Historical original 4,096-token phase
 
