@@ -1,0 +1,14 @@
+{
+  "version": "qwen-gold-archive-verification-v1",
+  "archive_sha256": "c5cd35ac80b99061f5ecd53112d889b3212c5eaf5e89508d6d4b27683cc90114",
+  "covered_observations": 240,
+  "new_qwen_observations": 20,
+  "bundles": 17,
+  "payload_files": 599,
+  "source_and_restored_payloads_equal": true,
+  "restored_qwen_evaluations_equal": 2,
+  "gold_quality_and_operations_reproduced": 6,
+  "garage_full_get_verified": true,
+  "provider_ledger_unchanged": true,
+  "native_unloaded": true
+}

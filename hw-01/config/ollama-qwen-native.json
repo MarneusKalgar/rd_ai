@@ -1,0 +1,6 @@
+{
+  "model": "qwen3.5:9b-q4_K_M",
+  "digest": "56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90",
+  "server_version": "0.40.7",
+  "server_version_policy": "compatible_patch"
+}

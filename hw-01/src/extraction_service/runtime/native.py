@@ -17,7 +17,7 @@ def initialize_native(project_dir: Path, model_id: str, client: JsonHttpClient) 
 
     experiment = preflight(project_dir).experiment
     model = selected_model(experiment.models, model_id, "ollama")
-    pin = load_model_pin(project_dir, native=True)
+    pin = load_model_pin(project_dir, native=True, filename=model.local_pin_file)
     pin.check(model)
     settings = OllamaSetupSettings()
 

@@ -15,17 +15,17 @@ counts below are historical snapshots. Required execution is complete; sections
 8–9 final analysis/reproducibility/acceptance remain. No additional inference is
 approved.
 
-**Next optional experiment — Qwen first:** prepare the 7.3.3 Qwen gold10
-comparison before investing in new skill/workflow behavior (7.3.1), behavioral
+**Qwen-first sequence — diagnostic complete, review pending:** review the
+7.3.3 Qwen v1/v2 gold10 comparison before investing in new skill/workflow behavior (7.3.1), behavioral
 semantic rejection/correction (7.3.2), or JEV verification/routing (7.3.5).
 The question is whether a different local model improves ordered-row selection
 under the existing pipeline before adding more orchestration. Section numbering
 does not prescribe execution order. The completed sampling diagnostic (7.3.4)
 and detection-only checks remain reusable evidence.
 
-1. Verify Qwen support/admission and, after an execution request, run exactly
-   gold10 with frozen v2 and the matched baseline controls in 7.3.3. Reuse saved
-   Gemma/Gemini comparators; do not rerun them or alter the required matrix.
+1. **Complete:** Qwen support/admission was verified and both frozen prompts
+   ran on gold10 (twenty new observations), using the baseline controls in 7.3.3
+   and saved Gemma/Gemini comparators. The required matrix remains unchanged.
 2. Stop for user review of field/row errors, exact documents, validity, memory
    and latency. A model change must improve usable extraction quality at an
    acceptable measured resource cost; a higher headline percentage alone is
@@ -438,19 +438,31 @@ skill does not change their experimental identity or prove their reliability.
 
 ## Optional Qwen3.5 9B comparison (7.3.3)
 
-**Next optional diagnostic; not executed.** Before investing in a local-model
+**Completed — 26 October 2026; stop for user review.**
+The user authorized updating this diagnostic to both frozen prompts and starting
+the experiment: gold10 with v1, then the same gold10 with v2, twenty new native
+observations in total. This includes necessary Qwen initialization and tested
+admission support, subject to the checks below. No provider inference, remaining20,
+prompt revision or harness behavior is part of this request.
+The installed digest is pinned in `config/ollama-qwen-native.json`; the separate
+`config/qwen-gold.yaml` preserves the matrix configuration. All twenty initial
+requests passed render-only admission at 49,152 context; the full gate passed
+792 tests. See the [Qwen comparison report](../reports/qwen-gold-comparison.md)
+for verified metadata, explicit options, terminal results and archived/restored comparisons.
+Both gold10 phases are complete; no continuation is authorized.
+Before investing in a local-model
 skill, behavioral validation harness or JEV routing, compare a second local model family:
 **`qwen3.5:9b-q4_K_M`**, through the existing native Ollama desktop runtime.
-This plan edit authorizes no download, implementation or inference invocation.
 The required 7.2 matrix is complete; this trial is a separate model-choice
 diagnostic, followed by user review before choosing another 7.3 intervention.
 
 ### Question and comparison boundary
 
 Test whether changing the local model materially improves ordered-row selection
-with the existing extraction pipeline. Reuse the verified Gemma v2 gold10 as
-the matched baseline comparator (temperature 0/top_p 1); the saved Gemini v2
-baseline supplies a provider reference. Do not rerun either automatically or
+with the existing extraction pipeline, and whether the v1-to-v2 instruction
+change helps Qwen. Reuse the verified Gemma v1/v2 gold10 observations as
+the corresponding matched baseline comparators (temperature 0/top_p 1); saved
+Gemini v1/v2 baselines supply provider references. Do not rerun either automatically or
 substitute Gemma's best exploratory result as the matched baseline. Qwen is a separate optional
 model diagnostic, not a replacement for the selected Gemma baseline or a new
 member of the required 240-observation matrix. Qwen observations do not increase required matrix coverage; see the latest
@@ -471,7 +483,9 @@ storage budget, and measure memory and speed rather than assuming equivalence.
    structured-output support and whether thinking can actually be disabled.
    Keep Gemma's saved identities unchanged. Add an explicit diagnostic
    configuration/model identity; preserve ordinary defaults and Gemma records.
-2. Use the same ten frozen gold inputs, v2 instruction bytes (SHA-256
+2. Use the same ten frozen gold inputs for both runs, unchanged v1 instruction
+   bytes (SHA-256 `ef5cf6c25a2623e73e5e85948321b304b1ce67f09b7caf0dfbc47fa26e666785`)
+   and unchanged v2 instruction bytes (SHA-256
    `6a03379937695a2e5b127d292fc6ddb2301c9048b730ca3f9982d6c6443d155b`),
    authoritative schema, input representation and gold scorer. Keep context
    **49,152**, output allowance **16,384**, temperature **0**, top_p **1**,
@@ -494,8 +508,8 @@ storage budget, and measure memory and speed rather than assuming equivalence.
 
 ### Execution, evidence and review gate
 
-After a separate execution request and successful preparation, run exactly the
-same gold10 once under a unique Qwen diagnostic run ID. Retain every outcome,
+After successful preparation, run the same gold10 once with v1 and once with
+v2, sequentially, under unique Qwen diagnostic run IDs. Retain every outcome,
 raw response, correction/retry and request/profile hash. No paid inference is
 part of this diagnostic. Unload the model after completion and verify residency.
 
@@ -511,7 +525,10 @@ A substantial reduction in unsupported catalog rows would support model choice
 as a useful intervention; similar failures would strengthen the case for testing
 input representation or staged row selection. One development-set comparison
 cannot prove reliability, a universal small-model limit or harness effectiveness.
-Stop for user review after gold10. Do not automatically run Qwen remaining20,
+Compare the two prompts on each of the same ten documents, including null
+handling and ordered-row selection. A single run per prompt does not establish
+sampling stability or isolate all model-specific defaults.
+Stop for user review after both gold10 runs. Do not automatically run Qwen remaining20,
 switch the selected local model, revise v2 or implement the harness. Any later
 model substitution needs an explicit plan/membership update and matched matrix
 coverage. The original Gemma matrix remains complete and unchanged. A favorable gold10

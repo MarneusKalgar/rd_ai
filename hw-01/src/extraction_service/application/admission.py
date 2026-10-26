@@ -7,7 +7,8 @@ from typing import Any
 
 from pydantic import Field, model_validator
 
-from extraction_service.application.tokenization import GemmaTokenizer
+from extraction_service.application.tokenization import LocalTokenizer
+from extraction_service.configuration.models import OllamaOptions
 from extraction_service.execution.admission import (
     AdmissionEvidence,
     AdmissionReason,
@@ -25,13 +26,21 @@ from extraction_service.runtime.configuration import ModelPin
 from extraction_service.runtime_types import NonEmptyText, PositiveInt, StrictModel
 
 
-def request_fingerprint(request: GenerationRequest, *, thinking: bool | None = None) -> str:
+def request_fingerprint(
+    request: GenerationRequest,
+    *,
+    thinking: bool | None = None,
+    ollama_options: OllamaOptions | None = None,
+) -> str:
     """Hash request content/sampling and any explicit Ollama thinking control."""
 
     payload = request.model_dump(exclude={"timeout_seconds"})
 
     if thinking is not None:
         payload["ollama_thinking"] = thinking
+
+    if ollama_options is not None:
+        payload["ollama_options"] = ollama_options.model_dump()
 
     serialized = json.dumps(payload, sort_keys=True)
 
@@ -43,11 +52,12 @@ class LocalAdmission:
         self,
         client: JsonHttpClient,
         pin: ModelPin,
-        tokenizer: GemmaTokenizer,
+        tokenizer: LocalTokenizer,
         context_length: int,
         *,
         runtime_version: str,
         thinking: bool | None = None,
+        ollama_options: OllamaOptions | None = None,
     ) -> None:
         self._client = client
         self._pin = pin
@@ -55,6 +65,7 @@ class LocalAdmission:
         self._context_length = context_length
         self._runtime_version = runtime_version
         self._thinking = thinking
+        self._options = ollama_options
 
     def check(self, request: GenerationRequest, identity: ModelIdentity) -> AdmissionEvidence:
         if (
@@ -79,6 +90,9 @@ class LocalAdmission:
         if self._thinking is not None:
             payload["think"] = self._thinking
 
+        if self._options is not None:
+            payload["options"].update(self._options.model_dump())
+
         reply = self._client.post(
             "api/chat",
             payload,
@@ -102,8 +116,10 @@ class LocalAdmission:
             raise AdmissionRejected(AdmissionReason.CONTEXT_CAPACITY_EXCEEDED)
 
         return AdmissionEvidence(
-            method="gemma4-installed-bpe-render-only-plus-two-boundary-tokens",
-            request_sha256=request_fingerprint(request, thinking=self._thinking),
+            method=self._tokenizer.method,
+            request_sha256=request_fingerprint(
+                request, thinking=self._thinking, ollama_options=self._options
+            ),
             counter_identity=f"{self._pin.digest}/{self._tokenizer.sha256}",
             prompt_token_bound=count,
             output_allowance=allowance,

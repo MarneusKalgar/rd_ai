@@ -60,6 +60,7 @@ permission for model inference or spending.
 | Checked gold10 reuse and remaining matrix commands | [Exploratory continuation preparation](reports/matrix-exploratory-preparation.md) |
 | Native v1/v2 exploratory all30 continuation | [Native exploratory results](reports/native-exploratory-results.md) |
 | Provider v1/v2 exploratory all30 continuation | [Provider exploratory results](reports/provider-exploratory-results.md) |
+| Qwen native v1/v2 gold10 diagnostic | [Qwen gold comparison](reports/qwen-gold-comparison.md) |
 | Completed v2 all30 baselines | [V2 continuation results](reports/v2-continuation-results.md) |
 | Cumulative budget migration audit | [Budget revisions](reports/budget-revisions.md) |
 

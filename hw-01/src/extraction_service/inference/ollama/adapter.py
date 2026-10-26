@@ -27,6 +27,7 @@ class OllamaAdapter:
         self._http = http_client
         self._context_length = context_length
         self._thinking = config.thinking
+        self._options = config.ollama_options
 
     @property
     def identity(self) -> ModelIdentity:
@@ -49,6 +50,9 @@ class OllamaAdapter:
 
         if self._thinking is not None:
             payload["think"] = self._thinking
+
+        if self._options is not None:
+            payload["options"].update(self._options.model_dump())
 
         if self._context_length is not None:
             payload["truncate"] = False

@@ -8,6 +8,7 @@ from typing import Annotated, Final
 from pydantic import Field, StringConstraints
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from extraction_service.artifacts import artifact_path
 from extraction_service.configuration.models import ModelConfig
 from extraction_service.runtime.errors import SetupError
 from extraction_service.runtime_types import (
@@ -102,12 +103,14 @@ class SetupSettings(OllamaSetupSettings):
     image: Annotated[str, StringConstraints(pattern=r"^ollama/ollama@sha256:[a-f0-9]{64}$")]
 
 
-def load_model_pin(project_dir: Path, *, native: bool = False) -> ModelPin:
+def load_model_pin(
+    project_dir: Path, *, native: bool = False, filename: str | None = None
+) -> ModelPin:
     """Load the public, versioned model lock without consulting model catalogs."""
 
-    filename = NATIVE_MODEL_PIN_FILE if native else MODEL_PIN_FILE
+    filename = filename or (NATIVE_MODEL_PIN_FILE if native else MODEL_PIN_FILE)
 
-    pin = ModelPin.model_validate_json((project_dir / filename).read_text())
+    pin = ModelPin.model_validate_json(artifact_path(project_dir, filename).read_text())
 
     if not native and pin.server_version_policy != ServerVersionPolicy.EXACT:
         raise SetupError("Docker runtime requires an exact server version policy")

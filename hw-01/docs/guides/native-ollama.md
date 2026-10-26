@@ -53,6 +53,30 @@ effective context, loaded memory placement and tokenizer hash are retained in
 the manifest; each attempt retains its native runtime version and model digest.
 Docker initialization evidence is not reused as native installation evidence.
 
+### Separate native model diagnostics
+
+An Ollama model configuration can specify `local_pin_file` to select a separate
+reviewed pin without replacing the default Gemma pin. The Qwen diagnostic uses
+`config/qwen-gold.yaml` and `config/ollama-qwen-native.json`; its identity and
+observations remain outside the completed required Gemma/Gemini matrix.
+Initialization still requires an explicit request, and ordinary runs never pull
+missing weights. Custom pin paths remain confined to the project directory.
+
+The installed tokenizer counter supports the reviewed Gemma4 metadata and
+Qwen3.5's `gpt2`/`qwen35` byte-level BPE metadata. Both count the server-rendered
+full prompt before generation, retain counter identity and enforce the selected
+context/output allowance. The Qwen counter conservatively takes the larger raw
+and NFC-normalized count before adding two boundary tokens. Other tokenizer
+shapes fail closed.
+
+Optional `ollama_options` explicitly controls top_k, repeat_penalty,
+presence_penalty and frequency_penalty for a diagnostic. The same values enter
+render-only admission and generation, request fingerprints and saved setup;
+evaluation separates different explicit option profiles. Omitting the object
+retains artifact/runtime defaults, preserving existing Gemma behavior. Record
+those defaults and any overrides when comparing model families; common sampling
+values alone do not make the models or their compute budgets equivalent.
+
 ## Commands
 
 Start the existing Ollama desktop app. Its version endpoint must be reachable

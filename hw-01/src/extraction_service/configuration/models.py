@@ -17,6 +17,15 @@ MAX_TRANSPORT_RETRIES: Final[int] = 5
 MAX_EXPERIMENT_BUDGET_USD: Final[float] = 10.0
 
 
+class OllamaOptions(StrictModel):
+    """Explicit local defaults for comparisons across artifacts with different presets."""
+
+    top_k: Annotated[int, Field(ge=0)] = 40
+    repeat_penalty: Annotated[float, Field(gt=0)] = 1.0
+    presence_penalty: Annotated[float, Field(ge=-2, le=2)] = 0.0
+    frequency_penalty: Annotated[float, Field(ge=-2, le=2)] = 0.0
+
+
 class ModelConfig(StrictModel):
     """Requested model identity; capabilities must be verified by later adapters."""
 
@@ -25,6 +34,8 @@ class ModelConfig(StrictModel):
     model: Identifier
     serving_provider: NonEmptyText | None = None
     thinking: bool | None = None
+    local_pin_file: NonEmptyText | None = None
+    ollama_options: OllamaOptions | None = None
 
     @model_validator(mode="after")
     def check_backend_controls(self) -> Self:
@@ -35,6 +46,11 @@ class ModelConfig(StrictModel):
 
         if self.backend != "ollama" and self.thinking is not None:
             raise ValueError("The thinking control is supported only for Ollama models")
+
+        if self.backend != "ollama" and (
+            self.local_pin_file is not None or self.ollama_options is not None
+        ):
+            raise ValueError("Local pins and options are supported only for Ollama models")
 
         return self
 

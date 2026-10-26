@@ -2,9 +2,18 @@
 
 import hashlib
 import json
-from typing import Any
+from typing import Any, Protocol
 
 from tokenizers import AddedToken, Regex, Tokenizer, models, normalizers, pre_tokenizers
+
+
+class LocalTokenizer(Protocol):
+    """Installed counter identity and method retained in admission evidence."""
+
+    sha256: str
+    method: str
+
+    def count(self, rendered: str) -> int: ...
 
 
 class GemmaTokenizer:
@@ -13,6 +22,8 @@ class GemmaTokenizer:
     No model weights, generated probes or external tokenizer downloads are used.
     Only the reviewed Gemma4 metadata shape is supported; other models fail closed.
     """
+
+    method = "gemma4-installed-bpe-render-only-plus-two-boundary-tokens"
 
     def __init__(self, info: dict[str, Any]) -> None:
         if info.get("tokenizer.ggml.model") != "gemma4":

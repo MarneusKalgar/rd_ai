@@ -1,0 +1,35 @@
+version: experiment-v1
+models:
+  - id: qwen
+    backend: ollama
+    model: qwen3.5:9b-q4_K_M
+    local_pin_file: config/ollama-qwen-native.json
+    thinking: false
+    ollama_options:
+      top_k: 40
+      repeat_penalty: 1.0
+      presence_penalty: 0.0
+      frequency_penalty: 0.0
+prompts:
+  - id: v1
+    file: prompts/v1.txt
+  - id: v2
+    file: prompts/v2.txt
+sampling:
+  - id: baseline-16384
+    temperature: 0.0
+    top_p: 1.0
+    max_output_tokens: 16384
+execution:
+  request_timeout_seconds: 1800.0
+  input_timeout_seconds: 7205.0
+  transport_retries: 1
+  api_budget_usd: 10.0
+  matrix_reserve_usd: 3.5
+  dependency_failure_limit: 3
+  backoff_initial_seconds: 1.0
+  backoff_max_seconds: 30.0
+selection:
+  model_id: qwen
+  prompt_id: v1
+  sampling_id: baseline-16384

@@ -20,3 +20,6 @@ selections:
   provider-exploratory-results:
     membership: results/submission/provider-exploratory-20261026-evaluation/membership.json
     evidence_index: archive-index/selections/provider-exploratory-results.json
+  qwen-gold-comparison:
+    membership: results/submission/qwen-gold-20261026-evaluation/membership.json
+    evidence_index: archive-index/selections/qwen-gold-comparison.json

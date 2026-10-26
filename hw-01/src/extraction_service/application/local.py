@@ -5,7 +5,8 @@ from time import perf_counter
 from typing import Any
 
 from extraction_service.application.admission import LocalAdmission
-from extraction_service.application.tokenization import GemmaTokenizer
+from extraction_service.application.qwen_tokenization import QwenTokenizer
+from extraction_service.application.tokenization import GemmaTokenizer, LocalTokenizer
 from extraction_service.configuration.models import ModelConfig
 from extraction_service.configuration.settings import ApplicationSettings, OllamaMode
 from extraction_service.execution.types import ExecutionTarget
@@ -53,7 +54,7 @@ def prepare_local(
 
     native = settings.ollama_mode == OllamaMode.NATIVE
     local_settings = OllamaSetupSettings() if native else SetupSettings()
-    pin = load_model_pin(project_dir, native=native)
+    pin = load_model_pin(project_dir, native=native, filename=model.local_pin_file)
     pin.check(model)
     version = wait_for_server(client, local_settings)
 
@@ -82,7 +83,11 @@ def prepare_local(
     if not isinstance(info, dict):
         raise ValueError("Installed tokenizer metadata unavailable")
 
-    tokenizer = GemmaTokenizer(info)
+    tokenizer: LocalTokenizer
+    if info.get("general.architecture") == "qwen35":
+        tokenizer = QwenTokenizer(info)
+    else:
+        tokenizer = GemmaTokenizer(info)
     started = perf_counter()
     loaded = load_model(client, pin, local_settings)
     load_ms = (perf_counter() - started) * 1000
@@ -96,9 +101,10 @@ def prepare_local(
         loaded.context_length,
         runtime_version=version,
         thinking=model.thinking,
+        ollama_options=model.ollama_options,
     )
     target = ExecutionTarget(adapter=adapter, endpoint=str(settings.ollama_base_url))
-    evidence = {
+    evidence: dict[str, Any] = {
         "mode": settings.ollama_mode.value,
         "endpoint": str(settings.ollama_base_url),
         "loaded": loaded.model_dump(mode="json"),
@@ -108,5 +114,9 @@ def prepare_local(
         "runtime": runtime.model_dump(mode="json"),
         "thinking": thinking,
     }
+
+    if model.ollama_options is not None:
+        evidence["ollama_options"] = model.ollama_options.model_dump()
+        evidence["artifact_parameters"] = details.body.get("parameters")
 
     return target, admission, evidence
