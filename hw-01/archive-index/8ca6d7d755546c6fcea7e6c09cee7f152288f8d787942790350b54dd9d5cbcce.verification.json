@@ -1,0 +1,11 @@
+{
+  "version": "provider-exploratory-archive-verification-v1",
+  "archive_sha256": "8ca6d7d755546c6fcea7e6c09cee7f152288f8d787942790350b54dd9d5cbcce",
+  "archive_bytes": 3451934,
+  "bundles": 18,
+  "payload_files": 552,
+  "covered_observations": 240,
+  "source_and_restored_payloads_equal": true,
+  "restored_provider_evaluations_equal": 2,
+  "garage_full_get_verified": true
+}

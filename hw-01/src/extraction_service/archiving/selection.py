@@ -11,6 +11,7 @@ from extraction_service.application.persistence import RunManifest, item_key, re
 from extraction_service.archiving.bundles import verify_bundle
 from extraction_service.archiving.files import confined, digest, read_json
 from extraction_service.archiving.models import BundleInfo, safe_name
+from extraction_service.evaluation.sampling_aliases import SamplingAliases
 from extraction_service.records import RunRecord
 from extraction_service.runtime_types import StrictModel
 
@@ -34,14 +35,22 @@ class SelectedEvidence:
 
 
 def _check_member(
-    manifest: RunManifest, records: dict[str, RunRecord], entry: dict[str, Any]
+    manifest: RunManifest,
+    records: dict[str, RunRecord],
+    entry: dict[str, Any],
+    aliases: SamplingAliases | None = None,
 ) -> None:
     run_id = entry["source_run_id"]
-    key = item_key(entry["input_id"], entry["model_id"], entry["prompt_id"], entry["sampling_id"])
+    source_sampling = entry.get("source_sampling_id", entry["sampling_id"])
+    key = item_key(entry["input_id"], entry["model_id"], entry["prompt_id"], source_sampling)
     record = records.get(key)
 
     if record is None or not record.attempts:
         raise ValueError("Covered membership must have original attempted evidence")
+
+    canonical = record.sampling if aliases is None else aliases.canonical(record.sampling)
+    if canonical.id != entry["sampling_id"]:
+        raise ValueError("Membership sampling alias is missing or differs")
 
     if (
         manifest.record_sha256.get(key) != entry["source_record_sha256"]
@@ -61,6 +70,11 @@ def verify_membership(submission: Path, membership: dict[str, Any]) -> tuple[set
         raise ValueError("Unsupported membership version")
 
     entries = membership["entries"]
+    aliases = (
+        SamplingAliases.model_validate(membership["sampling_aliases"])
+        if "sampling_aliases" in membership
+        else None
+    )
     identities = [
         (entry["input_id"], entry["model_id"], entry["prompt_id"], entry["sampling_id"])
         for entry in entries
@@ -96,7 +110,7 @@ def verify_membership(submission: Path, membership: dict[str, Any]) -> tuple[set
         if manifest_hash != entry["source_manifest_sha256"]:
             raise ValueError("Membership manifest hash differs")
 
-        _check_member(manifest, by_key, entry)
+        _check_member(manifest, by_key, entry, aliases)
 
     return set(checked), len(covered)
 

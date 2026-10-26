@@ -53,6 +53,26 @@ independent held-out generalization results.
 
 ## Evidence boundaries
 
+### Explicit sampling-ID reuse
+
+`evaluate --sampling-aliases config/matrix-sampling-aliases.json` enables the
+reviewed diagnostic-to-matrix naming map. Source and target temperature, top_p
+and output allowance must match exactly; conflicting targets, ambiguous sources
+and alias chains are rejected. Saved source settings are checked against the
+declared map before grouping. All other variant identities remain distinct.
+Original records and hashes remain unchanged, and reports retain each source
+sampling value alongside the canonical grouping identity. Duplicate inputs in
+the resulting variant remain errors, including overlaps introduced by an alias.
+
+Matrix membership embeds the same validated map and identifies a differing
+`source_sampling_id` explicitly. The archive verifier resolves the original
+record key from that source ID, checks the canonical target and preserves the
+original manifest/record hashes. Without a map, different sampling IDs continue
+to be separate variants. Aliases never change generation requests or scores.
+
+The [exploratory continuation](../reports/matrix-exploratory-preparation.md)
+records the specific ten-observation promotion and remaining commands.
+
 Variant groups retain stage, model ID/name, serving endpoint, actual local
 runtime/digest, prompt hash, sampling, schema, execution policy and effective
 context/tokenizer/processor evidence. Original run/config/manifest hashes and

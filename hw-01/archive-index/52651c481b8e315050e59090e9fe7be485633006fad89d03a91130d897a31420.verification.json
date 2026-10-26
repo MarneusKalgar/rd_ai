@@ -1,0 +1,17 @@
+{
+  "version": "native-exploratory-archive-verification-v1",
+  "archive_sha256": "52651c481b8e315050e59090e9fe7be485633006fad89d03a91130d897a31420",
+  "archive_bytes": 2070958,
+  "bundles": 14,
+  "payload_files": 414,
+  "covered_observations": 180,
+  "remaining_provider_observations": 60,
+  "source_and_restored_payloads_equal": true,
+  "restored_exploratory_evaluations_equal": 2,
+  "garage_full_get_verified": true,
+  "provider_ledger_unchanged": true,
+  "provider_inference_performed": false,
+  "native_unloaded": true,
+  "new_native_observations": 50,
+  "reused_gold_observations": 10
+}

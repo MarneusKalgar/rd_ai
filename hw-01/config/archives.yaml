@@ -11,3 +11,12 @@ selections:
   native-sampling-interaction:
     membership: results/submission/native-interaction-20261025-evaluation/membership.json
     evidence_index: archive-index/selections/native-sampling-interaction.json
+  exploratory-preparation:
+    membership: results/submission/matrix-exploratory-20261025-preparation/membership.json
+    evidence_index: archive-index/selections/exploratory-preparation.json
+  native-exploratory-results:
+    membership: results/submission/native-exploratory-20261025-evaluation/membership.json
+    evidence_index: archive-index/selections/native-exploratory-results.json
+  provider-exploratory-results:
+    membership: results/submission/provider-exploratory-20261026-evaluation/membership.json
+    evidence_index: archive-index/selections/provider-exploratory-results.json

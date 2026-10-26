@@ -1,5 +1,11 @@
 # Native Gemma v2 sampling diagnostic
 
+**Subsequent reuse decision:** the [checked continuation preparation](matrix-exploratory-preparation.md)
+promotes only the compatible temperature-0.2/top_p-0.90 gold10 into the required
+matrix through an explicit sampling-ID map. Original diagnostic exports, scores
+and archive membership remain unchanged. Earlier statements below about matrix
+coverage describe the state when those experiments were recorded.
+
 ## Scope and authorization — 25 October 2026
 
 The user requested gold10 runs varying temperature first, then top_p. This

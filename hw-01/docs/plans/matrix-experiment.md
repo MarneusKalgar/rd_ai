@@ -4,15 +4,71 @@
 
 **Evidence availability — 25 October 2026:** the compact review snapshot remains in Git. Raw runs, preparation and detailed evaluation bundles are preserved in verified archives; restore them before recomputing saved-run scores. See the [retrieval guide](../guides/archiving-results.md#historical-submission-evidence).
 
-## Current status — 24 October 2026
+## Current status — 26 October 2026
+
+**Provider exploratory continuation complete — 26 October 2026:** all sixty approved provider
+exploratory observations reached attempted terminal records. Checked required
+membership is **240/240**, with eight complete thirty-input variants. See the
+[provider results](../reports/provider-exploratory-results.md) for the full
+comparison, operations, spending and verified archive. Earlier remaining-work
+counts below are historical snapshots. Required execution is complete; sections
+8–9 final analysis/reproducibility/acceptance remain. No additional inference is
+approved.
+
+**Next optional experiment — Qwen first:** prepare the 7.3.3 Qwen gold10
+comparison before investing in new skill/workflow behavior (7.3.1), behavioral
+semantic rejection/correction (7.3.2), or JEV verification/routing (7.3.5).
+The question is whether a different local model improves ordered-row selection
+under the existing pipeline before adding more orchestration. Section numbering
+does not prescribe execution order. The completed sampling diagnostic (7.3.4)
+and detection-only checks remain reusable evidence.
+
+1. Verify Qwen support/admission and, after an execution request, run exactly
+   gold10 with frozen v2 and the matched baseline controls in 7.3.3. Reuse saved
+   Gemma/Gemini comparators; do not rerun them or alter the required matrix.
+2. Stop for user review of field/row errors, exact documents, validity, memory
+   and latency. A model change must improve usable extraction quality at an
+   acceptable measured resource cost; a higher headline percentage alone is
+   insufficient. Gold10 is development evidence, not a reliability certificate.
+3. Choose the next intervention from that review. If Qwen materially improves,
+   consider separately approving its remaining20 and obtaining additional
+   independently reviewed labels. If the same errors persist, prioritize a
+   separately identified input-representation or staged-selection/validation
+   experiment. Do not automatically implement every optional intervention.
+4. Exercise JEV routing only after identifying a local extraction path worth
+   retaining for some documents and defining independently assessable checks.
+   Measure incorrect outputs accepted and total cost, not just routing rate.
+
+These optional tasks do not reopen 7.2 or block sections 8–9 for the completed
+matrix. This plan update authorizes no implementation, model download, inference
+or additional spending. Each paid JEV or Gemini invocation requires the existing
+concrete command/allowance approval and cumulative-budget admission.
+
+**Native exploratory checkpoint — 25 October 2026:** all fifty new native inputs have
+attempted terminal records. The two exploratory variants each cover all30,
+including the explicitly reused v2 gold10. Required membership is **180/240**;
+the remaining sixty observations are provider exploratory v1/v2. All four native
+variants are complete. See the [native results](../reports/native-exploratory-results.md)
+for failures, scores, processing times and verified archive provenance. No provider
+or further native inference is approved.
+
+**25 October continuation preparation:** the matching native v2 exploratory
+gold10 has been promoted through an explicit checked ID-only sampling map.
+At preparation time membership covered **130/240**, leaving **110 new observations**; the completed native continuation above supersedes that remaining-work count.
+Frozen controls, source hashes and quality are unchanged; no new inference ran.
+The [preparation report](../reports/matrix-exploratory-preparation.md) provides
+the four commands, refreshed provider reservation evidence and approval gates.
+This supersedes earlier 120/240 remaining-work statements prospectively; the
+baseline and diagnostic reports retain their original populations.
 
 **25 October addendum:** the user authorized the separate native sampling
 diagnostic in 7.3.4: four gold10 settings, temperature first then top_p, with
-the compatible saved v2 reference reused. It is complete outside required
-matrix membership; the other inference/download approval boundaries below
+the compatible saved v2 reference reused. Its original diagnostic identities
+are retained; only the explicitly mapped gold10 above now contributes to the
+required matrix. The other inference/download approval boundaries below
 remain in effect. See the [sampling report](../reports/native-sampling-experiment.md).
 
-**Frozen v2 baseline phases complete and verified on 24 October 2026.** Native
+**Historical v2 baseline checkpoint — 24 October 2026.** Native
 Gemma attempted all30 with **29/30 schema-valid**, gold **7.16%**, 303 extra
 gold rows and one exact gold document. Stronger Gemini Flash saved **30/30
 schema-valid**, gold **100% (342/342)** and **10/10 exact gold documents**.
@@ -245,8 +301,8 @@ not filter rows, reject output or trigger new correction calls in this matrix.
 
 ## Optional extraction skill experiment (7.3.1)
 
-**Proposed after the v1 user review; documentation only.** The user requested
-planning a reusable extraction skill that Gemma can actually consume. This does
+**Deferred until the Qwen gold10 review in 7.3.3; documentation only.** The user requested
+planning a reusable extraction skill that a selected local model can actually consume. This does
 not authorize skill implementation, v2 changes, inference, model downloads or
 an autonomous agent loop. Keep this optional exercise separate from the required
 240-observation prompt/sampling matrix.
@@ -319,6 +375,13 @@ workflow demonstrates a concrete need for autonomy. See the
 
 ## Semantic validation sequence (7.3.2)
 
+**Current ordering:** retain the implemented detection-only diagnostics for
+offline analysis of saved outputs, including Qwen's later results. New behavioral
+rejection/correction follows the Qwen gold10 review in 7.3.3 if the observed
+failure modes justify it. Do not make a new harness a prerequisite for that
+model-only comparison. The dated v1/v2 staging below records the original
+sequence; the required prompt-only matrix is now complete.
+
 **Detection-only implementation authorized on 24 October 2026.** The first
 catalog-row candidate and saved-run CLI are implemented; see
 [deterministic row diagnostics](../guides/row-diagnostics.md) for supported structures,
@@ -375,18 +438,20 @@ skill does not change their experimental identity or prove their reliability.
 
 ## Optional Qwen3.5 9B comparison (7.3.3)
 
-**Planned diagnostic; not executed.** Before investing in a Gemma-specific
-skill or behavioral validation harness, compare a second local model family:
+**Next optional diagnostic; not executed.** Before investing in a local-model
+skill, behavioral validation harness or JEV routing, compare a second local model family:
 **`qwen3.5:9b-q4_K_M`**, through the existing native Ollama desktop runtime.
 This plan edit authorizes no download, implementation or inference invocation.
-Native Gemma remaining20, provider v2 and exploratory runs keep their existing
-review/approval gates.
+The required 7.2 matrix is complete; this trial is a separate model-choice
+diagnostic, followed by user review before choosing another 7.3 intervention.
 
 ### Question and comparison boundary
 
 Test whether changing the local model materially improves ordered-row selection
 with the existing extraction pipeline. Reuse the verified Gemma v2 gold10 as
-the comparator; do not rerun Gemma automatically. Qwen is a separate optional
+the matched baseline comparator (temperature 0/top_p 1); the saved Gemini v2
+baseline supplies a provider reference. Do not rerun either automatically or
+substitute Gemma's best exploratory result as the matched baseline. Qwen is a separate optional
 model diagnostic, not a replacement for the selected Gemma baseline or a new
 member of the required 240-observation matrix. Qwen observations do not increase required matrix coverage; see the latest
 status and checked membership above for completed required phases.
@@ -449,7 +514,11 @@ cannot prove reliability, a universal small-model limit or harness effectiveness
 Stop for user review after gold10. Do not automatically run Qwen remaining20,
 switch the selected local model, revise v2 or implement the harness. Any later
 model substitution needs an explicit plan/membership update and matched matrix
-coverage; this diagnostic does not silently satisfy Gemma's outstanding phases.
+coverage. The original Gemma matrix remains complete and unchanged. A favorable gold10
+result supports a separately approved continuation, not an automatic model
+replacement or production acceptance. Similar failures support choosing the
+next representation/workflow experiment; they do not prove all local models
+need the same harness.
 
 ## Optional native sampling diagnostic (7.3.4)
 
@@ -472,6 +541,80 @@ the user requested one further gold10 pass at temperature 0.5/top_p 0.90.
 `config/native-sampling-interaction.yaml` adds exactly ten native observations;
 the existing 0.2/1, 0.5/1 and 0.2/0.9 runs are reused for the 2×2 comparison.
 Keep the original sweep and archive unchanged. The follow-up is complete: 132/2366 (5.58%) on development gold10, with 253 extra rows. It adds no required matrix membership or provider spending; see the checked report.
+
+## Optional JEV verification and routing experiment (7.3.5)
+
+**Proposed after the Qwen gold10 review; documentation only.** Evaluate whether
+JEV can reduce provider escalation while keeping incorrect local outputs out
+of the accepted path. It is a separate pipeline experiment outside the completed
+240-observation matrix. Do not start JEV calls, Gemini fallbacks, new local runs
+or integration work from this plan edit.
+
+JEV returns typed decisions and probabilities. Its use for routing and
+verification is documented by [OpenRouter](https://openrouter.ai/docs/guides/community/jev).
+For this experiment, use focused source-support judgments rather than assuming
+that a generic document-difficulty label predicts local-model correctness.
+TypeSafe documents limitations in numeric precision/counting, indirection,
+irrelevant context and option order; keep arithmetic, exact comparisons and
+workflow policy in code. See the [JEV 1.13 limitations](https://docs.typesafe.ai/model-jaggedness/jev-1.13).
+Verify the chosen version's current capabilities and prices at preparation;
+pin that version rather than following a moving alias.
+
+### Inputs, decisions and boundaries
+
+- Start with saved local outputs and approved neutral source text. Reuse the
+  completed deterministic diagnostics; a known schema or source-evidence failure
+  must not be overridden by a favorable model judgment. Preserve original
+  outputs, statuses and scores. No automatic Gemma/Qwen/Gemini reruns.
+- Give JEV narrow questions with relevant headers, source-row context and
+  candidate values: for example, whether a returned row has explicit order
+  evidence and whether the proposed quantity is supported. Candidate/context
+  selection is part of the experiment and must be versioned and checked for
+  omitted evidence; do not discard contradictory source text.
+- Assess completeness separately. Verifying returned rows cannot reveal all
+  omitted ordered rows. Where completeness cannot be established, keep the
+  outcome uncertain rather than accepting the document as correct.
+- Use explicit accept/escalate/uncertain outcomes. Invalid responses, timeouts
+  or insufficient evidence must not become automatic acceptance. The
+  application owns the policy; JEV confidence alone is not an acceptance rule.
+  Define and assess thresholds on reviewed development evidence, then freeze
+  them before evaluating separate documents.
+- Keep gold labels, expected answers and evaluator judgments local; they must
+  not enter JEV or downstream extraction requests. Gold10 can support an initial
+  diagnostic, but thresholds tuned on it need additional independently reviewed
+  evaluation documents, grouped by source/layout, before reliability claims.
+
+### Evaluation, spending and review gate
+
+First define the checks and review evidence offline using saved outputs and
+local labels. After separately approved JEV calls, assess routing decisions
+against saved gold outcomes and reviewed check labels. A simulated Gemini fallback may reuse a compatible saved output
+as a counterfactual only, with its source identity disclosed; it is not a new
+executed hybrid pipeline or measured end-to-end latency. If required evidence
+is unavailable, mark the result unknown. Actual JEV judgments are measured API
+calls, and a later live cascade needs its own execution identity and approval.
+
+Report accepted coverage together with the count/rate of incorrect documents
+accepted, missed unsupported rows or fields, missed ordered rows, correct
+documents unnecessarily escalated, uncertain outcomes and error classes. Keep
+gold-scored quality distinct from unlabeled corpus operations. Compare against
+the same local-only and provider-only populations; do not infer factual routing
+accuracy from schema validity or an apparently calibrated confidence value.
+
+Count every judgment, retry, fallback and review step. Report known/unknown API
+cost, latency and native processing separately, plus cost per correct accepted
+document. Hardware amortization, electricity and human review remain explicit
+unknowns unless measured. Savings require fewer provider calls at an acceptable
+measured error rate; replacing provider work with local/JEV errors is not a
+cost reduction at equal quality.
+
+Before any paid phase, refresh exact model/route pricing and context evidence,
+verify budget reservation/settlement support, and present the concrete invocation
+and allowance for approval under the existing cumulative ledger. No approval
+for the completed matrix carries forward. Stop after the initial diagnostic
+for user review; do not automatically enable routing, tune thresholds, run
+fallbacks or extend the corpus. If executed, summarize the cost–quality findings
+in section 8 alongside, but separate from, the required matrix results.
 
 ## Historical original 4,096-token phase
 

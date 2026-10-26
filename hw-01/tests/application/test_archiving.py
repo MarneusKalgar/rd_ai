@@ -75,6 +75,63 @@ def _create(project: Path) -> ArchiveIndex:
     return create_archive(project, "config/archives.yaml", "final-baselines")
 
 
+def test_sampling_alias_membership_restores_original_record(archive_project: Path) -> None:
+    project = archive_project
+    directory = project / "results/submission/archive-source"
+    _, records = reload_records(directory)
+    source = records[0].sampling.model_dump()
+    path = project / "results/membership.json"
+    membership = json.loads(path.read_bytes())
+    membership["sampling_aliases"] = {
+        "version": "sampling-aliases-v1",
+        "aliases": [{"source": source, "target": {**source, "id": "matrix-profile"}}],
+    }
+    membership["entries"][0]["source_sampling_id"] = source["id"]
+    membership["entries"][0]["sampling_id"] = "matrix-profile"
+    path.write_text(json.dumps(membership))
+    original = (directory / "manifest.json").read_bytes()
+
+    index = _create(project)
+    restored = restore_archive(project, index)
+
+    assert (restored / "submission/archive-source/manifest.json").read_bytes() == original
+    assert index.covered_observations == 1
+
+
+@pytest.mark.parametrize("defect", ["missing-map", "changed-controls", "duplicate-slot"])
+def test_sampling_alias_membership_rejects_unsafe_promotion(
+    archive_project: Path, defect: str
+) -> None:
+    from copy import deepcopy
+
+    project = archive_project
+    _, records = reload_records(project / "results/submission/archive-source")
+    source = records[0].sampling.model_dump()
+    path = project / "results/membership.json"
+    membership = json.loads(path.read_bytes())
+    membership["sampling_aliases"] = {
+        "version": "sampling-aliases-v1",
+        "aliases": [{"source": source, "target": {**source, "id": "matrix-profile"}}],
+    }
+    membership["entries"][0]["source_sampling_id"] = source["id"]
+    membership["entries"][0]["sampling_id"] = "matrix-profile"
+    if defect == "missing-map":
+        del membership["sampling_aliases"]
+        expected = "sampling alias is missing"
+    elif defect == "changed-controls":
+        for name in ("source", "target"):
+            membership["sampling_aliases"]["aliases"][0][name]["temperature"] = 0.75
+        expected = "Saved sampling differs"
+    else:
+        membership["entries"].append(deepcopy(membership["entries"][0]))
+        membership["covered_observations"] = 2
+        expected = "duplicate observations"
+    path.write_text(json.dumps(membership))
+
+    with pytest.raises(ValueError, match=expected):
+        _create(project)
+
+
 def test_archive_roundtrip_is_deterministic_and_evaluates_original_evidence(
     archive_project: Path,
 ) -> None:

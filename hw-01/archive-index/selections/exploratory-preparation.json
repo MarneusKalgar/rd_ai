@@ -1,0 +1,9 @@
+{
+  "version": "matrix-preparation-selection-v1",
+  "bundles": [
+    {
+      "path": "results/submission/matrix-exploratory-20261025-preparation",
+      "source_inventory_sha256": "df61f4beaace7f9a87ade9b5c500d6f59db0cfe031e04608b65ca06037702120"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "version": "sampling-aliases-v1",
+  "aliases": [
+    {
+      "source": {
+        "id": "top-p-09-t02-16384",
+        "temperature": 0.2,
+        "top_p": 0.9,
+        "max_output_tokens": 16384
+      },
+      "target": {
+        "id": "exploratory-16384",
+        "temperature": 0.2,
+        "top_p": 0.9,
+        "max_output_tokens": 16384
+      }
+    }
+  ]
+}

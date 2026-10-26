@@ -92,6 +92,7 @@ def add_commands(commands: argparse._SubParsersAction[argparse.ArgumentParser]) 
     evaluation.add_argument("run_ids", nargs="+")
     evaluation.add_argument("--allow-budget-revision", action="store_true")
     evaluation.add_argument("--source-dir", default="results/runs")
+    evaluation.add_argument("--sampling-aliases", help="Explicit offline ID-only sampling map")
 
     diagnostic = commands.add_parser("diagnose-rows", help="Inspect saved row selection offline")
     diagnostic.add_argument("run_ids", nargs="+")
@@ -148,6 +149,7 @@ def dispatch(args: argparse.Namespace) -> int:
             args.run_ids,
             allow_budget_revision=args.allow_budget_revision,
             source_dir=args.source_dir,
+            sampling_aliases_file=args.sampling_aliases,
         )
         print(json.dumps(report, indent=2))
 

@@ -11,6 +11,7 @@ from extraction_service.application.selection import RunOptions
 from extraction_service.artifacts import artifact_path
 from extraction_service.corpus.loading import load_corpus
 from extraction_service.evaluation.metrics import operational_metrics
+from extraction_service.evaluation.sampling_aliases import SamplingAliases
 from extraction_service.evaluation.scoring import FieldScore, combine_scores, score_extraction
 from extraction_service.execution.budget.ledger import BudgetSnapshot
 from extraction_service.records import RunRecord
@@ -89,6 +90,7 @@ def evaluate_runs(
     *,
     allow_budget_revision: bool = False,
     source_dir: str = "results/runs",
+    sampling_aliases_file: str | None = None,
 ) -> dict[str, Any]:
     """Evaluate saved terminal runs without inference or rewriting original evidence.
 
@@ -102,6 +104,13 @@ def evaluate_runs(
         raise ValueError("Evaluation requires unique run IDs")
 
     corpus = load_corpus(project_dir)
+    aliases = (
+        None
+        if sampling_aliases_file is None
+        else SamplingAliases.model_validate_json(
+            artifact_path(project_dir, sampling_aliases_file).read_bytes()
+        )
+    )
     source_root = artifact_path(project_dir, source_dir)
     sources = {source.input_id: source for source in corpus.inputs}
     grouped: dict[str, list[RunRecord]] = {}
@@ -160,6 +169,8 @@ def evaluate_runs(
                 execution,
                 manifest.setup.get(record.model_id, {}),
             )
+            if aliases is not None:
+                descriptor["sampling"] = aliases.canonical(record.sampling).model_dump()
             key = hashlib.sha256(json.dumps(descriptor, sort_keys=True).encode()).hexdigest()
             bucket = grouped.setdefault(key, [])
 
@@ -204,6 +215,20 @@ def evaluate_runs(
                 "variant_id": key,
                 "identity": identities[key],
                 "run_ids": sorted({record.run_id for record in records}),
+                **(
+                    {
+                        "source_sampling": [
+                            {
+                                "run_id": record.run_id,
+                                "input_id": record.input_id,
+                                "sampling": record.sampling.model_dump(),
+                            }
+                            for record in records
+                        ]
+                    }
+                    if aliases is not None
+                    else {}
+                ),
                 "input_ids": [record.input_id for record in records],
                 "operational": operational_metrics(records),
                 "reported_models": sorted(
@@ -250,5 +275,8 @@ def evaluate_runs(
         report["budget_policy_revisions"] = [
             revision.model_dump(mode="json") for revision in budget.policy_revisions
         ]
+
+    if aliases is not None:
+        report["sampling_aliases"] = aliases.model_dump(mode="json")
 
     return report

@@ -57,6 +57,9 @@ permission for model inference or spending.
 | Revised v1 all30 baseline comparison | [Revised v1 baseline results](reports/revised-v1-baseline-results.md) |
 | Native v2 gold10 | [Native v2 gold results](reports/native-v2-gold.md) |
 | Native v2 temperature/top_p gold10 diagnostic | [Native sampling experiment](reports/native-sampling-experiment.md) |
+| Checked gold10 reuse and remaining matrix commands | [Exploratory continuation preparation](reports/matrix-exploratory-preparation.md) |
+| Native v1/v2 exploratory all30 continuation | [Native exploratory results](reports/native-exploratory-results.md) |
+| Provider v1/v2 exploratory all30 continuation | [Provider exploratory results](reports/provider-exploratory-results.md) |
 | Completed v2 all30 baselines | [V2 continuation results](reports/v2-continuation-results.md) |
 | Cumulative budget migration audit | [Budget revisions](reports/budget-revisions.md) |
 

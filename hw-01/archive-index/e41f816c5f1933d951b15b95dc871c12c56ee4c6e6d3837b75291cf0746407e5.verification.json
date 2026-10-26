@@ -1,0 +1,14 @@
+{
+  "version": "matrix-preparation-verification-v1",
+  "archive_sha256": "e41f816c5f1933d951b15b95dc871c12c56ee4c6e6d3837b75291cf0746407e5",
+  "covered_observations": 130,
+  "remaining_new_observations": 110,
+  "payload_files": 296,
+  "bundles": 10,
+  "all_source_and_restored_payloads_equal": true,
+  "restored_alias_evaluation_equal": true,
+  "garage_get_verified": true,
+  "inference_performed": false,
+  "full_offline_tests_passed": 777,
+  "expanded_alias_archiving_tests_passed": 39
+}
