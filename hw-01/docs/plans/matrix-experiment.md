@@ -6,6 +6,65 @@
 
 ## Current status — 26 October 2026
 
+**Source-field role continuation complete — 26 October 2026; advisory context
+not adopted.** Offline identifier/date checks passed their development controls,
+but exposing their source-role cues to Gemma worsened extraction overall:
+**295/1230 matched fields (23.98%), one exact document, 111 extra rows, zero
+missing rows and 5m01s processing**. The preferred saved hybrid remains
+**282/366 (77.05%), one exact document, three extra rows and 1m53s**.
+
+The additional context improved expected-null buyer identifiers from 0/33 to
+4/33 and expected-null dates from 16/31 to 29/31, but S021 acquired two extra
+rows and S044 returned 106 extra catalog rows. Do not promote this variant or
+mix its favorable fields with saved outputs and claim a measured result.
+The source-only checks remain available for offline review; they do not certify
+whole-PO correctness or trigger repair/rejection. See the
+[source-field role report](../reports/source-field-roles.md).
+
+The renderer also exposed a scope limitation: S021's two unselected catalog
+rows have legitimate buyer codes, and their facts were listed without order
+membership qualification. Do not attribute this trial solely to model weakness.
+Any future cue revision needs a separate identity plus catalog-with-buyer-code
+and legitimate-null-quantity counterexamples. Preserve the measured profile;
+do not silently fix it and describe the saved results as the revised workflow.
+
+All 847 tests and lint/types/gold/preflight passed. Ten new optional native
+observations ran with ten calls; no provider inference, remaining20 or second
+trial ran. The required matrix remains 240/240; the ledger is unchanged and
+Gemma is unloaded. Stop for review before any bounded evidence-based correction
+experiment. There is no change to default configs, frozen v2 or historical runs.
+
+**Authorized protocol retained:** following the
+hybrid commit `d11c43d`, the user requested proceeding with the next proposed
+source-evidence work. Offline checks cover buyer identifier ownership and
+line-specific delivery dates under a declared cell-label vocabulary. Unknown
+labels/free text, ambiguous/shared critical cells, unmatched or repeated product
+names and unfamiliar date formats require abstention. Generic article codes do
+not establish buyer ownership; order-level dates do not establish line linkage.
+
+The development assessment must flag no correct frozen gold fields and retain
+the legitimate buyer code and three line dates. Assess saved Gemma outputs and
+the correct provider v2 gold control without changing them. These controls are
+development evidence, not a held-out check precision/recall estimate.
+
+After the gate, run one separately identified native Gemma gold10 intervention,
+`config/gemma-field-roles.yaml` / `ordered-rows-field-roles-v1`. Preserve the
+hybrid's selected/raw source body and append only source-derived role cues when
+the audit can resolve their scope. Retain full original/audit/rendered context
+and implementation hashes. V2 instruction bytes, input/gold/schema/scorer,
+model/runtime, thinking=false, temperature 0/top_p 1, 49,152 context and 16,384
+output remain fixed. The added role cues change context, so this is an optional
+workflow variant, not another prompt-only matrix observation. No synthetic
+examples or expected gold values enter requests.
+
+Pre-register one gold10 pass after the full offline and request-admission gates.
+Reuse the saved hybrid comparator; report all fields, present/null counts,
+exact documents, row errors, validity, calls, corrections and processing time.
+Keep the existing bounded correction policy and preserve raw replies. This
+tests use of advisory evidence, not automatic semantic rejection, repair or a
+new correction loop. No provider/JEV, remaining20, profile expansion or second
+trial is included. Stop for review and retain verified archive provenance.
+
 **Hybrid gold10 complete — 26 October 2026; stop for review.** The new native
 trial produced 10/10 valid outputs with ten calls and no corrections:
 **282/366 matched fields (77.05%), one exact document, three extra rows, zero
@@ -487,6 +546,12 @@ workflow demonstrates a concrete need for autonomy. See the
 
 ## Semantic validation sequence (7.3.2)
 
+**26 October continuation complete:** offline identifier/date checks and one
+source-role context gold10 trial are complete as described in Current status.
+The context trial regressed and is not preferred over the raw-fallback hybrid. Automatic
+semantic rejection/correction remains deferred; the new checks are detection
+only and their source facts are exposed as separately versioned advisory context.
+
 **Current ordering:** retain the implemented detection-only diagnostics for
 offline analysis of saved outputs, including Qwen's later results. New behavioral
 rejection/correction follows the Qwen gold10 review in 7.3.3 if the observed
@@ -503,9 +568,10 @@ observations were inspected without inference, retaining source/output hashes
 and historical scores. Keep the compact diagnostic summary and reproduction
 command versioned; the verbose regenerable report belongs under ignored
 `results/diagnostics/`, with its hash retained as generated-artifact metadata.
-The other proposed deterministic candidates remain future
-work. Behavioral rejection/correction and inference
-remain unexecuted and require a separate task. This does not lift the v2 review
+At that checkpoint, other proposed deterministic candidates remained future
+work. The 26 October extension above adds identifier/date detection and one
+advisory-context trial; behavioral rejection/correction remains unexecuted
+and requires a separate task. This does not lift the v2 review
 gate or authorize the optional extraction skill implementation.
 Semantic validation checks whether source evidence supports the extracted facts,
 including whether an output row represents an order. It supplements JSON/schema

@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any, Final, Literal
 
 from extraction_service.diagnostics import order_forms, types
-from extraction_service.source_support import cells, selection
+from extraction_service.source_support import cells, field_labels, field_roles, selection
 from extraction_service.source_support.cells import (
     CELL_RECORDS_PROFILE,
     SourceRecord,
@@ -19,9 +19,13 @@ from extraction_service.source_support.cells import (
 from extraction_service.source_support.selection import ORDERED_ROWS_PROFILE, select_source_records
 
 ORDERED_ROWS_RAW_FALLBACK_PROFILE: Final[str] = "ordered-rows-raw-fallback-v1"
+ORDERED_ROWS_FIELD_ROLES_PROFILE: Final[str] = "ordered-rows-field-roles-v1"
 
 type SourceViewProfile = Literal[
-    "cell-records-v1", "ordered-rows-v1", "ordered-rows-raw-fallback-v1"
+    "cell-records-v1",
+    "ordered-rows-v1",
+    "ordered-rows-raw-fallback-v1",
+    "ordered-rows-field-roles-v1",
 ]
 
 
@@ -29,8 +33,14 @@ def view_identity(profile: SourceViewProfile) -> dict[str, Any]:
     """Bind the profile to its source-only implementation files."""
 
     files = [Path(cells.__file__), Path(__file__)]
-    if profile in (ORDERED_ROWS_PROFILE, ORDERED_ROWS_RAW_FALLBACK_PROFILE):
+    if profile in (
+        ORDERED_ROWS_PROFILE,
+        ORDERED_ROWS_RAW_FALLBACK_PROFILE,
+        ORDERED_ROWS_FIELD_ROLES_PROFILE,
+    ):
         files.extend((Path(selection.__file__), Path(order_forms.__file__), Path(types.__file__)))
+    if profile == ORDERED_ROWS_FIELD_ROLES_PROFILE:
+        files.extend((Path(field_labels.__file__), Path(field_roles.__file__)))
     return {
         "profile": profile,
         "implementation": {
@@ -47,12 +57,16 @@ class SourceView:
     rendered_text: str
     selection: dict[str, Any] | None
     source_map: tuple[dict[str, Any], ...]
+    field_roles: dict[str, Any] | None = None
 
     def evidence(self) -> dict[str, Any]:
         """Retain reversible source, request text and transformation identity."""
 
+        data = asdict(self)
+        if self.field_roles is None:
+            data.pop("field_roles")
         return {
-            **asdict(self),
+            **data,
             "original_sha256": text_digest(self.original_text),
             "rendered_sha256": text_digest(self.rendered_text),
             "identity": view_identity(self.profile),
@@ -66,11 +80,18 @@ def build_source_view(text: str, profile: SourceViewProfile) -> SourceView:
     decision = None
     raw_fallback = False
     excluded: set[int] = set()
-    if profile in (ORDERED_ROWS_PROFILE, ORDERED_ROWS_RAW_FALLBACK_PROFILE):
+    if profile in (
+        ORDERED_ROWS_PROFILE,
+        ORDERED_ROWS_RAW_FALLBACK_PROFILE,
+        ORDERED_ROWS_FIELD_ROLES_PROFILE,
+    ):
         selected = select_source_records(text, records)
         decision = asdict(selected)
         excluded = set(selected.excluded_lines)
-        raw_fallback = profile == ORDERED_ROWS_RAW_FALLBACK_PROFILE and not selected.applied
+        raw_fallback = (
+            profile in (ORDERED_ROWS_RAW_FALLBACK_PROFILE, ORDERED_ROWS_FIELD_ROLES_PROFILE)
+            and not selected.applied
+        )
     elif profile != CELL_RECORDS_PROFILE:
         raise ValueError("Unsupported source representation")
     preserved = {
@@ -111,7 +132,13 @@ def build_source_view(text: str, profile: SourceViewProfile) -> SourceView:
         }
         for record in records
     )
-    return SourceView(profile, text, rendered, decision, mapping)
+    role_evidence = None
+    if profile == ORDERED_ROWS_FIELD_ROLES_PROFILE:
+        cue, role_evidence = field_roles.render_field_role_cues(text)
+        role_evidence = {**role_evidence, "cue_applied": cue is not None, "cue_text": cue}
+        if cue is not None:
+            rendered += cue
+    return SourceView(profile, text, rendered, decision, mapping, role_evidence)
 
 
 def validate_source_view(value: Any, profile: SourceViewProfile, original_sha256: str) -> str:
@@ -147,4 +174,9 @@ def validate_source_view(value: Any, profile: SourceViewProfile, original_sha256
         # JSON serialization converts the operational tuples to arrays.
         if json.dumps(value.get(key), sort_keys=True) != json.dumps(expected[key], sort_keys=True):
             raise ValueError("Source view does not preserve its declared source transformation")
+    if profile == ORDERED_ROWS_FIELD_ROLES_PROFILE:
+        if json.dumps(value.get("field_roles"), sort_keys=True) != json.dumps(
+            expected.get("field_roles"), sort_keys=True
+        ):
+            raise ValueError("Source view field-role evidence differs from its source")
     return rendered

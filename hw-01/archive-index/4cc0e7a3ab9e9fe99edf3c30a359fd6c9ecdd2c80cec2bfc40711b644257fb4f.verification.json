@@ -1,0 +1,13 @@
+{
+  "version": "source-field-roles-archive-verification-v1",
+  "archive_sha256": "4cc0e7a3ab9e9fe99edf3c30a359fd6c9ecdd2c80cec2bfc40711b644257fb4f",
+  "covered_observations": 240,
+  "new_native_observations": 10,
+  "bundles": 23,
+  "payload_files": 704,
+  "source_and_restored_payloads_equal": true,
+  "restored_evaluations_equal": 5,
+  "garage_full_get_verified": true,
+  "provider_ledger_unchanged": true,
+  "native_unloaded": true
+}

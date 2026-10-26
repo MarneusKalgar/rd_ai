@@ -29,3 +29,6 @@ selections:
   gemma-raw-fallback:
     membership: results/submission/gemma-hybrid-20261026-evaluation/membership.json
     evidence_index: archive-index/selections/gemma-raw-fallback.json
+  field-roles:
+    membership: results/submission/field-roles-20261026-evaluation/membership.json
+    evidence_index: archive-index/selections/field-roles.json

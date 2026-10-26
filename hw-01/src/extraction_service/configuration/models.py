@@ -117,7 +117,13 @@ class ExperimentConfig(StrictModel):
     execution: ExecutionConfig
     selection: ExperimentSelection
     source_view: (
-        Literal["cell-records-v1", "ordered-rows-v1", "ordered-rows-raw-fallback-v1"] | None
+        Literal[
+            "cell-records-v1",
+            "ordered-rows-v1",
+            "ordered-rows-raw-fallback-v1",
+            "ordered-rows-field-roles-v1",
+        ]
+        | None
     ) = None
 
     @model_validator(mode="after")

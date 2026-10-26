@@ -9,7 +9,14 @@ from extraction_service.artifacts import artifact_path
 from extraction_service.corpus.files import read_input
 from extraction_service.corpus.manifests import load_manifests
 from extraction_service.diagnostics.reporting import diagnose_runs
-from extraction_service.source_support import cells, evidence, selection, views
+from extraction_service.source_support import (
+    cells,
+    evidence,
+    field_labels,
+    field_roles,
+    selection,
+    views,
+)
 from extraction_service.source_support.evidence import assess_order_evidence
 from extraction_service.source_support.views import build_source_view
 
@@ -42,6 +49,7 @@ def assess_saved_runs(
                     "original_status": saved["original_status"],
                     "evidence": assess_order_evidence(text, record.extraction),
                     "selection_eligibility": view.selection,
+                    "field_roles": field_roles.assess_field_roles(text, record.extraction),
                 }
             )
         runs.append(
@@ -53,9 +61,11 @@ def assess_saved_runs(
         Path(evidence.__file__),
         Path(selection.__file__),
         Path(views.__file__),
+        Path(field_labels.__file__),
+        Path(field_roles.__file__),
     )
     return {
-        "version": "source-support-assessment-v1",
+        "version": "source-support-assessment-v2",
         "diagnostic_only": True,
         "gold_answers_read": False,
         "legacy_selection_check": legacy,

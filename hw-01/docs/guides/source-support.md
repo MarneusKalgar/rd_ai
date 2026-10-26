@@ -50,6 +50,28 @@ original source text, including line endings and unparsed content. It introduces
 no new layout support. A source hash equal to the rendered hash is expected on
 the raw fallback branch; the hybrid profile still has its own evaluation identity.
 
+`config/gemma-field-roles.yaml` selects `ordered-rows-field-roles-v1`. It preserves
+the hybrid body and appends source-derived identifier/date role cues only when a
+closed cell-label audit can resolve their scope. It does not read gold or model
+outputs, rewrite extractions, change the v2 instruction file or add a retry loop.
+The added context has a distinct workflow identity and enters full admission.
+Its first gold10 trial regressed overall; see the
+[source-field role report](../reports/source-field-roles.md). Keep it as an
+experimental configuration rather than replacing the measured raw-fallback
+hybrid. Detection findings remain useful offline and do not enforce acceptance.
+
+The offline `assess-source` report version 2 includes field-role findings beside
+the original row/quantity checks. Exact, unique product matches connect returned
+fields to source rows. Generic article codes alone do not establish buyer-owned
+identifiers; header delivery/service dates alone do not establish line dates.
+Explicit buyer codes and dates on the product's own row are retained verbatim;
+ambiguous date formats, shared critical cells, conflicting roles, unknown labels,
+free-text scope qualifiers and duplicate/paraphrased descriptions require
+abstention. Blank explicit fields resolve to null, but absent output keys do not
+earn supported findings. A supported role does not prove ordered-row membership
+or full PO correctness. These checks currently cover declared neutral labels,
+not arbitrary languages or documents.
+
 Every new run retains the exact original source, rendered request source,
 both hashes, source map, exclusion decision and implementation identity in its
 manifest. Reload checks the representation and its binding to approved source
