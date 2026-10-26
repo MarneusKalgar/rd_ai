@@ -1,0 +1,13 @@
+{
+  "version": "scoped-role-cues-archive-verification-v1",
+  "archive_sha256": "912b2b9fe8f31fc6a690f2bcf31fc6e4d7eb670a86963a3ed922147e972fe2d7",
+  "covered_observations": 240,
+  "new_native_observations": 10,
+  "bundles": 26,
+  "payload_files": 754,
+  "source_and_restored_payloads_equal": true,
+  "restored_evaluations_equal": 6,
+  "garage_full_get_verified": true,
+  "provider_ledger_unchanged": true,
+  "native_unloaded": true
+}

@@ -8,7 +8,13 @@ from pathlib import Path
 from typing import Any, Final, Literal
 
 from extraction_service.diagnostics import order_forms, types
-from extraction_service.source_support import cells, field_labels, field_roles, selection
+from extraction_service.source_support import (
+    cells,
+    field_labels,
+    field_roles,
+    scoped_roles,
+    selection,
+)
 from extraction_service.source_support.cells import (
     CELL_RECORDS_PROFILE,
     SourceRecord,
@@ -20,12 +26,14 @@ from extraction_service.source_support.selection import ORDERED_ROWS_PROFILE, se
 
 ORDERED_ROWS_RAW_FALLBACK_PROFILE: Final[str] = "ordered-rows-raw-fallback-v1"
 ORDERED_ROWS_FIELD_ROLES_PROFILE: Final[str] = "ordered-rows-field-roles-v1"
+ORDERED_ROWS_SCOPED_ROLES_PROFILE: Final[str] = "ordered-rows-scoped-roles-v1"
 
 type SourceViewProfile = Literal[
     "cell-records-v1",
     "ordered-rows-v1",
     "ordered-rows-raw-fallback-v1",
     "ordered-rows-field-roles-v1",
+    "ordered-rows-scoped-roles-v1",
 ]
 
 
@@ -37,10 +45,13 @@ def view_identity(profile: SourceViewProfile) -> dict[str, Any]:
         ORDERED_ROWS_PROFILE,
         ORDERED_ROWS_RAW_FALLBACK_PROFILE,
         ORDERED_ROWS_FIELD_ROLES_PROFILE,
+        ORDERED_ROWS_SCOPED_ROLES_PROFILE,
     ):
         files.extend((Path(selection.__file__), Path(order_forms.__file__), Path(types.__file__)))
-    if profile == ORDERED_ROWS_FIELD_ROLES_PROFILE:
+    if profile in (ORDERED_ROWS_FIELD_ROLES_PROFILE, ORDERED_ROWS_SCOPED_ROLES_PROFILE):
         files.extend((Path(field_labels.__file__), Path(field_roles.__file__)))
+    if profile == ORDERED_ROWS_SCOPED_ROLES_PROFILE:
+        files.append(Path(scoped_roles.__file__))
     return {
         "profile": profile,
         "implementation": {
@@ -84,12 +95,18 @@ def build_source_view(text: str, profile: SourceViewProfile) -> SourceView:
         ORDERED_ROWS_PROFILE,
         ORDERED_ROWS_RAW_FALLBACK_PROFILE,
         ORDERED_ROWS_FIELD_ROLES_PROFILE,
+        ORDERED_ROWS_SCOPED_ROLES_PROFILE,
     ):
         selected = select_source_records(text, records)
         decision = asdict(selected)
         excluded = set(selected.excluded_lines)
         raw_fallback = (
-            profile in (ORDERED_ROWS_RAW_FALLBACK_PROFILE, ORDERED_ROWS_FIELD_ROLES_PROFILE)
+            profile
+            in (
+                ORDERED_ROWS_RAW_FALLBACK_PROFILE,
+                ORDERED_ROWS_FIELD_ROLES_PROFILE,
+                ORDERED_ROWS_SCOPED_ROLES_PROFILE,
+            )
             and not selected.applied
         )
     elif profile != CELL_RECORDS_PROFILE:
@@ -133,8 +150,11 @@ def build_source_view(text: str, profile: SourceViewProfile) -> SourceView:
         for record in records
     )
     role_evidence = None
-    if profile == ORDERED_ROWS_FIELD_ROLES_PROFILE:
-        cue, role_evidence = field_roles.render_field_role_cues(text)
+    if profile in (ORDERED_ROWS_FIELD_ROLES_PROFILE, ORDERED_ROWS_SCOPED_ROLES_PROFILE):
+        if profile == ORDERED_ROWS_SCOPED_ROLES_PROFILE:
+            cue, role_evidence = scoped_roles.render_scoped_role_cues(text)
+        else:
+            cue, role_evidence = field_roles.render_field_role_cues(text)
         role_evidence = {**role_evidence, "cue_applied": cue is not None, "cue_text": cue}
         if cue is not None:
             rendered += cue
@@ -174,7 +194,7 @@ def validate_source_view(value: Any, profile: SourceViewProfile, original_sha256
         # JSON serialization converts the operational tuples to arrays.
         if json.dumps(value.get(key), sort_keys=True) != json.dumps(expected[key], sort_keys=True):
             raise ValueError("Source view does not preserve its declared source transformation")
-    if profile == ORDERED_ROWS_FIELD_ROLES_PROFILE:
+    if profile in (ORDERED_ROWS_FIELD_ROLES_PROFILE, ORDERED_ROWS_SCOPED_ROLES_PROFILE):
         if json.dumps(value.get("field_roles"), sort_keys=True) != json.dumps(
             expected.get("field_roles"), sort_keys=True
         ):

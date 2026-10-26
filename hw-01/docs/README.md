@@ -65,6 +65,7 @@ permission for model inference or spending.
 | Gemma input representation and conditional source selection | [Gemma source support](reports/gemma-source-support.md) |
 | Gemma selection with exact raw fallback | [Gemma hybrid gold10](reports/gemma-raw-fallback.md) |
 | Source-field evidence and Gemma advisory context | [Source-field role gold10](reports/source-field-roles.md) |
+| Role cues limited to confirmed ordered rows | [Scoped role-cue gold10](reports/scoped-role-cues.md) |
 | Completed v2 all30 baselines | [V2 continuation results](reports/v2-continuation-results.md) |
 | Cumulative budget migration audit | [Budget revisions](reports/budget-revisions.md) |
 

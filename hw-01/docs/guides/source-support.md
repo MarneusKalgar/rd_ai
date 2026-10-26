@@ -60,6 +60,20 @@ Its first gold10 trial regressed overall; see the
 experimental configuration rather than replacing the measured raw-fallback
 hybrid. Detection findings remain useful offline and do not enforce acceptance.
 
+`config/gemma-scoped-roles.yaml` selects `ordered-rows-scoped-roles-v1`. It
+requires the unchanged row selector to establish membership before rendering
+role cues. It matches the selected source product-cell references against the
+field-role audit and exposes only those rows' facts. Unsupported or ambiguous
+membership leaves the hybrid body untouched with no cue; repeated ordered
+products remain in the body even when their role matching is ambiguous. No
+layout recognition is added and null quantities are not globally filtered.
+Scope decisions and exact source-cell references enter manifest provenance and
+reload validation. The original unscoped profile remains reconstructible.
+Its first gold10 trial scored 80.60% versus the raw-fallback hybrid's 77.05%,
+with unchanged row errors and one exact document. See the
+[measured scoped-cue report](../reports/scoped-role-cues.md) before considering
+continuation. This tuned development result does not certify unseen documents.
+
 The offline `assess-source` report version 2 includes field-role findings beside
 the original row/quantity checks. Exact, unique product matches connect returned
 fields to source rows. Generic article codes alone do not establish buyer-owned

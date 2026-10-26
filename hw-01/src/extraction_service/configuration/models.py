@@ -122,6 +122,7 @@ class ExperimentConfig(StrictModel):
             "ordered-rows-v1",
             "ordered-rows-raw-fallback-v1",
             "ordered-rows-field-roles-v1",
+            "ordered-rows-scoped-roles-v1",
         ]
         | None
     ) = None

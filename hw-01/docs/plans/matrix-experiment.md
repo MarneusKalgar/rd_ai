@@ -6,6 +6,54 @@
 
 ## Current status — 26 October 2026
 
+**Scoped role-cue gold10 complete — 26 October 2026; review pending.**
+The measured scope policy reached **295/366 matched fields (80.60%), one exact
+document, three extra rows, zero missing rows and 1m57s processing time**.
+The saved hybrid scored 282/366 (77.05%) in 1m53s. All ten outputs were valid,
+using ten calls and no corrections. This is a modest increase of thirteen
+matched fields without the unscoped trial's row regressions; exact documents
+remain 1/10. S021 returned one row and S044 three. See the
+[scoped role-cue report](../reports/scoped-role-cues.md).
+
+Expected-null line dates improved from 16/31 to 28/31, but expected-null buyer
+identifiers remain 0/33; the legitimate buyer identifier remains 1/1. Thirty-three
+of the 47 remaining incorrect expected gold fields concern identifier ownership.
+Any next correction experiment should address that evidence explicitly, with
+legitimate-value counterexamples and bounded calls, after user review. Do not
+infer production reliability or unseen-document accuracy from this tuned gold10.
+
+All 855 tests and lint/types/gold/preflight passed. Exactly ten new optional
+native observations ran; required matrix coverage remains 240/240. No provider
+or remaining20 calls ran; the ledger is unchanged and Gemma is unloaded. The
+variant is separately identified and no default configuration was changed.
+
+**Authorized protocol retained:** the user approved
+committing the negative experiment, adding scope counterexamples and one matched
+gold10 trial. The negative result is committed as `aeddae8`. Preserve that
+measured variant and its records. Introduce a separate
+`ordered-rows-scoped-roles-v1` / `config/gemma-scoped-roles.yaml` profile.
+
+Only the unchanged existing selector can establish ordered-row membership.
+Intersect field-role rows with its exact retained source product-cell references;
+do not accept caller-supplied names or an applied flag as proof. Unknown
+membership, ambiguous row alignment or unresolved field scope yields no cue.
+The existing hybrid body remains unchanged on those branches, preserving
+legitimate unknown quantities and repeated ordered products. Add no layout rules
+or universal non-null filter. Test catalog rows with valid buyer codes, marked
+rows with unknown quantities and ambiguous names/coordinates before generation.
+
+Run the same gold10 once after the full offline gate and full-request admission.
+Reuse the existing cue wording on confirmed scope; expose only confirmed rows'
+role facts, with explicit scope/cell provenance. For this gold cohort, verify
+three selected/cued requests and seven exact raw fallbacks. Check that all ten
+historical unscoped role request bodies/audits still reconstruct unchanged.
+Retain frozen v2, gold/input/schema/scorer, native Gemma digest/runtime/tokenizer,
+thinking=false, temperature 0/top_p 1, 49,152 context and 16,384 output controls.
+Report matched fields, exact documents, row errors, validity, calls/corrections
+and total processing time. No best-case output mixing, provider/JEV, remaining20,
+new correction loop or second trial is included. Preserve verified archival and
+stop for user review after the actual measured comparison.
+
 **Source-field role continuation complete — 26 October 2026; advisory context
 not adopted.** Offline identifier/date checks passed their development controls,
 but exposing their source-role cues to Gemma worsened extraction overall:

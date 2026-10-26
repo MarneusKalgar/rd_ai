@@ -215,6 +215,12 @@ def render_field_role_cues(text: str) -> tuple[str | None, dict[str, Any]]:
     """Render source-derived role cues; abstain instead of inventing missing scope."""
 
     source = parse_field_roles(text)
+    return render_role_evidence(source)
+
+
+def render_role_evidence(source: FieldRoleSource) -> tuple[str | None, dict[str, Any]]:
+    """Render already resolved source roles without changing their values or scope."""
+
     evidence = {"version": FIELD_ROLES_VERSION, "source": asdict(source)}
     if not source.recognized or any(
         not row.identifier.resolved or not row.delivery_date.resolved for row in source.rows
