@@ -5,7 +5,7 @@ import json
 import re
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any, Final, Literal
 
 from extraction_service.diagnostics import order_forms, types
 from extraction_service.source_support import cells, selection
@@ -18,14 +18,18 @@ from extraction_service.source_support.cells import (
 )
 from extraction_service.source_support.selection import ORDERED_ROWS_PROFILE, select_source_records
 
-type SourceViewProfile = Literal["cell-records-v1", "ordered-rows-v1"]
+ORDERED_ROWS_RAW_FALLBACK_PROFILE: Final[str] = "ordered-rows-raw-fallback-v1"
+
+type SourceViewProfile = Literal[
+    "cell-records-v1", "ordered-rows-v1", "ordered-rows-raw-fallback-v1"
+]
 
 
 def view_identity(profile: SourceViewProfile) -> dict[str, Any]:
     """Bind the profile to its source-only implementation files."""
 
     files = [Path(cells.__file__), Path(__file__)]
-    if profile == ORDERED_ROWS_PROFILE:
+    if profile in (ORDERED_ROWS_PROFILE, ORDERED_ROWS_RAW_FALLBACK_PROFILE):
         files.extend((Path(selection.__file__), Path(order_forms.__file__), Path(types.__file__)))
     return {
         "profile": profile,
@@ -60,11 +64,13 @@ def build_source_view(text: str, profile: SourceViewProfile) -> SourceView:
 
     records = read_records(text)
     decision = None
+    raw_fallback = False
     excluded: set[int] = set()
-    if profile == ORDERED_ROWS_PROFILE:
+    if profile in (ORDERED_ROWS_PROFILE, ORDERED_ROWS_RAW_FALLBACK_PROFILE):
         selected = select_source_records(text, records)
         decision = asdict(selected)
         excluded = set(selected.excluded_lines)
+        raw_fallback = profile == ORDERED_ROWS_RAW_FALLBACK_PROFILE and not selected.applied
     elif profile != CELL_RECORDS_PROFILE:
         raise ValueError("Unsupported source representation")
     preserved = {
@@ -95,7 +101,7 @@ def build_source_view(text: str, profile: SourceViewProfile) -> SourceView:
                 preserved.add(identity)
         if remaining:
             retained_records.append(SourceRecord(record.number, record.original, tuple(remaining)))
-    rendered = render_records(tuple(retained_records))
+    rendered = text if raw_fallback else render_records(tuple(retained_records))
     mapping = tuple(
         {
             "source_line": record.number,

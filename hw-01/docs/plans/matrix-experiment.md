@@ -6,6 +6,47 @@
 
 ## Current status — 26 October 2026
 
+**Hybrid gold10 complete — 26 October 2026; stop for review.** The new native
+trial produced 10/10 valid outputs with ten calls and no corrections:
+**282/366 matched fields (77.05%), one exact document, three extra rows, zero
+missing rows and 1m53s processing time**. The saved raw baseline matched 198
+fields (7.16%) in 14m00s; the earlier selected-source/full-cell-fallback trial
+matched 277 fields (22.82%) in 4m50s. Comparisons retain the unchanged scorer and
+include extra-row penalties. This is a real increase in matches versus raw,
+but one exact document does not establish reliable PO extraction.
+
+See the [hybrid report](../reports/gemma-raw-fallback.md) for measured per-input
+and field populations, verified request equivalence and archive provenance.
+All 824 offline tests and lint/types/gold/preflight passed. Exactly ten new
+optional observations ran; the required matrix remains 240/240. No provider
+inference ran, the ledger is unchanged and native residency is empty.
+
+The remaining expected-field errors prioritize the next review: 33 false
+buyer-product identifiers and 16 delivery-date mismatches account for 49 of 60
+incorrect expected gold fields; S003 supplies the three extra rows. Consider a
+separate source-evidence experiment for identifier ownership and explicit
+line-date linkage, with abstention and legitimate-value counterexamples. Do not
+universally null identifiers/dates or silently repair output. No semantic
+intervention, remaining20 or additional model run is authorized by completion.
+
+**Authorized protocol retained:** the user requested
+committing completed changes and proceeding with the proposed next experiment.
+Source-support work is committed as `ac1d5cf`. Implement and test one separate
+`ordered-rows-raw-fallback-v1` profile: preserve the existing deterministic
+selection and rendered body on supported layouts; retain exact original raw
+source bytes when the same selector abstains. Do not expand layout profiles or
+change prompts, labels, schema, scorer, model, thinking, sampling or context.
+
+Run exactly the same ten gold inputs once with Gemma/frozen v2,
+49,152 context, 16,384 output, temperature 0/top_p 1 and thinking=false after the
+offline gate and full-request admission pass. Record request/body comparisons
+against the saved selected-source trial and original source. Compare all ten
+new outputs with the saved raw, formatting-only and selected-source gold10
+trials; do not substitute saved best-case outputs for new observations.
+Preserve failures, complete provenance, checks and verified archival. No
+remaining20, provider/JEV calls, examples, profile expansion or additional trial
+is included. Stop for review after this gold10 result.
+
 **Gemma source-support gold10 complete — 26 October 2026; review pending.**
 The existing Qwen work was committed as `60fbdd1`. Offline source assessment,
 the representation-only trial, its review and the conditionally authorized
@@ -369,8 +410,10 @@ not filter rows, reject output or trigger new correction calls in this matrix.
 **Partial workflow experiment complete; skill packaging/example loading remain
 deferred.** After the Qwen review, the user authorized offline source-check
 assessment, one input-representation-only Gemma v2 gold10, review and a separate
-deterministic selection gold10 if needed. Both trials are complete; see the
-[source-support report](../reports/gemma-source-support.md). This implements a
+deterministic selection gold10 if needed. Those trials and the subsequently
+authorized raw-fallback gold10 are complete; see the
+[source-support report](../reports/gemma-source-support.md) and
+[hybrid results](../reports/gemma-raw-fallback.md). This implements a
 fixed source-processing workflow, not skill discovery or model-driven tool use.
 The skill-loading and example proposal below remains unimplemented. No further
 inference, remaining20, prompt changes, downloads or autonomous loop are

@@ -26,3 +26,6 @@ selections:
   gemma-source-support:
     membership: results/submission/gemma-support-20261026-evaluation/membership.json
     evidence_index: archive-index/selections/gemma-source-support.json
+  gemma-raw-fallback:
+    membership: results/submission/gemma-hybrid-20261026-evaluation/membership.json
+    evidence_index: archive-index/selections/gemma-raw-fallback.json

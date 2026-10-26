@@ -253,3 +253,97 @@ def test_real_cli_records_transformed_source_and_keeps_raw_variant_separate(
     evaluated = service.invoke("evaluate", "view-reference", "view-cells")
     assert evaluated.returncode == 0
     assert len(json.loads(evaluated.stdout)["variants"]) == 2
+
+
+def test_hybrid_keeps_recognized_selection_body_but_has_separate_identity() -> None:
+    selected = build_source_view(SOURCE, "ordered-rows-v1")
+    hybrid = build_source_view(SOURCE, "ordered-rows-raw-fallback-v1")
+
+    assert hybrid.selection is not None and hybrid.selection["applied"]
+    assert hybrid.rendered_text == selected.rendered_text
+    assert hybrid.source_map == selected.source_map
+    assert hybrid.selection == selected.selection
+    assert hybrid.evidence()["identity"] != selected.evidence()["identity"]
+
+
+def test_hybrid_unknown_layout_preserves_raw_bytes_including_line_endings() -> None:
+    source = "ORDER!A1 Unknown label: café\r\n\r\nUnparsed | [blank] | 0"
+    hybrid = build_source_view(source, "ordered-rows-raw-fallback-v1")
+
+    assert hybrid.selection is not None and not hybrid.selection["applied"]
+    assert hybrid.rendered_text.encode() == source.encode()
+    assert hybrid.evidence()["rendered_sha256"] == text_digest(source)
+    assert all(row["retained"] for row in hybrid.source_map)
+    reloaded = validate_source_view(
+        json.loads(json.dumps(hybrid.evidence())),
+        "ordered-rows-raw-fallback-v1",
+        text_digest(source),
+    )
+    assert reloaded == source
+
+
+@pytest.mark.parametrize("quantity", ["0", "-2", "2,5", "[missing]"])
+def test_hybrid_uncertain_quantity_retains_exact_raw_source(quantity: str) -> None:
+    source = SOURCE.replace("C21 Rendelt mennyiség: 2", f"C21 Rendelt mennyiség: {quantity}")
+    hybrid = build_source_view(source, "ordered-rows-raw-fallback-v1")
+
+    assert hybrid.selection is not None and not hybrid.selection["applied"]
+    assert hybrid.rendered_text == source
+    assert all(row["retained"] for row in hybrid.source_map)
+
+
+def test_hybrid_explicit_order_mark_with_blank_quantity_preserves_raw_evidence() -> None:
+    source = SOURCE.replace("D22 Mértékegység: KG", "D22 Mértékegység: KG | E22 Selected: yes")
+    hybrid = build_source_view(source, "ordered-rows-raw-fallback-v1")
+
+    assert hybrid.selection is not None and not hybrid.selection["applied"]
+    assert hybrid.rendered_text == source
+    assert "C22 Rendelt mennyiség: [blank]" in hybrid.rendered_text
+
+
+def test_hybrid_rejects_reformatted_fallback_even_with_updated_checksum() -> None:
+    source = "Unsupported raw source\r\n"
+    evidence = json.loads(
+        json.dumps(build_source_view(source, "ordered-rows-raw-fallback-v1").evidence())
+    )
+    evidence["rendered_text"] = "Unsupported raw source\n"
+    evidence["rendered_sha256"] = text_digest(evidence["rendered_text"])
+
+    with pytest.raises(ValueError, match="declared source transformation"):
+        validate_source_view(evidence, "ordered-rows-raw-fallback-v1", text_digest(source))
+
+
+def test_hybrid_cli_sends_raw_fallback_and_remains_separate_from_raw_variant(
+    service: ControlledService, gold: dict[str, object]
+) -> None:
+    config = load_experiment(service.project / "config/experiments.yaml")
+    (service.project / "config/hybrid.json").write_text(
+        config.model_copy(update={"source_view": "ordered-rows-raw-fallback-v1"}).model_dump_json()
+    )
+    service.responses = [json.dumps(gold), json.dumps(gold)]
+    raw = service.invoke("run", "--run-id", "hybrid-raw", "--input", "B02-S003-PO01")
+    hybrid = service.invoke(
+        "run",
+        "--config",
+        "config/hybrid.json",
+        "--run-id",
+        "hybrid-view",
+        "--input",
+        "B02-S003-PO01",
+    )
+
+    assert raw.returncode == hybrid.returncode == 0
+    manifest, records = reload_records(service.project / "results/runs/hybrid-view")
+    evidence = manifest.setup["source_views"]["B02-S003-PO01"]
+    assert not evidence["selection"]["applied"]
+    assert evidence["original_sha256"] == evidence["rendered_sha256"] == records[0].input_sha256
+    chats = [
+        payload
+        for path, payload, _ in service.requests
+        if path == "/api/chat" and payload and not payload.get("_debug_render_only")
+    ]
+    assert chats[-1]["messages"][1]["content"] == evidence["original_text"]
+    assert chats[-1]["messages"] == chats[-2]["messages"]
+    evaluated = service.invoke("evaluate", "hybrid-raw", "hybrid-view")
+    assert evaluated.returncode == 0
+    assert len(json.loads(evaluated.stdout)["variants"]) == 2

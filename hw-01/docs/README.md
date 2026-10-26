@@ -63,6 +63,7 @@ permission for model inference or spending.
 | Provider v1/v2 exploratory all30 continuation | [Provider exploratory results](reports/provider-exploratory-results.md) |
 | Qwen native v1/v2 gold10 diagnostic | [Qwen gold comparison](reports/qwen-gold-comparison.md) |
 | Gemma input representation and conditional source selection | [Gemma source support](reports/gemma-source-support.md) |
+| Gemma selection with exact raw fallback | [Gemma hybrid gold10](reports/gemma-raw-fallback.md) |
 | Completed v2 all30 baselines | [V2 continuation results](reports/v2-continuation-results.md) |
 | Cumulative budget migration audit | [Budget revisions](reports/budget-revisions.md) |
 

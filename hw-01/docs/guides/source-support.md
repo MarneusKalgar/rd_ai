@@ -43,6 +43,13 @@ predictions never enter it or the extraction request. It is deterministic
 selection followed by one extraction request, not a second model reasoning
 call or a post-processing repair of generated output.
 
+`config/gemma-raw-fallback.yaml` selects a third, separate profile,
+`ordered-rows-raw-fallback-v1`. Its supported layouts use the identical selection
+and cell-record body. When selection abstains, the request receives the exact
+original source text, including line endings and unparsed content. It introduces
+no new layout support. A source hash equal to the rendered hash is expected on
+the raw fallback branch; the hybrid profile still has its own evaluation identity.
+
 Every new run retains the exact original source, rendered request source,
 both hashes, source map, exclusion decision and implementation identity in its
 manifest. Reload checks the representation and its binding to approved source

@@ -1,0 +1,85 @@
+{
+  "version": "gemma-hybrid-selection-v1",
+  "bundles": [
+    {
+      "path": "results/submission/flash-v1-gold-16384-20261022",
+      "source_inventory_sha256": "f910107d95e547af1c8222dd14a82d9f32855f8d19d79a43407ae0954be02d97"
+    },
+    {
+      "path": "results/submission/gemma-cell-records-v2-gold-20261026-731",
+      "source_inventory_sha256": "67bf596645e6233bd4bbe2cfa689184ca8cb887f8a9cc147b21af3cf983bbd9b"
+    },
+    {
+      "path": "results/submission/gemma-ordered-rows-v2-gold-20261026-731",
+      "source_inventory_sha256": "9850b92bd7e9f59119fe11cdbd746b5739124bcc69f7bf11db5463da8b885777"
+    },
+    {
+      "path": "results/submission/matrix-native-v1-baseline-remaining-20261023-72",
+      "source_inventory_sha256": "1a037d0a91d6682482759f43f14d14734f0e6728f77208b148798f5710fe907c"
+    },
+    {
+      "path": "results/submission/matrix-native-v1-exploratory-20261025-72",
+      "source_inventory_sha256": "2857c56a759646a5e675d3bbe2a065601ab2bb7c90282139d82cf3db9c3984de"
+    },
+    {
+      "path": "results/submission/matrix-native-v2-exploratory-20261025-72",
+      "source_inventory_sha256": "a999b0153bba0cfa74da6e656f9490dbe9a1f204989d8348c9914053bd9154a5"
+    },
+    {
+      "path": "results/submission/matrix-native-v2-gold-20261024-72",
+      "source_inventory_sha256": "275087025bf6569f341794f659a9ed403b11dfec07bb29e677d8953bb62c42c9"
+    },
+    {
+      "path": "results/submission/matrix-native-v2-remaining-20261024-72",
+      "source_inventory_sha256": "b4c6f0f118989a8c4087421246d8bb2f8adcabcb27677541f2eab7e600e856cf"
+    },
+    {
+      "path": "results/submission/matrix-provider-v1-baseline-remaining-20261023-72",
+      "source_inventory_sha256": "2849552fc3c28ec3c0eead84da5df55283e786b1d0030a63d12d4cdcba80d65d"
+    },
+    {
+      "path": "results/submission/matrix-provider-v1-exploratory-20261026-72",
+      "source_inventory_sha256": "8507df689225d11a9e87c4a49870788356dc4eaed0853f05091356269ca64a04"
+    },
+    {
+      "path": "results/submission/matrix-provider-v2-exploratory-20261026-72",
+      "source_inventory_sha256": "dd6a7e72e025702321b3b64a3ec1c1ae707e204c101d4098a1f6f1ce6d0b340d"
+    },
+    {
+      "path": "results/submission/matrix-provider-v2-gold-20261024-72",
+      "source_inventory_sha256": "ed5e1fa53098f0216121408381d3aa2056bd31aaf9c072c17a44b50b528b3bcb"
+    },
+    {
+      "path": "results/submission/matrix-provider-v2-remaining-20261024-72",
+      "source_inventory_sha256": "33a8b9e88c6a525ea6f01a5ce8b4b0a07316131ca711c689e5b58f6a9ee2a0b2"
+    },
+    {
+      "path": "results/submission/native-s008-49152-16384-20261022",
+      "source_inventory_sha256": "dd4e4101c8e654831d440534de7d7228a8ccd60d4f832a9998096eecf35173a5"
+    },
+    {
+      "path": "results/submission/native-v2-gold-t02-p090-20261025",
+      "source_inventory_sha256": "1071173982a6006291f26c2521095e789fbf03811d43bf046d0825de3b80492c"
+    },
+    {
+      "path": "results/submission/gemma-support-20261026-preparation",
+      "source_inventory_sha256": "2383230df63a5a8f3b68b10f940eb0db37be0853de2465d3ec7362e405702294"
+    },
+    {
+      "path": "results/submission/gemma-support-20261026-evaluation",
+      "source_inventory_sha256": "b0ea154baa668e9e830ec36296bbb21ffb289924afe6cee97a0fe51b6a74f521"
+    },
+    {
+      "path": "results/submission/gemma-raw-fallback-v2-gold-20261026-731",
+      "source_inventory_sha256": "968b1220b500e1cbddffa61300687329894d83af38a0edb51de380762b84d64c"
+    },
+    {
+      "path": "results/submission/gemma-hybrid-20261026-preparation",
+      "source_inventory_sha256": "ddc67b4d0b949561a3c3a1b13783d5c1479a537670de87b105eb45f5f27e1729"
+    },
+    {
+      "path": "results/submission/gemma-hybrid-20261026-evaluation",
+      "source_inventory_sha256": "5440871c314e871d1698bdbe66faa1d0bb75bfc69e8ece7f0ae81f2a580dac0d"
+    }
+  ]
+}

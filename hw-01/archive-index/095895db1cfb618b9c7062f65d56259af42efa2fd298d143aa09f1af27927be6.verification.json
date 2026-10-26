@@ -1,0 +1,13 @@
+{
+  "version": "gemma-hybrid-archive-verification-v1",
+  "archive_sha256": "095895db1cfb618b9c7062f65d56259af42efa2fd298d143aa09f1af27927be6",
+  "covered_observations": 240,
+  "new_native_observations": 10,
+  "bundles": 20,
+  "payload_files": 649,
+  "source_and_restored_payloads_equal": true,
+  "restored_evaluations_equal": 4,
+  "garage_full_get_verified": true,
+  "provider_ledger_unchanged": true,
+  "native_unloaded": true
+}
