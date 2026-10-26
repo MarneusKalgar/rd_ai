@@ -20,6 +20,7 @@ from extraction_service.extraction.constants import SCHEMA_FILENAME
 from extraction_service.records import AttemptResult, RunRecord
 from extraction_service.runtime.storage import write_report
 from extraction_service.runtime_types import Sha256, StrictModel
+from extraction_service.source_support.views import validate_source_view
 
 
 class RunState(StrEnum):
@@ -110,6 +111,10 @@ class RunStore:
                     "experiment_sha256": job.experiment_sha256,
                 }
             )
+            if experiment.source_view is not None:
+                identities[-1]["source_view_sha256"] = hashlib.sha256(
+                    job.source_text.encode()
+                ).hexdigest()
 
         self.manifest = RunManifest(
             run_id=first.run_id,
@@ -188,6 +193,25 @@ def reload_records(directory: Path) -> tuple[RunManifest, list[RunRecord]]:
     )
     records = []
     jobs = {job["key"]: job for job in manifest.jobs}
+
+    if manifest.experiment.source_view is not None:
+        views = manifest.setup.get("source_views")
+        if not isinstance(views, dict):
+            raise ValueError("Saved run requires source view evidence")
+        for job in manifest.jobs:
+            evidence = views.get(job["input_id"])
+            if not isinstance(evidence, dict):
+                raise ValueError("Missing source view input evidence")
+            rendered = validate_source_view(
+                evidence, manifest.experiment.source_view, job["input_sha256"]
+            )
+            if hashlib.sha256(rendered.encode()).hexdigest() != job.get("source_view_sha256"):
+                raise ValueError("Saved source view differs from its job")
+            observed = manifest.setup.get(job["model_id"], {})
+            if not isinstance(observed, dict):
+                raise ValueError("Saved source view model setup is missing")
+            if observed.get("source_view") != evidence.get("identity"):
+                raise ValueError("Saved source view identity differs from model setup")
 
     if manifest.state in (RunState.COMPLETE, RunState.INCOMPLETE) and manifest.summary is None:
         raise ValueError("Finished run requires a summary")

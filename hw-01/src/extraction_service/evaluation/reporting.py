@@ -45,6 +45,9 @@ def _variant(record: RunRecord, execution: dict[str, Any], setup: dict[str, Any]
     if "ollama_options" in setup:
         context["ollama_options"] = setup["ollama_options"]
 
+    if "source_view" in setup:
+        context["source_view"] = setup["source_view"]
+
     return {
         "stage": record.stage.value,
         "model_id": record.model_id,

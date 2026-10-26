@@ -109,6 +109,11 @@ diagnose-rows:
 	$(COMPOSE) build offline 1>&2
 	$(COMPOSE) run --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service diagnose-rows $(ARGS)
 
+.PHONY: assess-source
+assess-source:
+	$(COMPOSE) build offline 1>&2
+	$(COMPOSE) run --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service assess-source $(ARGS)
+
 verify-export:
 	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service verify-export $(ARGS)
 

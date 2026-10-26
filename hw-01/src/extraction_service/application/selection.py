@@ -13,6 +13,7 @@ from extraction_service.corpus.loading import CorpusInput, LoadedCorpus
 from extraction_service.execution.types import ExtractionJob
 from extraction_service.record_types import ExecutionStage
 from extraction_service.runtime_types import StrictModel
+from extraction_service.source_support.views import build_source_view
 
 
 class RunOptions(StrictModel):
@@ -97,7 +98,9 @@ def selected_jobs(
                         run_id=options.run_id,
                         input_id=source.input_id,
                         input_sha256=source.input_sha256,
-                        source_text=source.text,
+                        source_text=source.text
+                        if experiment.source_view is None
+                        else build_source_view(source.text, experiment.source_view).rendered_text,
                         experiment_sha256=experiment_sha256,
                         prompt_id=prompt.id,
                         prompt_sha256=hashlib.sha256(instructions.encode()).hexdigest(),

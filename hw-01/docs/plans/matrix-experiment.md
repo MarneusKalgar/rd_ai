@@ -6,6 +6,70 @@
 
 ## Current status — 26 October 2026
 
+**Gemma source-support gold10 complete — 26 October 2026; review pending.**
+The existing Qwen work was committed as `60fbdd1`. Offline source assessment,
+the representation-only trial, its review and the conditionally authorized
+deterministic selection trial are complete. See the
+[measured report](../reports/gemma-source-support.md) and
+[operating boundaries](../guides/source-support.md).
+
+| Gemma v2 gold10 | Matched fields | Exact docs | Extra / missing rows | Processing time |
+| --- | --- | ---: | --- | --- |
+| Saved raw baseline | 198/2766 (7.16%) | 1 | 303 / 0 | 14m00s |
+| Full cell-record representation | 144/2910 (4.95%) | 1 | 321 / 13 | 20m14s |
+| Deterministic selection + cell records | 277/1214 (22.82%) | 1 | 109 / 0 | 4m50s |
+
+Formatting alone regressed and truncated S032. The conditional workflow restored
+10/10 valid outputs, increased matched fields and reduced time, but is still
+inaccurate overall. Only three layouts support selection; other layouts retain
+full source. S044's two-panel Spanish form remains outside the declared profiles.
+Do not extend profiles or rerun inputs to optimize this completed trial silently.
+In particular, raw S044 had zero extra rows while the formatted fallback added
+106. The next candidate for user review is a separate hybrid with raw fallback
+on unsupported layouts; it has not been run. Do not pool saved best-case outputs
+and describe that as an observed hybrid result.
+All 815 offline tests and lint/types/gold/preflight passed. Twenty new optional
+observations are retained separately; required matrix membership remains 240/240.
+No provider calls ran; the ledger is unchanged and Gemma is unloaded.
+
+**Authorized protocol retained below:** after reviewing the
+Qwen comparison, the user requested (1) offline assessment of deterministic source
+checks, (2) one representation-only Gemma v2 gold10 experiment, (3) quality/time
+review, and (4) staged row selection if needed. Qwen work was committed first
+as `60fbdd1`. Keep the completed required matrix and saved baselines unchanged.
+
+The first experiment uses `config/gemma-cell-records.yaml`: source cells on
+separate lines within explicit source-record groups, retaining every input row,
+literal value, blank marker and coordinate. V2 instruction bytes, schema,
+Gold10, Gemma digest/runtime, 49,152 context, 16,384 output, temperature 0/top_p 1,
+thinking=false and the existing deadline/correction policy remain fixed. Original
+and request-source hashes, full source mappings and implementation identity are
+retained separately from the PO output; transformed inputs are not raw-matrix
+observations. No gold labels or expected answers enter request construction.
+
+Before generation, assess the three recognized layouts against existing gold
+membership and saved outputs, and exercise counterexamples: unknown/zero or
+comma-decimal quantities, repeated names, shared unit cells, unfamiliar headers
+and explicit order marks with blank quantities. Unsupported/ambiguous evidence
+remains unknown. Detection flags do not repair output or change historical scores.
+Do not claim general check precision/recall from these development examples.
+
+After the representation-only gold10, compare matched fields, exact documents,
+extra/missing rows, first/final validity, all calls and summed processing time
+against the same saved Gemma v2 gold10. If recognized cases retain any extra or
+missing rows or unusable outputs, the user has authorized one separate gold10
+trial of `config/gemma-ordered-rows.yaml`: deterministic selection under the
+narrow known form conventions, followed by the same Gemma extraction. Only
+explicit blank catalog rows may be excluded; unfamiliar evidence makes the
+selector abstain and retain the full representation. Preserve headers, shared
+cells, order, duplicate ordered products and the complete excluded-source map.
+This is a fixed application workflow, not autonomous skill discovery.
+
+No remaining20, provider/JEV inference, examples, prompt revision, unbounded
+correction or model substitution is authorized. Stop for user review after the
+authorized gold10 comparison(s), and retain raw outcomes plus verified archive
+provenance. Native API charges are zero; local time/resource costs remain visible.
+
 **Provider exploratory continuation complete — 26 October 2026:** all sixty approved provider
 exploratory observations reached attempted terminal records. Checked required
 membership is **240/240**, with eight complete thirty-input variants. See the
@@ -15,9 +79,10 @@ counts below are historical snapshots. Required execution is complete; sections
 8–9 final analysis/reproducibility/acceptance remain. No additional inference is
 approved.
 
-**Qwen-first sequence — diagnostic complete, review pending:** review the
-7.3.3 Qwen v1/v2 gold10 comparison before investing in new skill/workflow behavior (7.3.1), behavioral
-semantic rejection/correction (7.3.2), or JEV verification/routing (7.3.5).
+**Qwen-first sequence — diagnostic reviewed; source-support trial complete:** the
+7.3.3 Qwen v1/v2 gold10 comparison preceded the authorized Gemma source-support
+work in 7.3.1. The original sequence below retains the boundaries for behavioral
+semantic rejection/correction (7.3.2) and JEV verification/routing (7.3.5).
 The question is whether a different local model improves ordered-row selection
 under the existing pipeline before adding more orchestration. Section numbering
 does not prescribe execution order. The completed sampling diagnostic (7.3.4)
@@ -301,11 +366,15 @@ not filter rows, reject output or trigger new correction calls in this matrix.
 
 ## Optional extraction skill experiment (7.3.1)
 
-**Deferred until the Qwen gold10 review in 7.3.3; documentation only.** The user requested
-planning a reusable extraction skill that a selected local model can actually consume. This does
-not authorize skill implementation, v2 changes, inference, model downloads or
-an autonomous agent loop. Keep this optional exercise separate from the required
-240-observation prompt/sampling matrix.
+**Partial workflow experiment complete; skill packaging/example loading remain
+deferred.** After the Qwen review, the user authorized offline source-check
+assessment, one input-representation-only Gemma v2 gold10, review and a separate
+deterministic selection gold10 if needed. Both trials are complete; see the
+[source-support report](../reports/gemma-source-support.md). This implements a
+fixed source-processing workflow, not skill discovery or model-driven tool use.
+The skill-loading and example proposal below remains unimplemented. No further
+inference, remaining20, prompt changes, downloads or autonomous loop are
+authorized. Keep optional work separate from the completed required matrix.
 
 The current Ollama adapter sends instructions, schema and source text through
 `request_messages`; it has no skill discovery, resource loader or tool loop.

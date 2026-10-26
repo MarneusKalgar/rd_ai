@@ -23,6 +23,7 @@ from extraction_service.exit_status import ExitStatus
 from extraction_service.preflight import DEFAULT_EXPERIMENT_FILE
 from extraction_service.record_types import ExecutionStage
 from extraction_service.records import RunRecord
+from extraction_service.source_support.reporting import assess_saved_runs
 
 COMMANDS: Final[frozenset[str]] = frozenset(
     {
@@ -36,6 +37,7 @@ COMMANDS: Final[frozenset[str]] = frozenset(
         "verify-export",
         "evaluate",
         "diagnose-rows",
+        "assess-source",
     }
 )
 SMOKE_INPUTS: Final[tuple[str, ...]] = ("B02-S030-PO01", "B02-S026-PO01", "B02-S008-PO01")
@@ -97,6 +99,11 @@ def add_commands(commands: argparse._SubParsersAction[argparse.ArgumentParser]) 
     diagnostic = commands.add_parser("diagnose-rows", help="Inspect saved row selection offline")
     diagnostic.add_argument("run_ids", nargs="+")
     diagnostic.add_argument("--source", choices=("runs", "submission"), default="submission")
+    support = commands.add_parser(
+        "assess-source", help="Inspect saved completeness/quantity evidence offline"
+    )
+    support.add_argument("run_ids", nargs="+")
+    support.add_argument("--source", choices=("runs", "submission"), default="submission")
 
 
 def _options(args: argparse.Namespace) -> RunOptions:
@@ -136,6 +143,11 @@ def dispatch(args: argparse.Namespace) -> int:
     """Execute one explicit command; outer CLI owns safe error reporting."""
 
     project_dir = args.project_dir
+
+    if args.command == "assess-source":
+        report = assess_saved_runs(project_dir, args.run_ids, source=args.source)
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+        return ExitStatus.SUCCESS
 
     if args.command == "diagnose-rows":
         report = diagnose_runs(project_dir, args.run_ids, source=args.source)

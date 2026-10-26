@@ -21,6 +21,7 @@ from extraction_service.execution.types import ExtractionJob, ScheduledExtractio
 from extraction_service.exit_status import ExitStatus
 from extraction_service.preflight import DEFAULT_EXPERIMENT_FILE, preflight
 from extraction_service.records import RunRecord
+from extraction_service.source_support.views import build_source_view, view_identity
 
 
 def execute_selected(
@@ -45,6 +46,24 @@ def execute_selected(
                     pricing=prepared.pricing,
                 )
             )
+
+    if experiment.source_view is not None:
+        setup = dict(setup)
+        views = {}
+        for source in corpus.inputs:
+            selected_jobs_for_input = [job for job in jobs if job.input_id == source.input_id]
+            if not selected_jobs_for_input:
+                continue
+            view = build_source_view(source.text, experiment.source_view)
+            if any(job.source_text != view.rendered_text for job in selected_jobs_for_input):
+                raise ValueError("Scheduled source differs from the selected representation")
+            views[source.input_id] = view.evidence()
+        setup["source_views"] = views
+        for model_id in targets:
+            observed = setup.get(model_id)
+            if not isinstance(observed, dict):
+                raise ValueError("Missing model setup evidence")
+            setup[model_id] = {**observed, "source_view": view_identity(experiment.source_view)}
 
     store = RunStore(project_dir, scheduled, experiment, corpus.contract, setup)
     ledger = BudgetLedger(project_dir, experiment.execution)

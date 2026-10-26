@@ -23,3 +23,6 @@ selections:
   qwen-gold-comparison:
     membership: results/submission/qwen-gold-20261026-evaluation/membership.json
     evidence_index: archive-index/selections/qwen-gold-comparison.json
+  gemma-source-support:
+    membership: results/submission/gemma-support-20261026-evaluation/membership.json
+    evidence_index: archive-index/selections/gemma-source-support.json

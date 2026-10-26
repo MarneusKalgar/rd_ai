@@ -22,6 +22,7 @@ help:
 	@echo "hw01-verify-export Recheck exported byte hashes and records (ARGS=run-id)"
 	@echo "hw01-evaluate      Score saved terminal runs offline (ARGS='run-id ...')"
 	@echo "hw01-diagnose-rows Inspect saved row selection without inference or rescoring"
+	@echo "hw01-assess-source Inspect saved completeness/quantity evidence without inference"
 	@echo "hw01-archive-results Create and verify a copy-only archive (ARGS='--selection final-baselines')"
 	@echo "hw01-verify-archive Verify a cached archive (ARGS='--index archive-index/<sha>.json')"
 	@echo "hw01-restore-results Restore an archive into an isolated results/restored directory"
@@ -67,3 +68,7 @@ hw01-storage-check:
 
 hw01-down:
 	$(MAKE) -C hw-01 down
+
+.PHONY: hw01-assess-source
+hw01-assess-source:
+	$(MAKE) -C hw-01 assess-source

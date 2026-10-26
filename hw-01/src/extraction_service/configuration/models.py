@@ -116,6 +116,7 @@ class ExperimentConfig(StrictModel):
     sampling: Annotated[list[SamplingConfig], Field(min_length=1)]
     execution: ExecutionConfig
     selection: ExperimentSelection
+    source_view: Literal["cell-records-v1", "ordered-rows-v1"] | None = None
 
     @model_validator(mode="after")
     def check_references(self) -> Self:
