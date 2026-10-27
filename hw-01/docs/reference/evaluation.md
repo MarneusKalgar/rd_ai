@@ -6,6 +6,14 @@ checkpoint hashes and identities, and prints evaluation JSON. It has no network,
 credentials, model initialization or generation. Redirect its output to retain a
 report. Original runs and the cumulative ledger are never rewritten.
 
+`evaluate --budget-policy config/evaluation-budget-policy.json` uses an explicit
+public, manifest-bound historical cap revision instead of the private ledger
+audit. The two modes are mutually exclusive. Only the administrative cap is
+normalized; source manifests must match the policy and every other control stays
+in the grouping identity. The result retains the policy hash and original run
+policies. This affects read-only evaluation only. See the
+[ledger-free reproduction workflow](../guides/reproducing-results.md).
+
 ## Quality rules
 
 The frozen JSON Schema supplies the seven header fields and eight line fields;

@@ -93,6 +93,7 @@ def add_commands(commands: argparse._SubParsersAction[argparse.ArgumentParser]) 
     evaluation = commands.add_parser("evaluate", help="Score saved terminal runs offline")
     evaluation.add_argument("run_ids", nargs="+")
     evaluation.add_argument("--allow-budget-revision", action="store_true")
+    evaluation.add_argument("--budget-policy", help="Public manifest-bound evaluation policy")
     evaluation.add_argument("--source-dir", default="results/runs")
     evaluation.add_argument("--sampling-aliases", help="Explicit offline ID-only sampling map")
 
@@ -162,6 +163,7 @@ def dispatch(args: argparse.Namespace) -> int:
             allow_budget_revision=args.allow_budget_revision,
             source_dir=args.source_dir,
             sampling_aliases_file=args.sampling_aliases,
+            budget_policy_file=args.budget_policy,
         )
         print(json.dumps(report, indent=2))
 

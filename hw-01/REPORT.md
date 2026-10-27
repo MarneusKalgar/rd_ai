@@ -303,16 +303,22 @@ It neither generates model requests nor changes records, gold or the ledger.
 Use the [archive workflow](docs/guides/archiving-results.md) and the
 `section8-consolidated` selection for the compact archive index and retrieval
 commands. Restored reproduction must match `evaluation.json`, `summary.json`
-and `errors.json` exactly. This combined-budget recomputation uses the local
-audited ledger and its cap-revision backup; neither private accounting file is
-uploaded. Portable verification without that local audit state remains a
-section 9 concern. The source reports linked in the
+and `errors.json` exactly. The historical section 8 driver used the local
+audited ledger and cap-revision backup; neither private accounting file was
+uploaded. Section 9 adds [ledger-free reproduction](docs/guides/reproducing-results.md)
+through a public manifest-bound evaluation policy and the shared scorer.
+`make hw01-reproduce-report` checks the published matrix and tables from the
+indexed archive without model credentials, a private ledger or archived-code
+execution. The source reports linked in the
 [documentation index](docs/README.md) retain separate experiment protocols,
 test gates and archive receipts. Bulk evidence stays ignored; reports, compact
 indices, receipts and restore verification are versioned. Garage and local
 caches remain on the same machine and do not constitute off-device backup.
 
-The implementation gate remains **927 passing tests**, Ruff lint/format, strict
-mypy, frozen gold validation and preflight. Section 8 adds analysis and offline
-artifact verification, with no application/scorer changes or new inference.
-Section 9 remains the broader clean-checkout reproducibility/acceptance review.
+Section 8 reused the **927-test** implementation gate and added saved-data
+recomputation without new inference. Section 9 passed **938 tests**, Ruff
+lint/format, strict mypy, frozen gold validation and preflight in an isolated
+tracked-source export with the explicit candidate patch. The same export
+reproduced the matrix using only its supplied public archive, without private
+environment files, a ledger or a preexisting restore. This used the existing
+Docker engine/cache, not a newly provisioned machine; no new inference ran.

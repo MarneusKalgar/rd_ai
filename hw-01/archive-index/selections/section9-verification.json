@@ -1,0 +1,13 @@
+{
+  "version": "section9-selection-v1",
+  "bundles": [
+    {
+      "path": "results/submission/section8-consolidated-20261027",
+      "source_inventory_sha256": "60f47614e47964972e3313d99123f15beb0c642798859e83f1069771cc67b7ce"
+    },
+    {
+      "path": "results/submission/section9-verification-20261027",
+      "source_inventory_sha256": "aa128953d11028329dd93cdac139d56eef6431aabfb7ef8adb601dd1b2b1109f"
+    }
+  ]
+}

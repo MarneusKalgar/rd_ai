@@ -67,7 +67,7 @@ There are no model dependencies or provider credentials on this offline service.
 Verification rewrites deterministic files in the isolated restore and its compact
 verification receipt; it does not overwrite original runs or the ledger.
 
-## Boundaries and section 9 follow-up
+## Original boundary and section 9 resolution
 
 This is a verified workspace/archive reproduction, not yet a completed clean-room
 checkout exercise. The combined historical $4.50/$10 evaluation calls the shared
@@ -76,6 +76,12 @@ revision backup. Neither private file is uploaded. Section 9 should establish
 how a fresh reviewer reproduces the public comparison without the original
 machine's private accounting state, while retaining original policy provenance.
 It must not fabricate a spending ledger or silently merge arbitrary policies.
+
+**Resolved in section 9:** [ledger-free reproduction](../guides/reproducing-results.md)
+uses a public policy bound to the thirteen original manifest hashes. The new
+command reproduces the historical evaluation without a private ledger, and
+does not execute the archived drivers above. The original section 8 receipt
+retains its historical conditions. See [section 9 verification](section9-verification.md).
 
 Garage, caches and repository are on the same laptop. Their checks demonstrate
 payload integrity and local recovery, not off-device disaster recovery.

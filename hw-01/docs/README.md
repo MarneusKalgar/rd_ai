@@ -13,6 +13,7 @@ instruction to rerun a completed experiment.
 
 ## Guides
 
+- [Reproduce the published matrix without models or a private ledger](guides/reproducing-results.md).
 - [Archive, upload and restore experiment evidence](guides/archiving-results.md).
 - [Run and save extractions](guides/running-extractions.md).
 - [Use native Ollama with Python in Docker](guides/native-ollama.md).
@@ -47,6 +48,7 @@ permission for model inference or spending.
 | --- | --- |
 | Complete matrix, optional trials, costs and bounded conclusions | [Consolidated evaluation](../REPORT.md) |
 | Restored 240-observation recomputation and report-table checks | [Section 8 verification](reports/section8-verification.md) |
+| Ledger-free isolated-source reproduction and full offline gate | [Section 9 verification](reports/section9-verification.md) |
 | Checked archive, Garage upload and restored evaluation | [Archive workflow verification](reports/archive-workflow-verification.md) |
 | Bulk evidence retention and Git history cleanup | [Submission retention](reports/submission-retention.md) |
 | Docker setup acceptance | [Docker setup verification](reports/docker-setup-verification.md) |

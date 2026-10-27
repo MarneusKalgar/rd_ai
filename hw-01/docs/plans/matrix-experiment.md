@@ -62,6 +62,20 @@ below retain historical authorizations and outcomes, not pending instructions.
 
 ## Latest measured checkpoints
 
+**Section 9 complete — 27 October 2026.** The
+[reproduction guide](../guides/reproducing-results.md) provides
+`make hw01-reproduce-report`: a network-disabled service with no provider
+credentials, model dependencies or named results volume. A public cap-revision
+policy is bound to the thirteen exact historical manifests; it neither creates
+a ledger nor authorizes spending. An isolated tracked-source export plus the
+explicit section 9 candidate patch reproduced all 240 observations/eight
+variants from the supplied public archive, with no local environment files,
+private ledger or prior restore. The same export passed 938 tests, Ruff,
+strict mypy, gold validation and preflight. Changed report claims are rejected.
+The [verification record](../reports/section9-verification.md) retains the scope,
+gates and limits. No fresh-machine/live-model availability, new gold labels,
+unseen-data reliability or off-device backup is claimed. No new inference ran.
+
 **Section 8 complete — 27 October 2026.** The [consolidated report](../../REPORT.md)
 recomputes all eight matrix variants from saved terminal records, verifies exact
 240/240 membership and retains failures, all30 operations, gold10 quality,
@@ -71,9 +85,9 @@ local workflows, with exact error examples, a bounded configuration choice and
 development-data limitations. No new inference, labels, scorer changes or paid
 spending were introduced. The `section8-consolidated` archive selection preserves
 the driver and source evidence; the [verification report](../reports/section8-verification.md)
-records restored reproduction. Section 9 remains the clean-checkout/reproducibility
-review, including portable aggregation across historical budget policies without
-the original machine's private ledger state.
+records restored reproduction. Section 9 subsequently verified portable
+aggregation across historical budget policies without the original machine's
+private ledger state; the original section 8 receipt keeps its historical limits.
 New independently reviewed documents are not a prerequisite for section 9;
 generalization claims remain unsupported without a separate reviewed evaluation.
 
@@ -632,7 +646,8 @@ and separate historical diagnostic tables are retained. Docker Ollama's stopped
 container, image and weights volume were removed at the user's request; native
 weights/results remain. Docker runs Python/offline checks; native is the selected
 model runtime. Optional Docker compatibility code remains in source and must not
-download/start Ollama implicitly. Section 9 verifies broader reproducibility.
+download/start Ollama implicitly. Section 9's isolated-source verification is
+complete; see its current checkpoint.
 
 ## Staged instruction-only v2 execution (7.2.5)
 

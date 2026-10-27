@@ -4,6 +4,9 @@ See the [documentation index](docs/README.md) for guides, technical reference,
 experiment plans, measured reports and quality practices.
 The [consolidated results](REPORT.md) cover the completed 240-observation
 matrix, provider selection, local assistance trials, measured costs and limits.
+Use [offline reproduction](docs/guides/reproducing-results.md) to verify them from
+the indexed public archive with `make hw01-reproduce-report`, without a model,
+provider key or private spending ledger.
 
 The [archive workflow](docs/guides/archiving-results.md) packages public evidence
 in Docker, verifies isolated restoration, and optionally uploads to local Garage
@@ -33,7 +36,7 @@ admission, incremental records/checkpoints, budget administration, CLI/Make
 commands and checked exports. Live acceptance is tracked separately; provider
 inference requires verified coverage and explicit human approval. Frozen v1/v2
 and both sampling profiles have completed the historical matrix. Section 8
-consolidates saved evidence; section 9's broader reproducibility review remains.
+consolidates saved evidence; section 9 verifies the saved comparison and setup.
 
 The [provider smoke evidence](docs/reports/provider-runtime-verification.md) records the
 approved Gemini 3.1 Flash-Lite run: two schema-valid outputs, one truncation,

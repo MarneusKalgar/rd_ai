@@ -138,6 +138,11 @@ restore-results: archive-dirs
 evaluate-restored: archive-dirs
 	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/restored:/app/results/restored:ro" offline python -m extraction_service evaluate $(ARGS)
 
+.PHONY: reproduce-report
+reproduce-report: archive-dirs
+	mkdir -p results/reproductions
+	$(COMPOSE) run --build --rm --no-deps reproduce python -m extraction_service.evaluation.reproduce $(ARGS)
+
 # Storage credentials are confined to the online helper; provider credentials are never loaded.
 upload-archive: archive-dirs
 	$(COMPOSE) run --build --rm --no-deps archive-online python -m extraction_service.archiving upload $(ARGS)

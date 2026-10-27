@@ -1,0 +1,31 @@
+{
+  "version": "evaluation-budget-policy-v1",
+  "source_archive_sha256": "c3398a3c846488086ef52be9a4706b0eb9568ab94f56f42d3190610d96ad263b",
+  "evidence_bundle": "section8-consolidated-20261027",
+  "budget_usd": "10",
+  "matrix_reserve_usd": "3.5",
+  "policy_revisions": [
+    {
+      "previous_budget_usd": "4.5",
+      "budget_usd": "10.0",
+      "previous_sha256": "2b00d7f326781fe5a0bbeac49c41a6d4a8321d2bcc24c89e84caf41e724282fd",
+      "evidence": "user-approved-USD10-experiment-budget-in-chat-20261022",
+      "observed_at": "2026-10-23T06:59:10.302591+00:00"
+    }
+  ],
+  "manifests": {
+    "flash-v1-gold-16384-20261022": "e63f0eadd1afdb8ae19b9c313d1acabebb40f4f8546a52f709d7990d42d9395f",
+    "matrix-native-v1-baseline-remaining-20261023-72": "a00263f8123750e572e98aecabc77b6a29c5a070361714e2fbd4ebc9c4ac2f9a",
+    "matrix-native-v1-exploratory-20261025-72": "26e770539e6fb356c33875702dffec19a7547925187c4d3e67d9c3d073b8d7db",
+    "matrix-native-v2-exploratory-20261025-72": "5e255efc7a9ab3a537e8b27a86ff2af888f6457455228965594ce23760b4f8f1",
+    "matrix-native-v2-gold-20261024-72": "25ee66000d3021277b1912cf134640fbfd9e0b95b768034053b390289538ff21",
+    "matrix-native-v2-remaining-20261024-72": "ee9b939b2293d1fb47aab996dfba2b646b58e56cd01d3ab1f2be8ddf43237633",
+    "matrix-provider-v1-baseline-remaining-20261023-72": "b1e134883d607183eb72b776067b165fd5267b08f4a431556f4640c041f1e229",
+    "matrix-provider-v1-exploratory-20261026-72": "19c059e8ad6bcce536ee169a7038e5b8e8409847c5cdd5d31c5bedac3abbb96d",
+    "matrix-provider-v2-exploratory-20261026-72": "51add3fbb22a2f4d36b13e1ab343bad62317c43c84193d3a486fcd82c3a9f7d0",
+    "matrix-provider-v2-gold-20261024-72": "57182e5332cb576cc2bed379cb14781ebb014872803fa8f32a49bf13340ce210",
+    "matrix-provider-v2-remaining-20261024-72": "f69490556d991cd7e88a8963b60cab76dd69e424ffcf8067784373220287c302",
+    "native-s008-49152-16384-20261022": "214e49b2a0121c8161909d330e3d726846b665af961c2fa39dd280e698dcf276",
+    "native-v2-gold-t02-p090-20261025": "2135f701baa0ab36bf36336cf94e1d93fe0c2d5b204702525463af93c254d349"
+  }
+}

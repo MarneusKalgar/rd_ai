@@ -29,6 +29,7 @@ help:
 	@echo "hw01-upload-archive Upload to configured S3/Garage and verify with a download"
 	@echo "hw01-download-archive Download and verify indexed evidence from S3/Garage"
 	@echo "hw01-evaluate-restored Score restored evidence offline (ARGS includes --source-dir)"
+	@echo "hw01-reproduce-report Verify the published matrix offline without a private ledger"
 	@echo "hw01-archive-store-init Generate private single-node Garage settings once"
 	@echo "hw01-archive-store-up Start the optional local Garage bucket"
 	@echo "hw01-archive-store-down Stop Garage; preserve its data volume"
@@ -80,3 +81,7 @@ hw01-correct-identifiers hw01-export-correction hw01-verify-correction hw01-eval
 .PHONY: hw01-run-split hw01-export-split hw01-verify-split hw01-evaluate-split
 hw01-run-split hw01-export-split hw01-verify-split hw01-evaluate-split:
 	$(MAKE) -C hw-01 $(patsubst hw01-%,%,$@)
+
+.PHONY: hw01-reproduce-report
+hw01-reproduce-report:
+	$(MAKE) -C hw-01 reproduce-report

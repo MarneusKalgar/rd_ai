@@ -60,6 +60,17 @@ services:
       - path: .env.archive
         required: false
 
+  # No named results volume, credentials or model dependencies: public evidence only.
+  reproduce:
+    <<: *app
+    network_mode: none
+    volumes:
+      - ./results/archives:/app/results/archives:ro
+      - ./results/restored:/app/results/restored
+      - ./results/reproductions:/app/results/reproductions
+      - ./archive-index:/app/archive-index:ro
+      - ./REPORT.md:/app/REPORT.md:ro
+
   garage:
     profiles: [archive]
     build:

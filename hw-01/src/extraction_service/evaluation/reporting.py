@@ -10,6 +10,7 @@ from extraction_service.application.persistence import RunState, reload_records
 from extraction_service.application.selection import RunOptions
 from extraction_service.artifacts import artifact_path
 from extraction_service.corpus.loading import load_corpus
+from extraction_service.evaluation.budget_policy import EvaluationBudgetPolicy
 from extraction_service.evaluation.metrics import operational_metrics
 from extraction_service.evaluation.sampling_aliases import SamplingAliases
 from extraction_service.evaluation.scoring import FieldScore, combine_scores, score_extraction
@@ -97,6 +98,7 @@ def evaluate_runs(
     allow_budget_revision: bool = False,
     source_dir: str = "results/runs",
     sampling_aliases_file: str | None = None,
+    budget_policy_file: str | None = None,
 ) -> dict[str, Any]:
     """Evaluate saved terminal runs without inference or rewriting original evidence.
 
@@ -122,7 +124,17 @@ def evaluate_runs(
     grouped: dict[str, list[RunRecord]] = {}
     identities: dict[str, dict[str, Any]] = {}
     runs = []
-    budget = _budget_revision(project_dir) if allow_budget_revision else None
+    if allow_budget_revision and budget_policy_file is not None:
+        raise ValueError("Choose local ledger audit or public evaluation policy, not both")
+
+    public_policy = (
+        None
+        if budget_policy_file is None
+        else EvaluationBudgetPolicy.model_validate_json(
+            artifact_path(project_dir, budget_policy_file).read_bytes()
+        )
+    )
+    budget = public_policy or (_budget_revision(project_dir) if allow_budget_revision else None)
     authorized_caps: set[Decimal] = set()
 
     if budget is not None:
@@ -145,6 +157,8 @@ def evaluate_runs(
             ).hexdigest(),
             "experiment_sha256": sorted({record.experiment_sha256 for record in records}),
         }
+        if public_policy is not None:
+            public_policy.check_manifest(run_id, run_evidence["manifest_sha256"])
         execution: dict[str, Any] = manifest.experiment.execution.model_dump()
 
         if budget is not None:
@@ -284,5 +298,11 @@ def evaluate_runs(
 
     if aliases is not None:
         report["sampling_aliases"] = aliases.model_dump(mode="json")
+
+    if public_policy is not None:
+        assert budget_policy_file is not None
+        report["public_budget_policy_sha256"] = hashlib.sha256(
+            artifact_path(project_dir, budget_policy_file).read_bytes()
+        ).hexdigest()
 
     return report
