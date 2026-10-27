@@ -72,3 +72,7 @@ hw01-down:
 .PHONY: hw01-assess-source
 hw01-assess-source:
 	$(MAKE) -C hw-01 assess-source
+
+.PHONY: hw01-correct-identifiers hw01-export-correction hw01-verify-correction hw01-evaluate-correction
+hw01-correct-identifiers hw01-export-correction hw01-verify-correction hw01-evaluate-correction:
+	$(MAKE) -C hw-01 $(patsubst hw01-%,%,$@)

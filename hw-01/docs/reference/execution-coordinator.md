@@ -10,6 +10,12 @@ model services; the [6.6 application workflow](../guides/running-extractions.md)
 composes admission, the inference CLI and incremental persistence. Live smoke
 acceptance remains a separately recorded gate. Routine checks stay offline.
 
+The optional [identifier correction replay](../guides/identifier-correction.md)
+is a separate native-only phase over saved primaries. It reuses admission,
+contract validation and attempt evidence, but permits only one new call per
+source-flagged input with no retry. It does not change the coordinator's required
+matrix policy or convert retained outputs into semantically accepted POs.
+
 ## Responsibilities
 
 | Module | Responsibility |

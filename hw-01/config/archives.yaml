@@ -35,3 +35,6 @@ selections:
   scoped-roles:
     membership: results/submission/scoped-roles-20261026-evaluation/membership.json
     evidence_index: archive-index/selections/scoped-roles.json
+  identifier-correction:
+    membership: results/submission/identifier-correction-20261026-evaluation/membership.json
+    evidence_index: archive-index/selections/identifier-correction.json

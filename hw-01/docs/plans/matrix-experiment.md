@@ -6,6 +6,61 @@
 
 ## Current status — 26 October 2026
 
+**Bounded identifier correction complete — 26 October 2026; review pending.**
+The saved scoped gold10 primaries were replayed without regeneration. Nine
+physical native correction calls produced two accepted whole candidates, five
+unresolved candidates and two candidates rejected for protected-field changes;
+one supported-code document needed no call. Retained all-ten quality increased
+from **295/366 (80.60%) to 309/366 (84.43%)**, with **two exact documents**, three
+extra rows and zero missing rows. All outputs remained schema-valid. Fourteen
+expected-null buyer codes were corrected; the legitimate code remained correct.
+
+New correction processing took **152.71s**; adding the saved 116.67s primary time
+gives **269.38s reconstructed processing**, not measured live end-to-end latency.
+The checker supplies source-role resolutions, so this is a source-guided pipeline
+measurement, not evidence that Gemma learned ownership independently. Gold10 is
+development data. The 887-test offline gate passed. Complete evidence was
+archived, uploaded to Garage, restored and re-evaluated; all six comparator
+reports reproduced and required membership remains 240/240. The ledger and prior
+payloads stayed unchanged; native residency is empty. See the
+[identifier correction report](../reports/identifier-correction.md).
+
+Stop for review. No additional replay, provider/JEV, remaining20 or broader
+semantic correction follows automatically. The protocol below records this
+completed phase's authorization and bounds.
+
+**Bounded identifier correction authorization — 26 October 2026:** the user requested
+committing scoped-cue work and proceeding with the next planned exercise. Scoped
+work is committed as `6dfee70`. Reuse its saved gold10 as fixed primary outputs;
+do not regenerate primaries or combine best fields from different runs.
+
+Implement `buyer-id-single-correction-v1`: source-only identifier contradictions
+permit at most one new native request per flagged input. Unknown evidence
+abstains, and supported identifiers receive no request. Preserve the existing
+source representation, v2 instruction prefix, schema, model/runtime, thinking,
+sampling and context/output controls. Render the prior complete PO and explicit
+source findings as a versioned correction suffix. Gold values do not enter
+generation, triggering or acceptance. Make this replay independent of gold and
+annotation files and test legitimate/non-null identifiers as counterexamples.
+
+Accept only the actual whole schema-valid returned PO when every targeted
+identifier resolves and every other value/row is unchanged. Reject the whole
+candidate on any off-target edit; never partially merge or silently null fields.
+Keep the original for review when rejected. Preserve raw responses/candidates,
+source/request hashes, decision evidence and remaining contradictions. Semantic
+acceptance of the full PO is outside this policy. There is no retry or second
+schema/semantic attempt in this correction phase, even though the historical
+primary experiment allowed bounded transport/schema correction.
+
+After focused/full offline gates and exact full-request admission, execute one
+gold10 replay phase. Count every actual correction call and disposition. Report
+all-ten retained-output quality separately from correction acceptance. New-phase
+timing is measured; adding saved primary times is reconstructed, not a live
+end-to-end benchmark. Preserve the exact budget ledger and baseline evidence;
+archive/upload/restore/re-evaluate the new evidence. No provider/JEV, remaining20,
+new primary, extra invocation or other-field correction is included. Stop for
+review after this measured experiment.
+
 **Scoped role-cue gold10 complete — 26 October 2026; review pending.**
 The measured scope policy reached **295/366 matched fields (80.60%), one exact
 document, three extra rows, zero missing rows and 1m57s processing time**.
@@ -594,13 +649,19 @@ workflow demonstrates a concrete need for autonomy. See the
 
 ## Semantic validation sequence (7.3.2)
 
-**26 October continuation complete:** offline identifier/date checks and one
+**Latest 26 October checkpoint:** the separately authorized native-only bounded
+identifier correction replay is complete as described in Current status and the
+[measured report](../reports/identifier-correction.md). It is the only executed
+behavioral semantic correction policy. It does not certify full POs or authorize
+another replay, other-field correction or provider/JEV routing.
+
+**Earlier 26 October detection/context checkpoint:** offline identifier/date checks and one
 source-role context gold10 trial are complete as described in Current status.
 The context trial regressed and is not preferred over the raw-fallback hybrid. Automatic
-semantic rejection/correction remains deferred; the new checks are detection
+semantic rejection/correction was deferred at that checkpoint; those checks were detection
 only and their source facts are exposed as separately versioned advisory context.
 
-**Current ordering:** retain the implemented detection-only diagnostics for
+**Original ordering (before the bounded replay authorization):** retain the implemented detection-only diagnostics for
 offline analysis of saved outputs, including Qwen's later results. New behavioral
 rejection/correction follows the Qwen gold10 review in 7.3.3 if the observed
 failure modes justify it. Do not make a new harness a prerequisite for that
@@ -618,8 +679,8 @@ command versioned; the verbose regenerable report belongs under ignored
 `results/diagnostics/`, with its hash retained as generated-artifact metadata.
 At that checkpoint, other proposed deterministic candidates remained future
 work. The 26 October extension above adds identifier/date detection and one
-advisory-context trial; behavioral rejection/correction remains unexecuted
-and requires a separate task. This does not lift the v2 review
+advisory-context trial. Behavioral rejection/correction was still unexecuted at
+that point; the separately authorized bounded replay is recorded above. This does not lift the v2 review
 gate or authorize the optional extraction skill implementation.
 Semantic validation checks whether source evidence supports the extracted facts,
 including whether an output row represents an order. It supplements JSON/schema

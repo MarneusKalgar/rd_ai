@@ -1,0 +1,16 @@
+{
+  "version": "identifier-correction-archive-verification-v1",
+  "archive_sha256": "e43e35b1f4704e80ed36982c938efee4b3e4964460a90aa94d6280f3777874ad",
+  "covered_observations": 240,
+  "new_native_correction_requests": 9,
+  "new_native_primaries": 0,
+  "reused_primary_requests": 10,
+  "bundles": 29,
+  "payload_files": 799,
+  "source_and_restored_payloads_equal": true,
+  "restored_comparator_evaluations_equal": 6,
+  "restored_correction_evaluation_equal": true,
+  "garage_full_get_verified": true,
+  "provider_ledger_unchanged": true,
+  "native_unloaded": true
+}

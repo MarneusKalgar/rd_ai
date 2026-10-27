@@ -153,3 +153,19 @@ archive-store-up:
 
 archive-store-down:
 	$(COMPOSE) --profile archive stop garage
+
+# Corrections reuse exact saved gold10 primaries; native mode and one-call guards
+# are enforced in the command. The baseline submission mount is read-only.
+.PHONY: correct-identifiers export-correction verify-correction evaluate-correction
+correct-identifiers:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" native-run python -m extraction_service.corrections run $(ARGS)
+
+export-correction:
+	mkdir -p results/submission
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission" offline python -m extraction_service.corrections export $(ARGS)
+
+verify-correction:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service.corrections verify $(ARGS)
+
+evaluate-correction:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service.corrections evaluate $(ARGS)
