@@ -169,3 +169,16 @@ verify-correction:
 
 evaluate-correction:
 	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service.corrections evaluate $(ARGS)
+
+.PHONY: run-split export-split verify-split evaluate-split
+run-split:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" native-run python -m extraction_service.staged run $(ARGS)
+
+export-split:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission" offline python -m extraction_service.staged export $(ARGS)
+
+verify-split:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service.staged verify $(ARGS)
+
+evaluate-split:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service.staged evaluate $(ARGS)

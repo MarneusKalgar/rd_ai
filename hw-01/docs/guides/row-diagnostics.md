@@ -96,7 +96,7 @@ this candidate to reject output or trigger correction. Gold10 has already been
 used during development; diagnostic flags on the other20 inputs are not new
 human labels. Do not report precision/recall without reviewed check labels.
 Future behavioral validation belongs to the separate workflow experiment in
-[the semantic-validation sequence](../plans/matrix-experiment.md#semantic-validation-sequence-732).
+[source-evidence validation and bounded correction](../plans/matrix-experiment.md#source-evidence-validation-and-bounded-correction-732).
 
 ## Saved v1 observations — 24 October 2026
 

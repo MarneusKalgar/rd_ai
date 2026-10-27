@@ -1,10 +1,119 @@
-# Revised required provider/local matrix (7.2)
+# Extraction experiments and historical provider/local matrix
 
 **Evidence retrieval:** Bulk evidence is in the [submission-history archive](../../archive-index/31349837ab5acff7f512d02ef2ee56a93a7a2da63d01dd8a12ea85acd734288a.json). Follow the [restore instructions](../guides/archiving-results.md#historical-submission-evidence) before opening restored-file links. Original run IDs and export paths retain their historical meaning.
 
 **Evidence availability — 25 October 2026:** the compact review snapshot remains in Git. Raw runs, preparation and detailed evaluation bundles are preserved in verified archives; restore them before recomputing saved-run scores. See the [retrieval guide](../guides/archiving-results.md#historical-submission-evidence).
 
-## Current status — 26 October 2026
+## Current direction — 27 October 2026
+
+This is an ongoing extraction experiment. Choose work by the question it can
+answer and its quality, total cost and latency trade-offs. The completed
+240-observation matrix is a fixed historical comparison, not a finish line.
+Earlier "required" and "optional" labels describe that comparison's original
+scope; they do not determine the value or priority of future work. Sections
+8–9 organize analysis and reproducibility and may proceed alongside useful
+experiments. They are not a prerequisite for investigating a new hypothesis.
+
+**7.3 exploration wrapped up — 27 October 2026.** Close the current bounded
+local-improvement exploration with its measured findings. This does not mean
+every proposed extension was executed or that whole-PO reliability was achieved.
+Preserve the negative results and defer further general Gemma prompt tuning.
+
+| Section | Disposition | Finding / deferred scope |
+| --- | --- | --- |
+| 7.3.1 | Completed bounded example experiment | Loader works; the package scored 75.90% versus 80.60% scoped baseline. Further instruction/example variants, skill discovery and tool use are deferred |
+| 7.3.2 | Completed selected workflow experiments | Selection/raw fallback and scoped cues helped; guarded correction reached 84.43% but only two exact documents. Header/line splitting regressed to 75.96%. Broader checks/correction, cropping, chunking and further corpus runs are deferred |
+| 7.3.3 | Completed Qwen v1/v2 gold10 diagnostic | Fewer matched gold fields than Gemma, retained truncations and longer processing; no demonstrated replacement under the tested profile |
+| 7.3.4 | Completed sampling sweep and interaction follow-up | No robust resolution of row/field errors; no further sampling sweep scheduled |
+| 7.3.5 | Deferred, not implemented or run | JEV verification and routing remain a separate future cost/quality question; retain the phased proposal as reference |
+
+The evidence supports using this Gemma configuration as a draft or narrowly
+constrained component, not unattended complete PO extraction on this document
+mix. Native API charges are zero, but time, hardware and review are not free.
+Source-aware deterministic processing delivered the strongest measured gains;
+the best observed local pipeline still had only two exact documents out of ten.
+These results do not establish a universal limit for all small/local models.
+
+Consolidating the comparison and reproducibility evidence is useful next work.
+Independent reviewed evaluation is a separate way to assess generalization,
+including the provider's perfect development-gold result. Neither is a ceremony
+for completing an assignment. Reopen a deferred experiment only for a concrete
+new question and bounded scope; there is no automatic local or paid continuation.
+
+If reopened, 7.3.1 and offline source-check assessment may progress independently.
+JEV may consume existing deterministic verdicts without waiting for all other
+extensions. A live cascade still depends on verifier results and a measured
+cost/quality case. Choose a cohort that answers the question rather than an
+arbitrary all30 rerun. The unlabeled twenty support operational or qualitative
+analysis, not factual accuracy claims.
+
+Gold10 is development data used to choose these interventions. Separate
+development gains from independent evaluation. Before generalization or routing
+reliability claims, obtain additional independently reviewed documents/labels,
+preserve source/layout grouping, and freeze rules or thresholds before that
+evaluation. Keep the original approved inputs, gold and scorer unchanged;
+additional reviewed data needs its own versioned identity and approval record.
+
+The scope revision above changed the plan only; later execution authorizations
+are recorded in their experiment sections. Each future
+experiment needs an explicit execution scope; paid invocations retain the
+standing concrete-command and allowance approval requirement. Dated protocols
+below retain historical authorizations and outcomes, not pending instructions.
+
+## Latest measured checkpoints
+
+**Header/line split gold10 complete — 27 October 2026; split not adopted.**
+Two independent stages over identical scoped sources produced ten complete
+schema-valid POs with twenty calls and no retry/schema correction. Headers
+improved from **68/70 (97.14%) to 69/70 (98.57%)**, but line matches fell from
+**227/296 (76.69%) to 209/296 (70.61%)**. Overall matches fell from
+**295/366 (80.60%) to 278/366 (75.96%)**, with one exact document, three extra
+rows and one missing row. Processing increased from **116.67s to 148.01s**:
+55.18s headers, 92.62s lines, plus assembly/orchestration overhead.
+
+This output-scope split did not improve overall extraction on development
+gold10. Frozen v2 remained the full prefix for both stages, so the result does
+not establish that pruned stage-specific prompts, source cropping or row
+chunking would be ineffective; those remain different unexecuted hypotheses.
+Do not pool its better header fields with earlier line outputs and claim a
+measured pipeline. Preserve the actual disjoint assembly and negative result.
+
+The 927-test gate and lint/types/gold/preflight passed. All twenty full stage
+requests passed non-generating admission before execution. Original schema,
+inputs/gold/scorer, source bodies, baseline payloads and the provider ledger
+remain unchanged. Native residency is empty. Archive/Garage/restore verification
+reproduced seven prior standard evaluations, the correction reference and the
+new split evaluation; historical matrix membership remains 240/240. See the
+[split report](../reports/gemma-header-lines.md) and
+[operation guide](../guides/header-line-split.md). Stop for review; no new model
+run, prompt pruning, chunking, remaining20 or provider/JEV work follows automatically.
+
+**Examples-only gold10 complete — 27 October 2026; package not adopted.**
+The minimal application loader supplied three fictional examples after the exact
+v2 instruction prefix, with all ten source bodies unchanged from the scoped
+primary comparator. Ten native calls produced ten schema-valid outputs, no
+retry/schema correction and no behavioral semantic correction.
+
+Matched fields changed from **295/366 (80.60%) to 296/390 (75.90%)**. Exact
+documents increased from one to two, but extra rows rose from three to six:
+S012 returned four rows instead of one, while S003 retained three extras. There
+were no missing rows. Present matches fell from 188/197 to 186/197; null matches
+rose from 107/145 to 110/145. Processing increased from **116.67s to 129.89s**.
+This is not a useful overall improvement from the chosen package on this
+development observation. It does not establish that every example package or
+skill is ineffective; do not revise this package after seeing results or pool
+favorable fields from different runs.
+
+The selected fictional-value marker check found no example values in predictions;
+this does not establish absence of all possible example influence. Gold10 was
+used during development. No provider/JEV or remaining20 calls ran; the ledger
+and previous payloads stayed unchanged and native residency is empty. All 906
+tests, lint/types/gold/preflight passed. The full evidence was archived to Garage,
+restored and re-evaluated with all seven standard gold10 reports and the prior
+correction report reproduced. Historical matrix membership remains 240/240.
+See the [examples report](../reports/gemma-examples.md) and
+[resource-loading guide](../guides/prompt-resources.md). Stop for review before
+another variant or intervention; no new execution follows automatically.
 
 **Bounded identifier correction complete — 26 October 2026; review pending.**
 The saved scoped gold10 primaries were replayed without regeneration. Nine
@@ -567,161 +676,259 @@ The recorded native model maximum is 131,072, but this comparison selects
 comparison. Keep deterministic semantic diagnostics detection-only; they must
 not filter rows, reject output or trigger new correction calls in this matrix.
 
-## Optional extraction skill experiment (7.3.1)
+## Controlled instructions and examples (7.3.1)
 
-**Partial workflow experiment complete; skill packaging/example loading remain
-deferred.** After the Qwen review, the user authorized offline source-check
-assessment, one input-representation-only Gemma v2 gold10, review and a separate
-deterministic selection gold10 if needed. Those trials and the subsequently
-authorized raw-fallback gold10 are complete; see the
+**Disposition — 27 October 2026:** the authorized examples-only experiment is
+complete and this exploration is closed for now. Further rule supplements,
+example variants, discovery and tool execution below remain deferred proposals.
+The dated protocol records the completed phase, not another execution request.
+
+**Execution authorized — 27 October 2026:** after discussing application-loaded
+skill content, the user requested proceeding. Implement the minimal pinned
+resource loader, then run one native Gemma gold10 examples-only comparison after
+offline checks and full-request admission. Use `config/gemma-examples.yaml` and
+the `extraction-examples` package: three frozen fictional worked examples, the
+unchanged v2 prefix and scoped source view, no new business-rule supplement.
+Record the package contents, resource order/hashes and actual rendered requests.
+Reuse the saved scoped primary comparator; do not regenerate it. Keep the
+source, model/runtime and generation/failure controls below fixed. No behavioral
+semantic correction, provider/JEV calls, remaining20, second trial or example
+revision after observing results is included. Preserve raw outcomes and verified
+archive/restore/re-evaluation evidence, unload native residency and stop for review.
+
+**Question:** can additional instructions or synthetic worked examples improve
+extraction quality enough to justify their context and processing cost?
+The loader and one examples-only native comparison are complete; the full gate
+passed 906 tests. The package scored 296/390 (75.90%), two exact documents, six
+extra rows and 129.89s processing; it is not preferred over the saved scoped
+primary overall. Preserve the frozen result and see the
+[measured report](../reports/gemma-examples.md) before proposing another variant.
+Additional-rule experiments and independent evaluation remain unexecuted.
+The content is usable by either model backend. Start with
+Gemma because it has the demonstrated quality gap; a later Gemini comparison
+needs a distinct question and paid-run approval, not automatic symmetry.
+
+The earlier representation-only, ordered-row selection and raw-fallback trials
+are complete. Their results are retained in the
 [source-support report](../reports/gemma-source-support.md) and
-[hybrid results](../reports/gemma-raw-fallback.md). This implements a
-fixed source-processing workflow, not skill discovery or model-driven tool use.
-The skill-loading and example proposal below remains unimplemented. No further
-inference, remaining20, prompt changes, downloads or autonomous loop are
-authorized. Keep optional work separate from the completed required matrix.
+[hybrid report](../reports/gemma-raw-fallback.md). Scoped role cues and the bounded
+identifier correction are also complete. These are measured workflow variants;
+this section does not schedule them again. Source checks, selection changes and
+correction policies belong to the separately identified interventions in 7.3.2.
 
-The current Ollama adapter sends instructions, schema and source text through
-`request_messages`; it has no skill discovery, resource loader or tool loop.
-Placing a `SKILL.md` file in the repository alone would not affect inference.
-A skill packages instructions/resources; it does not train or enlarge the model.
+### Controlled comparison
 
-Reserve synthetic worked examples for this separate experiment and keep them
-out of the initial v2 run. An invented example is a prompting technique, not
-automatically answer leakage; disclose the design and any benchmark-informed
-assumptions. Gold10 remains development data. Once the application loads an
-example from the skill, it becomes model context and needs its own version/hash
-and measured comparison. A file on disk supplies no model capability by itself.
+Use the saved **scoped primary** gold10 as the starting comparator: frozen v2,
+`ordered-rows-scoped-roles-v1`, **295/366 (80.60%), one exact document**. Do not
+use the corrected 84.43% result as the primary comparator for an instruction-only
+trial, because it includes additional model calls and source-guided selection of
+whole candidates. Reuse exact compatible records rather than rerunning a baseline
+merely to package its unchanged content.
 
-### First approach: application-controlled loading
+| Variant | Instructions | Examples | Purpose |
+| --- | --- | --- | --- |
+| Saved scoped primary | Frozen v2 prefix | None | Existing comparator |
+| Additional instructions, if proposed | Same v2 prefix plus a frozen rule supplement | None | Isolate the effect of added rules |
+| Examples | Exactly the chosen comparator's instruction body | Frozen synthetic examples | Isolate the incremental effect of examples |
 
-- Package concise extraction instructions in `SKILL.md`, with references to
-  the authoritative contract, small worked examples and optional validation
-  scripts. Focus on ordered versus catalog rows, explicit order evidence,
-  quantities versus package sizes, buyer versus supplier identifiers, line-date
-  linkage, null semantics and unit normalization. Derive rules from source
-  evidence; do not impose a universal non-null-quantity filter that could remove
-  legitimate order lines.
-- Have the application explicitly load the selected instructions and relevant
-  examples into the request. Gemma need not discover a skill or read files.
-  Include the fully rendered request in context admission; preserve complete
-  approved source/schema and retain the existing failure policy when it does
-  not fit. Record package/resource hashes and loaded content in run evidence.
-- First measure instruction/example loading alone as a separate prompt variant.
-  With the same rendered instructions, skill packaging itself offers no new
-  model capability; it provides reusable organization and versioning.
-- If instruction-only results remain insufficient, separately test a fixed
-  application workflow: **select ordered rows with source references → extract
-  fields from selected rows → validate source support**. The application owns
-  transitions and executes any scripts. Keep intermediate selections, references,
-  raw replies and validation failures outside the authoritative PO object;
-  version the intermediate contract. Do not silently delete unsupported rows
-  or repair the final extraction to improve its score.
+Choose the smallest comparison that answers the proposed question. Adding only
+examples needs no additional-rules arm. If both rules and examples change,
+measure a rules-only arm before attributing an incremental effect to examples.
+Give each rendered variant a distinct identity; do not overwrite v1/v2.
 
-### Comparison and acceptance
+Keep the same cohort, source representation/selection, schema, scorer, model
+digest/runtime/tokenizer, thinking=false, temperature 0/top_p 1, 49,152 context
+and 16,384 output allowance. Disable behavioral semantic correction in every
+arm and preserve the common JSON/schema validation and bounded failure policy.
+Do not add layout support, translation, new deterministic field repair or a
+second extraction stage in this comparison. A changed installed runtime/profile
+requires review of comparability rather than silently pooling results.
 
-Keep the same model digest, runtime, thinking, sampling and context/output
-controls where feasible, and the frozen inputs, schema and evaluator. Identify
-all changed controls. Assign distinct prompt/package/workflow identities rather
-than overwriting v1 or silently treating a multi-call workflow as prompt-only v2.
-Record any input transformation explicitly and report it as a separate variant.
+Synthetic examples may illustrate ordered versus catalog rows, quantity versus
+package size, buyer versus generic codes, line-date linkage and legitimate nulls.
+Use invented values and disclose all development assumptions, including those
+informed by benchmark errors. Never include benchmark answers or case-specific
+substitutes. Gold10 remains development evidence even when examples are synthetic.
 
-Evaluate gold10 field accuracy, extra/missing rows, null/present correctness and
-exact documents; report validity and total latency over all30 when running a
-complete comparison. Count every selection/extraction/validation/correction
-call, generated tokens and failure. Local API charges remain zero, but additional
-passes consume machine time; do not claim zero total operating cost. Disclose
-all examples used for development; gold10 is not held out, and examples must not
-contain case-specific benchmark answers. Improvement requires measured quality
-gains with an explicit latency/call-count trade-off, not just valid JSON or the
-presence of a skill file.
+### Minimal loading and evidence
 
-When implementation is separately requested, verify actual loaded instructions,
-resource hashes/context admission and controlled multi-step behavior with
-offline fixtures before model calls. Reuse the existing parsing/scoring and
-evidence infrastructure. Do not run inference merely to add this plan item.
+Package the reviewed instructions/resources in `SKILL.md` and referenced files;
+the application explicitly loads and renders selected content. A file reference
+on disk does not make content visible to Gemma or Gemini. Keep the loader small
+and model-neutral; adapters continue to receive complete rendered requests.
+Identical rendered content provides no new capability merely because it came
+from a skill package. Packaging is organization and reproducibility, not a
+separate inference hypothesis.
 
-Model-selected skill discovery, dynamic resource loading and tool calling remain
-deferred. They require explicit application integration, verified model support
-and separate evaluation of tool selection. Consider them only if the fixed
-workflow demonstrates a concrete need for autonomy. See the
-[Agent Skills integration guide](https://github.com/agentskills/agentskills/blob/main/docs/client-implementation/adding-skills-support.mdx).
+Record package/resource hashes, exact loaded content and order, rendered request
+identity and complete-request admission. Keep the complete selected source body
+and authoritative schema. If the request does not fit, retain the admission
+failure; do not silently truncate inputs or enlarge context. Before model calls,
+verify loading, missing/altered resources, deterministic rendering, backend
+serialization and admission using offline fixtures. Do not add a new handwritten
+PO model or require a generic agent framework.
 
-## Semantic validation sequence (7.3.2)
+Report matched fields and denominators, exact documents, extra/missing rows,
+present/null accuracy, validity, all calls/tokens and processing time over the same
+cohort. Report local API charges separately from hardware/electricity/review costs.
+Keep rejected/failed observations in the population. Additional unlabeled inputs
+can answer an operational question; they do not supply new accuracy labels.
+Restore and reproduce saved evidence before interpreting a gain. A development
+gain supports review of an independent evaluation, not a reliability claim.
 
-**Latest 26 October checkpoint:** the separately authorized native-only bounded
-identifier correction replay is complete as described in Current status and the
-[measured report](../reports/identifier-correction.md). It is the only executed
-behavioral semantic correction policy. It does not certify full POs or authorize
-another replay, other-field correction or provider/JEV routing.
+Model-selected skill discovery, dynamic tool use, autonomous orchestration and
+another staged workflow remain outside this experiment. Consider them only for a
+demonstrated need that the fixed application workflow cannot address. The dated
+authorization above is limited to one examples-only native comparison. Provider
+inference requires separate approval of its concrete invocation and allowance.
 
-**Earlier 26 October detection/context checkpoint:** offline identifier/date checks and one
-source-role context gold10 trial are complete as described in Current status.
-The context trial regressed and is not preferred over the raw-fallback hybrid. Automatic
-semantic rejection/correction was deferred at that checkpoint; those checks were detection
-only and their source facts are exposed as separately versioned advisory context.
+## Source-evidence validation and bounded correction (7.3.2)
 
-**Original ordering (before the bounded replay authorization):** retain the implemented detection-only diagnostics for
-offline analysis of saved outputs, including Qwen's later results. New behavioral
-rejection/correction follows the Qwen gold10 review in 7.3.3 if the observed
-failure modes justify it. Do not make a new harness a prerequisite for that
-model-only comparison. The dated v1/v2 staging below records the original
-sequence; the required prompt-only matrix is now complete.
+**Disposition — 27 October 2026:** the selected diagnostic, source-processing,
+cue, identifier-correction and header/line experiments are complete. Close this
+bounded exploration. Residual-error assessment and broader workflow proposals
+below are deferred; they are not unfinished conditions for this closure.
 
-**Detection-only implementation authorized on 24 October 2026.** The first
-catalog-row candidate and saved-run CLI are implemented; see
-[deterministic row diagnostics](../guides/row-diagnostics.md) for supported structures,
-unknown outcomes and evidence. Implementation and regression hardening passed
-the 732-test offline gate; 60 saved v1
-observations were inspected without inference, retaining source/output hashes
-and historical scores. Keep the compact diagnostic summary and reproduction
-command versioned; the verbose regenerable report belongs under ignored
-`results/diagnostics/`, with its hash retained as generated-artifact metadata.
-At that checkpoint, other proposed deterministic candidates remained future
-work. The 26 October extension above adds identifier/date detection and one
-advisory-context trial. Behavioral rejection/correction was still unexecuted at
-that point; the separately authorized bounded replay is recorded above. This does not lift the v2 review
-gate or authorize the optional extraction skill implementation.
-Semantic validation checks whether source evidence supports the extracted facts,
-including whether an output row represents an order. It supplements JSON/schema
-validation; schema descriptions alone do not perform these source comparisons.
+**Question:** which remaining extraction errors can trustworthy source evidence
+detect, and when does a bounded intervention improve the retained whole output
+without damaging correct fields? This section owns source-check coverage and
+behavioral correction. Instruction/example effects are measured in 7.3.1;
+probabilistic verification and routing are evaluated in 7.3.5.
 
-1. **Before v2: review and assess candidate checks offline.** Use saved v1
-   responses, approved source texts and the contract to identify evidence rules
-   and counterexamples. A detection-only diagnostic needs no model calls or full
-   v1 rerun. Store flags separately with check/version identity, source/output
-   hashes and supporting evidence; preserve original statuses, extractions and
-   scores. Assess both false positives and missed errors on reviewed cases.
-   Gold10 remains development evidence; do not claim the other20 are labeled.
-   Treat blank quantity as case-dependent evidence, not a universal instruction
-   to reject every row with a null quantity. Do not feed new diagnostic flags
-   into the required matrix's requests or correction policy.
-2. **Initial v1/v2 comparison: change the prompt only.** After user review and
-   further direction, freeze v2 and run the required matched variants using the
-   current pipeline and the gold10-first staging in 7.2.5. Native remaining20
-   require user review and approval. Load no skill or worked examples into this
-   initial v2. Preserve the completed v1 baselines. Keep row selection,
-   source preprocessing, runtime validation and correction behavior unchanged
-   across prompts so the prompt effect can be interpreted.
-3. **After that comparison: test behavioral semantic validation separately.**
-   When explicitly requested, give semantic rejection, evidence-based correction
-   or the skill's multi-step workflow its own versioned experiment identity,
-   outside the 240-observation prompt-only matrix. Compare the same frozen prompt
-   with and without that behavior, preserving other controls. Reuse compatible
-   saved no-check baseline observations with explicit membership rather than
-   automatically rerunning all v1. New corrected outputs require actual measured
-   calls; they cannot be inferred from detection flags. Bound all additional
-   attempts, retain raw failures/intermediate evidence, and report total calls,
-   tokens, latency and known/unknown costs alongside gold quality and check
-   precision/recall on cases with reviewed check labels. No silent row deletion,
-   output repair or rescoring of historical results. Each paid invocation still
-   requires concrete approval and budget admission.
+### Header/line task decomposition — complete 27 October 2026
 
-This sequence adds semantic-check design to the baseline review without making
-new runtime validation a prerequisite for the prompt experiment. The extraction
-skill proposal in 7.3.1 can reuse the assessed checks later; packaging them as a
-skill does not change their experimental identity or prove their reliability.
+The authorized phase below is complete. It reached 278/366 (75.96%) overall,
+69/70 header and 209/296 line matches, one exact document, three extra rows and
+one missing row in 148.01s over twenty physical calls. This is worse overall
+than the scoped whole-PO comparator. Preserve the policy as a measured variant,
+not a new default; see the [split report](../reports/gemma-header-lines.md).
+The following protocol records that phase's authorization rather than another
+pending execution.
 
+After reviewing the header/line error distribution, the user requested one
+matched native Gemma gold10 split experiment. This is a separately identified
+workflow intervention under 7.3.2, not another example package, new source check
+or change to the historical matrix. It can be evaluated independently of the
+remaining offline check catalogue.
+
+Run one header stage and one line-item stage sequentially over each input's
+exact saved scoped source body. Both keep frozen v2 as the instruction prefix
+and add only an output-scope directive. Derive the disjoint stage schemas from
+the authoritative schema, retaining existing property definitions/constraints;
+do not introduce a second handwritten PO model. The final object contains the
+actual header stage's seven fields and the actual line stage's `lineItems`,
+followed by full authoritative-schema validation. Neither stage receives the
+other's output. Failed stages retain raw partial evidence but produce no final
+PO, with no baseline fallback, best-field selection or silent repair.
+
+Reuse `gemma-scoped-roles-v2-gold-20261026-732` as the comparator; generate no new
+baseline observations. Keep source selection/fallback, native model/digest/runtime,
+tokenizer, 49,152 context, thinking=false, temperature 0/top_p 1 and 16,384 output
+tokens per call. Do not load examples, crop headers, chunk rows, change layout
+rules or enable semantic correction. Preserve the existing transport retry,
+schema-correction and per-stage deadline policy, with shared dependency stops.
+
+Twenty primary stage jobs replace ten whole-PO jobs in this trial. The combined
+primary output allowance is 32,768 per document; with the current bounded policy
+at most eighty physical calls are possible. Stage input deadlines remain 7,205s
+each, whose sum is 14,410s plus orchestration overhead; there is no shared aggregate
+timer. These larger aggregate ceilings are an explicit difference from the
+one-call baseline, not proof of equal compute budgets. Count actual tokens,
+calls, retries/corrections, header time, line time and complete-input time.
+
+After focused/full offline checks, verify all twenty exact rendered stage
+requests without generation, then run this one gold10 phase. Compare assembled
+header/line and overall accuracy, matched-field denominators, exact documents,
+extra/missing rows and validity. Stage-level operations remain visible even if
+assembly fails; do not score successful partial fields as a successful whole PO.
+Archive/upload/restore/re-evaluate evidence, preserve previous payloads and the
+provider ledger, and unload native residency. No provider/JEV, remaining20,
+example revision, prompt trimming or second trial is included. Stop for review.
+
+### Completed evidence
+
+| Exercise | Result and limit |
+| --- | --- |
+| Saved-output row, quantity and conservative completeness diagnostics | Implemented with supported/contradicted/unknown outcomes; unfamiliar layouts or ambiguous matching abstain |
+| Deterministic ordered-row selection and raw fallback | Three declared layouts supported; separately measured representation/selection trials, not universal row filtering |
+| Buyer-code ownership and line-date linkage checks | Implemented over declared cell roles; development controls include legitimate values and abstention cases |
+| Unscoped source-role context | Regressed to 23.98% with 111 extra rows; retain as negative evidence |
+| Role cues restricted to confirmed ordered rows | 80.60%, one exact document, three extra rows in 116.67s |
+| One guarded identifier correction per flagged input | Nine new calls, two whole candidates accepted; retained quality 84.43%, two exact documents; 152.71s additional processing |
+
+See the [diagnostic guide](../guides/row-diagnostics.md),
+[source-support guide](../guides/source-support.md),
+[role-context report](../reports/source-field-roles.md),
+[scoped-cue report](../reports/scoped-role-cues.md) and
+[identifier correction report](../reports/identifier-correction.md).
+The correction used saved primaries; its 269.38s combined processing time is
+reconstructed, not a live end-to-end benchmark. Its field improvement does not
+certify whole POs. Original run statuses, raw replies, scores and historical
+240-observation membership remain unchanged.
+
+### Deferred: offline residual-error and check assessment
+
+Use the saved scoped, corrected and examples-only outputs, source texts and approved gold to
+catalogue residual errors. Keep evidence from other saved variants as controls,
+not a pool from which to select favorable fields. Identify which errors are
+detectable under a declared source convention and which require abstention.
+Candidate areas include remaining order membership errors (including S003),
+quantity versus package-size interpretation, quantity/product units and explicit
+line-date linkage. These are candidates for assessment, not promised new rules
+or authorization to extend every layout.
+
+For each proposed check, specify:
+
+- Target field or row/completeness property, supported source structures,
+  matching rules and exact source references. A supported field does not certify
+  its row's order membership, other fields or the whole PO.
+- `supported`, `contradicted` and `unknown` outcomes with reasons. Unsupported,
+  missing or ambiguous evidence stays unknown. Legitimate null quantities,
+  repeated ordered products and explicit buyer codes need counterexamples;
+  never impose universal non-null filtering or blanket identifier/date nulling.
+- Reviewed check labels and positive/negative controls, with false flags, missed
+  errors, abstentions and coverage reported by error class. Gold field equality
+  alone is not a reviewed label for the check's source reasoning. Agent-written
+  annotations do not become human approval by being cited in a report.
+- Check/version identity, source/output hashes and diagnostic artifacts outside
+  the PO object. A candidate field check must not silently alter historical
+  statuses, predictions, row counts or evaluator results.
+
+Initial assessment needs no new model requests. Keep verbose regenerable
+diagnostics ignored with hashes and compact summaries retained. Group evaluation
+by source/layout and preserve an independent reviewed population before making
+check-reliability claims. Many correlated rows from one form are not many
+independent documents.
+
+### Deferred: select a behavioral intervention after assessment
+
+If an assessed failure mode justifies another experiment, define its exact
+baseline, target population, allowed changes, protected fields, abstention policy,
+maximum physical calls/retries, deadline and stop conditions before execution.
+Extend layout support, change selection or broaden correction as separately
+identified interventions; do not change all of them alongside a prompt experiment.
+Compare compatible saved no-intervention records and newly measured outcomes
+over the same cohort. No automatic all30 rerun is required.
+
+The completed identifier-only policy remains frozen. Broader correction must
+explicitly define whether and why another field may change. Keep actual complete
+candidates and apply the declared guard to whole objects; do not construct an
+unmeasured output by mixing the best fields from several replies. Preserve the
+prior output for review when an attempt fails or cannot be accepted. "Retained
+for review" and "no contradiction found" are not whole-document acceptance.
+New source evidence must not silently coerce, repair or delete legitimate data.
+
+Report all cohort outcomes, matched/present/null fields, exact documents,
+extra/missing rows, check errors/coverage, every call/token, failures, latency
+and known/unknown cost. Separate actually measured phase time from reconstructed
+saved-primary-plus-correction totals. A simulated repair or fallback is an
+explicit counterfactual, not an executed pipeline.
+
+Assess offline guards and counterexamples before any new bounded native phase.
+Paid work retains the concrete-invocation approval and cumulative-ledger guards.
+This plan update authorizes no replay, broader correction, new model run or JEV
+judgment. Existing checks can be consumed by 7.3.5 without completing every
+candidate above; an unknown check must not become a pass in downstream policy.
 
 ## Optional Qwen3.5 9B comparison (7.3.3)
 
@@ -846,79 +1053,136 @@ the user requested one further gold10 pass at temperature 0.5/top_p 0.90.
 the existing 0.2/1, 0.5/1 and 0.2/0.9 runs are reused for the 2×2 comparison.
 Keep the original sweep and archive unchanged. The follow-up is complete: 132/2366 (5.58%) on development gold10, with 253 extra rows. It adds no required matrix membership or provider spending; see the checked report.
 
-## Optional JEV verification and routing experiment (7.3.5)
+## JEV verifier diagnostic and conditional routing study (7.3.5)
 
-**Proposed after the Qwen gold10 review; documentation only.** Evaluate whether
-JEV can reduce provider escalation while keeping incorrect local outputs out
-of the accepted path. It is a separate pipeline experiment outside the completed
-240-observation matrix. Do not start JEV calls, Gemini fallbacks, new local runs
-or integration work from this plan edit.
+**Disposition — 27 October 2026:** deferred, unimplemented and unexecuted.
+Closing the current 7.3 exploration does not mark JEV complete. Preserve the
+phased scope below for a separately requested verification/routing experiment;
+no integration, judgments, fallbacks or spending are scheduled.
 
-JEV returns typed decisions and probabilities. Its use for routing and
-verification is documented by [OpenRouter](https://openrouter.ai/docs/guides/community/jev).
-For this experiment, use focused source-support judgments rather than assuming
-that a generic document-difficulty label predicts local-model correctness.
-TypeSafe documents limitations in numeric precision/counting, indirection,
-irrelevant context and option order; keep arithmetic, exact comparisons and
-workflow policy in code. See the [JEV 1.13 limitations](https://docs.typesafe.ai/model-jaggedness/jev-1.13).
-Verify the chosen version's current capabilities and prices at preparation;
-pin that version rather than following a moving alias.
+**Questions:** can JEV detect our observed extraction errors without rejecting
+too many correct candidates, and, only if it can, does its use reduce total cost
+at an acceptable quality and latency? Neither JEV integration nor inference has
+run. Separate verifier feasibility from routing economics and live execution.
+This scope needs neither another local-model comparison nor completion of all
+7.3.1/7.3.2 candidates before it can be assessed.
 
-### Inputs, decisions and boundaries
+The latest source-guided Gemma pipeline matches 309/366 fields (84.43%) but
+contains only **two exact documents out of ten**. Field accuracy is not the
+fraction of documents safe to accept. On that saved cohort, an error-free
+whole-document acceptor could retain at most those two local documents as
+entirely correct; that is an observed cohort constraint, not a forecast for new
+documents. A verifier may be informative even when the available provider-call
+savings do not justify a cascade.
 
-- Start with saved local outputs and approved neutral source text. Reuse the
-  completed deterministic diagnostics; a known schema or source-evidence failure
-  must not be overridden by a favorable model judgment. Preserve original
-  outputs, statuses and scores. No automatic Gemma/Qwen/Gemini reruns.
-- Give JEV narrow questions with relevant headers, source-row context and
-  candidate values: for example, whether a returned row has explicit order
-  evidence and whether the proposed quantity is supported. Candidate/context
-  selection is part of the experiment and must be versioned and checked for
-  omitted evidence; do not discard contradictory source text.
-- Assess completeness separately. Verifying returned rows cannot reveal all
-  omitted ordered rows. Where completeness cannot be established, keep the
-  outcome uncertain rather than accepting the document as correct.
-- Use explicit accept/escalate/uncertain outcomes. Invalid responses, timeouts
-  or insufficient evidence must not become automatic acceptance. The
-  application owns the policy; JEV confidence alone is not an acceptance rule.
-  Define and assess thresholds on reviewed development evidence, then freeze
-  them before evaluating separate documents.
-- Keep gold labels, expected answers and evaluator judgments local; they must
-  not enter JEV or downstream extraction requests. Gold10 can support an initial
-  diagnostic, but thresholds tuned on it need additional independently reviewed
-  evaluation documents, grouped by source/layout, before reliability claims.
+### Phase A: freeze an offline verifier assessment
 
-### Evaluation, spending and review gate
+Use saved scoped/corrected local candidates and approved neutral source text.
+Include saved gold-correct provider outputs as positive controls and observed
+local errors as negative controls. Keep each population and pipeline identity
+explicit. Synthetic sensitivity cases, if needed, are separate from actual
+model-output quality measurements. No new Gemma, Qwen or Gemini calls are needed
+to construct or assess the cohort.
 
-First define the checks and review evidence offline using saved outputs and
-local labels. After separately approved JEV calls, assess routing decisions
-against saved gold outcomes and reviewed check labels. A simulated Gemini fallback may reuse a compatible saved output
-as a counterfactual only, with its source identity disclosed; it is not a new
-executed hybrid pipeline or measured end-to-end latency. If required evidence
-is unavailable, mark the result unknown. Actual JEV judgments are measured API
-calls, and a later live cascade needs its own execution identity and approval.
+Define a small set of literal source-support questions, such as whether a
+particular row has explicit order evidence, a quantity belongs to that row or
+a code is buyer-owned. Each judgment needs relevant headers, candidate values
+and source-row/context references. Freeze candidate and context selection rules
+and retain their hashes/maps; cropping must not hide contradictory evidence.
+Gold answers, expected decisions, model-origin hints and evaluator judgments
+stay out of requests. Provenance and local scoring remain separate.
 
-Report accepted coverage together with the count/rate of incorrect documents
-accepted, missed unsupported rows or fields, missed ordered rows, correct
-documents unnecessarily escalated, uncertain outcomes and error classes. Keep
-gold-scored quality distinct from unlabeled corpus operations. Compare against
-the same local-only and provider-only populations; do not infer factual routing
-accuracy from schema validity or an apparently calibrated confidence value.
+Have the target check labels and counterexamples reviewed before interpreting
+verifier errors. Exact gold PO labels establish overall output correctness,
+but do not automatically annotate every source-support question. Freeze
+questions/criteria, cohort membership, label provenance, error classes, threshold
+selection procedure, maximum request/retry count and timeout/budget stop policy
+before a paid diagnostic. Do not invent a universal probability threshold or
+tune questions on evaluation answers after inspecting them.
 
-Count every judgment, retry, fallback and review step. Report known/unknown API
-cost, latency and native processing separately, plus cost per correct accepted
-document. Hardware amortization, electricity and human review remain explicit
-unknowns unless measured. Savings require fewer provider calls at an acceptable
-measured error rate; replacing provider work with local/JEV errors is not a
-cost reduction at equal quality.
+Reuse 7.3.2's supported/contradicted/unknown verdicts. Known schema or trustworthy
+source contradictions cannot be overridden by a favorable JEV answer. Failed
+candidates may still be submitted as negative diagnostic controls; the live
+acceptance policy must honor the deterministic failure. Unknown evidence is
+not a pass. Assess completeness separately: checking returned rows cannot
+establish that all ordered rows were returned. Unresolved completeness or an
+unchecked critical property prevents a whole-PO acceptance claim.
 
-Before any paid phase, refresh exact model/route pricing and context evidence,
-verify budget reservation/settlement support, and present the concrete invocation
-and allowance for approval under the existing cumulative ledger. No approval
-for the completed matrix carries forward. Stop after the initial diagnostic
-for user review; do not automatically enable routing, tune thresholds, run
-fallbacks or extend the corpus. If executed, summarize the cost–quality findings
-in section 8 alongside, but separate from, the required matrix results.
+### Phase B: dedicated decision integration and bounded diagnostic
+
+JEV returns typed decisions/probabilities rather than PO generation. Verify and
+choose the actual Decisions API or compatible System One endpoint described in
+the [OpenRouter documentation](https://openrouter.ai/docs/guides/community/jev)
+before implementation. It is not another model name to pass through the existing
+`chat/completions` PO adapter. Define a dedicated decision-client contract,
+validated question/response types and operational evidence outside the PO object;
+do not introduce a second PO schema/model or silently expand the extraction
+adapter interface to cover unrelated responses.
+
+Pin an explicit model version, verified route and capabilities. The original
+proposal concerned JEV 1.13; current documentation also lists 1.14. A version
+choice must be deliberate, not an automatic upgrade or a moving alias. Check
+that the version-specific limits and pricing used for admission/accounting
+actually apply to the chosen request shape. TypeSafe documents limitations in
+numeric precision/counting, date comparison, indirection, irrelevant context,
+adversarial content and choice-option order for
+[JEV 1.13](https://docs.typesafe.ai/model-jaggedness/jev-1.13). Keep arithmetic,
+exact comparisons and workflow policy in code; test question clarity, context
+preservation and option-order sensitivity where applicable.
+
+Reuse application-owned HTTP clients and the cumulative experiment ledger.
+Implement explicit context/request admission, conservative cost reservation,
+reported-cost settlement, unknown-charge holds and bounded physical retries
+for this decision endpoint. Record every actual request/response, question,
+probability, identity, usage/cost, timeout and failure. Do not assume the existing
+chat-token or response-cost parser is correct for JEV. No SDK/dependency addition
+is implied when the existing HTTP boundary is sufficient.
+
+Test serialization, response validation, omitted evidence, hard-failure precedence,
+unknown outcomes, retry/deadline limits and reservation/settlement using offline
+fixtures before paid inference. Refresh live metadata/pricing and obtain approval
+of the concrete diagnostic invocation and allowance under the existing ledger.
+One diagnostic does not authorize a replacement invocation, extraction fallback
+or new local generation. Unavailable context bounds, pricing or safe accounting
+stop preparation rather than bypassing guards.
+
+Report false acceptance of incorrect facts/candidates, false rejection of correct
+ones, abstentions, missed unsupported or omitted rows and coverage by error class.
+Keep field, row, question and document denominators separate. Several judgments
+about one form do not establish an equivalent number of independent documents.
+Persist probabilities so disclosed development threshold analysis can reuse
+the same calls; freeze any selected policy before independently reviewed
+evaluation grouped by source/layout. Gold10 alone supports a development
+diagnostic, not a reliable document-acceptance rate.
+
+### Phase C: routing economics, then a possible live cascade
+
+Proceed only after reviewing the verifier's measured errors, coverage and cost.
+Define the permissible false-accept risk and comparison population before
+evaluating savings. Compare the same local-only, provider-only and proposed
+cascade populations. Use explicit accept/escalate/uncertain decisions owned by
+application policy. Invalid responses, insufficient evidence and timeouts cannot
+become acceptance. JEV confidence alone does not certify a PO.
+
+An initial routing simulation may reuse compatible saved provider outputs as
+counterfactual fallbacks, with their identities disclosed. It is not a new
+executed cascade or measured live end-to-end latency. Report unavailable
+measurements as unknown. A later live cascade needs its own identity, fixed
+policy, bounded membership and separate approval of paid invocations.
+
+Count all local extraction/correction work, every verifier judgment and retry,
+fallback, failure and human-review step. Compare known/unknown API cost and
+measured latency, accepted coverage, incorrect documents accepted, correct
+documents unnecessarily escalated, and cost per correct accepted document.
+Include verifier overhead even when every document escalates. Keep hardware,
+electricity and human-time costs explicit unknowns unless measured. Fewer
+provider calls at worse quality do not establish savings at equal quality.
+
+If verifier errors, limited eligible coverage or overhead erase the benefit,
+record that negative result and do not build the live cascade merely to finish
+a plan item. This update authorizes no JEV calls, fallback calls, new native
+runs or integration work. Retain verified archives and summarize findings in
+the consolidated evidence report alongside the historical model comparisons.
 
 ## Historical original 4,096-token phase
 

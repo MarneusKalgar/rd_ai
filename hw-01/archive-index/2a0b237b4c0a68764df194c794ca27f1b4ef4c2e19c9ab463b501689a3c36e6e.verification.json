@@ -1,0 +1,14 @@
+{
+  "version": "gemma-examples-archive-verification-v1",
+  "archive_sha256": "2a0b237b4c0a68764df194c794ca27f1b4ef4c2e19c9ab463b501689a3c36e6e",
+  "historical_matrix_observations": 240,
+  "new_native_observations": 10,
+  "bundles": 32,
+  "payload_files": 849,
+  "source_and_restored_payloads_equal": true,
+  "restored_standard_evaluations_equal": 7,
+  "restored_correction_evaluation_equal": true,
+  "garage_full_get_verified": true,
+  "provider_ledger_unchanged": true,
+  "native_unloaded": true
+}

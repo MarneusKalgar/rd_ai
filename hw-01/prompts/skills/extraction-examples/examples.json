@@ -1,0 +1,87 @@
+[
+  {
+    "source": "PO FIC-9301. Buyer: Fictional Cedar Workshop. Currency choices: EUR / GBP; none selected. Requested delivery for this order: 2028-06-12. Order-entry table columns: generic article code | description | package information | ordered quantity | ordered unit. Row: ART-A7 | Violet clips | 60 clips per carton | [blank] | cartons. Row: ART-B9 | Amber washers | 18 washers per carton | 2 | cartons. Row: ART-C4 | Silver hooks | 25 hooks per carton | 0 | cartons. No printed business line numbers, buyer-owned product codes, prices, issue date or line-specific dates are stated.",
+    "expected": {
+      "purchaseOrderNumber": "FIC-9301",
+      "purchaseOrderDateTime": null,
+      "buyerName": "Fictional Cedar Workshop",
+      "shipToInfo": null,
+      "paymentTerms": null,
+      "buyerCurrency": null,
+      "totalValue": null,
+      "lineItems": [
+        {
+          "purchaseOrderLineNumber": null,
+          "buyerProductIdentifier": null,
+          "buyerProductName": "Amber washers",
+          "buyerProductQuantity": "2",
+          "buyerProductUOM": "cartons",
+          "quantityUnit": "CASE",
+          "buyerUnitPrice": null,
+          "buyerDeliveryDate": null
+        }
+      ]
+    },
+    "explanation": "Only the positive ordered-quantity row is ordered here. Package count 18 is not ordered quantity. The generic article code is not buyer-owned. An order delivery date is not a line date. Unselected currency choices establish no currency. Table position establishes no printed line number."
+  },
+  {
+    "source": "PO FIC-5082 issued 2028-02-19. Buyer: Fictional Meadow Lab. Currency: EUR. Order-level service date: 2028-03-25. First ordered line, printed line 007: product Copper spacer; buyer-owned product code 00073-Z; seller code SELL-Q8; ordered quantity 3; unit pieces; requested delivery for this line 2028-03-21. Second ordered line, printed line 009: product Copper spacer; buyer-owned product code 00073-Z; seller code SELL-Q8; ordered quantity 5; unit pieces; no line-specific delivery date. No price or PO total is stated.",
+    "expected": {
+      "purchaseOrderNumber": "FIC-5082",
+      "purchaseOrderDateTime": "2028-02-19",
+      "buyerName": "Fictional Meadow Lab",
+      "shipToInfo": null,
+      "paymentTerms": null,
+      "buyerCurrency": "EUR",
+      "totalValue": null,
+      "lineItems": [
+        {
+          "purchaseOrderLineNumber": "007",
+          "buyerProductIdentifier": "00073-Z",
+          "buyerProductName": "Copper spacer",
+          "buyerProductQuantity": "3",
+          "buyerProductUOM": "pieces",
+          "quantityUnit": "EACH",
+          "buyerUnitPrice": null,
+          "buyerDeliveryDate": "2028-03-21"
+        },
+        {
+          "purchaseOrderLineNumber": "009",
+          "buyerProductIdentifier": "00073-Z",
+          "buyerProductName": "Copper spacer",
+          "buyerProductQuantity": "5",
+          "buyerProductUOM": "pieces",
+          "quantityUnit": "EACH",
+          "buyerUnitPrice": null,
+          "buyerDeliveryDate": null
+        }
+      ]
+    },
+    "explanation": "Repeated products remain two separate ordered lines. Explicit buyer-owned codes and printed line numbers retain leading zeros. The seller code has a different role. Only the first line has its own delivery date; the order-level service date is not copied to the second."
+  },
+  {
+    "source": "PO FIC-7420. Explicit buyer: Fictional Maple Studio. In the catalog, Cobalt rinse, package 0.75 litre per bottle, generic code MIX-W6, is marked SELECTED: ORDER THIS PRODUCT. Its ordered quantity box is unreadable. The ordered unit is bottles. Another catalog entry, Quartz polish, has no order mark and a blank ordered quantity. No buyer product code, printed line number, date, price, currency or total is available.",
+    "expected": {
+      "purchaseOrderNumber": "FIC-7420",
+      "purchaseOrderDateTime": null,
+      "buyerName": "Fictional Maple Studio",
+      "shipToInfo": null,
+      "paymentTerms": null,
+      "buyerCurrency": null,
+      "totalValue": null,
+      "lineItems": [
+        {
+          "purchaseOrderLineNumber": null,
+          "buyerProductIdentifier": null,
+          "buyerProductName": "Cobalt rinse",
+          "buyerProductQuantity": null,
+          "buyerProductUOM": "bottles",
+          "quantityUnit": "BOTTLE",
+          "buyerUnitPrice": null,
+          "buyerDeliveryDate": null
+        }
+      ]
+    },
+    "explanation": "Explicit item selection establishes order membership even though quantity is unavailable. Retain the ordered line with null quantity; do not substitute package size 0.75. The other unselected catalog entry is excluded. A generic code still does not establish a buyer identifier."
+  }
+]

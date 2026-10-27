@@ -17,6 +17,7 @@ from extraction_service.execution.results import BatchSummary
 from extraction_service.execution.types import InputExecution, ScheduledExtraction
 from extraction_service.extraction import ExtractionContract
 from extraction_service.extraction.constants import SCHEMA_FILENAME
+from extraction_service.prompting.resources import validate_prompt_evidence
 from extraction_service.records import AttemptResult, RunRecord
 from extraction_service.runtime.storage import write_report
 from extraction_service.runtime_types import Sha256, StrictModel
@@ -193,6 +194,25 @@ def reload_records(directory: Path) -> tuple[RunManifest, list[RunRecord]]:
     )
     records = []
     jobs = {job["key"]: job for job in manifest.jobs}
+
+    skill_prompts = {
+        prompt.id: prompt
+        for prompt in manifest.experiment.prompts
+        if prompt.skill is not None and any(job["prompt_id"] == prompt.id for job in manifest.jobs)
+    }
+    if skill_prompts:
+        resources = manifest.setup.get("prompt_resources")
+        if not isinstance(resources, dict) or set(resources) != set(skill_prompts):
+            raise ValueError("Saved skill prompt resources are missing or unexpected")
+        for prompt_id, prompt in skill_prompts.items():
+            rendered = validate_prompt_evidence(resources[prompt_id], prompt)
+            digest = hashlib.sha256(rendered.encode()).hexdigest()
+            if any(
+                job["prompt_sha256"] != digest
+                for job in manifest.jobs
+                if job["prompt_id"] == prompt_id
+            ):
+                raise ValueError("Saved skill prompt differs from its job")
 
     if manifest.experiment.source_view is not None:
         views = manifest.setup.get("source_views")

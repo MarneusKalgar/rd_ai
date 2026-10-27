@@ -7,10 +7,10 @@ from uuid import uuid4
 
 from pydantic import Field, StringConstraints
 
-from extraction_service.artifacts import artifact_path, read_text
 from extraction_service.configuration.models import ExperimentConfig, ModelConfig
 from extraction_service.corpus.loading import CorpusInput, LoadedCorpus
 from extraction_service.execution.types import ExtractionJob
+from extraction_service.prompting.resources import load_prompt
 from extraction_service.record_types import ExecutionStage
 from extraction_service.runtime_types import StrictModel
 from extraction_service.source_support.views import build_source_view
@@ -86,7 +86,7 @@ def selected_jobs(
         if prompt.id not in prompts:
             continue
 
-        instructions = read_text(artifact_path(project_dir, prompt.file))
+        instructions = load_prompt(project_dir, prompt).instructions
 
         for sampling in experiment.sampling:
             if sampling.id not in sampling_ids:

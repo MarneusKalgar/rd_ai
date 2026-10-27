@@ -4,12 +4,13 @@ import hashlib
 from pathlib import Path
 from typing import Final, Literal
 
-from extraction_service.artifacts import artifact_path, read_text
+from extraction_service.artifacts import artifact_path
 from extraction_service.configuration.loading import load_experiment
 from extraction_service.configuration.models import ExperimentConfig
 from extraction_service.configuration.settings import ApplicationSettings
 from extraction_service.corpus.loading import LoadedCorpus, load_corpus
 from extraction_service.extraction.validation import SchemaIdentity
+from extraction_service.prompting.resources import load_prompt
 from extraction_service.runtime_types import StrictModel
 
 DEFAULT_EXPERIMENT_FILE: Final[str] = "config/experiments.yaml"
@@ -64,15 +65,7 @@ def preflight(
     prompts: list[PromptIdentity] = []
 
     for prompt in experiment.prompts:
-        path = artifact_path(project_dir, prompt.file)
-
-        if not path.is_relative_to((project_dir / "prompts").resolve()):
-            raise ValueError("Referenced prompt must belong to the project's prompts directory")
-
-        text = read_text(path)
-
-        if not text.strip():
-            raise ValueError("Referenced prompt cannot be empty")
+        text = load_prompt(project_dir, prompt).instructions
 
         prompts.append(
             PromptIdentity(

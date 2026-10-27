@@ -20,6 +20,7 @@ from extraction_service.execution.coordinator import ExtractionCoordinator
 from extraction_service.execution.types import ExtractionJob, ScheduledExtraction
 from extraction_service.exit_status import ExitStatus
 from extraction_service.preflight import DEFAULT_EXPERIMENT_FILE, preflight
+from extraction_service.prompting.resources import load_prompt
 from extraction_service.records import RunRecord
 from extraction_service.source_support.views import build_source_view, view_identity
 
@@ -64,6 +65,20 @@ def execute_selected(
             if not isinstance(observed, dict):
                 raise ValueError("Missing model setup evidence")
             setup[model_id] = {**observed, "source_view": view_identity(experiment.source_view)}
+
+    prompt_evidence = {}
+    for prompt in experiment.prompts:
+        matching = [job for job in jobs if job.prompt_id == prompt.id]
+        if not matching or prompt.skill is None:
+            continue
+        loaded = load_prompt(project_dir, prompt)
+        if any(job.instructions != loaded.instructions for job in matching):
+            raise ValueError("Scheduled prompt differs from loaded skill resources")
+        if loaded.evidence is None:
+            raise ValueError("Skill prompt requires resource evidence")
+        prompt_evidence[prompt.id] = loaded.evidence.model_dump(mode="json")
+    if prompt_evidence:
+        setup = {**setup, "prompt_resources": prompt_evidence}
 
     store = RunStore(project_dir, scheduled, experiment, corpus.contract, setup)
     ledger = BudgetLedger(project_dir, experiment.execution)

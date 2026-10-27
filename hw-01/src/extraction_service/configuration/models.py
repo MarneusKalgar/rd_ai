@@ -10,6 +10,7 @@ from extraction_service.runtime_types import (
     NonNegativeFloat,
     PositiveFloat,
     PositiveInt,
+    Sha256,
     StrictModel,
 )
 
@@ -55,11 +56,35 @@ class ModelConfig(StrictModel):
         return self
 
 
+class PromptResource(StrictModel):
+    """Pinned public resource, resolved inside the prompt's skill package."""
+
+    file: NonEmptyText
+    sha256: Sha256
+
+
+class SkillPackage(StrictModel):
+    """Explicit loading order; no discovery, recursive references or tool execution."""
+
+    file: NonEmptyText
+    sha256: Sha256
+    resources: Annotated[list[PromptResource], Field(min_length=1)]
+
+    @model_validator(mode="after")
+    def check_unique_files(self) -> Self:
+        files = [self.file, *(resource.file for resource in self.resources)]
+        if len(files) != len(set(files)):
+            raise ValueError("Skill resource files must be unique")
+        return self
+
+
 class PromptConfig(StrictModel):
     """A versioned prompt file owned by the HW project."""
 
     id: Identifier
     file: NonEmptyText
+    # Preserve historical plain-prompt experiment serialization byte semantics.
+    skill: SkillPackage | None = Field(default=None, exclude_if=lambda value: value is None)
 
 
 class SamplingConfig(StrictModel):

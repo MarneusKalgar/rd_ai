@@ -62,12 +62,15 @@ class ExtractionCoordinator:
         clock: Clock | None = None,
         admission: RequestAdmission | None = None,
         checkpoint: Callable[[InputExecution], None] | None = None,
+        dependency_states: dict[DependencyIdentity, DependencyState] | None = None,
     ) -> None:
+        """Optionally share availability stops across sequential stages with different schemas."""
+
         self._contract = contract
         self._execution = execution
         self._spending = SpendingGuard(execution, ledger)
         self._clock = SystemClock() if clock is None else clock
-        self._dependencies: dict[DependencyIdentity, DependencyState] = {}
+        self._dependencies = {} if dependency_states is None else dependency_states
         self._admission = admission
         self._checkpoint = checkpoint
 

@@ -76,3 +76,7 @@ hw01-assess-source:
 .PHONY: hw01-correct-identifiers hw01-export-correction hw01-verify-correction hw01-evaluate-correction
 hw01-correct-identifiers hw01-export-correction hw01-verify-correction hw01-evaluate-correction:
 	$(MAKE) -C hw-01 $(patsubst hw01-%,%,$@)
+
+.PHONY: hw01-run-split hw01-export-split hw01-verify-split hw01-evaluate-split
+hw01-run-split hw01-export-split hw01-verify-split hw01-evaluate-split:
+	$(MAKE) -C hw-01 $(patsubst hw01-%,%,$@)

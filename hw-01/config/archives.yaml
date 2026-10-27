@@ -38,3 +38,9 @@ selections:
   identifier-correction:
     membership: results/submission/identifier-correction-20261026-evaluation/membership.json
     evidence_index: archive-index/selections/identifier-correction.json
+  gemma-examples:
+    membership: results/submission/gemma-examples-20261027-evaluation/membership.json
+    evidence_index: archive-index/selections/gemma-examples.json
+  gemma-header-lines:
+    membership: results/submission/gemma-split-20261027-evaluation/membership.json
+    evidence_index: archive-index/selections/gemma-header-lines.json

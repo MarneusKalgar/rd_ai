@@ -20,6 +20,8 @@ instruction to rerun a completed experiment.
 - [Inspect saved outputs with deterministic row diagnostics](guides/row-diagnostics.md).
 - [Assess source evidence and isolate Gemma support trials](guides/source-support.md).
 - [Run a bounded source-guided identifier correction](guides/identifier-correction.md).
+- [Load pinned skill/example resources into prompts](guides/prompt-resources.md).
+- [Extract headers and lines in independent stages](guides/header-line-split.md).
 
 ## Reference
 
@@ -68,6 +70,8 @@ permission for model inference or spending.
 | Source-field evidence and Gemma advisory context | [Source-field role gold10](reports/source-field-roles.md) |
 | Role cues limited to confirmed ordered rows | [Scoped role-cue gold10](reports/scoped-role-cues.md) |
 | One guarded source-guided identifier correction per flagged input | [Identifier correction gold10](reports/identifier-correction.md) |
+| Application-loaded synthetic examples with frozen v2 | [Gemma examples gold10](reports/gemma-examples.md) |
+| Independent header/line stages with derived schemas | [Gemma header/line split gold10](reports/gemma-header-lines.md) |
 | Completed v2 all30 baselines | [V2 continuation results](reports/v2-continuation-results.md) |
 | Cumulative budget migration audit | [Budget revisions](reports/budget-revisions.md) |
 
