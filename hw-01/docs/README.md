@@ -2,7 +2,7 @@
 
 Start with [running extractions](guides/running-extractions.md), the
 [active experiment plan](plans/matrix-experiment.md), or the
-[latest v2 baseline results](reports/v2-continuation-results.md).
+[consolidated results](../REPORT.md).
 The [project README](../README.md) provides the homework entrypoint and commands.
 
 Documents are grouped by purpose. Guides explain operations; reference describes
@@ -45,6 +45,8 @@ permission for model inference or spending.
 
 | Evidence | Document |
 | --- | --- |
+| Complete matrix, optional trials, costs and bounded conclusions | [Consolidated evaluation](../REPORT.md) |
+| Restored 240-observation recomputation and report-table checks | [Section 8 verification](reports/section8-verification.md) |
 | Checked archive, Garage upload and restored evaluation | [Archive workflow verification](reports/archive-workflow-verification.md) |
 | Bulk evidence retention and Git history cleanup | [Submission retention](reports/submission-retention.md) |
 | Docker setup acceptance | [Docker setup verification](reports/docker-setup-verification.md) |

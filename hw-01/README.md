@@ -2,6 +2,8 @@
 
 See the [documentation index](docs/README.md) for guides, technical reference,
 experiment plans, measured reports and quality practices.
+The [consolidated results](REPORT.md) cover the completed 240-observation
+matrix, provider selection, local assistance trials, measured costs and limits.
 
 The [archive workflow](docs/guides/archiving-results.md) packages public evidence
 in Docker, verifies isolated restoration, and optionally uploads to local Garage
@@ -29,8 +31,9 @@ explicit selection and initialization. Its local image/weights were removed.
 The [selected extraction runner](docs/guides/running-extractions.md) adds actual-request
 admission, incremental records/checkpoints, budget administration, CLI/Make
 commands and checked exports. Live acceptance is tracked separately; provider
-inference requires verified coverage and explicit human approval. Measured prompt
-variants, the complete matrix and the final comparison report remain pending.
+inference requires verified coverage and explicit human approval. Frozen v1/v2
+and both sampling profiles have completed the historical matrix. Section 8
+consolidates saved evidence; section 9's broader reproducibility review remains.
 
 The [provider smoke evidence](docs/reports/provider-runtime-verification.md) records the
 approved Gemini 3.1 Flash-Lite run: two schema-valid outputs, one truncation,
@@ -40,7 +43,8 @@ acceptance, this completes 6.6.6. Further paid execution needs separate approval
 [Provider screening](docs/plans/provider-screening.md) prepares section 7.1 on the
 10 approved gold cases, using the [offline evaluator](docs/reference/evaluation.md).
 The [approved screening run](docs/reports/provider-screening-results.md) completed both
-Gemini candidates; Mistral stopped on upstream rate limits in both the original\ninvocation and one separately approved retry. The user accepted completing 7.1
+Gemini candidates; Mistral stopped on upstream rate limits in both the original
+invocation and one separately approved retry. The user accepted completing 7.1
 with the Gemini pair: Gemini 3.5 Flash-Lite is frozen as the main provider in
 `config/experiments.yaml`; Mistral remains unranked. Further paid execution
 needs the documented approval.
@@ -111,8 +115,8 @@ non-root user, with a read-only image filesystem and writable temporary
 storage. The build context contains only this HW's approved artifacts and
 source; it excludes private preparation data and tooling.
 
-These commands check the extraction boundary; they do not yet run the
-provider/local comparison required for final submission.
+These offline commands check implementation and frozen artifacts. They do not
+rerun the completed provider/local comparison or require model credentials.
 
 ## Verify the complete setup offline
 

@@ -1,0 +1,17 @@
+{
+  "version": "section8-verification-v1",
+  "archive_sha256": "c3398a3c846488086ef52be9a4706b0eb9568ab94f56f42d3190610d96ad263b",
+  "covered_observations": 240,
+  "variants": 8,
+  "gold_cases_per_variant": 10,
+  "bundles": 84,
+  "payload_files": 1594,
+  "source_and_restored_payloads_equal": true,
+  "restored_evaluation_summary_errors_equal": true,
+  "report_quality_operations_usage_tables_checked": true,
+  "report_per_field_tables_checked": true,
+  "provider_ledger_unchanged": true,
+  "garage_full_get_verified": true,
+  "inference_performed": false,
+  "requires_local_audited_budget_revision_state": true
+}

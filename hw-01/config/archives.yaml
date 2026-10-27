@@ -1,4 +1,7 @@
 selections:
+  section8-consolidated:
+    membership: results/submission/section8-consolidated-20261027/membership.json
+    evidence_index: archive-index/selections/section8-consolidated.json
   final-baselines:
     membership: results/submission/matrix-native-v2-remaining-20261024-72-evaluation/membership.json
     evidence_index: results/submission/v2-baseline-review-20261025/evidence-index.json

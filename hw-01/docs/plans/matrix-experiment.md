@@ -62,6 +62,21 @@ below retain historical authorizations and outcomes, not pending instructions.
 
 ## Latest measured checkpoints
 
+**Section 8 complete — 27 October 2026.** The [consolidated report](../../REPORT.md)
+recomputes all eight matrix variants from saved terminal records, verifies exact
+240/240 membership and retains failures, all30 operations, gold10 quality,
+per-field/present/null scores, usage, latency, charges and unresolved historical
+holds. It separates screening, output/runtime/model diagnostics and assisted
+local workflows, with exact error examples, a bounded configuration choice and
+development-data limitations. No new inference, labels, scorer changes or paid
+spending were introduced. The `section8-consolidated` archive selection preserves
+the driver and source evidence; the [verification report](../reports/section8-verification.md)
+records restored reproduction. Section 9 remains the clean-checkout/reproducibility
+review, including portable aggregation across historical budget policies without
+the original machine's private ledger state.
+New independently reviewed documents are not a prerequisite for section 9;
+generalization claims remain unsupported without a separate reviewed evaluation.
+
 **Header/line split gold10 complete — 27 October 2026; split not adopted.**
 Two independent stages over identical scoped sources produced ten complete
 schema-valid POs with twenty calls and no retry/schema correction. Headers
@@ -609,7 +624,15 @@ not need rerunning merely to inspect or flag their source-evidence errors.
 
 Both v2/baseline variants are complete. The remaining **120 primaries** are v1/v2 exploratory sampling on both models. The native gold10/remaining20 split changes execution order, not the all30 requirement or 240-observation target. Keep 16,384 output, the selected runtime/thinking/context, deadlines, retries and scoring matched across prompts. Freeze any profile change as a new explicit variant rather than changing only v2 or failed cases. Every paid invocation still needs approval and budget admission.
 
-Finish section 8 from an explicit **240-observation membership inventory**, eight complete 30-input variants, duplicate rejection, checked exports and preserved source hashes. Report gold10 quality, all30 operations, reasoning/output usage, null/present correctness, row errors and known/unknown costs. Historical constrained-budget and Docker/runtime diagnostics receive separate tables. Docker Ollama's stopped container, image and weights volume were removed at the user's request; native weights/results remain. Docker runs Python/offline checks; native is the selected model runtime. Optional Docker compatibility code remains in source and must not download/start Ollama implicitly.
+Section 8 is complete in [REPORT.md](../../REPORT.md), using the explicit
+**240-observation membership inventory**, eight complete 30-input variants,
+duplicate rejection, checked exports and preserved source hashes. Gold10 quality,
+all30 operations, usage, null/present correctness, row errors, known/unknown costs
+and separate historical diagnostic tables are retained. Docker Ollama's stopped
+container, image and weights volume were removed at the user's request; native
+weights/results remain. Docker runs Python/offline checks; native is the selected
+model runtime. Optional Docker compatibility code remains in source and must not
+download/start Ollama implicitly. Section 9 verifies broader reproducibility.
 
 ## Staged instruction-only v2 execution (7.2.5)
 
