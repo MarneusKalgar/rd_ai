@@ -31,22 +31,22 @@ __pycache__/
 # Generated HW-01 runtime output, caches, restores, logs and detailed reports.
 # Original exports are retained locally and archived; ignore rules do not back
 # them up or remove evidence already tracked in earlier commits.
-/hw-01/results/*
-!/hw-01/results/submission/
-/hw-01/results/submission/*
+/results/*
+!/results/submission/
+/results/submission/*
 
 # Only explicitly reviewed compact snapshots belong in the submission tree in Git.
 # Keep each allowlist narrow so new raw exports/detailed reports stay ignored.
-!/hw-01/results/submission/catalog-row-diagnostics-20261024/
-/hw-01/results/submission/catalog-row-diagnostics-20261024/*
-!/hw-01/results/submission/catalog-row-diagnostics-20261024/summary.json
-!/hw-01/results/submission/catalog-row-diagnostics-20261024/files.sha256.json
+!/results/submission/catalog-row-diagnostics-20261024/
+/results/submission/catalog-row-diagnostics-20261024/*
+!/results/submission/catalog-row-diagnostics-20261024/summary.json
+!/results/submission/catalog-row-diagnostics-20261024/files.sha256.json
 
-!/hw-01/results/submission/v2-baseline-review-20261025/
-/hw-01/results/submission/v2-baseline-review-20261025/*
-!/hw-01/results/submission/v2-baseline-review-20261025/README.md
-!/hw-01/results/submission/v2-baseline-review-20261025/summary.json
-!/hw-01/results/submission/v2-baseline-review-20261025/evidence-index.json
+!/results/submission/v2-baseline-review-20261025/
+/results/submission/v2-baseline-review-20261025/*
+!/results/submission/v2-baseline-review-20261025/README.md
+!/results/submission/v2-baseline-review-20261025/summary.json
+!/results/submission/v2-baseline-review-20261025/evidence-index.json
 
 # Compact archive indexes and verified-upload receipts live outside results/
-# under hw-01/archive-index/ and remain available for explicit review/commit.
+# under archive-index/ and remain available for explicit review/commit.

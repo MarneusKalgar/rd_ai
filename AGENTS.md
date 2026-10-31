@@ -2,12 +2,12 @@
 
 ## Project boundaries
 
-- This repository contains independent AI homework projects. Each homework owns
-  its dependencies, implementation, data, checks and deliverables.
-- HW-01 lives in `hw-01/`. Read its README and relevant documents before editing.
-- Start at `hw-01/docs/README.md` for guides, reference, plans, reports and quality
+- This repository contains one document-intelligence R&D application.
+- Read `docs/roadmap.md` and the applicable milestone plan before new work.
+- Start at `docs/README.md` for guides, reference, plans, reports and quality
   documentation. Keep new documents in the group matching their primary purpose.
-- Root Make targets route to homework commands. Keep private data preparation
+- Root Make targets own application commands; use canonical unprefixed targets.
+- Keep private data preparation
   out of the reviewer-facing workflow.
 - Work here does not automatically change AspectLoop or its AI-track scope.
 
@@ -30,8 +30,8 @@ put any focused mutation or reproduction in a disposable copy.
 ## Contracts and approved data
 
 - The authoritative PO extraction contract is
-  `hw-01/schemas/purchase-order-extraction.v1.schema.json`; field semantics are
-  documented in `hw-01/docs/reference/extraction-contract.md`.
+  `schemas/purchase-order-extraction.v1.schema.json`; field semantics are
+  documented in `docs/reference/extraction-contract.md`.
 - Do not introduce a second handwritten Pydantic PO model. Pydantic validates
   configuration, settings, attempt records and run records.
 - Keep operational metadata outside PO output objects. Preserve raw responses
@@ -59,12 +59,12 @@ put any focused mutation or reproduction in a disposable copy.
   substantial data processing into Docker as well.
 - Native Ollama is the explicitly selected exception for local model inference;
   its use does not authorize other application or scripting work on the host.
-- Run `make hw01-check` from the repository root for Ruff lint/format checks,
+- Run `make check` from the repository root for Ruff lint/format checks,
   strict mypy checks, pytest and frozen gold validation.
-- Use `make hw01-validate-gold` when only gold validation is needed.
-- Dependencies are declared in `hw-01/pyproject.toml` and locked in
-  `hw-01/uv.lock`. Update both together when changing dependencies; see
-  `hw-01/docs/reference/runtime-validation.md` for the Docker lock-update command.
+- Use `make validate-gold` when only gold validation is needed.
+- Dependencies are declared in `pyproject.toml` and locked in
+  `uv.lock`. Update both together when changing dependencies; see
+  `docs/reference/runtime-validation.md` for the Docker lock-update command.
 - Keep base images pinned by digest. Verify model tags, provider capabilities
   and prices before selecting them for measured runs.
 - Test meaningful behavior and regression risks. Do not add tests for spacing,
@@ -79,7 +79,7 @@ put any focused mutation or reproduction in a disposable copy.
   contains private preparation outputs. These are not reviewer prerequisites.
 - `.agents/skills/` contains versioned repository workflows.
 - `tools/po-data-prep/` is an ignored, one-off local utility. Do not add it to
-  Git or import it into the homework service.
+  Git or import it into the application.
 - Never commit API keys or credentials. Keep actual secrets in ignored local
   configuration and include only harmless examples in `.env.example`.
 - Keep changes scoped. Do not stage, commit, push, change branches or amend

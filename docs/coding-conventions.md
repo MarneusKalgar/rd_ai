@@ -1,7 +1,7 @@
 # Coding conventions
 
 These conventions apply to humans and agents working in this repository.
-Each homework owns its tooling configuration; shared conventions live here
+The application owns its tooling configuration; shared conventions live here
 so agent instruction files do not maintain separate copies.
 
 ## Readability and layout
@@ -133,7 +133,7 @@ SCHEMA_DIALECT: Final[str] = (
   Let uv update `pyproject.toml` and `uv.lock` together; do not hand-edit dependency
   lists or lockfile entries. Pass version constraints to the command when needed.
   Ordinary metadata and tool configuration in `pyproject.toml` remain editable.
-  See HW-01's [dependency commands](../hw-01/docs/reference/runtime-validation.md#dependency-maintenance).
+  See the application's [dependency commands](reference/runtime-validation.md#dependency-maintenance).
 
 - Separate setup, the action under test and assertions with blank lines.
 - Name the result before asserting on it; avoid nested calls in assertions.
@@ -149,9 +149,9 @@ SCHEMA_DIALECT: Final[str] = (
 - When auditing test sensitivity, try a bounded set of deliberate defects in
   disposable copies. Report which defects the tests detect; a passing suite or
   a mutation probe does not establish complete correctness.
-- Run the homework's documented checks in Docker. For HW-01, use
-  `make hw01-check` from the repository root.
-- HW-01's enforceable lint, formatting and type rules are configured in
-  [`pyproject.toml`](../hw-01/pyproject.toml), with dependencies pinned in its
+- Run the application checks in Docker; use
+  `make check` from the repository root.
+- The application's enforceable lint, formatting and type rules are configured in
+  [`pyproject.toml`](../pyproject.toml), with dependencies pinned in its
   lockfile. Ruff and mypy complement this document; passing them alone does
   not establish readability or correctness.

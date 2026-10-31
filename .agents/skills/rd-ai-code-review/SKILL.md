@@ -1,7 +1,7 @@
 ---
 name: rd-ai-code-review
 description: >
-  Review rd_ai homework branches, commits, PR diffs or working-tree changes
+  Review rd_ai project branches, commits, PR diffs or working-tree changes
   against requirements, correctness and repository conventions. Use for code
   review and test-quality review in rd_ai, not implementation or fix requests.
 ---
@@ -30,7 +30,7 @@ commit range.
    current contracts before using the implementation's claims as evidence.
    Missing ignored plans do not block a review.
 2. Review requirements, correctness and conventions as distinct axes. Trace
-   changes across affected homework boundaries; do not demand later planned
+   changes across affected application boundaries; do not demand later planned
    features from a deliberately partial implementation.
 3. Check what produces each test's asserted result and which defect would make
    it fail. Treat green checks, test counts and earlier reviews as bounded

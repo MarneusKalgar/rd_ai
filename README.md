@@ -1,50 +1,75 @@
-# rd_ai
+# Document intelligence R&D
 
-One repository for independent AI homework projects. Each homework owns its
-implementation and deliverables. The root
-entrypoint routes reviewer-facing commands to each homework.
+One Python application for measured purchase-order extraction, source support
+and human-reviewed correction research. The [roadmap](docs/roadmap.md) defines
+P00–P05; [the documentation index](docs/README.md) links guides, contracts,
+plans, reports and verification evidence.
+
+The existing extraction baseline contains thirty approved neutral text inputs,
+ten human-approved development-gold objects and 240 attempted matrix observations.
+Provider v2 matched the development labels; assisted local trials retained
+substantial whole-document errors. See [REPORT.md](REPORT.md) for populations,
+costs, failures and generalization limits. Retrieval, review tools and an API
+remain future milestones; repository consolidation does not implement them.
+
+## Verify without models
+
+Prerequisites: Docker Desktop/Compose and Make. No host Python, provider key or
+Ollama installation is required for offline verification.
+
+```sh
+make help
+make check
+make preflight
+```
+
+With the separately supplied indexed public archive in `results/archives/`:
+
+```sh
+make reproduce-report
+```
+
+The [reproduction guide](docs/guides/reproducing-results.md) explains retrieval,
+identity checks and the public manifest-bound historical budget policy. It
+reproduces eight variants and 240 outcomes without a private spending ledger,
+credentials or archived script execution. Bulk evidence remains ignored; compact
+archive indexes and receipts are versioned under `archive-index/`.
+
+## Runtime and compatibility
+
+Python, dependencies and substantial scripting run in Docker. Native Ollama is
+the selected local inference runtime; its use is explicit. Provider inference
+requires the separately approved concrete invocation and allowance. Offline
+checks never start model services. Docker Ollama compatibility commands remain
+explicit and may download removed resources; they are not the default workflow.
+
+Current commands run from this repository root. Legacy `hw01-*` Make aliases
+were retired; use canonical targets such as `make check` and
+`make reproduce-report`. Historical `cd hw-01` directions describe the old layout.
+The Python namespace, environment names, Compose project
+`rd-ai-hw01`, named volumes and historical `hw01/` archive namespace are retained
+to preserve runtime/evidence identity.
+
+Local `.env`, `.env.compose` and `.env.archive` files remain ignored. Make falls
+back to `.env.compose.example` when no local controls file exists. Never reset
+the cumulative ledger because the project layout changed.
+
+## Repository boundaries
 
 | Area | Responsibility |
 | --- | --- |
-| [`hw-01/`](hw-01/README.md) | HW-01 contract, adapters, selected-run CLI, durable results, Docker setup and checks; measured evaluation follows. |
-| [HW-01 documentation](hw-01/docs/README.md) | Operating guides, reference, experiment plans, reports and quality practices. |
-| [`hw-01/data/`](hw-01/data/README.md) | Frozen neutral input texts, reviewed gold objects, and dataset provenance. |
-| [`docs/coding-conventions.md`](docs/coding-conventions.md) | Shared coding conventions for contributors and agents. |
-| [`docs/review-process.md`](docs/review-process.md) | Review scope, evidence, verification and reporting rules. |
+| `src/extraction_service/`, `tests/` | Application responsibilities and controlled verification |
+| `schemas/`, `data/`, `prompts/`, `config/` | Frozen approved artifacts and versioned experiment/runtime configuration |
+| `docs/` | Roadmap, milestone plans, guides, reference and measured history |
+| `archive-index/` | Compact public evidence inventories and verified storage receipts |
+| `results/` | Ignored local runtime outputs, exports, caches, restores and proofs |
 
-Agent workflow guidance lives in [`AGENTS.md`](AGENTS.md); `CLAUDE.md` links to
-the same file.
+Original workbooks, root `data/private/`, private mappings, local settings and
+one-off preparation tools stay outside Git, image contexts and provider requests.
+The [dataset provenance](data/README.md) retains original approval and exposure
+limits. Saved experiments remain immutable and are not automatically rerun.
 
-For code review, use the repository's
-[`rd-ai-code-review`](.agents/skills/rd-ai-code-review/SKILL.md) skill. It checks
-requirements, correctness and conventions, with Docker verification and
-disposable reproductions where useful.
-
-## Current status
-
-HW-01 has **30 approved neutral inputs and 10 human-approved gold
-objects** frozen under [`hw-01/data/`](hw-01/data/README.md). The minimum
-dataset counts are met. Adapters and the shared execution policy are implemented;
-the [Docker runtime setup](hw-01/docs/guides/docker-runtime.md) is implemented. The
-[selected-run workflow](hw-01/docs/guides/running-extractions.md) is implemented with
-actual-request admission, incremental persistence and checked result exports.
-Live acceptance and the measured comparison are tracked separately.
-
-With Docker Desktop/Compose and Make installed, run `make hw01-check` for
-contract tests, lint, type checks and gold validation entirely inside Docker.
-Use `make hw01-preflight` to verify configuration, prompts and the complete
-approved corpus offline.
-No host Python or API key is required. This is a contract check, not yet the
-final model-comparison command.
-
-Use `make hw01-setup-provider` for offline app/storage preparation, or
-`make hw01-setup-local` for explicit pinned Ollama/Gemma initialization and local
-representative readiness diagnostics (currently six requests). The optional
-`make hw01-local-capacity` checks all prepared requests. `make hw01-down`
-preserves weights and results. Provider
-inference requires explicit human approval; these setup commands do not call it.
-
-The dataset README describes its preparation, approval and evaluation limits.
-Original workbooks, private review material and the one-off preparation tool
-are excluded from Git. The HW service will consume the included text dataset
-directly, without requiring source files or preparation tooling.
+Contributor guidance lives in [AGENTS.md](AGENTS.md), with `CLAUDE.md` as its
+relative symlink. Follow [coding conventions](docs/coding-conventions.md) and
+the [review process](docs/review-process.md). AspectLoop remains a separate
+product and repository; this project does not change its scope or milestones.

@@ -1,87 +1,194 @@
-.PHONY: help hw01-check hw01-validate-gold hw01-preflight hw01-setup-provider hw01-setup-local hw01-local-ready hw01-local-capacity hw01-storage-check hw01-down
+.PHONY: check validate-gold preflight setup-provider setup-local local-ready local-capacity storage-check down
 .DEFAULT_GOAL := help
 
+# ARGS carries explicit model/input/run selections; native avoids implicit downloads.
+# MODE=provider selects the credentialed app and never starts Ollama.
+# MODE=native uses the existing desktop server; Python remains in Docker.
+ARGS ?=
+MODE ?= native
+RUN_SERVICE := local-run
+ifeq ($(MODE),provider)
+RUN_SERVICE := app
+endif
+ifeq ($(MODE),native)
+RUN_SERVICE := native-run
+endif
+ifeq ($(filter $(MODE),local provider native),)
+$(error MODE must be local, provider or native)
+endif
+
+.PHONY: run smoke plan-run budget-init budget-show budget-raise export-run verify-export
+.PHONY: evaluate
+.PHONY: diagnose-rows
+.PHONY: setup-native
+
+# Make runs from the project root; legacy aliases share these recipes.
+# Prefer local resource overrides; the tracked example keeps a fresh checkout usable.
+# Override explicitly with: make COMPOSE_ENV_FILE=path/to/file <target>.
+COMPOSE_ENV_FILE := .env.compose.example
+ifneq ($(wildcard .env.compose),)
+COMPOSE_ENV_FILE := .env.compose
+endif
+COMPOSE := docker compose --env-file "$(COMPOSE_ENV_FILE)"
+
+# Offline checks: build with locked dependencies, then run without network/model calls.
+# Each && makes a failed gate stop the remaining checks.
+check:
+	$(COMPOSE) run --build --rm checks sh -c 'ruff check --no-cache . && ruff format --check --no-cache . && mypy --cache-dir=/tmp/mypy-cache && pytest && python -m extraction_service validate-gold && python -m extraction_service preflight'
+
+# The checks image defaults to validating the frozen gold objects.
+validate-gold:
+	$(COMPOSE) run --build --rm checks
+
+# Validate the complete public corpus/configuration without a live model.
+preflight:
+	$(COMPOSE) run --build --rm checks python -m extraction_service preflight
+
+# --no-deps keeps provider preparation independent of Ollama; no provider inference.
+setup-provider:
+	$(COMPOSE) run --build --rm --no-deps app python -m extraction_service.runtime provider
+
+# Explicit initialization may download missing pinned weights, then checks readiness.
+# up applies changed server/resource settings and waits for the HTTP health check.
+setup-local:
+	$(COMPOSE) --profile local up -d --wait --wait-timeout 120 ollama
+	$(COMPOSE) run --build --rm local-init
+
+# Explicitly initialize missing pinned weights through the already running desktop app.
+# No host installation, Docker Ollama startup or model generation is performed here.
+setup-native:
+	$(COMPOSE) run --build --rm --no-deps native-run python -m extraction_service.runtime initialize-native
+
+# Explicit Docker diagnostic: representative one-token probes across configured variants.
+local-ready:
+	$(COMPOSE) run --build --rm local-ready
+
+# Optional full prepared-request pass. Its one-hour budget overrides the routine
+# readiness deadline; these local diagnostics are not measured extraction results.
+local-capacity:
+	$(COMPOSE) run --build --rm -e HW01_SETUP_CAPACITY_SECONDS=3600 local-ready python -m extraction_service.runtime readiness --exhaustive
+
+# Test persistent non-root storage without initializing/changing the budget ledger.
+storage-check:
+	$(COMPOSE) run --build --rm --no-deps app python -m extraction_service.runtime storage
+
+# Remove containers/network only. Omitting -v preserves weights and results/accounting.
+down:
+	$(COMPOSE) --profile local down --remove-orphans
+
+# Inference requires initialized local weights, or approved provider selections.
+# No --allow-provider flag is added by Make. The operator must supply it explicitly.
+run:
+	$(COMPOSE) run --build --rm $(RUN_SERVICE) python -m extraction_service run $(ARGS)
+
+smoke:
+	$(COMPOSE) run --build --rm $(RUN_SERVICE) python -m extraction_service smoke $(ARGS)
+
+# Planning and accounting use no network and cannot generate model responses.
+plan-run:
+	$(COMPOSE) run --build --rm --no-deps offline python -m extraction_service plan-run $(ARGS)
+
+budget-init:
+	$(COMPOSE) run --build --rm --no-deps offline python -m extraction_service budget-init $(ARGS)
+
+budget-show:
+	$(COMPOSE) run --build --rm --no-deps offline python -m extraction_service budget-show $(ARGS)
+
+# Administrative action only: preserve reservations and audit the expected old cap.
+budget-raise:
+	$(COMPOSE) run --build --rm --no-deps offline python -m extraction_service budget-raise $(ARGS)
+
+# Overlay only the submission subtree to copy reviewed output to the host.
+# Raw logs, setup snapshots and the cumulative ledger stay in the named volume.
+export-run:
+	mkdir -p results/submission
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission" offline python -m extraction_service export-run $(ARGS)
+
+# Read-only source/output evidence; diagnostic flags never trigger inference.
+diagnose-rows:
+	$(COMPOSE) build offline 1>&2
+	$(COMPOSE) run --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service diagnose-rows $(ARGS)
+
+.PHONY: assess-source
+assess-source:
+	$(COMPOSE) build offline 1>&2
+	$(COMPOSE) run --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service assess-source $(ARGS)
+
+verify-export:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service verify-export $(ARGS)
+
+# Saved-run scoring has no network, key, model loading or generation.
+evaluate:
+	$(COMPOSE) run --build --rm --no-deps offline python -m extraction_service evaluate $(ARGS)
+
+.PHONY: archive-dirs archive-results verify-archive restore-results upload-archive download-archive evaluate-restored archive-store-init archive-store-up archive-store-down
+archive-dirs:
+	mkdir -p results/submission results/archives results/restored archive-index
+
+# Network-disabled operations use read-only original evidence and isolated writable outputs.
+archive-results: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps archive-offline python -m extraction_service.archiving create $(ARGS)
+
+verify-archive: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps archive-offline python -m extraction_service.archiving verify $(ARGS)
+
+restore-results: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps archive-offline python -m extraction_service.archiving restore $(ARGS)
+
+evaluate-restored: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/restored:/app/results/restored:ro" offline python -m extraction_service evaluate $(ARGS)
+
+.PHONY: reproduce-report
+reproduce-report: archive-dirs
+	mkdir -p results/reproductions
+	$(COMPOSE) run --build --rm --no-deps reproduce python -m extraction_service.evaluation.reproduce $(ARGS)
+
+# Storage credentials are confined to the online helper; provider credentials are never loaded.
+upload-archive: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps archive-online python -m extraction_service.archiving upload $(ARGS)
+
+download-archive: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps archive-online python -m extraction_service.archiving download $(ARGS)
+
+archive-store-init: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR):/workspace" archive-offline python -m extraction_service.archiving --project-dir /workspace init-store
+
+archive-store-up:
+	$(COMPOSE) --profile archive up --build -d --wait --wait-timeout 120 garage
+
+archive-store-down:
+	$(COMPOSE) --profile archive stop garage
+
+# Corrections reuse exact saved gold10 primaries; native mode and one-call guards
+# are enforced in the command. The baseline submission mount is read-only.
+.PHONY: correct-identifiers export-correction verify-correction evaluate-correction
+correct-identifiers:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" native-run python -m extraction_service.corrections run $(ARGS)
+
+export-correction:
+	mkdir -p results/submission
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission" offline python -m extraction_service.corrections export $(ARGS)
+
+verify-correction:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service.corrections verify $(ARGS)
+
+evaluate-correction:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service.corrections evaluate $(ARGS)
+
+.PHONY: run-split export-split verify-split evaluate-split
+run-split:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" native-run python -m extraction_service.staged run $(ARGS)
+
+export-split:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission" offline python -m extraction_service.staged export $(ARGS)
+
+verify-split:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service.staged verify $(ARGS)
+
+evaluate-split:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service.staged evaluate $(ARGS)
+
+.PHONY: help
 help:
-	@echo "hw01-check          Run HW-01 contract tests, lint and type checks in Docker"
-	@echo "hw01-validate-gold  Validate the frozen HW-01 gold objects in Docker"
-	@echo "hw01-preflight      Verify configuration and the complete HW-01 corpus offline"
-	@echo "hw01-setup-provider Check provider artifacts/storage without model calls"
-	@echo "hw01-setup-local    Start Ollama, initialize pinned Gemma and diagnose readiness"
-	@echo "hw01-local-ready    Check local identity/load and representative context probes"
-	@echo "hw01-local-capacity Check all prepared local requests (optional, slow)"
-	@echo "hw01-storage-check Verify persistent non-root results storage"
-	@echo "hw01-down          Stop HW-01 containers; preserve results and model weights"
-	@echo "hw01-run           Execute selected work (MODE=local/provider/native, ARGS='...')"
-	@echo "hw01-setup-native  Initialize pinned weights through the existing desktop app"
-	@echo "hw01-smoke         Run the explicit three-document extraction smoke"
-	@echo "hw01-plan-run      Describe selections and available cost bounds offline"
-	@echo "hw01-budget-init   Declare prior spend explicitly (ARGS required)"
-	@echo "hw01-budget-show   Reopen cumulative spending without resetting it"
-	@echo "hw01-budget-raise  Explicitly raise an existing cap with retained audit evidence"
-	@echo "hw01-export-run    Export saved evidence to results/submission (ARGS=run-id)"
-	@echo "hw01-verify-export Recheck exported byte hashes and records (ARGS=run-id)"
-	@echo "hw01-evaluate      Score saved terminal runs offline (ARGS='run-id ...')"
-	@echo "hw01-diagnose-rows Inspect saved row selection without inference or rescoring"
-	@echo "hw01-assess-source Inspect saved completeness/quantity evidence without inference"
-	@echo "hw01-archive-results Create and verify a copy-only archive (ARGS='--selection final-baselines')"
-	@echo "hw01-verify-archive Verify a cached archive (ARGS='--index archive-index/<sha>.json')"
-	@echo "hw01-restore-results Restore an archive into an isolated results/restored directory"
-	@echo "hw01-upload-archive Upload to configured S3/Garage and verify with a download"
-	@echo "hw01-download-archive Download and verify indexed evidence from S3/Garage"
-	@echo "hw01-evaluate-restored Score restored evidence offline (ARGS includes --source-dir)"
-	@echo "hw01-reproduce-report Verify the published matrix offline without a private ledger"
-	@echo "hw01-archive-store-init Generate private single-node Garage settings once"
-	@echo "hw01-archive-store-up Start the optional local Garage bucket"
-	@echo "hw01-archive-store-down Stop Garage; preserve its data volume"
-
-.PHONY: hw01-archive-results hw01-verify-archive hw01-restore-results hw01-upload-archive hw01-download-archive hw01-evaluate-restored hw01-archive-store-init hw01-archive-store-up hw01-archive-store-down
-hw01-archive-results hw01-verify-archive hw01-restore-results hw01-upload-archive hw01-download-archive hw01-evaluate-restored hw01-archive-store-init hw01-archive-store-up hw01-archive-store-down:
-	$(MAKE) -C hw-01 $(patsubst hw01-%,%,$@)
-
-.PHONY: hw01-run hw01-smoke hw01-plan-run hw01-budget-init hw01-budget-show hw01-budget-raise hw01-export-run hw01-verify-export hw01-setup-native hw01-evaluate hw01-diagnose-rows
-
-hw01-run hw01-smoke hw01-plan-run hw01-budget-init hw01-budget-show hw01-budget-raise hw01-export-run hw01-verify-export hw01-setup-native hw01-evaluate hw01-diagnose-rows:
-	$(MAKE) -C hw-01 $(patsubst hw01-%,%,$@)
-
-hw01-check:
-	$(MAKE) -C hw-01 check
-
-hw01-validate-gold:
-	$(MAKE) -C hw-01 validate-gold
-
-hw01-preflight:
-	$(MAKE) -C hw-01 preflight
-
-hw01-setup-provider:
-	$(MAKE) -C hw-01 setup-provider
-
-hw01-setup-local:
-	$(MAKE) -C hw-01 setup-local
-
-hw01-local-ready:
-	$(MAKE) -C hw-01 local-ready
-
-hw01-local-capacity:
-	$(MAKE) -C hw-01 local-capacity
-
-hw01-storage-check:
-	$(MAKE) -C hw-01 storage-check
-
-hw01-down:
-	$(MAKE) -C hw-01 down
-
-.PHONY: hw01-assess-source
-hw01-assess-source:
-	$(MAKE) -C hw-01 assess-source
-
-.PHONY: hw01-correct-identifiers hw01-export-correction hw01-verify-correction hw01-evaluate-correction
-hw01-correct-identifiers hw01-export-correction hw01-verify-correction hw01-evaluate-correction:
-	$(MAKE) -C hw-01 $(patsubst hw01-%,%,$@)
-
-.PHONY: hw01-run-split hw01-export-split hw01-verify-split hw01-evaluate-split
-hw01-run-split hw01-export-split hw01-verify-split hw01-evaluate-split:
-	$(MAKE) -C hw-01 $(patsubst hw01-%,%,$@)
-
-.PHONY: hw01-reproduce-report
-hw01-reproduce-report:
-	$(MAKE) -C hw-01 reproduce-report
+	@echo "Document intelligence R&D: check, preflight, reproduce-report, run, archive-results"
+	@echo "Commands run from this root; inference requires explicit scope and approval."
