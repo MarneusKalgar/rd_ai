@@ -10,18 +10,19 @@ import boto3
 from botocore.config import Config
 from botocore.exceptions import ClientError
 from pydantic import AnyHttpUrl, Field, SecretStr, field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import SettingsConfigDict
 
 from extraction_service.archiving.archive import archive_path, verify_archive, verify_archive_file
 from extraction_service.archiving.files import canonical, confined, digest, publish
 from extraction_service.archiving.models import ArchiveIndex
+from extraction_service.configuration.environment import ProjectSettings
 
 if TYPE_CHECKING:
     from mypy_boto3_s3 import S3Client
 
 
-class StorageSettings(BaseSettings):
-    model_config = SettingsConfigDict(env_prefix="HW01_ARCHIVE_", hide_input_in_errors=True)
+class StorageSettings(ProjectSettings):
+    model_config = SettingsConfigDict(env_prefix="DI_ARCHIVE_", hide_input_in_errors=True)
 
     endpoint_url: AnyHttpUrl
     region: str = "garage"

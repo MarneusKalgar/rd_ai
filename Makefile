@@ -22,7 +22,7 @@ endif
 .PHONY: diagnose-rows
 .PHONY: setup-native
 
-# Make runs from the project root; legacy aliases share these recipes.
+# Make runs from the project root with one canonical recipe per action.
 # Prefer local resource overrides; the tracked example keeps a fresh checkout usable.
 # Override explicitly with: make COMPOSE_ENV_FILE=path/to/file <target>.
 COMPOSE_ENV_FILE := .env.compose.example
@@ -30,6 +30,14 @@ ifneq ($(wildcard .env.compose),)
 COMPOSE_ENV_FILE := .env.compose
 endif
 COMPOSE := docker compose --env-file "$(COMPOSE_ENV_FILE)"
+
+# Reject stale shell/Make overrides and old Compose files before substitution.
+ifneq ($(filter HW01_%,$(.VARIABLES)),)
+$(error Retired HW01_ overrides detected; migrate all names to DI_)
+endif
+ifneq ($(shell rg -l '^[[:space:]]*(export[[:space:]]+)?HW01_' "$(COMPOSE_ENV_FILE)" 2>/dev/null),)
+$(error Retired HW01_ names in COMPOSE_ENV_FILE; migrate all names to DI_)
+endif
 
 # Offline checks: build with locked dependencies, then run without network/model calls.
 # Each && makes a failed gate stop the remaining checks.
@@ -66,7 +74,7 @@ local-ready:
 # Optional full prepared-request pass. Its one-hour budget overrides the routine
 # readiness deadline; these local diagnostics are not measured extraction results.
 local-capacity:
-	$(COMPOSE) run --build --rm -e HW01_SETUP_CAPACITY_SECONDS=3600 local-ready python -m extraction_service.runtime readiness --exhaustive
+	$(COMPOSE) run --build --rm -e DI_SETUP_CAPACITY_SECONDS=3600 local-ready python -m extraction_service.runtime readiness --exhaustive
 
 # Test persistent non-root storage without initializing/changing the budget ledger.
 storage-check:

@@ -27,9 +27,9 @@ def initialize_store(project: Path) -> dict[str, str]:
     access_key = "GK" + secrets.token_hex(12)
     secret_key = secrets.token_hex(32)
     values = (
-        "HW01_ARCHIVE_ENDPOINT_URL=http://garage:3900\n"
-        "HW01_ARCHIVE_REGION=garage\nHW01_ARCHIVE_BUCKET=hw01-evidence\n"
-        f"HW01_ARCHIVE_ACCESS_KEY={access_key}\nHW01_ARCHIVE_SECRET_KEY={secret_key}\n"
+        "DI_ARCHIVE_ENDPOINT_URL=http://garage:3900\n"
+        "DI_ARCHIVE_REGION=garage\nDI_ARCHIVE_BUCKET=hw01-evidence\n"
+        f"DI_ARCHIVE_ACCESS_KEY={access_key}\nDI_ARCHIVE_SECRET_KEY={secret_key}\n"
         f"GARAGE_DEFAULT_ACCESS_KEY={access_key}\nGARAGE_DEFAULT_SECRET_KEY={secret_key}\n"
         "GARAGE_DEFAULT_BUCKET=hw01-evidence\n"
     )

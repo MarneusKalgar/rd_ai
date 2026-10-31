@@ -1,8 +1,8 @@
 # Document intelligence R&D roadmap
 
-- Version: **1.3**.
+- Version: **1.4**.
 - Created and source mappings reviewed: **2026-10-31**.
-- Status: P00 consolidation and selected low-risk cleanup concluded; higher-risk naming migrations deferred; later milestones planned.
+- Status: P00 consolidation concluded; S08 runtime naming follow-up concluded; later milestones planned.
 - Implementation baseline: `654be96` — ledger-free report reproduction.
 
 ## 1. Authority and project outcome
@@ -140,7 +140,7 @@ observations. Never require disclosure of private model reasoning as evidence.
 
 | Milestone | Outcome | Dependencies | Initial status |
 | --- | --- | --- | --- |
-| P00 | One project structure with preserved baseline and reproducibility | Existing saved evidence | Consolidation/low-risk cleanup concluded; sensitive renames deferred |
+| P00 | One project structure with preserved baseline and reproducibility | Existing saved evidence | Consolidation concluded; S08 runtime follow-up concluded |
 | P01 | Explicit evaluation protocol and regression/challenge capabilities for the next question | P00 | Foundations inherited; extensions planned |
 | P02 | Inspectable source-grounded extraction and a measured support decision | P01's protocol for the selected experiment | Several exercises inherited; new scope must be selected |
 | P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | Planned |
@@ -163,8 +163,9 @@ The [dedicated P00 plan](plans/milestones/P00-project-consolidation.md) supplies
 ordered work, compatibility rules, commands, rollback and acceptance criteria.
 Its added S08 separates removable command/descriptive names from optional
 environment/package/storage migrations and preserved historical formats.
-The selected low-risk S08 cleanup is concluded; sensitive migrations remain
-deferred. See the [cleanup record](reports/legacy-name-cleanup.md).
+The low-risk cleanup is concluded. The subsequent S08 request selects DI
+settings, package metadata and disposable Compose naming while retaining
+persistent/archive identities. See the [runtime migration record](reports/runtime-name-migration.md).
 
 **AI Engineer topics exercised**
 
@@ -454,8 +455,10 @@ behavior; reports retain observations, identities and limits. Keep the roadmap
 compact enough to identify current decisions rather than accumulating the
 historical implementation plan's interleaved execution diary.
 
-The original P00 root migration and selected low-risk S08 cleanup are concluded.
-No environment, package, persistent-resource or archive-format migration ran.
+The original P00 root migration and low-risk cleanup are concluded. The S08
+follow-up migrates live settings, package metadata and Compose project naming,
+with independent preservation gates. Persistent-data and archive-format names
+remain unchanged.
 Select later P01/capability slices from actual gaps and available data;
 model experiments are not automatically scheduled.
 All billable model, embedding or judge invocations need the concrete scope,
@@ -469,6 +472,7 @@ allowance and standing human approval; roadmap creation grants none.
 | 1.1 | 2026-10-31 | P00 executed: root application, command compatibility, preserved artifacts/storage and verified isolated reproduction. |
 | 1.2 | 2026-10-31 | Add planned P00-S08 legacy-name cleanup/risk review; retain concluded root migration and immutable evidence. |
 | 1.3 | 2026-10-31 | Retire aliases/current legacy command instructions; retain sensitive identities and historical evidence. |
+| 1.4 | 2026-10-31 | Select DI settings, package metadata and disposable Compose naming; retain persistent storage and archive identities. |
 
 Use Git history for prior revisions. Record material changes to milestone scope,
 data authority or topic sources here; do not rewrite historical experiment claims.

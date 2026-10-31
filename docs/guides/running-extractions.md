@@ -47,7 +47,7 @@ override is a scoped run; it does not establish the default smoke's acceptance.
 
 Native mode is now the Make execution default; it uses the existing desktop
 server and does not download/start Docker Ollama. Revised matrix work explicitly
-uses `--config config/matrix.yaml`, with `HW01_CONTEXT_LENGTH=49152` for native
+uses `--config config/matrix.yaml`, with `DI_CONTEXT_LENGTH=49152` for native
 requests. See [matrix execution](../plans/matrix-experiment.md) and
 [budget policy updates](../reports/budget-revisions.md).
 

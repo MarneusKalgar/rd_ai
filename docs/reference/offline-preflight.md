@@ -97,7 +97,7 @@ later scope.
 
 `ApplicationSettings.load(project_dir)` reads the HW's optional `.env` and
 recognized process variables; process variables take precedence. The fields are
-`OPENROUTER_API_KEY`, `HW01_OPENROUTER_BASE_URL` and `HW01_OLLAMA_BASE_URL`.
+`OPENROUTER_API_KEY`, `DI_OPENROUTER_BASE_URL` and `DI_OLLAMA_BASE_URL`.
 Unknown dotenv entries are rejected; unrelated OS environment variables are
 ignored by pydantic-settings. Environment strings intentionally become URL and
 secret objects; experiment and record models remain strict.

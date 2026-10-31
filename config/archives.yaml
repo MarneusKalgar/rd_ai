@@ -1,4 +1,7 @@
 selections:
+  S08-runtime-naming:
+    membership: results/submission/S08-runtime-naming-20261031/membership.json
+    evidence_index: archive-index/selections/S08-runtime-naming.json
   P00-consolidation:
     membership: results/submission/P00-consolidation-20261031/membership.json
     evidence_index: archive-index/selections/P00-consolidation.json

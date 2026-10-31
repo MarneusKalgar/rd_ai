@@ -101,3 +101,6 @@ instead of storing raw payloads in Git.
 Shared repository conventions remain in the
 [coding conventions](coding-conventions.md) and
 [review process](review-process.md).
+
+Runtime naming follow-up: [migration guide](guides/runtime-name-migration.md) and
+[execution record](reports/runtime-name-migration.md).

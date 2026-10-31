@@ -37,7 +37,7 @@ metadata. Generating stage requests does not read Gold answer or annotation file
 The baseline's predictions do not enter either stage prompt.
 
 ```sh
-HW01_CONTEXT_LENGTH=49152 make run-split ARGS='--base-run-id gemma-scoped-roles-v2-gold-20261026-732 --run-id gemma-header-lines-gold-20261027-732'
+DI_CONTEXT_LENGTH=49152 make run-split ARGS='--base-run-id gemma-scoped-roles-v2-gold-20261026-732 --run-id gemma-header-lines-gold-20261027-732'
 make export-split ARGS='gemma-header-lines-gold-20261027-732'
 make verify-split ARGS='gemma-header-lines-gold-20261027-732 --source submission'
 make evaluate-split ARGS='gemma-header-lines-gold-20261027-732 --source submission'

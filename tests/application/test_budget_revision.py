@@ -92,7 +92,7 @@ def test_revised_native_profile_forwards_context_and_output_through_correction(
     service: ControlledService, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     service.native = True
-    monkeypatch.setenv("HW01_SETUP_CONTEXT_LENGTH", "49152")
+    monkeypatch.setenv("DI_SETUP_CONTEXT_LENGTH", "49152")
     _, processes = service.reply("/api/ps", None)
     processes["models"][0]["context_length"] = 49152
     service.replacements["/api/ps"] = processes

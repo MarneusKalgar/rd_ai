@@ -116,6 +116,51 @@ wheels = [
 ]
 
 [[package]]
+name = "document-intelligence"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "boto3" },
+    { name = "httpx" },
+    { name = "jsonschema" },
+    { name = "pydantic" },
+    { name = "pydantic-settings" },
+    { name = "pyyaml" },
+    { name = "tokenizers" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "boto3-stubs", extra = ["s3"] },
+    { name = "mypy" },
+    { name = "pytest" },
+    { name = "ruff" },
+    { name = "types-jsonschema" },
+    { name = "types-pyyaml" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "boto3", specifier = ">=1.40,<2" },
+    { name = "httpx", specifier = ">=0.28,<0.29" },
+    { name = "jsonschema", specifier = "==4.25.1" },
+    { name = "pydantic", specifier = ">=2.12,<3" },
+    { name = "pydantic-settings", specifier = ">=2.12,<3" },
+    { name = "pyyaml", specifier = ">=6.0.3,<7" },
+    { name = "tokenizers", specifier = ">=0.22,<0.24" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "boto3-stubs", extras = ["s3"], specifier = ">=1.40,<2" },
+    { name = "mypy", specifier = ">=1.18,<2" },
+    { name = "pytest", specifier = ">=9.1,<10" },
+    { name = "ruff", specifier = ">=0.14,<1" },
+    { name = "types-jsonschema", specifier = ">=4.25,<5" },
+    { name = "types-pyyaml", specifier = ">=6.0.12,<7" },
+]
+
+[[package]]
 name = "filelock"
 version = "4.2.4"
 source = { registry = "https://pypi.org/simple" }
@@ -250,51 +295,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/12/47/6858d63643e66fb4f6585c3cfd4029c0b2bc1ae21688cee9b3335f20a10d/huggingface_hub-2.2.0.tar.gz", hash = "sha256:5d1b47537394e4215cb858aa12fd493d0f7ef7f58990f5dcd24bc173107b2871", size = 1041026, upload-time = "2026-10-08T15:30:59.971Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/eb/b0/0f7b430fd100b3a3b037fdbb314878200241082e607b3383c63d91a13a72/huggingface_hub-2.2.0-py3-none-any.whl", hash = "sha256:1667f145dc56dc210d60966069397df9ecfca9607a5d43db88b308c89dae56b3", size = 839884, upload-time = "2026-10-08T15:30:57.914Z" },
-]
-
-[[package]]
-name = "hw01-structured-extraction"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "boto3" },
-    { name = "httpx" },
-    { name = "jsonschema" },
-    { name = "pydantic" },
-    { name = "pydantic-settings" },
-    { name = "pyyaml" },
-    { name = "tokenizers" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "boto3-stubs", extra = ["s3"] },
-    { name = "mypy" },
-    { name = "pytest" },
-    { name = "ruff" },
-    { name = "types-jsonschema" },
-    { name = "types-pyyaml" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "boto3", specifier = ">=1.40,<2" },
-    { name = "httpx", specifier = ">=0.28,<0.29" },
-    { name = "jsonschema", specifier = "==4.25.1" },
-    { name = "pydantic", specifier = ">=2.12,<3" },
-    { name = "pydantic-settings", specifier = ">=2.12,<3" },
-    { name = "pyyaml", specifier = ">=6.0.3,<7" },
-    { name = "tokenizers", specifier = ">=0.22,<0.24" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "boto3-stubs", extras = ["s3"], specifier = ">=1.40,<2" },
-    { name = "mypy", specifier = ">=1.18,<2" },
-    { name = "pytest", specifier = ">=9.1,<10" },
-    { name = "ruff", specifier = ">=0.14,<1" },
-    { name = "types-jsonschema", specifier = ">=4.25,<5" },
-    { name = "types-pyyaml", specifier = ">=6.0.12,<7" },
 ]
 
 [[package]]

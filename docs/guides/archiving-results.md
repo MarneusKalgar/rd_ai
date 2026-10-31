@@ -137,11 +137,11 @@ placeholders into a running deployment.
 
 The server runs as UID 10001, with read-only root filesystem and persistent
 `garage-data` volume. Only the S3 port is exposed, on `127.0.0.1:3900` by default;
-`HW01_GARAGE_PORT` can change the host port. RPC/admin ports are not published.
+`DI_GARAGE_PORT` can change the host port. RPC/admin ports are not published.
 The archive client reaches `http://garage:3900` inside the Compose network.
 `make archive-store-down` stops Garage and preserves its volume.
 
-For an existing S3-compatible service, configure the `HW01_ARCHIVE_*` settings
+For an existing S3-compatible service, configure the `DI_ARCHIVE_*` settings
 from `.env.archive.example` instead; starting local Garage is optional.
 Archive helpers never receive provider credentials. Offline archive/restore
 helpers have networking disabled and do not load storage credentials.

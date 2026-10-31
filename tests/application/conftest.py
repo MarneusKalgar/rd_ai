@@ -161,11 +161,11 @@ class ControlledService:
         return {
             **os.environ,
             "PYTHONPATH": str(Path(__file__).resolve().parents[2] / "src"),
-            "HW01_OLLAMA_BASE_URL": self.base_url,
-            "HW01_OLLAMA_MODE": "native" if self.native else "docker",
-            "HW01_OPENROUTER_BASE_URL": self.base_url + "/api/v1",
+            "DI_OLLAMA_BASE_URL": self.base_url,
+            "DI_OLLAMA_MODE": "native" if self.native else "docker",
+            "DI_OPENROUTER_BASE_URL": self.base_url + "/api/v1",
             "OPENROUTER_API_KEY": "controlled-test-key",
-            "HW01_SETUP_IMAGE": "ollama/ollama@sha256:" + "a" * 64,
+            "DI_SETUP_IMAGE": "ollama/ollama@sha256:" + "a" * 64,
         }
 
     def invoke(self, *arguments: str) -> subprocess.CompletedProcess[str]:

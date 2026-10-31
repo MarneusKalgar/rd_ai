@@ -6,9 +6,10 @@ from pathlib import Path
 from typing import Annotated, Final
 
 from pydantic import Field, StringConstraints
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import SettingsConfigDict
 
 from extraction_service.artifacts import artifact_path
+from extraction_service.configuration.environment import ProjectSettings
 from extraction_service.configuration.models import ModelConfig
 from extraction_service.runtime.errors import SetupError
 from extraction_service.runtime_types import (
@@ -79,11 +80,11 @@ class ModelPin(StrictModel):
             raise SetupError("Selected local model differs from config/ollama-model.json")
 
 
-class OllamaSetupSettings(BaseSettings):
+class OllamaSetupSettings(ProjectSettings):
     """Shared controls for either explicitly selected local server."""
 
     model_config = SettingsConfigDict(
-        env_prefix="HW01_SETUP_", extra="forbid", frozen=True, hide_input_in_errors=True
+        env_prefix="DI_SETUP_", extra="forbid", frozen=True, hide_input_in_errors=True
     )
 
     context_length: PositiveInt = 32768

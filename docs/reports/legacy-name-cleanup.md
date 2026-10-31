@@ -32,3 +32,7 @@ The selected low-risk work and risk dispositions are concluded. Higher-risk
 migrations remain deferred pending a concrete need, scope and the
 [S08 preservation gates](../plans/milestones/P00-project-consolidation.md#p00-s08--legacy-name-cleanup-and-risk-gated-migration-review).
 No namespace-wide removal or additional model/security coverage is claimed.
+
+A subsequent explicit request selected the remaining runtime/package/project
+work. See the [runtime migration record](runtime-name-migration.md); the
+low-risk observations above describe the earlier slice unchanged.

@@ -85,7 +85,7 @@ def saved_split(project_copy: Path, monkeypatch: pytest.MonkeyPatch) -> SplitFix
         yield {"local": prepared}, {"local": setup}
 
     monkeypatch.setattr(application, "compose_targets", composed)
-    monkeypatch.setenv("HW01_OLLAMA_MODE", "native")
+    monkeypatch.setenv("DI_OLLAMA_MODE", "native")
     for folder in ("gold", "annotations"):
         for path in (project / "data" / folder).glob("*.json"):
             path.unlink()

@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Self
 
 from pydantic import AnyHttpUrl, Field, SecretStr, field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import SettingsConfigDict
 
 from extraction_service.configuration.constants import (
     DEFAULT_OLLAMA_BASE_URL,
@@ -15,6 +15,7 @@ from extraction_service.configuration.constants import (
     ENVIRONMENT_PREFIX,
     PROVIDER_API_KEY_VARIABLE,
 )
+from extraction_service.configuration.environment import ProjectSettings
 
 
 class OllamaMode(StrEnum):
@@ -24,8 +25,8 @@ class OllamaMode(StrEnum):
     NATIVE = "native"
 
 
-class ApplicationSettings(BaseSettings):
-    """Parse only service URLs and secrets from the environment or HW .env file.
+class ApplicationSettings(ProjectSettings):
+    """Parse only service URLs and secrets from the environment or project .env file.
 
     Environment strings intentionally become URL and secret objects here.
     Numeric experiment values are validated separately in strict models.

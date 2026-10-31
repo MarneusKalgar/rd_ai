@@ -16,7 +16,7 @@ from extraction_service.configuration.settings import ApplicationSettings
 @pytest.fixture(autouse=True)
 def isolated_settings_environment(monkeypatch: pytest.MonkeyPatch) -> None:
     for name in list(os.environ):
-        if name.startswith("HW01_") or name == "OPENROUTER_API_KEY":
+        if name.startswith("DI_") or name == "OPENROUTER_API_KEY":
             monkeypatch.delenv(name)
 
 
@@ -157,7 +157,7 @@ def test_environment_overrides_dotenv_and_secret_is_not_serialized(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     (tmp_path / ".env").write_text(
-        "OPENROUTER_API_KEY=dotenv-private-value\nHW01_OLLAMA_BASE_URL=http://host.docker.internal:11434\n"
+        "OPENROUTER_API_KEY=dotenv-private-value\nDI_OLLAMA_BASE_URL=http://host.docker.internal:11434\n"
     )
     monkeypatch.setenv("OPENROUTER_API_KEY", "environment-private-value")
 
@@ -175,8 +175,8 @@ def test_environment_overrides_dotenv_and_secret_is_not_serialized(
     "entry",
     [
         "UNKNOWN_SECRET=private-marker",
-        "HW01_OLLAMA_BASE_URL=ftp://private-marker",
-        "HW01_OLLAMA_BASE_URL=http://private-marker:password@localhost:11434",
+        "DI_OLLAMA_BASE_URL=ftp://private-marker",
+        "DI_OLLAMA_BASE_URL=http://private-marker:password@localhost:11434",
         "OPENROUTER_API_KEY=   ",
     ],
 )
@@ -194,7 +194,7 @@ def test_settings_errors_reject_bad_values_without_disclosing_input(
 @pytest.mark.parametrize("field", ["openrouter_base_url", "ollama_base_url"])
 @pytest.mark.parametrize("suffix", ["?token=private-url-marker", "#private-url-marker"])
 def test_service_urls_reject_queries_and_fragments(tmp_path: Path, field: str, suffix: str) -> None:
-    environment_name = f"HW01_{field.upper()}"
+    environment_name = f"DI_{field.upper()}"
     environment_file = tmp_path / ".env"
     base_url = "http://localhost:11434/"
     environment_file.write_text(f"{environment_name}={base_url}")

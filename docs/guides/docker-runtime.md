@@ -71,9 +71,9 @@ separately. See [Ollama Docker instructions](https://docs.ollama.com/docker).
 | `config/ollama-model.json` | Reviewed local model digest and server version. |
 | `compose.yaml` | Immutable image, internal endpoint, profiles, volumes and server resources. |
 | `.env.compose` / `.env.compose.example` | Compose interpolation controls for resource allocation and setup deadlines. Make prefers the local file, falling back to the tracked example. |
-| `HW01_CONTEXT_LENGTH` | Compose substitution, default **32768**. Passed to the server and setup verifier; independent of common sampling. |
-| `HW01_OLLAMA_MEMORY_LIMIT` | Compose memory ceiling, default **7g**; the Docker VM must have additional memory for the app/engine. The recorded local override uses **10g**. |
-| `HW01_SETUP_*` in the setup container | Compose forwards only allowlisted wait/pull/load/measurement controls to validated settings. No helper dotenv file. |
+| `DI_CONTEXT_LENGTH` | Compose substitution, default **32768**. Passed to the server and setup verifier; independent of common sampling. |
+| `DI_OLLAMA_MEMORY_LIMIT` | Compose memory ceiling, default **7g**; the Docker VM must have additional memory for the app/engine. The recorded local override uses **10g**. |
+| `DI_SETUP_*` in the setup container | Compose forwards only allowlisted wait/pull/load/measurement controls to validated settings. No helper dotenv file. |
 | `ApplicationSettings` | Service URLs and optional secret from process environment or an explicitly present HW `.env`; unchanged by setup. |
 
 For a fresh checkout, copy `.env.compose.example` to `.env.compose`
@@ -81,7 +81,7 @@ and edit the resource/deadline values for the machine. The local file is ignored
 by Git and excluded from images. Make passes the selected file through Compose's
 `--env-file`; override its path with `make COMPOSE_ENV_FILE=path/to/file <target>`
 at the repository root. Shell variables
-take precedence, so `HW01_CONTEXT_LENGTH=32768 make setup-local` still works.
+take precedence, so `DI_CONTEXT_LENGTH=32768 make setup-local` still works.
 Relative override paths are resolved from the repository root, including root Make invocations.
 See [Compose interpolation and precedence](https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/).
 
@@ -117,7 +117,7 @@ Defaults: HTTP request 5 s, overall HTTP-ready wait 60 s (poll 1 s), pull 1800 s
 empty model load 300 s, representative diagnostics 900 s overall / 600 s per request.
 The optional `local-capacity` target sets the overall diagnostic deadline to 3600 s;
 this is a limit, not a promise that all checks finish in an hour. Override setup
-bounds explicitly with `docker compose run -e HW01_SETUP_...` when necessary.
+bounds explicitly with `docker compose run -e DI_SETUP_...` when necessary.
 Compose startup has its own 120 s wait. Server load timeout is 5 minutes,
 parallelism and loaded-model count are both one, and keep-alive is 10 minutes.
 A repeated initialization checks the verified installation without re-pulling.
@@ -125,10 +125,10 @@ Concurrent setup fails with an explicit lock error rather than waiting forever.
 
 ## Persistent results and weights
 
-Compose project `rd-ai-hw01` owns these Docker named volumes:
+Compose project `rd-ai` owns these Docker named volumes:
 
-- **`rd-ai-hw01_ollama-models`** → Ollama `/root/.ollama` (weights/manifests).
-- **`rd-ai-hw01_results`** → app `/app/results` (all results and accounting).
+- **`rd-ai_ollama-models`** → Ollama `/root/.ollama` (weights/manifests).
+- **`rd-ai_results`** → app `/app/results` (all results and accounting).
 
 The image provisions `/app/results` for UID 10001; Docker initializes an empty
 named volume with that ownership. Model selections, stages and future invocations

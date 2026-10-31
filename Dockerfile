@@ -18,7 +18,7 @@ FROM tooling AS dependencies
 COPY pyproject.toml uv.lock ./
 RUN uv sync --locked --no-dev --no-install-project
 
-# Public HW artifacts only. The .dockerignore allowlist excludes credentials,
+# Public project artifacts only. The .dockerignore allowlist excludes credentials,
 # private workbooks, preparation tooling, model weights and generated results.
 FROM dependencies AS artifacts
 COPY src ./src

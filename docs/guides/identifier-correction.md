@@ -33,7 +33,7 @@ Use a new run ID; automatic replay and overwrite are disabled. From the reposito
 root, with the reviewed scoped gold10 baseline exported/restored:
 
 ```sh
-HW01_CONTEXT_LENGTH=49152 make correct-identifiers ARGS='--base-run-id gemma-scoped-roles-v2-gold-20261026-732 --run-id buyer-id-correction-20261026-732'
+DI_CONTEXT_LENGTH=49152 make correct-identifiers ARGS='--base-run-id gemma-scoped-roles-v2-gold-20261026-732 --run-id buyer-id-correction-20261026-732'
 make export-correction ARGS='buyer-id-correction-20261026-732'
 make verify-correction ARGS='buyer-id-correction-20261026-732 --source submission'
 make evaluate-correction ARGS='buyer-id-correction-20261026-732 --source submission'

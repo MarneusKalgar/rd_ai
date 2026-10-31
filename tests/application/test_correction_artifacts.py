@@ -106,7 +106,7 @@ def saved_correction(project_copy: Path, monkeypatch: pytest.MonkeyPatch) -> Cor
         yield {"local": prepared}, {"local": setup}
 
     monkeypatch.setattr(application, "compose_targets", composed)
-    monkeypatch.setenv("HW01_OLLAMA_MODE", "native")
+    monkeypatch.setenv("DI_OLLAMA_MODE", "native")
     for folder in ("gold", "annotations"):
         for path in (project / "data" / folder).glob("*.json"):
             path.unlink()
@@ -252,7 +252,7 @@ def test_docker_mode_cannot_start_another_correction_invocation(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     project, _, _, adapter = saved_correction
-    monkeypatch.setenv("HW01_OLLAMA_MODE", "docker")
+    monkeypatch.setenv("DI_OLLAMA_MODE", "docker")
     with pytest.raises(ValueError, match="native Ollama mode"):
         run_corrections(
             project,

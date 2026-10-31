@@ -1,4 +1,4 @@
-name: rd-ai-hw01
+name: rd-ai
 
 x-ollama-image: &ollama-image ollama/ollama@sha256:265409e1d931028a8f7d5a32bcbafddd7bffbc6cc629d77efe9560adf692a5e7
 x-app: &app
@@ -17,26 +17,26 @@ x-app: &app
 
 x-setup-environment: &setup-environment
   # Only these allowlisted values reach local helpers; app credentials stay separate.
-  HW01_SETUP_CONTEXT_LENGTH: ${HW01_CONTEXT_LENGTH:-32768}
-  HW01_SETUP_WAIT_SECONDS: ${HW01_SETUP_WAIT_SECONDS:-60}
-  HW01_SETUP_POLL_SECONDS: ${HW01_SETUP_POLL_SECONDS:-1}
-  HW01_SETUP_REQUEST_SECONDS: ${HW01_SETUP_REQUEST_SECONDS:-5}
-  HW01_SETUP_PULL_SECONDS: ${HW01_SETUP_PULL_SECONDS:-1800}
-  HW01_SETUP_LOAD_SECONDS: ${HW01_SETUP_LOAD_SECONDS:-300}
-  HW01_SETUP_KEEP_ALIVE_SECONDS: ${HW01_SETUP_KEEP_ALIVE_SECONDS:-600}
-  HW01_SETUP_CAPACITY_SECONDS: ${HW01_SETUP_CAPACITY_SECONDS:-900}
-  HW01_SETUP_MEASUREMENT_SECONDS: ${HW01_SETUP_MEASUREMENT_SECONDS:-600}
+  DI_SETUP_CONTEXT_LENGTH: ${DI_CONTEXT_LENGTH:-32768}
+  DI_SETUP_WAIT_SECONDS: ${DI_SETUP_WAIT_SECONDS:-60}
+  DI_SETUP_POLL_SECONDS: ${DI_SETUP_POLL_SECONDS:-1}
+  DI_SETUP_REQUEST_SECONDS: ${DI_SETUP_REQUEST_SECONDS:-5}
+  DI_SETUP_PULL_SECONDS: ${DI_SETUP_PULL_SECONDS:-1800}
+  DI_SETUP_LOAD_SECONDS: ${DI_SETUP_LOAD_SECONDS:-300}
+  DI_SETUP_KEEP_ALIVE_SECONDS: ${DI_SETUP_KEEP_ALIVE_SECONDS:-600}
+  DI_SETUP_CAPACITY_SECONDS: ${DI_SETUP_CAPACITY_SECONDS:-900}
+  DI_SETUP_MEASUREMENT_SECONDS: ${DI_SETUP_MEASUREMENT_SECONDS:-600}
 
 x-local-environment: &local-environment
   <<: *setup-environment
-  HW01_OLLAMA_BASE_URL: http://ollama:11434
-  HW01_OLLAMA_MODE: docker
-  HW01_SETUP_IMAGE: *ollama-image
+  DI_OLLAMA_BASE_URL: http://ollama:11434
+  DI_OLLAMA_MODE: docker
+  DI_SETUP_IMAGE: *ollama-image
 
 x-native-environment: &native-environment
   <<: *setup-environment
-  HW01_OLLAMA_BASE_URL: ${HW01_NATIVE_OLLAMA_BASE_URL:-http://host.docker.internal:11434}
-  HW01_OLLAMA_MODE: native
+  DI_OLLAMA_BASE_URL: ${DI_NATIVE_OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+  DI_OLLAMA_MODE: native
 
 services:
   offline:
@@ -83,7 +83,7 @@ services:
       - ./results/garage-config/garage.toml:/etc/garage.toml:ro
       - garage-data:/var/lib/garage
     ports:
-      - "127.0.0.1:${HW01_GARAGE_PORT:-3900}:3900"
+      - "127.0.0.1:${DI_GARAGE_PORT:-3900}:3900"
     read_only: true
     cap_drop: [ALL]
     security_opt: [no-new-privileges:true]
@@ -154,7 +154,7 @@ services:
     profiles: [local]
     environment:
       OLLAMA_HOST: 0.0.0.0:11434
-      OLLAMA_CONTEXT_LENGTH: ${HW01_CONTEXT_LENGTH:-32768}
+      OLLAMA_CONTEXT_LENGTH: ${DI_CONTEXT_LENGTH:-32768}
       # Keep model work sequential for bounded memory and comparable experiments.
       OLLAMA_MAX_LOADED_MODELS: 1
       OLLAMA_NUM_PARALLEL: 1
@@ -171,7 +171,7 @@ services:
     security_opt:
       - no-new-privileges:true
     # Per-container ceiling; Docker Desktop's VM needs additional headroom.
-    mem_limit: ${HW01_OLLAMA_MEMORY_LIMIT:-7g}
+    mem_limit: ${DI_OLLAMA_MEMORY_LIMIT:-7g}
     healthcheck:
       test: [CMD, ollama, list]
       interval: 5s
@@ -180,6 +180,14 @@ services:
       start_period: 10s
 
 volumes:
+  # External names deliberately retain the original data/ledger identities.
+  # Missing storage fails rather than creating an empty replacement.
   results:
+    external: true
+    name: rd-ai-hw01_results
   ollama-models:
+    external: true
+    name: rd-ai-hw01_ollama-models
   garage-data:
+    external: true
+    name: rd-ai-hw01_garage-data

@@ -80,7 +80,7 @@ values alone do not make the models or their compute budgets equivalent.
 ## Commands
 
 Start the existing Ollama desktop app. Its version endpoint must be reachable
-from the Python container. Override `HW01_NATIVE_OLLAMA_BASE_URL` in
+from the Python container. Override `DI_NATIVE_OLLAMA_BASE_URL` in
 `.env.compose` only when the app uses another address/port. No provider dotenv
 file or credential is injected into the native service, and it has no Docker
 Ollama dependency. Keep the HTTP service local; the Docker Desktop host route

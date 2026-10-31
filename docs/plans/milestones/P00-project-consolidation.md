@@ -1,8 +1,8 @@
 # P00 — Project consolidation implementation plan
 
-- Version: **1.3**.
+- Version: **1.4**.
 - Created: **2026-10-31**.
-- Status: S01–S07 and selected low-risk S08 scope concluded 2026-10-31; sensitive naming migrations deferred.
+- Status: S01–S08 concluded 2026-10-31; persistent and archive identities explicitly retained.
 - Parent: [document-intelligence roadmap](../../roadmap.md#p00--project-consolidation-and-preserved-baseline).
 - Completed consolidation evidence: [original execution record](../../reports/P00-consolidation.md).
 
@@ -16,8 +16,10 @@ The original root migration is complete. The additional **P00-S08** responds to
 the later legacy-name review: remove unnecessary command/documentation names,
 and assess runtime/storage names before any coordinated migration. The selected
 low-risk cleanup has since retired aliases and repaired current instructions.
-Settings, packages, resources and archive formats remain unchanged. Original
-S01–S07 observations and acceptance remain valid.
+The follow-up requested on 2026-10-31 selects an atomic DI environment contract,
+package metadata rename and disposable Compose project rename. Existing volume,
+bucket and archive-format identities are retained. Original S01–S07 observations
+and acceptance remain historical and valid.
 
 Inherited evidence already exists:
 
@@ -46,10 +48,11 @@ models; new dependencies or Python namespace renames; application architecture
 refactoring; inference, capacity probes, downloads of models or paid calls;
 Git-history rewriting; changes to AspectLoop; automatic commits or pushes.
 
-S08 extends scope to low-risk legacy naming cleanup. Package metadata,
+S08 extends scope to coordinated legacy naming cleanup. Package metadata,
 environment contracts and persistent-resource naming may change only through
-the explicitly selected, tested migration paths in that slice. No such migration
-is selected by adding the plan; an assessment may conclude retain or defer.
+the explicitly selected, tested migration paths in that slice. The follow-up selects DI_* settings, document-intelligence package metadata and
+rd-ai Compose naming; persistent-data and archive-format renames are explicitly
+not selected. An assessment may conclude retain or defer for those identities.
 
 Proposed target layout:
 
@@ -266,9 +269,12 @@ evidence and a scoped completion decision, with no new billing or label claims.
 
 ### P00-S08 — Legacy-name cleanup and risk-gated migration review
 
-**Status: selected low-risk cleanup concluded.** See the
-[cleanup record](../../reports/legacy-name-cleanup.md). Runtime/package/storage
-migrations were not selected and remain deferred. Execute only selected naming changes. The default
+**Status: selected runtime migration and retained-name review concluded.**
+See the original [cleanup record](../../reports/legacy-name-cleanup.md) and the
+[runtime migration record](../../reports/runtime-name-migration.md). The subsequent
+request selects `DI_*`, `document-intelligence` and Compose project `rd-ai`.
+External volumes retain their actual names; bucket, object keys and archive v1
+formats are retained. Execute only selected naming changes. The default
 disposition for unselected runtime/storage changes is retained or deferred,
 with the reason recorded. Do not turn removal of Make aliases into an implicit
 archive-format, storage or credential migration.
@@ -284,10 +290,10 @@ archive-format, storage or credential migration.
    | Make aliases, `.PHONY` entries and compatibility help | Low-risk cleanup: canonical targets already exist; remove alias routing without changing canonical recipes or execution permissions. |
    | Current README/AGENTS, guides/reference, quality guidance and report reproduction instructions | Replace current command examples with canonical targets; preserve dated execution observations and original archived commands. |
    | Generic headings/docstrings, scratch-directory prefixes and synthetic test bucket names | Rename where they are descriptive/disposable; verify no identity calculation or fixture contract depends on their bytes. |
-   | `hw01-structured-extraction` package metadata | Coordinated optional change: update metadata and let uv regenerate the lockfile inside Docker; dependency versions must not drift. Keep the Python namespace unchanged. |
-   | `HW01_`, `HW01_SETUP_`, `HW01_ARCHIVE_` | Coordinated optional contract migration across settings, Compose, generators, local files, examples and tests; avoid ignored overrides and fallback to defaults. |
-   | Compose project and generated container/image/network names | Resource review required: decouple disposable names from persistent volume identities before a selected project rename. |
-   | Named results/Garage volumes and real bucket `hw01-evidence` | Persistent-data migration only if justified; preserve recoverable contents, permissions, configuration and ledger identity. No reinitialization. |
+   | `hw01-structured-extraction` package metadata | Selected: rename to `document-intelligence`; update metadata and let uv regenerate the lockfile inside Docker; dependency versions must not drift. Keep the Python namespace unchanged. |
+   | `HW01_`, `HW01_SETUP_`, `HW01_ARCHIVE_` | Selected atomic `DI_*` migration across settings, Compose, generators, local files, examples and tests; avoid ignored overrides and fallback to defaults. |
+   | Compose project and generated container/image/network names | Selected `rd-ai` project with original explicit external volume names; missing storage must fail, not initialize an empty replacement. |
+   | Named results/Garage volumes and real bucket `hw01-evidence` | Retain exact identities: no data-copy cutover or bucket rename. Capture recoverable copies and verify original contents, permissions and ledger identity. |
    | `hw01-archive-*-v1`, object keys, indexes, receipts and archived payloads | Preserve existing evidence; any future writer format/namespace change needs versioned compatibility and a separate decision. |
 
 2. **Perform the selected low-risk cleanup as one bounded change.** Retire the
@@ -431,9 +437,9 @@ The following S01–S07 acceptance record is concluded and remains historical:
 
 Additional follow-up gate:
 
-- [x] S08's selected low-risk cleanup and risk review are complete, with a disposition for
-  every legacy-name group and preservation/compatibility/rollback evidence for
-  any selected sensitive migration. Higher-risk migrations remain deferred.
+- [x] S08's follow-up environment/package/Compose migration passes its independent
+  preservation, compatibility and rollback gates; remaining persistent/archive
+  names have explicit retain dispositions.
 
 Stop a slice if a destination differs unexpectedly, a resource resolves to new
 empty storage, frozen hashes/metrics change, private data enters a candidate
@@ -454,3 +460,4 @@ Git resets, force pushes and destructive Docker cleanup as rollback mechanisms.
 | 1.1 | 2026-10-31 | P00 executed; all acceptance gates passed. See the migration report for evidence and limits. |
 | 1.2 | 2026-10-31 | Add planned S08: low-risk legacy-name cleanup, risk-gated runtime/storage decisions and immutable historical-format preservation; original S01–S07 acceptance retained. |
 | 1.3 | 2026-10-31 | Execute selected low-risk cleanup; retain/defer runtime, package, storage and historical-format names. |
+| 1.4 | 2026-10-31 | Select and verify atomic DI settings, package metadata and Compose project migration; retain explicit external storage and immutable evidence identities. |

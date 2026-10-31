@@ -46,9 +46,12 @@ explicit and may download removed resources; they are not the default workflow.
 Current commands run from this repository root. Legacy `hw01-*` Make aliases
 were retired; use canonical targets such as `make check` and
 `make reproduce-report`. Historical `cd hw-01` directions describe the old layout.
-The Python namespace, environment names, Compose project
-`rd-ai-hw01`, named volumes and historical `hw01/` archive namespace are retained
-to preserve runtime/evidence identity.
+The package is `document-intelligence`; settings use `DI_*` and Compose uses
+project `rd-ai`. The Python namespace remains `extraction_service`. Explicit
+external volume names retain the original storage and ledger; the bucket and
+historical `hw01/` archive namespace remain unchanged. See the
+[runtime naming migration](docs/guides/runtime-name-migration.md) for compatibility
+and rollback instructions.
 
 Local `.env`, `.env.compose` and `.env.archive` files remain ignored. Make falls
 back to `.env.compose.example` when no local controls file exists. Never reset

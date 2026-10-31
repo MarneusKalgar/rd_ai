@@ -258,7 +258,7 @@ def test_actual_http_receives_projected_formats_and_independent_full_sources(
 ) -> None:
     service.native = True
     for key, value in service.environment().items():
-        if key.startswith("HW01_"):
+        if key.startswith("DI_"):
             monkeypatch.setenv(key, value)
     headers, lines = parts(gold)
     service.responses = [json.dumps(headers), json.dumps(lines)]

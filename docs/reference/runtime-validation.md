@@ -151,12 +151,12 @@ From the repository root, build the pinned tooling image, then run the desired
 dependency command through it. For example, to add or change the HTTP dependency:
 
 ```sh
-docker build --target tooling -t rd-ai-hw01-tooling:0.12.11 .
+docker build --target tooling -t rd-ai-tooling:0.12.11 .
 docker run --rm \
   --mount type=bind,src="$PWD",dst=/workspace \
   --workdir /workspace \
   --env UV_CACHE_DIR=/tmp/uv-cache \
-  rd-ai-hw01-tooling:0.12.11 uv add --no-sync 'httpx>=0.28,<0.29'
+  rd-ai-tooling:0.12.11 uv add --no-sync 'httpx>=0.28,<0.29'
 ```
 
 Replace the final uv arguments as appropriate (`PACKAGE` is a placeholder):

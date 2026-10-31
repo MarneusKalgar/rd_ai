@@ -196,7 +196,7 @@ def test_runtime_cli_hides_bad_environment_values(
     project_copy: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     private = "do-not-print-this-value"
-    monkeypatch.setenv("HW01_SETUP_IMAGE", private)
+    monkeypatch.setenv("DI_SETUP_IMAGE", private)
 
     status = main(["--project-dir", str(project_copy), "readiness"])
 
@@ -217,8 +217,8 @@ def test_exhaustive_cli_routes_to_full_diagnostic(
 ) -> None:
     local_setup(project_copy, "local", setup_settings, client, initialize=True)
     server.requests.clear()
-    monkeypatch.setenv("HW01_SETUP_IMAGE", setup_settings.image)
-    monkeypatch.setenv("HW01_SETUP_CONTEXT_LENGTH", "16384")
+    monkeypatch.setenv("DI_SETUP_IMAGE", setup_settings.image)
+    monkeypatch.setenv("DI_SETUP_CONTEXT_LENGTH", "16384")
     monkeypatch.setattr(runtime_cli, "ollama_client", lambda settings: nullcontext(client))
 
     status = main(["--project-dir", str(project_copy), "readiness", "--exhaustive"])
@@ -250,7 +250,7 @@ def test_local_cli_reports_blocked_exit_without_provider_calls(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
-    monkeypatch.setenv("HW01_SETUP_IMAGE", setup_settings.image)
+    monkeypatch.setenv("DI_SETUP_IMAGE", setup_settings.image)
     monkeypatch.setattr(runtime_cli, "ollama_client", lambda settings: nullcontext(client))
     server.status_codes["/api/generate"] = 500
     server.replacements["/api/generate"] = {"error": "insufficient memory"}
