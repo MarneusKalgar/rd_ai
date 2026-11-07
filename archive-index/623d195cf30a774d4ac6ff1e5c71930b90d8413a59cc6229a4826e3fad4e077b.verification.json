@@ -1,0 +1,11 @@
+{
+  "version": "p02-restore-verification-v1",
+  "archive_sha256": "623d195cf30a774d4ac6ff1e5c71930b90d8413a59cc6229a4826e3fad4e077b",
+  "bundles": 5,
+  "payload_files": 99,
+  "all_original_payload_bytes_match": true,
+  "restored_report_reproduced": true,
+  "full_remote_get_verified": true,
+  "inference_performed": false,
+  "off_device_backup": false
+}

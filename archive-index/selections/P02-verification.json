@@ -1,0 +1,16 @@
+{
+  "bundles": [
+    {
+      "path": "results/submission/P02-verification-20261107",
+      "source_inventory_sha256": "fe6474d3694f2fffa57877262064c21d3967ce6a4ed04407e28fcde90b53ccd4"
+    },
+    {
+      "path": "results/submission/P02-E01-v2",
+      "source_inventory_sha256": "e2d30b030f15a9a92f8058e9cd07534a52c5f163090768ef65af2a9699b88b37"
+    },
+    {
+      "path": "results/submission/P02-E01-v3",
+      "source_inventory_sha256": "40eb47361704f8b344ae9b2a751be05293443a5f9c91163a2a6c4b325874de63"
+    }
+  ]
+}

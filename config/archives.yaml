@@ -1,4 +1,7 @@
 selections:
+  P02-verification:
+    membership: results/submission/P02-verification-20261107/membership.json
+    evidence_index: archive-index/selections/P02-verification.json
   P01-verification:
     membership: results/submission/P01-verification-20261101/membership.json
     evidence_index: archive-index/selections/P01-verification.json

@@ -23,6 +23,7 @@ sections 8–9 retain their completed outcomes.
 - [Configure Docker and persistent storage](guides/docker-runtime.md).
 - [Inspect saved outputs with deterministic row diagnostics](guides/row-diagnostics.md).
 - [Assess source evidence and isolate Gemma support trials](guides/source-support.md).
+- [Inspect exact field provenance without inference](guides/source-provenance.md).
 - [Run a bounded source-guided identifier correction](guides/identifier-correction.md).
 - [Load pinned skill/example resources into prompts](guides/prompt-resources.md).
 - [Extract headers and lines in independent stages](guides/header-line-split.md).
@@ -47,6 +48,7 @@ sections 8–9 retain their completed outcomes.
 - [Project R&D roadmap](roadmap.md).
 - [P00 project consolidation implementation plan](plans/milestones/P00-project-consolidation.md).
 - [P01 evaluation protocols implementation plan](plans/milestones/P01-evaluation-protocols.md).
+- [P02 source-provenance protocol (frozen draft; execution status in report)](plans/milestones/P02-source-provenance.md).
 - [Required provider/local matrix and optional local exercises](plans/matrix-experiment.md).
 - [Provider-screening protocol](plans/provider-screening.md).
 
@@ -58,6 +60,7 @@ permission for model inference or spending.
 
 | Evidence | Document |
 | --- | --- |
+| Offline field locations, inherited support linkage and preservation controls | [P02 source provenance](reports/P02-source-provenance.md) |
 | Offline protocols, paired comparison and challenge/reproduction verification | [P01 evaluation protocols](reports/P01-evaluation-protocols.md) |
 | Root migration, frozen identity preservation and offline checks | [P00 consolidation](reports/P00-consolidation.md) |
 | Retired command aliases and low-risk naming cleanup | [P00-S08 cleanup](reports/legacy-name-cleanup.md) |

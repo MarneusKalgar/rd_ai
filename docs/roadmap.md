@@ -1,9 +1,9 @@
 # Document intelligence R&D roadmap
 
-- Version: **1.7**.
+- Version: **1.9**.
 - Created and source mappings reviewed: **2026-10-31**.
 - Framework/SDK proposals reviewed: **2026-11-07**.
-- Status: P00 and selected P01 offline scope concluded; later milestones planned.
+- Status: P00 and selected P01/P02 offline slices concluded; later capability studies remain conditional/planned.
 - Implementation baseline: `654be96` — ledger-free report reproduction.
 
 ## 1. Authority and project outcome
@@ -185,7 +185,7 @@ observations. Never require disclosure of private model reasoning as evidence.
 | --- | --- | --- | --- |
 | P00 | One project structure with preserved baseline and reproducibility | Existing saved evidence | Consolidation concluded; S08 runtime follow-up concluded |
 | P01 | Explicit evaluation protocol and regression/challenge capabilities for the next question | P00 | Offline protocol/comparison scope concluded; judge study unselected |
-| P02 | Inspectable source-grounded extraction and a measured support decision | P01's protocol for the selected experiment | Several exercises inherited; new scope must be selected |
+| P02 | Inspectable source-grounded extraction and a measured support decision | P01's protocol for the selected experiment | Selected text-provenance slice concluded; workbook/semantic studies conditional |
 | P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | Planned |
 | P04 | Human-reviewed proposals with independently enforced application authority | P01; usable source evidence; P03 or controlled retrieval fixtures | Planned; LangGraph, agent/MCP and tracing comparisons conditional |
 | P05 | A usable local interface and measured operational/release controls | A selected fixed workflow from P04 | Planned; deployable-service expansion conditional |
@@ -287,6 +287,20 @@ unexercised unless that optional study actually runs.
 
 **Question:** Which source representation or support mechanism improves usable
 field/row extraction, and what review burden does it introduce?
+
+The [frozen P02 implementation plan](plans/milestones/P02-source-provenance.md)
+selected P02-E01: offline field-to-source byte references on the thirty saved
+native v2 baseline records. Its execution covers PO-number occurrence candidates
+and identifier/date linkage to inherited role checks, with zero new inference.
+Literal occurrence, semantic support and correctness have separate outcomes;
+reviewed support labels cannot be inferred from existing PO gold. Exact-location
+mechanics and synthetic controls have their own acceptance gates; real semantic
+accuracy requires a separately selected reviewed-anchor study. Workbook parsing
+and new representation/model trials remain conditional. The
+[execution report](reports/P02-source-provenance.md) records 1,707 selected fields,
+explicit ambiguity, unchanged inherited diagnostics and the 1,015-test gate.
+The selected inspection capability is concluded, without claiming broader
+spreadsheet understanding, semantic accuracy or improved extraction quality.
 
 **Inherited:** row selection/raw fallback and role-cue gains, limited guarded
 identifier correction, examples and independent header/line stages. Their
@@ -538,6 +552,8 @@ allowance and standing human approval; roadmap creation grants none.
 | 1.5 | 2026-10-31 | Add draft P01 implementation plan: offline protocol/exposure/rubric work, paired comparisons, bounded challenges and conditional judge calibration. |
 | 1.6 | 2026-11-01 | Conclude P01 offline protocol/comparison scope with 982-test gate, finite controls, preserved baseline and verified archival; human/judge/live-model extensions unexercised. |
 | 1.7 | 2026-11-07 | Place conditional LangChain/LangGraph comparisons in P03/P04 and LangSmith assessment in P04/P05; retain Python baseline, independent AspectLoop AI SDK proposal, accounting/authority boundaries and explicit adoption/export gates. |
+| 1.8 | 2026-11-07 | Add draft P02-E01 text-provenance implementation plan; distinguish inherited diagnostics, exact locations, semantic review authority and conditional workbook/model experiments. |
+| 1.9 | 2026-11-07 | Execute selected P02 text-provenance slice without inference: bound locations and inherited context linkage, offline commands, preserved P01/matrix results and 1,015-test gate; broader workbook/semantic studies remain conditional. |
 
 Use Git history for prior revisions. Record material changes to milestone scope,
 data authority or topic sources here; do not rewrite historical experiment claims.

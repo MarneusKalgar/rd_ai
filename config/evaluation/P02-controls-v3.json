@@ -1,0 +1,29 @@
+{
+  "authority": "synthetic technical oracles; no human semantic review",
+  "groups": [
+    "exact_bytes",
+    "unicode_boundaries",
+    "line_endings",
+    "invalid_ranges",
+    "source_tampering",
+    "record_path_binding",
+    "repeated_values",
+    "wrong_role",
+    "leading_zeroes",
+    "normalized_dates",
+    "null_absence",
+    "role_distinctions",
+    "ambiguous_products",
+    "overflow_unknown",
+    "failed_population",
+    "cli_tampering",
+    "untrusted_data_paths",
+    "offline_reproduction"
+  ],
+  "process_driver_sha256": "7657657efe1b7306de135d1e8d7085506ef54828453b7d13aa70e170586959e6",
+  "test_binding": {
+    "path": "tests/application/test_provenance.py",
+    "sha256": "ea7024f821fe84034440fecc392b84c8db24cc778e0f5a6693ce78f59ac984de"
+  },
+  "version": "provenance-controls-v3"
+}

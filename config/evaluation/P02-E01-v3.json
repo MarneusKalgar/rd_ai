@@ -1,0 +1,237 @@
+{
+  "archive": {
+    "path": "archive-index/c3398a3c846488086ef52be9a4706b0eb9568ab94f56f42d3190610d96ad263b.json",
+    "sha256": "510f30785e852afa156fa798a8d2b49e7d562561f72528b302a0f9d036c0a3e3"
+  },
+  "authority": "development evidence; no semantic accuracy certification",
+  "controls": {
+    "path": "config/evaluation/P02-controls-v3.json",
+    "sha256": "ebd4c6766186aa38d79513c5b772f0e9f9a1ba271764807aa83adda3beab06f6"
+  },
+  "corpus": {
+    "path": "data/corpus-manifest.json",
+    "sha256": "feef3ad665d97cdc06f6e2cb1c31cc621309baf9b7f1532699ff3a5418365575"
+  },
+  "experiment_id": "P02-E01",
+  "exposure": {
+    "path": "config/evaluation/exposure-v1.json",
+    "sha256": "2b0d110232fb408ed4b604da0af4c9a5ec06c8678aff60fa2048f992349f1397"
+  },
+  "fields": [
+    "purchaseOrderNumber",
+    "buyerProductIdentifier",
+    "buyerDeliveryDate"
+  ],
+  "generated_tokens": 0,
+  "input_ids": [
+    "B02-S002-PO01",
+    "B02-S003-PO01",
+    "B02-S004-PO01",
+    "B02-S005-PO01",
+    "B02-S006-PO01",
+    "B02-S007-PO01",
+    "B02-S008-PO01",
+    "B02-S009-PO01",
+    "B02-S011-PO01",
+    "B02-S012-PO01",
+    "B02-S013-PO01",
+    "B02-S014-PO01",
+    "B02-S015-PO01",
+    "B02-S016-PO01",
+    "B02-S017-PO01",
+    "B02-S018-PO01",
+    "B02-S019-PO01",
+    "B02-S021-PO01",
+    "B02-S022-PO01",
+    "B02-S023-PO01",
+    "B02-S025-PO01",
+    "B02-S026-PO01",
+    "B02-S028-PO01",
+    "B02-S029-PO01",
+    "B02-S030-PO01",
+    "B02-S032-PO01",
+    "B02-S033-PO01",
+    "B02-S036-PO01",
+    "B02-S040-PO01",
+    "B02-S044-PO01"
+  ],
+  "model_calls": 0,
+  "new_spend_usd": "0",
+  "output": "results/submission/P02-E01-v3",
+  "plan": {
+    "path": "docs/plans/milestones/P02-source-provenance.md",
+    "sha256": "2e6b8ae7bed9c812fb138b0e2ff3f1d14a1307e997f76e89b463c739210c5ffa"
+  },
+  "rubric": {
+    "path": "config/evaluation/rubric-v1.json",
+    "sha256": "e5fd883a0d768025fd6838cf4aa3afcba1684396067f0ef1b3cef89f1e38259c"
+  },
+  "schema": {
+    "path": "schemas/purchase-order-extraction.v1.schema.json",
+    "sha256": "efd06205171717bf69997007c36a0c85a66f55384042e79bda75df102be9bafb"
+  },
+  "selection": {
+    "comparison_controls": {
+      "context": {
+        "context_enforcement": "counted",
+        "context_length": 49152,
+        "pricing_stop": null,
+        "processor": "gpu_or_mixed",
+        "thinking": {
+          "advertised": {
+            "default": true,
+            "values": [
+              false,
+              true
+            ]
+          },
+          "effective": false,
+          "requested": false
+        },
+        "tokenizer_sha256": "42e3a238e10726346e996c7e3569fcfb2e8d47173944a3cd56826d8dc4d9a9fb"
+      },
+      "dependency": {
+        "endpoint": "http://host.docker.internal:11434/",
+        "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+        "model_name": "gemma4:e4b-it-qat",
+        "runtime": "ollama-native",
+        "runtime_version": "0.40.7",
+        "serving_provider": null
+      },
+      "execution": {
+        "backoff_initial_seconds": 1.0,
+        "backoff_max_seconds": 30.0,
+        "dependency_failure_limit": 3,
+        "input_timeout_seconds": 7205.0,
+        "matrix_reserve_usd": 3.5,
+        "request_timeout_seconds": 1800.0,
+        "transport_retries": 1
+      },
+      "model_id": "local",
+      "model_name": "gemma4:e4b-it-qat",
+      "runtime": "ollama-native",
+      "sampling": {
+        "id": "baseline-16384",
+        "max_output_tokens": 16384,
+        "temperature": 0.0,
+        "top_p": 1.0
+      },
+      "schema_sha256": "efd06205171717bf69997007c36a0c85a66f55384042e79bda75df102be9bafb",
+      "stage": "matrix"
+    },
+    "identity": {
+      "context": {
+        "context_enforcement": "counted",
+        "context_length": 49152,
+        "pricing_stop": null,
+        "processor": "gpu_or_mixed",
+        "thinking": {
+          "advertised": {
+            "default": true,
+            "values": [
+              false,
+              true
+            ]
+          },
+          "effective": false,
+          "requested": false
+        },
+        "tokenizer_sha256": "42e3a238e10726346e996c7e3569fcfb2e8d47173944a3cd56826d8dc4d9a9fb"
+      },
+      "dependency": {
+        "endpoint": "http://host.docker.internal:11434/",
+        "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+        "model_name": "gemma4:e4b-it-qat",
+        "runtime": "ollama-native",
+        "runtime_version": "0.40.7",
+        "serving_provider": null
+      },
+      "execution": {
+        "backoff_initial_seconds": 1.0,
+        "backoff_max_seconds": 30.0,
+        "dependency_failure_limit": 3,
+        "input_timeout_seconds": 7205.0,
+        "matrix_reserve_usd": 3.5,
+        "request_timeout_seconds": 1800.0,
+        "transport_retries": 1
+      },
+      "model_id": "local",
+      "model_name": "gemma4:e4b-it-qat",
+      "prompt_id": "v2",
+      "prompt_sha256": "6a03379937695a2e5b127d292fc6ddb2301c9048b730ca3f9982d6c6443d155b",
+      "runtime": "ollama-native",
+      "sampling": {
+        "id": "baseline-16384",
+        "max_output_tokens": 16384,
+        "temperature": 0.0,
+        "top_p": 1.0
+      },
+      "schema_sha256": "efd06205171717bf69997007c36a0c85a66f55384042e79bda75df102be9bafb",
+      "stage": "matrix"
+    },
+    "runs": {
+      "matrix-native-v2-gold-20261024-72": {
+        "manifest_sha256": "25ee66000d3021277b1912cf134640fbfd9e0b95b768034053b390289538ff21",
+        "original_execution": {
+          "api_budget_usd": 10.0,
+          "backoff_initial_seconds": 1.0,
+          "backoff_max_seconds": 30.0,
+          "dependency_failure_limit": 3,
+          "input_timeout_seconds": 7205.0,
+          "matrix_reserve_usd": 3.5,
+          "request_timeout_seconds": 1800.0,
+          "transport_retries": 1
+        },
+        "records": {
+          "B02-S002-PO01": "29a9917cbe84c6c959bc6c9c71f5523b6e611464a09dd7f2e3bdbc332fdd0d34",
+          "B02-S003-PO01": "86a4a0f0aef835cb2d81a6f9db54e22ae933306238255e79b00a1f8828ee0938",
+          "B02-S011-PO01": "21bc8aa8ac5d66faaf2a12471122cf591b1124130ae91450d375766e6879716d",
+          "B02-S012-PO01": "1158593b3d967942e87279c4caf8e5cb9865cc65dcd407bd3c4a1fe028a507e4",
+          "B02-S016-PO01": "3c97dec0a72a71439bac32820509db0baf8e65d710df1684f1965d92bc44f29e",
+          "B02-S021-PO01": "2a64fcdca1bfd62235e6ac3a3ecb197fe20da219274bd40108d0e1df1f2978f8",
+          "B02-S023-PO01": "9cbe9e627eefcbb18442e9031fa7711720c24b34a87ebb9c801ac6e7b319ccfc",
+          "B02-S032-PO01": "fedab75b535f8a8b142283a901ca3ee1d7793422da72c677c0f4319685f84388",
+          "B02-S040-PO01": "9eb826159168d202ad88de5ce5dd63e4bb27539fe8fdd26342d46a3eb3848033",
+          "B02-S044-PO01": "fc5e017d33394f8057852ad2361b51c709f2e63905dfbebe9da50323cfb322e9"
+        }
+      },
+      "matrix-native-v2-remaining-20261024-72": {
+        "manifest_sha256": "ee9b939b2293d1fb47aab996dfba2b646b58e56cd01d3ab1f2be8ddf43237633",
+        "original_execution": {
+          "api_budget_usd": 10.0,
+          "backoff_initial_seconds": 1.0,
+          "backoff_max_seconds": 30.0,
+          "dependency_failure_limit": 3,
+          "input_timeout_seconds": 7205.0,
+          "matrix_reserve_usd": 3.5,
+          "request_timeout_seconds": 1800.0,
+          "transport_retries": 1
+        },
+        "records": {
+          "B02-S004-PO01": "e444d46a1fca4429f6a48e77065e3cc42657136d69d36732413a16d410161793",
+          "B02-S005-PO01": "7d2284ba6738d9c711145d2d7aac16712cbec15919cc1b162a33a5135b016f52",
+          "B02-S006-PO01": "8df9cbacf5bd21aebd8ebb8981d5c1c01080147b6019db1eb003bd12db83b2a9",
+          "B02-S007-PO01": "4f2e78105cd3d5145017553ea6b3ecef204f8e39e5557cd4bb2163337b23e8f8",
+          "B02-S008-PO01": "9b85c12fd0ddeecb0585ea1d5aacb6bc4003211b739e2796a30f7c00ae27bc66",
+          "B02-S009-PO01": "fe89e54d3d73822a594e115fe87f0ab354fed8d7b908d88d590d11c539406d2f",
+          "B02-S013-PO01": "82f31d92ec0686be9ff7d776369bb46c1d5c51911fbe36d2f5f0929ae06a647f",
+          "B02-S014-PO01": "bb61d2387fb89faba42fd05337d3df88f886df3d33c2f4af466798a7b1ba5848",
+          "B02-S015-PO01": "1bd88c8a6686d49279f08892fb388a99049ade0904521bf76a495a943240c237",
+          "B02-S017-PO01": "6b2609925a6063b5802e52b62a8d6b57d15f093c0e84c0d3c5b8c811a6e7f888",
+          "B02-S018-PO01": "22c48cc384c4a627f52067b35234ec2ae5a78e67ad51d14bbdb6bb0d876154c4",
+          "B02-S019-PO01": "687ba80b6f8facd48c88e5a6496c5f24e0ba74cc67d51329dc503ebc59a2418c",
+          "B02-S022-PO01": "108f4e03ceef5d108251ed4e99c8177ebfd9b77d912d9b576ff1710f696f6e7d",
+          "B02-S025-PO01": "50dbf6dc322b901de254fc440d3d45bbc11ebdf3069959ec74c57b16c09d4f78",
+          "B02-S026-PO01": "228700fdcb9d1f589a19d3a5e9506172936e5f56a0115d081d48072f7149d1e8",
+          "B02-S028-PO01": "250a02f46cfd80bf7ded2d9033b06acf04b1e1a5ba3d1e7d5d6017716c0db0d3",
+          "B02-S029-PO01": "c3196b3b1d4cf55a71dee0a7436e9b716c922a6aef20463e4c49a96e06ca8c47",
+          "B02-S030-PO01": "e338428127ab448ec3b882349516a0daa05afeae8d72d3815aa0059a69843c33",
+          "B02-S033-PO01": "57f136aee9b7b190e57cfaff44101edb6f78ae27d5ced1238ff875591d74b7d6",
+          "B02-S036-PO01": "b0b24a7c960b18ffd373e5dfc1dae4e8bc1e473292839a8732ece533209f6d0a"
+        }
+      }
+    }
+  },
+  "source_revision": "3be1bdd",
+  "version": "provenance-protocol-v1"
+}

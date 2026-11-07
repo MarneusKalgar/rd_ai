@@ -1,0 +1,42 @@
+{
+  "archive_sha256": "623d195cf30a774d4ac6ff1e5c71930b90d8413a59cc6229a4826e3fad4e077b",
+  "archive_size": 4634483,
+  "bundles": [
+    {
+      "inventory_sha256": "e2d30b030f15a9a92f8058e9cd07534a52c5f163090768ef65af2a9699b88b37",
+      "kind": "evidence",
+      "name": "P02-E01-v2",
+      "payload_files": 3
+    },
+    {
+      "inventory_sha256": "40eb47361704f8b344ae9b2a751be05293443a5f9c91163a2a6c4b325874de63",
+      "kind": "evidence",
+      "name": "P02-E01-v3",
+      "payload_files": 3
+    },
+    {
+      "inventory_sha256": "fe6474d3694f2fffa57877262064c21d3967ce6a4ed04407e28fcde90b53ccd4",
+      "kind": "evidence",
+      "name": "P02-verification-20261107",
+      "payload_files": 27
+    },
+    {
+      "inventory_sha256": "275087025bf6569f341794f659a9ed403b11dfec07bb29e677d8953bb62c42c9",
+      "kind": "run",
+      "name": "matrix-native-v2-gold-20261024-72",
+      "payload_files": 23
+    },
+    {
+      "inventory_sha256": "b4c6f0f118989a8c4087421246d8bb2f8adcabcb27677541f2eab7e600e856cf",
+      "kind": "run",
+      "name": "matrix-native-v2-remaining-20261024-72",
+      "payload_files": 43
+    }
+  ],
+  "covered_observations": 30,
+  "manifest_sha256": "1a8bcc5f055993ebfc9dd4d9693d729a24d7e695d9a84e0c82170ca7992589f8",
+  "membership_sha256": "4eb8b72b777b7d9425e6a1d0d3d770cfc512b6beef3539f11a3313953091e616",
+  "object_key": "hw01/archives/sha256/623d195cf30a774d4ac6ff1e5c71930b90d8413a59cc6229a4826e3fad4e077b.tar.gz",
+  "selection": "P02-verification",
+  "version": "hw01-archive-index-v1"
+}

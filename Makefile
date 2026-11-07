@@ -197,6 +197,13 @@ evaluate-split:
 	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service.staged evaluate $(ARGS)
 
 .PHONY: help
+.PHONY: validate-provenance-protocol assess-provenance
+validate-provenance-protocol: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/docs:/app/docs:ro" --volume "$(CURDIR)/results/restored:/app/results/restored:ro" reproduce python -m extraction_service validate-provenance-protocol $(ARGS)
+
+assess-provenance: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/docs:/app/docs:ro" --volume "$(CURDIR)/results/restored:/app/results/restored:ro" --volume "$(CURDIR)/results/submission:/app/results/submission" reproduce python -m extraction_service assess-provenance $(ARGS)
+
 .PHONY: validate-evaluation-protocol evaluate-experiment
 validate-evaluation-protocol: archive-dirs
 	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/restored:/app/results/restored:ro" reproduce python -m extraction_service validate-evaluation-protocol $(ARGS)
