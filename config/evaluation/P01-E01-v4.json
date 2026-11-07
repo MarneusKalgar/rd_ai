@@ -1,0 +1,440 @@
+{
+  "allowed_differences": [
+    "prompt_id",
+    "prompt_sha256",
+    "collection time"
+  ],
+  "archive": {
+    "path": "archive-index/c3398a3c846488086ef52be9a4706b0eb9568ab94f56f42d3190610d96ad263b.json",
+    "sha256": "510f30785e852afa156fa798a8d2b49e7d562561f72528b302a0f9d036c0a3e3"
+  },
+  "automatic_reruns": false,
+  "claim_scope": "historical development comparison and synthetic controls; no independent model validation",
+  "control_suite": {
+    "path": "config/evaluation/control-suite-v1.json",
+    "sha256": "bbfa18fd2d58e2bd538cbbeac6f1d06a48549af8904979e5fcc418356751cc29"
+  },
+  "controls": {
+    "path": "config/evaluation/controls-v1.md",
+    "sha256": "885a02d20a8cb35e2251da883e1f520749c6363c42718f481c0ee86744fc365f"
+  },
+  "controls_authority": "section 6 of hash-bound plan; expected fixture outcomes frozen before measurement",
+  "corpus": {
+    "path": "data/corpus-manifest.json",
+    "sha256": "feef3ad665d97cdc06f6e2cb1c31cc621309baf9b7f1532699ff3a5418365575"
+  },
+  "experiment_id": "P01-E01",
+  "exposure": {
+    "path": "config/evaluation/exposure-v1.json",
+    "sha256": "2b0d110232fb408ed4b604da0af4c9a5ec06c8678aff60fa2048f992349f1397"
+  },
+  "frozen_at": "2026-11-01",
+  "gold_input_ids": [
+    "B02-S002-PO01",
+    "B02-S003-PO01",
+    "B02-S011-PO01",
+    "B02-S012-PO01",
+    "B02-S016-PO01",
+    "B02-S021-PO01",
+    "B02-S023-PO01",
+    "B02-S032-PO01",
+    "B02-S040-PO01",
+    "B02-S044-PO01"
+  ],
+  "gold_manifest": {
+    "path": "data/manifest.json",
+    "sha256": "26a9091f805b57791b35f970a772638cca8b388c18153d0d846bde41c200e2e2"
+  },
+  "input_ids": [
+    "B02-S002-PO01",
+    "B02-S003-PO01",
+    "B02-S004-PO01",
+    "B02-S005-PO01",
+    "B02-S006-PO01",
+    "B02-S007-PO01",
+    "B02-S008-PO01",
+    "B02-S009-PO01",
+    "B02-S011-PO01",
+    "B02-S012-PO01",
+    "B02-S013-PO01",
+    "B02-S014-PO01",
+    "B02-S015-PO01",
+    "B02-S016-PO01",
+    "B02-S017-PO01",
+    "B02-S018-PO01",
+    "B02-S019-PO01",
+    "B02-S021-PO01",
+    "B02-S022-PO01",
+    "B02-S023-PO01",
+    "B02-S025-PO01",
+    "B02-S026-PO01",
+    "B02-S028-PO01",
+    "B02-S029-PO01",
+    "B02-S030-PO01",
+    "B02-S032-PO01",
+    "B02-S033-PO01",
+    "B02-S036-PO01",
+    "B02-S040-PO01",
+    "B02-S044-PO01"
+  ],
+  "limits": {
+    "additional_api_spend_usd": "0",
+    "analysis_seconds": 300,
+    "generated_tokens": 0,
+    "model_calls": 0,
+    "verification_seconds": 900
+  },
+  "output": "results/submission/P01-E01-verified",
+  "plan_snapshot_sha256": "7b12d73d41722247af0c2e6943532fd6fe37711f23e1bca4d74808774c177e1a",
+  "public_budget_policy": {
+    "path": "config/evaluation-budget-policy.json",
+    "sha256": "467653a2f13db56a68fe559856cfcbde96a6ef4044bdbacd762eadad693c4efc"
+  },
+  "question": "Can complete paired reporting detect misleading improvement without new inference?",
+  "revision_reason": "Preserve initial analysis; final reporting adds null-error tags and positive no-change controls, with unchanged populations, thresholds and inference prohibition",
+  "rubric": {
+    "path": "config/evaluation/rubric-v1.json",
+    "sha256": "e5fd883a0d768025fd6838cf4aa3afcba1684396067f0ef1b3cef89f1e38259c"
+  },
+  "rubric_status": "definitions frozen; new human semantic judgments unavailable",
+  "schema": {
+    "path": "schemas/purchase-order-extraction.v1.schema.json",
+    "sha256": "efd06205171717bf69997007c36a0c85a66f55384042e79bda75df102be9bafb"
+  },
+  "selections": {
+    "v1": {
+      "comparison_controls": {
+        "context": {
+          "context_enforcement": "counted",
+          "context_length": 49152,
+          "pricing_stop": null,
+          "processor": "gpu_or_mixed",
+          "thinking": {
+            "advertised": {
+              "default": true,
+              "values": [
+                false,
+                true
+              ]
+            },
+            "effective": false,
+            "requested": false
+          },
+          "tokenizer_sha256": "42e3a238e10726346e996c7e3569fcfb2e8d47173944a3cd56826d8dc4d9a9fb"
+        },
+        "dependency": {
+          "endpoint": "http://host.docker.internal:11434/",
+          "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+          "model_name": "gemma4:e4b-it-qat",
+          "runtime": "ollama-native",
+          "runtime_version": "0.40.7",
+          "serving_provider": null
+        },
+        "execution": {
+          "backoff_initial_seconds": 1.0,
+          "backoff_max_seconds": 30.0,
+          "dependency_failure_limit": 3,
+          "input_timeout_seconds": 7205.0,
+          "matrix_reserve_usd": 3.5,
+          "request_timeout_seconds": 1800.0,
+          "transport_retries": 1
+        },
+        "model_id": "local",
+        "model_name": "gemma4:e4b-it-qat",
+        "runtime": "ollama-native",
+        "sampling": {
+          "id": "baseline-16384",
+          "max_output_tokens": 16384,
+          "temperature": 0.0,
+          "top_p": 1.0
+        },
+        "schema_sha256": "efd06205171717bf69997007c36a0c85a66f55384042e79bda75df102be9bafb",
+        "stage": "matrix"
+      },
+      "identity": {
+        "context": {
+          "context_enforcement": "counted",
+          "context_length": 49152,
+          "pricing_stop": null,
+          "processor": "gpu_or_mixed",
+          "thinking": {
+            "advertised": {
+              "default": true,
+              "values": [
+                false,
+                true
+              ]
+            },
+            "effective": false,
+            "requested": false
+          },
+          "tokenizer_sha256": "42e3a238e10726346e996c7e3569fcfb2e8d47173944a3cd56826d8dc4d9a9fb"
+        },
+        "dependency": {
+          "endpoint": "http://host.docker.internal:11434/",
+          "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+          "model_name": "gemma4:e4b-it-qat",
+          "runtime": "ollama-native",
+          "runtime_version": "0.40.7",
+          "serving_provider": null
+        },
+        "execution": {
+          "backoff_initial_seconds": 1.0,
+          "backoff_max_seconds": 30.0,
+          "dependency_failure_limit": 3,
+          "input_timeout_seconds": 7205.0,
+          "matrix_reserve_usd": 3.5,
+          "request_timeout_seconds": 1800.0,
+          "transport_retries": 1
+        },
+        "model_id": "local",
+        "model_name": "gemma4:e4b-it-qat",
+        "prompt_id": "v1",
+        "prompt_sha256": "ef5cf6c25a2623e73e5e85948321b304b1ce67f09b7caf0dfbc47fa26e666785",
+        "runtime": "ollama-native",
+        "sampling": {
+          "id": "baseline-16384",
+          "max_output_tokens": 16384,
+          "temperature": 0.0,
+          "top_p": 1.0
+        },
+        "schema_sha256": "efd06205171717bf69997007c36a0c85a66f55384042e79bda75df102be9bafb",
+        "stage": "matrix"
+      },
+      "runs": {
+        "matrix-native-v1-baseline-remaining-20261023-72": {
+          "manifest_sha256": "a00263f8123750e572e98aecabc77b6a29c5a070361714e2fbd4ebc9c4ac2f9a",
+          "original_execution": {
+            "api_budget_usd": 10.0,
+            "backoff_initial_seconds": 1.0,
+            "backoff_max_seconds": 30.0,
+            "dependency_failure_limit": 3,
+            "input_timeout_seconds": 7205.0,
+            "matrix_reserve_usd": 3.5,
+            "request_timeout_seconds": 1800.0,
+            "transport_retries": 1
+          },
+          "records": {
+            "B02-S002-PO01": "eea26fd84d0b392ee8203feefbfb6ca86ac969626cf63c07c77e867eb9493298",
+            "B02-S003-PO01": "3e7aa182566abd9a153f600fa2f72034549d13ce77034e1c1edda8f7e1182761",
+            "B02-S004-PO01": "2c7c8bfa6243096bd6f66cf25ab5ca6a88d707a4c9246d9712bff9c06722c743",
+            "B02-S005-PO01": "1d02b64ac18c9301170ca7608ef7097cabea567a75d56669a3130c8c2281008b",
+            "B02-S006-PO01": "899792dedf084c91ea60bf262573c521071cd5c45ad607007a091b5dc419f0df",
+            "B02-S007-PO01": "2454680b85ee4c2cb20065b30ea913389483899c475b2cabd0d1b116600c9d23",
+            "B02-S009-PO01": "488a067e9add9c288282739e78bb3df65eec3923074d7a03697c19106f8e4aa2",
+            "B02-S011-PO01": "acccd1f8904cdffd1b0f5a7048be88f681ea505b5d86984c93c5fdb52f35bc98",
+            "B02-S012-PO01": "ffdbf5b6796a03bbff0489c1ae0708d75e3d2d9c6cc2e959911e805803270595",
+            "B02-S013-PO01": "750133f9a8933286f84a2fd3c36f8302315c9f5b1b0c0f1d715209c1961eca63",
+            "B02-S014-PO01": "8126df96e3d09e9c32529207571a3c914fa6c9b4d4cd03fb3ad0d4b64f20e31b",
+            "B02-S015-PO01": "60190bca91b154dc95c92ce70328a8eacd7e0dd7ea9a431f418d78f190605773",
+            "B02-S016-PO01": "67f2f28c782126e78a49b5dba21a2f91563dd7ae820cd75fb0ea66ba75262629",
+            "B02-S017-PO01": "9e3e25562f20f0665e23a4e0c524c36ac9cec62bfc09484cfee091e866a075b5",
+            "B02-S018-PO01": "095ac3c245bddd3ce8a7de1935dc4a70aecf6f1baad02609b482464cb16fa2a7",
+            "B02-S019-PO01": "4d4ef7831bf23f5b37047caacf539d9a2468f78fe3acdb66935a3995f5c9c59d",
+            "B02-S021-PO01": "8455e0c870c924d51f7f6e452c64368af339ae0e0b2e559f8879bf51ca9cde7a",
+            "B02-S022-PO01": "2fb7a2c21c24868c9c8be6b9a55dc56ce8d106c16e5e732a9adc1ec1cb49b2da",
+            "B02-S023-PO01": "0aef9aaef070fc63ae70c32df4840da1a7b295232cc89ce64d178d5fd9bac86e",
+            "B02-S025-PO01": "5baca70bdedbafa7c4e40130e663b074dd0bf85f0d9e1294691dbfb8b061dfee",
+            "B02-S026-PO01": "504c092fd6f0aab1d10ce1c91ac36761a37d5d1dffb9c8b2cfccb0dc8959bb4c",
+            "B02-S028-PO01": "c3b823716a1f826a16fb74bb0568cb2e2b1e7c51023bbb4039b92fd065b8073e",
+            "B02-S029-PO01": "98dcf4cde9655ce05bd04e1c2958a67404b53c88e36ae0dc73c62935f6b86472",
+            "B02-S030-PO01": "e6625c3f5a44a509f68f87f354b961009dd31474f99f3437bd9bc62aa1d8253c",
+            "B02-S032-PO01": "e72fc177f747f9a0192c71d52da40d3ff89e3eaed234dbabd7ccfcc69a7d6d93",
+            "B02-S033-PO01": "4a54301387f568b5068a0a41f812339f4ec43792005ac4fc86ba243b7611b900",
+            "B02-S036-PO01": "aaac55607adbad2d21147a530caaaa369105d6c0b278f9ca41a4ab59b0259ef6",
+            "B02-S040-PO01": "5df4d24a733f085bf7cd4781b429a9994ba54a7dcf7ca95a0d057bbe98ff6bfc",
+            "B02-S044-PO01": "87ee90b0ff9e68b68b559ae91508655e7ff70e0e6b5c0f53198937fb09a80f0e"
+          }
+        },
+        "native-s008-49152-16384-20261022": {
+          "manifest_sha256": "214e49b2a0121c8161909d330e3d726846b665af961c2fa39dd280e698dcf276",
+          "original_execution": {
+            "api_budget_usd": 4.5,
+            "backoff_initial_seconds": 1.0,
+            "backoff_max_seconds": 30.0,
+            "dependency_failure_limit": 3,
+            "input_timeout_seconds": 7205.0,
+            "matrix_reserve_usd": 3.5,
+            "request_timeout_seconds": 1800.0,
+            "transport_retries": 1
+          },
+          "records": {
+            "B02-S008-PO01": "2c6f3c3291685168fadd7cff3998ac7ea9ce073c561e63c0779c892cb181fea1"
+          }
+        }
+      }
+    },
+    "v2": {
+      "comparison_controls": {
+        "context": {
+          "context_enforcement": "counted",
+          "context_length": 49152,
+          "pricing_stop": null,
+          "processor": "gpu_or_mixed",
+          "thinking": {
+            "advertised": {
+              "default": true,
+              "values": [
+                false,
+                true
+              ]
+            },
+            "effective": false,
+            "requested": false
+          },
+          "tokenizer_sha256": "42e3a238e10726346e996c7e3569fcfb2e8d47173944a3cd56826d8dc4d9a9fb"
+        },
+        "dependency": {
+          "endpoint": "http://host.docker.internal:11434/",
+          "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+          "model_name": "gemma4:e4b-it-qat",
+          "runtime": "ollama-native",
+          "runtime_version": "0.40.7",
+          "serving_provider": null
+        },
+        "execution": {
+          "backoff_initial_seconds": 1.0,
+          "backoff_max_seconds": 30.0,
+          "dependency_failure_limit": 3,
+          "input_timeout_seconds": 7205.0,
+          "matrix_reserve_usd": 3.5,
+          "request_timeout_seconds": 1800.0,
+          "transport_retries": 1
+        },
+        "model_id": "local",
+        "model_name": "gemma4:e4b-it-qat",
+        "runtime": "ollama-native",
+        "sampling": {
+          "id": "baseline-16384",
+          "max_output_tokens": 16384,
+          "temperature": 0.0,
+          "top_p": 1.0
+        },
+        "schema_sha256": "efd06205171717bf69997007c36a0c85a66f55384042e79bda75df102be9bafb",
+        "stage": "matrix"
+      },
+      "identity": {
+        "context": {
+          "context_enforcement": "counted",
+          "context_length": 49152,
+          "pricing_stop": null,
+          "processor": "gpu_or_mixed",
+          "thinking": {
+            "advertised": {
+              "default": true,
+              "values": [
+                false,
+                true
+              ]
+            },
+            "effective": false,
+            "requested": false
+          },
+          "tokenizer_sha256": "42e3a238e10726346e996c7e3569fcfb2e8d47173944a3cd56826d8dc4d9a9fb"
+        },
+        "dependency": {
+          "endpoint": "http://host.docker.internal:11434/",
+          "model_digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+          "model_name": "gemma4:e4b-it-qat",
+          "runtime": "ollama-native",
+          "runtime_version": "0.40.7",
+          "serving_provider": null
+        },
+        "execution": {
+          "backoff_initial_seconds": 1.0,
+          "backoff_max_seconds": 30.0,
+          "dependency_failure_limit": 3,
+          "input_timeout_seconds": 7205.0,
+          "matrix_reserve_usd": 3.5,
+          "request_timeout_seconds": 1800.0,
+          "transport_retries": 1
+        },
+        "model_id": "local",
+        "model_name": "gemma4:e4b-it-qat",
+        "prompt_id": "v2",
+        "prompt_sha256": "6a03379937695a2e5b127d292fc6ddb2301c9048b730ca3f9982d6c6443d155b",
+        "runtime": "ollama-native",
+        "sampling": {
+          "id": "baseline-16384",
+          "max_output_tokens": 16384,
+          "temperature": 0.0,
+          "top_p": 1.0
+        },
+        "schema_sha256": "efd06205171717bf69997007c36a0c85a66f55384042e79bda75df102be9bafb",
+        "stage": "matrix"
+      },
+      "runs": {
+        "matrix-native-v2-gold-20261024-72": {
+          "manifest_sha256": "25ee66000d3021277b1912cf134640fbfd9e0b95b768034053b390289538ff21",
+          "original_execution": {
+            "api_budget_usd": 10.0,
+            "backoff_initial_seconds": 1.0,
+            "backoff_max_seconds": 30.0,
+            "dependency_failure_limit": 3,
+            "input_timeout_seconds": 7205.0,
+            "matrix_reserve_usd": 3.5,
+            "request_timeout_seconds": 1800.0,
+            "transport_retries": 1
+          },
+          "records": {
+            "B02-S002-PO01": "29a9917cbe84c6c959bc6c9c71f5523b6e611464a09dd7f2e3bdbc332fdd0d34",
+            "B02-S003-PO01": "86a4a0f0aef835cb2d81a6f9db54e22ae933306238255e79b00a1f8828ee0938",
+            "B02-S011-PO01": "21bc8aa8ac5d66faaf2a12471122cf591b1124130ae91450d375766e6879716d",
+            "B02-S012-PO01": "1158593b3d967942e87279c4caf8e5cb9865cc65dcd407bd3c4a1fe028a507e4",
+            "B02-S016-PO01": "3c97dec0a72a71439bac32820509db0baf8e65d710df1684f1965d92bc44f29e",
+            "B02-S021-PO01": "2a64fcdca1bfd62235e6ac3a3ecb197fe20da219274bd40108d0e1df1f2978f8",
+            "B02-S023-PO01": "9cbe9e627eefcbb18442e9031fa7711720c24b34a87ebb9c801ac6e7b319ccfc",
+            "B02-S032-PO01": "fedab75b535f8a8b142283a901ca3ee1d7793422da72c677c0f4319685f84388",
+            "B02-S040-PO01": "9eb826159168d202ad88de5ce5dd63e4bb27539fe8fdd26342d46a3eb3848033",
+            "B02-S044-PO01": "fc5e017d33394f8057852ad2361b51c709f2e63905dfbebe9da50323cfb322e9"
+          }
+        },
+        "matrix-native-v2-remaining-20261024-72": {
+          "manifest_sha256": "ee9b939b2293d1fb47aab996dfba2b646b58e56cd01d3ab1f2be8ddf43237633",
+          "original_execution": {
+            "api_budget_usd": 10.0,
+            "backoff_initial_seconds": 1.0,
+            "backoff_max_seconds": 30.0,
+            "dependency_failure_limit": 3,
+            "input_timeout_seconds": 7205.0,
+            "matrix_reserve_usd": 3.5,
+            "request_timeout_seconds": 1800.0,
+            "transport_retries": 1
+          },
+          "records": {
+            "B02-S004-PO01": "e444d46a1fca4429f6a48e77065e3cc42657136d69d36732413a16d410161793",
+            "B02-S005-PO01": "7d2284ba6738d9c711145d2d7aac16712cbec15919cc1b162a33a5135b016f52",
+            "B02-S006-PO01": "8df9cbacf5bd21aebd8ebb8981d5c1c01080147b6019db1eb003bd12db83b2a9",
+            "B02-S007-PO01": "4f2e78105cd3d5145017553ea6b3ecef204f8e39e5557cd4bb2163337b23e8f8",
+            "B02-S008-PO01": "9b85c12fd0ddeecb0585ea1d5aacb6bc4003211b739e2796a30f7c00ae27bc66",
+            "B02-S009-PO01": "fe89e54d3d73822a594e115fe87f0ab354fed8d7b908d88d590d11c539406d2f",
+            "B02-S013-PO01": "82f31d92ec0686be9ff7d776369bb46c1d5c51911fbe36d2f5f0929ae06a647f",
+            "B02-S014-PO01": "bb61d2387fb89faba42fd05337d3df88f886df3d33c2f4af466798a7b1ba5848",
+            "B02-S015-PO01": "1bd88c8a6686d49279f08892fb388a99049ade0904521bf76a495a943240c237",
+            "B02-S017-PO01": "6b2609925a6063b5802e52b62a8d6b57d15f093c0e84c0d3c5b8c811a6e7f888",
+            "B02-S018-PO01": "22c48cc384c4a627f52067b35234ec2ae5a78e67ad51d14bbdb6bb0d876154c4",
+            "B02-S019-PO01": "687ba80b6f8facd48c88e5a6496c5f24e0ba74cc67d51329dc503ebc59a2418c",
+            "B02-S022-PO01": "108f4e03ceef5d108251ed4e99c8177ebfd9b77d912d9b576ff1710f696f6e7d",
+            "B02-S025-PO01": "50dbf6dc322b901de254fc440d3d45bbc11ebdf3069959ec74c57b16c09d4f78",
+            "B02-S026-PO01": "228700fdcb9d1f589a19d3a5e9506172936e5f56a0115d081d48072f7149d1e8",
+            "B02-S028-PO01": "250a02f46cfd80bf7ded2d9033b06acf04b1e1a5ba3d1e7d5d6017716c0db0d3",
+            "B02-S029-PO01": "c3196b3b1d4cf55a71dee0a7436e9b716c922a6aef20463e4c49a96e06ca8c47",
+            "B02-S030-PO01": "e338428127ab448ec3b882349516a0daa05afeae8d72d3815aa0059a69843c33",
+            "B02-S033-PO01": "57f136aee9b7b190e57cfaff44101edb6f78ae27d5ced1238ff875591d74b7d6",
+            "B02-S036-PO01": "b0b24a7c960b18ffd373e5dfc1dae4e8bc1e473292839a8732ece533209f6d0a"
+          }
+        }
+      }
+    }
+  },
+  "source_revision": "50d4e4d",
+  "status": "frozen for offline evaluation; no inference permission",
+  "thresholds": {
+    "accepted_bad_controls": 0,
+    "gold_cases_per_side": 10,
+    "historical_observations": 240,
+    "required_controls": 16,
+    "selected_cases_per_side": 30
+  },
+  "version": "evaluation-protocol-v3"
+}

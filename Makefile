@@ -197,6 +197,13 @@ evaluate-split:
 	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/submission:/app/results/submission:ro" offline python -m extraction_service.staged evaluate $(ARGS)
 
 .PHONY: help
+.PHONY: validate-evaluation-protocol evaluate-experiment
+validate-evaluation-protocol: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/restored:/app/results/restored:ro" reproduce python -m extraction_service validate-evaluation-protocol $(ARGS)
+
+evaluate-experiment: archive-dirs
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/restored:/app/results/restored:ro" --volume "$(CURDIR)/results/submission:/app/results/submission" reproduce python -m extraction_service evaluate-experiment $(ARGS)
+
 help:
 	@echo "Document intelligence R&D: check, preflight, reproduce-report, run, archive-results"
 	@echo "Commands run from this root; inference requires explicit scope and approval."

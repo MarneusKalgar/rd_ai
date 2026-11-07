@@ -1,0 +1,138 @@
+{
+  "version": "p01-control-suite-v1",
+  "truth": "synthetic technical oracles and inherited regression assertions; no new human/model judgments",
+  "controls": [
+    {
+      "id": 1,
+      "name": "identical",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation_protocol.py::test_unchanged_pair_has_no_invented_gain"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "wrong-valid",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation_protocol.py::test_regression_stays_visible_alongside_improvements"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "regression",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation_protocol.py::test_regression_stays_visible_alongside_improvements"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "missing-row",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation.py::test_field_and_order_errors_are_penalized"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "extra-row",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation_protocol.py::test_extra_row_does_not_hide_behind_gold_only_transitions"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "order-duplicates",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation.py::test_field_and_order_errors_are_penalized"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "invalid-null",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation_protocol.py::test_unusable_pair_cannot_match_expected_nulls"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "unattempted",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation.py::test_paid_unknown_cost_and_stopped_inputs_remain_visible"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "membership",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation_protocol.py::test_single_defect_protocol_rejections"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "hashes",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation_protocol.py::test_bound_artifact_rejects_changed_bytes",
+        "tests/application/test_evaluation.py::test_evaluation_rejects_corrupted_or_mismatched_evidence"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "controls",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation_protocol.py::test_single_defect_protocol_rejections"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "unknown-cost",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation.py::test_paid_unknown_cost_and_stopped_inputs_remain_visible"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "reviewed-control",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation_protocol.py::test_review_metrics_separate_support_truth_and_authority"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "unknown-anchor",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation_protocol.py::test_review_metrics_separate_support_truth_and_authority"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "instruction-markers",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation_protocol.py::test_controlled_instruction_and_disclosure_survive_as_data_without_authority",
+        "tests/application/test_evaluation_protocol.py::test_hostile_valid_strings_remain_inexact_data"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "strings-bounds",
+      "expected": "all selected behavioral assertions pass",
+      "pytest": [
+        "tests/application/test_evaluation_protocol.py::test_hostile_valid_strings_remain_inexact_data",
+        "tests/application/test_process.py::test_context_rejection_is_not_an_inference_attempt",
+        "tests/execution/test_deadlines.py::test_deadline_covers_requests_and_backoff_and_counts_one_availability_failure"
+      ]
+    }
+  ]
+}

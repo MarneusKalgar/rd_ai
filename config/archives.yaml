@@ -1,4 +1,7 @@
 selections:
+  P01-verification:
+    membership: results/submission/P01-verification-20261101/membership.json
+    evidence_index: archive-index/selections/P01-verification.json
   S08-runtime-naming:
     membership: results/submission/S08-runtime-naming-20261031/membership.json
     evidence_index: archive-index/selections/S08-runtime-naming.json

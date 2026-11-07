@@ -1,0 +1,522 @@
+{
+  "authority": "agent-authored historical inventory; no new human approval",
+  "cases": [
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S002-PO01",
+      "gold_sha256": "02530fb9b99593425b6e0e2029a3ed75db8f16bebca76d072a7b99153cab339e",
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S002-PO01",
+      "input_sha256": "18af9189f01eeb6a4644da39a7e48ce568fb0a68e846fb1447a060d5274ff51c",
+      "known_uses": [
+        "historical all30 matrix",
+        "development gold evaluation",
+        "provider screening"
+      ],
+      "label_status": "human_approved",
+      "layout_group": "compact_material_order",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S002"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S003-PO01",
+      "gold_sha256": "76069a20445fe081b76add43ab4f76f49941f505de410920a2985b2bf22c12a2",
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S003-PO01",
+      "input_sha256": "aaa858621696181fb7d2bb33af4e57fca955c16f22f961199d2430d3839d417e",
+      "known_uses": [
+        "historical all30 matrix",
+        "development gold evaluation",
+        "provider screening"
+      ],
+      "label_status": "human_approved",
+      "layout_group": "korean_material_order",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S003"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S004-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S004-PO01",
+      "input_sha256": "af244e303d56e46af4a614d67bca7a13443f650c0d6b430896923155938b0140",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "surface_material_catalog",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S004"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S005-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S005-PO01",
+      "input_sha256": "696a93f1e308f96b36dba4031c9df9fd4a08e7c804ae3fc3c8da541007abd80c",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "grocery_price_catalog",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S005"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S006-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S006-PO01",
+      "input_sha256": "f5ffdaf5b168811a3b6ead79c4b5f0c3df89ab93558434b18da7d32b78a8ccc7",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "carton_order_form",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S006"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S008-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S008-PO01",
+      "input_sha256": "bc4678f85b792f9fd022a680e8079aa8441016b22cfd1301c4623d34d049be1b",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "biscuit_catalog",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S008"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S009-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S009-PO01",
+      "input_sha256": "c89a9b025006edd65d5c094104824f17a318a15ba6f6447aa887d405ba9d4286",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "customer_product_order",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S009"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S012-PO01",
+      "gold_sha256": "7f3d56524b42a250bde1c64968a2419e7c594d58bbd14c38350d90e6b07b9392",
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S012-PO01",
+      "input_sha256": "25242bac2cbc257b53bae9c4cab6130404a0ca380d011bfaea896f788e17af3b",
+      "known_uses": [
+        "historical all30 matrix",
+        "development gold evaluation",
+        "provider screening"
+      ],
+      "label_status": "human_approved",
+      "layout_group": "italian_manual_order",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S012"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S013-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S013-PO01",
+      "input_sha256": "e3e1897dabbddc4b537a2097c48b6d83b61c12b96aef7330b6c67aba35048574",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "prepared_food_order",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S013"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S014-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S014-PO01",
+      "input_sha256": "b3e4c0a4418e4cb813d986c39d8030e968be5ecad4ae716659bbf9e944a424a2",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "chilled_grocery_catalog",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S014"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S015-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S015-PO01",
+      "input_sha256": "10ff4e222477075c2f78603720a4c2bb620b6055a5f004ee43f7e3797cbdab7c",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "material_delivery_schedule",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S015"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S016-PO01",
+      "gold_sha256": "a57c97d92721043455f81ad7d661f0e8aa6b0e3cb1f8c0680acbbd236a09e8b9",
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S016-PO01",
+      "input_sha256": "6e9a97dd67a8cf7496c55af180474838742be4cba68f7cd258ba7f781c017873",
+      "known_uses": [
+        "historical all30 matrix",
+        "development gold evaluation",
+        "provider screening"
+      ],
+      "label_status": "human_approved",
+      "layout_group": "hungarian_agricultural_order",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S016"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S017-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S017-PO01",
+      "input_sha256": "1c284b8b16c1051b31ecbe9df85e6641a93ce9154ecf1e62124e831f98030579",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "italian_material_order",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S017"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S018-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S018-PO01",
+      "input_sha256": "c8c40f4bf7c46d7796382d8dd7f99ff2ed0cedc72feadb967f5eb01d23da701c",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "ibc_order_form",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S018"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S019-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S019-PO01",
+      "input_sha256": "50fd82ac789e0eed24dbda7886b5c00529cf9192568d96bcdb73e094a670979f",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "bulk_customer_po_schedule",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S019"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S021-PO01",
+      "gold_sha256": "73586c389bd944d105fc918f4a91ad7fe1657242f7f920c918efbd65ff5eb3da",
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S021-PO01",
+      "input_sha256": "d1130ca71b39d4ca873625ec9aed04f43d07a6f78cf92e0ab4bc8dc2e32178ef",
+      "known_uses": [
+        "historical all30 matrix",
+        "development gold evaluation",
+        "provider screening"
+      ],
+      "label_status": "human_approved",
+      "layout_group": "buyer_and_supplier_codes",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S021"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S022-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S022-PO01",
+      "input_sha256": "6fc281542a61de631208a6a551549e49a3cf59a4f427a932b5be1f70fc168f8a",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "chinese_material_order",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S022"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S025-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S025-PO01",
+      "input_sha256": "c223eb517dcd3942d9938f347f4d892594b5559495896cc94db4e7fe38f0988e",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "beverage_case_order",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S025"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S026-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S026-PO01",
+      "input_sha256": "d6f288ae629d39873f46787261015611723f3dec894a94d475291cf907a71c3c",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "bulk_sugar_order",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S026"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S028-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S028-PO01",
+      "input_sha256": "d392648965df03ba58c5c7f145e0b9eed030aee2b9d70edd3e1633c701cf73ac",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "spanish_case_catalog",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S028"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S029-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S029-PO01",
+      "input_sha256": "00144d6cc91f8b594b4dfc37c23580ec375c52da576fed971fa8becc7d6cc12d",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "buyer_article_export",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S029"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S032-PO01",
+      "gold_sha256": "ac09766d948c4579935a0257065f910d157d80c44e65b233d179b62ccdb7c270",
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S032-PO01",
+      "input_sha256": "36a9f8b96a5b7fcdfdfe8af23c3503bd7dc3342f5b25ba4b602b7dfb878c6d00",
+      "known_uses": [
+        "historical all30 matrix",
+        "development gold evaluation",
+        "provider screening"
+      ],
+      "label_status": "human_approved",
+      "layout_group": "dutch_beverage_catalog",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S032"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S036-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S036-PO01",
+      "input_sha256": "4160cb21a77733579ec5a763d3f35946aabb4aaa56a6443c1beed3f6d450e74b",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "multi_order_shipping_export",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S036"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S040-PO01",
+      "gold_sha256": "ba2398d004e05cef2110596e10de9b7c9a2658f8cf9ca7d2d3998f099510e3fa",
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S040-PO01",
+      "input_sha256": "ef824224fd27755fdb768bc9be278dbd725549dcc97c3f12caa32e74a670a57b",
+      "known_uses": [
+        "historical all30 matrix",
+        "development gold evaluation",
+        "provider screening"
+      ],
+      "label_status": "human_approved",
+      "layout_group": "romanian_grocery_catalog",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S040"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S044-PO01",
+      "gold_sha256": "f60be35c1ecb757aba63c8edb9be275fac399d6ed84fffd5be099371ba03202a",
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S044-PO01",
+      "input_sha256": "5b5d772e905b323f8dd737f0f03a2a191a6db72f451fb80daa9a378cb49b04ce",
+      "known_uses": [
+        "historical all30 matrix",
+        "development gold evaluation",
+        "provider screening"
+      ],
+      "label_status": "human_approved",
+      "layout_group": "spanish_two_panel_catalog",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S044"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S006-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S007-PO01",
+      "input_sha256": "9a48076cbd83f9a94e355e1c132cfeaeda4b6252751de1e4568eda0d2a3bf8da",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "carton_order_form",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S007"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S009-PO01",
+      "gold_sha256": "52ef93587021fc87fd05a5427cca87b033bc0b66875e52c73a7f2eb44716db0d",
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S011-PO01",
+      "input_sha256": "22c5d2117a037be02b9b9bceca3a737f8257159f6bdd9b7c291bc549b60f0626",
+      "known_uses": [
+        "historical all30 matrix",
+        "development gold evaluation",
+        "provider screening"
+      ],
+      "label_status": "human_approved",
+      "layout_group": "customer_product_order",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S011"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S022-PO01",
+      "gold_sha256": "761eaf06f484a7dd00b90c7558a5eef6b3e3c29352b2e0c2329db94b1aabc056",
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S023-PO01",
+      "input_sha256": "ebc31400b1d1159b75db1c586fe17d30138997f4ac25acb583d1a203e0847c54",
+      "known_uses": [
+        "historical all30 matrix",
+        "development gold evaluation",
+        "provider screening"
+      ],
+      "label_status": "human_approved",
+      "layout_group": "chinese_material_order",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S023"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S026-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S030-PO01",
+      "input_sha256": "2f26b05454e5ff7c95d46f69db9d129d2969f41bef80faad167d4dc06fe9062c",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "bulk_sugar_order",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S030"
+    },
+    {
+      "additional_manual_review": "unknown",
+      "connected_group": "B02-S004-PO01",
+      "gold_sha256": null,
+      "independent_holdout": false,
+      "individual_output_inspection": "unknown",
+      "input_id": "B02-S033-PO01",
+      "input_sha256": "e3ff074ede676033acaac3cf23bc6ad1df7e9af05e32d07354c90c0e2d1b0810",
+      "known_uses": [
+        "historical all30 matrix"
+      ],
+      "label_status": "not_gold",
+      "layout_group": "surface_material_catalog",
+      "prompt_example_exposure": "unknown",
+      "source_group": "B02-S033"
+    }
+  ],
+  "corpus": {
+    "path": "data/corpus-manifest.json",
+    "sha256": "feef3ad665d97cdc06f6e2cb1c31cc621309baf9b7f1532699ff3a5418365575"
+  },
+  "grouping": "transitive shared source OR layout; no evaluation split selected",
+  "observed_at": "2026-11-01",
+  "references": [
+    {
+      "path": "docs/roadmap.md",
+      "sha256": "058903c3cb7d15d95b313b5a22fefc2916f252e4cef2d92fce9a8c2fecbe82f5"
+    },
+    {
+      "path": "REPORT.md",
+      "sha256": "f9c6fd039f77bbda2502d247167d2b39bd5a521e5620f042da3753e5db923825"
+    }
+  ],
+  "version": "evaluation-exposure-v1"
+}

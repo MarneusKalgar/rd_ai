@@ -9,6 +9,7 @@ from typing import Any, Final
 from extraction_service.application import cli as application_cli
 from extraction_service.artifacts import read_checked
 from extraction_service.corpus.constants import GOLD_MANIFEST_FILENAME
+from extraction_service.evaluation import experiment as evaluation_cli
 from extraction_service.exit_status import ExitStatus
 from extraction_service.extraction import ExtractionContract
 from extraction_service.extraction.constants import SCHEMA_FILENAME
@@ -95,6 +96,7 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     response_parser.add_argument("response_file", type=Path)
     application_cli.add_commands(commands)
+    evaluation_cli.add_commands(commands)
 
     return parser
 
@@ -125,6 +127,9 @@ def _validate_response(path: Path, contract: ExtractionContract) -> int:
 
 
 def _dispatch(args: argparse.Namespace) -> int:
+    if args.command in evaluation_cli.COMMANDS:
+        return evaluation_cli.dispatch(args)
+
     if args.command in application_cli.COMMANDS:
         return application_cli.dispatch(args)
 
@@ -165,13 +170,17 @@ def main(argv: list[str] | None = None) -> int:
         return ExitStatus.INTERRUPTED
     except (OSError, ValueError, KeyError, TypeError) as error:
         # Operational exceptions may contain arbitrary provider or local input.
-        message = type(error).__name__ if args.command in application_cli.COMMANDS else str(error)
+        message = (
+            type(error).__name__
+            if args.command in (*application_cli.COMMANDS, *evaluation_cli.COMMANDS)
+            else str(error)
+        )
         error_report = {"setup_error": message}
         _print_json(error_report, indent=None)
 
         return EXIT_SETUP_FAILURE
     except Exception as error:
-        if args.command not in application_cli.COMMANDS:
+        if args.command not in (*application_cli.COMMANDS, *evaluation_cli.COMMANDS):
             raise
 
         _print_json({"unexpected_error": type(error).__name__}, indent=None)

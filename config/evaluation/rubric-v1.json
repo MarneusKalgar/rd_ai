@@ -1,0 +1,31 @@
+{
+  "version": "evaluation-rubric-v1",
+  "authority": "agent-authored evaluation definitions; no new human factual review",
+  "primary_outcomes": ["valid_exact", "valid_inexact", "unusable", "not_attempted"],
+  "diagnostic_tags": ["wrong_header", "wrong_line_field", "present_null_error", "extra_row", "missing_row"],
+  "tag_population": "overlapping tags; never sum as exclusive errors",
+  "semantic_cause": "unknown unless fixture truth or explicit reviewed evidence establishes it",
+  "review_outcomes": {
+    "change_warranted": "An explicit anchor establishes an incorrect unit and supports the proposed change.",
+    "no_change_warranted": "An explicit anchor establishes that the existing unit is correct.",
+    "abstain": "Evidence is insufficient for the requested decision; no correctness credit is granted.",
+    "not_reviewed": "No applicable review anchor exists; rates are unavailable."
+  },
+  "definitions": {
+    "harmful_change": "correct-to-wrong transition on an anchored unit",
+    "unnecessary_change": "alteration of an anchored correct unit",
+    "false_support": "claiming support for an anchored contradicted unit",
+    "false_acceptance": "claiming acceptability for an anchored incorrect unit"
+  },
+  "anchor_policy": {
+    "existing_gold": "exact field comparison only; no implied source-support judgment",
+    "synthetic": "declared technical oracle, reported separately from gold and human judgments",
+    "human_reviewed": "requires explicit reviewer, evidence reference, decision and version",
+    "unknown": "excluded from accuracy denominators and retained in coverage populations"
+  },
+  "source_support_is_output_correctness": false,
+  "evaluation_is_permission_to_apply": false,
+  "invalid_output_matches_gold_null": false,
+  "schema_validity_implies_truth": false,
+  "automatic_semantic_repair": false
+}
