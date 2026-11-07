@@ -27,8 +27,12 @@ sections 8–9 retain their completed outcomes.
 - [Load pinned skill/example resources into prompts](guides/prompt-resources.md).
 - [Extract headers and lines in independent stages](guides/header-line-split.md).
 
+- [Validate and compare frozen evaluation protocols without inference](guides/evaluation-protocols.md).
+
 ## Reference
 
+- [Living AI/ML engineering glossary and interview practice](reference/ai-ml-glossary.md).
+- [AI Engineer topic mapping across rd_ai and AspectLoop](reference/ai-engineer-topic-mapping.md).
 - [Purchase-order extraction contract](reference/extraction-contract.md).
 - [Model adapters and client ownership](reference/model-adapters.md).
 - [Execution coordinator, retries and budget accounting](reference/execution-coordinator.md).
@@ -36,10 +40,13 @@ sections 8–9 retain their completed outcomes.
 - [Configuration, records and offline preflight](reference/offline-preflight.md).
 - [Evaluation rules and metric populations](reference/evaluation.md).
 
+- [Model fundamentals explained through saved experiments](reference/model-fundamentals.md).
+
 ## Plans
 
-- [Project R&D roadmap v1.0](roadmap.md).
+- [Project R&D roadmap](roadmap.md).
 - [P00 project consolidation implementation plan](plans/milestones/P00-project-consolidation.md).
+- [P01 evaluation protocols implementation plan](plans/milestones/P01-evaluation-protocols.md).
 - [Required provider/local matrix and optional local exercises](plans/matrix-experiment.md).
 - [Provider-screening protocol](plans/provider-screening.md).
 
@@ -51,6 +58,7 @@ permission for model inference or spending.
 
 | Evidence | Document |
 | --- | --- |
+| Offline protocols, paired comparison and challenge/reproduction verification | [P01 evaluation protocols](reports/P01-evaluation-protocols.md) |
 | Root migration, frozen identity preservation and offline checks | [P00 consolidation](reports/P00-consolidation.md) |
 | Retired command aliases and low-risk naming cleanup | [P00-S08 cleanup](reports/legacy-name-cleanup.md) |
 | Complete matrix, optional trials, costs and bounded conclusions | [Consolidated evaluation](../REPORT.md) |

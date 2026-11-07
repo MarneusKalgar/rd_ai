@@ -1,8 +1,9 @@
 # Document intelligence R&D roadmap
 
-- Version: **1.4**.
+- Version: **1.7**.
 - Created and source mappings reviewed: **2026-10-31**.
-- Status: P00 consolidation concluded; S08 runtime naming follow-up concluded; later milestones planned.
+- Framework/SDK proposals reviewed: **2026-11-07**.
+- Status: P00 and selected P01 offline scope concluded; later milestones planned.
 - Implementation baseline: `654be96` — ledger-free report reproduction.
 
 ## 1. Authority and project outcome
@@ -29,7 +30,7 @@ Planning hierarchy:
 
 - **Milestone P00–P05:** an observable capability or answered engineering question.
 - **Implementation slice:** ordered changes with affected paths and acceptance
-  criteria; P00's slices are specified in its dedicated plan.
+  criteria, specified in each milestone's dedicated plan.
 - **Experiment:** a frozen question, comparison, data identity, changed factors,
   metrics, resource allowance, stop conditions and recorded decision.
 
@@ -110,6 +111,48 @@ never promote provider predictions to gold automatically. Gold answers, saved
 predictions and evaluation reports must not enter a retrieval corpus used to
 claim independent extraction quality. No data collection gate applies to P00.
 
+### Framework and SDK experiments
+
+Keep the existing Python adapters, execution coordinator, validation and durable
+accounting as the baseline. Framework and SDK names describe overlapping
+responsibilities; select a candidate for a concrete integration, orchestration
+or evaluation question. Popularity and reference-project usage are not adoption
+criteria, and a new library alone does not establish better extraction quality.
+
+| Candidate | Milestone placement | Proposed comparison and boundary |
+| --- | --- | --- |
+| LangChain | Conditional P03/P04 integration or agent-loop comparison | Select a model/tool integration only when it fills a named gap relative to existing adapters and typed tools. Do not add it as a mandatory layer for retrieval or LangGraph. |
+| LangGraph (Python) | P04 bounded orchestration experiment | After the fixed review workflow exists, compare the same steps/tools with explicit graph state, branching, checkpoints and human-review interrupts. Test recovery and replay before introducing a separately identified model-directed loop. |
+| LangSmith | Conditional P04 trace/evaluation pilot; P05 operational assessment | Compare debugging, trace completeness and evaluation usefulness with existing saved records and portable instrumentation. It can be evaluated independently of LangChain/LangGraph; the ledger and archived evidence remain authoritative. |
+| Vercel AI SDK | Separate AspectLoop TypeScript proposal | No rd_ai language migration or JavaScript runtime dependency. SDK Core integration and optional UI streaming belong to AspectLoop's own roadmap and acceptance process. |
+
+The selected milestone plan must freeze comparable cases, model/prompt/schema
+settings and predeclared quality, failure, latency, call/cost and engineering
+criteria. Start integration/recovery checks with deterministic fixtures; any
+live comparison needs its own approved scope and allowance. Keep model calls
+inside existing admission/accounting controls, including framework retries and
+replayed nodes. Checkpoints do not guarantee exactly-once external effects:
+application authorization, document-version checks, idempotency and human apply
+commands remain independently enforced. Define checkpoint ownership, retained
+data and principal/document isolation before enabling persistence.
+
+Tracing starts disabled. A LangSmith pilot needs an explicit data/export,
+redaction, access, retention and cost decision, using synthetic or approved
+neutral fixtures. Reject unauthorized payload/credential export and verify that
+telemetry failure cannot change task outcomes or accounting. A bounded trial
+does not select a second permanent observability stack. Record an
+adopt/reject/defer decision; these candidates need not all be exercised or
+installed to accept the underlying capability.
+
+Primary references reviewed 2026-11-07:
+[LangChain](https://docs.langchain.com/oss/python/langchain/overview),
+[LangGraph](https://docs.langchain.com/oss/python/langgraph/overview),
+[LangSmith](https://docs.langchain.com/langsmith/observability) and
+[AI SDK](https://ai-sdk.dev/docs/introduction). See the
+[living glossary comparison](reference/ai-ml-glossary.md#langchain-langgraph-and-langsmith)
+for definitions and cross-project distinctions. This roadmap update authorizes
+no dependency installation, trace export or inference.
+
 ## 4. Sources and meaning of topic coverage
 
 Mappings use the [AI Engineer roadmap](https://roadmap.sh/ai-engineer), accessed
@@ -141,10 +184,10 @@ observations. Never require disclosure of private model reasoning as evidence.
 | Milestone | Outcome | Dependencies | Initial status |
 | --- | --- | --- | --- |
 | P00 | One project structure with preserved baseline and reproducibility | Existing saved evidence | Consolidation concluded; S08 runtime follow-up concluded |
-| P01 | Explicit evaluation protocol and regression/challenge capabilities for the next question | P00 | Foundations inherited; extensions planned |
+| P01 | Explicit evaluation protocol and regression/challenge capabilities for the next question | P00 | Offline protocol/comparison scope concluded; judge study unselected |
 | P02 | Inspectable source-grounded extraction and a measured support decision | P01's protocol for the selected experiment | Several exercises inherited; new scope must be selected |
 | P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | Planned |
-| P04 | Human-reviewed proposals with independently enforced application authority | P01; usable source evidence; P03 or controlled retrieval fixtures | Planned; agent/MCP comparisons conditional |
+| P04 | Human-reviewed proposals with independently enforced application authority | P01; usable source evidence; P03 or controlled retrieval fixtures | Planned; LangGraph, agent/MCP and tracing comparisons conditional |
 | P05 | A usable local interface and measured operational/release controls | A selected fixed workflow from P04 | Planned; deployable-service expansion conditional |
 
 P02 and P03 need not wait for every possible P01 extension. P04 tool contracts
@@ -194,6 +237,13 @@ new inference, labels, dependencies or application capability experiments.
 
 **Question:** How will the next change demonstrate useful improvement rather
 than better agreement with repeatedly reused examples?
+
+The [P01 implementation plan](plans/milestones/P01-evaluation-protocols.md)
+records concluded S01–S07 execution: offline comparison verification using
+saved evidence and finite technical controls, with zero new model calls. See the
+[P01 execution report](reports/P01-evaluation-protocols.md). Judge calibration,
+new human semantic judgments and live attack susceptibility remain unexercised.
+Completion does not authorize later inference or milestone execution.
 
 **Inherited:** scorer arithmetic/failure handling, per-field and present/null
 metrics, sampling/output/context observations, false-positive diagnostic work
@@ -336,12 +386,18 @@ agent with the same tools/cases and one context strategy. Local MCP exposure
 and one client exercise are a separate consumer/learning slice; remote MCP and
 multi-agent execution remain conditional extensions.
 
+The [framework comparison](#framework-and-sdk-experiments) places the proposed
+Python LangGraph trial here, after the fixed workflow. Compare orchestration
+without changing model behavior first; a graph containing deterministic steps
+does not demonstrate model-directed agency. LangChain integration and LangSmith
+tracing are independently selected candidates, not required companion products.
+
 **AI Engineer topics exercised**
 
 | Topics | Project exercise and evidence |
 | --- | --- |
 | Tools & Function Calling; Function Calling | Typed requests/results validated independently of the model; proposals grant no permission. |
-| Agents Usecases; AI Agents; Manual Implementation | Conditional fixed-workflow versus model-directed-loop comparison with total quality, calls and latency; an agent is not assumed beneficial. |
+| Agents Usecases; AI Agents; Manual Implementation | Conditional manual versus LangGraph orchestration comparison, followed by a separately selected model-directed-loop comparison; retain total quality, calls and latency and claim only exercised behavior. |
 | Context Window; Context Compaction; Context Isolation; State & Historical Context; Memory Systems | Compare bounded policies; test lost constraints, stale state and cross-document/session contamination. |
 | MCP Host; MCP Client; MCP Server; Data Layer; Transport Layer; Connect to Local Server | Conditional local MCP slice reuses domain tools; record actual client/transport behavior. |
 | LLM Evaluations; Tracing & logging; Cost/latency monitoring | Task/no-change/abstention scores and tool/evidence traces, including interrupted or repeated calls. |
@@ -377,13 +433,19 @@ bounded logs/metrics/traces; define code/prompt/model/schema/reference/index/eva
 release identities and demonstrate candidate rejection/rollback. Feedback is
 draft labeling material until reviewed; no automatic training-data promotion.
 
+Assess a selected LangSmith pilot against the
+[framework/SDK criteria](#framework-and-sdk-experiments), including redaction,
+export/retention controls, trace-to-run correlation and telemetry outage behavior.
+Hosted tracing is optional; saved evidence and accounting remain usable without
+it. Preserve the independent AspectLoop telemetry decision.
+
 **AI Engineer topics exercised**
 
 | Topics | Project exercise and evidence |
 | --- | --- |
 | OpenAI-compatible APIs; Using SDKs Directly | Preserve existing provider boundaries while exposing the application workflow; another SDK is not required. |
 | Streaming Responses; Prompt Caching | Conditional exercises only when selected; partial text is not a validated final result, and application response caching alone is not prompt caching. |
-| LLM Observability; Tracing & logging; Cost/latency monitoring | Correlate requests, tool/retrieval work, cancellations, known/unknown charges and measured workload behavior. |
+| LLM Observability; Tracing & logging; Cost/latency monitoring | Correlate requests, tool/retrieval work, cancellations, known/unknown charges and measured workload behavior; a conditional LangSmith pilot must meet the same evidence/privacy boundaries. |
 | Production monitoring; Regression Testing | Exercise local quality gates, versioned release/feedback handling and rollback; local tests do not establish production deployment readiness. |
 | Security and Privacy Concerns; Constraining outputs and inputs; Conducting Adversarial Testing | Verify the end-to-end interface's permission, handling and resource boundaries. |
 
@@ -473,6 +535,9 @@ allowance and standing human approval; roadmap creation grants none.
 | 1.2 | 2026-10-31 | Add planned P00-S08 legacy-name cleanup/risk review; retain concluded root migration and immutable evidence. |
 | 1.3 | 2026-10-31 | Retire aliases/current legacy command instructions; retain sensitive identities and historical evidence. |
 | 1.4 | 2026-10-31 | Select DI settings, package metadata and disposable Compose naming; retain persistent storage and archive identities. |
+| 1.5 | 2026-10-31 | Add draft P01 implementation plan: offline protocol/exposure/rubric work, paired comparisons, bounded challenges and conditional judge calibration. |
+| 1.6 | 2026-11-01 | Conclude P01 offline protocol/comparison scope with 982-test gate, finite controls, preserved baseline and verified archival; human/judge/live-model extensions unexercised. |
+| 1.7 | 2026-11-07 | Place conditional LangChain/LangGraph comparisons in P03/P04 and LangSmith assessment in P04/P05; retain Python baseline, independent AspectLoop AI SDK proposal, accounting/authority boundaries and explicit adoption/export gates. |
 
 Use Git history for prior revisions. Record material changes to milestone scope,
 data authority or topic sources here; do not rewrite historical experiment claims.

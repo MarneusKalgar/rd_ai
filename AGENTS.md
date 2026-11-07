@@ -11,6 +11,17 @@
   out of the reviewer-facing workflow.
 - Work here does not automatically change AspectLoop or its AI-track scope.
 
+## Living AI/ML glossary
+
+- Maintain `docs/reference/ai-ml-glossary.md` during relevant AI/ML work,
+  experiment review and interview preparation. Update affected definitions,
+  evidence/status and distinctions as part of the scoped documentation handoff.
+- Preserve stable term IDs, historical measurements and observed/planned/
+  hypothetical distinctions. Verify changing industry claims with primary sources.
+- Keep proprietary reference locators in ignored local notes; do not copy source,
+  prompts, business payloads or credentials from Elemica into public documentation.
+- The glossary does not authorize new model runs or changes in another project.
+
 ## Coding conventions
 
 Read and follow [coding conventions](docs/coding-conventions.md) before writing
