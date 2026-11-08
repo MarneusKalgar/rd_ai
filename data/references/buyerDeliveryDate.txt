@@ -1,0 +1,3 @@
+buyerDeliveryDate
+Requested delivery date for this line, if the source ties it to the line.
+Ordered lines belonging to this PO only; exclude catalog and lookup-only rows.

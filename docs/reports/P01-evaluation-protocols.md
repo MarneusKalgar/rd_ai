@@ -8,6 +8,36 @@ were needed.
 
 ## Implemented capability and provenance
 
+### Executed flow
+
+This depicts the concluded P01 offline slice, not a new extraction run. Keep
+this report's current-flow diagram aligned with later scoped changes while
+preserving the frozen protocol and historical proof.
+
+```mermaid
+flowchart TD
+    P["Frozen protocol, exposure and rubrics"] --> V["Verify hashes, identities and populations"]
+    S["Saved Gemma v1/v2 records: 30 per side"] --> V
+    V --> G{"Evidence and comparison eligible?"}
+    G -->|No| X["Reject comparison; retain failure"]
+    G -->|Yes| C["Pair all 30 inputs; retain failed outcomes"]
+    Gold["10 approved development gold POs"] --> Score["Unchanged scorer on gold10 only"]
+    C --> Score
+    C --> Ops["Operational populations for all 30"]
+    Score --> Delta["Field transitions, regressions, extra rows and explicit unknowns"]
+    Ops --> Report["Complete paired report"]
+    Delta --> Report
+    Controls["Independent technical controls"] --> Verify["Check arithmetic and reject altered evidence/results"]
+    Report --> Verify
+    Verify --> Proof["Reproduce P01 and historical matrix; archive and restore"]
+```
+
+Gold and review anchors are evaluator inputs, never generation inputs. The
+twenty unlabeled cases receive no factual accuracy score. Judge calibration
+and new human semantic review are outside this executed flow.
+
+### Evidence inventory
+
 - Frozen exposure inventory: thirty inputs, ten approved development-gold cases,
   twenty unlabeled cases and twenty-five transitive source/layout groups. Unknown
   prompt-example exposure, individual inspection and additional review remain

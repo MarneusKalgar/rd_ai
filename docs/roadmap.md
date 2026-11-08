@@ -1,8 +1,8 @@
 # Document intelligence R&D roadmap
 
-- Version: **1.9**.
+- Version: **1.13**.
 - Created and source mappings reviewed: **2026-10-31**.
-- Framework/SDK proposals reviewed: **2026-11-07**.
+- Framework/SDK proposals reviewed: **2026-11-08**.
 - Status: P00 and selected P01/P02 offline slices concluded; later capability studies remain conditional/planned.
 - Implementation baseline: `654be96` — ledger-free report reproduction.
 
@@ -44,6 +44,7 @@ claimed as new work under this roadmap.
 
 The following are recorded results, not new runs or current model-selection and
 price guarantees. See the [consolidated report](../REPORT.md),
+[extraction foundation flow](reference/extraction-foundation.md),
 [historical matrix plan](plans/matrix-experiment.md) and
 [section 9 verification](reports/section9-verification.md).
 
@@ -121,7 +122,7 @@ criteria, and a new library alone does not establish better extraction quality.
 
 | Candidate | Milestone placement | Proposed comparison and boundary |
 | --- | --- | --- |
-| LangChain | Conditional P03/P04 integration or agent-loop comparison | Select a model/tool integration only when it fills a named gap relative to existing adapters and typed tools. Do not add it as a mandatory layer for retrieval or LangGraph. |
+| LangChain | Planned P03-I01 retrieval/composition trial; conditional P04 agent-loop comparison | Compare Qdrant integration and request composition with the direct implementation using the same filters, vectors, contexts and metered model capability. Adoption needs parity and a demonstrated integration benefit; no mandatory framework layer or additional live generation matrix. |
 | LangGraph (Python) | P04 bounded orchestration experiment | After the fixed review workflow exists, compare the same steps/tools with explicit graph state, branching, checkpoints and human-review interrupts. Test recovery and replay before introducing a separately identified model-directed loop. |
 | LangSmith | Conditional P04 trace/evaluation pilot; P05 operational assessment | Compare debugging, trace completeness and evaluation usefulness with existing saved records and portable instrumentation. It can be evaluated independently of LangChain/LangGraph; the ledger and archived evidence remain authoritative. |
 | Vercel AI SDK | Separate AspectLoop TypeScript proposal | No rd_ai language migration or JavaScript runtime dependency. SDK Core integration and optional UI streaming belong to AspectLoop's own roadmap and acceptance process. |
@@ -141,8 +142,9 @@ redaction, access, retention and cost decision, using synthetic or approved
 neutral fixtures. Reject unauthorized payload/credential export and verify that
 telemetry failure cannot change task outcomes or accounting. A bounded trial
 does not select a second permanent observability stack. Record an
-adopt/reject/defer decision; these candidates need not all be exercised or
-installed to accept the underlying capability.
+adopt/reject/defer decision. P03-I01 is selected bounded trial work; permanent
+adoption remains conditional. Other unselected candidates need not be installed
+or exercised to accept the underlying capability.
 
 Primary references reviewed 2026-11-07:
 [LangChain](https://docs.langchain.com/oss/python/langchain/overview),
@@ -186,7 +188,7 @@ observations. Never require disclosure of private model reasoning as evidence.
 | P00 | One project structure with preserved baseline and reproducibility | Existing saved evidence | Consolidation concluded; S08 runtime follow-up concluded |
 | P01 | Explicit evaluation protocol and regression/challenge capabilities for the next question | P00 | Offline protocol/comparison scope concluded; judge study unselected |
 | P02 | Inspectable source-grounded extraction and a measured support decision | P01's protocol for the selected experiment | Selected text-provenance slice concluded; workbook/semantic studies conditional |
-| P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | Planned |
+| P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | S01–S05/E01 implemented and verified; embeddings/Qdrant/RAG and LangChain trial remain planned |
 | P04 | Human-reviewed proposals with independently enforced application authority | P01; usable source evidence; P03 or controlled retrieval fixtures | Planned; LangGraph, agent/MCP and tracing comparisons conditional |
 | P05 | A usable local interface and measured operational/release controls | A selected fixed workflow from P04 | Planned; deployable-service expansion conditional |
 
@@ -350,10 +352,44 @@ thresholds; historical outputs and gold remain unchanged.
 **Question:** Can the system find current, authorized rules/evidence and explain
 a field reliably enough to justify the retrieval path?
 
+The [P03 plan](plans/milestones/P03-authorized-retrieval.md) covers
+three planned experiments: E01 exact/BM25 baseline, E02 real learned embeddings
+with a local Qdrant vector database, and E03 actual LLM-generated cited answers
+under matched no-retrieval/BM25/vector contexts. Use a 24-unit schema-derived/
+fictional collection and 40 frozen query-context cases. E01 is model-free;
+embeddings, vector-store persistence/search/lifecycle and generation are core
+planned work, not optional replacements for its advertised topics. Pin actual
+encoder/model/store profiles and resource bounds before their live execution;
+paid invocations retain the standing concrete-command approval policy.
+
+Fixture scope checks are not production authentication. PO gold, predictions
+and P02 diagnostic verdicts stay outside the reference collection. Citation
+integrity, retrieval relevance and semantic answer support have separate gates.
+Completing E01 alone cannot close P03; completed model-dependent comparisons
+may record rejection instead of adoption. The plan includes an
+[end-to-end flow](plans/milestones/P03-authorized-retrieval.md#revised-end-to-end-flow).
+The planned [I01 integration trial](plans/milestones/P03-authorized-retrieval.md#p03-i01--bounded-langchain-integration-trial)
+compares direct Qdrant retrieval/request composition with LangChain using saved
+vectors and captured/replayed model outcomes. Application-owned scope, source,
+budget and answer checks remain independent. It adds no fourth answer arm or
+automatic inference repeat. Keep Qdrant for rd_ai; pgvector remains a candidate
+for AspectLoop's separate PostgreSQL-backed retrieval work, subject to its own
+plan. This does not change AspectLoop's implementation or select its store.
+Remaining stages require their scoped execution gates; this status update starts
+no downloads or model invocations.
+
+**E01 executed:** [reference retrieval report](reports/P03-reference-retrieval.md)
+records 24 base units, all 40 query-context cases, 12/12 exact positives and
+BM25 Recall@3 1.000 / Precision@3 0.431 on authored technical relevance cases.
+Irrelevant lexical hits after deletion/revocation remain explicit. The Docker
+gate passed 1,041 tests; no new model calls or semantic accuracy claims. Only
+S01–S05 is complete; E02/E03/I01 and final archival remain separate work.
+
 **Work:** curate approved field definitions, normalization rules and explicitly
 fictional business policies; assign source/chunk/version identities. Establish
-deterministic lookup and keyword baselines, then evaluate embeddings and one
-store when selected. Hybrid retrieval/reranking are conditional on a measured
+deterministic lookup and keyword baselines, then evaluate learned embeddings
+with one persistent vector database and actual grounded generation. Hybrid
+retrieval/reranking are conditional on a measured
 need. Generate cited answers and insufficient-evidence outcomes; test updates,
 conflicts, deletion, reindexing and two fictional access scopes. Keep benchmark
 answers/predictions out of the evidence collection used for quality claims.
@@ -367,6 +403,7 @@ answers/predictions out of the evidence collection used for quality claims.
 | RAG; Chunking; Embedding; Retrieval Process; Generation; Using SDKs Directly | A small cited-answer pipeline with distinct retrieval and answer scores. |
 | RAG Usecases; RAG vs Fine-tuning; RAG & Dynamic Filters; Context Security | Justify retrieval, filter by authority/version before context construction and retain insufficient-evidence behavior. |
 | Human Evals; Evaluation Metrics; Cost/latency monitoring | Review relevance, citation support, answer correctness and abstention separately, including operational failures. |
+| LangChain / framework integration | Compare real Qdrant-wrapper retrieval and request composition with direct calls; measure parity, overhead and maintenance benefit without claiming agent behavior or improved model accuracy. |
 
 **OWASP topics exercised**
 
@@ -384,7 +421,12 @@ answers/predictions out of the evidence collection used for quality claims.
 **Acceptance:** reproducible authorized lookup/index behavior, reviewed relevance
 and answer/citation cases, update/deletion/isolation controls and full cost/time
 populations. A measured decision to retain simpler lookup is valid; embeddings,
-vector or reranker coverage is claimed only for work actually exercised.
+vector and generated-answer experiments must actually run to close the planned
+P03 scope, even if their candidates are rejected. The bounded I01 integration
+trial must also be recorded, without requiring permanent LangChain adoption.
+Reranking remains optional;
+topic coverage is claimed only for work actually exercised. Unreviewed semantic
+quality remains unresolved, not an automatic answer-quality pass.
 
 ### P04 — Human-reviewed proposals and bounded orchestration
 
@@ -554,6 +596,10 @@ allowance and standing human approval; roadmap creation grants none.
 | 1.7 | 2026-11-07 | Place conditional LangChain/LangGraph comparisons in P03/P04 and LangSmith assessment in P04/P05; retain Python baseline, independent AspectLoop AI SDK proposal, accounting/authority boundaries and explicit adoption/export gates. |
 | 1.8 | 2026-11-07 | Add draft P02-E01 text-provenance implementation plan; distinguish inherited diagnostics, exact locations, semantic review authority and conditional workbook/model experiments. |
 | 1.9 | 2026-11-07 | Execute selected P02 text-provenance slice without inference: bound locations and inherited context linkage, offline commands, preserved P01/matrix results and 1,015-test gate; broader workbook/semantic studies remain conditional. |
+| 1.10 | 2026-11-07 | Verify P03 boundaries and add draft offline authorized-reference retrieval plan; separate exact/lexical baselines, technical relevance labels, lifecycle/access controls and evidence excerpts from conditional embeddings and generated RAG answers. |
+| 1.11 | 2026-11-08 | Revise P03 to require planned real embeddings, local Qdrant vector-database operations and actual generated RAG comparisons after the lexical baseline; preserve concrete model/run gates and separate execution, quality and adoption outcomes. |
+| 1.12 | 2026-11-08 | Select P03-I01 bounded direct-versus-LangChain Qdrant retrieval/composition trial with application-owned controls and replay parity; preserve Qdrant for rd_ai and pgvector as a separate AspectLoop candidate. |
+| 1.13 | 2026-11-08 | Record executed S01–S05/E01 and its 1,041-test gate, technical-fixture relevance results and lexical insufficiency limits; retain later P03 model/database/integration work and archival as unexecuted. |
 
 Use Git history for prior revisions. Record material changes to milestone scope,
 data authority or topic sources here; do not rewrite historical experiment claims.

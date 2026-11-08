@@ -1,0 +1,2 @@
+Ordered lines versus catalog rows
+Extract ordered lines only. Exclude catalog and lookup-only rows. Preserve source order and repeated products; package size is not ordered quantity.

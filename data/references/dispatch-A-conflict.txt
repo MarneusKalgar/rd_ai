@@ -1,0 +1,2 @@
+Fictional dispatch policy
+Scope A dispatch marker is VIOLET. Synthetic technical version fixture.

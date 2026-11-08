@@ -1,0 +1,3 @@
+purchaseOrderLineNumber
+Printed line number, if present, as text to retain leading zeros.
+Ordered lines belonging to this PO only; exclude catalog and lookup-only rows.

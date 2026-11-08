@@ -1,0 +1,2 @@
+Decimal strings
+Represent ordered quantities, unit prices and totals as decimal strings. Missing source values remain null; never invent a value.

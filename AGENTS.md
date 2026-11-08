@@ -7,6 +7,11 @@
 - Start at `docs/README.md` for guides, reference, plans, reports and quality
   documentation. Keep new documents in the group matching their primary purpose.
 - Root Make targets own application commands; use canonical unprefixed targets.
+- Keep milestone flow diagrams synchronized with the scoped implementation and
+  execution status. Update affected diagrams when a stage, boundary, comparator
+  or failure path changes, and check them before milestone closeout. Distinguish
+  planned from executed flows. Preserve hash-bound plan snapshots and historical
+  diagrams; put current executed flows in the linked report when the plan is frozen.
 - Keep private data preparation
   out of the reviewer-facing workflow.
 - Work here does not automatically change AspectLoop or its AI-track scope.

@@ -1,0 +1,2 @@
+purchaseOrderNumber
+The buyer's PO identifier, kept as text so leading zeros survive.

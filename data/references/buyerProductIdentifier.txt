@@ -1,0 +1,3 @@
+buyerProductIdentifier
+Product identifier supplied by the buyer, not a barcode or seller code unless identified as the buyer code.
+Ordered lines belonging to this PO only; exclude catalog and lookup-only rows.

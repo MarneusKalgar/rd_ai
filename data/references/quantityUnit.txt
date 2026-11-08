@@ -1,0 +1,3 @@
+quantityUnit
+Small normalized unit category. OTHER means an explicit different unit; UNKNOWN means the unit is absent or its code cannot be interpreted.
+Ordered lines belonging to this PO only; exclude catalog and lookup-only rows.

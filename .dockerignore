@@ -14,6 +14,9 @@
 !config/**
 !prompts/
 !prompts/**
+!docs/
+!docs/reference/
+!docs/reference/extraction-contract.md
 
 # Keep private data and environment overrides out even inside allowed folders.
 **/private/

@@ -26,6 +26,7 @@ COPY schemas ./schemas
 COPY data ./data
 COPY config ./config
 COPY prompts ./prompts
+COPY docs/reference/extraction-contract.md ./docs/reference/extraction-contract.md
 
 # App/setup image: production dependencies only, with non-root results storage.
 # A fresh named results volume inherits this directory's ownership.
@@ -49,6 +50,7 @@ COPY --from=artifacts /app/schemas ./schemas
 COPY --from=artifacts /app/data ./data
 COPY --from=artifacts /app/config ./config
 COPY --from=artifacts /app/prompts ./prompts
+COPY --from=artifacts /app/docs/reference/extraction-contract.md ./docs/reference/extraction-contract.md
 COPY tests ./tests
 USER 10001:10001
 CMD ["python", "-m", "extraction_service", "validate-gold"]

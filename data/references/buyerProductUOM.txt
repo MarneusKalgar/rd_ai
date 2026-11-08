@@ -1,0 +1,3 @@
+buyerProductUOM
+Source wording or code for the ordered quantity's unit when its meaning is supported.
+Ordered lines belonging to this PO only; exclude catalog and lookup-only rows.

@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "authority": "authored-technical-oracles; shared authorship and development exposure; no new human review",
+  "cases": [
+    {
+      "id": "Q01",
+      "group": "lookup",
+      "query": "Explain purchaseOrderNumber",
+      "scope": "A",
+      "topic": "purchaseOrderNumber",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "purchaseOrderNumber"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q02",
+      "group": "lookup",
+      "query": "Explain purchaseOrderDateTime",
+      "scope": "A",
+      "topic": "purchaseOrderDateTime",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "purchaseOrderDateTime"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q03",
+      "group": "lookup",
+      "query": "Explain buyerName",
+      "scope": "A",
+      "topic": "buyerName",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "buyerName"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q04",
+      "group": "lookup",
+      "query": "Explain shipToInfo",
+      "scope": "A",
+      "topic": "shipToInfo",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "shipToInfo"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q05",
+      "group": "lookup",
+      "query": "Explain paymentTerms",
+      "scope": "A",
+      "topic": "paymentTerms",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "paymentTerms"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q06",
+      "group": "lookup",
+      "query": "Explain buyerCurrency",
+      "scope": "A",
+      "topic": "buyerCurrency",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "buyerCurrency"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q07",
+      "group": "lookup",
+      "query": "Explain totalValue",
+      "scope": "A",
+      "topic": "totalValue",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "totalValue"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q08",
+      "group": "lookup",
+      "query": "Explain purchaseOrderLineNumber",
+      "scope": "A",
+      "topic": "purchaseOrderLineNumber",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "purchaseOrderLineNumber"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q09",
+      "group": "lookup",
+      "query": "Explain buyerProductIdentifier",
+      "scope": "A",
+      "topic": "buyerProductIdentifier",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "buyerProductIdentifier"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q10",
+      "group": "lookup",
+      "query": "Explain buyerProductName",
+      "scope": "A",
+      "topic": "buyerProductName",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "buyerProductName"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q11",
+      "group": "lookup",
+      "query": "Explain buyerProductQuantity",
+      "scope": "A",
+      "topic": "buyerProductQuantity",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "buyerProductQuantity"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q12",
+      "group": "lookup",
+      "query": "Explain buyerDeliveryDate",
+      "scope": "A",
+      "topic": "buyerDeliveryDate",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "buyerDeliveryDate"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q13",
+      "group": "free",
+      "query": "How are leading zeros preserved in identifiers?",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "identifier-text",
+        "purchaseOrderNumber",
+        "purchaseOrderLineNumber"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q14",
+      "group": "free",
+      "query": "Which date is the PO issue date?",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "purchaseOrderDateTime",
+        "date-roles"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q15",
+      "group": "free",
+      "query": "Can the buyer be inferred from bill-to?",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "buyerName"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q16",
+      "group": "free",
+      "query": "Where does the ship-to name and address belong?",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "shipToInfo"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q17",
+      "group": "free",
+      "query": "What are payment terms?",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "paymentTerms"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q18",
+      "group": "free",
+      "query": "Does a list of currency choices select the order currency?",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "buyerCurrency"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q19",
+      "group": "free",
+      "query": "Is the workbook batch total the PO net product total?",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "totalValue"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q20",
+      "group": "free",
+      "query": "Should a seller code replace the buyer product identifier?",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "buyerProductIdentifier"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q21",
+      "group": "free",
+      "query": "Where is the ordered product name recorded?",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "buyerProductName"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q22",
+      "group": "free",
+      "query": "Is package size the ordered quantity?",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "ordered-lines",
+        "buyerProductQuantity"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q23",
+      "group": "free",
+      "query": "What is the difference between OTHER and UNKNOWN units?",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "quantityUnit",
+        "unit-categories"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q24",
+      "group": "free",
+      "query": "How are requested delivery dates tied to a line?",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "buyerDeliveryDate",
+        "date-roles"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q25",
+      "group": "negative",
+      "query": "xylophoniczz",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [],
+      "expected_status": "insufficient_evidence"
+    },
+    {
+      "id": "Q26",
+      "group": "negative",
+      "query": "nebulazz",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [],
+      "expected_status": "insufficient_evidence"
+    },
+    {
+      "id": "Q27",
+      "group": "negative",
+      "query": "quasarzz",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [],
+      "expected_status": "insufficient_evidence"
+    },
+    {
+      "id": "Q28",
+      "group": "negative",
+      "query": "tachyonzz",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [],
+      "expected_status": "insufficient_evidence"
+    },
+    {
+      "id": "Q29",
+      "group": "negative",
+      "query": "dispatch marker",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog-conflict.json",
+      "effective_time": 20,
+      "relevant": [
+        "dispatch-A@1",
+        "dispatch-A@2"
+      ],
+      "expected_status": "conflicting_evidence"
+    },
+    {
+      "id": "Q30",
+      "group": "negative",
+      "query": "Fictional dispatch policy",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog-conflict.json",
+      "effective_time": 20,
+      "relevant": [
+        "dispatch-A@1",
+        "dispatch-A@2"
+      ],
+      "expected_status": "conflicting_evidence"
+    },
+    {
+      "id": "Q31",
+      "group": "negative",
+      "query": "Explain dispatch",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog-conflict.json",
+      "effective_time": 20,
+      "relevant": [
+        "dispatch-A@1",
+        "dispatch-A@2"
+      ],
+      "expected_status": "conflicting_evidence"
+    },
+    {
+      "id": "Q32",
+      "group": "negative",
+      "query": "Scope A dispatch",
+      "scope": "A",
+      "topic": null,
+      "catalog": "config/retrieval/catalog-conflict.json",
+      "effective_time": 20,
+      "relevant": [
+        "dispatch-A@1",
+        "dispatch-A@2"
+      ],
+      "expected_status": "conflicting_evidence"
+    },
+    {
+      "id": "Q33",
+      "group": "lifecycle",
+      "query": "dispatch marker",
+      "scope": "A",
+      "topic": "dispatch",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "dispatch-A"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q34",
+      "group": "lifecycle",
+      "query": "review marker",
+      "scope": "A",
+      "topic": "review",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "review-A"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q35",
+      "group": "lifecycle",
+      "query": "dispatch marker",
+      "scope": "B",
+      "topic": "dispatch",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "dispatch-B"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q36",
+      "group": "lifecycle",
+      "query": "review marker",
+      "scope": "B",
+      "topic": "review",
+      "catalog": "config/retrieval/catalog.json",
+      "effective_time": 20,
+      "relevant": [
+        "review-B"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q37",
+      "group": "lifecycle",
+      "query": "dispatch marker",
+      "scope": "A",
+      "topic": "dispatch",
+      "catalog": "config/retrieval/catalog-update.json",
+      "effective_time": 20,
+      "relevant": [
+        "dispatch-A@2"
+      ],
+      "expected_status": "evidence_found"
+    },
+    {
+      "id": "Q38",
+      "group": "lifecycle",
+      "query": "dispatch marker",
+      "scope": "A",
+      "topic": "dispatch",
+      "catalog": "config/retrieval/catalog-deleted.json",
+      "effective_time": 20,
+      "relevant": [],
+      "expected_status": "insufficient_evidence"
+    },
+    {
+      "id": "Q39",
+      "group": "lifecycle",
+      "query": "dispatch marker",
+      "scope": "A",
+      "topic": "dispatch",
+      "catalog": "config/retrieval/catalog-revoked.json",
+      "effective_time": 20,
+      "relevant": [],
+      "expected_status": "insufficient_evidence"
+    },
+    {
+      "id": "Q40",
+      "group": "lifecycle",
+      "query": "dispatch marker",
+      "scope": "A",
+      "topic": "dispatch",
+      "catalog": "config/retrieval/catalog-update.json",
+      "effective_time": 5,
+      "relevant": [
+        "dispatch-A"
+      ],
+      "expected_status": "evidence_found"
+    }
+  ]
+}

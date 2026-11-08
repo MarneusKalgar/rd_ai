@@ -1,0 +1,2 @@
+Unit categories
+quantityUnit categories are EACH CASE KILOGRAM BOTTLE OTHER UNKNOWN. OTHER is an explicit different unit; UNKNOWN is absent or uninterpretable.

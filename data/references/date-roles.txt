@@ -1,0 +1,2 @@
+Date roles
+Normalize supported dates to ISO YYYY-MM-DD. Distinguish PO issue dates from requested delivery dates; do not substitute one role for another.

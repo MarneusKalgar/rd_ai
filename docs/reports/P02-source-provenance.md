@@ -7,6 +7,37 @@ new semantic resolvers and model/representation experiments remain unselected.
 
 ## Capability and scope
 
+### Executed flow
+
+This depicts the concluded P02 text-provenance slice. It is stored here because
+the original plan is a hash-bound input to the preserved experiment. Maintain
+this current-flow diagram during scoped changes without modifying frozen proof.
+
+```mermaid
+flowchart TD
+    P["Frozen P02 protocol and controls"] --> V["Verify sources, archive and record bindings"]
+    S["30 saved native v2 records + approved source texts"] --> V
+    V --> G{"Evidence valid?"}
+    G -->|No| Reject["Reject altered or missing evidence"]
+    G -->|Yes| U{"Usable extraction?"}
+    U -->|No| Unknown["Retain record-level unknown"]
+    U -->|Yes| Fields["Select PO number, buyer identifier and delivery-date paths"]
+    Fields --> Literal["Locate exact UTF-8 occurrences; retain ambiguity/nulls"]
+    Fields --> Roles["Run unchanged identifier/date role checks"]
+    Roles --> Context["Link inherited cells or closed scope to source context"]
+    Literal --> Sidecar["Hash-bound provenance report; original PO unchanged"]
+    Context --> Sidecar
+    Unknown --> Sidecar
+    Sidecar --> Check["Validate references, replay and tamper controls"]
+    Check --> Archive["Preserve P01/matrix; archive and verify restoration"]
+```
+
+Literal location, inherited semantic verdict and context linkage remain distinct.
+Gold answers are not read, no model runs, and these findings do not establish
+whole-PO correctness or reviewed semantic accuracy.
+
+### Implementation details
+
 P02-E01 attaches original UTF-8 byte references to three declared field kinds
 on the thirty native v2 baseline records already selected by P01. Exact literal
 occurrences, inherited semantic role judgments and validated context linkage

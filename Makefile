@@ -214,3 +214,9 @@ evaluate-experiment: archive-dirs
 help:
 	@echo "Document intelligence R&D: check, preflight, reproduce-report, run, archive-results"
 	@echo "Commands run from this root; inference requires explicit scope and approval."
+
+# E01 runs only against public sources/configuration, without network or ledger access.
+.PHONY: validate-retrieval-protocol build-reference-index evaluate-retrieval
+validate-retrieval-protocol build-reference-index evaluate-retrieval:
+	mkdir -p results/submission
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/config:/app/config:ro" --volume "$(CURDIR)/data/references:/app/data/references:ro" --volume "$(CURDIR)/src:/app/src:ro" --volume "$(CURDIR)/results/submission:/app/results/submission" reproduce python -m extraction_service $@ $(ARGS)

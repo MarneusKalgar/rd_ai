@@ -1,0 +1,3 @@
+buyerUnitPrice
+Explicit per-unit price, normalized as a decimal string.
+Ordered lines belonging to this PO only; exclude catalog and lookup-only rows.

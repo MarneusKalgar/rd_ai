@@ -1,0 +1,2 @@
+paymentTerms
+Payment terms stated on the order.

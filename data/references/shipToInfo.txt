@@ -1,0 +1,2 @@
+shipToInfo
+Source-supported ship-to name/address as one neutral text value.

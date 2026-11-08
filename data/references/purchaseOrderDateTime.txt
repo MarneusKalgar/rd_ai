@@ -1,0 +1,2 @@
+purchaseOrderDateTime
+PO issue date normalized to YYYY-MM-DD; not a requested delivery, entry, or cancellation date.

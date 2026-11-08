@@ -1,0 +1,2 @@
+totalValue
+Explicit net product total for this PO, normalized as a decimal string; not a workbook batch total.

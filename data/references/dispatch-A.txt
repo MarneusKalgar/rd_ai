@@ -1,0 +1,2 @@
+Fictional dispatch policy
+Scope A dispatch marker is AMBER. This synthetic policy cannot override PO schema meanings.

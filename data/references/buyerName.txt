@@ -1,0 +1,2 @@
+buyerName
+Buyer party named by the source; never inferred from ship-to or bill-to alone.

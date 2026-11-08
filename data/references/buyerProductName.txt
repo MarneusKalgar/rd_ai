@@ -1,0 +1,3 @@
+buyerProductName
+Product name or description attached to the ordered line.
+Ordered lines belonging to this PO only; exclude catalog and lookup-only rows.

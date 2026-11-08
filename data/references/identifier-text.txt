@@ -1,0 +1,2 @@
+Identifier text and leading zeros
+Keep identifiers as text. Leading zeros survive. Do not convert identifiers into numbers.

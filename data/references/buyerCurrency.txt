@@ -1,0 +1,2 @@
+buyerCurrency
+Explicit order currency as a three-letter code. A list of choices is not a selected currency.

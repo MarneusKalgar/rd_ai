@@ -15,6 +15,7 @@ from extraction_service.exit_status import ExitStatus
 from extraction_service.extraction import ExtractionContract
 from extraction_service.extraction.constants import SCHEMA_FILENAME
 from extraction_service.preflight import DEFAULT_EXPERIMENT_FILE, preflight
+from extraction_service.retrieval import cli as retrieval_cli
 
 EXIT_SUCCESS: Final[int] = ExitStatus.SUCCESS
 EXIT_VALIDATION_FAILURE: Final[int] = ExitStatus.EXTRACTION_FAILURE
@@ -99,6 +100,7 @@ def _build_parser() -> argparse.ArgumentParser:
     application_cli.add_commands(commands)
     evaluation_cli.add_commands(commands)
     provenance_cli.add_commands(commands)
+    retrieval_cli.add_commands(commands)
 
     return parser
 
@@ -129,6 +131,9 @@ def _validate_response(path: Path, contract: ExtractionContract) -> int:
 
 
 def _dispatch(args: argparse.Namespace) -> int:
+    if args.command in retrieval_cli.COMMANDS:
+        return retrieval_cli.dispatch(args)
+
     if args.command in provenance_cli.COMMANDS:
         return provenance_cli.dispatch(args)
 
