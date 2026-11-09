@@ -1,6 +1,6 @@
 # Document intelligence R&D roadmap
 
-- Version: **1.13**.
+- Version: **1.14**.
 - Created and source mappings reviewed: **2026-10-31**.
 - Framework/SDK proposals reviewed: **2026-11-08**.
 - Status: P00 and selected P01/P02 offline slices concluded; later capability studies remain conditional/planned.
@@ -188,7 +188,7 @@ observations. Never require disclosure of private model reasoning as evidence.
 | P00 | One project structure with preserved baseline and reproducibility | Existing saved evidence | Consolidation concluded; S08 runtime follow-up concluded |
 | P01 | Explicit evaluation protocol and regression/challenge capabilities for the next question | P00 | Offline protocol/comparison scope concluded; judge study unselected |
 | P02 | Inspectable source-grounded extraction and a measured support decision | P01's protocol for the selected experiment | Selected text-provenance slice concluded; workbook/semantic studies conditional |
-| P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | S01–S05/E01 implemented and verified; embeddings/Qdrant/RAG and LangChain trial remain planned |
+| P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | E01/E02 exercised, including real embeddings/Qdrant; RAG generation and LangChain trial remain planned |
 | P04 | Human-reviewed proposals with independently enforced application authority | P01; usable source evidence; P03 or controlled retrieval fixtures | Planned; LangGraph, agent/MCP and tracing comparisons conditional |
 | P05 | A usable local interface and measured operational/release controls | A selected fixed workflow from P04 | Planned; deployable-service expansion conditional |
 
@@ -383,7 +383,14 @@ records 24 base units, all 40 query-context cases, 12/12 exact positives and
 BM25 Recall@3 1.000 / Precision@3 0.431 on authored technical relevance cases.
 Irrelevant lexical hits after deletion/revocation remain explicit. The Docker
 gate passed 1,041 tests; no new model calls or semantic accuracy claims. Only
-S01–S05 is complete; E02/E03/I01 and final archival remain separate work.
+S01–S05 was complete at that checkpoint.
+
+**E02 executed:** [vector retrieval report](reports/P03-vector-retrieval.md)
+records 58 actual MiniLM encoder batches, real filtered exact Qdrant queries,
+update/delete/revocation controls and forty-case recovery after physical restart.
+Recall/precision tie BM25; MRR falls to 0.985294, so the +0.05 recall-gain gate
+does not support preferring dense retrieval. The store is stopped, data retained.
+E03 generation, I01 and final archival remain unexecuted.
 
 **Work:** curate approved field definitions, normalization rules and explicitly
 fictional business policies; assign source/chunk/version identities. Establish
@@ -600,6 +607,7 @@ allowance and standing human approval; roadmap creation grants none.
 | 1.11 | 2026-11-08 | Revise P03 to require planned real embeddings, local Qdrant vector-database operations and actual generated RAG comparisons after the lexical baseline; preserve concrete model/run gates and separate execution, quality and adoption outcomes. |
 | 1.12 | 2026-11-08 | Select P03-I01 bounded direct-versus-LangChain Qdrant retrieval/composition trial with application-owned controls and replay parity; preserve Qdrant for rd_ai and pgvector as a separate AspectLoop candidate. |
 | 1.13 | 2026-11-08 | Record executed S01–S05/E01 and its 1,041-test gate, technical-fixture relevance results and lexical insufficiency limits; retain later P03 model/database/integration work and archival as unexecuted. |
+| 1.14 | 2026-11-08 | Record real S06/E02 embeddings/Qdrant lifecycle and restart recovery; retain lexical baseline after no recall gain, and keep generation/LangChain/final archival unexecuted. |
 
 Use Git history for prior revisions. Record material changes to milestone scope,
 data authority or topic sources here; do not rewrite historical experiment claims.

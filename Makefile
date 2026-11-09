@@ -216,6 +216,23 @@ help:
 	@echo "Commands run from this root; inference requires explicit scope and approval."
 
 # E01 runs only against public sources/configuration, without network or ledger access.
+.PHONY: prepare-encoder encode-references vector-store-up vector-store-stop evaluate-vectors
+prepare-encoder:
+	mkdir -p results/embedding-models results/submission
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/results/embedding-models:/app/results/embedding-models" vector-e02-online python -m extraction_service.retrieval.vector_cli prepare $(ARGS)
+
+encode-references:
+	$(COMPOSE) run --build --rm --no-deps vector-e02-offline python -m extraction_service.retrieval.vector_cli encode --output results/submission/P03-E02-v1/vectors.json $(ARGS)
+
+vector-store-up:
+	$(COMPOSE) --profile retrieval up -d qdrant-e02
+
+vector-store-stop:
+	$(COMPOSE) --profile retrieval stop qdrant-e02
+
+evaluate-vectors:
+	$(COMPOSE) run --build --rm --no-deps --volume "$(CURDIR)/compose.yaml:/app/compose.yaml:ro" --volume "$(CURDIR)/tests/application/test_vector_store.py:/app/tests/application/test_vector_store.py:ro" vector-e02 python -m extraction_service.retrieval.vector_cli $(ARGS)
+
 .PHONY: validate-retrieval-protocol build-reference-index evaluate-retrieval
 validate-retrieval-protocol build-reference-index evaluate-retrieval:
 	mkdir -p results/submission

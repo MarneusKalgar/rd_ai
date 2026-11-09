@@ -1,9 +1,9 @@
 # P03 — Authorized reference retrieval and grounded responses
 
-- Version: **1.3**.
+- Version: **1.4**.
 - Created: **2026-11-07**.
 - Revised: **2026-11-08**.
-- Status: **S01–S05 / E01 implemented and verified; E02/E03/I01 remain planned, not executed**.
+- Status: **S01–S06 / E01–E02 implemented and verified; E03/I01 remain planned, not executed**.
 - Parent: [P03 roadmap](../../roadmap.md#p03--authorized-evidence-retrieval-and-grounded-answers).
 - Planning baseline: `167a76c` — selected P02 provenance slice committed.
 - Planned experiments: **P03-E01 lexical baseline**, **P03-E02 embedding/vector-database retrieval**, **P03-E03 generated RAG answers**.
@@ -57,10 +57,11 @@ or production reliability claim follows from this controlled development suite.
 
 ### Revised end-to-end flow
 
-E01 execution is recorded in the [S01–S05 report](../../reports/P03-reference-retrieval.md#executed-flow).
-The diagram below retains the full planned milestone: only its reference,
-exact/BM25 and evidence-evaluation portions have run. No embeddings, Qdrant,
-generation or LangChain coverage is implied by E01 completion.
+E01 execution is recorded in the [S01–S05 report](../../reports/P03-reference-retrieval.md#executed-flow);
+E02 is recorded in the [S06 vector report](../../reports/P03-vector-retrieval.md#executed-flow).
+The diagram retains the full milestone. Green nodes indicate exercised reference,
+lexical, learned-vector and evidence paths. LangChain and generation remain
+unexecuted, as does final S09 archival.
 
 This is the **planned** P03 flow. During execution, keep it synchronized with
 stage implementations, comparison arms, authorization/failure paths and recorded
@@ -118,6 +119,8 @@ flowchart TD
         IP --> D
         D --> P["Reproduce, archive, record adoption decision"]
     end
+    classDef exercised fill:#e7f4e8,stroke:#397647
+    class R,C,B,E,DB,Q,F,BR,QE,DQ,VR,EV,CT,RE exercised
 ```
 
 BM25 and vector retrieval are separate comparison arms, not an unmeasured
@@ -508,10 +511,10 @@ requires a recorded new protocol revision, not quiet case removal.
 
 ## 7. Planned model-dependent work — P03-S06–S09 / E02–E03
 
-E02 and E03 are required planned stages, not conditional extensions. Execution
-gates determine when their concrete runs may start; they do not make the topics
-optional. E01 can be implemented and verified while those profiles are prepared,
-but the milestone remains incomplete until actual E02/E03 work is recorded.
+E02 has now been exercised with pinned MiniLM ONNX encoding and local Qdrant;
+E03 remains a required, unexecuted stage. Their profiles and actual limits remain
+part of the evidence. E01/E02 completion does not close the milestone: generation,
+I01 and final preservation work remain outstanding.
 
 ### P03-S06 / E02 — Learned embeddings and a real vector database
 
@@ -545,9 +548,9 @@ but the milestone remains incomplete until actual E02/E03 work is recorded.
 6. Compare E02 with E01 on the same queries, eligible sources, chunks, `k=3` and
    relevance labels. Keep encoding/index/query timing and all failed outcomes
    separate. Capture authorized top-k evidence bundles for the later RAG arms.
-7. After the direct Qdrant path works, execute I01's retrieval parity slice below
-   against the same server/snapshot and saved encoder outputs. Freeze the
-   integration choice for E03 only after its request/control checks pass.
+7. **Separate I01 follow-up, not executed by the S06/E02 invocation:** compare
+   LangChain with the now-working direct path using the same server/snapshot and
+   saved encoder outputs. Freeze E03's integration choice after those checks.
 
 **Accept S06:** real encoder outputs and real Qdrant operations are demonstrated;
 all hard isolation/currentness/integrity controls pass, and the complete matched
@@ -789,9 +792,10 @@ remain conditional P04/P05. No alternate ecosystem or telemetry stack is selecte
 | Guides, reports and glossary | Actual commands, outcomes, source identities and exercised-versus-conditional topics |
 | Ignored `results/` and compact `archive-index/` | Reproducible snapshots, complete results, logs and verified archive/restore proof |
 
-The three E01 commands below are implemented; see the
+The E01 and E02 commands below are implemented; see the
 [operations guide](../../guides/reference-retrieval.md) for publication and
-reproduction. Vector/RAG interfaces remain **proposals, not implemented commands**.
+reproduction and [vector guide](../../guides/vector-retrieval.md) for the actual
+encoder/store phases. RAG interfaces remain **proposals, not implemented commands**.
 S06–S07 will
 freeze exact protocol paths, fixture inputs, model/store identities, snapshot/
 result destinations and invocation bounds:
@@ -801,8 +805,10 @@ make validate-retrieval-protocol ARGS='--protocol config/retrieval/P03-E01-v3.js
 make build-reference-index ARGS='--protocol config/retrieval/P03-E01-v3.json'
 make evaluate-retrieval ARGS='--protocol config/retrieval/P03-E01-v3.json'
 make evaluate-retrieval ARGS='--protocol config/retrieval/P03-E01-v3.json --check-result results/submission/P03-E01-v3/report.json'
-make build-vector-index ARGS='--protocol config/retrieval/P03-E02-v1.json'
-make evaluate-retrieval ARGS='--protocol config/retrieval/P03-E02-v1.json'
+make prepare-encoder
+make encode-references
+make vector-store-up
+make evaluate-vectors ARGS='evaluate --run-id e02v1 --output results/submission/P03-E02-v1/report.json'
 make plan-rag ARGS='--protocol config/retrieval/P03-E03-v1.json --phase pilot'
 make run-rag ARGS='--protocol config/retrieval/P03-E03-v1.json --phase pilot'
 make run-rag ARGS='--protocol config/retrieval/P03-E03-v1.json --phase remaining'
@@ -865,7 +871,7 @@ reference above is background, not a refreshed review of the entire roadmap.
 - [x] S03 eligible exact/lexical retrieval and positive/negative scope controls demonstrated.
 - [x] S04 evidence responses, currentness/conflicts/deletion/revocation and historical replay boundaries verified.
 - [x] S05 complete 40-case evaluation and real offline process controls recorded.
-- [ ] S06 real learned embeddings and Qdrant storage/search/lifecycle executed and compared with BM25 across the frozen cases.
+- [x] S06 real learned embeddings and Qdrant storage/search/lifecycle executed and compared with BM25 across the frozen cases; see the linked report for verification and the negative adoption decision.
 - [ ] I01 direct-versus-LangChain Qdrant retrieval and request-composition parity trial executed; engineering decision and E03 implementation identity recorded.
 - [ ] S07 actual LLM generation recorded across matched no-retrieval/BM25/vector arms, including deterministic skips and failed outcomes.
 - [ ] S08 retrieval, answer/grounding and complete operational populations evaluated with explicit review coverage and decisions.
@@ -885,3 +891,4 @@ new approval label or Git operation by itself.
 | 1.1 | 2026-11-08 | Make real embeddings, local Qdrant vector-database operations and matched LLM-generated RAG answers planned S06–S09 work; retain BM25 as comparator, add end-to-end flow and full milestone completion/adoption gates. |
 | 1.2 | 2026-11-08 | Select bounded I01 direct-versus-LangChain Qdrant retrieval/composition trial, add ownership/parity diagrams and acceptance gates without expanding live generation arms; retain Qdrant for rd_ai and pgvector as a separate AspectLoop candidate. |
 | 1.3 | 2026-11-08 | Implement and verify S01–S05/E01: frozen 24-unit/40-case fixtures, authorized exact/BM25 evidence, lifecycle/citation/process controls and 1,041-test gate. Link executed flow; E02/E03/I01 and S09 archival remain unexecuted. |
+| 1.4 | 2026-11-08 | Exercise S06/E02 with hash-pinned CPU ONNX embeddings, exact local Qdrant queries, real lifecycle controls and forty-case restart recovery. Retain BM25 after no recall gain; E03/I01 and final archival remain unexecuted. |

@@ -1,0 +1,22 @@
+{
+  "id": "P03-E02-v1",
+  "purpose": "Final implementation and saved actual encoder outputs; initial store run retained separately as build diagnostic",
+  "bindings": {
+    "config/retrieval/P03-E02-profile-v1.json": "bdf1ee97c5b227bcf8e78ea3eb59885b411ad0a8d362dc819ddd7018f33b82c3",
+    "config/retrieval/P03-E01-v3.json": "191c28bd68e66418e0d942c32c3317b98e6878a6cb1b3435c88fa5e20ae6481e",
+    "results/submission/P03-E02-v1/vectors.json": "6cea252f4f1a38fdab6266811d09c2a2eaaef1f2d310012bae688cbdf944e3e8",
+    "uv.lock": "b815db4ab99183e7acb631603f8147baa18a3ab10f9c363b934015290c9e00be",
+    "pyproject.toml": "8fc32fe1f976f4049274f74b849f533aebb51848792b6fbac06c652aca5ac155",
+    "compose.yaml": "942fcb348750cb0738c1b7133133fe7b9061cb2c93d90ae8d03ae46163f33801",
+    "tests/application/test_vector_store.py": "3453e24ec282951ce45092bde0c7972e6888b332b2671c9473a036e868df5ea5",
+    "src/extraction_service/retrieval/encoder.py": "80b57c7c93eafc64fb508f855477496af7a9da374c6503c8128dc0b51cf83f18",
+    "src/extraction_service/retrieval/vector_store.py": "81f308ac2159e9fa352c7bccdd14afe51ac63b0a418a752b495ee1d3418d1316",
+    "src/extraction_service/retrieval/vector_cli.py": "c136bd8210f50b1ec0adf5e978a90c9fda5179d55dfa968cdd7997b299fc0003"
+  },
+  "controls": [
+    "test_vector_store.py",
+    "live lifecycle phase",
+    "physical stop/start plus forty-case reload"
+  ],
+  "comparison": "same E01 forty-case population; k=3; exact cosine; no hybrid/ANN; adopt dense only with >=0.05 absolute recall gain and no hard regression"
+}

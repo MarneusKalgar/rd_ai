@@ -1,0 +1,68 @@
+{
+  "protocol": "P03-E02-v1",
+  "population": 40,
+  "positive_relevance_cases": 34,
+  "embeddings": 58,
+  "encoding_batches": 58,
+  "encoding_seconds": 6.2292383770000015,
+  "onnxruntime": "1.31.1",
+  "numpy": "2.5.4",
+  "server_version": "1.20.0",
+  "e01": {
+    "macro_recall_at_3": 1.0,
+    "macro_precision_at_3": 0.4313725490196078,
+    "mrr": 1.0
+  },
+  "e02": {
+    "macro_recall_at_3": 1.0,
+    "macro_precision_at_3": 0.4313725490196078,
+    "mrr": 0.9852941176470589
+  },
+  "initial_store_calls": 52,
+  "reload_store_calls": 40,
+  "lifecycle_store_calls": 12,
+  "server_identity_calls": 1,
+  "initial_store_seconds": 0.45069345900003555,
+  "reload_store_seconds": 1.59469187600007,
+  "restart_semantic_reproduction": true,
+  "all_exact_oracles_passed": true,
+  "lifecycle": {
+    "collection": "p03_control_e02v1",
+    "controls": [
+      "scope A/B bait",
+      "revocation",
+      "currentness",
+      "update",
+      "deletion"
+    ],
+    "controls_passed": true,
+    "store_calls": 12
+  },
+  "ranking_regressions": [
+    "Q12"
+  ],
+  "insufficient_label_cases_returning_hits": [
+    "Q25",
+    "Q26",
+    "Q27",
+    "Q28",
+    "Q38",
+    "Q39"
+  ],
+  "decision": "retain BM25; dense recall gain is zero, below the predeclared +0.05 gate",
+  "generation_calls": 0,
+  "paid_api_spend": 0,
+  "implementation_verified": true,
+  "verification": {
+    "full_gate_tests": 1050,
+    "full_gate_seconds": 1235.07,
+    "additional_artifact_tests": 8,
+    "additional_artifact_seconds": 0.67
+  },
+  "evidence": {
+    "lifecycle.json": "5eaded98026cc57ab81890783af3a92f8813f556719fd07fb2695da0842f89d3",
+    "reloaded.json": "8947e2a5843646150cdbe161bebfd2ded5dd1ed6a226324d52116ba1e4987c08",
+    "report.json": "8b2f7dde6465b06c5bfbf0e14a3bbcf8abec108c61e9de36c8797e4542a69359",
+    "vectors.json": "6cea252f4f1a38fdab6266811d09c2a2eaaef1f2d310012bae688cbdf944e3e8"
+  }
+}

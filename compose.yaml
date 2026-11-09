@@ -39,6 +39,50 @@ x-native-environment: &native-environment
   DI_OLLAMA_MODE: native
 
 services:
+  # E02 has a separate private network/storage lifecycle; no host listener or keys.
+  qdrant-e02:
+    profiles: [retrieval]
+    image: qdrant/qdrant@sha256:9bfc89f9914fc14876a88c05270685921a55b8877b254a98bcc1cc2f0a424cd2
+    networks: [retrieval]
+    volumes:
+      - qdrant-e02:/qdrant/storage
+    read_only: true
+    tmpfs: [/tmp, /qdrant/snapshots]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 1g
+    cpus: 1
+    environment:
+      QDRANT__TELEMETRY_DISABLED: "true"
+
+  vector-e02:
+    <<: *app
+    profiles: [retrieval]
+    networks: [retrieval]
+    volumes:
+      - ./results/submission:/app/results/submission
+      - ./results/embedding-models:/app/results/embedding-models:ro
+    mem_limit: 2g
+    cpus: 2
+
+  vector-e02-offline:
+    <<: *app
+    profiles: [retrieval]
+    network_mode: none
+    volumes:
+      - ./results/submission:/app/results/submission
+      - ./results/embedding-models:/app/results/embedding-models:ro
+    mem_limit: 2g
+    cpus: 2
+
+  vector-e02-online:
+    <<: *app
+    profiles: [retrieval]
+    # Model download only; no provider credentials or extraction ledger mount.
+    volumes:
+      - ./results/embedding-models:/app/results/embedding-models
+    mem_limit: 2g
+
   offline:
     <<: *app
     network_mode: none
@@ -180,6 +224,7 @@ services:
       start_period: 10s
 
 volumes:
+  qdrant-e02:
   # External names deliberately retain the original data/ledger identities.
   # Missing storage fails rather than creating an empty replacement.
   results:
@@ -191,3 +236,7 @@ volumes:
   garage-data:
     external: true
     name: rd-ai-hw01_garage-data
+
+networks:
+  retrieval:
+    internal: true
