@@ -24,6 +24,10 @@ dev = [
     "types-jsonschema>=4.25,<5",
     "types-PyYAML>=6.0.12,<7",
 ]
+integration = [
+    "langchain-core>=1,<2",
+    "langchain-qdrant>=1,<2",
+]
 
 [tool.uv]
 package = false

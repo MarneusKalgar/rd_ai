@@ -55,6 +55,13 @@ COPY tests ./tests
 USER 10001:10001
 CMD ["python", "-m", "extraction_service", "validate-gold"]
 
+# Optional integration trial dependencies never enter the default runtime/checks.
+FROM checks AS integration
+USER root
+RUN uv sync --locked --group integration --no-install-project
+USER 10001:10001
+CMD ["python", "-m", "extraction_service.retrieval.integration_cli", "--help"]
+
 # Initialize empty volume ownership without adding a shell to Garage's scratch image.
 FROM tooling AS garage-directories
 RUN mkdir -p /garage-state/meta /garage-state/data \

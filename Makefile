@@ -1,6 +1,19 @@
 .PHONY: check validate-gold preflight setup-provider setup-local local-ready local-capacity storage-check down
 .DEFAULT_GOAL := help
 
+.PHONY: integration-trial integration-check integration-reproduce
+integration-trial:
+	mkdir -p results/submission/P03-I01-v1
+	$(COMPOSE) -f compose.yaml -f compose.i01.yaml run --build --rm --no-deps integration-i01 python -m extraction_service.retrieval.integration_cli $(ARGS)
+
+integration-check:
+	$(COMPOSE) -f compose.yaml -f compose.i01.yaml run --build --rm --no-deps integration-i01 sh -c 'ruff check --no-cache . && ruff format --check --no-cache . && mypy --cache-dir=/tmp/mypy-cache && pytest tests/application/test_integration.py'
+
+# Independent verification runs without any network or database/model mount.
+integration-reproduce:
+	$(COMPOSE) -f compose.yaml -f compose.i01.yaml build integration-i01
+	docker run --rm --network none --read-only --tmpfs /tmp --cap-drop ALL --security-opt no-new-privileges:true --memory 2g --cpus 2 --volume "$(CURDIR)/compose.yaml:/app/compose.yaml:ro" --volume "$(CURDIR)/compose.i01.yaml:/app/compose.i01.yaml:ro" --volume "$(CURDIR)/Dockerfile:/app/Dockerfile:ro" --volume "$(CURDIR)/results/submission/P03-E01-v3:/app/results/submission/P03-E01-v3:ro" --volume "$(CURDIR)/results/submission/P03-E02-v1:/app/results/submission/P03-E02-v1:ro" --volume "$(CURDIR)/results/submission/P03-I01-v1:/app/results/submission/P03-I01-v1:ro" rd-ai-integration-i01:latest python -m extraction_service.retrieval.integration_reproduce $(ARGS)
+
 # ARGS carries explicit model/input/run selections; native avoids implicit downloads.
 # MODE=provider selects the credentialed app and never starts Ollama.
 # MODE=native uses the existing desktop server; Python remains in Docker.

@@ -1,9 +1,9 @@
 # P03 — Authorized reference retrieval and grounded responses
 
-- Version: **1.4**.
+- Version: **1.5**.
 - Created: **2026-11-07**.
-- Revised: **2026-11-08**.
-- Status: **S01–S06 / E01–E02 implemented and verified; E03/I01 remain planned, not executed**.
+- Revised: **2026-11-09**.
+- Status: **E01/E02 and I01's capture-only integration trial verified; E03 and S08 actual-response replay remain unexecuted**.
 - Parent: [P03 roadmap](../../roadmap.md#p03--authorized-evidence-retrieval-and-grounded-answers).
 - Planning baseline: `167a76c` — selected P02 provenance slice committed.
 - Planned experiments: **P03-E01 lexical baseline**, **P03-E02 embedding/vector-database retrieval**, **P03-E03 generated RAG answers**.
@@ -60,8 +60,10 @@ or production reliability claim follows from this controlled development suite.
 E01 execution is recorded in the [S01–S05 report](../../reports/P03-reference-retrieval.md#executed-flow);
 E02 is recorded in the [S06 vector report](../../reports/P03-vector-retrieval.md#executed-flow).
 The diagram retains the full milestone. Green nodes indicate exercised reference,
-lexical, learned-vector and evidence paths. LangChain and generation remain
-unexecuted, as does final S09 archival.
+lexical, learned-vector and evidence paths. Blue nodes indicate the
+[I01 comparator/capture trial](../../reports/P03-langchain-integration.md#executed-flow),
+which retained the direct implementation. Generation and final archival remain
+unexecuted; blue request composition does not imply live model execution.
 
 This is the **planned** P03 flow. During execution, keep it synchronized with
 stage implementations, comparison arms, authorization/failure paths and recorded
@@ -121,6 +123,8 @@ flowchart TD
     end
     classDef exercised fill:#e7f4e8,stroke:#397647
     class R,C,B,E,DB,Q,F,BR,QE,DQ,VR,EV,CT,RE exercised
+    classDef trial fill:#e8edff,stroke:#4a5e99
+    class VI,LQ,CP,IP trial
 ```
 
 BM25 and vector retrieval are separate comparison arms, not an unmeasured
@@ -133,6 +137,11 @@ application scope or acquire correction/submission authority.
 This **planned** I01 comparison changes integration/composition code while
 keeping one Qdrant collection, the same encoder outputs and the same application
 policies. It is not a fourth E03 answer arm or a second model-call owner.
+
+**Execution update:** I01's real retrieval and synthetic capture/replay trial is
+concluded; [all 40 retrieval and 120 composition comparisons passed](../../reports/P03-langchain-integration.md).
+Direct integration remains selected. The ownership diagram also shows later live
+admission/model paths, which were not executed or proven by capture-only fixtures.
 
 ```mermaid
 flowchart TD
@@ -574,9 +583,10 @@ links are not version pins or authorization to install/start the store.
 
 **Question:** Does LangChain reduce integration/composition work enough to justify
 its dependencies without changing retrieval, requests or application controls?
-This trial is now selected planned work; using LangChain permanently remains a
-measured decision. Execute the direct baseline first, then the following checks
-before freezing S07's live implementation:
+This bounded trial is now executed; the measured decision is to retain direct
+integration. The ordered scope below records its checks; actual S07 response
+replay remains an S08 follow-up. The trial used a distinct capture-only fixture
+contract, not an approved live E03 profile.
 
 1. Pin the minimal compatible `langchain-core` and `langchain-qdrant` packages
    with the reviewed Qdrant client through `uv` in Docker. Keep framework types
@@ -872,7 +882,7 @@ reference above is background, not a refreshed review of the entire roadmap.
 - [x] S04 evidence responses, currentness/conflicts/deletion/revocation and historical replay boundaries verified.
 - [x] S05 complete 40-case evaluation and real offline process controls recorded.
 - [x] S06 real learned embeddings and Qdrant storage/search/lifecycle executed and compared with BM25 across the frozen cases; see the linked report for verification and the negative adoption decision.
-- [ ] I01 direct-versus-LangChain Qdrant retrieval and request-composition parity trial executed; engineering decision and E03 implementation identity recorded.
+- [x] I01 real direct-versus-LangChain retrieval and synthetic capture parity trial executed; retain direct integration. Actual S07 response replay remains pending in S08, and S07 still must freeze the live answer-job/profile identity.
 - [ ] S07 actual LLM generation recorded across matched no-retrieval/BM25/vector arms, including deterministic skips and failed outcomes.
 - [ ] S08 retrieval, answer/grounding and complete operational populations evaluated with explicit review coverage and decisions.
 - [ ] S09 full checks, prior-result preservation, model-free report reproduction, database recovery and verified archival completed.
@@ -892,3 +902,4 @@ new approval label or Git operation by itself.
 | 1.2 | 2026-11-08 | Select bounded I01 direct-versus-LangChain Qdrant retrieval/composition trial, add ownership/parity diagrams and acceptance gates without expanding live generation arms; retain Qdrant for rd_ai and pgvector as a separate AspectLoop candidate. |
 | 1.3 | 2026-11-08 | Implement and verify S01–S05/E01: frozen 24-unit/40-case fixtures, authorized exact/BM25 evidence, lifecycle/citation/process controls and 1,041-test gate. Link executed flow; E02/E03/I01 and S09 archival remain unexecuted. |
 | 1.4 | 2026-11-08 | Exercise S06/E02 with hash-pinned CPU ONNX embeddings, exact local Qdrant queries, real lifecycle controls and forty-case restart recovery. Retain BM25 after no recall gain; E03/I01 and final archival remain unexecuted. |
+| 1.5 | 2026-11-09 | Conclude I01 real-store and capture-only integration trial: 40/40 retrieval and 120/120 composition parity, lifecycle controls and model-free reconstruction. Retain direct integration; optional framework group stays outside default runtime. E03/S08 real-response work and S09 archival remain unexecuted. |

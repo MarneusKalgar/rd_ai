@@ -1,0 +1,25 @@
+# Optional I01 overlay; the frozen E02 compose.yaml remains unchanged.
+services:
+  integration-i01:
+    profiles: [integration]
+    build:
+      context: .
+      target: integration
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    networks: [retrieval]
+    mem_limit: 2g
+    cpus: 2
+    environment:
+      LANGSMITH_TRACING: "false"
+      LANGCHAIN_TRACING_V2: "false"
+      LANGCHAIN_TRACING: "false"
+    volumes:
+      - ./compose.yaml:/app/compose.yaml:ro
+      - ./compose.i01.yaml:/app/compose.i01.yaml:ro
+      - ./Dockerfile:/app/Dockerfile:ro
+      - ./results/submission/P03-E01-v3:/app/results/submission/P03-E01-v3:ro
+      - ./results/submission/P03-E02-v1:/app/results/submission/P03-E02-v1:ro
+      - ./results/submission/P03-I01-v1:/app/results/submission/P03-I01-v1

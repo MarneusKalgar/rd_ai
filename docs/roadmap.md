@@ -1,8 +1,8 @@
 # Document intelligence R&D roadmap
 
-- Version: **1.14**.
+- Version: **1.15**.
 - Created and source mappings reviewed: **2026-10-31**.
-- Framework/SDK proposals reviewed: **2026-11-08**.
+- Framework/SDK proposals reviewed: **2026-11-09**.
 - Status: P00 and selected P01/P02 offline slices concluded; later capability studies remain conditional/planned.
 - Implementation baseline: `654be96` — ledger-free report reproduction.
 
@@ -122,7 +122,7 @@ criteria, and a new library alone does not establish better extraction quality.
 
 | Candidate | Milestone placement | Proposed comparison and boundary |
 | --- | --- | --- |
-| LangChain | Planned P03-I01 retrieval/composition trial; conditional P04 agent-loop comparison | Compare Qdrant integration and request composition with the direct implementation using the same filters, vectors, contexts and metered model capability. Adoption needs parity and a demonstrated integration benefit; no mandatory framework layer or additional live generation matrix. |
+| LangChain | P03-I01 trial concluded; conditional P04 comparison | Real Qdrant and capture-only composition parity passed; retain direct integration because no maintenance benefit justifies the extra dependencies/metadata requests. The optional group supports replay, not default runtime adoption or a live-generation claim. |
 | LangGraph (Python) | P04 bounded orchestration experiment | After the fixed review workflow exists, compare the same steps/tools with explicit graph state, branching, checkpoints and human-review interrupts. Test recovery and replay before introducing a separately identified model-directed loop. |
 | LangSmith | Conditional P04 trace/evaluation pilot; P05 operational assessment | Compare debugging, trace completeness and evaluation usefulness with existing saved records and portable instrumentation. It can be evaluated independently of LangChain/LangGraph; the ledger and archived evidence remain authoritative. |
 | Vercel AI SDK | Separate AspectLoop TypeScript proposal | No rd_ai language migration or JavaScript runtime dependency. SDK Core integration and optional UI streaming belong to AspectLoop's own roadmap and acceptance process. |
@@ -142,8 +142,8 @@ redaction, access, retention and cost decision, using synthetic or approved
 neutral fixtures. Reject unauthorized payload/credential export and verify that
 telemetry failure cannot change task outcomes or accounting. A bounded trial
 does not select a second permanent observability stack. Record an
-adopt/reject/defer decision. P03-I01 is selected bounded trial work; permanent
-adoption remains conditional. Other unselected candidates need not be installed
+adopt/reject/defer decision. P03-I01 concluded with direct integration retained;
+later framework adoption needs its own demonstrated benefit. Other unselected candidates need not be installed
 or exercised to accept the underlying capability.
 
 Primary references reviewed 2026-11-07:
@@ -188,7 +188,7 @@ observations. Never require disclosure of private model reasoning as evidence.
 | P00 | One project structure with preserved baseline and reproducibility | Existing saved evidence | Consolidation concluded; S08 runtime follow-up concluded |
 | P01 | Explicit evaluation protocol and regression/challenge capabilities for the next question | P00 | Offline protocol/comparison scope concluded; judge study unselected |
 | P02 | Inspectable source-grounded extraction and a measured support decision | P01's protocol for the selected experiment | Selected text-provenance slice concluded; workbook/semantic studies conditional |
-| P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | E01/E02 exercised, including real embeddings/Qdrant; RAG generation and LangChain trial remain planned |
+| P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | E01/E02/I01 exercised; retain direct integration. RAG generation and final evidence work remain planned |
 | P04 | Human-reviewed proposals with independently enforced application authority | P01; usable source evidence; P03 or controlled retrieval fixtures | Planned; LangGraph, agent/MCP and tracing comparisons conditional |
 | P05 | A usable local interface and measured operational/release controls | A selected fixed workflow from P04 | Planned; deployable-service expansion conditional |
 
@@ -390,7 +390,13 @@ records 58 actual MiniLM encoder batches, real filtered exact Qdrant queries,
 update/delete/revocation controls and forty-case recovery after physical restart.
 Recall/precision tie BM25; MRR falls to 0.985294, so the +0.05 recall-gain gate
 does not support preferring dense retrieval. The store is stopped, data retained.
-E03 generation, I01 and final archival remain unexecuted.
+At that checkpoint E03 generation, I01 and final archival remained unexecuted.
+
+**I01 executed:** [integration report](reports/P03-langchain-integration.md)
+records 40/40 real retrieval and 120/120 synthetic capture parity comparisons,
+six paired live controls, and offline canonical reconstruction. No encoding or
+generation ran. Retain direct integration; the optional framework group stays
+outside default runtime installation. Actual S07 response replay remains S08 work.
 
 **Work:** curate approved field definitions, normalization rules and explicitly
 fictional business policies; assign source/chunk/version identities. Establish
@@ -608,6 +614,7 @@ allowance and standing human approval; roadmap creation grants none.
 | 1.12 | 2026-11-08 | Select P03-I01 bounded direct-versus-LangChain Qdrant retrieval/composition trial with application-owned controls and replay parity; preserve Qdrant for rd_ai and pgvector as a separate AspectLoop candidate. |
 | 1.13 | 2026-11-08 | Record executed S01–S05/E01 and its 1,041-test gate, technical-fixture relevance results and lexical insufficiency limits; retain later P03 model/database/integration work and archival as unexecuted. |
 | 1.14 | 2026-11-08 | Record real S06/E02 embeddings/Qdrant lifecycle and restart recovery; retain lexical baseline after no recall gain, and keep generation/LangChain/final archival unexecuted. |
+| 1.15 | 2026-11-09 | Conclude I01 retrieval/capture integration trial and offline reconstruction; retain direct implementation and optional replay-only framework dependencies. Generation, actual-response replay and final archival remain unexecuted. |
 
 Use Git history for prior revisions. Record material changes to milestone scope,
 data authority or topic sources here; do not rewrite historical experiment claims.

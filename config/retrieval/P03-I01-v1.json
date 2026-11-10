@@ -1,0 +1,23 @@
+{
+  "id": "P03-I01-v1",
+  "bindings": {
+    "config/retrieval/P03-I01-profile-v1.json": "70083a840ac133e8cf8ea60326de44158c617d9666c41ae1654bb21745c9328e",
+    "config/retrieval/P03-I01-plan-v1.md": "33dc7cac04ded42cdd7768ff5c7a02e23ed78af5a30ece53c5b809f870bb9218",
+    "pyproject.toml": "f16d6678725433365b7423b5a0527c34b9eb2f1b90a881dae837b662ac43ef26",
+    "uv.lock": "63736302ef2faef4c758d5242b4306651f96760fb969d008e8c5489826ed1ece",
+    "Dockerfile": "080fa8cab7702fa661adfb15ea4921b36a4a439cfc1b5817f0607cea21685446",
+    "compose.i01.yaml": "ebf553ce65605855d166ce070d040c0df423d2a2d5ab27c8df8f233bddba0d5a",
+    "config/retrieval/I01-inherited-runtime/uv.lock": "b815db4ab99183e7acb631603f8147baa18a3ab10f9c363b934015290c9e00be",
+    "config/retrieval/I01-inherited-runtime/pyproject.toml": "8fc32fe1f976f4049274f74b849f533aebb51848792b6fbac06c652aca5ac155",
+    "config/retrieval/P03-E02-v1.json": "a2ea4a26e4f080974cb6e7dab7b24d832dcb43812a07b121f7af806c626a7016",
+    "results/submission/P03-E01-v3/report.json": "5f56d5c9509b8d0e6af43475ee875653d37b189a3f4b2f47c9cd9b2337f97bc6",
+    "results/submission/P03-E02-v1/vectors.json": "6cea252f4f1a38fdab6266811d09c2a2eaaef1f2d310012bae688cbdf944e3e8",
+    "tests/application/test_integration.py": "9d1cf07de328f78822fa786b2300fbedbf9b3c695226bd4534ffde3aa42217a6",
+    "src/extraction_service/retrieval/composition.py": "e8dbed6eed6ba273ee51636123ebf14ebd1f51dd45f43bb565d7692f1950e066",
+    "src/extraction_service/retrieval/integration.py": "03c3135b517bd6382a4066fba158d4c273d2c9986b1e74c2167777223a938b5f",
+    "src/extraction_service/retrieval/integration_cli.py": "feeaf738364f0b67d81313cc08ada8c3149aa830ec2a2582b64419d778a2afcb"
+  },
+  "label_authority": "mechanical synthetic response fixtures; no semantic accuracy labels",
+  "controls": "tests/application/test_integration.py and live_controls; no embedding/generation allowed",
+  "historical_runtime_mapping": "E02 uv.lock/pyproject verified against preserved byte-identical snapshots, not rewritten"
+}
