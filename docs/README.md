@@ -19,6 +19,7 @@ sections 8–9 retain their completed outcomes.
 - [Run and reproduce offline authorized reference retrieval](guides/reference-retrieval.md).
 - [Use pinned local embeddings and private Qdrant](guides/vector-retrieval.md).
 - [Run and reproduce the optional LangChain integration trial](guides/langchain-integration.md).
+- [Plan, approve and inspect matched E03 RAG answers](guides/rag-answers.md).
 - [Reproduce the published matrix without models or a private ledger](guides/reproducing-results.md).
 - [Archive, upload and restore experiment evidence](guides/archiving-results.md).
 - [Run and save extractions](guides/running-extractions.md).
@@ -55,7 +56,7 @@ sections 8–9 retain their completed outcomes.
 - [P01 executed flow diagram](reports/P01-evaluation-protocols.md#executed-flow).
 - [P02 source-provenance protocol (frozen draft; execution status in report)](plans/milestones/P02-source-provenance.md).
 - [P02 executed flow diagram](reports/P02-source-provenance.md#executed-flow).
-- [P03 implementation plan (E01/E02/I01 exercised; generation planned)](plans/milestones/P03-authorized-retrieval.md).
+- [P03 implementation plan (E01/E02/I01 and E03 generation exercised; semantic review/replay and archival remain)](plans/milestones/P03-authorized-retrieval.md).
 - [P03-E01 executed flow diagram](reports/P03-reference-retrieval.md#executed-flow).
 - [P03-E02 executed vector flow diagram](reports/P03-vector-retrieval.md#executed-flow).
 - [P03-I01 executed integration flow diagram](reports/P03-langchain-integration.md#executed-flow).
@@ -75,6 +76,8 @@ permission for model inference or spending.
 | P03-E01 rule chunks, authorized exact/BM25 retrieval and forty-case evaluation | [P03 reference retrieval](reports/P03-reference-retrieval.md) |
 | P03-E02 learned embeddings, real Qdrant lifecycle and restart comparison | [P03 vector retrieval](reports/P03-vector-retrieval.md) |
 | P03-I01 direct/LangChain parity, capture/replay and bounded adoption decision | [P03 LangChain integration](reports/P03-langchain-integration.md) |
+| P03-E03 pilot, completed financial recovery and physical accounting | [P03 RAG pilot](reports/P03-rag-pilot.md) |
+| P03-S07 full matched generation, retained provider failure, usage and accounting | [P03 RAG generation](reports/P03-rag-answers.md) |
 | Offline field locations, inherited support linkage and preservation controls | [P02 source provenance](reports/P02-source-provenance.md) |
 | Offline protocols, paired comparison and challenge/reproduction verification | [P01 evaluation protocols](reports/P01-evaluation-protocols.md) |
 | Root migration, frozen identity preservation and offline checks | [P00 consolidation](reports/P00-consolidation.md) |

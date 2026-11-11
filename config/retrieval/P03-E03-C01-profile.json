@@ -1,0 +1,7 @@
+{
+  "id": "P03-E03-C01",
+  "joint_receipt_sha256": "2f429d7f1f58bdede7a9a066c5a72557cd544481b2963480b00108b066d42445",
+  "recovery_journal_sha256": "1f8f927fcf2ac4b619b5b1a41f50f9962fe424565eb4b493b146189006bbec22",
+  "phase_allowance_usd": "3.00",
+  "purpose": "One separately approved remaining28 invocation; preserve all pilot observations and original model/prompt/schema/context/settings. At most 77 physical calls, seven deterministic skips, zero retries/corrections. No automatic replacement."
+}

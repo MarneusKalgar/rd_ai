@@ -1,0 +1,70 @@
+{
+  "experiment": "P03-E03-v1",
+  "phase": "pilot",
+  "manifest_sha256": "3dc7a9fa647a5d86aca11003d196487f52cf521fa6c691b7a43c953e04a8faab",
+  "journal_sha256": "1fa806c4d28dec0563c4cdf3d09d67f4413f374c28e3814985c85744db7ba042",
+  "semantic_review": "unreviewed; structural validation is not accuracy or entailment",
+  "jobs": 36,
+  "deterministic_skips": 5,
+  "physical_calls": 29,
+  "not_attempted": 2,
+  "stop_reason": "phase_allowance_insufficient",
+  "continuation_eligible": false,
+  "next_reservation_usd": "1.646592",
+  "phase_allowance_usd": "2.00",
+  "required_next_reservation_plus_spend_usd": "2.0009910",
+  "input_tokens": 27352,
+  "output_tokens": 34819,
+  "reported_cost_usd": "0.3543990",
+  "summed_generation_duration_seconds": 206.62809967800237,
+  "first_reservation_to_last_result_seconds": 210.622123,
+  "cumulative_accounted_usd": "5.98843270",
+  "cumulative_remaining_usd": "4.01156730",
+  "prior_reservations_preserved": 215,
+  "prior_unknown_holds_usd": "0.50135040",
+  "verified_paid_reservations": 29,
+  "arms": {
+    "none": {
+      "jobs": 12,
+      "calls": 12,
+      "skips": 0,
+      "not_attempted": 0,
+      "outcomes": {
+        "structurally_valid": 12
+      },
+      "statuses": {
+        "unverified": 10,
+        "insufficient_evidence": 2
+      }
+    },
+    "bm25": {
+      "jobs": 12,
+      "calls": 8,
+      "skips": 3,
+      "not_attempted": 1,
+      "outcomes": {
+        "structurally_valid": 8,
+        "deterministic_non_answer": 3,
+        "not_attempted": 1
+      },
+      "statuses": {
+        "grounded": 8
+      }
+    },
+    "vector": {
+      "jobs": 12,
+      "calls": 9,
+      "skips": 2,
+      "not_attempted": 1,
+      "outcomes": {
+        "structurally_valid": 9,
+        "deterministic_non_answer": 2,
+        "not_attempted": 1
+      },
+      "statuses": {
+        "grounded": 8,
+        "insufficient_evidence": 1
+      }
+    }
+  }
+}

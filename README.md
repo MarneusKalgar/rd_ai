@@ -9,8 +9,13 @@ The existing extraction baseline contains thirty approved neutral text inputs,
 ten human-approved development-gold objects and 240 attempted matrix observations.
 Provider v2 matched the development labels; assisted local trials retained
 substantial whole-document errors. See [REPORT.md](REPORT.md) for populations,
-costs, failures and generalization limits. Retrieval, review tools and an API
-remain future milestones; repository consolidation does not implement them.
+costs, failures and generalization limits. P03 now exercises authorized lexical
+and vector retrieval and the optional LangChain comparison; direct integration
+was retained. [E03 generation](docs/reports/P03-rag-answers.md) now covers all
+40 technical questions across three arms: 108 calls, 107 mechanically valid
+answers, one provider-error response and 12 deterministic skips. Semantic
+answer review remains pending. Review tools and an API
+remain later milestones.
 
 ## Verify without models
 

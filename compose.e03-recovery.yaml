@@ -1,0 +1,18 @@
+# Separate operational addendum: original frozen E03 files remain byte-identical.
+services:
+  answer-recovery-provider:
+    extends: {file: compose.e03.yaml, service: answer-provider}
+    volumes:
+      - ./tools/answer-recovery:/app/tools/answer-recovery:ro
+      - ./compose.e03-recovery.yaml:/app/compose.e03-recovery.yaml:ro
+  answer-recovery-offline:
+    extends: {file: compose.e03.yaml, service: answer-review}
+    volumes:
+      - ./config:/app/config
+      - ./tools/answer-recovery:/app/tools/answer-recovery:ro
+      - ./compose.e03-recovery.yaml:/app/compose.e03-recovery.yaml:ro
+  answer-recovery-checks:
+    extends: {file: compose.e03.yaml, service: answer-offline}
+    volumes:
+      - ./tools/answer-recovery:/app/tools/answer-recovery:ro
+      - ./compose.e03-recovery.yaml:/app/compose.e03-recovery.yaml:ro

@@ -1,0 +1,18 @@
+# C01 verifies both immutable pilot invocations; original gates remain unchanged.
+services:
+  answer-continuation-provider:
+    extends: {file: compose.e03-recovery.yaml, service: answer-recovery-provider}
+    environment: &continuation-environment
+      PYTHONPATH: /app/src:/app/tools/answer-recovery
+    volumes: &continuation-volumes
+      - ./tools/answer-continuation:/app/tools/answer-continuation:ro
+      - ./compose.e03-continuation.yaml:/app/compose.e03-continuation.yaml:ro
+      - ./results/submission/P03-E03-v1/pilot-joint-receipt.json:/app/pilot-joint-receipt.json:ro
+  answer-continuation-offline:
+    extends: {file: compose.e03-recovery.yaml, service: answer-recovery-offline}
+    environment: *continuation-environment
+    volumes: *continuation-volumes
+  answer-continuation-checks:
+    extends: {file: compose.e03-recovery.yaml, service: answer-recovery-checks}
+    environment: *continuation-environment
+    volumes: *continuation-volumes

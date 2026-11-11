@@ -1,0 +1,8 @@
+{
+  "id": "P03-E03-R01",
+  "parent_manifest_sha256": "3dc7a9fa647a5d86aca11003d196487f52cf521fa6c691b7a43c953e04a8faab",
+  "parent_journal_sha256": "1fa806c4d28dec0563c4cdf3d09d67f4413f374c28e3814985c85744db7ba042",
+  "tail_keys": ["Q38/bm25", "Q38/vector"],
+  "total_pilot_exposure_usd": "2.10",
+  "purpose": "Separately approved financial recovery of two never-sent jobs only. Preserve the stopped parent and all generation/context settings. No remaining28 inference, retry or correction."
+}

@@ -1,6 +1,41 @@
 .PHONY: check validate-gold preflight setup-provider setup-local local-ready local-capacity storage-check down
 .DEFAULT_GOAL := help
 
+.PHONY: answer-continuation-freeze answer-continuation-plan answer-continuation-export answer-continuation-check answer-continue
+answer-continuation-freeze answer-continuation-plan answer-continuation-export:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.e03-recovery.yaml -f compose.e03-continuation.yaml run --build --rm --no-deps answer-continuation-offline python tools/answer-continuation/continue_run.py $(patsubst answer-continuation-%,%,$@) $(ARGS)
+
+answer-continuation-check:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.e03-recovery.yaml -f compose.e03-continuation.yaml run --build --rm --no-deps answer-continuation-checks sh -c 'ruff check --no-cache tools/answer-continuation && ruff format --check --no-cache tools/answer-continuation && mypy --cache-dir=/tmp/mypy-continuation src tools/answer-recovery tools/answer-continuation && pytest tools/answer-continuation/test_continue.py tools/answer-recovery/test_recover.py'
+
+answer-continue:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.e03-recovery.yaml -f compose.e03-continuation.yaml run --build --rm --no-deps answer-continuation-provider python tools/answer-continuation/continue_run.py run $(ARGS)
+
+.PHONY: answer-recovery-freeze answer-recovery-plan answer-recovery-check answer-recover answer-recovery-export
+answer-recovery-freeze answer-recovery-plan answer-recovery-export:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.e03-recovery.yaml run --build --rm --no-deps answer-recovery-offline python tools/answer-recovery/recover.py $(patsubst answer-recovery-%,%,$@) $(ARGS)
+
+answer-recovery-check:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.e03-recovery.yaml run --build --rm --no-deps answer-recovery-checks sh -c 'ruff check --no-cache tools/answer-recovery && ruff format --check --no-cache tools/answer-recovery && mypy --cache-dir=/tmp/mypy-recovery src tools/answer-recovery && pytest tools/answer-recovery/test_recover.py'
+
+answer-recover:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.e03-recovery.yaml run --build --rm --no-deps answer-recovery-provider python tools/answer-recovery/recover.py run $(ARGS)
+
+.PHONY: answer-freeze answer-plan answer-metadata answer-run answer-check answer-export
+answer-freeze answer-plan:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml run --build --rm --no-deps answer-offline python -m extraction_service.answering.cli $(patsubst answer-%,%,$@) $(ARGS)
+
+answer-check:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml run --build --rm --no-deps answer-offline sh -c 'ruff check --no-cache . && ruff format --check --no-cache . && mypy --cache-dir=/tmp/mypy-cache && pytest tests/application/test_answers.py'
+
+# Metadata is public catalog GET only. run requires both explicit paid/context flags.
+answer-metadata answer-run:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml run --build --rm --no-deps answer-provider python -m extraction_service.answering.cli $(patsubst answer-%,%,$@) $(ARGS)
+
+answer-export:
+	mkdir -p results/submission/P03-E03-v1
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml run --build --rm --no-deps answer-review python -m extraction_service.answering.cli export $(ARGS)
+
 .PHONY: integration-trial integration-check integration-reproduce
 integration-trial:
 	mkdir -p results/submission/P03-I01-v1

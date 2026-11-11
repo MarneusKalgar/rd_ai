@@ -1,0 +1,9 @@
+{
+  "id": "P03-E03-R01",
+  "bindings": {
+    "config/retrieval/P03-E03-R01-profile.json": "b9318022733db2684311021dfd53271d400a189c00035bc6f0f11b7583bdb5d6",
+    "tools/answer-recovery/recover.py": "aad86129e518fcf45c64b526d121f645046933ffc7e6d5d2135abaee1257fce0",
+    "tools/answer-recovery/test_recover.py": "10baed24268f0d701399d4fe08bd22257bea920f4b2c9d34b23786ffa7faf890",
+    "compose.e03-recovery.yaml": "d47019e6f6911cc43b62abc702213d7ce480bd61f7c3b8a1108dea6c3cb4e5b8"
+  }
+}

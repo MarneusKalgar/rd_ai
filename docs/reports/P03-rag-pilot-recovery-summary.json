@@ -1,0 +1,59 @@
+{
+  "experiment": "P03-E03-v1",
+  "financial_addendum": "P03-E03-R01",
+  "recorded": "2026-11-10",
+  "parent_manifest_sha256": "3dc7a9fa647a5d86aca11003d196487f52cf521fa6c691b7a43c953e04a8faab",
+  "receipts": {
+    "pilot.jsonl": "1fa806c4d28dec0563c4cdf3d09d67f4413f374c28e3814985c85744db7ba042",
+    "pilot-recovery-R01.jsonl": "1f8f927fcf2ac4b619b5b1a41f50f9962fe424565eb4b493b146189006bbec22"
+  },
+  "joint_receipt_sha256": "2f429d7f1f58bdede7a9a066c5a72557cd544481b2963480b00108b066d42445",
+  "pilot_population_complete": true,
+  "jobs": 36,
+  "physical_calls": 31,
+  "deterministic_skips": 5,
+  "not_attempted": 0,
+  "mechanically_valid_responses": 31,
+  "semantic_review": "unreviewed",
+  "original_pilot_cost_usd": "0.3543990",
+  "recovery_cost_usd": "0.0111975",
+  "total_pilot_cost_usd": "0.3655965",
+  "input_tokens": 29345,
+  "output_tokens": 35731,
+  "summed_physical_duration_seconds": 214.96515968200217,
+  "cumulative_accounted_usd": "5.99963020",
+  "cumulative_remaining_usd": "4.00036980",
+  "prior_reservations_preserved": 215,
+  "prior_unknown_holds_usd": "0.50135040",
+  "remaining28_authorized": false,
+  "original_continuation_command_eligible": false,
+  "arms": {
+    "none": {
+      "jobs": 12,
+      "calls": 12,
+      "skips": 0,
+      "model_statuses": {
+        "unverified": 10,
+        "insufficient_evidence": 2
+      }
+    },
+    "bm25": {
+      "jobs": 12,
+      "calls": 9,
+      "skips": 3,
+      "model_statuses": {
+        "grounded": 8,
+        "insufficient_evidence": 1
+      }
+    },
+    "vector": {
+      "jobs": 12,
+      "calls": 10,
+      "skips": 2,
+      "model_statuses": {
+        "grounded": 8,
+        "insufficient_evidence": 2
+      }
+    }
+  }
+}

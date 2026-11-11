@@ -1,9 +1,9 @@
 # P03 — Authorized reference retrieval and grounded responses
 
-- Version: **1.5**.
+- Version: **1.10**.
 - Created: **2026-11-07**.
-- Revised: **2026-11-09**.
-- Status: **E01/E02 and I01's capture-only integration trial verified; E03 and S08 actual-response replay remain unexecuted**.
+- Revised: **2026-11-10**.
+- Status: **S01–S07 generation executed and verified: E03 has 120 jobs, 108 calls, 107 structurally valid answers, one retained provider error and 12 skips. S08 semantic review/replay and S09 remain outstanding; P03 is partial**.
 - Parent: [P03 roadmap](../../roadmap.md#p03--authorized-evidence-retrieval-and-grounded-answers).
 - Planning baseline: `167a76c` — selected P02 provenance slice committed.
 - Planned experiments: **P03-E01 lexical baseline**, **P03-E02 embedding/vector-database retrieval**, **P03-E03 generated RAG answers**.
@@ -60,12 +60,15 @@ or production reliability claim follows from this controlled development suite.
 E01 execution is recorded in the [S01–S05 report](../../reports/P03-reference-retrieval.md#executed-flow);
 E02 is recorded in the [S06 vector report](../../reports/P03-vector-retrieval.md#executed-flow).
 The diagram retains the full milestone. Green nodes indicate exercised reference,
-lexical, learned-vector and evidence paths. Blue nodes indicate the
+lexical, learned-vector, evidence and generation paths. Blue nodes indicate the
 [I01 comparator/capture trial](../../reports/P03-langchain-integration.md#executed-flow),
-which retained the direct implementation. Generation and final archival remain
-unexecuted; blue request composition does not imply live model execution.
+which retained the direct implementation. E03 now covers the full matched
+40-question population; see the [full generation report](../../reports/P03-rag-answers.md).
+The original pilot, R01 recovery and C01 continuation remain separate immutable
+receipts. Semantic answer review/replay and final archival are outstanding.
+See the [E03 guide](../../guides/rag-answers.md).
 
-This is the **planned** P03 flow. During execution, keep it synchronized with
+This diagram combines **executed S01–S07 paths and planned S08/S09 work**. Keep it synchronized with
 stage implementations, comparison arms, authorization/failure paths and recorded
 status before closeout. Preserve frozen protocol/plan snapshots; update this
 living plan and the execution report rather than rewriting archived evidence.
@@ -100,20 +103,28 @@ flowchart TD
         EV --> CT["Application: build bounded cited context per arm"]
         CT --> G{"Eligible evidence without known conflict?"}
         G -->|No| AB["Insufficient or conflicting evidence"]
-        G -->|Yes| CP["Direct or LangChain request composition"]
-        CP --> LLM["Existing metered adapter to frozen LLM"]
+        G -->|Yes| CP["Retained direct answer-job composition"]
+        CP --> PG["E03 admission + durable reservation + phase limits"]
+        CP -. "Remaining28 executed" .-> CONT["Approved C01: 84 jobs, 77 calls, seven skips; $0.761469"]
+        CONT --> PG
+        PG --> LLM["Gemini 3.5 Flash: 108 calls, 107 valid answers and one provider error"]
+        PG -. "Original reservation-headroom stop" .-> STOP["Retain stopped parent; select two never-sent jobs"]
+        STOP --> REC["Separately approved R01 financial recovery: same generation controls"]
+        REC --> LLM
         LLM --> A["Generated answer + citations"]
         A --> V["Validate response and citation integrity"]
+        V --> J["Persist raw result before cost settlement"]
+        LLM -. "Refusal, truncation or transport failure" .-> J
     end
 
     subgraph Evaluation["4. Evaluate independently"]
         BR --> RE["Retrieval: relevance, ranking, isolation"]
         VR --> RE
-        V --> AE["Answers: correctness, grounding, abstention"]
+        J --> AE["Answers: correctness, grounding, abstention"]
         AB --> AE
         FAIL --> AE
-        Q -. "Matched control" .-> NR["Same LLM without retrieved context"]
-        NR --> AE
+        Q -. "Matched control" .-> NR["No-context answer job; knowledge allowed as unverified"]
+        NR --> PG
         RE --> D["Compare quality, failures, latency and cost"]
         AE --> D
         VI -. "I01: matched retrieval parity" .-> IP["Integration parity, overhead and maintenance decision"]
@@ -124,7 +135,8 @@ flowchart TD
     classDef exercised fill:#e7f4e8,stroke:#397647
     class R,C,B,E,DB,Q,F,BR,QE,DQ,VR,EV,CT,RE exercised
     classDef trial fill:#e8edff,stroke:#4a5e99
-    class VI,LQ,CP,IP trial
+    class VI,LQ,IP trial
+    class G,AB,CP,PG,LLM,A,V,J,NR,STOP,REC,CONT exercised
 ```
 
 BM25 and vector retrieval are separate comparison arms, not an unmeasured
@@ -521,9 +533,30 @@ requires a recorded new protocol revision, not quiet case removal.
 ## 7. Planned model-dependent work — P03-S06–S09 / E02–E03
 
 E02 has now been exercised with pinned MiniLM ONNX encoding and local Qdrant;
-E03 remains a required, unexecuted stage. Their profiles and actual limits remain
-part of the evidence. E01/E02 completion does not close the milestone: generation,
-I01 and final preservation work remain outstanding.
+E03's direct answer pipeline and matched profile are implemented; its original
+pilot stopped after 29 calls, then approved R01 completed the two never-sent
+jobs. Approved C01 subsequently completed the remaining28 population. Their
+profiles and actual limits remain part of the evidence. S01–S07 completion does
+not close the milestone: S08 semantic review/replay and final preservation remain
+outstanding. The original continuation gate still rejects the stopped parent;
+C01 verified the separate joint receipt without changing that historical stop.
+
+**C01 execution — 2026-11-10:** the joint-receipt-aware operational entrypoint
+reconstructed both pilot invocations and checked their requests, admission,
+mechanical validation and known ledger charges. The frozen remaining population
+is exactly 84 jobs, disjoint from all 36 pilot jobs: 77 potential physical calls
+and seven deterministic skips. C01 used an approved $3 new-phase allowance under the
+unchanged $10 cumulative ledger and preserves every generation/context/deadline/
+failure control. Its 23 combined continuation/recovery tests, lint and strict
+typing passed; pre-run real-receipt freeze/plan verification made no model call.
+After separate approval, C01 made exactly 77 calls for $0.761469, with 76 valid
+answers, one retained provider-error response and seven skips. No budget or
+dependency stop occurred. No pilot model observation was repeated and no semantic
+score was used as a continuation filter. Full offline reconstruction verified all
+120 jobs and 108 unique physical/paid records, completing S07 generation.
+See the [C01 operations](../../../tools/answer-continuation/README.md) and
+[full report](../../reports/P03-rag-answers.md). No paid invocation may be repeated
+under the existing frozen identities.
 
 ### P03-S06 / E02 — Learned embeddings and a real vector database
 
@@ -645,6 +678,43 @@ Verify the chosen release's APIs during implementation rather than treating
 documentation examples or their automatic embedding behavior as our run profile.
 
 ### P03-S07 / E03 — LLM-generated cited answers
+
+**Implementation checkpoint — 2026-11-10:** the user selected Gemini 3.5 Flash
+through Google AI Studio. The [operations guide](../../guides/rag-answers.md)
+records the separate answer schema/job/journal, direct integration, frozen
+technical rubric, 8,192-token output allowance, unchanged provider-default
+reasoning, and matched no-context/BM25/saved-Qdrant arms. At that preparation
+checkpoint no generation had run. The 12-case pilot plans 36 jobs, five deterministic skips and at most 31
+physical calls; remaining28 plans 84 jobs. Each phase has zero retries/corrections,
+180-second request and 7,200-second phase deadlines, and a $2 phase allowance
+under the unchanged $10 ledger. Provider-enforced context is explicitly scoped to
+E03 and still requires approval of the concrete paid invocation. Reusing the
+legacy MATRIX funding bucket does not turn these into PO extraction jobs.
+S07 acceptance remains unchecked until actual non-skipped outcomes exist.
+
+**Execution checkpoint — 2026-11-10:** the separately approved pilot made 29
+physical calls for $0.354399, with 29 mechanically valid answers, five
+deterministic skips and two unattempted jobs (Q38/BM25 and Q38/vector).
+The next full-context reservation would bring phase exposure to $2.000991,
+exceeding the approved $2 allowance. Preserve the frozen profile and stopped
+journal; no automatic replacement, financial-policy mutation or continuation
+was performed. The [pilot report](../../reports/P03-rag-pilot.md) records the
+operational evidence. That stop required the separate reviewed recovery recorded
+below, preserving its original flag and all quality controls. This is not a semantic score.
+
+**Executed financial recovery — 2026-11-10:** separately approved `P03-E03-R01`
+made only the two never-sent Q38 calls for $0.0111975. It binds the unchanged
+original manifest/journal and a separately versioned operational controller.
+Original spend was counted inside the approved $2.10 total pilot exposure
+envelope; the $10 cumulative cap, prior charges and all generation/context/
+deadline/failure controls stayed unchanged. Both replies passed mechanical
+checks and reported insufficient evidence. Total pilot cost is $0.3655965.
+Joint offline verification established all 36 planned jobs as 31 unique physical
+observations plus five deterministic skips; semantic quality remains unreviewed.
+Both journals are preserved. The original continuation command still rejects
+its stopped parent; a tested joint-receipt-aware continuation path and separate
+paid approval were prerequisites for remaining28. At that checkpoint S07 remained
+incomplete; C01's subsequent completion is recorded above.
 
 1. Freeze one generator, route/digest where available, prompt, separate answer
    schema, sampling/reasoning/output/context settings and failure policy. Reuse
@@ -781,8 +851,8 @@ retain all forty cases even where a particular metric is unavailable. Do not
 lower thresholds or discard unknown/failed cases after observing outputs.
 
 Only hybrid search, reranking, query rewriting, multilingual expansion and prompt
-caching remain optional P03 extensions. I01 is planned integration work;
-LangChain adoption is conditional on its results.
+caching remain optional P03 extensions. I01 concluded with direct integration
+retained; permanent LangChain adoption was rejected for this bounded workflow.
 LangGraph/MCP/approval workflows remain P04; LangSmith and exposed UI/operations
 remain conditional P04/P05. No alternate ecosystem or telemetry stack is selected.
 
@@ -805,10 +875,9 @@ remain conditional P04/P05. No alternate ecosystem or telemetry stack is selecte
 The E01 and E02 commands below are implemented; see the
 [operations guide](../../guides/reference-retrieval.md) for publication and
 reproduction and [vector guide](../../guides/vector-retrieval.md) for the actual
-encoder/store phases. RAG interfaces remain **proposals, not implemented commands**.
-S06–S07 will
-freeze exact protocol paths, fixture inputs, model/store identities, snapshot/
-result destinations and invocation bounds:
+encoder/store phases. The [E03 guide](../../guides/rag-answers.md) gives implemented
+answer commands and their separately approved execution gates. Protocol freeze
+and offline checks do not authorize paid inference:
 
 ```sh
 make validate-retrieval-protocol ARGS='--protocol config/retrieval/P03-E01-v3.json'
@@ -819,9 +888,13 @@ make prepare-encoder
 make encode-references
 make vector-store-up
 make evaluate-vectors ARGS='evaluate --run-id e02v1 --output results/submission/P03-E02-v1/report.json'
-make plan-rag ARGS='--protocol config/retrieval/P03-E03-v1.json --phase pilot'
-make run-rag ARGS='--protocol config/retrieval/P03-E03-v1.json --phase pilot'
-make run-rag ARGS='--protocol config/retrieval/P03-E03-v1.json --phase remaining'
+make answer-plan
+make answer-metadata
+make answer-check
+make answer-freeze
+# Only after separate paid/context approval:
+make answer-run ARGS='--phase pilot --allow-provider --allow-server-context'
+# Continuation needs separate approval and its reviewed actual pilot digest.
 make check
 ```
 
@@ -857,24 +930,24 @@ reference above is background, not a refreshed review of the entire roadmap.
 
 | AI Engineer topics | Exercise / boundary |
 | --- | --- |
-| RAG; Chunking; Retrieval Process; Context Sources | Planned E01 chunks/baseline, E02 dense retrieval and E03 actual model-generated cited answers; all are required stages |
-| What are Embeddings; Semantic Search; Embedding Models | Planned E02 actual document/query encoding and matched BM25 comparison; lexical tokenization is not a learned embedding |
-| Vector Databases; Indexing Embeddings; Performing Similarity Search | Planned E02 actual Qdrant persistence/filtering/query/update/delete/recovery; exact search initially, no automatic ANN claim |
+| RAG; Chunking; Retrieval Process; Context Sources | E01 chunks/baseline, E02 dense retrieval and full E03 model-generated answer comparison are exercised; semantic answer quality remains unreviewed |
+| What are Embeddings; Semantic Search; Embedding Models | E02 actual document/query encoding and matched BM25 comparison exercised; lexical tokenization is not a learned embedding |
+| Vector Databases; Indexing Embeddings; Performing Similarity Search | E02 actual Qdrant persistence/filtering/query/update/delete/recovery exercised; exact search, no ANN performance claim |
 | RAG Usecases; RAG vs Fine-tuning; Dynamic Filters; Context Security | Versioned field-rule explanations and pre-context scope filtering; no model training or mutation authority |
 | Deterministic Evals; Evaluation Metrics; Cost/latency monitoring | E01 independent relevance/ranking controls and complete timing populations; E02/E03 add their actual model costs separately |
-| Generation; Using SDKs Directly; Human Evals | Planned E03 actual LLM comparison and explicit claim review; record SDK or HTTP integration as actually used, and never claim human review from synthetic oracles alone |
-| LangChain / framework integration | Planned I01 real Qdrant-wrapper queries and request-composition replay versus the direct baseline; no automatic agent, LangGraph, LangSmith or model-quality claim |
+| Generation; Using SDKs Directly; Human Evals | E03 generation exercised through existing direct HTTP adapters, without new provider-SDK adoption. S08 semantic review remains pending; no new human review is claimed |
+| LangChain / framework integration | I01 real Qdrant-wrapper queries and synthetic capture/replay versus direct calls exercised; direct integration retained. Actual-response replay remains S08 work; no agent/LangGraph/LangSmith adoption or framework quality-gain claim |
 
 | OWASP 2025 risk | Selected and conditional boundary |
 | --- | --- |
-| LLM01 Prompt Injection | E01 untrusted reference text cannot control retrieval authority; live generator behavior only measured in E03 |
+| LLM01 Prompt Injection | E01/I01 exercise application-owned scope/source boundaries. E03 records irrelevant-context behavior; dedicated live injection effects are not measured by the normal question population |
 | LLM02 Sensitive Information Disclosure | E01 A/B/shared scope context and per-request trace isolation; no claim of production identity enforcement |
 | LLM03 Supply Chain | Source/catalog/chunker/index integrity, pinned encoder/store/client and model identities, with update/recovery controls in the planned stages |
 | LLM04 Data and Model Poisoning | Controlled reference promotion/removal fixture; no training-time poisoning claim |
 | LLM05 Improper Output Handling | Citation/quote validation and data-only content; no browser, workbook or external execution added |
 | LLM08 Vector and Embedding Weaknesses | E01 metadata/staleness controls; vector-specific isolation/drift/deletion only exercised by E02 |
-| LLM09 Misinformation | Relevance, quoted-byte integrity and answer support remain separate; generated claims only scored after E03 anchor selection |
-| LLM10 Unbounded Consumption | E01 bounded ingestion/index/query/context/results/time; E02/E03 must add encoding/generation/retry/spend ceilings |
+| LLM09 Misinformation | Relevance, quoted-byte integrity and answer support remain separate; the frozen E03 rubric awaits S08 semantic review, and citation checks establish no truth score |
+| LLM10 Unbounded Consumption | E01 bounded ingestion/index/query/context/results/time; E02/E03 exercised frozen encoding/generation/call/context/deadline/spend controls, including retained funding stops and zero automatic generation retries |
 
 - [x] S01 reference/query/control authority and protocol frozen independently of ranking outcomes.
 - [x] S02 reproducible, integrity-checked reference/index snapshots implemented.
@@ -882,8 +955,10 @@ reference above is background, not a refreshed review of the entire roadmap.
 - [x] S04 evidence responses, currentness/conflicts/deletion/revocation and historical replay boundaries verified.
 - [x] S05 complete 40-case evaluation and real offline process controls recorded.
 - [x] S06 real learned embeddings and Qdrant storage/search/lifecycle executed and compared with BM25 across the frozen cases; see the linked report for verification and the negative adoption decision.
-- [x] I01 real direct-versus-LangChain retrieval and synthetic capture parity trial executed; retain direct integration. Actual S07 response replay remains pending in S08, and S07 still must freeze the live answer-job/profile identity.
-- [ ] S07 actual LLM generation recorded across matched no-retrieval/BM25/vector arms, including deterministic skips and failed outcomes.
+- [x] I01 real direct-versus-LangChain retrieval and synthetic capture parity trial executed; retain direct integration. Actual S07 response replay remains pending in S08.
+- [x] S07 answer pipeline, separate schema/records, matched profile, technical rubric and paid/context gates implemented; live execution remains separately gated.
+- [x] S07 12-case pilot population completed through separately approved R01 financial recovery; 31 physical responses and five deterministic skips verified across immutable linked receipts. Semantic review remains pending.
+- [x] S07 full 40-question generation recorded across matched no-context/BM25/vector arms: 108 calls, 107 structurally valid answers, one retained provider error and 12 deterministic skips. All 120 jobs and charges verified; semantic accuracy remains unreviewed.
 - [ ] S08 retrieval, answer/grounding and complete operational populations evaluated with explicit review coverage and decisions.
 - [ ] S09 full checks, prior-result preservation, model-free report reproduction, database recovery and verified archival completed.
 
@@ -903,3 +978,8 @@ new approval label or Git operation by itself.
 | 1.3 | 2026-11-08 | Implement and verify S01–S05/E01: frozen 24-unit/40-case fixtures, authorized exact/BM25 evidence, lifecycle/citation/process controls and 1,041-test gate. Link executed flow; E02/E03/I01 and S09 archival remain unexecuted. |
 | 1.4 | 2026-11-08 | Exercise S06/E02 with hash-pinned CPU ONNX embeddings, exact local Qdrant queries, real lifecycle controls and forty-case restart recovery. Retain BM25 after no recall gain; E03/I01 and final archival remain unexecuted. |
 | 1.5 | 2026-11-09 | Conclude I01 real-store and capture-only integration trial: 40/40 retrieval and 120/120 composition parity, lifecycle controls and model-free reconstruction. Retain direct integration; optional framework group stays outside default runtime. E03/S08 real-response work and S09 archival remain unexecuted. |
+| 1.6 | 2026-11-10 | Implement E03 direct answer jobs and shared admission/accounting controls, matched Flash profile and independent rubric; expose explicit pilot/continuation and evidence export. Generation remains unexecuted pending separate paid approval; no S07 completion or semantic-quality claim. |
+| 1.7 | 2026-11-10 | Record the approved, stopped E03 pilot: 29 physical replies, five deterministic skips and two unattempted jobs at the $2 phase-reservation guard. Preserve frozen controls and block continuation; semantic review remains unavailable. |
+| 1.8 | 2026-11-10 | Record approved R01 completion of the two never-sent jobs and joint 36-job operational verification. Total pilot cost $0.3655965; no billed observation repeated. Remaining28 requires joint-receipt-aware execution and separate approval; semantic review remains pending. |
+| 1.9 | 2026-11-10 | Implement and verify C01 joint-receipt-aware scheduling of the 84 disjoint remaining jobs, with a proposed $3 phase allowance and unchanged generation controls. Freeze/plan and 23 focused tests passed; paid invocation remains separately gated. |
+| 1.10 | 2026-11-10 | Execute approved C01 and verify the full E03 population: 120 jobs, 108 calls, 107 mechanically valid answers, one provider-error response, 12 skips and $1.1270655 total. Accept S07 generation; S08 semantic review/replay and S09 remain outstanding. |

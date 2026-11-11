@@ -1,0 +1,28 @@
+# E03 reuses verified real retrieval evidence; it never starts a model or Qdrant.
+services:
+  answer-offline:
+    build: {context: ., target: checks}
+    network_mode: none
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    volumes:
+      - ./config:/app/config
+      - ./compose.e03.yaml:/app/compose.e03.yaml:ro
+      - ./Dockerfile:/app/Dockerfile:ro
+      - ./results/submission/P03-I01-v1:/app/results/submission/P03-I01-v1:ro
+  answer-provider:
+    extends: {file: compose.yaml, service: app}
+    volumes:
+      - ./compose.e03.yaml:/app/compose.e03.yaml:ro
+      - ./Dockerfile:/app/Dockerfile:ro
+      - ./results/submission/P03-I01-v1:/app/results/submission/P03-I01-v1:ro
+    # Existing persistent ledger is inherited from app. No Docker Ollama dependency.
+  answer-review:
+    extends: {file: compose.yaml, service: offline}
+    volumes:
+      - ./compose.e03.yaml:/app/compose.e03.yaml:ro
+      - ./Dockerfile:/app/Dockerfile:ro
+      - ./results/submission/P03-I01-v1:/app/results/submission/P03-I01-v1:ro
+      - ./results/submission/P03-E03-v1:/app/e03-export

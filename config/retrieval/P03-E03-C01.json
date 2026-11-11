@@ -1,0 +1,11 @@
+{
+  "id": "P03-E03-C01",
+  "bindings": {
+    "config/retrieval/P03-E03-C01-profile.json": "763ce7b95490c71e93cd427fcb58a77143ba3f64a81a9af4d0b83582a8718f4f",
+    "pilot-joint-receipt.json": "2f429d7f1f58bdede7a9a066c5a72557cd544481b2963480b00108b066d42445",
+    "tools/answer-continuation/continue_run.py": "dda6d07fbd50e73542918dd5a24d339561d5de81d5fa2393b91aa95d06cb60f0",
+    "tools/answer-continuation/test_continue.py": "008d25ac92b7d5ffb2b1467769a7091a1523565cded6f11752de53a72c74a0a6",
+    "compose.e03-continuation.yaml": "96d1022a1ad9dbea71a62352d09ad98a692c4833f0755d96117305120dd54c60"
+  },
+  "jobs_sha256": "b3237c6f117d1030ad3bf0c022920511da124aaa3ebb1adff3a0e5f5cfa86695"
+}

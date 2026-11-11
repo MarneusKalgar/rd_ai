@@ -1,6 +1,6 @@
 # Document intelligence R&D roadmap
 
-- Version: **1.15**.
+- Version: **1.20**.
 - Created and source mappings reviewed: **2026-10-31**.
 - Framework/SDK proposals reviewed: **2026-11-09**.
 - Status: P00 and selected P01/P02 offline slices concluded; later capability studies remain conditional/planned.
@@ -188,7 +188,7 @@ observations. Never require disclosure of private model reasoning as evidence.
 | P00 | One project structure with preserved baseline and reproducibility | Existing saved evidence | Consolidation concluded; S08 runtime follow-up concluded |
 | P01 | Explicit evaluation protocol and regression/challenge capabilities for the next question | P00 | Offline protocol/comparison scope concluded; judge study unselected |
 | P02 | Inspectable source-grounded extraction and a measured support decision | P01's protocol for the selected experiment | Selected text-provenance slice concluded; workbook/semantic studies conditional |
-| P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | E01/E02/I01 exercised; retain direct integration. RAG generation and final evidence work remain planned |
+| P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | E01/E02/I01 and full S07 generation exercised: 120 jobs, 108 calls, one retained provider error, $1.1270655. S08 semantic review/replay and S09 preservation remain outstanding |
 | P04 | Human-reviewed proposals with independently enforced application authority | P01; usable source evidence; P03 or controlled retrieval fixtures | Planned; LangGraph, agent/MCP and tracing comparisons conditional |
 | P05 | A usable local interface and measured operational/release controls | A selected fixed workflow from P04 | Planned; deployable-service expansion conditional |
 
@@ -397,6 +397,33 @@ records 40/40 real retrieval and 120/120 synthetic capture parity comparisons,
 six paired live controls, and offline canonical reconstruction. No encoding or
 generation ran. Retain direct integration; the optional framework group stays
 outside default runtime installation. Actual S07 response replay remains S08 work.
+
+**E03 implementation checkpoint (2026-11-10):** separate answer jobs/schema and
+durable physical records reuse shared admission, adapters, dependency policy and
+cumulative ledger. The user selected Gemini 3.5 Flash. Matched no-context,
+BM25 and saved real Qdrant contexts have a fixed 12-case pilot and remaining28
+phase, with frozen technical propositions and explicit paid/context gates.
+See the [E03 guide](guides/rag-answers.md). No actual generation or answer-quality
+result was claimed at that preparation checkpoint; S07 acceptance was then pending.
+
+**E03 pilot executed (2026-11-10):** [stopped-pilot report](reports/P03-rag-pilot.md)
+records 29 actual calls for $0.354399, five deterministic skips and two unsent
+jobs. The next $1.646592 reservation exceeded the $2 phase allowance by
+$0.000991. The frozen parent remains unchanged and blocks ordinary continuation.
+A separately bound financial-recovery addendum was then explicitly approved and
+executed for only the two never-sent jobs. R01 cost $0.0111975, completing the
+pilot population at 31 physical responses and five deterministic skips, for
+**$0.3655965 total**. Joint operational receipt verification passed without
+repeating any billed observation. Semantic correctness/grounding remain
+unreviewed. C01 then verified the joint receipts and ran after separate paid
+approval, retaining the stopped original's gate. Its 84 disjoint remaining jobs
+made 77 calls for $0.761469, with 76 valid answers, one zero-cost provider error
+and seven skips. Full operational reconstruction verified all **120 jobs,
+108 calls and $1.1270655 total**, completing S07 generation. The current
+cumulative balance is $3.23890080 under the unchanged $10 cap. See the
+[full generation report](reports/P03-rag-answers.md). S08 semantic review/replay
+and S09 preservation remain outstanding; these structural results establish no
+semantic answer-quality gain.
 
 **Work:** curate approved field definitions, normalization rules and explicitly
 fictional business policies; assign source/chunk/version identities. Establish
@@ -615,6 +642,11 @@ allowance and standing human approval; roadmap creation grants none.
 | 1.13 | 2026-11-08 | Record executed S01–S05/E01 and its 1,041-test gate, technical-fixture relevance results and lexical insufficiency limits; retain later P03 model/database/integration work and archival as unexecuted. |
 | 1.14 | 2026-11-08 | Record real S06/E02 embeddings/Qdrant lifecycle and restart recovery; retain lexical baseline after no recall gain, and keep generation/LangChain/final archival unexecuted. |
 | 1.15 | 2026-11-09 | Conclude I01 retrieval/capture integration trial and offline reconstruction; retain direct implementation and optional replay-only framework dependencies. Generation, actual-response replay and final archival remain unexecuted. |
+| 1.16 | 2026-11-10 | Implement E03 direct answer-job/schema/accounting integration and matched Flash pilot/continuation profile; retain explicit paid/context approval and unexecuted generation status. |
+| 1.17 | 2026-11-10 | Record the approved E03 pilot's 29 actual responses, five deterministic skips, two unsent jobs and phase-reservation stop; preserve original controls and scope financial recovery separately. |
+| 1.18 | 2026-11-10 | Complete E03 pilot population via approved R01: 31 physical responses, five deterministic skips, $0.3655965 total. Preserve immutable receipts and unreviewed semantic status; remaining28 unrun. |
+| 1.19 | 2026-11-10 | Prepare and verify C01's disjoint remaining28 continuation and $3 phase allowance with both pilot receipts preserved; paid generation remains awaiting concrete approval. |
+| 1.20 | 2026-11-10 | Complete full S07 generation through approved C01: 108 calls, 107 structurally valid answers, one provider error, 12 skips and $1.1270655 total. Retain semantic review/replay and preservation as S08/S09 work. |
 
 Use Git history for prior revisions. Record material changes to milestone scope,
 data authority or topic sources here; do not rewrite historical experiment claims.

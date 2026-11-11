@@ -1,0 +1,133 @@
+{
+  "experiment": "P03-E03-v1",
+  "continuation": "P03-E03-C01",
+  "recorded": "2026-11-10",
+  "generation_scope_complete": true,
+  "semantic_review": "unreviewed; no semantic accuracy/grounding score",
+  "parent_manifest_sha256": "3dc7a9fa647a5d86aca11003d196487f52cf521fa6c691b7a43c953e04a8faab",
+  "receipts": {
+    "pilot.jsonl": "1fa806c4d28dec0563c4cdf3d09d67f4413f374c28e3814985c85744db7ba042",
+    "pilot-recovery-R01.jsonl": "1f8f927fcf2ac4b619b5b1a41f50f9962fe424565eb4b493b146189006bbec22",
+    "remaining-C01.jsonl": "fa99d5401a466e1436c5db893ea42258f59467f86a3e824ec8a563102d220562"
+  },
+  "pilot_joint_receipt_sha256": "2f429d7f1f58bdede7a9a066c5a72557cd544481b2963480b00108b066d42445",
+  "cases": 40,
+  "jobs": 120,
+  "physical_calls": 108,
+  "deterministic_skips": 12,
+  "not_attempted": 0,
+  "outcomes": {
+    "structurally_valid": 107,
+    "deterministic_non_answer": 12,
+    "response_failure": 1
+  },
+  "response_kinds": {
+    "completed": 107,
+    "error": 1
+  },
+  "arms": {
+    "none": {
+      "jobs": 40,
+      "calls": 40,
+      "skips": 0,
+      "outcomes": {
+        "structurally_valid": 40
+      },
+      "model_statuses": {
+        "unverified": 29,
+        "insufficient_evidence": 11
+      },
+      "input_tokens": 30794,
+      "output_tokens": 36187,
+      "cost_usd": "0.3718740",
+      "duration_seconds": 250.82205936500577
+    },
+    "bm25": {
+      "jobs": 40,
+      "calls": 32,
+      "skips": 8,
+      "outcomes": {
+        "structurally_valid": 31,
+        "response_failure": 1,
+        "deterministic_non_answer": 8
+      },
+      "model_statuses": {
+        "grounded": 29,
+        "insufficient_evidence": 2
+      },
+      "input_tokens": 30938,
+      "output_tokens": 36195,
+      "cost_usd": "0.3721620",
+      "duration_seconds": 211.06722889299908
+    },
+    "vector": {
+      "jobs": 40,
+      "calls": 36,
+      "skips": 4,
+      "outcomes": {
+        "structurally_valid": 36,
+        "deterministic_non_answer": 4
+      },
+      "model_statuses": {
+        "grounded": 30,
+        "insufficient_evidence": 6
+      },
+      "input_tokens": 40181,
+      "output_tokens": 35862,
+      "cost_usd": "0.3830295",
+      "duration_seconds": 208.39969988700523
+    }
+  },
+  "failures": [
+    {
+      "key": "Q07/bm25",
+      "outcome": "response_failure",
+      "kind": "error",
+      "finish_reason": "error",
+      "error": "{'code': 502, 'message': 'Network connection lost.', 'metadata': {'error_type': 'provider_unavailable'}}",
+      "cost_usd": "0.0"
+    }
+  ],
+  "input_tokens": 101913,
+  "output_tokens": 108244,
+  "missing_usage_records": 0,
+  "pilot_cost_usd": "0.3655965",
+  "continuation_cost_usd": "0.7614690",
+  "total_e03_cost_usd": "1.1270655",
+  "summed_physical_request_seconds": 670.2889881450101,
+  "invocations": [
+    {
+      "journal": "pilot.jsonl",
+      "calls": 29,
+      "cost_usd": "0.3543990",
+      "summed_request_seconds": 206.62809967800237,
+      "first_reservation_to_last_result_seconds": 210.622123,
+      "peak_phase_exposure_usd": "1.9882755",
+      "approved_allowance_usd": "2.00"
+    },
+    {
+      "journal": "pilot-recovery-R01.jsonl",
+      "calls": 2,
+      "cost_usd": "0.0111975",
+      "summed_request_seconds": 8.337060003999795,
+      "first_reservation_to_last_result_seconds": 8.468414,
+      "peak_phase_exposure_usd": "2.0061090",
+      "approved_allowance_usd": "2.10"
+    },
+    {
+      "journal": "remaining-C01.jsonl",
+      "calls": 77,
+      "cost_usd": "0.7614690",
+      "summed_request_seconds": 455.32382846300794,
+      "first_reservation_to_last_result_seconds": 475.98607,
+      "peak_phase_exposure_usd": "2.3990025",
+      "approved_allowance_usd": "3.00"
+    }
+  ],
+  "encoding_calls": 0,
+  "database_calls": 0,
+  "prior_reservations_accounted": 215,
+  "prior_unknown_holds_usd": "0.50135040",
+  "cumulative_accounted_usd": "6.76109920",
+  "cumulative_remaining_usd": "3.23890080"
+}
