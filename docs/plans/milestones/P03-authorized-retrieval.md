@@ -1,9 +1,9 @@
 # P03 — Authorized reference retrieval and grounded responses
 
-- Version: **1.10**.
+- Version: **1.15**.
 - Created: **2026-11-07**.
-- Revised: **2026-11-10**.
-- Status: **S01–S07 generation executed and verified: E03 has 120 jobs, 108 calls, 107 structurally valid answers, one retained provider error and 12 skips. S08 semantic review/replay and S09 remain outstanding; P03 is partial**.
+- Revised: **2026-11-12**.
+- Status: **S01–S08 complete as R&D experiments. Judge scores remain provisional and human-calibrated reliability is not established. S09 remains outstanding; P03 is partial**.
 - Parent: [P03 roadmap](../../roadmap.md#p03--authorized-evidence-retrieval-and-grounded-answers).
 - Planning baseline: `167a76c` — selected P02 provenance slice committed.
 - Planned experiments: **P03-E01 lexical baseline**, **P03-E02 embedding/vector-database retrieval**, **P03-E03 generated RAG answers**.
@@ -68,7 +68,7 @@ The original pilot, R01 recovery and C01 continuation remain separate immutable
 receipts. Semantic answer review/replay and final archival are outstanding.
 See the [E03 guide](../../guides/rag-answers.md).
 
-This diagram combines **executed S01–S07 paths and planned S08/S09 work**. Keep it synchronized with
+This diagram combines **executed S01–S07 paths, provisional S08 execution and pending human/S09 work**. Keep it synchronized with
 stage implementations, comparison arms, authorization/failure paths and recorded
 status before closeout. Preserve frozen protocol/plan snapshots; update this
 living plan and the execution report rather than rewriting archived evidence.
@@ -120,13 +120,31 @@ flowchart TD
     subgraph Evaluation["4. Evaluate independently"]
         BR --> RE["Retrieval: relevance, ranking, isolation"]
         VR --> RE
-        J --> AE["Answers: correctness, grounding, abstention"]
-        AB --> AE
-        FAIL --> AE
+        J --> PRE["S08 prep executed: 120-job integrity reconstruction and blank review packets"]
+        AB --> PRE
+        FAIL --> PRE
+        PRE --> EP["Frozen source-bound S08 judge profile; preserve S07 evidence"]
+        EP --> DC["Deterministic checks on all 120 jobs"]
+        DC --> EB["Docker: freeze isolated question/answer/evidence bundles"]
+        EB -.-> HR["Optional human anchors for human-calibrated reliability claim"]
+        EB --> HO["Overall human review complete: 36 labels; granular anchors unassessed"]
+        HO --> HR
+        EB --> TC["Two synthetic controls passed; not human calibration"]
+        TC --> JC["Provisional Codex/Sol judge; fresh session per answer"]
+        JC --> JV["Docker: validate saved verdict JSON and execution records"]
+        JV --> ME["Report provisional yield: all / answerable / negative; human review optional"]
+        ME --> D
+        JV --> SG{"Human-calibrated reliability gates pass?"}
+        SG -->|Yes| AE["Score correctness, claim support and abstention; human adjudication"]
+        SG -->|No| U["Retain provisional AI grades/unknowns; adoption unresolved"]
+        HR --> SG
+        JC -. "Quota, auth, deadline or execution stop" .-> JS["Persist partial work; no paid/model fallback"]
+        JS --> U
         Q -. "Matched control" .-> NR["No-context answer job; knowledge allowed as unverified"]
         NR --> PG
         RE --> D["Compare quality, failures, latency and cost"]
         AE --> D
+        U --> D
         VI -. "I01: matched retrieval parity" .-> IP["Integration parity, overhead and maintenance decision"]
         CP -. "I01: capture/replay request parity" .-> IP
         IP --> D
@@ -136,7 +154,7 @@ flowchart TD
     class R,C,B,E,DB,Q,F,BR,QE,DQ,VR,EV,CT,RE exercised
     classDef trial fill:#e8edff,stroke:#4a5e99
     class VI,LQ,IP trial
-    class G,AB,CP,PG,LLM,A,V,J,NR,STOP,REC,CONT exercised
+    class G,AB,CP,PG,LLM,A,V,J,NR,STOP,REC,CONT,PRE,EP,DC,EB,TC,JC,JV,HO,ME exercised
 ```
 
 BM25 and vector retrieval are separate comparison arms, not an unmeasured
@@ -209,6 +227,9 @@ domains into new services or change Garage/archive ownership. No hosted search
 subscription or additional host runtime is required. Python, dependency work,
 encoder execution and substantial scripts run in Docker; native Ollama remains
 the existing explicit exception for an approved local generation profile.
+S08 separately plans a scoped host Codex CLI judge exception, using the existing
+subscription and leaving application/data processing in Docker; see its runner
+boundary below.
 
 ## 3. Reference collection, authority and query population
 
@@ -774,39 +795,266 @@ requires its concrete scoped execution. This document revision starts no calls.
 
 ### P03-S08 — Separate retrieval quality from generated-answer quality
 
-1. Report exact/BM25/dense retrieval results independently, using the same
-   eligible relevance sets. Keep field-key applicability, source-family, scope,
-   version and negative cases visible. Record encoding/store failures rather
-   than scoring only successful vector queries.
-2. Compare all three generated-answer arms with paired case outcomes: correctness,
-   claim support/citation relevance, unsupported assertions, grounded coverage,
-   abstention/conflict behavior, failure rate, calls/tokens/cost and latency.
+**R&D reporting policy (2026-11-12):** human review is optional complementary
+evidence, not a blocker for reporting deterministic or provisional judge-assessed
+improvement. Preserve existing calibration gates for claims of human-calibrated
+judge reliability; that stronger claim is not needed to conclude the technical
+experiment. Original frozen rubric, prompt and verdicts remain unchanged.
+
+Whole-population rubric-pass yield is 10% no-context, 62.5% BM25 (+52.5 percentage
+points) and 80% vector (+70 pp). On thirty frozen answerable reference questions,
+the yields are 0/30, 24/30 and 26/30. Ten negative controls retain separate
+grade/skip/error populations; their judge yield is not a safety-success rate.
+The no-context zero is an uncalibrated rubric result with known grounding/
+correctness ambiguity, not zero factual accuracy. See the
+[measured improvement](../../reports/P03-evaluation.md#measured-rag-improvement).
+Verification passed 39 focused tests, Ruff and strict typing (169 files).
+
+Use a **hybrid evaluation**: deterministic checks on every job, reference-guided
+semantic grading, human calibration/audit and adjudication, then matched arm
+comparison. S07 generation is complete; evaluate its saved outputs without
+regenerating answers. The first calibration candidate is **GPT-6.1 Sol through
+Codex CLI signed in with the user's ChatGPT Plus subscription**. This selects a
+candidate and execution path, not an already calibrated judge. The runner is now
+implemented and provisional judging has completed on 107 answers plus two
+synthetic controls; human anchors remain incomplete.
+See the [S08 evaluation report](../../reports/P03-evaluation.md) for measured
+execution and limitations. No API-funded fallback or generator rerun is selected.
+
+**S08 preparation checkpoint (2026-11-11):** the network-disabled
+`make answer-evaluation-prepare` verified the frozen application/source bindings
+and three journal receipts, reconstructed all 120 outcomes and revalidated saved
+answers/citation eligibility. It prepared eight calibration and four disjoint
+audit questions, each with all three arms, and blank human-review records.
+See [review preparation](../../../tools/answer-evaluation/README.md). The focused
+Docker gate passed six tests, Ruff and strict typing (155 files). This is not
+full ledger reconciliation, semantic scoring or I01 actual-response replay.
+The Homebrew Codex CLI was upgraded by the user from 0.130.0 to 0.167.1; version,
+exec help and ChatGPT login status now respond. Runner isolation/configuration,
+numeric admission bounds and live judging were unimplemented at that preparation
+checkpoint. Human anchors remain pending; the sample is not human-approved gold.
+
+**S08 continuation checkpoint (2026-11-11):** actual request/response replay
+passes on all 120 jobs through direct/LangChain composition, preserving 108
+replies (including the upstream error) and 12 skips without inference. Read-only
+ledger reconstruction retains the original costs and unknown-charge holds.
+The source-bound subscription runner exercises two synthetic controls before
+grading saved answers provisionally. The first strict parser rejected the CLI's
+known pre-turn feature warning; a separately bound S08-R01 controller retains
+that observation and recognizes only the exact notice before continuing unsent
+jobs. Human feedback on ten items is retained as general endorsement, not full
+rubric anchors. Separate shuffled v2 packets preserve original IDs and exposure
+history. Human import/comparison validates phases, claims and explicit authority;
+missing/unknown anchors cannot pass judge admission. Raw execution and compact
+counts are recorded separately from validated semantic quality.
+
+**S08 completed provisional checkpoint (2026-11-11):** all 109 CLI records
+validated with distinct sessions and no observed tool execution. Complete-and-
+correct rubric passes were 4/40 no-context, 25/31 BM25 and 32/36 vector graded
+answers; thirteen original outcomes remain ungraded. These are uncalibrated
+judgments, not validated accuracy. Three verdicts passed all expected propositions
+but withheld correctness because evidence was absent, requiring adjudication of
+correctness versus grounding. Preserve those verdicts and the frozen prompt.
+The final Docker gate passed 32 tests, Ruff and strict mypy (165 files). The
+published report reconstructs raw evidence and the unchanged read-only ledger;
+formal human calibration/audit and S09 remain open.
+
+**Human item-label checkpoint (2026-11-12):** all 36 packet items now have
+user-supplied overall labels: 18 pass, six partly correct/missing details,
+nine no-answer/not-pass, and three no-answer/not-pass with the question flagged
+"fake". These counts include the user's R01 correction restoring
+`3a8ed26ec1fecf9e` to pass; prior labels remain preserved.
+Preserve these separately from granular calibration anchors and original
+judge verdicts. Overall rejection of a non-answer does not establish incorrect
+abstention; question validity and evidence-policy disagreements require
+adjudication. No expected-proposition approval or per-claim support was inferred.
+Formal judge admission remains unresolved.
+
+**Human overall-review completion (2026-11-12):** finalize all 36 user labels
+without requiring duplicate data entry. Source-bound comparison retains ten
+agreements, seventeen disagreements, three judge-unknown outcomes and six
+ungraded outcomes, keeping calibration/audit separate. Interpret these as
+criterion-limited comparisons, not validated judge error rates. Overall human
+review is complete; per-claim support, rubric approval and abstention judgments
+remain unassessed, so granular judge admission and semantic adoption remain
+unresolved. The expanded focused gate passed 37 tests, Ruff and strict typing
+(167 files). No inference or ledger write was performed.
+
+| Judge decision | Selected scope |
+| --- | --- |
+| Initial candidate | Explicit `gpt-6.1-sol` model identity; verify availability in the authenticated account before execution |
+| Transport | Dedicated non-interactive `codex exec` runner with ChatGPT subscription authentication; independent of the OpenRouter generation adapter |
+| Comparison | `gpt-6.1-terra` remains a conditional faster candidate, requiring its own frozen profile and calibration; no automatic substitution |
+| Authority | Reference-guided model judgments, checked against human calibration/audit anchors; subscription access establishes no grading reliability |
+| Funding | Included subscription allowance only; record usage separately from historical API spending, with no automatic purchased-credit or API fallback |
+| Libraries | Application-owned bundle/validation/aggregation workflow; no RAGAS, LangSmith or new provider SDK selected |
+
+1. **Freeze a separate S08 evaluation profile.** Bind the original 120 jobs,
+   immutable journals/receipts, retrieved contexts, reference versions and
+   [pre-generation rubric](../../../config/evaluation/P03-E03-rubric-v1.json).
+   Preserve the 107 structurally valid answers, one provider error and 12
+   deterministic skips. Record that the propositions are agent-authored,
+   development-exposed technical expectations, not new human-approved gold or
+   an unseen holdout. Keep S08 review records/addenda separate from the frozen
+   S07 prompt, rubric, source bindings and operational results.
+2. **Run deterministic evaluation across all jobs.** Verify exact membership,
+   schema/status, citation IDs/bytes/spans, trusted scope, effective versions,
+   skips/failures, usage and cost. Citation integrity and permission/currentness
+   violations are mechanical outcomes; semantic grading cannot override them.
+   Report exact/BM25/dense retrieval independently using the same eligible
+   relevance sets and existing Precision@3, Recall@3 and MRR definitions. Keep
+   field-key applicability, source-family, scope, version and negative slices
+   visible, including encoding/store failures.
+3. **Create human-reviewed calibration and audit anchors.** Select a small,
+   stratified question-level sample across lookup, free-form, negative and
+   lifecycle groups; include all three arms for each selected question. Freeze
+   counts, IDs, selection rationale and a separate audit sample before judge
+   results are inspected. Include useful/irrelevant evidence, unsupported-claim
+   controls, insufficient/conflicting evidence and applicable scope/version
+   controls. Label invented controls separately from actual S07 observations.
+   Human reviewers verify the expected propositions against authoritative
+   references and annotate answer correctness, substantive claim support and
+   abstention/conflict behavior before seeing judge grades. Record reviewer,
+   evidence, decision version and unresolved disagreements. Calibration may
+   inform judge instructions; the disjoint audit sample must not be used for
+   that tuning. This is a judge audit on development data, not a new independent
+   generator benchmark. Inspection or agent-written labels alone do not create
+   human-reviewed anchors.
+4. **Calibrate and apply a reference-guided LLM judge.** Freeze the judge
+   model, CLI version, subscription-authentication mode, prompt, output schema,
+   reasoning effort, source visibility and usage profile. Recheck actual account
+   availability and supported CLI controls; resolve explicit settings rather than
+   inheriting mutable desktop defaults or Gemini sampling options. Sol is a
+   separate model family from the Gemini generator; evaluate one answer
+   at a time against the rubric, expected propositions and cited source spans.
+   Hide model/arm identities and aggregate scores where practical while keeping
+   evidence-availability, permission and version information needed to grade.
+   For each required proposition record supported/missing/contradicted; for
+   every substantive claim, including answer-summary additions, record source
+   support/contradiction/insufficient evidence with the specific passage and
+   rationale. Keep factual correctness, completeness and grounding separate:
+   a correct no-context answer can earn correctness without grounding credit.
+   Check calibration and the untouched audit sample against human anchors;
+   report exact verdict agreement, false acceptance of wrong/unsupported claims,
+   false rejection, unknowns and all sample denominators. Predeclare numeric
+   judge-admission bounds and stop conditions in the S08 profile before judge
+   calls; a failed audit prevents treating its remaining grades as validated.
+   Treat source/answer text as data and test that grading ignores embedded
+   instructions. A recorded agent review is also model-based evaluation.
+   BLEU/ROUGE/BERTScore, generator self-grading and uncalibrated LLM/JEV scores
+   are not substitutes for the selected semantic procedure.
+5. **Adjudicate and compare paired outcomes.** Human-review judge/anchor
+   disagreements, uncertain decisions and hard-control conflicts; retain the
+   original judgment and adjudication rather than overwriting either. Audit a
+   frozen sample of apparently accepted grades as well as flagged cases.
+   Publish per-item authority as human-reviewed, calibrated-model-judged,
+   provisional AI-reviewed or unresolved; report human coverage separately
+   from model coverage. Human calibration of a sample does not make all outputs
+   human-reviewed. If anchors/reviewers are unavailable, keep any AI-only grades
+   provisional and semantic adoption unresolved.
+   Compare the same questions across no-context/BM25/vector only after scoring
+   answers independently; this is a matched ablation, not a preference vote for
+   the most fluent answer. Report correctness, completeness, grounded claim
+   precision/coverage, unsupported assertions, abstention/conflict behavior and
+   failure rate with explicit units, denominators and review authority. Retain
+   all 40 jobs per arm in end-to-end accounting; separate answer-only semantic
+   metrics, application non-answers, model abstentions and the provider failure.
+   Unknown/unreviewed claims stay visible alongside every applicable rate.
    Distinguish wrong retrieval, wrong generation despite useful evidence and
-   correct answers unsupported by the retrieved context.
-3. Use independently authored technical propositions and explicit review status.
-   Free-text semantic judgments need the frozen rubric and recorded reviewer/
-   evidence/decision version; otherwise their rates remain unavailable. Report
-   review coverage and disagreements. Do not let the generator grade itself,
-   use provider predictions as truth or add an uncalibrated LLM/JEV judge.
-4. Test citation structure/eligibility mechanically; score semantic support
-   separately. Measure live prompt-injection effects only on calls that actually
-   ran, alongside independently enforced application boundaries. Include all
-   scopes and legitimate positive controls.
-5. Measure complete pipeline usage, including reference/query encoding, index
+   correct answers unsupported by retrieved context. Measure live injection
+   effects only on calls that actually ran; existing scope/lifecycle controls
+   and deterministic skips do not establish live model injection resistance.
+6. **Compare complete operational cost.** Include reference/query encoding, index
    build/update and per-query retrieval/generation. Report cold setup separately
    from warm query latency and local hardware costs excluded from API billing.
+   Report judge calls/tokens/cost/latency and human review effort separately from
+   the original generator measurements. Saved-response analysis and replay need
+   no new generation. Subscription judge runs need frozen job/attempt/deadline
+   bounds and any supported token limits plus durable execution records; report tokens only
+   where exposed by the CLI, and record unavailable usage explicitly. Subscription
+   quota is not an API dollar charge: keep the original API ledger and unresolved
+   charge holds unchanged, with no fabricated zero-cost reservations or token
+   prices. Disclose subscription cost excluded from marginal API billing rather
+   than describing the judge as cost-free. Quota exhaustion or unavailable auth/
+   model access stops work with partial results retained. Do not buy credits,
+   switch models or fall back to API/OpenRouter automatically. A later paid judge
+   path needs its own concrete command, spending approval and existing metered
+   admission/ledger controls; S07 approvals do not authorize it.
    Do not claim amortized savings without stating the reuse/workload assumption.
-6. Report I01's matched integration parity, operational/dependency overhead and
-   adoption decision separately from E02 retrieval gains and E03 answer quality.
+7. **Replay actual saved responses through I01 paths.** Report matched integration
+   parity, operational/dependency overhead and adoption decision separately from
+   E02 retrieval gains and E03 answer quality.
    Replayed responses cannot count as new model observations or evidence that
    LangChain improves model accuracy.
 
-**Accept S08:** the full case/arm membership is preserved; ranking, factual and
-grounding populations are explicit; known regressions/failures and unreviewed
-claims cannot disappear inside a favorable aggregate. Missing semantic review
-blocks a semantic quality conclusion, not the honest recording of executed RAG.
+#### S08 Codex runner boundary and evidence
+
+Docker owns bundle preparation, hashes/manifests, JSON processing, validation,
+aggregation and tests through root Make targets. The locally installed,
+subscription-authenticated Codex CLI is the narrowly scoped host exception for
+model-facing judge execution and simple orchestration. This does not authorize
+host Python/Node/Ruby processing, application work or Docker Ollama. Reconcile
+this specific exception with repository runtime guidance during implementation;
+no CLI install, upgrade or authentication change occurs in this plan update.
+
+Run each answer in a fresh session from a controlled directory outside the
+repository, with only the frozen question, answer, expected propositions and
+permitted source bundle. Exclude this conversation, previous verdicts, aggregate
+scores, human audit labels and unrelated repository files. Calibration examples,
+if used, are a separately frozen part of the judge prompt. Disable browsing,
+MCP/plugins, shell tools and workspace discovery for grading; a read-only sandbox
+alone does not prevent unrelated reads. Verify effective configuration and
+isolation with offline fixtures before live use; stop if required restrictions
+cannot be enforced. Preserve necessary source/scope/version semantics while
+hiding generator/arm identities where practical.
+
+Use the CLI's structured-output facility for the verdict and retain its available
+event/usage output. The runner owns durable job IDs, input/prompt/schema hashes,
+requested/reported model identity, reasoning settings, CLI/configuration version,
+start/end times, attempts, exit status, raw verdict and validation failures.
+Record unreported identity/usage fields as unavailable. Save partial failures
+before stopping; exclude malformed/incomplete verdicts from semantic acceptance
+while retaining them in coverage. Freeze retry/resume behavior and limits before
+execution, avoid regrading completed jobs silently, and do not resume a prior
+conversation as a new independent judgment.
+
+Use supported ChatGPT sign-in for the CLI; do not extract subscription tokens
+into a custom API client or expose credentials in bundles, images, logs or Git.
+Keep bulky judge inputs/events/verdicts ignored and archive them with the S08
+profile and control evidence at S09; version compact manifests and reports.
+
+Official OpenAI documentation checked 2026-11-11: [subscription authentication](https://learn.chatgpt.com/docs/auth),
+[non-interactive execution and structured outputs](https://learn.chatgpt.com/docs/non-interactive-mode),
+and [Sol/Terra model selection](https://learn.chatgpt.com/docs/models). Account
+entitlement, remaining allowance and enforceable runner settings still require
+local verification; the documentation is not evidence that a run occurred.
+
+Judge bias and human-agreement background: [Zheng et al., LLM-as-a-Judge](https://arxiv.org/abs/2306.05685),
+checked 2026-11-11. Its benchmark results are not calibration evidence for this
+application; the local anchors/audit and predeclared gates own that decision.
+
+**Accept S08:** preserve full case/arm membership and explicit ranking, factual
+and grounding populations; reproduce deterministic and paired reports from
+saved evidence; retain I01 replay results and complete resource populations.
+Record the frozen judge profile, human anchors, calibration/audit results and
+adjudications with their actual coverage, or explicitly record the missing/
+failed review gate and leave semantic adoption unresolved. Known failures,
+regressions and unknown claims cannot disappear inside a favorable aggregate.
+For the selected Codex path, retain runner isolation/structured-output/stop
+verification and subscription usage records separately from API accounting.
+Structural validity, provisional AI grades and sample-only human review cannot
+establish fully human-validated answer quality. Missing semantic review blocks
+a validated semantic-quality conclusion, not honest execution reporting.
 
 ### P03-S09 — Reproduce, archive and close the full P03 scope
+
+S08 follow-up: [disagreement analysis](../../reports/P03-evaluation-adjudication.md)
+separates four explanatory-depth mismatches, four abstention/usefulness
+mismatches, eight generic-versus-contract explanations and one date-warning
+completeness mismatch. Keep the three unknown and six ungraded outcomes separate.
+Prospective criteria are documented without changing frozen scores, admitting
+the judge or authorizing another run. Human overall review is complete;
+granular calibration/semantic adoption remain unresolved.
 
 1. Run focused checks and Docker `make check`; preserve P01/P02 and the historical
    extraction matrix without new extraction inference. Exercise the actual local
@@ -845,9 +1093,11 @@ with an offline-only substitute. Product reliability remains a separate claim.
 | Close P03 research execution | All three planned experiments and the bounded I01 trial run, all outcomes/failures and resource use retained, preservation/recovery gates passed, and decisions recorded; this does not require vector/RAG gains or permanent LangChain adoption |
 
 The numeric quality thresholds are development decision criteria, not achieved
-results. Freeze scoring units, authority, full expected populations and review
-procedure before the pilot. Report semantic coverage alongside each rate and
-retain all forty cases even where a particular metric is unavailable. Do not
+results. The expected propositions were frozen before generation. Freeze S08's
+separate review units, authority, sample membership, judge-admission bounds and
+procedure before grading; disclose this post-generation evaluation addendum
+without rewriting S07's frozen evidence. Report semantic coverage alongside each
+rate and retain all forty cases even where a particular metric is unavailable. Do not
 lower thresholds or discard unknown/failed cases after observing outputs.
 
 Only hybrid search, reranking, query rewriting, multilingual expansion and prompt
@@ -935,8 +1185,8 @@ reference above is background, not a refreshed review of the entire roadmap.
 | Vector Databases; Indexing Embeddings; Performing Similarity Search | E02 actual Qdrant persistence/filtering/query/update/delete/recovery exercised; exact search, no ANN performance claim |
 | RAG Usecases; RAG vs Fine-tuning; Dynamic Filters; Context Security | Versioned field-rule explanations and pre-context scope filtering; no model training or mutation authority |
 | Deterministic Evals; Evaluation Metrics; Cost/latency monitoring | E01 independent relevance/ranking controls and complete timing populations; E02/E03 add their actual model costs separately |
-| Generation; Using SDKs Directly; Human Evals | E03 generation exercised through existing direct HTTP adapters, without new provider-SDK adoption. S08 semantic review remains pending; no new human review is claimed |
-| LangChain / framework integration | I01 real Qdrant-wrapper queries and synthetic capture/replay versus direct calls exercised; direct integration retained. Actual-response replay remains S08 work; no agent/LangGraph/LangSmith adoption or framework quality-gain claim |
+| Generation; Using SDKs Directly; Human Evals; LLM-as-a-Judge | E03 generation exercised through direct HTTP adapters. S08 exercises subscription Codex/Sol provisional judging, exact-evidence validation and actual-response replay. Ten general human endorsements are retained; complete human calibration/audit and validated semantic conclusions remain unresolved |
+| LangChain / framework integration | I01 real Qdrant-wrapper queries and synthetic capture/replay versus direct calls exercised; S08 actual-response replay passed 120/120 parity. Direct integration retained; no agent/LangGraph/LangSmith adoption or framework quality-gain claim |
 
 | OWASP 2025 risk | Selected and conditional boundary |
 | --- | --- |
@@ -946,7 +1196,7 @@ reference above is background, not a refreshed review of the entire roadmap.
 | LLM04 Data and Model Poisoning | Controlled reference promotion/removal fixture; no training-time poisoning claim |
 | LLM05 Improper Output Handling | Citation/quote validation and data-only content; no browser, workbook or external execution added |
 | LLM08 Vector and Embedding Weaknesses | E01 metadata/staleness controls; vector-specific isolation/drift/deletion only exercised by E02 |
-| LLM09 Misinformation | Relevance, quoted-byte integrity and answer support remain separate; the frozen E03 rubric awaits S08 semantic review, and citation checks establish no truth score |
+| LLM09 Misinformation | Relevance, quoted-byte integrity and answer support remain separate. S08 provisional grading exposed correctness/grounding ambiguity; human calibration/adjudication remain unresolved, and citation checks establish no truth score |
 | LLM10 Unbounded Consumption | E01 bounded ingestion/index/query/context/results/time; E02/E03 exercised frozen encoding/generation/call/context/deadline/spend controls, including retained funding stops and zero automatic generation retries |
 
 - [x] S01 reference/query/control authority and protocol frozen independently of ranking outcomes.
@@ -955,11 +1205,13 @@ reference above is background, not a refreshed review of the entire roadmap.
 - [x] S04 evidence responses, currentness/conflicts/deletion/revocation and historical replay boundaries verified.
 - [x] S05 complete 40-case evaluation and real offline process controls recorded.
 - [x] S06 real learned embeddings and Qdrant storage/search/lifecycle executed and compared with BM25 across the frozen cases; see the linked report for verification and the negative adoption decision.
-- [x] I01 real direct-versus-LangChain retrieval and synthetic capture parity trial executed; retain direct integration. Actual S07 response replay remains pending in S08.
+- [x] I01 real direct-versus-LangChain retrieval and synthetic capture parity trial executed; retain direct integration. Actual S07 response replay completed in S08 with 120/120 parity.
 - [x] S07 answer pipeline, separate schema/records, matched profile, technical rubric and paid/context gates implemented; live execution remains separately gated.
 - [x] S07 12-case pilot population completed through separately approved R01 financial recovery; 31 physical responses and five deterministic skips verified across immutable linked receipts. Semantic review remains pending.
 - [x] S07 full 40-question generation recorded across matched no-context/BM25/vector arms: 108 calls, 107 structurally valid answers, one retained provider error and 12 deterministic skips. All 120 jobs and charges verified; semantic accuracy remains unreviewed.
-- [ ] S08 retrieval, answer/grounding and complete operational populations evaluated with explicit review coverage and decisions.
+- [x] S08 R&D evaluation complete: deterministic checks, actual-response replay, provisional judging, overall human labels, disagreement analysis and matched improvement reports. Human review is complementary; granular calibration remains unresolved and no human-calibrated accuracy claim is made.
+- [x] S08 offline review preparation: source-bound 120-job reconstruction, citation revalidation, disjoint calibration/audit packets and blank human decisions; six focused tests passed. No judge calls or human approvals.
+- [x] S08 deterministic accounting and actual-response replay: all 120 jobs retained, 108 replies per direct/LangChain path and 12 skips, without new generation or ledger writes. Provisional judge infrastructure, synthetic controls and explicit human-review import implemented; formal calibration remains open.
 - [ ] S09 full checks, prior-result preservation, model-free report reproduction, database recovery and verified archival completed.
 
 Completing S01–S09, including I01, concludes **P03's planned retrieval and RAG experiments**.
@@ -983,3 +1235,8 @@ new approval label or Git operation by itself.
 | 1.8 | 2026-11-10 | Record approved R01 completion of the two never-sent jobs and joint 36-job operational verification. Total pilot cost $0.3655965; no billed observation repeated. Remaining28 requires joint-receipt-aware execution and separate approval; semantic review remains pending. |
 | 1.9 | 2026-11-10 | Implement and verify C01 joint-receipt-aware scheduling of the 84 disjoint remaining jobs, with a proposed $3 phase allowance and unchanged generation controls. Freeze/plan and 23 focused tests passed; paid invocation remains separately gated. |
 | 1.10 | 2026-11-10 | Execute approved C01 and verify the full E03 population: 120 jobs, 108 calls, 107 mechanically valid answers, one provider-error response, 12 skips and $1.1270655 total. Accept S07 generation; S08 semantic review/replay and S09 remain outstanding. |
+| 1.11 | 2026-11-11 | Select the S08 hybrid procedure: full-population deterministic checks, human calibration/audit anchors, separately selected reference-guided judge, human adjudication and paired comparisons. Update the planned flow and review gates; preserve frozen S07 evidence and standing paid-call approvals. No new review or inference executed. |
+| 1.12 | 2026-11-11 | Select GPT-6.1 Sol through subscription-authenticated Codex as the initial calibration candidate. Define Docker-prepared isolated bundles, a scoped host CLI runner, structured verdict evidence and quota stops without automatic paid fallback; retain Terra as conditional and preserve human calibration requirements. No new inference or runtime change. |
+| 1.13 | 2026-11-11 | Execute offline S08 review preparation and six-test gate; prepare 24 calibration and 12 audit jobs from the verified 120-job population. Confirm user-upgraded CLI 0.167.1 and subscription login. Human anchors, isolated judge runner, semantic grading and actual-response replay remain pending. |
+| 1.14 | 2026-11-11 | Exercise complete-population deterministic accounting and 120/120 actual-response parity; implement/freeze the subscription judge and warning-specific S08-R01 continuation without repeating the first control. Preserve general human feedback, add shuffled review packets and explicit anchor validation. AI grades remain provisional; human calibration and S09 remain unresolved. |
+| 1.15 | 2026-11-12 | Complete S08 R&D evaluation with 36 overall human labels, disagreement analysis and matched all/answerable/negative rubric-pass yields. Human review is complementary; retain uncalibrated-judge limitations. All 39 focused tests, lint and typing passed; S09 remains outstanding. |

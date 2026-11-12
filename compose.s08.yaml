@@ -1,0 +1,20 @@
+services:
+  answer-evaluation:
+    extends: {file: compose.e03.yaml, service: answer-offline}
+    volumes:
+      - ./tools/answer-evaluation:/app/tools/answer-evaluation:ro
+      - ./compose.s08.yaml:/app/compose.s08.yaml:ro
+      - ./docs/reports/P03-rag-answers-summary.json:/app/docs/reports/P03-rag-answers-summary.json:ro
+      - ./results/submission/P03-E03-v1:/evidence:ro
+      - ./results/submission/P03-S08-v1:/review-output
+  answer-evaluation-replay:
+    extends: {file: compose.s08.yaml, service: answer-evaluation}
+    build: {context: ., target: integration}
+    environment:
+      LANGSMITH_TRACING: "false"
+      LANGCHAIN_TRACING: "false"
+      LANGCHAIN_TRACING_V2: "false"
+  answer-evaluation-report:
+    extends: {file: compose.s08.yaml, service: answer-evaluation}
+    volumes:
+      - results:/app/results:ro

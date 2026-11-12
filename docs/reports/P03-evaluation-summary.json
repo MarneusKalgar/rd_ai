@@ -1,0 +1,309 @@
+{
+  "id": "P03-S08-v1",
+  "jobs": 120,
+  "arms": {
+    "none": {
+      "jobs": 40,
+      "physical_calls": 40,
+      "outcomes": {
+        "structurally_valid": 40
+      },
+      "known_cost_usd": "0.3718740"
+    },
+    "bm25": {
+      "jobs": 40,
+      "physical_calls": 32,
+      "outcomes": {
+        "structurally_valid": 31,
+        "response_failure": 1,
+        "deterministic_non_answer": 8
+      },
+      "known_cost_usd": "0.3721620"
+    },
+    "vector": {
+      "jobs": 40,
+      "physical_calls": 36,
+      "outcomes": {
+        "structurally_valid": 36,
+        "deterministic_non_answer": 4
+      },
+      "known_cost_usd": "0.3830295"
+    }
+  },
+  "retrieval": {
+    "bm25": {
+      "cases": 40,
+      "positive_relevance_cases": 34,
+      "macro_recall_at_3": 1.0,
+      "macro_precision_at_3": 0.4313725490196078,
+      "mrr": 1.0,
+      "authority": "authored technical relevance, not human accuracy"
+    },
+    "vector": {
+      "cases": 40,
+      "positive_relevance_cases": 34,
+      "macro_recall_at_3": 1.0,
+      "macro_precision_at_3": 0.4313725490196078,
+      "mrr": 0.9852941176470589,
+      "authority": "authored technical relevance, not human accuracy"
+    }
+  },
+  "source_receipts": {
+    "pilot.jsonl": "1fa806c4d28dec0563c4cdf3d09d67f4413f374c28e3814985c85744db7ba042",
+    "pilot-recovery-R01.jsonl": "1f8f927fcf2ac4b619b5b1a41f50f9962fe424565eb4b493b146189006bbec22",
+    "remaining-C01.jsonl": "fa99d5401a466e1436c5db893ea42258f59467f86a3e824ec8a563102d220562"
+  },
+  "ledger_sha256": "6a365e8a9cd919ff48750873f769d3f5768064ce0f7cc84073a5147886fe2852",
+  "prior_unknown_holds_usd": "0.50135040",
+  "e03_known_cost_usd": "1.1270655",
+  "provisional_semantic_counts": {
+    "none": {
+      "jobs": 40,
+      "valid_ai_grades": 40,
+      "complete_correct_rubric_passes": 4,
+      "reviewed_human_anchors": 0,
+      "explicit_claims": 59,
+      "supported_explicit_claims": 0,
+      "authority": "uncalibrated AI judgment; no semantic adoption conclusion"
+    },
+    "bm25": {
+      "jobs": 40,
+      "valid_ai_grades": 31,
+      "complete_correct_rubric_passes": 25,
+      "reviewed_human_anchors": 0,
+      "explicit_claims": 46,
+      "supported_explicit_claims": 46,
+      "authority": "uncalibrated AI judgment; no semantic adoption conclusion"
+    },
+    "vector": {
+      "jobs": 40,
+      "valid_ai_grades": 36,
+      "complete_correct_rubric_passes": 32,
+      "reviewed_human_anchors": 0,
+      "explicit_claims": 47,
+      "supported_explicit_claims": 47,
+      "authority": "uncalibrated AI judgment; no semantic adoption conclusion"
+    }
+  },
+  "improvement_metrics": {
+    "metric": "provisional judge-assessed rubric-pass yield",
+    "populations": {
+      "all": {
+        "none": {
+          "jobs": 40,
+          "graded": 40,
+          "rubric_passes": 4,
+          "outcomes": {
+            "structurally_valid": 40
+          },
+          "answer_statuses": {
+            "unverified": 29,
+            "insufficient_evidence": 11
+          },
+          "rubric_pass_yield_percent": 10.0,
+          "delta_vs_none_percentage_points": 0.0
+        },
+        "bm25": {
+          "jobs": 40,
+          "graded": 31,
+          "rubric_passes": 25,
+          "outcomes": {
+            "structurally_valid": 31,
+            "response_failure": 1,
+            "deterministic_non_answer": 8
+          },
+          "answer_statuses": {
+            "grounded": 29,
+            "absent": 9,
+            "insufficient_evidence": 2
+          },
+          "rubric_pass_yield_percent": 62.5,
+          "delta_vs_none_percentage_points": 52.5
+        },
+        "vector": {
+          "jobs": 40,
+          "graded": 36,
+          "rubric_passes": 32,
+          "outcomes": {
+            "structurally_valid": 36,
+            "deterministic_non_answer": 4
+          },
+          "answer_statuses": {
+            "grounded": 30,
+            "insufficient_evidence": 6,
+            "absent": 4
+          },
+          "rubric_pass_yield_percent": 80.0,
+          "delta_vs_none_percentage_points": 70.0
+        }
+      },
+      "answerable": {
+        "none": {
+          "jobs": 30,
+          "graded": 30,
+          "rubric_passes": 0,
+          "outcomes": {
+            "structurally_valid": 30
+          },
+          "answer_statuses": {
+            "unverified": 25,
+            "insufficient_evidence": 5
+          },
+          "rubric_pass_yield_percent": 0.0,
+          "delta_vs_none_percentage_points": 0.0
+        },
+        "bm25": {
+          "jobs": 30,
+          "graded": 29,
+          "rubric_passes": 24,
+          "outcomes": {
+            "structurally_valid": 29,
+            "response_failure": 1
+          },
+          "answer_statuses": {
+            "grounded": 29,
+            "absent": 1
+          },
+          "rubric_pass_yield_percent": 80.0,
+          "delta_vs_none_percentage_points": 80.0
+        },
+        "vector": {
+          "jobs": 30,
+          "graded": 30,
+          "rubric_passes": 26,
+          "outcomes": {
+            "structurally_valid": 30
+          },
+          "answer_statuses": {
+            "grounded": 30
+          },
+          "rubric_pass_yield_percent": 86.66666666666667,
+          "delta_vs_none_percentage_points": 86.66666666666667
+        }
+      },
+      "negative": {
+        "none": {
+          "jobs": 10,
+          "graded": 10,
+          "rubric_passes": 4,
+          "outcomes": {
+            "structurally_valid": 10
+          },
+          "answer_statuses": {
+            "insufficient_evidence": 6,
+            "unverified": 4
+          },
+          "rubric_pass_yield_percent": 40.0,
+          "delta_vs_none_percentage_points": 0.0
+        },
+        "bm25": {
+          "jobs": 10,
+          "graded": 2,
+          "rubric_passes": 1,
+          "outcomes": {
+            "deterministic_non_answer": 8,
+            "structurally_valid": 2
+          },
+          "answer_statuses": {
+            "absent": 8,
+            "insufficient_evidence": 2
+          },
+          "rubric_pass_yield_percent": 10.0,
+          "delta_vs_none_percentage_points": -30.000000000000004
+        },
+        "vector": {
+          "jobs": 10,
+          "graded": 6,
+          "rubric_passes": 6,
+          "outcomes": {
+            "structurally_valid": 6,
+            "deterministic_non_answer": 4
+          },
+          "answer_statuses": {
+            "insufficient_evidence": 6,
+            "absent": 4
+          },
+          "rubric_pass_yield_percent": 60.0,
+          "delta_vs_none_percentage_points": 19.999999999999996
+        }
+      }
+    },
+    "partition_rule": "Frozen expected_status=evidence_found vs other expected statuses",
+    "human_review": "optional complementary evidence; not a prerequisite for this metric",
+    "limitations": "Development fixtures and uncalibrated judge; abstentions can pass. Not validated accuracy, causal generalization or human satisfaction."
+  },
+  "judge_execution": {
+    "valid_provisional_records_including_controls": 109,
+    "distinct_thread_ids": 109,
+    "reported_usage": {
+      "input_tokens": 750808,
+      "cached_input_tokens": 234624,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 31385,
+      "reasoning_output_tokens": 9439
+    },
+    "phase_spans_seconds": {
+      "original": 8.0,
+      "R01": 2363.0
+    },
+    "usage_note": "reported fields; cached/reasoning fields may be subsets, not additive",
+    "api_ledger_writes": 0,
+    "cli_internal_physical_requests": "unavailable"
+  },
+  "human_calibration": "incomplete",
+  "human_overall_review": {
+    "status": "complete overall human review of sampled items",
+    "reviewer": "user in project chat",
+    "coverage": 36,
+    "counts": {
+      "pass": 18,
+      "partly_correct_missing_details": 6,
+      "not_pass_no_answer": 9,
+      "not_pass_no_answer_question_flagged_fake": 3
+    },
+    "phases": {
+      "calibration": {
+        "human_items": 24,
+        "pass": 10,
+        "judge_not_accepted": 8,
+        "disagreement": 14,
+        "judge_not_accepted_human_accepted": 6,
+        "judge_unknown": 1,
+        "unknown": 1,
+        "judge_accepted": 11,
+        "agreement": 5,
+        "partly_correct_missing_details": 6,
+        "judge_accepted_human_not_accepted": 8,
+        "not_pass_no_answer": 5,
+        "judge_ungraded": 4,
+        "not_pass_no_answer_question_flagged_fake": 3
+      },
+      "audit": {
+        "human_items": 12,
+        "pass": 8,
+        "judge_not_accepted": 4,
+        "disagreement": 3,
+        "judge_not_accepted_human_accepted": 3,
+        "judge_unknown": 2,
+        "unknown": 2,
+        "judge_accepted": 4,
+        "agreement": 5,
+        "not_pass_no_answer": 4,
+        "judge_ungraded": 2
+      }
+    },
+    "source_sha256": {
+      "human-item-labels-20261112-R01.json": "64ff868221bc79c547b9b1002cf4c9fa20100f93483fc391d6d4c57768094d96",
+      "judge-v1/provisional-summary-R01.json": "fe24d62d629819cea0307b7d0725d45e53325390355817d90aeff829becbc6bb",
+      "private-mapping.json": "e6e8981432be71590287b29a23595be4da96cf3b7d0569ef8d89358ac0831222",
+      "bundles.json": "bb4a5b7ef8737224629e678ff5140f63eb4057b5de50ae548c8dea075cc8f8e6"
+    },
+    "criteria": "Acceptability vs judge correctness AND completeness; descriptive only",
+    "review_independence": "not blind; aggregates and selected examples previously discussed",
+    "granular_calibration": "unresolved; claim support, abstention appropriateness and rubric approval unassessed",
+    "semantic_adoption": "unresolved"
+  },
+  "semantic_adoption": "unresolved",
+  "new_generator_calls": 0,
+  "provisional_summary_sha256": "fe24d62d629819cea0307b7d0725d45e53325390355817d90aeff829becbc6bb"
+}

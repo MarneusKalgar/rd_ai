@@ -78,6 +78,8 @@ permission for model inference or spending.
 | P03-I01 direct/LangChain parity, capture/replay and bounded adoption decision | [P03 LangChain integration](reports/P03-langchain-integration.md) |
 | P03-E03 pilot, completed financial recovery and physical accounting | [P03 RAG pilot](reports/P03-rag-pilot.md) |
 | P03-S07 full matched generation, retained provider failure, usage and accounting | [P03 RAG generation](reports/P03-rag-answers.md) |
+| P03-S08 deterministic accounting, actual-response replay and provisional subscription judging | [P03 evaluation](reports/P03-evaluation.md) |
+| P03-S08 human/judge disagreement analysis and prospective acceptance criteria | [S08 adjudication](reports/P03-evaluation-adjudication.md) |
 | Offline field locations, inherited support linkage and preservation controls | [P02 source provenance](reports/P02-source-provenance.md) |
 | Offline protocols, paired comparison and challenge/reproduction verification | [P01 evaluation protocols](reports/P01-evaluation-protocols.md) |
 | Root migration, frozen identity preservation and offline checks | [P00 consolidation](reports/P00-consolidation.md) |

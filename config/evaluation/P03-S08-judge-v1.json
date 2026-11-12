@@ -1,0 +1,23 @@
+{
+  "id": "P03-S08-judge-v1",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "medium",
+  "cli_version": "0.167.1",
+  "authentication": "chatgpt",
+  "mode": "provisional AI judgment; human calibration not completed",
+  "request_seconds": 180,
+  "phase_seconds": 7200,
+  "maximum_attempts_per_job": 1,
+  "maximum_jobs": 109,
+  "maximum_observed_output_tokens": 12000,
+  "calibration_admission": {
+    "minimum_exact_agreement": 0.9,
+    "maximum_false_acceptances_on_reviewed_negative_controls": 0,
+    "unknowns": "retain; do not exclude from coverage",
+    "status": "unassessed; no complete human anchors"
+  },
+  "funding": "included subscription allowance only; no API fallback, credit purchase or automatic model replacement",
+  "retries": 0,
+  "scope": "two synthetic judge controls plus the 107 saved structurally valid S07 answers; preserve other 13 jobs without model calls",
+  "limitations": "CLI output-token usage is observed after completion, not an enforced generation ceiling; subscription headroom must be verified before live execution"
+}

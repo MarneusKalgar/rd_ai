@@ -75,6 +75,11 @@ put any focused mutation or reproduction in a disposable copy.
   substantial data processing into Docker as well.
 - Native Ollama is the explicitly selected exception for local model inference;
   its use does not authorize other application or scripting work on the host.
+- P03-S08 additionally permits the installed, subscription-authenticated Codex
+  CLI for isolated judge execution and its simple shell orchestration. Bundle
+  preparation, JSON processing, validation, tests and aggregation stay in Docker.
+  Use the frozen S08 profile; no automatic API/credit/model fallback or unrelated
+  host runtime work follows from this exception.
 - Run `make check` from the repository root for Ruff lint/format checks,
   strict mypy checks, pytest and frozen gold validation.
 - Use `make validate-gold` when only gold validation is needed.

@@ -1,6 +1,63 @@
 .PHONY: check validate-gold preflight setup-provider setup-local local-ready local-capacity storage-check down
 .DEFAULT_GOAL := help
 
+.PHONY: answer-evaluation-prepare answer-evaluation-check answer-human-overall-review
+answer-human-overall-review:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --rm --no-deps answer-evaluation python tools/answer-evaluation/overall_reviews.py
+
+answer-evaluation-prepare:
+	mkdir -p results/submission/P03-S08-v1
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --build --rm --no-deps answer-evaluation python tools/answer-evaluation/prepare.py
+
+answer-evaluation-check:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --build --rm --no-deps answer-evaluation sh -c 'ruff check --no-cache tools/answer-evaluation && ruff format --check --no-cache tools/answer-evaluation && mypy --cache-dir=/tmp/mypy-s08 src tools/answer-evaluation && pytest tools/answer-evaluation'
+
+.PHONY: answer-evaluation-replay
+answer-evaluation-replay:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --build --rm --no-deps answer-evaluation-replay python tools/answer-evaluation/replay.py
+
+.PHONY: answer-evaluation-report
+answer-evaluation-report:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --build --rm --no-deps answer-evaluation-report python tools/answer-evaluation/report.py
+
+.PHONY: answer-evaluation-publish
+answer-evaluation-publish:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --rm --no-deps -v '$(CURDIR)/docs/reports:/public-output' answer-evaluation-report python tools/answer-evaluation/report.py
+
+.PHONY: answer-review-shuffle
+answer-review-shuffle:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --rm --no-deps answer-evaluation python tools/answer-evaluation/review_packets.py
+
+.PHONY: answer-human-review
+answer-human-review:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --rm --no-deps answer-evaluation python tools/answer-evaluation/human_reviews.py
+
+.PHONY: answer-judge-freeze answer-judge-admit answer-judge-check answer-judge-summary answer-judge-run
+answer-judge-freeze:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --build --rm --no-deps answer-evaluation python tools/answer-evaluation/judge.py freeze
+
+answer-judge-admit answer-judge-check:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --rm --no-deps answer-evaluation python tools/answer-evaluation/judge.py $(patsubst answer-judge-%,%,$@) --job '$(JOB)'
+
+answer-judge-summary:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --rm --no-deps answer-evaluation python tools/answer-evaluation/judge.py summarize
+
+answer-judge-run:
+	/bin/bash tools/answer-evaluation/run-judge.sh --provisional
+
+.PHONY: answer-judge-r01-freeze answer-judge-r01-admit answer-judge-r01-check answer-judge-r01-summary answer-judge-r01-run
+answer-judge-r01-freeze:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --rm --no-deps answer-evaluation python tools/answer-evaluation/judge_continue.py freeze --host-root '$(CURDIR)'
+
+answer-judge-r01-admit answer-judge-r01-check:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --rm --no-deps answer-evaluation python tools/answer-evaluation/judge_continue.py $(patsubst answer-judge-r01-%,%,$@) --job '$(JOB)'
+
+answer-judge-r01-summary:
+	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --rm --no-deps answer-evaluation python tools/answer-evaluation/judge_continue.py summary
+
+answer-judge-r01-run:
+	/bin/bash results/submission/P03-S08-v1/judge-v1/continue-R01.sh --provisional
+
 .PHONY: answer-continuation-freeze answer-continuation-plan answer-continuation-export answer-continuation-check answer-continue
 answer-continuation-freeze answer-continuation-plan answer-continuation-export:
 	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.e03-recovery.yaml -f compose.e03-continuation.yaml run --build --rm --no-deps answer-continuation-offline python tools/answer-continuation/continue_run.py $(patsubst answer-continuation-%,%,$@) $(ARGS)

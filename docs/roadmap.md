@@ -1,6 +1,6 @@
 # Document intelligence R&D roadmap
 
-- Version: **1.20**.
+- Version: **1.22**.
 - Created and source mappings reviewed: **2026-10-31**.
 - Framework/SDK proposals reviewed: **2026-11-09**.
 - Status: P00 and selected P01/P02 offline slices concluded; later capability studies remain conditional/planned.
@@ -188,7 +188,7 @@ observations. Never require disclosure of private model reasoning as evidence.
 | P00 | One project structure with preserved baseline and reproducibility | Existing saved evidence | Consolidation concluded; S08 runtime follow-up concluded |
 | P01 | Explicit evaluation protocol and regression/challenge capabilities for the next question | P00 | Offline protocol/comparison scope concluded; judge study unselected |
 | P02 | Inspectable source-grounded extraction and a measured support decision | P01's protocol for the selected experiment | Selected text-provenance slice concluded; workbook/semantic studies conditional |
-| P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | E01/E02/I01 and full S07 generation exercised: 120 jobs, 108 calls, one retained provider error, $1.1270655. S08 semantic review/replay and S09 preservation remain outstanding |
+| P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | E01/E02/I01 and S07/S08 complete: 120 jobs, matched provisional improvement metrics, human overall review and actual-response parity. Judge reliability remains uncalibrated; S09 preservation remains outstanding |
 | P04 | Human-reviewed proposals with independently enforced application authority | P01; usable source evidence; P03 or controlled retrieval fixtures | Planned; LangGraph, agent/MCP and tracing comparisons conditional |
 | P05 | A usable local interface and measured operational/release controls | A selected fixed workflow from P04 | Planned; deployable-service expansion conditional |
 
@@ -396,7 +396,9 @@ At that checkpoint E03 generation, I01 and final archival remained unexecuted.
 records 40/40 real retrieval and 120/120 synthetic capture parity comparisons,
 six paired live controls, and offline canonical reconstruction. No encoding or
 generation ran. Retain direct integration; the optional framework group stays
-outside default runtime installation. Actual S07 response replay remains S08 work.
+outside default runtime installation. S08 subsequently passed actual S07-response
+composition replay on all 120 jobs, retaining 108 replies and twelve skips with
+no new inference; direct integration remains selected.
 
 **E03 implementation checkpoint (2026-11-10):** separate answer jobs/schema and
 durable physical records reuse shared admission, adapters, dependency policy and
@@ -421,9 +423,14 @@ made 77 calls for $0.761469, with 76 valid answers, one zero-cost provider error
 and seven skips. Full operational reconstruction verified all **120 jobs,
 108 calls and $1.1270655 total**, completing S07 generation. The current
 cumulative balance is $3.23890080 under the unchanged $10 cap. See the
-[full generation report](reports/P03-rag-answers.md). S08 semantic review/replay
-and S09 preservation remain outstanding; these structural results establish no
-semantic answer-quality gain.
+[full generation report](reports/P03-rag-answers.md). [S08 evaluation](reports/P03-evaluation.md)
+adds deterministic accounting, actual-response replay and provisional Sol judging
+through the existing Codex subscription, with separate quota controls and no
+API-funded fallback. S08 is complete as an R&D evaluation, with matched
+rubric-pass yield measurements, 36 overall human labels and disagreement analysis.
+Human review is complementary; human-calibrated judge reliability remains
+unestablished. S09 preservation remains outstanding; reported improvement is
+provisional judge-assessed yield, not validated factual accuracy.
 
 **Work:** curate approved field definitions, normalization rules and explicitly
 fictional business policies; assign source/chunk/version identities. Establish
@@ -647,6 +654,8 @@ allowance and standing human approval; roadmap creation grants none.
 | 1.18 | 2026-11-10 | Complete E03 pilot population via approved R01: 31 physical responses, five deterministic skips, $0.3655965 total. Preserve immutable receipts and unreviewed semantic status; remaining28 unrun. |
 | 1.19 | 2026-11-10 | Prepare and verify C01's disjoint remaining28 continuation and $3 phase allowance with both pilot receipts preserved; paid generation remains awaiting concrete approval. |
 | 1.20 | 2026-11-10 | Complete full S07 generation through approved C01: 108 calls, 107 structurally valid answers, one provider error, 12 skips and $1.1270655 total. Retain semantic review/replay and preservation as S08/S09 work. |
+| 1.21 | 2026-11-11 | Exercise S08 deterministic accounting and actual-response parity; add provisional subscription-authenticated Sol judging and human-review validation. Preserve first control via a warning-specific parser addendum; human calibration/adoption and S09 remain unresolved. |
+| 1.22 | 2026-11-12 | Complete S08 R&D evaluation: matched improvement metrics, overall human review and criterion-disagreement analysis. Retain uncalibrated judge limitations and S09 preservation as outstanding. |
 
 Use Git history for prior revisions. Record material changes to milestone scope,
 data authority or topic sources here; do not rewrite historical experiment claims.
