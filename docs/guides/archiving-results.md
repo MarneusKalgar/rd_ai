@@ -171,6 +171,33 @@ and [single-node setup](https://github.com/deuxfleurs-org/garage/blob/v2.4.1/doc
 
 ## Retention and publication
 
+### P03 research preservation
+
+P03's completed archive is
+`58a69457b2555ef3347b669ebcb171bebf3f887f5f90d2b91b84c13b77783024`.
+The [closeout report](../reports/P03-closeout.md) links its index, verified full-GET
+receipt and isolated recovery verification. It contains complete E01/E02/I01/
+E03/S08 evidence, public source/control snapshots, saved vectors, a logical
+Qdrant export and recoverable pinned encoder artifacts. Binary weights and
+specifically reviewed source/module files use reversible encoded parts under
+the unchanged archive file/path/credential-scanning rules.
+
+```sh
+make archive-store-up
+make download-archive ARGS='--index archive-index/58a69457b2555ef3347b669ebcb171bebf3f887f5f90d2b91b84c13b77783024.json'
+make restore-results ARGS='--index archive-index/58a69457b2555ef3347b669ebcb171bebf3f887f5f90d2b91b84c13b77783024.json'
+make closeout-verify ARGS='--bundle /workspace/results/restored/58a69457b2555ef3347b669ebcb171bebf3f887f5f90d2b91b84c13b77783024/submission/P03-S09-v1'
+```
+
+If that exact isolated restore already exists, skip `restore-results`; the archive
+and closeout verifiers can recheck it without overwriting it. Reconstruction
+requires Docker's locked optional integration image for historical replay,
+but no model execution, provider key or live spending ledger. Qdrant restoration
+and physical restart were separately verified at S09 with the pinned 1.20.0
+server; replay does not silently start the original database or an Ollama service.
+
+### General retention
+
 New bulk exports and detailed reports under `results/submission/` are ignored
 by default. The repository's `.gitignore` explicitly allows only reviewed compact
 snapshot files; future curated snapshots need a narrow reviewed allowlist.

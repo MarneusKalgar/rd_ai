@@ -1,9 +1,9 @@
 # Document intelligence R&D roadmap
 
-- Version: **1.22**.
+- Version: **1.23**.
 - Created and source mappings reviewed: **2026-10-31**.
 - Framework/SDK proposals reviewed: **2026-11-09**.
-- Status: P00 and selected P01/P02 offline slices concluded; later capability studies remain conditional/planned.
+- Status: P00, selected P01/P02 slices and P03 research execution concluded; P04/P05 remain planned/conditional.
 - Implementation baseline: `654be96` — ledger-free report reproduction.
 
 ## 1. Authority and project outcome
@@ -188,7 +188,7 @@ observations. Never require disclosure of private model reasoning as evidence.
 | P00 | One project structure with preserved baseline and reproducibility | Existing saved evidence | Consolidation concluded; S08 runtime follow-up concluded |
 | P01 | Explicit evaluation protocol and regression/challenge capabilities for the next question | P00 | Offline protocol/comparison scope concluded; judge study unselected |
 | P02 | Inspectable source-grounded extraction and a measured support decision | P01's protocol for the selected experiment | Selected text-provenance slice concluded; workbook/semantic studies conditional |
-| P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | E01/E02/I01 and S07/S08 complete: 120 jobs, matched provisional improvement metrics, human overall review and actual-response parity. Judge reliability remains uncalibrated; S09 preservation remains outstanding |
+| P03 | Versioned, authorized evidence retrieval and grounded answers | P01 protocol; an approved reference collection | E01/E02/E03/I01 and S01–S09 complete, including isolated database recovery and verified Garage restoration. Retain BM25/direct integration; RAG product adoption deferred and judge reliability uncalibrated |
 | P04 | Human-reviewed proposals with independently enforced application authority | P01; usable source evidence; P03 or controlled retrieval fixtures | Planned; LangGraph, agent/MCP and tracing comparisons conditional |
 | P05 | A usable local interface and measured operational/release controls | A selected fixed workflow from P04 | Planned; deployable-service expansion conditional |
 
@@ -429,8 +429,10 @@ through the existing Codex subscription, with separate quota controls and no
 API-funded fallback. S08 is complete as an R&D evaluation, with matched
 rubric-pass yield measurements, 36 overall human labels and disagreement analysis.
 Human review is complementary; human-calibrated judge reliability remains
-unestablished. S09 preservation remains outstanding; reported improvement is
-provisional judge-assessed yield, not validated factual accuracy.
+unestablished. [S09 closeout](reports/P03-closeout.md) completes research execution
+with isolated Qdrant restore/restart, exact encoder recovery and verified Garage
+download/restoration. Reported improvement remains provisional judge-assessed
+yield, not validated factual accuracy. Local recovery is not an off-device backup.
 
 **Work:** curate approved field definitions, normalization rules and explicitly
 fictional business policies; assign source/chunk/version identities. Establish
@@ -656,6 +658,7 @@ allowance and standing human approval; roadmap creation grants none.
 | 1.20 | 2026-11-10 | Complete full S07 generation through approved C01: 108 calls, 107 structurally valid answers, one provider error, 12 skips and $1.1270655 total. Retain semantic review/replay and preservation as S08/S09 work. |
 | 1.21 | 2026-11-11 | Exercise S08 deterministic accounting and actual-response parity; add provisional subscription-authenticated Sol judging and human-review validation. Preserve first control via a warning-specific parser addendum; human calibration/adoption and S09 remain unresolved. |
 | 1.22 | 2026-11-12 | Complete S08 R&D evaluation: matched improvement metrics, overall human review and criterion-disagreement analysis. Retain uncalibrated judge limitations and S09 preservation as outstanding. |
+| 1.23 | 2026-11-12 | Complete P03 research execution through S09: full model-free verification, database and encoder recovery, Garage archival/restoration and explicit adopt/reject/defer decisions. Keep product adoption, human-calibrated reliability and off-device backup distinct from research completion. |
 
 Use Git history for prior revisions. Record material changes to milestone scope,
 data authority or topic sources here; do not rewrite historical experiment claims.

@@ -1,0 +1,30 @@
+# Preservation workers use frozen evidence; no model server or provider keys.
+x-s09: &s09
+  build: {context: ., target: integration}
+  read_only: true
+  tmpfs: [/tmp]
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  mem_limit: 2g
+  cpus: 2
+  environment:
+    LANGSMITH_TRACING: "false"
+    LANGCHAIN_TRACING: "false"
+    LANGCHAIN_TRACING_V2: "false"
+  volumes:
+    - .:/workspace:ro
+    - ./tools/closeout:/app/tools/closeout:ro
+    - ./results/submission/P03-S09-v1:/preservation
+services:
+  closeout-offline:
+    <<: *s09
+    network_mode: none
+  closeout-live:
+    <<: *s09
+    networks: [retrieval]
+  qdrant-s09-restored:
+    extends: {file: compose.yaml, service: qdrant-e02}
+    volumes: !override
+      - qdrant-s09-restored:/qdrant/storage
+volumes:
+  qdrant-s09-restored:

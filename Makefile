@@ -1,6 +1,18 @@
 .PHONY: check validate-gold preflight setup-provider setup-local local-ready local-capacity storage-check down
 .DEFAULT_GOAL := help
 
+.PHONY: closeout-check closeout-export closeout-restore closeout-reload closeout-snapshot closeout-verify closeout-seal
+closeout-check:
+	$(COMPOSE) -f compose.yaml -f compose.s09.yaml run --build --rm --no-deps closeout-offline sh -c 'ruff check --no-cache tools/closeout && ruff format --check --no-cache tools/closeout && MYPYPATH=/workspace/tools/answer-evaluation mypy --cache-dir=/tmp/mypy-s09 src tools/closeout && pytest tools/closeout'
+
+closeout-export closeout-restore closeout-reload:
+	mkdir -p results/submission/P03-S09-v1
+	$(COMPOSE) -f compose.yaml -f compose.s09.yaml run --build --rm --no-deps closeout-live python tools/closeout/preserve.py $(patsubst closeout-%,%,$@) $(ARGS)
+
+closeout-snapshot closeout-verify closeout-seal:
+	mkdir -p results/submission/P03-S09-v1
+	$(COMPOSE) -f compose.yaml -f compose.s09.yaml run --build --rm --no-deps closeout-offline python tools/closeout/preserve.py $(patsubst closeout-%,%,$@) $(ARGS)
+
 .PHONY: answer-evaluation-prepare answer-evaluation-check answer-human-overall-review
 answer-human-overall-review:
 	$(COMPOSE) -f compose.yaml -f compose.e03.yaml -f compose.s08.yaml run --rm --no-deps answer-evaluation python tools/answer-evaluation/overall_reviews.py

@@ -1,0 +1,5 @@
+# Preserve P03 research alongside the original verified extraction membership.
+selections:
+  P03-closeout:
+    membership: results/submission/P02-verification-20261107/membership.json
+    evidence_index: archive-index/selections/P03-closeout.json

@@ -13,9 +13,13 @@ costs, failures and generalization limits. P03 now exercises authorized lexical
 and vector retrieval and the optional LangChain comparison; direct integration
 was retained. [E03 generation](docs/reports/P03-rag-answers.md) now covers all
 40 technical questions across three arms: 108 calls, 107 mechanically valid
-answers, one provider-error response and 12 deterministic skips. Semantic
-answer review remains pending. Review tools and an API
-remain later milestones.
+answers, one provider-error response and 12 deterministic skips.
+[S08 evaluation](docs/reports/P03-evaluation.md) reports provisional RAG gains,
+human labels and criterion disagreements. [S09 closeout](docs/reports/P03-closeout.md)
+completes research execution with isolated Qdrant recovery and verified Garage
+archive restoration. BM25/direct integration remain selected; product adoption
+and calibrated judge reliability are separate, unestablished claims. Review tools
+and an API remain later milestones.
 
 ## Verify without models
 

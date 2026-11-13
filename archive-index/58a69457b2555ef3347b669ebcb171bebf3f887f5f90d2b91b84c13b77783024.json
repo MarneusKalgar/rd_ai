@@ -1,0 +1,30 @@
+{
+  "archive_sha256": "58a69457b2555ef3347b669ebcb171bebf3f887f5f90d2b91b84c13b77783024",
+  "archive_size": 92422407,
+  "bundles": [
+    {
+      "inventory_sha256": "7f89483142eab3d0d40b8695692a75fa548182cc120838aceaf252425a4fb277",
+      "kind": "evidence",
+      "name": "P03-S09-v1",
+      "payload_files": 1791
+    },
+    {
+      "inventory_sha256": "275087025bf6569f341794f659a9ed403b11dfec07bb29e677d8953bb62c42c9",
+      "kind": "run",
+      "name": "matrix-native-v2-gold-20261024-72",
+      "payload_files": 23
+    },
+    {
+      "inventory_sha256": "b4c6f0f118989a8c4087421246d8bb2f8adcabcb27677541f2eab7e600e856cf",
+      "kind": "run",
+      "name": "matrix-native-v2-remaining-20261024-72",
+      "payload_files": 43
+    }
+  ],
+  "covered_observations": 30,
+  "manifest_sha256": "1094d63706e9afceb178f46aa12e82fc848b11054cbb02e66aae45bc3aa6266c",
+  "membership_sha256": "4eb8b72b777b7d9425e6a1d0d3d770cfc512b6beef3539f11a3313953091e616",
+  "object_key": "hw01/archives/sha256/58a69457b2555ef3347b669ebcb171bebf3f887f5f90d2b91b84c13b77783024.tar.gz",
+  "selection": "P03-closeout",
+  "version": "hw01-archive-index-v1"
+}

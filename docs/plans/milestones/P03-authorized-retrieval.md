@@ -1,9 +1,9 @@
 # P03 — Authorized reference retrieval and grounded responses
 
-- Version: **1.15**.
+- Version: **1.16**.
 - Created: **2026-11-07**.
 - Revised: **2026-11-12**.
-- Status: **S01–S08 complete as R&D experiments. Judge scores remain provisional and human-calibrated reliability is not established. S09 remains outstanding; P03 is partial**.
+- Status: **S01–S09 and I01 complete as R&D experiments, including verified Garage restoration. Judge scores remain provisional; product/autonomous-advice adoption and human-calibrated reliability are not established**.
 - Parent: [P03 roadmap](../../roadmap.md#p03--authorized-evidence-retrieval-and-grounded-answers).
 - Planning baseline: `167a76c` — selected P02 provenance slice committed.
 - Planned experiments: **P03-E01 lexical baseline**, **P03-E02 embedding/vector-database retrieval**, **P03-E03 generated RAG answers**.
@@ -68,7 +68,7 @@ The original pilot, R01 recovery and C01 continuation remain separate immutable
 receipts. Semantic answer review/replay and final archival are outstanding.
 See the [E03 guide](../../guides/rag-answers.md).
 
-This diagram combines **executed S01–S07 paths, provisional S08 execution and pending human/S09 work**. Keep it synchronized with
+This diagram combines **executed S01–S09 paths and optional human-calibration work**. Keep it synchronized with
 stage implementations, comparison arms, authorization/failure paths and recorded
 status before closeout. Preserve frozen protocol/plan snapshots; update this
 living plan and the execution report rather than rewriting archived evidence.
@@ -148,13 +148,15 @@ flowchart TD
         VI -. "I01: matched retrieval parity" .-> IP["Integration parity, overhead and maintenance decision"]
         CP -. "I01: capture/replay request parity" .-> IP
         IP --> D
-        D --> P["Reproduce, archive, record adoption decision"]
+        D --> P["S09: reproduce, archive, record adopt/reject/defer decisions"]
+        P --> SR["Isolated Qdrant restore + restart: 40 queries each"]
+        SR --> GA["Garage full GET, isolated archive restore and portable verification passed"]
     end
     classDef exercised fill:#e7f4e8,stroke:#397647
     class R,C,B,E,DB,Q,F,BR,QE,DQ,VR,EV,CT,RE exercised
     classDef trial fill:#e8edff,stroke:#4a5e99
     class VI,LQ,IP trial
-    class G,AB,CP,PG,LLM,A,V,J,NR,STOP,REC,CONT,PRE,EP,DC,EB,TC,JC,JV,HO,ME exercised
+    class G,AB,CP,PG,LLM,A,V,J,NR,STOP,REC,CONT,PRE,EP,DC,EB,TC,JC,JV,HO,ME,D,P,SR,GA exercised
 ```
 
 BM25 and vector retrieval are separate comparison arms, not an unmeasured
@@ -1048,6 +1050,26 @@ a validated semantic-quality conclusion, not honest execution reporting.
 
 ### P03-S09 — Reproduce, archive and close the full P03 scope
 
+**Executed closeout (2026-11-12):** see the [S09 report](../../reports/P03-closeout.md)
+and compact receipt. Full gate: 1,118 passed/two intentional SDK skips; separate
+integration tests 16/16 and recovery tests 3/3 passed, with lint/format/types.
+Historical matrix reproduction verified 240 observations/eight variants, and
+P01/P02 bundle inventories remained intact. A separate Qdrant 1.20.0 instance
+recovered the logical export and passed forty queries, lifecycle controls, a
+physical stop/start and forty more queries. Encoder artifacts recovered exactly.
+Garage upload/full GET, independent download, isolated archive restore and
+model-free E01/E02/I01/E03/S08 reconstruction passed. Archive identity:
+`58a69457b2555ef3347b669ebcb171bebf3f887f5f90d2b91b84c13b77783024`.
+Both database instances are stopped with volumes retained. No inference, private
+ledger export, source deletion or new provider spending occurred.
+
+Adopt BM25 as the measured reference baseline; reject default vector replacement
+and permanent LangChain integration for this bounded comparison. Retain RAG as
+an R&D path, with product/autonomous-advice adoption deferred and judge reliability
+uncalibrated. Optional SDK dependencies remain outside the default runtime and
+are retained solely for historical replay. Local Garage recovery is not an
+off-device backup. These limitations do not leave research execution partial.
+
 S08 follow-up: [disagreement analysis](../../reports/P03-evaluation-adjudication.md)
 separates four explanatory-depth mismatches, four abstention/usefulness
 mismatches, eight generic-versus-contract explanations and one date-warning
@@ -1212,7 +1234,7 @@ reference above is background, not a refreshed review of the entire roadmap.
 - [x] S08 R&D evaluation complete: deterministic checks, actual-response replay, provisional judging, overall human labels, disagreement analysis and matched improvement reports. Human review is complementary; granular calibration remains unresolved and no human-calibrated accuracy claim is made.
 - [x] S08 offline review preparation: source-bound 120-job reconstruction, citation revalidation, disjoint calibration/audit packets and blank human decisions; six focused tests passed. No judge calls or human approvals.
 - [x] S08 deterministic accounting and actual-response replay: all 120 jobs retained, 108 replies per direct/LangChain path and 12 skips, without new generation or ledger writes. Provisional judge infrastructure, synthetic controls and explicit human-review import implemented; formal calibration remains open.
-- [ ] S09 full checks, prior-result preservation, model-free report reproduction, database recovery and verified archival completed.
+- [x] S09 full checks, prior-result preservation, model-free report reproduction, isolated database recovery/restart and verified Garage archival/restoration completed. Product adoption and human-calibrated judge reliability remain separate claims.
 
 Completing S01–S09, including I01, concludes **P03's planned retrieval and RAG experiments**.
 Vector or RAG underperformance may yield rejection rather than adoption; merely
@@ -1240,3 +1262,4 @@ new approval label or Git operation by itself.
 | 1.13 | 2026-11-11 | Execute offline S08 review preparation and six-test gate; prepare 24 calibration and 12 audit jobs from the verified 120-job population. Confirm user-upgraded CLI 0.167.1 and subscription login. Human anchors, isolated judge runner, semantic grading and actual-response replay remain pending. |
 | 1.14 | 2026-11-11 | Exercise complete-population deterministic accounting and 120/120 actual-response parity; implement/freeze the subscription judge and warning-specific S08-R01 continuation without repeating the first control. Preserve general human feedback, add shuffled review packets and explicit anchor validation. AI grades remain provisional; human calibration and S09 remain unresolved. |
 | 1.15 | 2026-11-12 | Complete S08 R&D evaluation with 36 overall human labels, disagreement analysis and matched all/answerable/negative rubric-pass yields. Human review is complementary; retain uncalibrated-judge limitations. All 39 focused tests, lint and typing passed; S09 remains outstanding. |
+| 1.16 | 2026-11-12 | Complete S09 and P03 research execution: full gate, historical matrix reproduction, isolated Qdrant logical restore/restart, exact encoder/source recovery and verified Garage download/restore with model-free reconstruction. Record adopt/reject/defer decisions and local-only backup limits; no new inference. |
